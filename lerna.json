@@ -1,0 +1,14 @@
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "packages": [
+    "packages/*"
+  ],
+  "command": {
+    "version": {
+      "message": "%v",
+      "push": false
+    }
+  }
+}

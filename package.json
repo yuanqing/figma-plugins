@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "lerna run build",
+    "clean": "rimraf '*.log' 'packages/*/build' 'packages/*/manifest.json'",
+    "fix": "prettier-standard 'packages/*/src/**/*.js'",
+    "lint": "standard 'packages/*/src/**/*.js'",
+    "publish": "lerna publish from-package",
+    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install",
+    "watch": "lerna run watch"
+  },
+  "devDependencies": {
+    "@create-figma-plugin/build": "*",
+    "husky": "^3.0.3",
+    "lerna": "^3.16.4",
+    "lint-staged": "^9.2.1",
+    "prettier-standard": "^14.0.5",
+    "rimraf": "^3.0.0",
+    "standard": "^14.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "standard",
+      "prettier-standard",
+      "git add"
+    ]
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
