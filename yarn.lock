@@ -19,11 +19,11 @@
     js-tokens "^4.0.0"
 
 "@create-figma-plugin/build@*":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.12.tgz#31920654150b5c2606c5636bf8ef1d1032818d6d"
-  integrity sha512-2WJXhsRdJySNoITeOkgX7RjVP7M7KEytFfvJq0Z26D4yAjxCfagT8/5/aoDbc68thrcLSLYfaG0wToIYI21EPA==
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.13.tgz#96ef92b73d3fbe0a7e626d2b5cc0e6f723e7c759"
+  integrity sha512-ddKNPZtETBz4NNkJ3aewY3jgej3fK/7JE/yLVLa582JJ987wgEmigfhp7Ep57Ls08oC/CpCx1xlDp2azFzw7DA==
   dependencies:
-    "@create-figma-plugin/common" "^0.0.12"
+    "@create-figma-plugin/common" "^0.0.13"
     chokidar "^3.0.2"
     fs-extra "^8.1.0"
     sade "^1.6.0"
@@ -33,10 +33,10 @@
     typescript "^3.5.3"
     webpack "^4.36.1"
 
-"@create-figma-plugin/common@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.12.tgz#bf064062a2eda64e792c41262cf56858b4167166"
-  integrity sha512-TsJM8cwDYfborXL4UuZ5AvL++F89YgA2J75LHHNF7z/kA//ANhkD5h8aT5oJbTrMN/P4EYw6nRtKAjNRlKyDWw==
+"@create-figma-plugin/common@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.13.tgz#96ec348de0f3ada8bf0d8213d11e310a25b7c96c"
+  integrity sha512-qyvE4jIvgAWVgzPLz/uq0UhKMLduUxEpPI/D2ACzBPu+Cznfa9rZvl+WzwEr70Nm+42FSt75yHYv2YhTJ+yDUw==
   dependencies:
     chalk "^2.4.2"
     fs-extra "^8.1.0"
