@@ -1,4 +1,9 @@
+import whitelistRegex from './whitelist-regex'
+
 export default function (node) {
+  if (node.exportSettings.length !== 0 || whitelistRegex.test(node.name)) {
+    return
+  }
   switch (node.type) {
     case 'BOOLEAN_OPERATION': {
       switch (node.booleanOperation) {
