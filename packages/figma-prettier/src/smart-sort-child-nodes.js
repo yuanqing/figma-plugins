@@ -1,5 +1,9 @@
 export default function (node) {
-  if (typeof node.children === 'undefined') {
+  if (
+    typeof node.children === 'undefined' ||
+    node.children.length === 0 ||
+    node.type === 'INSTANCE'
+  ) {
     return
   }
   const [firstChildNode, ...children] = node.children
@@ -11,7 +15,7 @@ export default function (node) {
       const resultNode = result[i]
       if (
         checkIfNodesOverlap(childNode, resultNode) ||
-        compareYXposition(childNode, resultNode)
+        compareNodePosition(childNode, resultNode)
       ) {
         result.splice(i, 0, childNode)
         insertedChildNode = true
@@ -38,7 +42,7 @@ function checkIfNodesOverlap (a, b) {
   )
 }
 
-function compareYXposition (a, b) {
+function compareNodePosition (a, b) {
   // Returns `true` if `a` should be moved before `b` in the list
   const yPositionDifference = a.y - b.y
   if (yPositionDifference !== 0) {
