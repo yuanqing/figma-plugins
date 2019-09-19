@@ -2,19 +2,29 @@ export default function (node) {
   if (typeof node.children === 'undefined') {
     return
   }
-  const length = node.children.length
-  node.children.forEach(function (childNode, i) {
-    let j = i + 1
-    while (j < length) {
-      const siblingNode = node.children[j]
+  const [firstChildNode, ...children] = node.children
+  const result = [firstChildNode]
+  for (const childNode of children) {
+    let i = 0
+    let insertedChildNode = false
+    while (i < result.length) {
+      const resultNode = result[i]
       if (
-        checkIfNodesOverlap(childNode, siblingNode) === false &&
-        compareYXposition(childNode, siblingNode)
+        checkIfNodesOverlap(childNode, resultNode) === false &&
+        compareYXposition(childNode, resultNode)
       ) {
-        // TODO
+        result.splice(i - 1, 0, childNode)
+        insertedChildNode = true
+        break
       }
-      j++
+      i++
     }
+    if (insertedChildNode === false) {
+      result.splice(result.length, 0, childNode)
+    }
+  }
+  result.forEach(function (resultNode, index) {
+    node.insertChild(result.length - 1 - index, resultNode)
   })
 }
 
