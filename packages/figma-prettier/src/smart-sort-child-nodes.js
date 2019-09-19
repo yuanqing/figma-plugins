@@ -10,10 +10,10 @@ export default function (node) {
     while (i < result.length) {
       const resultNode = result[i]
       if (
-        checkIfNodesOverlap(childNode, resultNode) === false &&
+        checkIfNodesOverlap(childNode, resultNode) ||
         compareYXposition(childNode, resultNode)
       ) {
-        result.splice(i - 1, 0, childNode)
+        result.splice(i, 0, childNode)
         insertedChildNode = true
         break
       }
@@ -39,7 +39,7 @@ function checkIfNodesOverlap (a, b) {
 }
 
 function compareYXposition (a, b) {
-  // Returns `true` if `a` should be moved before `b`
+  // Returns `true` if `a` should be moved before `b` in the list
   const yPositionDifference = a.y - b.y
   if (yPositionDifference !== 0) {
     return yPositionDifference < 0
