@@ -1,11 +1,15 @@
 {
   "name": "figma-prettier",
   "version": "0.0.0",
-  "description": "A Sketch plugin to automagically organise and clean up your Figma document",
+  "description": "A Figma plugin to automagically organise and clean up your Figma document",
   "keywords": [
+    "clean",
     "create-figma-plugin",
+    "fmt",
     "figma",
     "figma-plugin",
+    "figma-prettier",
+    "format",
     "prettier"
   ],
   "license": "MIT",
