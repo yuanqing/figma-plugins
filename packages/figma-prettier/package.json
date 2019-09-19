@@ -29,5 +29,8 @@
   "create-figma-plugin": {
     "name": "Prettier",
     "command": "prettier.js"
+  },
+  "dependencies": {
+    "natural-compare-lite": "^1.4.0"
   }
 }
