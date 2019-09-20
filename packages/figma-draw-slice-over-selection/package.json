@@ -1,0 +1,29 @@
+{
+  "name": "figma-draw-slice-over-selection",
+  "version": "0.0.0",
+  "description": "A Figma plugin to draw a slice over the selection",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "slice"
+  ],
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/figma-plugins.git",
+    "directory": "packages/figma-draw-slice-over-selection"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "create-figma-plugin-build",
+    "watch": "create-figma-plugin-build --watch"
+  },
+  "create-figma-plugin": {
+    "name": "Draw Slice Over Selection",
+    "command": "draw-slice-over-selection.js"
+  }
+}
