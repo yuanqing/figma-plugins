@@ -2,5 +2,5 @@
 
 Name | Description
 :--|:--
-[**Prettier**](packages/figma-prettier) | Automagically organise and clean up your Figma document
 [**Draw Slice Over Selection**](packages/figma-draw-slice-over-selection) | Draw a slice over the selection
+[**Prettier**](packages/figma-prettier) | Automagically organise and clean up your Figma document
