@@ -1,0 +1,28 @@
+{
+  "name": "figma-ui",
+  "version": "0.0.0",
+  "description": "Preact components for use in Figma plugins",
+  "keywords": [
+    "component",
+    "figma",
+    "figma-ui",
+    "form",
+    "preact"
+  ],
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/figma-plugins.git",
+    "directory": "packages/figma-ui"
+  },
+  "files": [
+    "src"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "figma-plugin-ds": "thomas-lowry/figma-plugin-ds",
+    "preact": "^10.0.0-rc.3",
+    "tachyons": "^4.11.1"
+  }
+}
