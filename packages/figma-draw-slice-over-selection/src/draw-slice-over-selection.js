@@ -1,4 +1,4 @@
-import calculateMaximumBounds from './calculate-maximum-bounds'
+import { calculateMaximumBounds } from './calculate-maximum-bounds'
 
 export default function (figma) {
   const selection = figma.currentPage.selection

@@ -1,4 +1,4 @@
-export default function (nodes) {
+export function calculateMaximumBounds (nodes) {
   let maximumBounds = [
     {
       x: Number.MAX_VALUE,
