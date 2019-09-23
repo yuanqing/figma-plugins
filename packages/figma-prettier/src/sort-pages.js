@@ -1,6 +1,6 @@
 import naturalCompare from 'natural-compare-lite'
 
-export default function (document) {
+export function sortPages (document) {
   const pages = document.children.slice().sort(function (a, b) {
     const aName = a.name.toLowerCase()
     const bName = b.name.toLowerCase()

@@ -1,4 +1,4 @@
-export default function (node) {
+export function smartSortChildNodes (node) {
   if (
     typeof node.children === 'undefined' ||
     node.children.length === 0 ||

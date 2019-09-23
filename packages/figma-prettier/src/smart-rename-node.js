@@ -1,6 +1,6 @@
-import whitelistRegex from './whitelist-regex'
+import { whitelistRegex } from './whitelist-regex'
 
-export default function (node) {
+export function smartRenameNode (node) {
   if (node.exportSettings.length !== 0 || whitelistRegex.test(node.name)) {
     return
   }

@@ -1,8 +1,8 @@
-import deleteHiddenNode from './delete-hidden-node'
-import smartRenameNode from './smart-rename-node'
-import smartSortChildNodes from './smart-sort-child-nodes'
-import sortPages from './sort-pages'
-import traverseNode from './traverse-node'
+import { traverseNode } from '@create-figma-plugin/utilities'
+import { deleteHiddenNode } from './delete-hidden-node'
+import { smartRenameNode } from './smart-rename-node'
+import { smartSortChildNodes } from './smart-sort-child-nodes'
+import { sortPages } from './sort-pages'
 
 export default function (figma) {
   sortPages(figma.root)

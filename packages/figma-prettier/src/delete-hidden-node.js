@@ -1,6 +1,6 @@
 import whitelistRegex from './whitelist-regex'
 
-export default function (node) {
+export function deleteHiddenNode (node) {
   if (whitelistRegex.test(node.name)) {
     return
   }
