@@ -5,6 +5,6 @@ import 'tachyons/css/tachyons.min.css'
 
 export function render (Plugin) {
   return function (rootNode) {
-    preactRender(<Plugin data={window.__data__} />, rootNode)
+    preactRender(<Plugin {...window.__data__} />, rootNode)
   }
 }
