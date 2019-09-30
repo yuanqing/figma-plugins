@@ -3,7 +3,9 @@ import { triggerCommandEvent } from '@create-figma-plugin/utilities'
 import { Button, InputWithIcon, render, useForm } from 'figma-ui'
 import { h } from 'preact'
 
-export default render(function ({ data }) {
+export default render(App)
+
+function App (initialState) {
   function submitCallback ({ horizontalOffset, verticalOffset }) {
     triggerCommandEvent('MOVE_LAYERS', {
       horizontalOffset: parseFloat(horizontalOffset),
@@ -14,7 +16,7 @@ export default render(function ({ data }) {
     triggerCommandEvent('CANCEL')
   }
   const { inputs, handleInputChange, handleSubmit } = useForm(
-    data,
+    initialState,
     submitCallback,
     cancelCallback
   )
@@ -46,4 +48,4 @@ export default render(function ({ data }) {
       </Button>
     </div>
   )
-})
+}
