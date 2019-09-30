@@ -1,6 +1,8 @@
+/* global figma */
+
 import { calculateMaximumBounds } from './calculate-maximum-bounds'
 
-export default function (figma) {
+export default function () {
   const selection = figma.currentPage.selection
   if (selection.length === 0) {
     figma.closePlugin('Select one or more layers')
