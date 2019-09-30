@@ -5,10 +5,12 @@
   "keywords": [
     "clean",
     "create-figma-plugin",
-    "fmt",
     "figma",
     "figma-plugin",
     "format",
+    "lint",
+    "linter",
+    "organise",
     "prettier"
   ],
   "license": "MIT",
