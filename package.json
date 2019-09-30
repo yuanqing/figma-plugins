@@ -6,7 +6,7 @@
     "fix": "prettier-standard '*.js' 'packages/*/src/**/*.js'",
     "lint": "standard '*.js' 'packages/*/src/**/*.js'",
     "publish": "lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install --prefer-offline",
+    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install && yarn run build",
     "watch": "lerna run watch --ignore figma-ui"
   },
   "devDependencies": {
