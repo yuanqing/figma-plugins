@@ -1,16 +1,17 @@
 /** @jsx h */
+import { triggerCommandEvent } from '@create-figma-plugin/utilities'
 import { Button, InputWithIcon, render, useForm } from 'figma-ui'
 import { h } from 'preact'
 
-export default render(function ({ postMessage, data }) {
+export default render(function ({ data }) {
   function submitCallback ({ horizontalOffset, verticalOffset }) {
-    postMessage({
+    triggerCommandEvent('MOVE_LAYERS', {
       horizontalOffset: parseFloat(horizontalOffset),
       verticalOffset: parseFloat(verticalOffset)
     })
   }
   function cancelCallback () {
-    postMessage(null)
+    triggerCommandEvent('CANCEL')
   }
   const { inputs, handleInputChange, handleSubmit } = useForm(
     data,
