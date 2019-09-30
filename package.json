@@ -1,12 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "build": "lerna run build --ignore figma-ui",
+    "build": "yarn run clean && lerna run build --ignore figma-ui",
     "clean": "rimraf '*.log' 'packages/*/build' 'packages/*/manifest.json'",
     "fix": "prettier-standard '*.js' 'packages/*/src/**/*.js'",
     "lint": "standard '*.js' 'packages/*/src/**/*.js'",
     "publish": "lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install && yarn run build",
+    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
     "watch": "lerna run watch --ignore figma-ui"
   },
   "devDependencies": {
