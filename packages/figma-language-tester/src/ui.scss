@@ -1,0 +1,38 @@
+@import 'figma-plugin-ds/scss/base/_mixins';
+@import 'figma-plugin-ds/scss/base/_variables';
+
+.top {
+  overflow: auto;
+  height: 210px;
+}
+
+.bottom {
+  border-top: 1px solid $figma-silver;
+  padding: 8px 14px;
+}
+
+.item {
+	user-select: none;
+	cursor: default;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border: 1px solid transparent;
+  height: 32px;
+  &:hover {
+    background-color: $figma-selection-b;
+  }
+  &--active {
+    background-color: $figma-selection-b;
+  }
+}
+
+.item__text {
+  @include font-ui-pos('small','normal');
+  flex-grow: 1;
+  padding-left: 14px;
+}
+
+.item__icon {
+  padding-right: 4px;
+}

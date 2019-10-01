@@ -11,7 +11,7 @@ import { translate } from './translate'
 export default function () {
   showUi({
     width: 240,
-    height: 304
+    height: 259
   })
   const originalStrings = {} // maps `node.id` to the original strings
   addCommandEventListener('SET_LANGUAGE', function (languageKey) {

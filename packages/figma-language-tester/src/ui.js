@@ -4,6 +4,7 @@ import { Button, render } from 'figma-ui'
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 import languages from './languages'
+import './ui.scss'
 
 const DEFAULT_LANGUAGE = 'DEFAULT_LANGUAGE'
 
@@ -21,7 +22,7 @@ function App () {
   }
   return (
     <div>
-      <div class='h5 overflow-auto'>
+      <div class='top'>
         {Object.keys(languages).map(function (languageKey) {
           return (
             <LanguageItem
@@ -34,8 +35,8 @@ function App () {
           )
         })}
       </div>
-      <div class='ph2 pv2'>
-        <Button type='secondary' onClick={handleResetClick}>
+      <div class='bottom'>
+        <Button type='primary' onClick={handleResetClick}>
           Reset
         </Button>
       </div>
@@ -45,11 +46,13 @@ function App () {
 
 function LanguageItem ({ isActive, onClick, children }) {
   return (
-    <div class='onboarding-tip pointer' onClick={onClick}>
-      <div class='onboarding-tip__icon'>
-        {isActive ? <div class='icon icon--blue icon--resolve' /> : null}
-      </div>
-      <div class='onboarding-tip__msg'>{children}</div>
+    <div class={isActive ? 'item item--active' : 'item'} onClick={onClick}>
+      <div class='item__text'>{children}</div>
+      {isActive ? (
+        <div class='item__icon'>
+          <div class='icon icon--adjust icon--blue icon--resolve' />
+        </div>
+      ) : null}
     </div>
   )
 }
