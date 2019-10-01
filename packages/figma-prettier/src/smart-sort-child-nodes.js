@@ -1,7 +1,7 @@
 export function smartSortChildNodes (node) {
   if (
     typeof node.children === 'undefined' ||
-    node.children.length === 0 ||
+    node.children.length < 2 ||
     node.type === 'INSTANCE'
   ) {
     return

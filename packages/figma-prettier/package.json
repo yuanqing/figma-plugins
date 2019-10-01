@@ -32,7 +32,30 @@
     "natural-compare-lite": "^1.4.0"
   },
   "create-figma-plugin": {
+    "id": "figma-prettier",
     "name": "Prettier",
-    "command": "prettier.js"
+    "menu": [
+      {
+        "name": "Prettier",
+        "command": "commands/prettier.js"
+      },
+      "-",
+      {
+        "name": "Delete Hidden Layers",
+        "command": "commands/delete-hidden-layers.js"
+      },
+      {
+        "name": "Smart Rename Layers",
+        "command": "commands/smart-rename-layers.js"
+      },
+      {
+        "name": "Smart Sort Layers",
+        "command": "commands/smart-sort-layers.js"
+      },
+      {
+        "name": "Sort Pages",
+        "command": "commands/sort-pages.js"
+      }
+    ]
   }
 }

@@ -1,4 +1,4 @@
-import whitelistRegex from './whitelist-regex'
+import { whitelistRegex } from './whitelist-regex'
 
 export function deleteHiddenNode (node) {
   if (whitelistRegex.test(node.name)) {

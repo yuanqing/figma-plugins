@@ -1,7 +1,9 @@
+/* global figma */
+
 import naturalCompare from 'natural-compare-lite'
 
-export function sortPages (document) {
-  const pages = document.children.slice().sort(function (a, b) {
+export function sortPages () {
+  const pages = figma.root.children.slice().sort(function (a, b) {
     const aName = a.name.toLowerCase()
     const bName = b.name.toLowerCase()
     if (aName === bName) {
@@ -10,6 +12,6 @@ export function sortPages (document) {
     return naturalCompare(aName, bName)
   })
   pages.forEach(function (page, index) {
-    document.insertChild(index, page)
+    figma.root.insertChild(index, page)
   })
 }
