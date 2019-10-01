@@ -23,16 +23,22 @@ export default function () {
 }
 
 function setLanguage (originalStrings, languageKey) {
-  traverseNode(figma.currentPage, async function (node) {
-    if (node.type !== 'TEXT') {
-      return
-    }
-    if (typeof originalStrings[node.id] === 'undefined') {
-      originalStrings[node.id] = node.characters
-    }
-    await figma.loadFontAsync(node.fontName)
-    node.characters = await translate(originalStrings[node.id], languageKey)
-  })
+  const selection = figma.currentPage.selection
+  const nodes = selection.length === 0 ? [figma.currentPage] : selection
+  for (const node of nodes) {
+    traverseNode(node, async function (node) {
+      if (node.type !== 'TEXT') {
+        return
+      }
+      if (typeof originalStrings[node.id] === 'undefined') {
+        originalStrings[node.id] = node.characters
+      }
+      await figma.loadFontAsync(node.fontName)
+      const translated = await translate(originalStrings[node.id], languageKey)
+      node.characters =
+        translated === '' ? originalStrings[node.id] : translated
+    })
+  }
   figma.notify(`✔ Set language to ${languages[languageKey]}`, { timeout: 1000 })
 }
 
