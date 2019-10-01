@@ -18,7 +18,7 @@ module.exports = function (config) {
     }
   })
   config.module.rules.push({
-    test: /\.css$/,
+    test: /\.s?css$/,
     use: [
       {
         loader: 'style-loader',
@@ -26,7 +26,8 @@ module.exports = function (config) {
           injectType: 'styleTag'
         }
       },
-      'css-loader'
+      'css-loader',
+      'sass-loader'
     ]
   })
   return config
