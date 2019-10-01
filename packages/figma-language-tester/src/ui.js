@@ -23,21 +23,10 @@ function App () {
     <div>
       <div class='h5 overflow-auto'>
         {Object.keys(languages).map(function (languageKey) {
-          if (activeLanguageKey === languageKey) {
-            return (
-              <LanguageItem
-                key={languageKey}
-                isActive
-                onClick={handleResetClick}
-              >
-                {languages[languageKey]}
-              </LanguageItem>
-            )
-          }
           return (
             <LanguageItem
               key={languageKey}
-              isActive={false}
+              isActive={activeLanguageKey === languageKey}
               onClick={handleLanguageClick.bind(null, languageKey)}
             >
               {languages[languageKey]}
@@ -58,7 +47,7 @@ function LanguageItem ({ isActive, onClick, children }) {
   return (
     <div class='onboarding-tip pointer' onClick={onClick}>
       <div class='onboarding-tip__icon'>
-        {isActive ? <div class='icon icon--resolve' /> : null}
+        {isActive ? <div class='icon icon--blue icon--resolve' /> : null}
       </div>
       <div class='onboarding-tip__msg'>{children}</div>
     </div>
