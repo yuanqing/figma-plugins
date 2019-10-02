@@ -1,0 +1,22 @@
+@import 'figma-plugin-ds/scss/base/_mixins';
+@import 'figma-plugin-ds/scss/base/_variables';
+
+.app__description {
+  @include font-ui-pos('small', 'normal');
+  padding: 8px 14px 0;
+  color: $figma-black;
+
+  a {
+    @include font-ui-pos('small', 'medium');
+    text-decoration: none;
+    color: $figma-blue;
+  }
+}
+
+.app__input {
+  padding: 8px 14px 0;
+}
+
+.app__button {
+  padding: 8px 14px;
+}

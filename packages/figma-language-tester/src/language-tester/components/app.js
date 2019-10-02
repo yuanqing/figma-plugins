@@ -1,16 +1,15 @@
 /** @jsx h */
 import { triggerCommandEvent } from '@create-figma-plugin/utilities'
-import { Button, render } from 'figma-ui'
+import { Button } from 'figma-ui'
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import languages from './languages'
-import './ui.scss'
+import { LanguageItem } from './language-item'
+import languages from '../languages'
+import './app.scss'
 
 const DEFAULT_LANGUAGE = 'DEFAULT_LANGUAGE'
 
-export default render(App)
-
-function App () {
+export function App () {
   const [activeLanguageKey, setLanguageKey] = useState(DEFAULT_LANGUAGE)
   function handleLanguageClick (languageKey) {
     setLanguageKey(languageKey)
@@ -22,7 +21,7 @@ function App () {
   }
   return (
     <div>
-      <div class='top'>
+      <div class='app__languages'>
         {Object.keys(languages).map(function (languageKey) {
           return (
             <LanguageItem
@@ -35,24 +34,11 @@ function App () {
           )
         })}
       </div>
-      <div class='bottom'>
+      <div class='app__button'>
         <Button type='primary' onClick={handleResetClick}>
           Reset
         </Button>
       </div>
-    </div>
-  )
-}
-
-function LanguageItem ({ isActive, onClick, children }) {
-  return (
-    <div class={isActive ? 'item item--active' : 'item'} onClick={onClick}>
-      <div class='item__text'>{children}</div>
-      {isActive ? (
-        <div class='item__icon'>
-          <div class='icon icon--adjust icon--blue icon--resolve' />
-        </div>
-      ) : null}
     </div>
   )
 }

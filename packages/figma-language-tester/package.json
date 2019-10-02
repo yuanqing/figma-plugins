@@ -35,7 +35,7 @@
   "create-figma-plugin": {
     "id": "figma-language-tester",
     "name": "Language Tester",
-    "command": "language-tester.js",
-    "ui": "ui.js"
+    "command": "language-tester/command.js",
+    "ui": "language-tester/ui.js"
   }
 }
