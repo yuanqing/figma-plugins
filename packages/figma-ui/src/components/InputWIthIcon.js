@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
-import './InputWithIcon.css'
+import './InputWithIcon.scss'
 
 export function InputWithIcon ({
   children,
@@ -24,7 +24,12 @@ export function InputWithIcon ({
       <div class='input-icon__icon'>
         <div class={`icon icon--${iconName} icon--${iconColor}`} />
       </div>
-      <input type={type} class='input-icon__input input-reset' {...rest} />
+      <input
+        type={type}
+        class='input-icon__input input-icon--reset'
+        value={children}
+        {...rest}
+      />
     </div>
   )
 }
