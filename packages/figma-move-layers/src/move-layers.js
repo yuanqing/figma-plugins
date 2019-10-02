@@ -32,8 +32,5 @@ export default async function () {
       `✔ Moved selected layer${selection.length === 1 ? '' : 's'}`
     )
   })
-  addCommandEventListener('CANCEL', function () {
-    figma.closePlugin()
-  })
   showUi({ width: 240, height: 124, data: settings })
 }
