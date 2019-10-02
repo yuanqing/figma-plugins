@@ -37,7 +37,18 @@
   "create-figma-plugin": {
     "id": "figma-language-tester",
     "name": "Language Tester",
-    "command": "language-tester/command.js",
-    "ui": "language-tester/ui.js"
+    "menu": [
+      {
+        "name": "Language Tester",
+        "command": "language-tester/command.js",
+        "ui": "language-tester/ui.js"
+      },
+      "-",
+      {
+        "name": "Set API Key",
+        "command": "set-api-key/command.js",
+        "ui": "set-api-key/ui.js"
+      }
+    ]
   }
 }
