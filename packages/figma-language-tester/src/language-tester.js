@@ -13,16 +13,17 @@ export default function () {
     width: 240,
     height: 259
   })
+  const apiKey = process.env.API_KEY
   const originalStrings = {} // maps `node.id` to the original strings
   addCommandEventListener('SET_LANGUAGE', function (languageKey) {
-    setLanguage(originalStrings, languageKey)
+    setLanguage(originalStrings, languageKey, apiKey)
   })
   addCommandEventListener('RESET_LANGUAGE', function () {
     resetLanguage(originalStrings)
   })
 }
 
-function setLanguage (originalStrings, languageKey) {
+function setLanguage (originalStrings, languageKey, apiKey) {
   const selection = figma.currentPage.selection
   const nodes = selection.length === 0 ? [figma.currentPage] : selection
   for (const node of nodes) {
@@ -34,9 +35,11 @@ function setLanguage (originalStrings, languageKey) {
         originalStrings[node.id] = node.characters
       }
       await figma.loadFontAsync(node.fontName)
-      const translated = await translate(originalStrings[node.id], languageKey)
-      node.characters =
-        translated === '' ? originalStrings[node.id] : translated
+      node.characters = await translate(
+        originalStrings[node.id],
+        languageKey,
+        apiKey
+      )
     })
   }
   figma.notify(`✔ Set language to ${languages[languageKey]}`, { timeout: 1000 })

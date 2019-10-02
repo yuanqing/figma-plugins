@@ -1,26 +1,17 @@
 import { fetch } from '@create-figma-plugin/utilities'
 import pMemoize from 'p-memoize'
 
-export const translate = pMemoize(async function (text, languageKey) {
-  const json = await fetch(
-    `
-      https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${languageKey}&dt=t&q=${encode(
+export const translate = pMemoize(async function (text, languageKey, apiKey) {
+  const result = await fetch(
+    `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${apiKey}&text=${encode(
       text
-    )}
-    `
+    )}&lang=${languageKey}`
   )
-  if (json[0].length === 1) {
-    return json[0][0][0]
-  }
-  const result = []
-  json[0].forEach(function (line) {
-    result.push(line[0])
-  })
-  return result.join('')
+  return result.text[0]
 })
 
 const newlineRegex = /\n/
 
 function encode (text) {
-  return encodeURI(text).replace(newlineRegex, '%0A%0A')
+  return encodeURI(text).replace(newlineRegex, '%0A')
 }
