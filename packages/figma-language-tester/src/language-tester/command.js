@@ -51,7 +51,7 @@ async function setLanguage (originalStrings, languageKey, apiKey) {
     node.characters = translated[index]
   })
   notificationHandler.cancel()
-  figma.notify(`✔ Set language to ${languages[languageKey]}`, { timeout: 2000 })
+  figma.notify(`✔ Translated to ${languages[languageKey]}`, { timeout: 2000 })
 }
 
 async function resetLanguage (originalStrings) {
@@ -66,7 +66,7 @@ async function resetLanguage (originalStrings) {
     node.characters = originalStrings[node.id]
   })
   notificationHandler.cancel()
-  figma.notify('✔ Reset language', { timeout: 2000 })
+  figma.notify('✔ Reset', { timeout: 2000 })
 }
 
 function filterNodes (nodes, filterCallback) {
