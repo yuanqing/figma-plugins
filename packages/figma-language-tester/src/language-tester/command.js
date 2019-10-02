@@ -10,8 +10,7 @@ import { translate } from './translate'
 import setApiKeyCommand from '../set-api-key/command'
 
 export default async function () {
-  const settings = await loadSettings()
-  const apiKey = settings.apiKey
+  const { apiKey } = await loadSettings()
   if (typeof apiKey === 'undefined' || apiKey === '') {
     setApiKeyCommand()
     return
@@ -30,52 +29,59 @@ export default async function () {
 }
 
 async function setLanguage (originalStrings, languageKey, apiKey) {
-  const notificationHandler = showLoadingNotification()
+  const notificationHandler = figma.notify('Translating…', { timeout: 60000 })
   const selection = figma.currentPage.selection
-  const nodes = selection.length === 0 ? [figma.currentPage] : selection
-  const promises = []
-  for (const node of nodes) {
-    traverseNode(node, async function (node) {
-      if (node.type !== 'TEXT') {
-        return
-      }
-      if (typeof originalStrings[node.id] === 'undefined') {
-        originalStrings[node.id] = node.characters
-      }
-      await figma.loadFontAsync(node.fontName)
-      const translated = await translate(
-        originalStrings[node.id],
-        languageKey,
-        apiKey
-      )
-      node.characters = translated
-      promises.push(Promise.resolve())
-    })
-  }
-  await Promise.all(promises)
+  const nodes = filterTextNodes(
+    selection.length === 0 ? [figma.currentPage] : selection
+  )
+  nodes.forEach(function (node) {
+    if (typeof originalStrings[node.id] === 'undefined') {
+      originalStrings[node.id] = node.characters
+    }
+  })
+  await loadFonts(nodes)
+  const promises = nodes.map(function (node) {
+    return translate(originalStrings[node.id], languageKey, apiKey)
+  })
+  const translated = await Promise.all(promises)
+  nodes.forEach(function (node, index) {
+    node.characters = translated[index]
+  })
   notificationHandler.cancel()
   figma.notify(`✔ Set language to ${languages[languageKey]}`, { timeout: 2000 })
 }
 
 async function resetLanguage (originalStrings) {
-  const notificationHandler = showLoadingNotification()
-  const promises = []
-  traverseNode(figma.currentPage, async function (node) {
-    if (node.type !== 'TEXT') {
-      return
-    }
-    if (typeof originalStrings[node.id] === 'undefined') {
-      return
-    }
-    await figma.loadFontAsync(node.fontName)
-    node.characters = originalStrings[node.id]
-    promises.push(Promise.resolve())
+  const notificationHandler = figma.notify('Working…', { timeout: 60000 })
+  const nodes = filterTextNodes([figma.currentPage], function (node) {
+    return typeof originalStrings[node.id] !== 'undefined'
   })
-  await Promise.all(promises)
+  await loadFonts(nodes)
+  nodes.forEach(function (node) {
+    node.characters = originalStrings[node.id]
+  })
   notificationHandler.cancel()
   figma.notify('✔ Reset language', { timeout: 2000 })
 }
 
-function showLoadingNotification () {
-  return figma.notify('Translating…', { timeout: 60000 })
+function filterTextNodes (nodes, filterCallback) {
+  const result = []
+  for (const node of nodes) {
+    traverseNode(node, async function (node) {
+      if (
+        node.type === 'TEXT' &&
+        (typeof filterCallback === 'undefined' || filterCallback(node))
+      ) {
+        result.push(node)
+      }
+    })
+  }
+  return result
+}
+
+function loadFonts (nodes) {
+  const promises = nodes.map(function (node) {
+    return figma.loadFontAsync(node.fontName)
+  })
+  return Promise.all(promises)
 }
