@@ -31,8 +31,11 @@ export default async function () {
 async function setLanguage (originalStrings, languageKey, apiKey) {
   const notificationHandler = figma.notify('Translating…', { timeout: 60000 })
   const selection = figma.currentPage.selection
-  const nodes = filterTextNodes(
-    selection.length === 0 ? [figma.currentPage] : selection
+  const nodes = filterNodes(
+    selection.length === 0 ? [figma.currentPage] : selection,
+    function (node) {
+      return node.type === 'TEXT'
+    }
   )
   nodes.forEach(function (node) {
     if (typeof originalStrings[node.id] === 'undefined') {
@@ -53,8 +56,10 @@ async function setLanguage (originalStrings, languageKey, apiKey) {
 
 async function resetLanguage (originalStrings) {
   const notificationHandler = figma.notify('Working…', { timeout: 60000 })
-  const nodes = filterTextNodes([figma.currentPage], function (node) {
-    return typeof originalStrings[node.id] !== 'undefined'
+  const nodes = filterNodes([figma.currentPage], function (node) {
+    return (
+      node.type === 'TEXT' && typeof originalStrings[node.id] !== 'undefined'
+    )
   })
   await loadFonts(nodes)
   nodes.forEach(function (node) {
@@ -64,14 +69,11 @@ async function resetLanguage (originalStrings) {
   figma.notify('✔ Reset language', { timeout: 2000 })
 }
 
-function filterTextNodes (nodes, filterCallback) {
+function filterNodes (nodes, filterCallback) {
   const result = []
   for (const node of nodes) {
     traverseNode(node, async function (node) {
-      if (
-        node.type === 'TEXT' &&
-        (typeof filterCallback === 'undefined' || filterCallback(node))
-      ) {
+      if (filterCallback(node)) {
         result.push(node)
       }
     })
