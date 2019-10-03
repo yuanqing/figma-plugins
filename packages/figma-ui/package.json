@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "figma-plugin-ds": "thomas-lowry/figma-plugin-ds",
-    "preact": "^10.0.0-rc.3",
-    "tachyons": "^4.11.1"
+    "preact": "^10.0.0-rc.3"
   }
 }
