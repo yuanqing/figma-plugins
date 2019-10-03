@@ -12,6 +12,7 @@ import setApiKeyCommand from '../set-api-key/command'
 export default async function () {
   const { apiKey } = await loadSettings()
   if (typeof apiKey === 'undefined' || apiKey === '') {
+    global.__command__ = 'set-api-key/command.js'
     setApiKeyCommand()
     return
   }
