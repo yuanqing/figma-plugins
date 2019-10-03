@@ -32,5 +32,5 @@ export default async function () {
       `✔ Moved selected layer${selection.length === 1 ? '' : 's'}`
     )
   })
-  showUi({ width: 240, height: 124, data: settings })
+  showUi({ width: 240, height: 128, data: settings })
 }

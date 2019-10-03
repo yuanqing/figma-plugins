@@ -34,7 +34,7 @@
   "create-figma-plugin": {
     "id": "figma-move-layers",
     "name": "Move Layers",
-    "command": "move-layers.js",
+    "command": "command.js",
     "ui": "ui.js"
   }
 }
