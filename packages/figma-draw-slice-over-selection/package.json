@@ -25,8 +25,15 @@
     "lint": "standard 'src/**/*.js'",
     "watch": "create-figma-plugin-build --watch"
   },
+  "dependencies": {
+    "@create-figma-plugin/utilities": "*",
+    "figma-ui": "*",
+    "preact": "^10.0.0-rc.3"
+  },
   "create-figma-plugin": {
+    "id": "figma-draw-slice-over-selection",
     "name": "Draw Slice Over Selection",
-    "command": "draw-slice-over-selection.js"
+    "command": "command.js",
+    "ui": "ui.js"
   }
 }
