@@ -13,7 +13,7 @@ export function App (initialState) {
   function cancelCallback () {
     triggerCommandEvent('CANCEL')
   }
-  const { inputs, handleInputChange, handleSubmit } = useForm(
+  const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
     cancelCallback
@@ -26,7 +26,7 @@ export function App (initialState) {
           iconColor='black-3'
           iconName='group'
           name='padding'
-          onKeyUp={handleInputChange}
+          onInput={handleInput}
           value={inputs.padding}
           focused
         />
