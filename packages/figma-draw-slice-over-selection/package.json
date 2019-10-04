@@ -4,6 +4,7 @@
   "description": "A Figma plugin to draw a slice over the selection",
   "keywords": [
     "create-figma-plugin",
+    "draw-slice-over-selection",
     "figma",
     "figma-plugin",
     "slice"

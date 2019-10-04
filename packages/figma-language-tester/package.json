@@ -9,8 +9,9 @@
     "i18n",
     "internationalisation",
     "l20n",
-    "localization",
-    "language"
+    "language",
+    "language-tester",
+    "localization"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",
