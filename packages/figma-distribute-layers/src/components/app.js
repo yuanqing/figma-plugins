@@ -13,7 +13,7 @@ export function App ({ direction, iconName, ...initialState }) {
   function cancelCallback () {
     triggerCommandEvent('CANCEL')
   }
-  const { inputs, handleInputChange, handleSubmit } = useForm(
+  const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
     cancelCallback
@@ -26,7 +26,7 @@ export function App ({ direction, iconName, ...initialState }) {
           iconColor='black-3'
           iconName={iconName}
           name='space'
-          onKeyUp={handleInputChange}
+          onKeyUp={handleInput}
           value={inputs.space}
           focused
         />

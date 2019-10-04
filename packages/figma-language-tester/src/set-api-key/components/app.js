@@ -10,7 +10,7 @@ export function App (initialState) {
       apiKey
     })
   }
-  const { inputs, handleInputChange, handleSubmit } = useForm(
+  const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback
   )
@@ -26,7 +26,7 @@ export function App (initialState) {
         <Input
           type='text'
           name='apiKey'
-          onKeyUp={handleInputChange}
+          onKeyUp={handleInput}
           value={inputs.apiKey}
           focused
         />

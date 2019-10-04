@@ -14,7 +14,7 @@ export function App (initialState) {
   function cancelCallback () {
     triggerCommandEvent('CANCEL')
   }
-  const { inputs, handleInputChange, handleSubmit } = useForm(
+  const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
     cancelCallback
@@ -27,7 +27,7 @@ export function App (initialState) {
           iconColor='black-3'
           iconName='arrow-left-right'
           name='horizontalOffset'
-          onKeyUp={handleInputChange}
+          onKeyUp={handleInput}
           value={inputs.horizontalOffset}
           focused
         />
@@ -38,7 +38,7 @@ export function App (initialState) {
           iconColor='black-3'
           iconName='arrow-up-down'
           name='verticalOffset'
-          onKeyUp={handleInputChange}
+          onKeyUp={handleInput}
           value={inputs.verticalOffset}
         />
       </div>

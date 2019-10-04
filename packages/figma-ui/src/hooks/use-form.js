@@ -12,30 +12,31 @@ export function useForm (
     }
     handleSubmitCallback(inputs)
   }
-  function handleInputChange (event) {
+  function handleInput (event) {
     setInputs({
       ...inputs,
       [event.target.name]: event.target.value
     })
   }
-  function handleKeydown (event) {
+  function handleKeyDown (event) {
     if (event.key === 'Enter') {
       handleSubmitCallback(inputs)
+      return
     }
     if (event.key === 'Escape') {
       handleCancelCallback()
     }
   }
   useEffect(function () {
-    window.addEventListener('keydown', handleKeydown)
+    window.addEventListener('keydown', handleKeyDown)
     return function () {
-      window.removeEventListener('keydown', handleKeydown)
+      window.removeEventListener('keydown', handleKeyDown)
     }
   })
   return {
     inputs,
     setInputs,
     handleSubmit,
-    handleInputChange
+    handleInput
   }
 }
