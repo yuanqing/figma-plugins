@@ -1,0 +1,60 @@
+{
+  "name": "figma-distribute-layers",
+  "version": "0.0.0",
+  "description": "A Figma plugin to distribute layers in a given direction and offset",
+  "keywords": [
+    "arrange",
+    "create-figma-plugin",
+    "distribute",
+    "distribute-layers",
+    "figma",
+    "figma-plugin"
+  ],
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/figma-plugins.git",
+    "directory": "packages/figma-distribute-layers"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "create-figma-plugin-build",
+    "fix": "prettier-standard 'src/**/*.js'",
+    "lint": "standard 'src/**/*.js'",
+    "watch": "create-figma-plugin-build --watch"
+  },
+  "dependencies": {
+    "@create-figma-plugin/utilities": "*",
+    "figma-ui": "*",
+    "preact": "^10.0.0-rc.3"
+  },
+  "create-figma-plugin": {
+    "id": "figma-distribute-layers",
+    "name": "Distribute Layers",
+    "menu": [
+      {
+        "name": "Distribute Layers Left",
+        "command": "distribute-layers-left/command.js",
+        "ui": "distribute-layers-left/ui.js"
+      },
+      {
+        "name": "Distribute Layers Right",
+        "command": "distribute-layers-right/command.js",
+        "ui": "distribute-layers-right/ui.js"
+      },
+      {
+        "name": "Distribute Layers Up",
+        "command": "distribute-layers-up/command.js",
+        "ui": "distribute-layers-up/ui.js"
+      },
+      {
+        "name": "Distribute Layers Down",
+        "command": "distribute-layers-down/command.js",
+        "ui": "distribute-layers-down/ui.js"
+      }
+    ]
+  }
+}
