@@ -20,7 +20,7 @@ export function App (initialState) {
     cancelCallback
   )
   return (
-    <div>
+    <div class='app'>
       <div class='app__input'>
         <InputWithIcon
           type='number'
