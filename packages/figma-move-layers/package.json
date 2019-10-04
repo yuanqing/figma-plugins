@@ -1,13 +1,13 @@
 {
   "name": "figma-move-layers",
   "version": "0.0.0",
-  "description": "A Figma plugin to precisely move and arrange layers",
+  "description": "A Figma plugin to precisely move layers",
   "keywords": [
-    "arrange",
     "create-figma-plugin",
     "figma",
     "figma-plugin",
     "move",
+    "move-layers",
     "offset"
   ],
   "license": "MIT",

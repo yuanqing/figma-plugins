@@ -1,5 +1,4 @@
 /* global figma */
-
 import {
   addCommandEventListener,
   loadSettings,
@@ -31,6 +30,9 @@ export default async function () {
     figma.closePlugin(
       `✔ Moved selected layer${selection.length === 1 ? '' : 's'}`
     )
+  })
+  addCommandEventListener('CANCEL', async function () {
+    figma.closePlugin()
   })
   showUi({ width: 240, height: 128, data: settings })
 }
