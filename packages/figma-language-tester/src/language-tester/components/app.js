@@ -20,7 +20,7 @@ export function App () {
     triggerEvent('RESET_LANGUAGE')
   }
   return (
-    <div>
+    <div class='app'>
       <div class='app__languages'>
         {Object.keys(languages).map(function (languageKey) {
           return (

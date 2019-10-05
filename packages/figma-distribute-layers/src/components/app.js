@@ -26,7 +26,7 @@ export function App ({ direction, iconName, ...initialState }) {
           iconColor='black-3'
           iconName={iconName}
           name='space'
-          onKeyUp={handleInput}
+          onInput={handleInput}
           value={inputs.space}
           focused
         />

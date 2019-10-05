@@ -15,7 +15,7 @@ export function App (initialState) {
     submitCallback
   )
   return (
-    <div>
+    <div class='app'>
       <div class='app__description'>
         Enter a{' '}
         <a href='https://translate.yandex.com/developers/keys'>
@@ -26,7 +26,7 @@ export function App (initialState) {
         <Input
           type='text'
           name='apiKey'
-          onKeyUp={handleInput}
+          onInput={handleInput}
           value={inputs.apiKey}
           focused
         />
