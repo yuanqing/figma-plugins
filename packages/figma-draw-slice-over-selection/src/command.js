@@ -1,7 +1,7 @@
 /* global figma */
 import { calculateMaximumBounds } from './calculate-maximum-bounds'
 import {
-  addCommandEventListener,
+  addEventListener,
   loadSettings,
   saveSettings,
   showUi
@@ -16,9 +16,7 @@ export default async function () {
   const settings = (await loadSettings()) || {
     padding: 0
   }
-  addCommandEventListener('DRAW_SLICE_OVER_SELECTION', async function (
-    settings
-  ) {
+  addEventListener('DRAW_SLICE_OVER_SELECTION', async function (settings) {
     await saveSettings(settings)
     const { padding } = settings
     const maximumBounds = calculateMaximumBounds(selection)
@@ -32,7 +30,7 @@ export default async function () {
     slice.locked = true
     figma.closePlugin('✔ Drew slice over selection')
   })
-  addCommandEventListener('CANCEL', async function () {
+  addEventListener('CANCEL', async function () {
     figma.closePlugin()
   })
   showUi({ width: 240, height: 100, data: settings })

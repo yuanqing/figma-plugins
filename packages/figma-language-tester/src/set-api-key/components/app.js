@@ -1,12 +1,12 @@
 /** @jsx h */
-import { triggerCommandEvent } from '@create-figma-plugin/utilities'
+import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button, Input, useForm } from 'figma-ui'
 import { h } from 'preact'
 import './app.scss'
 
 export function App (initialState) {
   function submitCallback ({ apiKey }) {
-    triggerCommandEvent('SAVE_API_KEY', {
+    triggerEvent('SAVE_API_KEY', {
       apiKey
     })
   }

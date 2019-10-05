@@ -1,17 +1,17 @@
 /** @jsx h */
-import { triggerCommandEvent } from '@create-figma-plugin/utilities'
+import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button, InputWithIcon, useForm } from 'figma-ui'
 import { h } from 'preact'
 import './app.scss'
 
 export function App ({ direction, iconName, ...initialState }) {
   function submitCallback ({ space }) {
-    triggerCommandEvent('DISTRIBUTE_LAYERS', {
+    triggerEvent('DISTRIBUTE_LAYERS', {
       space: parseFloat(space)
     })
   }
   function cancelCallback () {
-    triggerCommandEvent('CANCEL')
+    triggerEvent('CANCEL')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
@@ -33,7 +33,7 @@ export function App ({ direction, iconName, ...initialState }) {
       </div>
       <div class='app__button'>
         <Button type='primary' onClick={handleSubmit}>
-          {`Distribute Layers ${direction}`}
+          Distribute Layers {direction}
         </Button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 /* global figma */
 import {
-  addCommandEventListener,
+  addEventListener,
   loadSettings,
   saveSettings,
   showUi
@@ -16,14 +16,14 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
     const settings = (await loadSettings()) || {
       space: 0
     }
-    addCommandEventListener('DISTRIBUTE_LAYERS', async function (settings) {
+    addEventListener('DISTRIBUTE_LAYERS', async function (settings) {
       await saveSettings(settings)
       const { space } = settings
       nodes.sort(sortLayers)
       distributeLayers(nodes, space)
       figma.closePlugin(`✔ Distributed layers ${direction}`)
     })
-    addCommandEventListener('CANCEL', async function () {
+    addEventListener('CANCEL', async function () {
       figma.closePlugin()
     })
     showUi({ width: 240, height: 100, data: settings })

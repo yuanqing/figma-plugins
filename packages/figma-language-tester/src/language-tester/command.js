@@ -1,6 +1,6 @@
 /* global figma */
 import {
-  addCommandEventListener,
+  addEventListener,
   loadSettings,
   showUi,
   traverseNode
@@ -21,10 +21,10 @@ export default async function () {
     height: 259
   })
   const originalStrings = {} // maps `node.id` to the original strings
-  addCommandEventListener('SET_LANGUAGE', function (languageKey) {
+  addEventListener('SET_LANGUAGE', function (languageKey) {
     setLanguage(originalStrings, languageKey, apiKey)
   })
-  addCommandEventListener('RESET_LANGUAGE', function () {
+  addEventListener('RESET_LANGUAGE', function () {
     resetLanguage(originalStrings)
   })
 }

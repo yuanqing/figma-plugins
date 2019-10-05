@@ -1,7 +1,7 @@
 /* global figma */
 
 import {
-  addCommandEventListener,
+  addEventListener,
   loadSettings,
   saveSettings,
   showUi
@@ -11,7 +11,7 @@ export default async function () {
   const settings = (await loadSettings()) || {
     apiKey: ''
   }
-  addCommandEventListener('SAVE_API_KEY', async function (settings) {
+  addEventListener('SAVE_API_KEY', async function (settings) {
     await saveSettings(settings)
     figma.closePlugin('✔ Saved API key')
   })

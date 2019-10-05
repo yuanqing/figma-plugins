@@ -1,5 +1,5 @@
 /** @jsx h */
-import { triggerCommandEvent } from '@create-figma-plugin/utilities'
+import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button } from 'figma-ui'
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
@@ -13,11 +13,11 @@ export function App () {
   const [activeLanguageKey, setLanguageKey] = useState(DEFAULT_LANGUAGE)
   function handleLanguageClick (languageKey) {
     setLanguageKey(languageKey)
-    triggerCommandEvent('SET_LANGUAGE', languageKey)
+    triggerEvent('SET_LANGUAGE', languageKey)
   }
   function handleResetClick () {
     setLanguageKey(DEFAULT_LANGUAGE)
-    triggerCommandEvent('RESET_LANGUAGE')
+    triggerEvent('RESET_LANGUAGE')
   }
   return (
     <div>

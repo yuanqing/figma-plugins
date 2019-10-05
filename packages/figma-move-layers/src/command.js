@@ -1,6 +1,6 @@
 /* global figma */
 import {
-  addCommandEventListener,
+  addEventListener,
   loadSettings,
   saveSettings,
   showUi
@@ -16,7 +16,9 @@ export default async function () {
     horizontalOffset: 0,
     verticalOffset: 0
   }
-  addCommandEventListener('MOVE_LAYERS', async function (settings) {
+  addEventListener('MOVE_LAYERS', async function (settings) {
+    console.log('MOVE_LAYERS')
+    console.log(settings)
     await saveSettings(settings)
     const { horizontalOffset, verticalOffset } = settings
     if (horizontalOffset === 0 && verticalOffset === 0) {
@@ -31,7 +33,7 @@ export default async function () {
       `✔ Moved selected layer${selection.length === 1 ? '' : 's'}`
     )
   })
-  addCommandEventListener('CANCEL', async function () {
+  addEventListener('CANCEL', async function () {
     figma.closePlugin()
   })
   showUi({ width: 240, height: 128, data: settings })

@@ -1,17 +1,17 @@
 /** @jsx h */
-import { triggerCommandEvent } from '@create-figma-plugin/utilities'
+import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button, InputWithIcon, useForm } from 'figma-ui'
 import { h } from 'preact'
 import './app.scss'
 
 export function App (initialState) {
   function submitCallback ({ padding }) {
-    triggerCommandEvent('DRAW_SLICE_OVER_SELECTION', {
+    triggerEvent('DRAW_SLICE_OVER_SELECTION', {
       padding: parseFloat(padding)
     })
   }
   function cancelCallback () {
-    triggerCommandEvent('CANCEL')
+    triggerEvent('CANCEL')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,

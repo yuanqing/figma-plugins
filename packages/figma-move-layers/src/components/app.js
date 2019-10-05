@@ -1,18 +1,19 @@
 /** @jsx h */
-import { triggerCommandEvent } from '@create-figma-plugin/utilities'
+import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button, InputWithIcon, useForm } from 'figma-ui'
 import { h } from 'preact'
 import './app.scss'
 
 export function App (initialState) {
   function submitCallback ({ horizontalOffset, verticalOffset }) {
-    triggerCommandEvent('MOVE_LAYERS', {
+    console.log('submitCallback', horizontalOffset, verticalOffset)
+    triggerEvent('MOVE_LAYERS', {
       horizontalOffset: parseFloat(horizontalOffset),
       verticalOffset: parseFloat(verticalOffset)
     })
   }
   function cancelCallback () {
-    triggerCommandEvent('CANCEL')
+    triggerEvent('CANCEL')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
@@ -27,7 +28,7 @@ export function App (initialState) {
           iconColor='black-3'
           iconName='arrow-left-right'
           name='horizontalOffset'
-          onKeyUp={handleInput}
+          onInput={handleInput}
           value={inputs.horizontalOffset}
           focused
         />
@@ -38,7 +39,7 @@ export function App (initialState) {
           iconColor='black-3'
           iconName='arrow-up-down'
           name='verticalOffset'
-          onKeyUp={handleInput}
+          onInput={handleInput}
           value={inputs.verticalOffset}
         />
       </div>
