@@ -1,4 +1,4 @@
 import { render } from 'figma-ui'
-import { App } from './components/app'
+import { DrawSliceOverSelection } from './components/draw-slice-over-selection'
 
-export default render(App)
+export default render(DrawSliceOverSelection)

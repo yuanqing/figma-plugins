@@ -2,9 +2,9 @@
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button, InputWithIcon, useForm } from 'figma-ui'
 import { h } from 'preact'
-import './app.scss'
+import './draw-slice-over-selection.scss'
 
-export function App (initialState) {
+export function DrawSliceOverSelection (initialState) {
   function submitCallback ({ padding }) {
     triggerEvent('DRAW_SLICE_OVER_SELECTION', {
       padding: parseFloat(padding)
@@ -19,8 +19,8 @@ export function App (initialState) {
     cancelCallback
   )
   return (
-    <div class='app'>
-      <div class='app__input'>
+    <div class='draw-slice-over-selection'>
+      <div class='draw-slice-over-selection__input'>
         <InputWithIcon
           type='number'
           iconColor='black-3'
@@ -31,7 +31,7 @@ export function App (initialState) {
           focused
         />
       </div>
-      <div class='app__button'>
+      <div class='draw-slice-over-selection__button'>
         <Button type='primary' onClick={handleSubmit}>
           Draw Slice Over Selection
         </Button>
