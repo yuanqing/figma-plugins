@@ -1,7 +1,7 @@
 /** @jsx h */
 import { render } from 'figma-ui'
-import { App } from './components/app'
+import { DistributeLayers } from './components/distribute-layers'
 
 export function uiFactory (props) {
-  return render(App, props)
+  return render(DistributeLayers, props)
 }

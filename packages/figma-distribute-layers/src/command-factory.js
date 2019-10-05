@@ -21,7 +21,7 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
       const { space } = settings
       nodes.sort(sortLayers)
       distributeLayers(nodes, space)
-      figma.closePlugin(`✔ Distributed layers ${direction}`)
+      figma.closePlugin(`✔ ${' '} Distributed layers ${direction}`)
     })
     addEventListener('CANCEL', async function () {
       figma.closePlugin()

@@ -4,7 +4,8 @@ import { setAbsoluteY } from '../set-absolute-position'
 export default commandFactory({
   direction: 'up',
   sortLayers: function (a, b) {
-    return a.y - b.y
+    const difference = a.y - b.y
+    return difference !== 0 ? difference : a.x - b.x
   },
   distributeLayers: function (nodes, space) {
     let y = null

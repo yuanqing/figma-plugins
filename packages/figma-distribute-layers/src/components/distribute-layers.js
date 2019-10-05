@@ -2,9 +2,9 @@
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button, InputWithIcon, useForm } from 'figma-ui'
 import { h } from 'preact'
-import './app.scss'
+import './distribute-layers.scss'
 
-export function App ({ direction, iconName, ...initialState }) {
+export function DistributeLayers ({ direction, iconName, ...initialState }) {
   function submitCallback ({ space }) {
     triggerEvent('DISTRIBUTE_LAYERS', {
       space: parseFloat(space)
@@ -19,8 +19,8 @@ export function App ({ direction, iconName, ...initialState }) {
     cancelCallback
   )
   return (
-    <div class='app'>
-      <div class='app__input'>
+    <div class='distribute-layers'>
+      <div class='distribute-layers__input'>
         <InputWithIcon
           type='number'
           iconColor='black-3'
@@ -31,7 +31,7 @@ export function App ({ direction, iconName, ...initialState }) {
           focused
         />
       </div>
-      <div class='app__button'>
+      <div class='distribute-layers__button'>
         <Button type='primary' onClick={handleSubmit}>
           Distribute Layers {direction}
         </Button>
