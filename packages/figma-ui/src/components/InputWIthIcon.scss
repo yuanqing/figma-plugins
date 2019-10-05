@@ -1,4 +1,6 @@
-.input-icon--reset::-webkit-inner-spin-button,
-.input-icon--reset::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+.input-icon__input--reset {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
 }

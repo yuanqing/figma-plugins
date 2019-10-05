@@ -2,10 +2,8 @@
 import { h } from 'preact'
 import './Button.scss'
 
-export function Button ({ children, type, ...rest }) {
+export function Button ({ type, ...rest }) {
   return (
-    <button class={`button button--${type} button--full-width`} {...rest}>
-      {children}
-    </button>
+    <button class={`button button--${type} button--full-width`} {...rest} />
   )
 }

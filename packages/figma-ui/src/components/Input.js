@@ -3,7 +3,7 @@ import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 import './Input.scss'
 
-export function Input ({ children, type, focused, ...rest }) {
+export function Input ({ focused, ...rest }) {
   if (focused) {
     rest.ref = useRef(null)
     useEffect(function () {
@@ -12,7 +12,5 @@ export function Input ({ children, type, focused, ...rest }) {
       node.select()
     }, [])
   }
-  return (
-    <input type={type} class='input input-reset' value={children} {...rest} />
-  )
+  return <input class='input input--reset' {...rest} />
 }
