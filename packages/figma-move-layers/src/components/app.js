@@ -6,7 +6,6 @@ import './app.scss'
 
 export function App (initialState) {
   function submitCallback ({ horizontalOffset, verticalOffset }) {
-    console.log('submitCallback', horizontalOffset, verticalOffset)
     triggerEvent('MOVE_LAYERS', {
       horizontalOffset: parseFloat(horizontalOffset),
       verticalOffset: parseFloat(verticalOffset)

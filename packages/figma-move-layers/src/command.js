@@ -17,8 +17,6 @@ export default async function () {
     verticalOffset: 0
   }
   addEventListener('MOVE_LAYERS', async function (settings) {
-    console.log('MOVE_LAYERS')
-    console.log(settings)
     await saveSettings(settings)
     const { horizontalOffset, verticalOffset } = settings
     if (horizontalOffset === 0 && verticalOffset === 0) {
