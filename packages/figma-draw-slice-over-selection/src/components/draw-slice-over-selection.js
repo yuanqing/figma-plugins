@@ -11,7 +11,7 @@ export function DrawSliceOverSelection (initialState) {
     })
   }
   function cancelCallback () {
-    triggerEvent('CANCEL')
+    triggerEvent('CLOSE')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,

@@ -30,7 +30,7 @@ export default async function () {
     slice.locked = true
     figma.closePlugin(`✔ ${' '} Drew slice over selection`)
   })
-  addEventListener('CANCEL', async function () {
+  addEventListener('CLOSE', async function () {
     figma.closePlugin()
   })
   showUi({ width: 240, height: 100, data: settings })
