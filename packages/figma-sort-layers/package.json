@@ -24,7 +24,7 @@
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "*"
+    "natural-compare-lite": "^1.4.0"
   },
   "create-figma-plugin": {
     "id": "figma-sort-layers",
