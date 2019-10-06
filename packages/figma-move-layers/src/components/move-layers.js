@@ -27,7 +27,7 @@ export function MoveLayers (initialState) {
           iconColor='black-3'
           iconName='arrow-left-right'
           name='horizontalOffset'
-          onInput={handleInput}
+          onChange={handleInput}
           value={inputs.horizontalOffset}
           focused
         />
@@ -38,7 +38,7 @@ export function MoveLayers (initialState) {
           iconColor='black-3'
           iconName='arrow-up-down'
           name='verticalOffset'
-          onInput={handleInput}
+          onChange={handleInput}
           value={inputs.verticalOffset}
         />
       </div>

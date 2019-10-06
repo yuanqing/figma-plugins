@@ -30,7 +30,7 @@ export function SetApiKey (initialState) {
         <Input
           type='text'
           name='apiKey'
-          onInput={handleInput}
+          onChange={handleInput}
           value={inputs.apiKey}
           focused
         />

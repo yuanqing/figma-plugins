@@ -26,7 +26,7 @@ export function DistributeLayers ({ direction, iconName, ...initialState }) {
           iconColor='black-3'
           iconName={iconName}
           name='space'
-          onInput={handleInput}
+          onChange={handleInput}
           value={inputs.space}
           focused
         />

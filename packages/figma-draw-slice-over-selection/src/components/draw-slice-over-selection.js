@@ -26,7 +26,7 @@ export function DrawSliceOverSelection (initialState) {
           iconColor='black-3'
           iconName='group'
           name='padding'
-          onInput={handleInput}
+          onChange={handleInput}
           value={inputs.padding}
           focused
         />
