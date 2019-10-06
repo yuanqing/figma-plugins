@@ -62,7 +62,7 @@ async function setLanguage (originalStrings, languageKey, apiKey) {
     node.characters = translated[index]
   })
   notificationHandler.cancel()
-  figma.notify(`✔ ${' '} Translated to ${languages[languageKey]}`, {
+  figma.notify(`✔ \u00a0 Translated to ${languages[languageKey]}`, {
     timeout: 2000
   })
 }

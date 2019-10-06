@@ -28,7 +28,7 @@ export default async function () {
     slice.resize(width, height)
     slice.name = '@SliceOverSelection'
     slice.locked = true
-    figma.closePlugin(`✔ ${' '} Drew slice over selection`)
+    figma.closePlugin('✔ \u00a0 Drew slice over selection')
   })
   addEventListener('CLOSE', async function () {
     figma.closePlugin()
