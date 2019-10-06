@@ -1,4 +1,4 @@
-export function calculateMaximumBounds (nodes) {
+export function calculateMaximumBounds (layers) {
   let maximumBounds = [
     {
       x: Number.MAX_VALUE,
@@ -9,17 +9,17 @@ export function calculateMaximumBounds (nodes) {
       y: -1 * Number.MAX_VALUE
     }
   ]
-  for (const node of nodes) {
-    const x = node.absoluteTransform[0][2]
-    const y = node.absoluteTransform[1][2]
+  for (const layer of layers) {
+    const x = layer.absoluteTransform[0][2]
+    const y = layer.absoluteTransform[1][2]
     maximumBounds = [
       {
         x: Math.min(maximumBounds[0].x, x),
         y: Math.min(maximumBounds[0].y, y)
       },
       {
-        x: Math.max(maximumBounds[1].x, x + node.width),
-        y: Math.max(maximumBounds[1].y, y + node.height)
+        x: Math.max(maximumBounds[1].x, x + layer.width),
+        y: Math.max(maximumBounds[1].y, y + layer.height)
       }
     ]
   }
