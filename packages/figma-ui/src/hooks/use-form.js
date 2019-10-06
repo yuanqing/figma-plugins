@@ -13,9 +13,13 @@ export function useForm (
     handleSubmitCallback(inputs)
   }
   function handleInput (event) {
+    const value =
+      event.target.type === 'checkbox'
+        ? event.target.checked
+        : event.target.value
     setInputs({
       ...inputs,
-      [event.target.name]: event.target.value
+      [event.target.name]: value
     })
   }
   function handleKeyUp (event) {

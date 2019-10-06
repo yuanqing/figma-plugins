@@ -17,7 +17,7 @@ export function InputWithIcon ({ iconColor, iconName, focused, ...rest }) {
       <div class='input-icon__icon'>
         <div class={`icon icon--${iconName} icon--${iconColor}`} />
       </div>
-      <input class='input-icon__input input-icon__input--reset' {...rest} />
+      <input class='input-icon__input' {...rest} />
     </div>
   )
 }

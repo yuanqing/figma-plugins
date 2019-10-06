@@ -3,7 +3,7 @@ import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 import './Input.scss'
 
-export function Input ({ focused, ...rest }) {
+export function Input ({ border, focused, onChange, ...rest }) {
   if (focused) {
     rest.ref = useRef(null)
     useEffect(function () {
@@ -12,5 +12,11 @@ export function Input ({ focused, ...rest }) {
       layer.select()
     }, [])
   }
-  return <input class='input input--reset' {...rest} />
+  return (
+    <input
+      {...rest}
+      class={`input ${border ? 'input--border' : ''}`}
+      onChange={onChange}
+    />
+  )
 }
