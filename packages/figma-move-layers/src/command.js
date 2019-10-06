@@ -9,7 +9,7 @@ import {
 export default async function () {
   const selection = figma.currentPage.selection
   if (selection.length === 0) {
-    figma.closePlugin('Select one or more layers')
+    figma.closePlugin('✘ \u00a0 Select one or more layers')
     return
   }
   const settings = (await loadSettings()) || {

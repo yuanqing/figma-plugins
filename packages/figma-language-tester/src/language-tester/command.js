@@ -19,7 +19,7 @@ export default async function () {
   const nodes = getTextNodes()
   if (nodes.length === 0) {
     figma.closePlugin(
-      `No text layers ${
+      `✘ \u00a0 No text layers ${
         figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
       }`,
       { timeout: 2000 }
