@@ -44,6 +44,11 @@
       "standard",
       "prettier-standard",
       "git add"
+    ],
+    "*.scss": [
+      "stylelint",
+      "prettier",
+      "git add"
     ]
   },
   "stylelint": {
