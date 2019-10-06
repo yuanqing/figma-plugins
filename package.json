@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "yarn run clean && lerna run build --ignore figma-ui",
-    "clean": "rimraf '*.log' 'packages/*/build' 'packages/*/manifest.json'",
+    "clean": "rimraf '*.log' 'packages/*/{*.log,build,manifest.json}'",
     "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
     "fix-css": "prettier --write 'packages/*/src/**/*.scss'",
     "fix-js": "prettier-standard '*.js' 'packages/*/src/**/*.js'",
