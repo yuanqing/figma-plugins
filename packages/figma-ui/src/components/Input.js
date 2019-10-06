@@ -7,9 +7,9 @@ export function Input ({ focused, ...rest }) {
   if (focused) {
     rest.ref = useRef(null)
     useEffect(function () {
-      const node = rest.ref.current
-      node.focus()
-      node.select()
+      const layer = rest.ref.current
+      layer.focus()
+      layer.select()
     }, [])
   }
   return <input class='input input--reset' {...rest} />
