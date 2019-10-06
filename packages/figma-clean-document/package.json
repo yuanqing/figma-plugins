@@ -1,9 +1,10 @@
 {
-  "name": "figma-prettier",
+  "name": "figma-clean-document",
   "version": "0.0.0",
   "description": "A Figma plugin to automagically organise and clean up your Figma document",
   "keywords": [
     "clean",
+    "clean-document",
     "create-figma-plugin",
     "figma",
     "figma-plugin",
@@ -18,7 +19,7 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/figma-plugins.git",
-    "directory": "packages/figma-prettier"
+    "directory": "packages/figma-clean-document"
   },
   "files": [
     "src"
@@ -32,12 +33,16 @@
     "natural-compare-lite": "^1.4.0"
   },
   "create-figma-plugin": {
-    "id": "figma-prettier",
-    "name": "Prettier",
+    "id": "figma-clean-document",
+    "name": "Clean Document",
     "menu": [
       {
-        "name": "Prettier",
-        "command": "commands/prettier.js"
+        "name": "Clean Document",
+        "command": "commands/clean-document.js"
+      },
+      {
+        "name": "Sort Pages",
+        "command": "commands/sort-pages.js"
       },
       "-",
       {
@@ -51,10 +56,6 @@
       {
         "name": "Smart Sort Layers",
         "command": "commands/smart-sort-layers.js"
-      },
-      {
-        "name": "Sort Pages",
-        "command": "commands/sort-pages.js"
       }
     ]
   }
