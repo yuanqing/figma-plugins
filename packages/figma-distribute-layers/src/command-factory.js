@@ -23,7 +23,7 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
       distributeLayers(layers, space)
       figma.closePlugin(`✔ \u00a0 Distributed layers ${direction}`)
     })
-    addEventListener('CLOSE', async function () {
+    addEventListener('CLOSE', function () {
       figma.closePlugin()
     })
     showUi({ width: 240, height: 100, data: settings })

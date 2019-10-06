@@ -40,7 +40,7 @@ export default async function () {
       figma.closePlugin()
     }
   })
-  addEventListener('CLOSE', async function () {
+  addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
 }

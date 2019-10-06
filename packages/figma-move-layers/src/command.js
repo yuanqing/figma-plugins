@@ -31,7 +31,7 @@ export default async function () {
       `✔ \u00a0 Moved selected layer${selection.length === 1 ? '' : 's'}`
     )
   })
-  addEventListener('CLOSE', async function () {
+  addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
   showUi({ width: 240, height: 128, data: settings })
