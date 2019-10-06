@@ -5,7 +5,7 @@ export function sortLayersByName (layers) {
     const aName = a.name.toLowerCase()
     const bName = b.name.toLowerCase()
     if (aName === bName) {
-      return naturalCompare(a.id, b.id)
+      return a.y - b.y || a.x - b.x || naturalCompare(a.id, b.id)
     }
     return naturalCompare(aName, bName)
   })

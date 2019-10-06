@@ -32,21 +32,21 @@
     "menu": [
       {
         "name": "Sort Layers by Name",
-        "command": "sort-layers-by-name/command.js"
+        "command": "commands/sort-layers-by-name.js"
       },
       "-",
       {
         "name": "Sort Layers by X Position",
-        "command": "sort-layers-by-x-position/command.js"
+        "command": "commands/sort-layers-by-x-position.js"
       },
       {
         "name": "Sort Layers by Y Position",
-        "command": "sort-layers-by-y-position/command.js"
+        "command": "commands/sort-layers-by-y-position.js"
       },
       "-",
       {
         "name": "Smart Sort Layers",
-        "command": "smart-sort-layers/command.js"
+        "command": "commands/smart-sort-layers.js"
       }
     ]
   }

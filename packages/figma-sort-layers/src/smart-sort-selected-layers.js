@@ -5,7 +5,7 @@ export function smartSortSelectedLayers () {
   const selectedLayers = figma.currentPage.selection
   const parentLayer = selectedLayers[0].parent
   const layerIds = collectLayerIds(selectedLayers)
-  smartSortChildLayers(parentLayer, layerIds)
+  return smartSortChildLayers(parentLayer, layerIds)
 }
 
 function collectLayerIds (layers) {

@@ -35,9 +35,7 @@ export function smartSortChildLayers (layer, childLayerIds) {
       result.splice(result.length, 0, childLayer)
     }
   }
-  result.reverse().forEach(function (resultLayer) {
-    layer.appendChild(resultLayer)
-  })
+  return result
 }
 
 function checkIfLayersOverlap (a, b) {

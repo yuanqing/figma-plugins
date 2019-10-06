@@ -1,5 +1,6 @@
 /* global figma */
 import { checkCommonParent } from './check-common-parent'
+import { updateLayersSortOrder } from './update-layers-sort-order'
 
 export function commandFactory ({ sortLayers, successMessage }) {
   return function () {
@@ -12,7 +13,8 @@ export function commandFactory ({ sortLayers, successMessage }) {
       figma.closePlugin('✘ \u00a0 Select layers in the same list')
       return
     }
-    sortLayers(selectedLayers)
+    const result = sortLayers(selectedLayers)
+    updateLayersSortOrder(result)
     figma.closePlugin(`✔ \u00a0 ${successMessage}`)
   }
 }

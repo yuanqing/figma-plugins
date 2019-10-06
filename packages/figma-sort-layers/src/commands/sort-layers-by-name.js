@@ -1,5 +1,5 @@
 import { commandFactory } from '../command-factory'
-import { sortLayersByName } from './sort-layers-by-name'
+import { sortLayersByName } from '../sort-layers-by-name'
 
 export default commandFactory({
   sortLayers: sortLayersByName,

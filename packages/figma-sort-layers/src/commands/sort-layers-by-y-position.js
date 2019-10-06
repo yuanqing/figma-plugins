@@ -1,5 +1,5 @@
 import { commandFactory } from '../command-factory'
-import { sortLayersByYPosition } from '../sort-layers-by-position'
+import { sortLayersByYPosition } from '../sort-layers-by-y-position'
 
 export default commandFactory({
   sortLayers: sortLayersByYPosition,
