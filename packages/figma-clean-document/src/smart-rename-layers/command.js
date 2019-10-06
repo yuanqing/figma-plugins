@@ -3,7 +3,7 @@ import {
   getAllOrSelectedLayers,
   traverseLayer
 } from '@create-figma-plugin/utilities'
-import { deleteHiddenLayer } from '../delete-hidden-layer'
+import { smartRenameLayer } from './smart-rename-layer'
 
 export default function () {
   let count = 0
@@ -13,7 +13,7 @@ export default function () {
       if (layer.removed) {
         return
       }
-      if (deleteHiddenLayer(layer)) {
+      if (smartRenameLayer(layer)) {
         count++
       }
     })
@@ -22,8 +22,8 @@ export default function () {
     figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
   figma.closePlugin(
     count === 0
-      ? `No hidden layers ${context}`
-      : `✔ \u00a0 Deleted ${count} hidden layer${
+      ? `No layers renamed ${context}`
+      : `✔ \u00a0 Smart renamed ${count} layer${
           count === 1 ? '' : 's'
         } ${context}`
   )

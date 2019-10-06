@@ -30,7 +30,9 @@
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "*",
-    "natural-compare-lite": "^1.4.0"
+    "figma-ui": "*",
+    "natural-compare-lite": "^1.4.0",
+    "preact": "^10.0.0"
   },
   "create-figma-plugin": {
     "id": "figma-clean-document",
@@ -38,24 +40,26 @@
     "menu": [
       {
         "name": "Clean Document",
-        "command": "commands/clean-document.js"
+        "command": "clean-document/command.js",
+        "ui": "clean-document/ui.js"
       },
+      "-",
       {
         "name": "Sort Pages",
-        "command": "commands/sort-pages.js"
+        "command": "sort-pages/command.js"
       },
       "-",
       {
         "name": "Delete Hidden Layers",
-        "command": "commands/delete-hidden-layers.js"
+        "command": "delete-hidden-layers/command.js"
       },
       {
         "name": "Smart Rename Layers",
-        "command": "commands/smart-rename-layers.js"
+        "command": "smart-rename-layers/command.js"
       },
       {
         "name": "Smart Sort Layers",
-        "command": "commands/smart-sort-layers.js"
+        "command": "smart-sort-layers/command.js"
       }
     ]
   }

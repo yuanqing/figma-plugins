@@ -1,7 +1,8 @@
-import { whitelistRegex } from './whitelist-regex'
-
-export function smartRenameLayer (layer) {
-  if (layer.exportSettings.length !== 0 || whitelistRegex.test(layer.name)) {
+export function smartRenameLayer (layer, whitelistRegex) {
+  if (layer.exportSettings.length !== 0) {
+    return false
+  }
+  if (whitelistRegex && whitelistRegex.test(layer.name)) {
     return false
   }
   const previousName = layer.name
