@@ -1,3 +1,7 @@
+@import "figma-plugin-ds/scss/base/_mixins";
+@import "figma-plugin-ds/scss/base/_variables";
+@import "figma-plugin-ds/scss/components/_input-icon";
+
 .input-icon__input--reset {
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {

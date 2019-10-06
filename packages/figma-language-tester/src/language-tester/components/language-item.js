@@ -11,7 +11,7 @@ export function LanguageItem ({ isActive, onClick, children }) {
       <div class='language-item__text'>{children}</div>
       {isActive ? (
         <div class='language-item__icon'>
-          <div class='icon icon--adjust icon--resolve icon--blue' />
+          <div class='icon icon--resolve icon--blue' />
         </div>
       ) : null}
     </div>
