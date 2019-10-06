@@ -23,9 +23,9 @@ export default async function () {
       figma.closePlugin()
       return
     }
-    for (const node of selection) {
-      node.x += horizontalOffset
-      node.y += verticalOffset
+    for (const layer of selection) {
+      layer.x += horizontalOffset
+      layer.y += verticalOffset
     }
     figma.closePlugin(
       `✔ \u00a0 Moved selected layer${selection.length === 1 ? '' : 's'}`
