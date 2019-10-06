@@ -7,15 +7,15 @@ export default commandFactory({
     const difference = a.y - b.y
     return difference !== 0 ? difference : a.x - b.x
   },
-  distributeLayers: function (nodes, space) {
+  distributeLayers: function (layers, space) {
     let y = null
-    for (const node of nodes) {
+    for (const layer of layers) {
       if (y === null) {
-        y = node.absoluteTransform[1][2] + node.height + space
+        y = layer.absoluteTransform[1][2] + layer.height + space
         continue
       }
-      setAbsoluteY(node, y)
-      y = y + node.height + space
+      setAbsoluteY(layer, y)
+      y = y + layer.height + space
     }
   }
 })

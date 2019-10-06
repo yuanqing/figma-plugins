@@ -8,8 +8,8 @@ import {
 
 export function commandFactory ({ direction, sortLayers, distributeLayers }) {
   return async function () {
-    const nodes = [].concat(figma.currentPage.selection)
-    if (nodes.length < 2) {
+    const layers = [].concat(figma.currentPage.selection)
+    if (layers.length < 2) {
       figma.closePlugin('✘ \u00a0 Select two or more layers')
       return
     }
@@ -19,8 +19,8 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
     addEventListener('DISTRIBUTE_LAYERS', async function (settings) {
       await saveSettings(settings)
       const { space } = settings
-      nodes.sort(sortLayers)
-      distributeLayers(nodes, space)
+      layers.sort(sortLayers)
+      distributeLayers(layers, space)
       figma.closePlugin(`✔ \u00a0 Distributed layers ${direction}`)
     })
     addEventListener('CLOSE', async function () {
