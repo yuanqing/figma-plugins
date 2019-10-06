@@ -1,9 +1,9 @@
 /* global figma */
-import { traverseNode } from '@create-figma-plugin/utilities'
+import { traverseLayer } from '@create-figma-plugin/utilities'
 import { smartSortChildLayers } from './smart-sort-child-layers'
 
 export function smartSortAllLayers () {
-  traverseNode(
+  traverseLayer(
     figma.currentPage,
     function (layer) {
       if (layer.removed) {

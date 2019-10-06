@@ -3,7 +3,7 @@ import {
   addEventListener,
   loadSettings,
   showUi,
-  traverseNode
+  traverseLayer
 } from '@create-figma-plugin/utilities'
 import languages from './languages'
 import { translate } from './translate'
@@ -93,7 +93,7 @@ function getTextLayers () {
 function filterLayers (layers, filterCallback) {
   const result = []
   for (const layer of layers) {
-    traverseNode(layer, async function (layer) {
+    traverseLayer(layer, async function (layer) {
       if (filterCallback(layer)) {
         result.push(layer)
       }

@@ -1,7 +1,7 @@
 /* global figma */
 import {
   getAllOrSelectedLayers,
-  traverseNode
+  traverseLayer
 } from '@create-figma-plugin/utilities'
 import { deleteHiddenLayer } from '../delete-hidden-layer'
 
@@ -9,7 +9,7 @@ export default function () {
   let count = 0
   const layers = getAllOrSelectedLayers()
   for (const layer of layers) {
-    traverseNode(layer, function (layer) {
+    traverseLayer(layer, function (layer) {
       if (layer.removed) {
         return
       }
