@@ -1,4 +1,4 @@
 import { render } from 'figma-ui'
-import { App } from './components/app'
+import { MoveLayers } from './components/move-layers'
 
-export default render(App)
+export default render(MoveLayers)

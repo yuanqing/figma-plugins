@@ -2,9 +2,9 @@
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button, InputWithIcon, useForm } from 'figma-ui'
 import { h } from 'preact'
-import './app.scss'
+import './move-layers.scss'
 
-export function App (initialState) {
+export function MoveLayers (initialState) {
   function submitCallback ({ horizontalOffset, verticalOffset }) {
     triggerEvent('MOVE_LAYERS', {
       horizontalOffset: parseFloat(horizontalOffset),
@@ -12,7 +12,7 @@ export function App (initialState) {
     })
   }
   function cancelCallback () {
-    triggerEvent('CANCEL')
+    triggerEvent('CLOSE')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
@@ -20,8 +20,8 @@ export function App (initialState) {
     cancelCallback
   )
   return (
-    <div class='app'>
-      <div class='app__input'>
+    <div class='move-layers'>
+      <div class='move-layers__input'>
         <InputWithIcon
           type='number'
           iconColor='black-3'
@@ -32,7 +32,7 @@ export function App (initialState) {
           focused
         />
       </div>
-      <div class='app__input'>
+      <div class='move-layers__input'>
         <InputWithIcon
           type='number'
           iconColor='black-3'
@@ -42,7 +42,7 @@ export function App (initialState) {
           value={inputs.verticalOffset}
         />
       </div>
-      <div class='app__button'>
+      <div class='move-layers__button'>
         <Button type='primary' onClick={handleSubmit}>
           Move Selected Layers
         </Button>
