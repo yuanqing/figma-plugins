@@ -1,15 +1,20 @@
 export function smartSortChildLayers (layer, childLayerIds) {
+  const children = layer.children
   if (
-    typeof layer.children === 'undefined' ||
-    layer.children.length < 2 ||
+    typeof children === 'undefined' ||
+    children.length < 2 ||
     layer.type === 'INSTANCE'
   ) {
     return
   }
+  /* eslint-disable indent */
   const [firstChildLayer, ...childLayers] =
     typeof childLayerIds === 'undefined'
-      ? layer.children
-      : filterLayers(layer.children, childLayerIds)
+      ? children
+      : children.filter(function (layer) {
+          return childLayerIds.indexOf(layer.id) !== -1
+        })
+  /* eslint-enable indent */
   const result = [firstChildLayer]
   for (const childLayer of childLayers) {
     let i = 0
@@ -30,14 +35,8 @@ export function smartSortChildLayers (layer, childLayerIds) {
       result.splice(result.length, 0, childLayer)
     }
   }
-  result.reverse().forEach(function (resultLayer, index) {
-    layer.insertChild(index, resultLayer)
-  })
-}
-
-function filterLayers (layers, layerIds) {
-  return layers.filter(function (layer) {
-    return layerIds.indexOf(layer.id) !== -1
+  result.reverse().forEach(function (resultLayer) {
+    layer.appendChild(resultLayer)
   })
 }
 
