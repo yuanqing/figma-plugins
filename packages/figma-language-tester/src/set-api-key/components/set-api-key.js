@@ -24,7 +24,11 @@ export function SetApiKey (initialState) {
     <div class='set-api-key'>
       <div class='set-api-key__description'>
         Enter a{' '}
-        <a href='https://translate.yandex.com/developers/keys'>
+        <a
+          href='https://translate.yandex.com/developers/keys'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
           Yandex Translate API key
         </a>
       </div>
