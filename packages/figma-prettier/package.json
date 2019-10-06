@@ -25,8 +25,6 @@
   ],
   "scripts": {
     "build": "create-figma-plugin-build",
-    "fix": "prettier-standard 'src/**/*.js'",
-    "lint": "standard 'src/**/*.js'",
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {

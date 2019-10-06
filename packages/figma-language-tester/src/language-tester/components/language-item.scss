@@ -1,9 +1,9 @@
-@import 'figma-plugin-ds/scss/base/_mixins';
-@import 'figma-plugin-ds/scss/base/_variables';
+@import "figma-plugin-ds/scss/base/_mixins";
+@import "figma-plugin-ds/scss/base/_variables";
 
 .language-item {
-	user-select: none;
-	cursor: default;
+  user-select: none;
+  cursor: default;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -19,7 +19,7 @@
   }
 
   &__text {
-    @include font-ui-pos('small','normal');
+    @include font-ui-pos("small", "normal");
     flex-grow: 1;
     padding-left: 14px;
   }
@@ -28,4 +28,3 @@
     padding-right: 4px;
   }
 }
-

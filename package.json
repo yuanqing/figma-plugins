@@ -3,8 +3,12 @@
   "scripts": {
     "build": "yarn run clean && lerna run build --ignore figma-ui",
     "clean": "rimraf '*.log' 'packages/*/build' 'packages/*/manifest.json'",
-    "fix": "prettier-standard '*.js' 'packages/*/src/**/*.js'",
-    "lint": "standard '*.js' 'packages/*/src/**/*.js'",
+    "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
+    "fix-css": "prettier --write 'packages/*/src/**/*.scss'",
+    "fix-js": "prettier-standard '*.js' 'packages/*/src/**/*.js'",
+    "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
+    "lint-css": "stylelint 'packages/*/src/**/*.scss'",
+    "lint-js": "standard '*.js' 'packages/*/src/**/*.js'",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
     "watch": "lerna run watch --ignore figma-ui"
@@ -14,16 +18,21 @@
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@create-figma-plugin/build": "*",
     "babel-loader": "^8.0.6",
+    "concurrently": "^4.1.2",
     "css-loader": "^3.2.0",
     "husky": "^3.0.7",
     "lerna": "^3.16.4",
     "lint-staged": "^9.4.0",
     "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
     "prettier-standard": "^15.0.1",
     "rimraf": "^3.0.0",
-    "standard": "^14.3.1",
     "sass-loader": "^8.0.0",
-    "style-loader": "^1.0.0"
+    "standard": "^14.3.1",
+    "style-loader": "^1.0.0",
+    "stylelint": "^11.0.0",
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-prettier": "^1.1.1"
   },
   "husky": {
     "hooks": {
@@ -35,6 +44,11 @@
       "standard",
       "prettier-standard",
       "git add"
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-prettier/recommended"
     ]
   },
   "workspaces": [

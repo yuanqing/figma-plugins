@@ -1,14 +1,14 @@
-@import 'figma-plugin-ds/scss/base/_mixins';
-@import 'figma-plugin-ds/scss/base/_variables';
+@import "figma-plugin-ds/scss/base/_mixins";
+@import "figma-plugin-ds/scss/base/_variables";
 
 .set-api-key {
   &__description {
-    @include font-ui-pos('small', 'normal');
+    @include font-ui-pos("small", "normal");
     padding: 8px 14px 0;
     color: $figma-black;
 
     a {
-      @include font-ui-pos('small', 'medium');
+      @include font-ui-pos("small", "medium");
       text-decoration: none;
       color: $figma-blue;
     }
