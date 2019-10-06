@@ -3,6 +3,11 @@
 @import "figma-plugin-ds/scss/components/_input-icon";
 
 .input-icon__input {
+  &--border,
+  &--border:disabled:hover {
+    border-color: $figma-black-1;
+  }
+
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;

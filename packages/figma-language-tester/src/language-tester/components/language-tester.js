@@ -1,6 +1,6 @@
 /** @jsx h */
 import { triggerEvent } from '@create-figma-plugin/utilities'
-import { Button } from 'figma-ui'
+import { Button } from 'figma-ui/src/components/Button'
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import { LanguageItem } from './language-item'

@@ -3,7 +3,8 @@
 @import "figma-plugin-ds/scss/components/_input";
 
 .input {
-  &--border {
+  &--border,
+  &--border:disabled:hover {
     border-color: $figma-black-1;
   }
 

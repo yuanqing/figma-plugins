@@ -4,7 +4,9 @@
 .set-api-key {
   &__description {
     @include font-ui-pos("small", "normal");
-    padding: 8px 14px 0;
+    user-select: none;
+    cursor: default;
+    padding: 12px 14px 0;
     color: $figma-black;
 
     a {

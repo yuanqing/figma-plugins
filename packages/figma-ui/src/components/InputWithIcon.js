@@ -3,7 +3,13 @@ import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 import './InputWithIcon.scss'
 
-export function InputWithIcon ({ iconColor, iconName, focused, ...rest }) {
+export function InputWithIcon ({
+  border,
+  iconColor,
+  iconName,
+  focused,
+  ...rest
+}) {
   if (focused) {
     rest.ref = useRef(null)
     useEffect(function () {
@@ -17,7 +23,10 @@ export function InputWithIcon ({ iconColor, iconName, focused, ...rest }) {
       <div class='input-icon__icon'>
         <div class={`icon icon--${iconName} icon--${iconColor}`} />
       </div>
-      <input class='input-icon__input' {...rest} />
+      <input
+        class={`input-icon__input ${border ? 'input-icon__input--border' : ''}`}
+        {...rest}
+      />
     </div>
   )
 }
