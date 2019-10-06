@@ -22,7 +22,7 @@ export function DrawSliceOverSelection (initialState) {
   )
   return (
     <div class='draw-slice-over-selection'>
-      <div class='draw-slice-over-selection__description'>Enter padding</div>
+      <div class='draw-slice-over-selection__description'>Set padding</div>
       <div class='draw-slice-over-selection__input'>
         <InputWithIcon
           type='number'
