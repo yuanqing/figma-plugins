@@ -1,0 +1,13 @@
+@import 'figma-plugin-ds/scss/base/_variables';
+
+.language-tester {
+  &__languages {
+    height: 210px;
+    overflow: auto;
+  }
+
+  &__button {
+    border-top: 1px solid $figma-silver;
+    padding: 8px 14px;
+  }
+}

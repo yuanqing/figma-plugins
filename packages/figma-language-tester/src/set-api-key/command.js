@@ -1,5 +1,4 @@
 /* global figma */
-
 import {
   addEventListener,
   loadSettings,
@@ -13,7 +12,10 @@ export default async function () {
   }
   addEventListener('SAVE_API_KEY', async function (settings) {
     await saveSettings(settings)
-    figma.closePlugin('✔ Saved API key')
+    figma.closePlugin(`✔ ${' '} Saved API key`)
+  })
+  addEventListener('CLOSE', function () {
+    figma.closePlugin()
   })
   showUi({ width: 240, height: 112, data: settings })
 }

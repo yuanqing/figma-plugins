@@ -16,28 +16,38 @@ export default async function () {
     setApiKeyCommand()
     return
   }
+  const nodes = getTextNodes()
+  if (nodes.length === 0) {
+    figma.closePlugin(
+      `No text layers ${
+        figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
+      }`,
+      { timeout: 2000 }
+    )
+    return
+  }
   showUi({
     width: 240,
     height: 259
   })
   const originalStrings = {} // maps `node.id` to the original strings
-  addEventListener('SET_LANGUAGE', function (languageKey) {
-    setLanguage(originalStrings, languageKey, apiKey)
+  addEventListener('SET_LANGUAGE', async function (languageKey) {
+    await setLanguage(originalStrings, languageKey, apiKey)
   })
-  addEventListener('RESET_LANGUAGE', function () {
-    resetLanguage(originalStrings)
+  addEventListener('RESET_LANGUAGE', async function (close) {
+    await resetLanguage(originalStrings)
+    if (close) {
+      figma.closePlugin()
+    }
+  })
+  addEventListener('CLOSE', async function () {
+    figma.closePlugin()
   })
 }
 
 async function setLanguage (originalStrings, languageKey, apiKey) {
   const notificationHandler = figma.notify('Translating…', { timeout: 60000 })
-  const selection = figma.currentPage.selection
-  const nodes = filterNodes(
-    selection.length === 0 ? [figma.currentPage] : selection,
-    function (node) {
-      return node.type === 'TEXT'
-    }
-  )
+  const nodes = getTextNodes()
   nodes.forEach(function (node) {
     if (typeof originalStrings[node.id] === 'undefined') {
       originalStrings[node.id] = node.characters
@@ -52,11 +62,12 @@ async function setLanguage (originalStrings, languageKey, apiKey) {
     node.characters = translated[index]
   })
   notificationHandler.cancel()
-  figma.notify(`✔ Translated to ${languages[languageKey]}`, { timeout: 2000 })
+  figma.notify(`✔ ${' '} Translated to ${languages[languageKey]}`, {
+    timeout: 2000
+  })
 }
 
 async function resetLanguage (originalStrings) {
-  const notificationHandler = figma.notify('Working…', { timeout: 60000 })
   const nodes = filterNodes([figma.currentPage], function (node) {
     return (
       node.type === 'TEXT' && typeof originalStrings[node.id] !== 'undefined'
@@ -66,8 +77,17 @@ async function resetLanguage (originalStrings) {
   nodes.forEach(function (node) {
     node.characters = originalStrings[node.id]
   })
-  notificationHandler.cancel()
-  figma.notify('✔ Reset', { timeout: 2000 })
+  figma.notify('Reset', { timeout: 2000 })
+}
+
+function getTextNodes () {
+  const selection = figma.currentPage.selection
+  return filterNodes(
+    selection.length === 0 ? [figma.currentPage] : selection,
+    function (node) {
+      return node.type === 'TEXT'
+    }
+  )
 }
 
 function filterNodes (nodes, filterCallback) {

@@ -1,4 +1,4 @@
 import { render } from 'figma-ui'
-import { App } from './components/app'
+import { SetApiKey } from './components/set-api-key'
 
-export default render(App)
+export default render(SetApiKey)

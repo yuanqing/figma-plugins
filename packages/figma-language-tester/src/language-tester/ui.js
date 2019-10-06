@@ -1,4 +1,4 @@
 import { render } from 'figma-ui'
-import { App } from './components/app'
+import { LanguageTester } from './components/language-tester'
 
-export default render(App)
+export default render(LanguageTester)

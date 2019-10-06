@@ -9,20 +9,23 @@
   flex-direction: row;
   border: 1px solid transparent;
   height: 32px;
+
   &:hover {
     background-color: $figma-selection-b;
   }
+
   &--active {
     background-color: $figma-selection-b;
   }
+
+  &__text {
+    @include font-ui-pos('small','normal');
+    flex-grow: 1;
+    padding-left: 14px;
+  }
+
+  &__icon {
+    padding-right: 4px;
+  }
 }
 
-.language-item__text {
-  @include font-ui-pos('small','normal');
-  flex-grow: 1;
-  padding-left: 14px;
-}
-
-.language-item__icon {
-  padding-right: 4px;
-}

@@ -2,27 +2,31 @@
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button, Input, useForm } from 'figma-ui'
 import { h } from 'preact'
-import './app.scss'
+import './set-api-key.scss'
 
-export function App (initialState) {
+export function SetApiKey (initialState) {
   function submitCallback ({ apiKey }) {
     triggerEvent('SAVE_API_KEY', {
       apiKey
     })
   }
+  function cancelCallback () {
+    triggerEvent('CLOSE')
+  }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
-    submitCallback
+    submitCallback,
+    cancelCallback
   )
   return (
-    <div class='app'>
-      <div class='app__description'>
+    <div class='set-api-key'>
+      <div class='set-api-key__description'>
         Enter a{' '}
         <a href='https://translate.yandex.com/developers/keys'>
           Yandex Translate API key
         </a>
       </div>
-      <div class='app__input'>
+      <div class='set-api-key__input'>
         <Input
           type='text'
           name='apiKey'
@@ -31,7 +35,7 @@ export function App (initialState) {
           focused
         />
       </div>
-      <div class='app__button'>
+      <div class='set-api-key__button'>
         <Button type='primary' onClick={handleSubmit}>
           Save API Key
         </Button>
