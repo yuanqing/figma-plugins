@@ -9,16 +9,11 @@ import {
 import { deleteHiddenLayer } from '../delete-hidden-layers/delete-hidden-layer'
 import { smartRenameLayer } from '../smart-rename-layers/smart-rename-layer'
 import { smartSortChildLayers } from '../smart-sort-layers/smart-sort-child-layers'
+import { defaultSettings } from '../default-settings'
 import { sortLayersByName } from '../sort-layers-by-name'
 
 export default async function () {
-  const settings = (await loadSettings()) || {
-    deleteHiddenLayers: true,
-    sortPages: true,
-    smartSortLayers: true,
-    smartRenameLayers: true,
-    smartRenameLayersWhitelist: '^@'
-  }
+  const settings = (await loadSettings()) || defaultSettings
   addEventListener('CLEAN_DOCUMENT', async function (settings) {
     await saveSettings(settings)
     const {

@@ -1,6 +1,9 @@
 /** @jsx h */
 import { triggerEvent } from '@create-figma-plugin/utilities'
-import { Button, Checkbox, InputWithLabel, useForm } from 'figma-ui'
+import { Button } from 'figma-ui/src/components/Button'
+import { Checkbox } from 'figma-ui/src/components/Checkbox'
+import { InputWithLabel } from 'figma-ui/src/components/InputWithLabel'
+import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import './clean-document.scss'
 
