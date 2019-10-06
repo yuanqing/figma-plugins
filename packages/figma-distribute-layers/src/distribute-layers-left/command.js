@@ -1,5 +1,5 @@
+import { setAbsoluteX } from '@create-figma-plugin/utilities'
 import { commandFactory } from '../command-factory'
-import { setAbsoluteX } from '../set-absolute-position'
 
 export default commandFactory({
   direction: 'left',

@@ -10,7 +10,7 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
   return async function () {
     const nodes = [].concat(figma.currentPage.selection)
     if (nodes.length < 2) {
-      figma.closePlugin('Select two or more layers')
+      figma.closePlugin('✘ \u00a0 Select two or more layers')
       return
     }
     const settings = (await loadSettings()) || {

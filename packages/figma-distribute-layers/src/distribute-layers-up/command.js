@@ -1,5 +1,5 @@
+import { setAbsoluteY } from '@create-figma-plugin/utilities'
 import { commandFactory } from '../command-factory'
-import { setAbsoluteY } from '../set-absolute-position'
 
 export default commandFactory({
   direction: 'up',
