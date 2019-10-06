@@ -1,10 +1,17 @@
 @import "figma-plugin-ds/scss/base/_base";
+@import "figma-plugin-ds/scss/base/_mixins";
 @import "figma-plugin-ds/scss/base/_variables";
 @import "figma-plugin-ds/scss/components/_icon";
 @import "figma-plugin-ds/scss/icons/_group";
 
 .draw-slice-over-selection {
-  padding: 6px 0;
+  &__description {
+    @include font-ui-pos("small", "normal");
+    user-select: none;
+    cursor: default;
+    padding: 12px 14px 0;
+    color: $figma-black;
+  }
 
   &__input {
     padding: 8px 14px 0;

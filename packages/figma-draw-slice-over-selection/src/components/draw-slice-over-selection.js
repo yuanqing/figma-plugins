@@ -1,6 +1,8 @@
 /** @jsx h */
 import { triggerEvent } from '@create-figma-plugin/utilities'
-import { Button, InputWithIcon, useForm } from 'figma-ui'
+import { Button } from 'figma-ui/src/components/Button'
+import { InputWithIcon } from 'figma-ui/src/components/InputWithIcon'
+import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import './draw-slice-over-selection.scss'
 
@@ -20,6 +22,7 @@ export function DrawSliceOverSelection (initialState) {
   )
   return (
     <div class='draw-slice-over-selection'>
+      <div class='draw-slice-over-selection__description'>Enter padding</div>
       <div class='draw-slice-over-selection__input'>
         <InputWithIcon
           type='number'
