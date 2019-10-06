@@ -11,7 +11,7 @@ export function DistributeLayers ({ direction, iconName, ...initialState }) {
     })
   }
   function cancelCallback () {
-    triggerEvent('CANCEL')
+    triggerEvent('CLOSE')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
