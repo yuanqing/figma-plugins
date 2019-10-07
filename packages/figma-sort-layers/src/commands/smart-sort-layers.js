@@ -1,7 +1,7 @@
 import { commandFactory } from '../command-factory'
-import { smartSortSelectedLayers } from '../smart-sort-selected-layers'
+import { smartSortLayers } from '../smart-sort-layers'
 
 export default commandFactory({
-  sortLayers: smartSortSelectedLayers,
+  sortLayers: smartSortLayers,
   successMessage: 'Smart sorted selected layers'
 })

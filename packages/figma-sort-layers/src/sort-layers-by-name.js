@@ -5,7 +5,17 @@ export function sortLayersByName (layers) {
     const aName = a.name.toLowerCase()
     const bName = b.name.toLowerCase()
     if (aName === bName) {
-      return a.y - b.y || a.x - b.x || naturalCompare(a.id, b.id)
+      if (a.type !== 'PAGE') {
+        const yPositionDifference = a.y - b.y
+        if (yPositionDifference !== 0) {
+          return yPositionDifference
+        }
+        const xPositionDifference = a.x - b.x
+        if (xPositionDifference !== 0) {
+          return xPositionDifference
+        }
+      }
+      return naturalCompare(a.id, b.id)
     }
     return naturalCompare(aName, bName)
   })

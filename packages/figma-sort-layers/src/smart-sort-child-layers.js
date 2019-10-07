@@ -5,7 +5,7 @@ export function smartSortChildLayers (layer, childLayerIds) {
     children.length < 2 ||
     layer.type === 'INSTANCE'
   ) {
-    return
+    return null
   }
   /* eslint-disable indent */
   const [firstChildLayer, ...childLayers] =

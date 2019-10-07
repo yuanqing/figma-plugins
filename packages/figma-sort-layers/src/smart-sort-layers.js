@@ -1,10 +1,8 @@
-/* global figma */
 import { smartSortChildLayers } from './smart-sort-child-layers'
 
-export function smartSortSelectedLayers () {
-  const selectedLayers = figma.currentPage.selection
-  const parentLayer = selectedLayers[0].parent
-  const layerIds = collectLayerIds(selectedLayers)
+export function smartSortLayers (layers) {
+  const parentLayer = layers[0].parent
+  const layerIds = collectLayerIds(layers)
   return smartSortChildLayers(parentLayer, layerIds)
 }
 
