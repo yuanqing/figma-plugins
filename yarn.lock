@@ -148,12 +148,12 @@
     to-fast-properties "^2.0.0"
 
 "@create-figma-plugin/build@*":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.19.tgz#bda8c5a33d7ae02660a2ba88e8c41597f65ed6b9"
-  integrity sha512-1/uKMRyl5ytzU5+/cEzyfg9OFl10RaAJ82RPMFP+XPYxTt1VUy8u7eOk9STI90EMdSgzNYpBGPUvFEPrVZty9g==
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.20.tgz#38f67ee82d7b42b00dbe53a1154ef3d5636e7ce0"
+  integrity sha512-w7T2hVbKTvi31XwHyuvwcdy64odN1+X+gPskk7fMZ4Bl5Ug3NZYNP/XlrDWojheVLJSLdtuh8mtFkymek5N5hw==
   dependencies:
-    "@create-figma-plugin/common" "^0.0.19"
-    "@create-figma-plugin/utilities" "^0.0.19"
+    "@create-figma-plugin/common" "^0.0.20"
+    "@create-figma-plugin/utilities" "^0.0.20"
     chokidar "^3.1.1"
     find-up "^4.1.0"
     fs-extra "^8.1.0"
@@ -164,20 +164,20 @@
     typescript "^3.6.3"
     webpack "^4.41.0"
 
-"@create-figma-plugin/common@^0.0.19":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.19.tgz#6a1f6438fa6871954701405c6161057d50324e6b"
-  integrity sha512-L5p9m1J4js2zpfp2AIX8umtMF/6Edi71/bHossMxOBrIvXTJ132YxRgZhx2NdU9e5ceOjrH9pT0O7L630+0f6w==
+"@create-figma-plugin/common@^0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.20.tgz#c0c0b5db0f78d4101867d08467fe7dd02ff8f48d"
+  integrity sha512-05toTxj3FfHP+X66ko8NEHOt136tBzYH7PT6/J3XVTEw0172kNnmkH4dhK5w5UrCsgD7X3d3TmZEr99jKsY9Ww==
   dependencies:
     "@sindresorhus/slugify" "^0.9.1"
     chalk "^2.4.2"
     fs-extra "^8.1.0"
     npmlog "^4.1.2"
 
-"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.19":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.19.tgz#104559037ec698c2ba96217ae22840803037e985"
-  integrity sha512-+xK2ATjqx02wbOfiHyEQ7WayHcdTEVuN2TBjqormk8uo0QuDjR9ckzliLOtp248sjVMxrRqoc+wsZjAjMZ6Q/A==
+"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.20.tgz#784612e288c56802a0cf026725fce36d446885bb"
+  integrity sha512-fYwuepbtR0XzJnCChJneqQAk5TJycrR9uHg996t3roi5aOCN/HTPDIQVjCp0ny1jJJoLmdymxTHqU+1EuXwiDg==
 
 "@evocateur/libnpmaccess@^3.1.2":
   version "3.1.2"
@@ -1000,9 +1000,9 @@
     universal-user-agent "^4.0.0"
 
 "@octokit/rest@^16.28.4":
-  version "16.31.0"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.31.0.tgz#97ceba8e9b6bfdaffa321d7022917053fcb7dc39"
-  integrity sha512-ZmMpc59N/Ju8FjN2qyOefB+vLppO/8uP/tPyvwEe7cQxdXvPx0OXL/OxDLib8tnT046AtgMNYaXH3FpZnrUdOA==
+  version "16.32.0"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.32.0.tgz#5bb14e870c90ae34c3587b17bc8efb86d4d62da3"
+  integrity sha512-H8X4OGHK7KFNlrx11xQLBQcFGjracSLSoV8JC/N8/BfLl9L5ZMpxt5iFrudZM6alsCZd4hQ5f/GW0hEjAW0ZvQ==
   dependencies:
     "@octokit/request" "^5.0.0"
     "@octokit/request-error" "^1.0.2"
@@ -2810,9 +2810,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.247:
-  version "1.3.275"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.275.tgz#19a38436e34216f51820fa2f4326d5ce141fa36f"
-  integrity sha512-/YWtW/VapMnuYA1lNOaa1F4GhR1LBf+CUTp60lzDPEEh0XOzyOAyULyYZVF9vziZ3qSbTqCwmKwsyRXp66STbw==
+  version "1.3.276"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.276.tgz#1cca47c31b6e852ce43ab62ae4f31608db8b95d4"
+  integrity sha512-J7bVRAW2fHJVOGZqxSvmMcbBAWPiueHsKwSq+TjaNq1wQ71Za0uBExC1ECuMmAAQioDA2//auhI/glFINnUGPw==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
