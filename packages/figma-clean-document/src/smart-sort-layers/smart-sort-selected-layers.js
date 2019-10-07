@@ -1,26 +1,18 @@
 /* global figma */
-import { smartSortChildLayers } from './smart-sort-child-layers'
+import { checkCommonParent } from 'figma-sort-layers/src/check-common-parent'
+import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-child-layers'
+import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'
 
 export function smartSortSelectedLayers () {
   const selectedLayers = figma.currentPage.selection
-  if (checkIfLayersHaveCommonParent(selectedLayers) === false) {
+  if (checkCommonParent(selectedLayers) === false) {
     return false
   }
   const parentLayer = selectedLayers[0].parent
   const layerIds = collectLayerIds(selectedLayers)
-  smartSortChildLayers(parentLayer, layerIds)
-  return true
-}
-
-function checkIfLayersHaveCommonParent ([firstLayer, ...layers]) {
-  if (layers.length === 0) {
-    return true
-  }
-  const parentId = firstLayer.parent.id
-  for (const layer of layers) {
-    if (layer.parent.id !== parentId) {
-      return false
-    }
+  const result = smartSortChildLayers(parentLayer, layerIds)
+  if (result !== null) {
+    updateLayersSortOrder(result)
   }
   return true
 }

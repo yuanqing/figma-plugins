@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "*",
+    "figma-sort-layers": "*",
     "figma-ui": "*",
-    "natural-compare-lite": "^1.4.0",
     "preact": "^10.0.0"
   },
   "create-figma-plugin": {

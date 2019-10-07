@@ -6,11 +6,12 @@ import {
   showUi,
   traverseLayer
 } from '@create-figma-plugin/utilities'
+import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-child-layers'
+import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
+import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'
 import { deleteHiddenLayer } from '../delete-hidden-layers/delete-hidden-layer'
 import { smartRenameLayer } from '../smart-rename-layers/smart-rename-layer'
-import { smartSortChildLayers } from '../smart-sort-layers/smart-sort-child-layers'
 import { defaultSettings } from '../default-settings'
-import { sortLayersByName } from '../sort-layers-by-name'
 
 export default async function () {
   const settings = (await loadSettings()) || defaultSettings
@@ -20,13 +21,17 @@ export default async function () {
       deleteHiddenLayers,
       smartRenameLayers,
       smartRenameLayersWhitelist,
-      smartSortLayers
+      smartSortLayers,
+      sortPages
     } = settings
     const whitelistRegex =
       smartRenameLayersWhitelist !== ''
         ? new RegExp(smartRenameLayersWhitelist)
         : null
-    sortLayersByName(figma.root.children)
+    if (sortPages) {
+      const result = sortLayersByName(figma.root.children)
+      updateLayersSortOrder(result)
+    }
     for (const page of figma.root.children) {
       traverseLayer(page, function (layer) {
         if (layer.removed) {
@@ -36,7 +41,10 @@ export default async function () {
           deleteHiddenLayer(layer)
         }
         if (smartSortLayers) {
-          smartSortChildLayers(layer)
+          const result = smartSortChildLayers(layer)
+          if (result !== null) {
+            updateLayersSortOrder(result)
+          }
         }
         if (smartRenameLayers) {
           smartRenameLayer(layer, whitelistRegex)
