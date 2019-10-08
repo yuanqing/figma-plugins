@@ -1,6 +1,7 @@
 /* global figma */
 import {
   addEventListener,
+  formatSuccessMessage,
   loadSettings,
   saveSettings,
   showUi,
@@ -51,7 +52,7 @@ export default async function () {
         }
       })
     }
-    figma.closePlugin('✔ \u00a0 Cleaned document')
+    figma.closePlugin(formatSuccessMessage('Cleaned document'))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

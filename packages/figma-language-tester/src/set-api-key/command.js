@@ -1,6 +1,7 @@
 /* global figma */
 import {
   addEventListener,
+  formatSuccessMessage,
   loadSettings,
   saveSettings,
   showUi
@@ -12,7 +13,7 @@ export default async function () {
   }
   addEventListener('SAVE_API_KEY', async function (settings) {
     await saveSettings(settings)
-    figma.closePlugin('✔ \u00a0 Saved API key')
+    figma.closePlugin(formatSuccessMessage('Saved API key'))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

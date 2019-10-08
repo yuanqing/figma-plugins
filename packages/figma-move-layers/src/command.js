@@ -1,15 +1,18 @@
 /* global figma */
 import {
   addEventListener,
+  formatErrorMessage,
+  formatSuccessMessage,
   loadSettings,
+  pluralize,
   saveSettings,
   showUi
 } from '@create-figma-plugin/utilities'
 
 export default async function () {
-  const selection = figma.currentPage.selection
-  if (selection.length === 0) {
-    figma.closePlugin('✘ \u00a0 Select one or more layers')
+  const selectedLayers = figma.currentPage.selection
+  if (selectedLayers.length === 0) {
+    figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
   const settings = (await loadSettings()) || {
@@ -23,12 +26,14 @@ export default async function () {
       figma.closePlugin()
       return
     }
-    for (const layer of selection) {
+    for (const layer of selectedLayers) {
       layer.x += horizontalOffset
       layer.y += verticalOffset
     }
     figma.closePlugin(
-      `✔ \u00a0 Moved selected layer${selection.length === 1 ? '' : 's'}`
+      formatSuccessMessage(
+        `Moved selected ${pluralize(selectedLayers.length, 'layer')}`
+      )
     )
   })
   addEventListener('CLOSE', function () {

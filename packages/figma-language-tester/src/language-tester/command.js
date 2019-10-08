@@ -1,6 +1,8 @@
 /* global figma */
 import {
   addEventListener,
+  formatErrorMessage,
+  formatSuccessMessage,
   loadSettings,
   showUi,
   traverseLayer
@@ -19,9 +21,11 @@ export default async function () {
   const layers = getTextLayers()
   if (layers.length === 0) {
     figma.closePlugin(
-      `✘ \u00a0 No text layers ${
-        figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
-      }`,
+      formatErrorMessage(
+        `No text layers ${
+          figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
+        }`
+      ),
       { timeout: 2000 }
     )
     return
@@ -62,9 +66,12 @@ async function setLanguage (originalStrings, languageKey, apiKey) {
     layer.characters = translated[index]
   })
   notificationHandler.cancel()
-  figma.notify(`✔ \u00a0 Translated to ${languages[languageKey]}`, {
-    timeout: 2000
-  })
+  figma.notify(
+    formatSuccessMessage(`Translated to ${languages[languageKey]}`),
+    {
+      timeout: 2000
+    }
+  )
 }
 
 async function resetLanguage (originalStrings) {

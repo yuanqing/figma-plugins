@@ -1,6 +1,9 @@
 /* global figma */
 import {
+  formatSuccessMessage,
   getAllOrSelectedLayers,
+  mapNumberToWord,
+  pluralize,
   traverseLayer
 } from '@create-figma-plugin/utilities'
 import { smartRenameLayer } from './smart-rename-layer'
@@ -20,11 +23,16 @@ export default function () {
   }
   const context =
     figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
+  /* eslint-disable indent */
   figma.closePlugin(
     count === 0
       ? `No layers renamed ${context}`
-      : `✔ \u00a0 Smart renamed ${count} layer${
-          count === 1 ? '' : 's'
-        } ${context}`
+      : formatSuccessMessage(
+          `Smart renamed ${mapNumberToWord(count)} ${pluralize(
+            count,
+            'layer'
+          )} ${context}`
+        )
   )
+  /* eslint-enable indent */
 }

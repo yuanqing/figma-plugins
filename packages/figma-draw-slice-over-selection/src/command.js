@@ -2,6 +2,8 @@
 import { calculateMaximumBounds } from './calculate-maximum-bounds'
 import {
   addEventListener,
+  formatErrorMessage,
+  formatSuccessMessage,
   loadSettings,
   saveSettings,
   showUi
@@ -10,7 +12,7 @@ import {
 export default async function () {
   const selection = figma.currentPage.selection
   if (selection.length === 0) {
-    figma.closePlugin('✘ \u00a0 Select one or more layers')
+    figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
   const settings = (await loadSettings()) || {
@@ -28,7 +30,7 @@ export default async function () {
     slice.resize(width, height)
     slice.name = '@SliceOverSelection'
     slice.locked = true
-    figma.closePlugin('✔ \u00a0 Drew slice over selection')
+    figma.closePlugin(formatSuccessMessage('Drew slice over selection'))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

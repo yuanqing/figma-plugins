@@ -1,6 +1,8 @@
 /* global figma */
 import {
   addEventListener,
+  formatErrorMessage,
+  formatSuccessMessage,
   loadSettings,
   saveSettings,
   showUi
@@ -10,7 +12,7 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
   return async function () {
     const layers = [].concat(figma.currentPage.selection)
     if (layers.length < 2) {
-      figma.closePlugin('✘ \u00a0 Select two or more layers')
+      figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
     }
     const settings = (await loadSettings()) || {
@@ -21,7 +23,7 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
       const { space } = settings
       layers.sort(sortLayers)
       distributeLayers(layers, space)
-      figma.closePlugin(`✔ \u00a0 Distributed layers ${direction}`)
+      figma.closePlugin(formatSuccessMessage(`Distributed layers ${direction}`))
     })
     addEventListener('CLOSE', function () {
       figma.closePlugin()
