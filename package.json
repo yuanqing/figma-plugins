@@ -11,7 +11,7 @@
     "lint-js": "standard '*.js' 'packages/*/src/**/*.js'",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
-    "watch": "lerna run watch --ignore figma-ui"
+    "watch": "yarn run clean && lerna run watch --ignore figma-ui"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
