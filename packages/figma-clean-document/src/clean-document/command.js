@@ -41,16 +41,24 @@ export default async function () {
         if (deleteHiddenLayers) {
           deleteHiddenLayer(layer)
         }
-        if (smartSortLayers) {
-          const result = smartSortChildLayers(layer)
-          if (result !== null) {
-            updateLayersSortOrder(result)
-          }
-        }
         if (smartRenameLayers) {
           smartRenameLayer(layer, whitelistRegex)
         }
       })
+      if (smartSortLayers) {
+        traverseLayer(
+          page,
+          function (layer) {
+            const result = smartSortChildLayers(layer)
+            if (result !== null) {
+              updateLayersSortOrder(result)
+            }
+          },
+          function (layer) {
+            return layer.type !== 'INSTANCE'
+          }
+        )
+      }
     }
     figma.closePlugin(formatSuccessMessage('Cleaned document'))
   })
