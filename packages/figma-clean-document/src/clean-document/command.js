@@ -50,12 +50,12 @@ export default async function () {
       const result = sortLayersByName(figma.root.children)
       updateLayersSortOrder(result)
     }
-    figma.closePlugin(formatSuccessMessage(`Cleaned ${scope}`))
+    figma.closePlugin(formatSuccessMessage(`Cleaned ${scope.toLowerCase()}`))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUi({ width: 240, height: 400, data: settings })
+  showUi({ width: 240, height: 346, data: settings })
 }
 
 function getLayersInScope (scope) {
