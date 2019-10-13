@@ -13,10 +13,10 @@ export default function () {
   const layers = getAllOrSelectedLayers()
   for (const layer of layers) {
     traverseLayer(layer, function (layer) {
-      if (layer.removed) {
+      if (layer.removed === true) {
         return
       }
-      if (deleteHiddenLayer(layer)) {
+      if (deleteHiddenLayer(layer) === true) {
         count++
       }
     })
