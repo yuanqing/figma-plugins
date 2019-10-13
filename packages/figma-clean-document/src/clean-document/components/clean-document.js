@@ -2,9 +2,11 @@
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button } from 'figma-ui/src/components/Button'
 import { Checkbox } from 'figma-ui/src/components/Checkbox'
+import { SegmentedControl } from 'figma-ui/src/components/SegmentedControl'
 import { InputWithLabel } from 'figma-ui/src/components/InputWithLabel'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
+import { DOCUMENT, PAGE, SELECTION } from '../scope'
 import './clean-document.scss'
 
 export function CleanDocument (initialState) {
@@ -20,18 +22,32 @@ export function CleanDocument (initialState) {
     cancelCallback
   )
   const {
-    sortPages,
     deleteHiddenLayers,
+    scope,
     smartRenameLayers,
     smartRenameLayersWhitelist,
-    smartSortLayers
+    smartSortLayers,
+    sortPages
   } = inputs
   const isSubmitButtonEnabled =
-    sortPages || deleteHiddenLayers || smartRenameLayers || smartSortLayers
+    sortPages === true ||
+    deleteHiddenLayers === true ||
+    smartRenameLayers === true ||
+    smartSortLayers === true
   return (
     <div class='clean-document'>
+      <div class='clean-document__scope'>
+        <SegmentedControl
+          options={[DOCUMENT, PAGE, SELECTION]}
+          title='Scope'
+          name='scope'
+          onChange={handleInput}
+          value={scope}
+        />
+      </div>
       <div class='clean-document__checkbox'>
         <Checkbox
+          disabled={scope === SELECTION}
           title='Sort pages'
           name='sortPages'
           onChange={handleInput}
