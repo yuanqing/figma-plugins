@@ -47,7 +47,7 @@ export function CleanDocument (initialState) {
       </div>
       <div class='clean-document__checkbox'>
         <Checkbox
-          disabled={scope === SELECTION}
+          disabled={scope !== DOCUMENT}
           title='Sort pages'
           name='sortPages'
           onChange={handleInput}
