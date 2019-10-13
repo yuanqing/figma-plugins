@@ -1,69 +1,69 @@
 /* global figma */
 import {
   addEventListener,
+  formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
   saveSettings,
-  showUi,
-  traverseLayer
+  showUi
 } from '@create-figma-plugin/utilities'
-import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-child-layers'
 import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
 import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'
-import { deleteHiddenLayer } from '../delete-hidden-layers/delete-hidden-layer'
-import { smartRenameLayer } from '../smart-rename-layers/smart-rename-layer'
+import { cleanLayer } from './clean-layer'
+import { DOCUMENT, PAGE, SELECTION } from './scope'
 import { defaultSettings } from '../default-settings'
 
 export default async function () {
   const settings = (await loadSettings()) || defaultSettings
+  const hasSelection = figma.currentPage.selection.length !== 0
+  if (hasSelection) {
+    settings.scope = SELECTION
+  } else {
+    if (settings.scope === SELECTION) {
+      settings.scope = DOCUMENT
+    }
+  }
   addEventListener('CLEAN_DOCUMENT', async function (settings) {
     await saveSettings(settings)
     const {
       deleteHiddenLayers,
+      scope,
       smartRenameLayers,
       smartRenameLayersWhitelist,
       smartSortLayers,
       sortPages
     } = settings
-    const whitelistRegex =
-      smartRenameLayersWhitelist !== ''
-        ? new RegExp(smartRenameLayersWhitelist)
-        : null
-    if (sortPages) {
+    const layers = getLayersInScope(scope)
+    if (scope === SELECTION && layers.length === 0) {
+      figma.closePlugin(formatErrorMessage('Select one or more layers'))
+      return
+    }
+    for (const layer of layers) {
+      cleanLayer(layer, {
+        deleteHiddenLayers,
+        smartRenameLayers,
+        smartRenameLayersWhitelist,
+        smartSortLayers
+      })
+    }
+    if (scope === DOCUMENT && sortPages === true) {
       const result = sortLayersByName(figma.root.children)
       updateLayersSortOrder(result)
     }
-    for (const page of figma.root.children) {
-      traverseLayer(page, function (layer) {
-        if (layer.removed) {
-          return
-        }
-        if (deleteHiddenLayers) {
-          deleteHiddenLayer(layer)
-        }
-        if (smartRenameLayers) {
-          smartRenameLayer(layer, whitelistRegex)
-        }
-      })
-      if (smartSortLayers) {
-        traverseLayer(
-          page,
-          function (layer) {
-            const result = smartSortChildLayers(layer)
-            if (result !== null) {
-              updateLayersSortOrder(result)
-            }
-          },
-          function (layer) {
-            return layer.type !== 'INSTANCE'
-          }
-        )
-      }
-    }
-    figma.closePlugin(formatSuccessMessage('Cleaned document'))
+    figma.closePlugin(formatSuccessMessage(`Cleaned ${scope}`))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUi({ width: 240, height: 294, data: settings })
+  showUi({ width: 240, height: 400, data: settings })
+}
+
+function getLayersInScope (scope) {
+  if (scope === DOCUMENT) {
+    return figma.root.children
+  }
+  if (scope === PAGE) {
+    return [figma.currentPage]
+  }
+  return figma.currentPage.selection
 }
