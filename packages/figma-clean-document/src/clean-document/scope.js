@@ -1,3 +1,3 @@
-export const DOCUMENT = 'document'
-export const PAGE = 'page'
-export const SELECTION = 'selection'
+export const DOCUMENT = 'Document'
+export const PAGE = 'Page'
+export const SELECTION = 'Selection'
