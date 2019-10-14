@@ -63,8 +63,8 @@
       },
       "-",
       {
-        "name": "Reset Settings",
-        "command": "reset-settings/command.js"
+        "name": "Reset",
+        "command": "reset/command.js"
       }
     ]
   }

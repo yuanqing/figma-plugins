@@ -4,5 +4,5 @@ import { defaultSettings } from '../default-settings'
 
 export default async function () {
   await saveSettings(defaultSettings)
-  figma.closePlugin('Reset settings')
+  figma.closePlugin('Reset')
 }
