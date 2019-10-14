@@ -42,11 +42,15 @@
         "command": "language-tester/command.js",
         "ui": "language-tester/ui.js"
       },
-      "-",
       {
         "name": "Set API Key",
         "command": "set-api-key/command.js",
         "ui": "set-api-key/ui.js"
+      },
+      "-",
+      {
+        "name": "Reset",
+        "command": "reset/command.js"
       }
     ]
   }
