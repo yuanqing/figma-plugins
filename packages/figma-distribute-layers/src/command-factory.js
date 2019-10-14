@@ -7,6 +7,7 @@ import {
   saveSettings,
   showUi
 } from '@create-figma-plugin/utilities'
+import defaultSettings from './default-settings'
 
 export function commandFactory ({ direction, sortLayers, distributeLayers }) {
   return async function () {
@@ -15,9 +16,7 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
     }
-    const settings = (await loadSettings()) || {
-      space: 0
-    }
+    const settings = (await loadSettings()) || defaultSettings
     addEventListener('DISTRIBUTE_LAYERS', async function (settings) {
       await saveSettings(settings)
       const { space } = settings

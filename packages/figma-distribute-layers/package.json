@@ -52,6 +52,11 @@
         "name": "Distribute Layers Down",
         "command": "distribute-layers-down/command.js",
         "ui": "distribute-layers-down/ui.js"
+      },
+      "-",
+      {
+        "name": "Reset",
+        "command": "reset/command.js"
       }
     ]
   }
