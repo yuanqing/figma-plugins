@@ -1,6 +1,4 @@
 @import "figma-plugin-ds/scss/base/_base";
-@import "figma-plugin-ds/scss/base/_mixins";
-@import "figma-plugin-ds/scss/base/_variables";
 
 .clean-document {
   &__scope {
@@ -9,10 +7,10 @@
 
   &__input {
     margin-top: -4px;
-    padding: 0 14px 10px 37px;
+    padding: 0 16px 10px 37px;
   }
 
   &__button {
-    padding: 8px 14px 8px;
+    padding: 8px 16px;
   }
 }

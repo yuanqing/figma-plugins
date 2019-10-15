@@ -9,15 +9,15 @@
     @include font-ui-pos("small", "normal");
     user-select: none;
     cursor: default;
-    padding: 12px 14px 0;
+    padding: 12px 16px 0;
     color: $figma-black;
   }
 
   &__input {
-    padding: 8px 14px 0;
+    padding: 8px 16px 0;
   }
 
   &__button {
-    padding: 8px 14px;
+    padding: 8px 16px;
   }
 }

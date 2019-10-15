@@ -1,5 +1,4 @@
 @import "figma-plugin-ds/scss/base/_base";
-@import "figma-plugin-ds/scss/base/_variables";
 @import "figma-plugin-ds/scss/components/_icon";
 @import "figma-plugin-ds/scss/icons/_tidy-up-list-horiz";
 @import "figma-plugin-ds/scss/icons/_tidy-up-list-vert";
@@ -8,10 +7,10 @@
   padding: 6px 0;
 
   &__input {
-    padding: 8px 14px 0;
+    padding: 8px 16px 0;
   }
 
   &__button {
-    padding: 8px 14px;
+    padding: 8px 16px;
   }
 }
