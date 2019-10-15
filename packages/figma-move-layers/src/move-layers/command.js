@@ -8,6 +8,7 @@ import {
   saveSettings,
   showUi
 } from '@create-figma-plugin/utilities'
+import { defaultSettings } from '../default-settings'
 
 export default async function () {
   const selectedLayers = figma.currentPage.selection
@@ -15,10 +16,7 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const settings = (await loadSettings()) || {
-    horizontalOffset: 0,
-    verticalOffset: 0
-  }
+  const settings = (await loadSettings()) || defaultSettings
   addEventListener('MOVE_LAYERS', async function (settings) {
     await saveSettings(settings)
     const { horizontalOffset, verticalOffset } = settings

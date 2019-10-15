@@ -8,6 +8,7 @@ import {
   saveSettings,
   showUi
 } from '@create-figma-plugin/utilities'
+import { defaultSettings } from '../default-settings'
 
 export default async function () {
   const selection = figma.currentPage.selection
@@ -15,9 +16,7 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const settings = (await loadSettings()) || {
-    padding: 0
-  }
+  const settings = (await loadSettings()) || defaultSettings
   addEventListener('DRAW_SLICE_OVER_SELECTION', async function (settings) {
     await saveSettings(settings)
     const { padding } = settings
