@@ -55,7 +55,8 @@
       },
       {
         "name": "Smart Rename Layers",
-        "command": "smart-rename-layers/command.js"
+        "command": "smart-rename-layers/command.js",
+        "ui": "smart-rename-layers/ui.js"
       },
       {
         "name": "Smart Sort Layers",

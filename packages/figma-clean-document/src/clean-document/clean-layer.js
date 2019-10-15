@@ -13,10 +13,6 @@ export function cleanLayer (
     smartSortLayers
   }
 ) {
-  const whitelistRegex =
-    smartRenameLayersWhitelist !== ''
-      ? new RegExp(smartRenameLayersWhitelist)
-      : null
   traverseLayer(layer, function (layer) {
     if (layer.removed === true) {
       return
@@ -25,7 +21,7 @@ export function cleanLayer (
       deleteHiddenLayer(layer)
     }
     if (smartRenameLayers === true) {
-      smartRenameLayer(layer, whitelistRegex)
+      smartRenameLayer(layer, smartRenameLayersWhitelist)
     }
   })
   if (smartSortLayers) {

@@ -1,0 +1,13 @@
+@import "figma-plugin-ds/scss/base/_base";
+@import "figma-plugin-ds/scss/base/_mixins";
+@import "figma-plugin-ds/scss/base/_variables";
+
+.smart-rename-layers {
+  &__input {
+    padding: 8px 14px 0;
+  }
+
+  &__button {
+    padding: 8px 14px;
+  }
+}
