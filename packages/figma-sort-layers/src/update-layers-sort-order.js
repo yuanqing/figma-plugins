@@ -1,7 +1,7 @@
 export function updateLayersSortOrder (layers) {
   const insertIndex = calculateInsertIndex(layers)
   const parentLayer = layers[0].parent // we've already checked that `layers` have a common parent
-  layers.forEach(function (layer) {
+  layers.reverse().forEach(function (layer) {
     parentLayer.insertChild(insertIndex, layer)
   })
 }
