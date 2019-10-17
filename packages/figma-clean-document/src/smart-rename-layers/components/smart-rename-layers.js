@@ -1,7 +1,7 @@
 /** @jsx h */
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button } from 'figma-ui/src/components/Button'
-import { InputWithLabel } from 'figma-ui/src/components/InputWithLabel'
+import { Input } from 'figma-ui/src/components/Input'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import './smart-rename-layers.scss'
@@ -21,15 +21,15 @@ export function SmartRenameLayers (initialState) {
   const { smartRenameLayersWhitelist } = inputs
   return (
     <div class='smart-rename-layers'>
+      <div class='smart-rename-layers__label'>Ignore layers named…</div>
       <div class='smart-rename-layers__input'>
-        <InputWithLabel
+        <Input
           type='text'
-          disabled={inputs.smartRenameLayers === false}
           border
-          label='Ignore layers named…'
           name='smartRenameLayersWhitelist'
           onChange={handleInput}
           value={smartRenameLayersWhitelist}
+          focused
         />
       </div>
       <div class='smart-rename-layers__button'>

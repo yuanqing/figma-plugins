@@ -1,6 +1,16 @@
 @import "figma-plugin-ds/scss/base/_base";
+@import "figma-plugin-ds/scss/base/_mixins";
+@import "figma-plugin-ds/scss/base/_variables";
 
 .smart-rename-layers {
+  &__label {
+    @include font-ui-pos("small", "normal");
+    user-select: none;
+    cursor: default;
+    padding: 12px 16px 0;
+    color: $figma-black-3;
+  }
+
   &__input {
     padding: 8px 16px 0;
   }

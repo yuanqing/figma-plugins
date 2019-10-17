@@ -5,12 +5,12 @@
 @import "figma-plugin-ds/scss/icons/_group";
 
 .draw-slice-over-selection {
-  &__description {
+  &__label {
     @include font-ui-pos("small", "normal");
     user-select: none;
     cursor: default;
     padding: 12px 16px 0;
-    color: $figma-black;
+    color: $figma-black-3;
   }
 
   &__input {

@@ -3,7 +3,7 @@ import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button } from 'figma-ui/src/components/Button'
 import { Checkbox } from 'figma-ui/src/components/Checkbox'
 import { SegmentedControl } from 'figma-ui/src/components/SegmentedControl'
-import { InputWithLabel } from 'figma-ui/src/components/InputWithLabel'
+import { Input } from 'figma-ui/src/components/Input'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import { DOCUMENT, PAGE, SELECTION } from '../scope'
@@ -65,17 +65,17 @@ export function CleanDocument (initialState) {
       <div class='clean-document__checkbox'>
         <Checkbox
           title='Smart rename layers'
+          description='Ignore layers named…'
           name='smartRenameLayers'
           onChange={handleInput}
           value={smartRenameLayers}
         />
       </div>
       <div class='clean-document__input'>
-        <InputWithLabel
+        <Input
           type='text'
           disabled={inputs.smartRenameLayers === false}
           border
-          label='Ignore layers named…'
           name='smartRenameLayersWhitelist'
           onChange={handleInput}
           value={smartRenameLayersWhitelist}
