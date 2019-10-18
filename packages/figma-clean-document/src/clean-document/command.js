@@ -55,7 +55,7 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUi({ width: 240, height: 346, data: settings })
+  showUi({ width: 240, height: 342, data: settings })
 }
 
 function getLayersInScope (scope) {

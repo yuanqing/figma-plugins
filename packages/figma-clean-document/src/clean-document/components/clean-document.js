@@ -51,7 +51,7 @@ export function CleanDocument (initialState) {
           title='Sort pages'
           name='sortPages'
           onChange={handleInput}
-          value={sortPages}
+          value={scope === DOCUMENT ? sortPages : false}
         />
       </div>
       <div class='clean-document__checkbox'>
