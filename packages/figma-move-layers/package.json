@@ -1,6 +1,6 @@
 {
   "name": "figma-move-layers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Figma plugin to precisely move layers",
   "keywords": [
     "create-figma-plugin",
