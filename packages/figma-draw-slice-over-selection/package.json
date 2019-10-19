@@ -1,6 +1,6 @@
 {
   "name": "figma-draw-slice-over-selection",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Figma plugin to draw a slice over the selection",
   "keywords": [
     "create-figma-plugin",
