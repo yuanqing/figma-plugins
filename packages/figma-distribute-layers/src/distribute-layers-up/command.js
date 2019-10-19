@@ -1,11 +1,16 @@
-import { setAbsoluteY } from '@create-figma-plugin/utilities'
+import {
+  getAbsolutePosition,
+  setAbsoluteY
+} from '@create-figma-plugin/utilities'
 import { commandFactory } from '../command-factory'
 
 export default commandFactory({
   direction: 'up',
   sortLayers: function (a, b) {
-    const difference = a.y - b.y
-    return difference !== 0 ? difference : a.x - b.x
+    const aAbsolute = getAbsolutePosition(a)
+    const bAbsolute = getAbsolutePosition(b)
+    const difference = aAbsolute.y - bAbsolute.y
+    return difference !== 0 ? difference : aAbsolute.x - bAbsolute.x
   },
   distributeLayers: function (layers, space) {
     let y = null
