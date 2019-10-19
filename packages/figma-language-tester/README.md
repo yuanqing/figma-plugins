@@ -4,13 +4,13 @@
 
 ## Commands
 
-### Language Tester
-
-Opens a dialog with a list of languages. Select a language in the list to translate the text layers within the selection or on the current page. Click <kbd>Reset</kbd> to revert all text layers to their original content.
-
 ### Set API Key
 
 Add a [Yandex Translate API key](https://translate.yandex.com/developers/keys).
+
+### Language Tester
+
+Opens a dialog with a list of languages. Select a language in the list to translate the text layers within the selection or on the current page. Click <kbd>Reset</kbd> to revert all text layers to their original content.
 
 ## License
 
