@@ -29,7 +29,7 @@
     "preact": "^10.0.0"
   },
   "create-figma-plugin": {
-    "id": "767371518477856712",
+    "id": "767379335945775056",
     "name": "Draw Slice Over Selection",
     "menu": [
       {

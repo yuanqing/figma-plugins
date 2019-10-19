@@ -28,7 +28,7 @@
     "natural-compare-lite": "^1.4.0"
   },
   "create-figma-plugin": {
-    "id": "767371643393527754",
+    "id": "767379414704079825",
     "name": "Sort Layers",
     "menu": [
       {
