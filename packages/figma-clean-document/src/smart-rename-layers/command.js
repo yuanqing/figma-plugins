@@ -18,6 +18,10 @@ export default async function () {
   addEventListener('SMART_RENAME_LAYERS', async function (settings) {
     await saveSettings(settings)
     const { smartRenameLayersWhitelist } = settings
+    const smartRenameLayersWhitelistRegex =
+      smartRenameLayersWhitelist !== ''
+        ? new RegExp(smartRenameLayersWhitelist)
+        : null
     let count = 0
     const layers = getAllOrSelectedLayers()
     for (const layer of layers) {
@@ -25,7 +29,7 @@ export default async function () {
         if (layer.removed === true) {
           return
         }
-        if (smartRenameLayer(layer, smartRenameLayersWhitelist)) {
+        if (smartRenameLayer(layer, smartRenameLayersWhitelistRegex)) {
           count++
         }
       })

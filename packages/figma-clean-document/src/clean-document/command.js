@@ -38,11 +38,15 @@ export default async function () {
       figma.closePlugin(formatErrorMessage('Select one or more layers'))
       return
     }
+    const smartRenameLayersWhitelistRegex =
+      smartRenameLayersWhitelist !== ''
+        ? new RegExp(smartRenameLayersWhitelist)
+        : null
     for (const layer of layers) {
       cleanLayer(layer, {
         deleteHiddenLayers,
         smartRenameLayers,
-        smartRenameLayersWhitelist,
+        smartRenameLayersWhitelistRegex,
         smartSortLayers
       })
     }

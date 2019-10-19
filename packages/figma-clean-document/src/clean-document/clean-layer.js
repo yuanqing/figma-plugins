@@ -9,19 +9,19 @@ export function cleanLayer (
   {
     deleteHiddenLayers,
     smartRenameLayers,
-    smartRenameLayersWhitelist,
+    smartRenameLayersWhitelistRegex,
     smartSortLayers
   }
 ) {
   traverseLayer(layer, function (layer) {
-    if (layer.removed === true) {
-      return
-    }
     if (deleteHiddenLayers === true) {
       deleteHiddenLayer(layer)
     }
+    if (layer.removed === true) {
+      return
+    }
     if (smartRenameLayers === true) {
-      smartRenameLayer(layer, smartRenameLayersWhitelist)
+      smartRenameLayer(layer, smartRenameLayersWhitelistRegex)
     }
   })
   if (smartSortLayers) {
