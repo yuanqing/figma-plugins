@@ -1,6 +1,6 @@
 {
   "name": "figma-ui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Preact components for use in Figma plugins",
   "keywords": [
     "component",
