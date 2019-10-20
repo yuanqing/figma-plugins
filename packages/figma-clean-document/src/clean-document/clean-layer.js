@@ -21,21 +21,6 @@ export function cleanLayer (
     if (layer.type === 'PAGE' || layer.removed === true) {
       return
     }
-    if (deleteHiddenLayers === true) {
-      deleteHiddenLayer(layer)
-      if (layer.removed === true) {
-        return
-      }
-    }
-    if (ungroupSingleLayerGroups === true) {
-      ungroupSingleLayerGroup(layer)
-      if (layer.removed === true) {
-        return
-      }
-    }
-    if (pixelPerfect === true) {
-      makePixelPerfect(layer)
-    }
     if (smartRenameLayers === true) {
       smartRenameLayer(layer, smartRenameLayersWhitelistRegex)
     }
@@ -44,6 +29,24 @@ export function cleanLayer (
     traverseLayer(
       layer,
       function (layer) {
+        if (layer.type === 'PAGE' || layer.removed === true) {
+          return
+        }
+        if (deleteHiddenLayers === true) {
+          deleteHiddenLayer(layer)
+          if (layer.removed === true) {
+            return
+          }
+        }
+        if (ungroupSingleLayerGroups === true) {
+          ungroupSingleLayerGroup(layer)
+          if (layer.removed === true) {
+            return
+          }
+        }
+        if (pixelPerfect === true) {
+          makePixelPerfect(layer)
+        }
         const result = smartSortChildLayers(layer)
         if (result !== null) {
           updateLayersSortOrder(result)
