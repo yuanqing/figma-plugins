@@ -18,7 +18,7 @@ Ungroups single-layer groups within the selection or on the current page that ha
 
 ### Make Pixel Perfect
 
-Round the X and Y position and dimensions of layers within the selection or on the current page to the nearest pixel.
+Rounds the X and Y position and dimensions of layers within the selection or on the current page to the nearest pixel.
 
 ### Smart Rename Layers
 
