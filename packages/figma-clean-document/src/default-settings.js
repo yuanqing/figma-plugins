@@ -2,7 +2,7 @@ import { DOCUMENT } from './clean-document/scope'
 
 export const defaultSettings = {
   deleteHiddenLayers: true,
-  pixelPerfect: true,
+  pixelPerfect: false,
   scope: DOCUMENT,
   sortPages: true,
   smartSortLayers: true,
