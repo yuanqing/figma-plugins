@@ -3,6 +3,7 @@ import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-child-lay
 import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'
 import { deleteHiddenLayer } from '../delete-hidden-layers/delete-hidden-layer'
 import { smartRenameLayer } from '../smart-rename-layers/smart-rename-layer'
+import { ungroupSingleLayerGroup } from '../ungroup-single-layer-groups/ungroup-single-layer-group'
 
 export function cleanLayer (
   layer,
@@ -10,12 +11,16 @@ export function cleanLayer (
     deleteHiddenLayers,
     smartRenameLayers,
     smartRenameLayersWhitelistRegex,
-    smartSortLayers
+    smartSortLayers,
+    ungroupSingleLayerGroups
   }
 ) {
   traverseLayer(layer, function (layer) {
     if (deleteHiddenLayers === true) {
       deleteHiddenLayer(layer)
+    }
+    if (ungroupSingleLayerGroups === true) {
+      ungroupSingleLayerGroup(layer)
     }
     if (layer.removed === true) {
       return

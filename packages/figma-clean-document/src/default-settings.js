@@ -6,5 +6,6 @@ export const defaultSettings = {
   sortPages: true,
   smartSortLayers: true,
   smartRenameLayers: true,
-  smartRenameLayersWhitelist: '^@'
+  smartRenameLayersWhitelist: '^@',
+  ungroupSingleLayerGroups: true
 }

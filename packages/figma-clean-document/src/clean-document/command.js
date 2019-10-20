@@ -31,7 +31,8 @@ export default async function () {
       smartRenameLayers,
       smartRenameLayersWhitelist,
       smartSortLayers,
-      sortPages
+      sortPages,
+      ungroupSingleLayerGroups
     } = settings
     const layers = getLayersInScope(scope)
     if (scope === SELECTION && layers.length === 0) {
@@ -47,7 +48,8 @@ export default async function () {
         deleteHiddenLayers,
         smartRenameLayers,
         smartRenameLayersWhitelistRegex,
-        smartSortLayers
+        smartSortLayers,
+        ungroupSingleLayerGroups
       })
     }
     if (scope === DOCUMENT && sortPages === true) {
@@ -59,7 +61,7 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUi({ width: 240, height: 342, data: settings })
+  showUi({ width: 240, height: 374, data: settings })
 }
 
 function getLayersInScope (scope) {

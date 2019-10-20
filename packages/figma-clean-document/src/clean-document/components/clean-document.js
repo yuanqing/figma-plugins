@@ -27,11 +27,13 @@ export function CleanDocument (initialState) {
     smartRenameLayers,
     smartRenameLayersWhitelist,
     smartSortLayers,
-    sortPages
+    sortPages,
+    ungroupSingleLayerGroups
   } = inputs
   const isSubmitButtonEnabled =
     sortPages === true ||
     deleteHiddenLayers === true ||
+    ungroupSingleLayerGroups === true ||
     smartRenameLayers === true ||
     smartSortLayers === true
   return (
@@ -60,6 +62,14 @@ export function CleanDocument (initialState) {
           name='deleteHiddenLayers'
           onChange={handleInput}
           value={deleteHiddenLayers}
+        />
+      </div>
+      <div class='clean-document__checkbox'>
+        <Checkbox
+          title='Ungroup single-layer groups'
+          name='ungroupSingleLayerGroups'
+          onChange={handleInput}
+          value={ungroupSingleLayerGroups}
         />
       </div>
       <div class='clean-document__checkbox'>

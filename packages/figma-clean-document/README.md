@@ -12,6 +12,10 @@ Sorts pages of the current document in alphabetical order.
 
 Deletes all hidden layers within the selection or on the current page.
 
+### Ungroup Single-Layer Groups
+
+Ungroups single-layer groups that have no backgrounds, blend modes, effects or export settings.
+
 ### Smart Rename Layers
 
 Intelligently renames layers within the selection or on the current page.

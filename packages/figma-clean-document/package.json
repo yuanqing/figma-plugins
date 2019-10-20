@@ -54,6 +54,10 @@
         "command": "delete-hidden-layers/command.js"
       },
       {
+        "name": "Ungroup Single-Layer Groups",
+        "command": "ungroup-single-layer-groups/command.js"
+      },
+      {
         "name": "Smart Rename Layers",
         "command": "smart-rename-layers/command.js",
         "ui": "smart-rename-layers/ui.js"
