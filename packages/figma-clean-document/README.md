@@ -14,7 +14,11 @@ Deletes all hidden layers within the selection or on the current page.
 
 ### Ungroup Single-Layer Groups
 
-Ungroups single-layer groups that have no backgrounds, blend modes, effects or export settings.
+Ungroups single-layer groups within the selection or on the current page that have no background, blend mode, effect or export setting.
+
+### Make Pixel Perfect
+
+Round the X and Y position and dimensions of layers within the selection or on the current page to the nearest pixel.
 
 ### Smart Rename Layers
 
