@@ -66,6 +66,10 @@
         "name": "Smart Sort Layers",
         "command": "smart-sort-layers/command.js"
       },
+      {
+        "name": "Make Pixel Perfect",
+        "command": "make-pixel-perfect/command.js"
+      },
       "-",
       {
         "name": "Reset",

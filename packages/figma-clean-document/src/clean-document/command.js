@@ -27,6 +27,7 @@ export default async function () {
     await saveSettings(settings)
     const {
       deleteHiddenLayers,
+      pixelPerfect,
       scope,
       smartRenameLayers,
       smartRenameLayersWhitelist,
@@ -46,6 +47,7 @@ export default async function () {
     for (const layer of layers) {
       cleanLayer(layer, {
         deleteHiddenLayers,
+        pixelPerfect,
         smartRenameLayers,
         smartRenameLayersWhitelistRegex,
         smartSortLayers,
@@ -61,7 +63,7 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUi({ width: 240, height: 374, data: settings })
+  showUi({ width: 240, height: 406, data: settings })
 }
 
 function getLayersInScope (scope) {

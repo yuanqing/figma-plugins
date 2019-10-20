@@ -23,6 +23,7 @@ export function CleanDocument (initialState) {
   )
   const {
     deleteHiddenLayers,
+    pixelPerfect,
     scope,
     smartRenameLayers,
     smartRenameLayersWhitelist,
@@ -70,6 +71,14 @@ export function CleanDocument (initialState) {
           name='ungroupSingleLayerGroups'
           onChange={handleInput}
           value={ungroupSingleLayerGroups}
+        />
+      </div>
+      <div class='clean-document__checkbox'>
+        <Checkbox
+          title='Make pixel-perfect'
+          name='pixelPerfect'
+          onChange={handleInput}
+          value={pixelPerfect}
         />
       </div>
       <div class='clean-document__checkbox'>
