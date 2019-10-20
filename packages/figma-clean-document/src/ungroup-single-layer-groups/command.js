@@ -4,13 +4,13 @@ import { ungroupSingleLayerGroup } from './ungroup-single-layer-group'
 
 export default commandFactory({
   callback: ungroupSingleLayerGroup,
-  createSuccessMessage: function (count) {
+  createSuccessMessage: function (context, count) {
     return `Ungrouped ${mapNumberToWord(count)} single-layer ${pluralize(
       count,
       'group'
-    )}`
+    )} ${context}`
   },
-  createFailureMessage: function () {
-    return 'No single-layer groups'
+  createFailureMessage: function (context) {
+    return `No single-layer groups ${context}`
   }
 })

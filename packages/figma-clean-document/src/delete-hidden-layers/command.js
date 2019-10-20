@@ -4,13 +4,13 @@ import { deleteHiddenLayer } from './delete-hidden-layer'
 
 export default commandFactory({
   callback: deleteHiddenLayer,
-  createSuccessMessage: function (count) {
+  createSuccessMessage: function (context, count) {
     return `Deleted ${mapNumberToWord(count)} hidden ${pluralize(
       count,
       'layer'
-    )}`
+    )} ${context}`
   },
-  createFailureMessage: function () {
-    return 'No hidden layers'
+  createFailureMessage: function (context) {
+    return `No hidden layers ${context}`
   }
 })

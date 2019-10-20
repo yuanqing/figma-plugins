@@ -28,9 +28,9 @@ export function commandFactory ({
     figma.closePlugin(
       `${
         count > 0
-          ? formatSuccessMessage(createSuccessMessage(count))
-          : createFailureMessage()
-      } ${context}`
+          ? formatSuccessMessage(createSuccessMessage(context, count))
+          : createFailureMessage(context)
+      }`
     )
   }
 }
