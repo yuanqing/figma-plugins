@@ -1,38 +1,16 @@
-/* global figma */
-import {
-  formatSuccessMessage,
-  getAllOrSelectedLayers,
-  mapNumberToWord,
-  pluralize,
-  traverseLayer
-} from '@create-figma-plugin/utilities'
+import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
+import { commandFactory } from '../command-factory'
 import { deleteHiddenLayer } from './delete-hidden-layer'
 
-export default function () {
-  let count = 0
-  const layers = getAllOrSelectedLayers()
-  for (const layer of layers) {
-    traverseLayer(layer, function (layer) {
-      if (layer.removed === true) {
-        return
-      }
-      if (deleteHiddenLayer(layer) === true) {
-        count++
-      }
-    })
+export default commandFactory({
+  callback: deleteHiddenLayer,
+  createSuccessMessage: function (count) {
+    return `Deleted ${mapNumberToWord(count)} hidden ${pluralize(
+      count,
+      'layer'
+    )}`
+  },
+  createFailureMessage: function () {
+    return 'No hidden layers'
   }
-  const context =
-    figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
-  /* eslint-disable indent */
-  figma.closePlugin(
-    count === 0
-      ? `No hidden layers ${context}`
-      : formatSuccessMessage(
-          `Deleted ${mapNumberToWord(count)} hidden ${pluralize(
-            count,
-            'layer'
-          )} ${context}`
-        )
-  )
-  /* eslint-enable indent */
-}
+})
