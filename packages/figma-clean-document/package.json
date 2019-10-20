@@ -58,6 +58,10 @@
         "command": "ungroup-single-layer-groups/command.js"
       },
       {
+        "name": "Make Pixel Perfect",
+        "command": "make-pixel-perfect/command.js"
+      },
+      {
         "name": "Smart Rename Layers",
         "command": "smart-rename-layers/command.js",
         "ui": "smart-rename-layers/ui.js"
@@ -65,10 +69,6 @@
       {
         "name": "Smart Sort Layers",
         "command": "smart-sort-layers/command.js"
-      },
-      {
-        "name": "Make Pixel Perfect",
-        "command": "make-pixel-perfect/command.js"
       },
       "-",
       {
