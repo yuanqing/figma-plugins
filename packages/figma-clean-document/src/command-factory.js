@@ -7,21 +7,31 @@ import {
 
 export function commandFactory ({
   callback,
+  filterCallback,
   createSuccessMessage,
   createFailureMessage
 }) {
   return function () {
     let count = 0
-    const layers = getAllOrSelectedLayers()
-    for (const layer of layers) {
-      traverseLayer(layer, function (layer) {
-        if (layer.removed === true) {
-          return
-        }
-        if (callback(layer) === true) {
-          count++
-        }
-      })
+    let didChange = true
+    while (didChange === true) {
+      didChange = false
+      const layers = getAllOrSelectedLayers()
+      for (const layer of layers) {
+        traverseLayer(
+          layer,
+          function (layer) {
+            if (layer.removed === true) {
+              return
+            }
+            if (callback(layer) === true) {
+              count++
+              didChange = true
+            }
+          },
+          filterCallback
+        )
+      }
     }
     const context =
       figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
