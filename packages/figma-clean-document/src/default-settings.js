@@ -1,9 +1,9 @@
-import { DOCUMENT } from './clean-document/scope'
+import { PAGE } from './clean-document/scope'
 
 export const defaultSettings = {
   deleteHiddenLayers: true,
   pixelPerfect: true,
-  scope: DOCUMENT,
+  scope: PAGE,
   sortPages: true,
   smartSortLayers: true,
   smartRenameLayers: true,

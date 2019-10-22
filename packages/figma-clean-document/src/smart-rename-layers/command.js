@@ -16,6 +16,9 @@ import { smartRenameLayer } from './smart-rename-layer'
 export default async function () {
   const settings = (await loadSettings()) || defaultSettings
   addEventListener('SMART_RENAME_LAYERS', async function (settings) {
+    const notificationHandler = figma.notify('Renaming layers…', {
+      timeout: 60000
+    })
     await saveSettings(settings)
     const { smartRenameLayersWhitelist } = settings
     const smartRenameLayersWhitelistRegex =
@@ -36,6 +39,7 @@ export default async function () {
     }
     const context =
       figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
+    notificationHandler.cancel()
     /* eslint-disable indent */
     figma.closePlugin(
       count === 0

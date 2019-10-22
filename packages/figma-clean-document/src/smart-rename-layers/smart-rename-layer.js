@@ -32,6 +32,12 @@ export function smartRenameLayer (layer, whitelistRegex) {
       layer.name = 'Ellipse'
       break
     }
+    case 'FRAME': {
+      if (layer.parent.type !== 'PAGE') {
+        layer.name = 'Frame'
+      }
+      break
+    }
     case 'GROUP': {
       layer.name = 'Group'
       break

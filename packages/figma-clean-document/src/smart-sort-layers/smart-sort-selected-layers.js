@@ -4,12 +4,17 @@ import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-child-lay
 import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'
 
 export function smartSortSelectedLayers () {
-  const selectedLayers = figma.currentPage.selection
-  if (checkCommonParent(selectedLayers) === false) {
-    return false
+  let childLayers = figma.currentPage.selection
+  let parentLayer = childLayers[0].parent
+  if (childLayers.length === 1) {
+    parentLayer = childLayers[0]
+    childLayers = childLayers[0].children
+  } else {
+    if (checkCommonParent(childLayers) === false) {
+      return false
+    }
   }
-  const parentLayer = selectedLayers[0].parent
-  const layerIds = collectLayerIds(selectedLayers)
+  const layerIds = collectLayerIds(childLayers)
   const result = smartSortChildLayers(parentLayer, layerIds)
   if (result !== null) {
     updateLayersSortOrder(result)

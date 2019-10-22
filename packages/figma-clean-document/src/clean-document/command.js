@@ -13,7 +13,7 @@ import { cleanLayer } from './clean-layer'
 import { DOCUMENT, PAGE, SELECTION } from './scope'
 import { defaultSettings } from '../default-settings'
 
-const MAX_ITERATIONS = 100
+const MAX_ITERATIONS = 10
 
 export default async function () {
   const settings = (await loadSettings()) || defaultSettings
@@ -26,6 +26,10 @@ export default async function () {
     }
   }
   addEventListener('CLEAN_DOCUMENT', async function (settings) {
+    const notificationHandler = figma.notify(
+      `Cleaning ${settings.scope.toLowerCase()}…`,
+      { timeout: 60000 }
+    )
     await saveSettings(settings)
     const {
       deleteHiddenLayers,
@@ -47,10 +51,10 @@ export default async function () {
         ? new RegExp(smartRenameLayersWhitelist)
         : null
     let didChange = true
-    let count = 0
-    while (didChange === true && count < MAX_ITERATIONS) {
+    let iterations = 0
+    while (didChange === true && iterations < MAX_ITERATIONS) {
       didChange = false
-      count++
+      iterations++
       for (const layer of getLayersInScope(scope)) {
         didChange =
           cleanLayer(layer, {
@@ -67,6 +71,7 @@ export default async function () {
       const result = sortLayersByName(figma.root.children)
       updateLayersSortOrder(result)
     }
+    notificationHandler.cancel()
     figma.closePlugin(formatSuccessMessage(`Cleaned ${scope.toLowerCase()}`))
   })
   addEventListener('CLOSE', function () {

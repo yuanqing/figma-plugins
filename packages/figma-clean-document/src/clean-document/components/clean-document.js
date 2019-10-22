@@ -32,9 +32,10 @@ export function CleanDocument (initialState) {
     ungroupSingleLayerGroups
   } = inputs
   const isSubmitButtonEnabled =
-    sortPages === true ||
+    (scope === DOCUMENT && sortPages === true) ||
     deleteHiddenLayers === true ||
     ungroupSingleLayerGroups === true ||
+    pixelPerfect === true ||
     smartRenameLayers === true ||
     smartSortLayers === true
   return (
@@ -115,7 +116,7 @@ export function CleanDocument (initialState) {
           disabled={isSubmitButtonEnabled === false}
           onClick={isSubmitButtonEnabled && handleSubmit}
         >
-          Clean Document
+          Clean
         </Button>
       </div>
     </div>

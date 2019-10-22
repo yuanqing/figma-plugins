@@ -13,6 +13,7 @@ function shouldUngroupLayer (layer) {
     layer.children.length === 1 &&
     layer.backgrounds.length === 0 &&
     layer.blendMode === 'PASS_THROUGH' &&
+    typeof layer.constraints === 'undefined' &&
     layer.effects.length === 0 &&
     layer.exportSettings.length === 0
   )

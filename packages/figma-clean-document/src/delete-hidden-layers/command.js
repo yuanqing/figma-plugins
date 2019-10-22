@@ -7,6 +7,9 @@ export default commandFactory({
   filterCallback: function (layer) {
     return layer.type !== 'COMPONENT' && layer.type !== 'INSTANCE'
   },
+  createLoadingMessage: function () {
+    return 'Deleting hidden layers…'
+  },
   createSuccessMessage: function (context, count) {
     return `Deleted ${mapNumberToWord(count)} hidden ${pluralize(
       count,

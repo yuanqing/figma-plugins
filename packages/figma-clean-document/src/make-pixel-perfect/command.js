@@ -7,6 +7,9 @@ export default commandFactory({
   filterCallback: function (layer) {
     return layer.type !== 'INSTANCE' && layer.type !== 'VECTOR'
   },
+  createLoadingMessage: function () {
+    return 'Making layers pixel-perfect…'
+  },
   createSuccessMessage: function (context, count) {
     return `Made ${mapNumberToWord(count)} ${pluralize(
       count,

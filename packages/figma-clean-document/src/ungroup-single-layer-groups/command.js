@@ -7,6 +7,9 @@ export default commandFactory({
   filterCallback: function (layer) {
     return layer.type !== 'INSTANCE'
   },
+  createLoadingMessage: function () {
+    return 'Ungrouping single-layer groups…'
+  },
   createSuccessMessage: function (context, count) {
     return `Ungrouped ${mapNumberToWord(count)} single-layer ${pluralize(
       count,
