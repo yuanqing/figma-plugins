@@ -13,6 +13,8 @@ import { cleanLayer } from './clean-layer'
 import { DOCUMENT, PAGE, SELECTION } from './scope'
 import { defaultSettings } from '../default-settings'
 
+const MAX_ITERATIONS = 100
+
 export default async function () {
   const settings = (await loadSettings()) || defaultSettings
   const hasSelection = figma.currentPage.selection.length !== 0
@@ -44,15 +46,22 @@ export default async function () {
       smartRenameLayersWhitelist !== ''
         ? new RegExp(smartRenameLayersWhitelist)
         : null
-    for (const layer of layers) {
-      cleanLayer(layer, {
-        deleteHiddenLayers,
-        pixelPerfect,
-        smartRenameLayers,
-        smartRenameLayersWhitelistRegex,
-        smartSortLayers,
-        ungroupSingleLayerGroups
-      })
+    let didChange = true
+    let count = 0
+    while (didChange === true && count < MAX_ITERATIONS) {
+      didChange = false
+      count++
+      for (const layer of getLayersInScope(scope)) {
+        didChange =
+          cleanLayer(layer, {
+            deleteHiddenLayers,
+            pixelPerfect,
+            smartRenameLayers,
+            smartRenameLayersWhitelistRegex,
+            smartSortLayers,
+            ungroupSingleLayerGroups
+          }) || didChange
+      }
     }
     if (scope === DOCUMENT && sortPages === true) {
       const result = sortLayersByName(figma.root.children)
