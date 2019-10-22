@@ -4,6 +4,9 @@ import { ungroupSingleLayerGroup } from './ungroup-single-layer-group'
 
 export default commandFactory({
   callback: ungroupSingleLayerGroup,
+  filterCallback: function (layer) {
+    return layer.type !== 'INSTANCE'
+  },
   createSuccessMessage: function (context, count) {
     return `Ungrouped ${mapNumberToWord(count)} single-layer ${pluralize(
       count,
