@@ -35,7 +35,10 @@ export function smartSortChildLayers (layer, childLayerIds) {
       result.splice(result.length, 0, childLayer)
     }
   }
-  return result
+  if (didLayerOrderChange(childLayers, result) === true) {
+    return result
+  }
+  return null
 }
 
 function checkIfLayersOverlap (a, b) {
@@ -55,4 +58,14 @@ function compareLayerPosition (a, b) {
     return yPositionDifference < 0
   }
   return a.x - b.x < 0
+}
+
+function didLayerOrderChange (oldChildLayers, newChildLayers) {
+  let result = false
+  oldChildLayers.forEach(function (layer, index) {
+    if (layer.id !== newChildLayers[index].id) {
+      result = true
+    }
+  })
+  return result
 }
