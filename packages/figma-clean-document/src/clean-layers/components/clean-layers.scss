@@ -2,10 +2,8 @@
 @import "figma-plugin-ds/scss/base/_mixins";
 @import "figma-plugin-ds/scss/base/_variables";
 
-.clean-document {
-  &__scope {
-    padding: 12px 16px 8px;
-  }
+.clean-layers {
+  padding-top: 8px;
 
   &__input {
     padding: 0 16px 8px 37px;

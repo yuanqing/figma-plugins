@@ -8,15 +8,16 @@ export function smartSortChildLayers (layer, childLayerIds) {
     return null
   }
   /* eslint-disable indent */
-  const [firstChildLayer, ...childLayers] =
+  const childLayers =
     typeof childLayerIds === 'undefined'
       ? children
       : children.filter(function (layer) {
           return childLayerIds.indexOf(layer.id) !== -1
         })
+  const [firstChildLayer, ...remainingChildLayers] = childLayers
   /* eslint-enable indent */
   const result = [firstChildLayer]
-  for (const childLayer of childLayers) {
+  for (const childLayer of remainingChildLayers) {
     let i = 0
     let insertedChildLayer = false
     while (i < result.length) {
@@ -62,8 +63,9 @@ function compareLayerPosition (a, b) {
 
 function didLayerOrderChange (oldChildLayers, newChildLayers) {
   let result = false
+  const reversed = [].concat(newChildLayers).reverse()
   oldChildLayers.forEach(function (layer, index) {
-    if (layer.id !== newChildLayers[index].id) {
+    if (layer.id !== reversed[index].id) {
       result = true
     }
   })

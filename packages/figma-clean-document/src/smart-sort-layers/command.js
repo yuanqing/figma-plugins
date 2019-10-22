@@ -12,9 +12,11 @@ export default function () {
   })
   if (figma.currentPage.selection.length > 0) {
     if (smartSortSelectedLayers() === false) {
+      notificationHandler.cancel()
       figma.closePlugin(formatErrorMessage('Select layers in the same list'))
       return
     }
+    notificationHandler.cancel()
     figma.closePlugin(formatSuccessMessage('Smart sorted selected layers'))
     return
   }

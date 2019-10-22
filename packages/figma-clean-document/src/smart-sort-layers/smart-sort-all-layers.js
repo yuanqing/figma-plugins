@@ -7,9 +7,6 @@ export function smartSortAllLayers () {
   traverseLayer(
     figma.currentPage,
     function (layer) {
-      if (layer.removed === true) {
-        return
-      }
       const result = smartSortChildLayers(layer)
       if (result !== null) {
         updateLayersSortOrder(result)

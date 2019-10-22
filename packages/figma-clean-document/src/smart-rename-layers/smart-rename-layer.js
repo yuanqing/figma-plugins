@@ -63,7 +63,9 @@ export function smartRenameLayer (layer, whitelistRegex) {
       break
     }
     case 'TEXT': {
-      layer.autoRename = true
+      if (layer.characters.length > 0) {
+        layer.autoRename = true
+      }
       break
     }
     case 'VECTOR': {

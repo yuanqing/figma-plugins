@@ -39,14 +39,9 @@
     "name": "Clean Document",
     "menu": [
       {
-        "name": "Clean Document",
-        "command": "clean-document/command.js",
-        "ui": "clean-document/ui.js"
-      },
-      "-",
-      {
-        "name": "Sort Pages",
-        "command": "sort-pages/command.js"
+        "name": "Clean Layers",
+        "command": "clean-layers/command.js",
+        "ui": "clean-layers/ui.js"
       },
       "-",
       {
@@ -69,6 +64,11 @@
       {
         "name": "Smart Sort Layers",
         "command": "smart-sort-layers/command.js"
+      },
+      "-",
+      {
+        "name": "Sort Pages",
+        "command": "sort-pages/command.js"
       },
       "-",
       {

@@ -2,16 +2,14 @@
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button } from 'figma-ui/src/components/Button'
 import { Checkbox } from 'figma-ui/src/components/Checkbox'
-import { SegmentedControl } from 'figma-ui/src/components/SegmentedControl'
 import { Input } from 'figma-ui/src/components/Input'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
-import { DOCUMENT, PAGE, SELECTION } from '../scope'
-import './clean-document.scss'
+import './clean-layers.scss'
 
-export function CleanDocument (initialState) {
+export function CleanLayers (initialState) {
   function submitCallback (settings) {
-    triggerEvent('CLEAN_DOCUMENT', settings)
+    triggerEvent('CLEAN_LAYERS', settings)
   }
   function cancelCallback () {
     triggerEvent('CLOSE')
@@ -24,41 +22,20 @@ export function CleanDocument (initialState) {
   const {
     deleteHiddenLayers,
     pixelPerfect,
-    scope,
     smartRenameLayers,
     smartRenameLayersWhitelist,
     smartSortLayers,
-    sortPages,
     ungroupSingleLayerGroups
   } = inputs
   const isSubmitButtonEnabled =
-    (scope === DOCUMENT && sortPages === true) ||
     deleteHiddenLayers === true ||
-    ungroupSingleLayerGroups === true ||
     pixelPerfect === true ||
     smartRenameLayers === true ||
-    smartSortLayers === true
+    smartSortLayers === true ||
+    ungroupSingleLayerGroups === true
   return (
-    <div class='clean-document'>
-      <div class='clean-document__scope'>
-        <SegmentedControl
-          options={[DOCUMENT, PAGE, SELECTION]}
-          title='Scope'
-          name='scope'
-          onChange={handleInput}
-          value={scope}
-        />
-      </div>
-      <div class='clean-document__checkbox'>
-        <Checkbox
-          disabled={scope !== DOCUMENT}
-          title='Sort pages'
-          name='sortPages'
-          onChange={handleInput}
-          value={scope === DOCUMENT ? sortPages : false}
-        />
-      </div>
-      <div class='clean-document__checkbox'>
+    <div class='clean-layers'>
+      <div class='clean-layers__checkbox'>
         <Checkbox
           title='Delete hidden layers'
           name='deleteHiddenLayers'
@@ -66,7 +43,7 @@ export function CleanDocument (initialState) {
           value={deleteHiddenLayers}
         />
       </div>
-      <div class='clean-document__checkbox'>
+      <div class='clean-layers__checkbox'>
         <Checkbox
           title='Ungroup single-layer groups'
           name='ungroupSingleLayerGroups'
@@ -74,7 +51,7 @@ export function CleanDocument (initialState) {
           value={ungroupSingleLayerGroups}
         />
       </div>
-      <div class='clean-document__checkbox'>
+      <div class='clean-layers__checkbox'>
         <Checkbox
           title='Make pixel-perfect'
           name='pixelPerfect'
@@ -82,7 +59,7 @@ export function CleanDocument (initialState) {
           value={pixelPerfect}
         />
       </div>
-      <div class='clean-document__checkbox'>
+      <div class='clean-layers__checkbox'>
         <Checkbox
           title='Smart rename layers'
           description='Ignore layers named…'
@@ -91,7 +68,7 @@ export function CleanDocument (initialState) {
           value={smartRenameLayers}
         />
       </div>
-      <div class='clean-document__input'>
+      <div class='clean-layers__input'>
         <Input
           type='text'
           disabled={inputs.smartRenameLayers === false}
@@ -101,7 +78,7 @@ export function CleanDocument (initialState) {
           value={smartRenameLayersWhitelist}
         />
       </div>
-      <div class='clean-document__checkbox'>
+      <div class='clean-layers__checkbox'>
         <Checkbox
           title='Smart sort layers'
           description='Sort layers by their X and Y position while maintaining their stacking order on the page'
@@ -110,7 +87,7 @@ export function CleanDocument (initialState) {
           value={smartSortLayers}
         />
       </div>
-      <div class='clean-document__button'>
+      <div class='clean-layers__button'>
         <Button
           type='primary'
           disabled={isSubmitButtonEnabled === false}

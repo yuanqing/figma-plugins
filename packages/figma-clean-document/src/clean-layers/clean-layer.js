@@ -5,6 +5,7 @@ import { deleteHiddenLayer } from '../delete-hidden-layers/delete-hidden-layer'
 import { makePixelPerfect } from '../make-pixel-perfect/make-pixel-perfect'
 import { smartRenameLayer } from '../smart-rename-layers/smart-rename-layer'
 import { ungroupSingleLayerGroup } from '../ungroup-single-layer-groups/ungroup-single-layer-group'
+import { isLayerAnIllustration } from './is-layer-an-illustration'
 
 export function cleanLayer (
   layer,
@@ -18,21 +19,21 @@ export function cleanLayer (
   }
 ) {
   let didChange = false
-  traverseLayer(layer, function (layer) {
-    if (layer.type === 'PAGE' || layer.removed === true) {
-      return
-    }
-    if (smartRenameLayers === true) {
-      didChange =
-        smartRenameLayer(layer, smartRenameLayersWhitelistRegex) || didChange
-    }
-  })
   traverseLayer(
     layer,
     function (layer) {
-      if (layer.type === 'PAGE' || layer.removed === true) {
-        return
+      if (smartRenameLayers === true) {
+        didChange =
+          smartRenameLayer(layer, smartRenameLayersWhitelistRegex) || didChange
       }
+    },
+    function (layer) {
+      return layer.type !== 'PAGE'
+    }
+  )
+  traverseLayer(
+    layer,
+    function (layer) {
       if (deleteHiddenLayers === true) {
         didChange = deleteHiddenLayer(layer) || didChange
         if (layer.removed === true) {
@@ -48,17 +49,29 @@ export function cleanLayer (
       if (pixelPerfect === true) {
         didChange = makePixelPerfect(layer) || didChange
       }
-      if (smartSortLayers === true) {
+    },
+    function (layer) {
+      return layer.type !== 'INSTANCE' && layer.type !== 'PAGE'
+    }
+  )
+  if (smartSortLayers === true) {
+    traverseLayer(
+      layer,
+      function (layer) {
         const result = smartSortChildLayers(layer)
         if (result !== null) {
           didChange = true
           updateLayersSortOrder(result)
         }
+      },
+      function (layer) {
+        return (
+          layer.type !== 'INSTANCE' &&
+          layer.type !== 'PAGE' &&
+          isLayerAnIllustration(layer) === false
+        )
       }
-    },
-    function (layer) {
-      return layer.type !== 'INSTANCE'
-    }
-  )
+    )
+  }
   return didChange
 }

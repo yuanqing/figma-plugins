@@ -29,9 +29,6 @@ export function commandFactory ({
         traverseLayer(
           layer,
           function (layer) {
-            if (layer.removed === true) {
-              return
-            }
             if (callback(layer) === true) {
               count++
               didChange = true

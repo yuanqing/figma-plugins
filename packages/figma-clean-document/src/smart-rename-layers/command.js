@@ -29,9 +29,6 @@ export default async function () {
     const layers = getAllOrSelectedLayers()
     for (const layer of layers) {
       traverseLayer(layer, function (layer) {
-        if (layer.removed === true) {
-          return
-        }
         if (smartRenameLayer(layer, smartRenameLayersWhitelistRegex)) {
           count++
         }
