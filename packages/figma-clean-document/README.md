@@ -4,10 +4,6 @@
 
 ## Commands
 
-### Sort Pages
-
-Sorts pages of the current document in alphabetical order.
-
 ### Delete Hidden Layers
 
 Deletes all hidden layers within the selection or on the current page.
@@ -35,9 +31,13 @@ Optionally specify a whitelist Regular Expression to skip the renaming of partic
 
 Sort layers within the selection or on the current page by their X and Y position while maintaining their relative stacking order on the page.
 
-### Clean Document
+### Clean Layers
 
-Run the above commands on the entire document, the current page or the selection.
+Run all the above commands on layers within the selection or on the current page.
+
+### Sort Pages
+
+Sorts pages of the current document in alphabetical order.
 
 ## License
 
