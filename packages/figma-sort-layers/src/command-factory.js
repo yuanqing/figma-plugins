@@ -3,7 +3,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage
 } from '@create-figma-plugin/utilities'
-import { checkCommonParent } from './check-common-parent'
+import { groupSiblingLayers } from './group-sibling-layers'
 import { updateLayersSortOrder } from './update-layers-sort-order'
 
 export function commandFactory ({ sortLayers, successMessage }) {
@@ -13,12 +13,13 @@ export function commandFactory ({ sortLayers, successMessage }) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
     }
-    if (checkCommonParent(selectedLayers) === false) {
-      figma.closePlugin(formatErrorMessage('Select layers in the same list'))
-      return
+    const groups = groupSiblingLayers(selectedLayers)
+    for (const layers of groups) {
+      const result = sortLayers(layers)
+      if (result !== null) {
+        updateLayersSortOrder(result)
+      }
     }
-    const result = sortLayers(selectedLayers)
-    updateLayersSortOrder(result)
     figma.closePlugin(formatSuccessMessage(successMessage))
   }
 }
