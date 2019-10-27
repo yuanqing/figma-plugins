@@ -4,7 +4,7 @@ import { ungroupSingleLayerGroup } from './ungroup-single-layer-group'
 
 export default commandFactory({
   callback: ungroupSingleLayerGroup,
-  filterCallback: function (layer) {
+  filter: function (layer) {
     return layer.type !== 'INSTANCE'
   },
   createLoadingMessage: function () {

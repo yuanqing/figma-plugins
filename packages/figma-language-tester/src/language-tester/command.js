@@ -4,7 +4,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
-  showUi,
+  showUI,
   traverseLayer
 } from '@create-figma-plugin/utilities'
 import languages from './languages'
@@ -30,10 +30,7 @@ export default async function () {
     )
     return
   }
-  showUi({
-    width: 240,
-    height: 259
-  })
+  showUI(240, 259)
   const originalStrings = {} // maps `layer.id` to the original strings
   addEventListener('SET_LANGUAGE', async function (languageKey) {
     await setLanguage(originalStrings, languageKey, apiKey)
@@ -97,11 +94,11 @@ function getTextLayers () {
   )
 }
 
-function filterLayers (layers, filterCallback) {
+function filterLayers (layers, filter) {
   const result = []
   for (const layer of layers) {
     traverseLayer(layer, async function (layer) {
-      if (filterCallback(layer)) {
+      if (filter(layer)) {
         result.push(layer)
       }
     })

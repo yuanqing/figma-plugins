@@ -5,7 +5,7 @@ import {
   formatSuccessMessage,
   loadSettings,
   saveSettings,
-  showUi
+  showUI
 } from '@create-figma-plugin/utilities'
 import defaultSettings from './default-settings'
 
@@ -27,6 +27,6 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
     addEventListener('CLOSE', function () {
       figma.closePlugin()
     })
-    showUi({ width: 240, height: 100, data: settings })
+    showUI(240, 100, settings)
   }
 }

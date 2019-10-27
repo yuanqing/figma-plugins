@@ -4,7 +4,7 @@ import {
   formatSuccessMessage,
   loadSettings,
   saveSettings,
-  showUi
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
 
@@ -17,5 +17,5 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUi({ width: 240, height: 116, data: settings })
+  showUI(240, 116, settings)
 }

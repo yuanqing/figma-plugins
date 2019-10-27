@@ -4,7 +4,7 @@ import { deleteHiddenLayer } from './delete-hidden-layer'
 
 export default commandFactory({
   callback: deleteHiddenLayer,
-  filterCallback: function (layer) {
+  filter: function (layer) {
     return layer.type !== 'COMPONENT' && layer.type !== 'INSTANCE'
   },
   createLoadingMessage: function () {

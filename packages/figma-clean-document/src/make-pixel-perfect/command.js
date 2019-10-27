@@ -4,7 +4,7 @@ import { makePixelPerfect } from './make-pixel-perfect'
 
 export default commandFactory({
   callback: makePixelPerfect,
-  filterCallback: function (layer) {
+  filter: function (layer) {
     return layer.type !== 'INSTANCE' && layer.type !== 'VECTOR'
   },
   createLoadingMessage: function () {

@@ -9,7 +9,7 @@ const MAX_ITERATIONS = 10
 
 export function commandFactory ({
   callback,
-  filterCallback,
+  filter,
   createLoadingMessage,
   createSuccessMessage,
   createFailureMessage
@@ -34,7 +34,7 @@ export function commandFactory ({
               didChange = true
             }
           },
-          filterCallback
+          filter
         )
       }
     }
