@@ -1,6 +1,6 @@
 import {
   getAbsolutePosition,
-  setAbsoluteY
+  setAbsolutePosition
 } from '@create-figma-plugin/utilities'
 import { commandFactory } from '../command-factory'
 
@@ -19,7 +19,7 @@ export default commandFactory({
         y = layer.absoluteTransform[1][2] + layer.height + space
         continue
       }
-      setAbsoluteY(layer, y)
+      setAbsolutePosition(layer, { y })
       y = y + layer.height + space
     }
   }
