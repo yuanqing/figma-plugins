@@ -148,36 +148,36 @@
     to-fast-properties "^2.0.0"
 
 "@create-figma-plugin/build@*":
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.25.tgz#b03257ff934cddd72585aaa9eb1785fd7b4683ca"
-  integrity sha512-z6xfmSgDbOAZXHmmgbhfY+GJ36IeFPAQZnFDCWFxCfc2G0hBuRyDuvCHVCbK0i0H+XRnCNMQbeDVl7/lnxQIrQ==
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.26.tgz#d3c3e2b4db9cbaaa144734a4a473e7a7dd6f4e24"
+  integrity sha512-d8gDXGIUfey6zPIM87+slnLVPtZgPCWe2vsMsfeUKh3vTQsawETMoQ70oFm0E/yqg0AYVtkGK7L5kCk4lIPz5w==
   dependencies:
-    "@create-figma-plugin/common" "^0.0.25"
-    "@create-figma-plugin/utilities" "^0.0.25"
-    chokidar "^3.1.1"
+    "@create-figma-plugin/common" "^0.0.26"
+    "@create-figma-plugin/utilities" "^0.0.26"
+    chokidar "^3.2.2"
     find-up "^4.1.0"
     fs-extra "^8.1.0"
     sade "^1.6.1"
     temp-write "^4.0.0"
-    terser-webpack-plugin "^2.1.2"
-    ts-loader "^6.2.0"
-    typescript "^3.6.3"
-    webpack "^4.41.0"
+    terser-webpack-plugin "^2.2.1"
+    ts-loader "^6.2.1"
+    typescript "^3.6.4"
+    webpack "^4.41.2"
 
-"@create-figma-plugin/common@^0.0.25":
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.25.tgz#60c88a4eac47d2dc59c40e997d5adbc78232887d"
-  integrity sha512-DL1r4CJPDFAmkjHMyaAju7Twhe+rme6y0poQjSRzKqDM3k3kME6Q7AzOn358R8r6wEqqygxUhB5XnqCuBwWEcw==
+"@create-figma-plugin/common@^0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.26.tgz#017a3e888c644dd8bc25d66f9439df95ae10c35d"
+  integrity sha512-XTkjF6ZrthUjEU5F7GMCpSSD6zXAGc7xaAgHqPU9TOzPijwRkPkJ0PeT5B6XAGEAyHUQ8VTLDNJ4oLn5NFEozA==
   dependencies:
     "@sindresorhus/slugify" "^0.9.1"
     chalk "^2.4.2"
     fs-extra "^8.1.0"
     npmlog "^4.1.2"
 
-"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.25":
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.25.tgz#d0571983ef84c8d270b85c178ee3d93bb198f6b8"
-  integrity sha512-rWClIhZVoq+r3Rk+yVv666qFORYDutTCt2M14uv591RzbVEok0mPNqfte5mKOjtuvz1Bl4kqvVcYln5oT3xS9A==
+"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.26.tgz#c154a6c8191d47acfaaa93bd27f10c7831cf264e"
+  integrity sha512-lv7sU3oY3P6s+ZEyKjFaKftvhFVrzw376q/MpT6j2oCaxVYH1DWCNUHsbniJaNFTyMdiO8XDuwa/Uys11u7p3Q==
 
 "@evocateur/libnpmaccess@^3.1.2":
   version "3.1.2"
@@ -2008,7 +2008,7 @@ chokidar@^2.0.2:
   optionalDependencies:
     fsevents "^1.2.7"
 
-chokidar@^3.1.1:
+chokidar@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.2.2.tgz#a433973350021e09f2b853a2287781022c0dc935"
   integrity sha512-bw3pm7kZ2Wa6+jQWYP/c7bAZy3i4GwiIiMO2EeRjrE48l8vBqC/WvFhSF0xyM8fQiPEGvwMY/5bqDG7sSEOuhg==
@@ -8067,7 +8067,7 @@ terser-webpack-plugin@^1.4.1:
     webpack-sources "^1.4.0"
     worker-farm "^1.7.0"
 
-terser-webpack-plugin@^2.1.2:
+terser-webpack-plugin@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-2.2.1.tgz#5569e6c7d8be79e5e43d6da23acc3b6ba77d22bd"
   integrity sha512-jwdauV5Al7zopR6OAYvIIRcxXCSvLjZjr7uZE8l2tIWb/ryrGN48sJftqGf5k9z09tWhajx53ldp0XPI080YnA==
@@ -8247,7 +8247,7 @@ trough@^1.0.0:
   dependencies:
     glob "^7.1.2"
 
-ts-loader@^6.2.0:
+ts-loader@^6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-6.2.1.tgz#67939d5772e8a8c6bdaf6277ca023a4812da02ef"
   integrity sha512-Dd9FekWuABGgjE1g0TlQJ+4dFUfYGbYcs52/HQObE0ZmUNjQlmLAS7xXsSzy23AMaMwipsx5sNHvoEpT2CZq1g==
@@ -8307,7 +8307,7 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.6.3:
+typescript@^3.6.4:
   version "3.6.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
   integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
@@ -8585,7 +8585,7 @@ webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-sources@^1.4.3:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@^4.41.0:
+webpack@^4.41.2:
   version "4.41.2"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.41.2.tgz#c34ec76daa3a8468c9b61a50336d8e3303dce74e"
   integrity sha512-Zhw69edTGfbz9/8JJoyRQ/pq8FYUoY0diOXqW0T6yhgdhCv6wr0hra5DwwWexNRns2Z2+gsnrNcbe9hbGBgk/A==
