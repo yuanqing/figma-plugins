@@ -5,9 +5,11 @@ import {
   getAllOrSelectedLayers,
   loadSettings,
   saveSettings,
-  showUi
+  showUI
 } from '@create-figma-plugin/utilities'
 import { cleanLayer } from './clean-layer'
+import { smartSortAllLayers } from '../smart-sort-layers/smart-sort-all-layers'
+import { smartSortSelectedLayers } from '../smart-sort-layers/smart-sort-selected-layers'
 import { defaultSettings } from '../default-settings'
 
 const MAX_ITERATIONS = 10
@@ -50,6 +52,13 @@ export default async function () {
             ungroupSingleLayerGroups
           }) || didChange
       }
+      if (smartSortLayers === true) {
+        if (figma.currentPage.selection.length > 0) {
+          didChange = smartSortSelectedLayers() || didChange
+        } else {
+          didChange = smartSortAllLayers() || didChange
+        }
+      }
     }
     notificationHandler.cancel()
     figma.closePlugin(formatSuccessMessage(`Cleaned ${context}`))
@@ -57,5 +66,5 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUi({ width: 240, height: 328, data: settings })
+  showUI(240, 328, settings)
 }

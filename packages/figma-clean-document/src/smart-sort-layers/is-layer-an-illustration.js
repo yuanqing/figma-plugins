@@ -1,4 +1,4 @@
-const CONSECUTIVE_VECTOR_COUNT = 20
+const CONSECUTIVE_VECTOR_COUNT = 50
 
 export function isLayerAnIllustration (layer) {
   if (

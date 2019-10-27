@@ -1,11 +1,8 @@
 import { traverseLayer } from '@create-figma-plugin/utilities'
-import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-child-layers'
-import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'
 import { deleteHiddenLayer } from '../delete-hidden-layers/delete-hidden-layer'
 import { makePixelPerfect } from '../make-pixel-perfect/make-pixel-perfect'
 import { smartRenameLayer } from '../smart-rename-layers/smart-rename-layer'
 import { ungroupSingleLayerGroup } from '../ungroup-single-layer-groups/ungroup-single-layer-group'
-import { isLayerAnIllustration } from './is-layer-an-illustration'
 
 export function cleanLayer (
   layer,
@@ -14,7 +11,6 @@ export function cleanLayer (
     pixelPerfect,
     smartRenameLayers,
     smartRenameLayersWhitelistRegex,
-    smartSortLayers,
     ungroupSingleLayerGroups
   }
 ) {
@@ -54,24 +50,5 @@ export function cleanLayer (
       return layer.type !== 'INSTANCE' && layer.type !== 'PAGE'
     }
   )
-  if (smartSortLayers === true) {
-    traverseLayer(
-      layer,
-      function (layer) {
-        const result = smartSortChildLayers(layer)
-        if (result !== null) {
-          didChange = true
-          updateLayersSortOrder(result)
-        }
-      },
-      function (layer) {
-        return (
-          layer.type !== 'INSTANCE' &&
-          layer.type !== 'PAGE' &&
-          isLayerAnIllustration(layer) === false
-        )
-      }
-    )
-  }
   return didChange
 }
