@@ -2,6 +2,8 @@
 
 > A Figma plugin to draw a slice over the selection
 
+![Draw Slice Over Selection](media/cover.png)
+
 ## Commands
 
 ### Draw Slice Over Selection

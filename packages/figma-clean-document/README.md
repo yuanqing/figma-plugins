@@ -2,6 +2,8 @@
 
 > A Figma plugin to automagically organize and clean up your Figma document
 
+![Clean Document](media/cover.png)
+
 ## Commands
 
 ### Delete Hidden Layers

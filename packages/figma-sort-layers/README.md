@@ -2,6 +2,8 @@
 
 > A Figma plugin to sort layers by name or position
 
+![Sort Layers](media/cover.png)
+
 ## Commands
 
 ### Sort Layers by Name

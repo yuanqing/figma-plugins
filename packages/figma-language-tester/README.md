@@ -2,6 +2,8 @@
 
 > A Figma plugin to test your UI in different languages
 
+![Language Tester](media/cover.png)
+
 ## Commands
 
 ### Set API Key

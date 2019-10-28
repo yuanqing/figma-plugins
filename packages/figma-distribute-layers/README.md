@@ -2,6 +2,8 @@
 
 > A Figma plugin to distribute layers in a given direction and offset
 
+![Distribute Layers](media/cover.png)
+
 ## Commands
 
 ### Distribute Layers Left / Right / Up / Down

@@ -2,6 +2,8 @@
 
 > A Figma plugin to precisely move layers
 
+![Move Layers](media/cover.png)
+
 ## Commands
 
 ### Move Layers
