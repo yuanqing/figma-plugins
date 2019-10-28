@@ -9,8 +9,10 @@
     "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
     "lint-css": "stylelint 'packages/*/src/**/*.scss'",
     "lint-js": "standard '*.js' 'packages/*/src/**/*.js'",
+    "postinstall": "yarn run build && yarn run typings",
     "publish": "lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
+    "reset": "yarn run clean && lerna clean --yes && rimraf figma.d.ts node_modules 'packages/*/node_modules' yarn.lock && yarn install",
+    "typings": "curl --remote-name --silent https://www.figma.com/plugin-docs/figma.d.ts",
     "watch": "yarn run clean && lerna run watch --ignore figma-ui"
   },
   "devDependencies": {
