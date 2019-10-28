@@ -1,5 +1,5 @@
 /* global figma */
-import { groupSiblingLayers } from 'figma-sort-layers/src/group-sibling-layers'
+import { groupSiblingLayers } from '@create-figma-plugin/utilities'
 
 export function getLayersInScope () {
   const selection = figma.currentPage.selection

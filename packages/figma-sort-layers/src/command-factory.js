@@ -1,6 +1,8 @@
 /* global figma */
-import { formatSuccessMessage } from '@create-figma-plugin/utilities'
-import { groupSiblingLayers } from './group-sibling-layers'
+import {
+  formatSuccessMessage,
+  groupSiblingLayers
+} from '@create-figma-plugin/utilities'
 import { updateLayersSortOrder } from './update-layers-sort-order'
 
 export function commandFactory ({ sortLayers, successMessage }) {
