@@ -1,4 +1,4 @@
-const CONSECUTIVE_VECTOR_COUNT = 50
+const CONSECUTIVE_LAYER_COUNT = 50
 
 export function isLayerAnIllustration (layer) {
   if (
@@ -18,12 +18,12 @@ export function isLayerAnIllustration (layer) {
       childLayer.type === 'VECTOR'
     ) {
       count++
-      if (count === CONSECUTIVE_VECTOR_COUNT) {
-        return true
+      if (count === CONSECUTIVE_LAYER_COUNT) {
+        break
       }
     } else {
-      break
+      return false
     }
   }
-  return false
+  return true
 }
