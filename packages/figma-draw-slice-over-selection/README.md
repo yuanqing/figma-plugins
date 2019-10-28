@@ -1,8 +1,8 @@
-# Draw Slice Over Selection [![npm Version](https://img.shields.io/npm/v/figma-draw-slice-over-selection.svg)](https://www.npmjs.com/package/figma-draw-slice-over-selection)
+# Draw Slice Over Selection [![Figma Plugin](https://img.shields.io/badge/figma-plugin-1BC47D.svg)](https://figma.com/c/plugin/767379335945775056/Draw-Slice-Over-Selection) [![npm Version](https://img.shields.io/npm/v/figma-draw-slice-over-selection.svg)](https://www.npmjs.com/package/figma-draw-slice-over-selection)
 
 > A Figma plugin to draw a slice over the selection
 
-![Draw Slice Over Selection](media/cover.png)
+[![Draw Slice Over Selection](media/cover.png)](https://figma.com/c/plugin/767379335945775056/Draw-Slice-Over-Selection)
 
 ## Commands
 
