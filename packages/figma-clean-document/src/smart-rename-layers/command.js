@@ -34,18 +34,18 @@ export default async function () {
         }
       })
     }
-    const context =
+    const scope =
       figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
     notificationHandler.cancel()
     /* eslint-disable indent */
     figma.closePlugin(
       count === 0
-        ? `No layers renamed ${context}`
+        ? `No layers renamed ${scope}`
         : formatSuccessMessage(
             `Smart renamed ${mapNumberToWord(count)} ${pluralize(
               count,
               'layer'
-            )} ${context}`
+            )} ${scope}`
           )
     )
     /* eslint-enable indent */

@@ -10,13 +10,13 @@ export default commandFactory({
   createLoadingMessage: function () {
     return 'Making layers pixel-perfect…'
   },
-  createSuccessMessage: function (context, count) {
+  createSuccessMessage: function (scope, count) {
     return `Made ${mapNumberToWord(count)} ${pluralize(
       count,
       'layer'
-    )} ${context} pixel-perfect`
+    )} ${scope} pixel-perfect`
   },
-  createFailureMessage: function (context) {
-    return `All layers ${context} already pixel-perfect`
+  createFailureMessage: function (scope) {
+    return `All layers ${scope} already pixel-perfect`
   }
 })

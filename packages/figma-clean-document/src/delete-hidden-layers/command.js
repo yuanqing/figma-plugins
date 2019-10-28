@@ -10,13 +10,13 @@ export default commandFactory({
   createLoadingMessage: function () {
     return 'Deleting hidden layers…'
   },
-  createSuccessMessage: function (context, count) {
+  createSuccessMessage: function (scope, count) {
     return `Deleted ${mapNumberToWord(count)} hidden ${pluralize(
       count,
       'layer'
-    )} ${context}`
+    )} ${scope}`
   },
-  createFailureMessage: function (context) {
-    return `No hidden layers ${context}`
+  createFailureMessage: function (scope) {
+    return `No hidden layers ${scope}`
   }
 })

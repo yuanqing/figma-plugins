@@ -10,13 +10,13 @@ export default commandFactory({
   createLoadingMessage: function () {
     return 'Ungrouping single-layer groups…'
   },
-  createSuccessMessage: function (context, count) {
+  createSuccessMessage: function (scope, count) {
     return `Ungrouped ${mapNumberToWord(count)} single-layer ${pluralize(
       count,
       'group'
-    )} ${context}`
+    )} ${scope}`
   },
-  createFailureMessage: function (context) {
-    return `No single-layer groups ${context}`
+  createFailureMessage: function (scope) {
+    return `No single-layer groups ${scope}`
   }
 })

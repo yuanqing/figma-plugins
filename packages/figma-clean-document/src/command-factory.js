@@ -38,14 +38,14 @@ export function commandFactory ({
         )
       }
     }
-    const context =
+    const scope =
       figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
     notificationHandler.cancel()
     figma.closePlugin(
       `${
         count > 0
-          ? formatSuccessMessage(createSuccessMessage(context, count))
-          : createFailureMessage(context)
+          ? formatSuccessMessage(createSuccessMessage(scope, count))
+          : createFailureMessage(scope)
       }`
     )
   }
