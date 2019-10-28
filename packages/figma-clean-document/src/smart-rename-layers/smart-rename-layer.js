@@ -2,7 +2,7 @@ export function smartRenameLayer (layer, whitelistRegex) {
   if (layer.exportSettings.length !== 0) {
     return false
   }
-  if (whitelistRegex && whitelistRegex.test(layer.name)) {
+  if (whitelistRegex !== null && whitelistRegex.test(layer.name) === true) {
     return false
   }
   const previousName = layer.name

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'preact/hooks'
 import './Input.scss'
 
 export function Input ({ border, focused, onChange, ...rest }) {
-  if (focused) {
+  if (focused === true) {
     rest.ref = useRef(null)
     useEffect(function () {
       const layer = rest.ref.current
@@ -15,7 +15,7 @@ export function Input ({ border, focused, onChange, ...rest }) {
   return (
     <input
       {...rest}
-      class={`input ${border ? 'input--border' : ''}`}
+      class={`input ${border === true ? 'input--border' : ''}`}
       onChange={onChange}
     />
   )

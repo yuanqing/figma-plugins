@@ -23,8 +23,8 @@ export function smartSortChildLayers (layer, childLayerIds) {
     while (i < result.length) {
       const resultLayer = result[i]
       if (
-        checkIfLayersOverlap(childLayer, resultLayer) ||
-        compareLayerPosition(childLayer, resultLayer)
+        checkIfLayersOverlap(childLayer, resultLayer) === true ||
+        compareLayerPosition(childLayer, resultLayer) === true
       ) {
         result.splice(i, 0, childLayer)
         insertedChildLayer = true

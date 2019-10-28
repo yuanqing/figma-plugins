@@ -37,7 +37,7 @@ export default async function () {
   })
   addEventListener('RESET_LANGUAGE', async function (close) {
     await resetLanguage(originalStrings)
-    if (close) {
+    if (close === true) {
       figma.closePlugin()
     }
   })
@@ -98,7 +98,7 @@ function filterLayers (layers, filter) {
   const result = []
   for (const layer of layers) {
     traverseLayer(layer, async function (layer) {
-      if (filter(layer)) {
+      if (filter(layer) === true) {
         result.push(layer)
       }
     })

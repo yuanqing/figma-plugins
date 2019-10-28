@@ -29,7 +29,7 @@ export default async function () {
     const layers = getAllOrSelectedLayers()
     for (const layer of layers) {
       traverseLayer(layer, function (layer) {
-        if (smartRenameLayer(layer, smartRenameLayersWhitelistRegex)) {
+        if (smartRenameLayer(layer, smartRenameLayersWhitelistRegex) === true) {
           count++
         }
       })

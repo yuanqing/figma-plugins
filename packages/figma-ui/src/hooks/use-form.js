@@ -7,7 +7,7 @@ export function useForm (
 ) {
   const [inputs, setInputs] = useState(initialInputs)
   function handleSubmit (event) {
-    if (event) {
+    if (typeof event !== 'undefined') {
       event.preventDefault()
     }
     handleSubmitCallback(inputs)

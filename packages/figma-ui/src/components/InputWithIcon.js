@@ -10,7 +10,7 @@ export function InputWithIcon ({
   focused,
   ...rest
 }) {
-  if (focused) {
+  if (focused === true) {
     rest.ref = useRef(null)
     useEffect(function () {
       const layer = rest.ref.current
@@ -24,7 +24,9 @@ export function InputWithIcon ({
         <div class={`icon icon--${iconName} icon--${iconColor}`} />
       </div>
       <input
-        class={`input-icon__input ${border ? 'input-icon__input--border' : ''}`}
+        class={`input-icon__input ${
+          border === true ? 'input-icon__input--border' : ''
+        }`}
         {...rest}
       />
     </div>

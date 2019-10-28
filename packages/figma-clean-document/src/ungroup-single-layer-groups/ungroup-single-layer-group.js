@@ -1,5 +1,5 @@
 export function ungroupSingleLayerGroup (layer) {
-  if (shouldUngroupLayer(layer)) {
+  if (shouldUngroupLayer(layer) === true) {
     const index = layer.parent.children.indexOf(layer)
     layer.parent.insertChild(index, layer.children[0])
     return true
