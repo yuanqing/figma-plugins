@@ -2,24 +2,22 @@
 import {
   addEventListener,
   formatSuccessMessage,
-  getAllOrSelectedLayers,
   loadSettings,
   saveSettings,
   showUI
 } from '@create-figma-plugin/utilities'
 import { cleanLayer } from './clean-layer'
-import { smartSortAllLayers } from '../smart-sort-layers/smart-sort-all-layers'
-import { smartSortSelectedLayers } from '../smart-sort-layers/smart-sort-selected-layers'
 import { defaultSettings } from '../default-settings'
+import { getLayersInScope } from '../get-layers-in-scope'
+import { smartSortLayers } from '../smart-sort-layers/smart-sort-layers'
 
 const MAX_ITERATIONS = 10
 
 export default async function () {
   const settings = (await loadSettings()) || defaultSettings
   addEventListener('CLEAN_LAYERS', async function (settings) {
-    const context =
-      figma.currentPage.selection.length > 0 ? 'selection' : 'page'
-    const notificationHandler = figma.notify(`Cleaning ${context}…`, {
+    const scope = figma.currentPage.selection.length > 0 ? 'selection' : 'page'
+    const notificationHandler = figma.notify(`Cleaning ${scope}…`, {
       timeout: 60000
     })
     await saveSettings(settings)
@@ -28,7 +26,7 @@ export default async function () {
       pixelPerfect,
       smartRenameLayers,
       smartRenameLayersWhitelist,
-      smartSortLayers,
+      smartSortLayers: smartSort,
       ungroupSingleLayerGroups
     } = settings
     const smartRenameLayersWhitelistRegex =
@@ -40,28 +38,25 @@ export default async function () {
     while (didChange === true && iterations < MAX_ITERATIONS) {
       didChange = false
       iterations++
-      const layers = getAllOrSelectedLayers()
-      for (const layer of layers) {
-        didChange =
-          cleanLayer(layer, {
-            deleteHiddenLayers,
-            pixelPerfect,
-            smartRenameLayers,
-            smartRenameLayersWhitelistRegex,
-            smartSortLayers,
-            ungroupSingleLayerGroups
-          }) || didChange
-      }
-      if (smartSortLayers === true) {
-        if (figma.currentPage.selection.length > 0) {
-          didChange = smartSortSelectedLayers() || didChange
-        } else {
-          didChange = smartSortAllLayers() || didChange
+      const groups = getLayersInScope()
+      for (const layers of groups) {
+        for (const layer of layers) {
+          didChange =
+            cleanLayer(layer, {
+              deleteHiddenLayers,
+              pixelPerfect,
+              smartRenameLayers,
+              smartRenameLayersWhitelistRegex,
+              ungroupSingleLayerGroups
+            }) || didChange
+        }
+        if (smartSort === true) {
+          didChange = smartSortLayers(layers) || didChange
         }
       }
     }
     notificationHandler.cancel()
-    figma.closePlugin(formatSuccessMessage(`Cleaned ${context}`))
+    figma.closePlugin(formatSuccessMessage(`Cleaned ${scope}`))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

@@ -1,26 +1,25 @@
 /* global figma */
-import {
-  formatErrorMessage,
-  formatSuccessMessage
-} from '@create-figma-plugin/utilities'
-import { smartSortAllLayers } from './smart-sort-all-layers'
-import { smartSortSelectedLayers } from './smart-sort-selected-layers'
+import { formatSuccessMessage } from '@create-figma-plugin/utilities'
+import { getLayersInScope } from '../get-layers-in-scope'
+import { smartSortLayers } from './smart-sort-layers'
 
 export default function () {
   const notificationHandler = figma.notify('Sorting layers…', {
     timeout: 60000
   })
-  if (figma.currentPage.selection.length > 0) {
-    if (smartSortSelectedLayers() === false) {
-      notificationHandler.cancel()
-      figma.closePlugin(formatErrorMessage('Select layers in the same list'))
-      return
-    }
-    notificationHandler.cancel()
-    figma.closePlugin(formatSuccessMessage('Smart sorted selected layers'))
-    return
+  const groups = getLayersInScope()
+  let didChange = false
+  for (const layers of groups) {
+    didChange = smartSortLayers(layers) || didChange
   }
-  smartSortAllLayers()
   notificationHandler.cancel()
-  figma.closePlugin(formatSuccessMessage('Smart sorted layers on page'))
+  const scope =
+    figma.currentPage.selection.length === 0
+      ? 'layers on page'
+      : 'selected layers'
+  figma.closePlugin(
+    didChange === true
+      ? formatSuccessMessage(`Smart sorted ${scope}`)
+      : 'No change to sort order'
+  )
 }
