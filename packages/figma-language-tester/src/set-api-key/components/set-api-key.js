@@ -44,7 +44,7 @@ export function SetApiKey (initialState) {
       </div>
       <div class='set-api-key__button'>
         <Button type='primary' onClick={handleSubmit}>
-          Save API Key
+          Set API Key
         </Button>
       </div>
     </div>
