@@ -15,18 +15,12 @@ export function cleanLayer (
   }
 ) {
   let didChange = false
-  traverseLayer(
-    layer,
-    function (layer) {
-      if (smartRenameLayers === true) {
-        didChange =
-          smartRenameLayer(layer, smartRenameLayersWhitelistRegex) || didChange
-      }
-    },
-    function (layer) {
-      return layer.type !== 'PAGE'
+  traverseLayer(layer, function (layer) {
+    if (smartRenameLayers === true) {
+      didChange =
+        smartRenameLayer(layer, smartRenameLayersWhitelistRegex) || didChange
     }
-  )
+  })
   traverseLayer(
     layer,
     function (layer) {
@@ -47,7 +41,7 @@ export function cleanLayer (
       }
     },
     function (layer) {
-      return layer.type !== 'INSTANCE' && layer.type !== 'PAGE'
+      return layer.type !== 'INSTANCE'
     }
   )
   return didChange
