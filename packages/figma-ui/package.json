@@ -4,10 +4,15 @@
   "description": "Preact components for use in Figma plugins",
   "keywords": [
     "component",
+    "design-system",
     "figma",
+    "figma-plugin",
+    "figma-plugin-ds",
+    "figma-plugins",
     "figma-ui",
     "form",
-    "preact"
+    "preact",
+    "ui"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",

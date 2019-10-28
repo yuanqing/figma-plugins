@@ -9,7 +9,8 @@
     "distribute-layers",
     "figma",
     "figma-plugin",
-    "figma-plugins"
+    "figma-plugins",
+    "offset"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",
