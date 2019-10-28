@@ -14,7 +14,7 @@ Deletes all hidden layers within the selection or on the current page.
 
 Ungroups single-layer groups within the selection or on the current page that have no background, blend mode, effect or export setting.
 
-### Make Pixel Perfect
+### Make Pixel-Perfect
 
 Rounds the X and Y position and dimensions of layers within the selection or on the current page to the nearest pixel.
 

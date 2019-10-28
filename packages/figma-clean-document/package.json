@@ -54,7 +54,7 @@
         "command": "ungroup-single-layer-groups/command.js"
       },
       {
-        "name": "Make Pixel Perfect",
+        "name": "Make Pixel-Perfect",
         "command": "make-pixel-perfect/command.js"
       },
       {
