@@ -148,12 +148,12 @@
     to-fast-properties "^2.0.0"
 
 "@create-figma-plugin/build@*":
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.26.tgz#d3c3e2b4db9cbaaa144734a4a473e7a7dd6f4e24"
-  integrity sha512-d8gDXGIUfey6zPIM87+slnLVPtZgPCWe2vsMsfeUKh3vTQsawETMoQ70oFm0E/yqg0AYVtkGK7L5kCk4lIPz5w==
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.28.tgz#00519cd334899c64e3aee9cc9a5045319e17d8ab"
+  integrity sha512-SLJDTh9rDwhSPx4YgrzsisNrHK1Lp5oXNARkMdfepFlcUt7tU8C9n8erANW+F1a1q1Z6wOyBto1Ikrkt/9RV4w==
   dependencies:
-    "@create-figma-plugin/common" "^0.0.26"
-    "@create-figma-plugin/utilities" "^0.0.26"
+    "@create-figma-plugin/common" "^0.0.28"
+    "@create-figma-plugin/utilities" "^0.0.28"
     chokidar "^3.2.2"
     find-up "^4.1.0"
     fs-extra "^8.1.0"
@@ -164,20 +164,20 @@
     typescript "^3.6.4"
     webpack "^4.41.2"
 
-"@create-figma-plugin/common@^0.0.26":
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.26.tgz#017a3e888c644dd8bc25d66f9439df95ae10c35d"
-  integrity sha512-XTkjF6ZrthUjEU5F7GMCpSSD6zXAGc7xaAgHqPU9TOzPijwRkPkJ0PeT5B6XAGEAyHUQ8VTLDNJ4oLn5NFEozA==
+"@create-figma-plugin/common@^0.0.28":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.28.tgz#ea7726f2b81c94e94dfa60fee7ab8b6b85b8964a"
+  integrity sha512-KOAwVaaEncycQdwQs5YyBhf2uEW2aXHPwhFmRGhp4sw0l1fyR1CjiPjZFBFaIly4JjJMclezrBvUww9c/Ihfzw==
   dependencies:
     "@sindresorhus/slugify" "^0.9.1"
     chalk "^2.4.2"
     fs-extra "^8.1.0"
     npmlog "^4.1.2"
 
-"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.26":
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.26.tgz#c154a6c8191d47acfaaa93bd27f10c7831cf264e"
-  integrity sha512-lv7sU3oY3P6s+ZEyKjFaKftvhFVrzw376q/MpT6j2oCaxVYH1DWCNUHsbniJaNFTyMdiO8XDuwa/Uys11u7p3Q==
+"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.28":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.28.tgz#dcd400b5c328fe3e84e6df6c7de9dbea3ab2d45d"
+  integrity sha512-69qlvPfHN58+CVGZlW8K9phF1dewo2WJjYoxhjB4saRalHmUF7t+qC5Hiffr9gily205/Xbolhnv6G2GG962sA==
 
 "@evocateur/libnpmaccess@^3.1.2":
   version "3.1.2"
@@ -2009,9 +2009,9 @@ chokidar@^2.0.2:
     fsevents "^1.2.7"
 
 chokidar@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.2.2.tgz#a433973350021e09f2b853a2287781022c0dc935"
-  integrity sha512-bw3pm7kZ2Wa6+jQWYP/c7bAZy3i4GwiIiMO2EeRjrE48l8vBqC/WvFhSF0xyM8fQiPEGvwMY/5bqDG7sSEOuhg==
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.2.3.tgz#b9270a565d14f02f6bfdd537a6a2bbf5549b8c8c"
+  integrity sha512-GtrxGuRf6bzHQmXWRepvsGnXpkQkVU+D2/9a7dAe4a7v1NhrfZOZ2oKf76M3nOs46fFYL8D+Q8JYA4GYeJ8Cjw==
   dependencies:
     anymatch "~3.1.1"
     braces "~3.0.2"
@@ -2255,11 +2255,9 @@ config-chain@^1.1.11:
     proto-list "~1.2.1"
 
 console-browserify@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.1.0.tgz#f0241c45730a9fc6323b206dbf38edc741d0bb10"
-  integrity sha1-8CQcRXMKn8YyOyBtvzjtx0HQuxA=
-  dependencies:
-    date-now "^0.1.4"
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.2.0.tgz#67063cef57ceb6cf4993a2ab3a55840ae8c49336"
+  integrity sha512-ZMkYO/LkF17QvCPqM0gxw8yUzigAOZOSWSHg91FH6orS7vcEj5dVZTidN2fQ14yBSdg97RqhSNwLUXInd52OTA==
 
 console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
@@ -2527,11 +2525,6 @@ date-fns@^1.27.2, date-fns@^1.30.1:
   version "1.30.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
-
-date-now@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
-  integrity sha1-6vQ5/U1ISK105cx9vvIAZyueNFs=
 
 dateformat@^3.0.0:
   version "3.0.3"
