@@ -1,25 +1,26 @@
 /* global figma */
-import {
-  formatErrorMessage,
-  formatSuccessMessage
-} from '@create-figma-plugin/utilities'
+import { formatSuccessMessage } from '@create-figma-plugin/utilities'
 import { groupSiblingLayers } from './group-sibling-layers'
 import { updateLayersSortOrder } from './update-layers-sort-order'
 
 export function commandFactory ({ sortLayers, successMessage }) {
   return function () {
-    const selectedLayers = figma.currentPage.selection
-    if (selectedLayers.length < 2) {
-      figma.closePlugin(formatErrorMessage('Select two or more layers'))
-      return
-    }
-    const groups = groupSiblingLayers(selectedLayers)
+    const selection = figma.currentPage.selection
+    const groups =
+      selection.length === 1
+        ? [selection[0].children]
+        : groupSiblingLayers(selection)
+    let didChange = false
     for (const layers of groups) {
       const result = sortLayers(layers)
       if (result !== null) {
-        updateLayersSortOrder(result)
+        didChange = updateLayersSortOrder(result) || didChange
       }
     }
-    figma.closePlugin(formatSuccessMessage(successMessage))
+    figma.closePlugin(
+      didChange === true
+        ? formatSuccessMessage(successMessage)
+        : 'No change to sort order'
+    )
   }
 }

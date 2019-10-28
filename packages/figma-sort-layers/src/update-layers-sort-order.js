@@ -4,9 +4,12 @@ export function updateLayersSortOrder (layers) {
   if (parentLayer.type !== 'DOCUMENT') {
     layers.reverse()
   }
+  const before = collectLayerIndices(layers)
   layers.forEach(function (layer) {
     parentLayer.insertChild(insertIndex, layer)
   })
+  const after = collectLayerIndices(layers)
+  return areArraysIdentical(before, after) === false
 }
 
 function calculateInsertIndex (layers) {
@@ -21,4 +24,25 @@ function calculateInsertIndex (layers) {
     }
   })
   return insertIndex + 1
+}
+
+function collectLayerIndices (layers) {
+  const result = []
+  const children = layers[0].parent.children
+  for (const layer of layers) {
+    result.push(children.indexOf(layer))
+  }
+  return result
+}
+
+function areArraysIdentical (a, b) {
+  if (a.length !== b.length) {
+    return false
+  }
+  for (const index in a) {
+    if (a[index] !== b[index]) {
+      return false
+    }
+  }
+  return true
 }

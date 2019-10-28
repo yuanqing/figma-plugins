@@ -14,8 +14,8 @@ export function smartSortChildLayers (layer, childLayerIds) {
       : children.filter(function (layer) {
           return childLayerIds.indexOf(layer.id) !== -1
         })
-  const [firstChildLayer, ...remainingChildLayers] = childLayers
   /* eslint-enable indent */
+  const [firstChildLayer, ...remainingChildLayers] = childLayers
   const result = [firstChildLayer]
   for (const childLayer of remainingChildLayers) {
     let i = 0
