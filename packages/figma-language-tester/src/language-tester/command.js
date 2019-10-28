@@ -9,13 +9,16 @@ import {
 } from '@create-figma-plugin/utilities'
 import languages from './languages'
 import { translate } from './translate'
-import setApiKeyCommand from '../set-api-key/command'
 
 export default async function () {
   const { apiKey } = await loadSettings()
   if (typeof apiKey === 'undefined' || apiKey === '') {
-    global.__command__ = 'set-api-key/command.js'
-    setApiKeyCommand()
+    figma.closePlugin(
+      formatErrorMessage(
+        'Add an API key via Plugins › Language Tester › Set API Key'
+      ),
+      { timeout: 10000 }
+    )
     return
   }
   const layers = getTextLayers()
@@ -25,8 +28,7 @@ export default async function () {
         `No text layers ${
           figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
         }`
-      ),
-      { timeout: 2000 }
+      )
     )
     return
   }
@@ -63,12 +65,7 @@ async function setLanguage (originalStrings, languageKey, apiKey) {
     layer.characters = translated[index]
   })
   notificationHandler.cancel()
-  figma.notify(
-    formatSuccessMessage(`Translated to ${languages[languageKey]}`),
-    {
-      timeout: 2000
-    }
-  )
+  figma.notify(formatSuccessMessage(`Translated to ${languages[languageKey]}`))
 }
 
 async function resetLanguage (originalStrings) {
@@ -81,7 +78,7 @@ async function resetLanguage (originalStrings) {
   layers.forEach(function (layer) {
     layer.characters = originalStrings[layer.id]
   })
-  figma.notify('Reset', { timeout: 2000 })
+  figma.notify('Reset')
 }
 
 function getTextLayers () {
