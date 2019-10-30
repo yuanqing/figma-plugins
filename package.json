@@ -12,6 +12,7 @@
     "postinstall": "yarn run build && yarn run typings",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf figma.d.ts node_modules 'packages/*/node_modules' yarn.lock && yarn install",
+    "test": "ava",
     "typings": "curl --remote-name --silent https://www.figma.com/plugin-docs/figma.d.ts",
     "watch": "yarn run clean && lerna run watch --ignore figma-ui"
   },
@@ -19,9 +20,11 @@
     "@babel/core": "^7.6.2",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@create-figma-plugin/build": "*",
+    "ava": "^2.4.0",
     "babel-loader": "^8.0.6",
     "concurrently": "^4.1.2",
     "css-loader": "^3.2.0",
+    "esm": "^3.2.25",
     "husky": "^3.0.8",
     "lerna": "^3.16.4",
     "lint-staged": "^9.4.1",
@@ -35,6 +38,16 @@
     "stylelint": "^11.0.0",
     "stylelint-config-prettier": "^6.0.0",
     "stylelint-prettier": "^1.1.1"
+  },
+  "ava": {
+    "files": [
+      "packages/*/test/**/*.js",
+      "!**/fixtures/**"
+    ],
+    "verbose": true,
+    "require": [
+      "esm"
+    ]
   },
   "husky": {
     "hooks": {
