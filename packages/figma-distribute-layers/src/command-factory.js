@@ -27,6 +27,6 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
     addEventListener('CLOSE', function () {
       figma.closePlugin()
     })
-    showUI(240, 100, settings)
+    showUI({ width: 240, height: 100, data: settings })
   }
 }

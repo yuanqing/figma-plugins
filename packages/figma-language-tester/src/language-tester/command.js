@@ -32,7 +32,7 @@ export default async function () {
     )
     return
   }
-  showUI(240, 259)
+  showUI({ width: 240, height: 259 })
   const originalStrings = {} // maps `layer.id` to the original strings
   addEventListener('SET_LANGUAGE', async function (languageKey) {
     await setLanguage(originalStrings, languageKey, apiKey)
