@@ -1,4 +1,3 @@
 export const defaultSettings = {
-  '€': 'EUR',
-  $: 'USD'
+  locale: 'en-US'
 }
