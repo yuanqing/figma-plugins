@@ -25,13 +25,26 @@
   ],
   "scripts": {
     "build": "create-figma-plugin-build",
+    "prebuild": "yarn run scripts",
+    "pretest": "yarn run scripts",
+    "prewatch": "yarn run scripts",
     "scripts": "node scripts/build-symbol-to-iso-codes-map.js > src/data/symbol-to-iso-codes-map.json && node scripts/build-iso-code-to-decimal-places-map.js > src/data/iso-code-to-decimal-places-map.json",
+    "test": "ava",
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "*",
     "figma-ui": "*",
     "preact": "^10.0.0"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "verbose": true,
+    "require": [
+      "esm"
+    ]
   },
   "create-figma-plugin": {
     "id": "figma-money",
