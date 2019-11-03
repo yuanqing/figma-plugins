@@ -24,22 +24,31 @@ export function formatFactory (transform) {
       suffix,
       isoCode
     ) {
-      if (isoCode === '' && isValidIsoCode(suffix.trim())) {
+      let before = ''
+      let after = ''
+      if (
+        isValidIsoCode(isoCode.trim()) === false &&
+        isValidIsoCode(suffix.trim()) === true
+      ) {
+        // `isoCode` is an invalid match, so put it in `after`
+        after = `${isoCode}${after}`
         isoCode = suffix
         suffix = ''
       }
       const trimmedPrefix = prefix.trim()
       const trimmedSuffix = suffix.trim()
       let parsedIsoCode = isoCode.trim()
-      let before = ''
-      let after = ''
+      let isExplicitFormat = false
       // try to parse `isoCode`
-      if (parsedIsoCode !== '' && isValidIsoCode(parsedIsoCode) === false) {
-        parsedIsoCode = ''
+      if (isValidIsoCode(parsedIsoCode) === true) {
+        isExplicitFormat = true
+      } else {
         after = `${isoCode}${after}`
+        parsedIsoCode = ''
       }
       if (trimmedPrefix !== '') {
         if (parsedIsoCode === '') {
+          // try to parse an ISO code from `trimmedPrefix`
           parsedIsoCode = mapSymbolToIsoCode(trimmedPrefix, locale)
           if (parsedIsoCode !== '') {
             // `trimmedPrefix` is consumed
@@ -55,6 +64,7 @@ export function formatFactory (transform) {
       }
       if (trimmedSuffix !== '') {
         if (parsedIsoCode === '') {
+          // try to parse an ISO code from `trimmedSuffix`
           parsedIsoCode = mapSymbolToIsoCode(trimmedSuffix, locale)
           if (parsedIsoCode !== '') {
             // `trimmedSuffix` is consumed
@@ -77,7 +87,11 @@ export function formatFactory (transform) {
       result = result.replace(spaceRegex, ' ') // normalise spaces
       result = result.replace(dollarPrefixRegex, '') // strip the country prefix before `$`
       const minus = m1 !== '' || m2 !== '' ? MINUS : ''
-      return `${before}${minus}${transform(result, parsedIsoCode)}${after}`
+      return `${before}${minus}${transform(
+        result,
+        parsedIsoCode,
+        isExplicitFormat
+      )}${after}`
     })
   }
 }

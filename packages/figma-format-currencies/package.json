@@ -60,6 +60,11 @@
         "command": "format-explicit/command.js",
         "ui": "format-explicit/ui.js"
       },
+      {
+        "name": "Fix Currency Format",
+        "command": "fix-currency-format/command.js",
+        "ui": "fix-currency-format/ui.js"
+      },
       "-",
       {
         "name": "Reset",
