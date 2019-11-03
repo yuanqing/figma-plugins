@@ -1,7 +1,7 @@
 {
-  "name": "figma-money",
+  "name": "figma-format-currencies",
   "version": "0.0.0",
-  "description": "A Figma plugin to convert and format currencies",
+  "description": "A Figma plugin to format and convert between currencies",
   "keywords": [
     "currency",
     "figma",
@@ -18,7 +18,7 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/figma-plugins.git",
-    "directory": "packages/figma-money"
+    "directory": "packages/figma-format-currencies"
   },
   "files": [
     "src"
@@ -47,8 +47,8 @@
     ]
   },
   "create-figma-plugin": {
-    "id": "figma-money",
-    "name": "Money",
+    "id": "figma-format-currencies",
+    "name": "Format Currencies",
     "menu": [
       {
         "name": "Format Short",
