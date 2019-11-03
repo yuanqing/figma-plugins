@@ -24,7 +24,8 @@
     "src"
   ],
   "scripts": {
-    "build": "node scripts/build-symbol-to-iso-codes-map.js > src/data/symbol-to-iso-codes-map.json && create-figma-plugin-build",
+    "build": "create-figma-plugin-build",
+    "scripts": "node scripts/build-symbol-to-iso-codes-map.js > src/data/symbol-to-iso-codes-map.json && node scripts/build-iso-code-to-decimal-places-map.js > src/data/iso-code-to-decimal-places-map.json",
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {

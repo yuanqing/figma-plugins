@@ -1,28 +1,30 @@
-import { EN_DASH, MINUS } from './special-characters'
+import { EN_DASH, HYPHEN, MINUS, SPACE } from './special-characters'
+
+const ISO_CODE = '[A-Z]{3}'
+const SYMBOL = '[A-Za-z$₵£¥₦₩₪₫€₱₹.]{1,4}'
+const VALUE = '[\\d., ]*\\d'
 
 const pattern = [
-  // minus
-  `[${MINUS}${EN_DASH}-]?`, // eg. `-`
+  // `m1`
+  `[${MINUS}${EN_DASH}${HYPHEN}]?`, // eg. `-`
 
-  // symbol prefix (with optional space)
-  '(?:[^\\d\\n\\s]{1,4} ?)?', // eg. `$`, `Rs`. `OMF`, `FCFA`
+  // `prefix`
+  `(?:${SYMBOL}${SPACE}?)?`, // eg. `$`, `Rs`. `OMF`, `FCFA`
 
-  // incorrectly-positioned minus
-  `[${MINUS}${EN_DASH}-]?`, // eg. `-`
+  // `m2`
+  `[${MINUS}${EN_DASH}${HYPHEN}]?`, // eg. `-`
 
-  // v1, v2, v3
-  '\\d{1,3}', // eg. `1`, `12`, or `123`
-  '(?:[^\\d\\n]\\d{3})*', // eg. `,123`, `,123,456`, ...
-  '(?:[^\\d\\n]\\d{1,5})?', // eg. `.1` up to `.12345`
+  // `value`
+  VALUE, // eg. `1`, `12`, or `123`
 
-  // symbol suffix (with optional space)
-  '(?: ?[^\\d\\n\\s]{1,4})?', // eg. `$`, `Rs`, `OMF`, `FCFA`
+  // `suffix`
+  `(?:${SPACE}?${SYMBOL})?`, // eg. `$`, `Rs`, `OMF`, `FCFA`
 
-  // iso code (with optional space)
-  '(?: ?[A-Z]{3})?' // eg. `USD`
+  // `isoCode`
+  `(?:${SPACE}?${ISO_CODE})?` // eg. `USD`
 ]
   .map(function (pattern) {
-    return `(${pattern})`
+    return `(${pattern})` // wrap in a capturing group
   })
   .join('')
 

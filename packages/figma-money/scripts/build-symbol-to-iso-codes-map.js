@@ -1,9 +1,10 @@
 const isoCodes = require('../src/data/iso-codes.json')
+const sortObjectByKey = require('./sort-object-by-key')
 
 let result
 result = mapSymbolToIsoCodes()
 result = setDefaultIsoCodes(result)
-result = sortByKeys(result)
+result = sortObjectByKey(result)
 console.log(JSON.stringify(result, null, 2))
 
 function mapSymbolToIsoCodes () {
@@ -12,7 +13,6 @@ function mapSymbolToIsoCodes () {
   )
   const result = {}
   for (const isoCode of isoCodes) {
-    // render the value `0` using `Intl.NumberFormat`
     const locale = isoCode.substring(0, 2).toLowerCase()
     const string = new Intl.NumberFormat(`en-${locale}`, {
       style: 'currency',
@@ -59,13 +59,4 @@ function setDefaultIsoCodes (isoCodes) {
     ...isoCodes,
     ...result
   }
-}
-
-function sortByKeys (object) {
-  const sortedKeys = Object.keys(object).sort()
-  const result = {}
-  for (const key of sortedKeys) {
-    result[key] = object[key]
-  }
-  return result
 }

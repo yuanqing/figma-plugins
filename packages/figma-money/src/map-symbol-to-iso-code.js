@@ -1,5 +1,5 @@
 import symbolToIsoCodeMap from './data/symbol-to-iso-codes-map.json'
-import isoCodes from './data/iso-codes.json'
+import { isoCodes } from './iso-codes'
 
 const dashRegex = /-/
 
