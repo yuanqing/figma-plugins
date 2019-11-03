@@ -5,18 +5,17 @@ import {
   formatSuccessMessage,
   loadFonts,
   loadSettings,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
 import { getTextLayers } from '../get-text-layers'
 
-export function commandFactory (successMessage) {
+export function commandFactory (createSuccessMessage) {
   return async function () {
     const layers = getTextLayers()
+    const scope =
+      figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
     if (layers.length === 0) {
-      const scope =
-        figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
       figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
       return
     }
@@ -27,15 +26,16 @@ export function commandFactory (successMessage) {
         const layer = figma.getNodeById(id)
         layer.characters = characters
       }
-      figma.closePlugin(formatSuccessMessage(successMessage))
+      figma.closePlugin(formatSuccessMessage(createSuccessMessage(scope)))
     })
-    showUI({ visible: false })
-    triggerEvent(
-      'FORMAT',
-      layers.map(function ({ id, characters }) {
-        return { id, characters }
-      }),
-      settings.locale
+    showUI(
+      { visible: false },
+      {
+        locale: settings.locale,
+        layers: layers.map(function ({ id, characters }) {
+          return { id, characters }
+        })
+      }
     )
   }
 }

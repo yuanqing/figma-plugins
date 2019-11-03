@@ -1,3 +1,5 @@
 import { commandFactory } from '../factory/command-factory'
 
-export default commandFactory('Fixed currency formatting')
+export default commandFactory(function (scope) {
+  return `Fixed currrency formatted ${scope}`
+})

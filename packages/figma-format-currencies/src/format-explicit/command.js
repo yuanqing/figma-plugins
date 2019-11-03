@@ -1,3 +1,5 @@
 import { commandFactory } from '../factory/command-factory'
 
-export default commandFactory('Set currencies to Explicit format')
+export default commandFactory(function (scope) {
+  return `Set currencies ${scope} to Explicit format`
+})

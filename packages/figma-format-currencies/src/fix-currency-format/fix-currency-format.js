@@ -1,13 +1,18 @@
-import { formatFactory } from '../factory/format-factory'
+import { addIsoCodeSuffix } from '../add-iso-code-suffix'
+import { format } from '../format'
+import { formatCurrency } from '../format-currency'
 
-export const fixCurrencyFormat = formatFactory(function (
-  result,
-  { isoCode, isExplicitFormat }
-) {
-  if (isExplicitFormat === true) {
-    if (result.indexOf(isoCode) === -1) {
-      return `${result} ${isoCode}`
+export function fixCurrencyFormat (characters, locale) {
+  return format(characters, locale, function ({
+    value,
+    isoCode,
+    locale,
+    isExplicitFormat
+  }) {
+    const result = formatCurrency(value, isoCode, locale)
+    if (isExplicitFormat === true) {
+      return addIsoCodeSuffix(result, isoCode)
     }
-  }
-  return result
-})
+    return result
+  })
+}
