@@ -67,6 +67,12 @@
       },
       "-",
       {
+        "name": "Settings",
+        "command": "settings/command.js",
+        "ui": "settings/ui.js"
+      },
+      "-",
+      {
         "name": "Reset",
         "command": "reset/command.js"
       }
