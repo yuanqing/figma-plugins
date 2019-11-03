@@ -87,11 +87,11 @@ export function formatFactory (transform) {
       result = result.replace(spaceRegex, ' ') // normalise spaces
       result = result.replace(dollarPrefixRegex, '') // strip the country prefix before `$`
       const minus = m1 !== '' || m2 !== '' ? MINUS : ''
-      return `${before}${minus}${transform(
-        result,
-        parsedIsoCode,
+      return `${before}${minus}${transform(result, {
+        value: parsedValue,
+        isoCode: parsedIsoCode,
         isExplicitFormat
-      )}${after}`
+      })}${after}`
     })
   }
 }
