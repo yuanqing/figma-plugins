@@ -92,3 +92,79 @@ test('123.456 ¥ JPY', function (t) {
     '¥123,456 JPY ABC DEF'
   )
 })
+
+test('¥123,456,789', function (t) {
+  t.is(fixCurrencyFormat('¥123,456,789', 'en-US'), '¥123,456,789')
+  t.is(fixCurrencyFormat('¥123,456,789,', 'en-US'), '¥123,456,789,')
+  t.is(fixCurrencyFormat('X ¥123,456,789', 'en-US'), 'X ¥123,456,789')
+  t.is(fixCurrencyFormat('X ¥123,456,789 ABC', 'en-US'), 'X ¥123,456,789 ABC')
+  t.is(
+    fixCurrencyFormat('X ¥123,456,789 ABC DEF', 'en-US'),
+    'X ¥123,456,789 ABC DEF'
+  )
+  t.is(fixCurrencyFormat('¥123,456,789 ABC', 'en-US'), '¥123,456,789 ABC')
+  t.is(
+    fixCurrencyFormat('¥123,456,789 ABC DEF', 'en-US'),
+    '¥123,456,789 ABC DEF'
+  )
+})
+
+test('¥123,456,789 JPY', function (t) {
+  t.is(fixCurrencyFormat('¥123,456,789 JPY', 'en-US'), '¥123,456,789 JPY')
+  t.is(fixCurrencyFormat('¥123,456,789 JPY,', 'en-US'), '¥123,456,789 JPY,')
+  t.is(fixCurrencyFormat('X ¥123,456,789 JPY', 'en-US'), 'X ¥123,456,789 JPY')
+  t.is(
+    fixCurrencyFormat('X ¥123,456,789 JPY ABC', 'en-US'),
+    'X ¥123,456,789 JPY ABC'
+  )
+  t.is(
+    fixCurrencyFormat('X ¥123,456,789 JPY ABC DEF', 'en-US'),
+    'X ¥123,456,789 JPY ABC DEF'
+  )
+  t.is(
+    fixCurrencyFormat('¥123,456,789 JPY ABC', 'en-US'),
+    '¥123,456,789 JPY ABC'
+  )
+  t.is(
+    fixCurrencyFormat('¥123,456,789 JPY ABC DEF', 'en-US'),
+    '¥123,456,789 JPY ABC DEF'
+  )
+})
+
+test('123.456.789 ¥', function (t) {
+  t.is(fixCurrencyFormat('123.456.789 ¥', 'en-US'), '¥123,456,789')
+  t.is(fixCurrencyFormat('123.456.789 ¥,', 'en-US'), '¥123,456,789,')
+  t.is(fixCurrencyFormat('X 123.456.789 ¥', 'en-US'), 'X ¥123,456,789')
+  t.is(fixCurrencyFormat('X 123.456.789 ¥ ABC', 'en-US'), 'X ¥123,456,789 ABC')
+  t.is(
+    fixCurrencyFormat('X 123.456.789 ¥ ABC DEF', 'en-US'),
+    'X ¥123,456,789 ABC DEF'
+  )
+  t.is(fixCurrencyFormat('123.456.789 ¥ ABC', 'en-US'), '¥123,456,789 ABC')
+  t.is(
+    fixCurrencyFormat('123.456.789 ¥ ABC DEF', 'en-US'),
+    '¥123,456,789 ABC DEF'
+  )
+})
+
+test('123.456.789 ¥ JPY', function (t) {
+  t.is(fixCurrencyFormat('123.456.789 ¥ JPY', 'en-US'), '¥123,456,789 JPY')
+  t.is(fixCurrencyFormat('123.456.789 ¥ JPY,', 'en-US'), '¥123,456,789 JPY,')
+  t.is(fixCurrencyFormat('X 123.456.789 ¥ JPY', 'en-US'), 'X ¥123,456,789 JPY')
+  t.is(
+    fixCurrencyFormat('X 123.456.789 ¥ JPY ABC', 'en-US'),
+    'X ¥123,456,789 JPY ABC'
+  )
+  t.is(
+    fixCurrencyFormat('X 123.456.789 ¥ JPY ABC DEF', 'en-US'),
+    'X ¥123,456,789 JPY ABC DEF'
+  )
+  t.is(
+    fixCurrencyFormat('123.456.789 ¥ JPY ABC', 'en-US'),
+    '¥123,456,789 JPY ABC'
+  )
+  t.is(
+    fixCurrencyFormat('123.456.789 ¥ JPY ABC DEF', 'en-US'),
+    '¥123,456,789 JPY ABC DEF'
+  )
+})

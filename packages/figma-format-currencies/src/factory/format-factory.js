@@ -96,6 +96,12 @@ export function formatFactory (transform) {
   }
 }
 
+const separatorRegexes = {
+  ' ': /\s/g,
+  ',': /,/g,
+  '.': /\./g
+}
+
 function parseValue (value, isoCode) {
   const matches = value.match(nonDigitRegex)
   if (matches === null) {
@@ -111,7 +117,9 @@ function parseValue (value, isoCode) {
   if (firstIndex === lastIndex) {
     return value.replace(nonDigitRegex, '.')
   }
-  return value.replace(thousandsSeparator, '').replace(decimalSeparator, '.')
+  return value
+    .replace(separatorRegexes[thousandsSeparator], '')
+    .replace(separatorRegexes[decimalSeparator], '.')
 }
 
 function formatMoneyByLocale (value, currency, locale) {

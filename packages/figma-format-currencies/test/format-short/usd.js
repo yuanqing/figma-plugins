@@ -126,3 +126,67 @@ test('123.456,78 $ USD', function (t) {
   t.is(formatShort('123.456,78 $ USD ABC', 'en-US'), '$123,456.78 ABC')
   t.is(formatShort('123.456,78 $ USD ABC DEF', 'en-US'), '$123,456.78 ABC DEF')
 })
+
+test('$12,345,678.90', function (t) {
+  t.is(formatShort('$12,345,678.90', 'en-US'), '$12,345,678.90')
+  t.is(formatShort('$12,345,678.90,', 'en-US'), '$12,345,678.90,')
+  t.is(formatShort('X $12,345,678.90', 'en-US'), 'X $12,345,678.90')
+  t.is(formatShort('X $12,345,678.90 ABC', 'en-US'), 'X $12,345,678.90 ABC')
+  t.is(
+    formatShort('X $12,345,678.90 ABC DEF', 'en-US'),
+    'X $12,345,678.90 ABC DEF'
+  )
+  t.is(formatShort('$12,345,678.90 ABC', 'en-US'), '$12,345,678.90 ABC')
+  t.is(formatShort('$12,345,678.90 ABC DEF', 'en-US'), '$12,345,678.90 ABC DEF')
+})
+
+test('$12,345,678.90 USD', function (t) {
+  t.is(formatShort('$12,345,678.90 USD', 'en-US'), '$12,345,678.90')
+  t.is(formatShort('$12,345,678.90 USD,', 'en-US'), '$12,345,678.90,')
+  t.is(formatShort('X $12,345,678.90 USD', 'en-US'), 'X $12,345,678.90')
+  t.is(formatShort('X $12,345,678.90 USD ABC', 'en-US'), 'X $12,345,678.90 ABC')
+  t.is(
+    formatShort('X $12,345,678.90 USD ABC DEF', 'en-US'),
+    'X $12,345,678.90 ABC DEF'
+  )
+  t.is(formatShort('$12,345,678.90 USD ABC', 'en-US'), '$12,345,678.90 ABC')
+  t.is(
+    formatShort('$12,345,678.90 USD ABC DEF', 'en-US'),
+    '$12,345,678.90 ABC DEF'
+  )
+})
+
+test('12.345.678,90 $', function (t) {
+  t.is(formatShort('12.345.678,90 $', 'en-US'), '$12,345,678.90')
+  t.is(formatShort('12.345.678,90 $,', 'en-US'), '$12,345,678.90,')
+  t.is(formatShort('X 12.345.678,90 $', 'en-US'), 'X $12,345,678.90')
+  t.is(formatShort('X 12.345.678,90 $ ABC', 'en-US'), 'X $12,345,678.90 ABC')
+  t.is(
+    formatShort('X 12.345.678,90 $ ABC DEF', 'en-US'),
+    'X $12,345,678.90 ABC DEF'
+  )
+  t.is(formatShort('12.345.678,90 $ ABC', 'en-US'), '$12,345,678.90 ABC')
+  t.is(
+    formatShort('12.345.678,90 $ ABC DEF', 'en-US'),
+    '$12,345,678.90 ABC DEF'
+  )
+})
+
+test('12.345.678,90 $ USD', function (t) {
+  t.is(formatShort('12.345.678,90 $ USD', 'en-US'), '$12,345,678.90')
+  t.is(formatShort('12.345.678,90 $ USD,', 'en-US'), '$12,345,678.90,')
+  t.is(formatShort('X 12.345.678,90 $ USD', 'en-US'), 'X $12,345,678.90')
+  t.is(
+    formatShort('X 12.345.678,90 $ USD ABC', 'en-US'),
+    'X $12,345,678.90 ABC'
+  )
+  t.is(
+    formatShort('X 12.345.678,90 $ USD ABC DEF', 'en-US'),
+    'X $12,345,678.90 ABC DEF'
+  )
+  t.is(formatShort('12.345.678,90 $ USD ABC', 'en-US'), '$12,345,678.90 ABC')
+  t.is(
+    formatShort('12.345.678,90 $ USD ABC DEF', 'en-US'),
+    '$12,345,678.90 ABC DEF'
+  )
+})

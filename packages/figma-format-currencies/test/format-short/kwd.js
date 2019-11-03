@@ -72,3 +72,47 @@ test('123.456,789 KWD', function (t) {
     'KWD 123,456.789 ABC DEF'
   )
 })
+
+test('KWD 123,456,789.000', function (t) {
+  t.is(formatShort('KWD 123,456,789.000', 'en-US'), 'KWD 123,456,789.000')
+  t.is(formatShort('KWD 123,456,789.000,', 'en-US'), 'KWD 123,456,789.000,')
+  t.is(formatShort('X KWD 123,456,789.000', 'en-US'), 'X KWD 123,456,789.000')
+  t.is(
+    formatShort('X KWD 123,456,789.000 ABC', 'en-US'),
+    'X KWD 123,456,789.000 ABC'
+  )
+  t.is(
+    formatShort('X KWD 123,456,789.000 ABC DEF', 'en-US'),
+    'X KWD 123,456,789.000 ABC DEF'
+  )
+  t.is(
+    formatShort('KWD 123,456,789.000 ABC', 'en-US'),
+    'KWD 123,456,789.000 ABC'
+  )
+  t.is(
+    formatShort('KWD 123,456,789.000 ABC DEF', 'en-US'),
+    'KWD 123,456,789.000 ABC DEF'
+  )
+})
+
+test('123.456.789,000 KWD', function (t) {
+  t.is(formatShort('123.456.789,000 KWD', 'en-US'), 'KWD 123,456,789.000')
+  t.is(formatShort('123.456.789,000 KWD,', 'en-US'), 'KWD 123,456,789.000,')
+  t.is(formatShort('X 123.456.789,000 KWD', 'en-US'), 'X KWD 123,456,789.000')
+  t.is(
+    formatShort('X 123.456.789,000 KWD ABC', 'en-US'),
+    'X KWD 123,456,789.000 ABC'
+  )
+  t.is(
+    formatShort('X 123.456.789,000 KWD ABC DEF', 'en-US'),
+    'X KWD 123,456,789.000 ABC DEF'
+  )
+  t.is(
+    formatShort('123.456.789,000 KWD ABC', 'en-US'),
+    'KWD 123,456,789.000 ABC'
+  )
+  t.is(
+    formatShort('123.456.789,000 KWD ABC DEF', 'en-US'),
+    'KWD 123,456,789.000 ABC DEF'
+  )
+})
