@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import './SegmentedControl.scss'
+import './segmented-control.scss'
 
 export function SegmentedControl ({ options, title, name, value, ...rest }) {
   return (

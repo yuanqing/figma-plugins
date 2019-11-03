@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
-import './InputWithIcon.scss'
+import './input-with-icon.scss'
 
 export function InputWithIcon ({
   border,

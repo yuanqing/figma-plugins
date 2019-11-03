@@ -1,8 +1,8 @@
 /** @jsx h */
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { useForm } from 'figma-ui/src/hooks/use-form'
-import { Button } from 'figma-ui/src/components/Button'
-import { Input } from 'figma-ui/src/components/Input'
+import { Button } from 'figma-ui/src/components/button'
+import { Input } from 'figma-ui/src/components/input'
 import { h } from 'preact'
 import './set-api-key.scss'
 

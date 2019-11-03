@@ -1,7 +1,7 @@
 /** @jsx h */
 import { triggerEvent } from '@create-figma-plugin/utilities'
-import { Button } from 'figma-ui/src/components/Button'
-import { InputWithIcon } from 'figma-ui/src/components/InputWithIcon'
+import { Button } from 'figma-ui/src/components/button'
+import { InputWithIcon } from 'figma-ui/src/components/input-with-icon'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import './move-layers.scss'

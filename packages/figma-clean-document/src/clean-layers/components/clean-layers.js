@@ -1,8 +1,8 @@
 /** @jsx h */
 import { triggerEvent } from '@create-figma-plugin/utilities'
-import { Button } from 'figma-ui/src/components/Button'
-import { Checkbox } from 'figma-ui/src/components/Checkbox'
-import { Input } from 'figma-ui/src/components/Input'
+import { Button } from 'figma-ui/src/components/button'
+import { Checkbox } from 'figma-ui/src/components/checkbox'
+import { Input } from 'figma-ui/src/components/input'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import './clean-layers.scss'

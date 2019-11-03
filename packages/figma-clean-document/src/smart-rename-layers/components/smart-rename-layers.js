@@ -1,7 +1,7 @@
 /** @jsx h */
 import { triggerEvent } from '@create-figma-plugin/utilities'
-import { Button } from 'figma-ui/src/components/Button'
-import { Input } from 'figma-ui/src/components/Input'
+import { Button } from 'figma-ui/src/components/button'
+import { Input } from 'figma-ui/src/components/input'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import './smart-rename-layers.scss'

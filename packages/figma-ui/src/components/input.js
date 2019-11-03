@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
-import './Input.scss'
+import './input.scss'
 
 export function Input ({ border, focused, onChange, ...rest }) {
   if (focused === true) {

@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import './Checkbox.scss'
+import './checkbox.scss'
 
 export function Checkbox ({ title, description, name, value, ...rest }) {
   return (
