@@ -25,10 +25,10 @@
   ],
   "scripts": {
     "build": "create-figma-plugin-build",
-    "prebuild": "yarn run scripts",
-    "pretest": "yarn run scripts",
-    "prewatch": "yarn run scripts",
-    "scripts": "node scripts/build-symbol-to-iso-codes-map.js > src/data/symbol-to-iso-codes-map.json && node scripts/build-iso-code-to-decimal-places-map.js > src/data/iso-code-to-decimal-places-map.json",
+    "prebuild": "yarn run data",
+    "pretest": "yarn run data",
+    "prewatch": "yarn run data",
+    "data": "node scripts/build-symbol-to-iso-codes-map.js > src/data/symbol-to-iso-codes-map.json && node scripts/build-iso-code-to-decimal-places-map.js > src/data/iso-code-to-decimal-places-map.json",
     "test": "ava",
     "watch": "create-figma-plugin-build --watch"
   },
