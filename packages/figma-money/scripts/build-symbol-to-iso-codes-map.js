@@ -1,4 +1,4 @@
-const isoCodes = require('./iso-codes.json')
+const isoCodes = require('../src/data/iso-codes.json')
 
 let result
 result = mapSymbolToIsoCodes()
@@ -7,20 +7,8 @@ result = sortByKeys(result)
 console.log(JSON.stringify(result, null, 2))
 
 function mapSymbolToIsoCodes () {
-  const value = 0
-  const pattern = `([^${value}\\s]*)`
   const symbolRegex = new RegExp(
-    [
-      '(?:',
-      pattern,
-      '\\s?', // optional space after prefix
-      ')',
-      `${value}`,
-      '(?:', // optional space before suffix
-      '\\s?',
-      pattern,
-      ')'
-    ].join('')
+    ['(?:([^0\\s]*)\\s?)', '0', '(?:\\s?([^0\\s]*))'].join('')
   )
   const result = {}
   for (const isoCode of isoCodes) {
@@ -30,7 +18,7 @@ function mapSymbolToIsoCodes () {
       style: 'currency',
       currency: isoCode,
       maximumSignificantDigits: 1
-    }).format(value)
+    }).format(0)
     const m = string.match(symbolRegex)
     if (m === null) {
       result[isoCode] = isoCode

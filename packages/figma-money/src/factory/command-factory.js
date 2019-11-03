@@ -8,10 +8,10 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../../default-settings'
-import { getTextLayers } from '../../get-text-layers'
+import { defaultSettings } from '../default-settings'
+import { getTextLayers } from '../get-text-layers'
 
-export function commandFactory (format) {
+export function commandFactory (successMessage) {
   return async function () {
     const layers = getTextLayers()
     if (layers.length === 0) {
@@ -27,9 +27,7 @@ export function commandFactory (format) {
         const layer = figma.getNodeById(id)
         layer.characters = characters
       }
-      figma.closePlugin(
-        formatSuccessMessage(`Set currencies to ${format} format`)
-      )
+      figma.closePlugin(formatSuccessMessage(successMessage))
     })
     showUI({ visible: false })
     triggerEvent(

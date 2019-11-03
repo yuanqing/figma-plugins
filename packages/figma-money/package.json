@@ -24,7 +24,7 @@
     "src"
   ],
   "scripts": {
-    "build": "node scripts/build-symbol-to-iso-codes-map.js > src/symbol-to-iso-codes-map.json && create-figma-plugin-build",
+    "build": "node scripts/build-symbol-to-iso-codes-map.js > src/data/symbol-to-iso-codes-map.json && create-figma-plugin-build",
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {
@@ -38,13 +38,13 @@
     "menu": [
       {
         "name": "Format Short",
-        "command": "format/format-short/command.js",
-        "ui": "format/format-short/ui.js"
+        "command": "format-short/command.js",
+        "ui": "format-short/ui.js"
       },
       {
         "name": "Format Explicit",
-        "command": "format/format-explicit/command.js",
-        "ui": "format/format-explicit/ui.js"
+        "command": "format-explicit/command.js",
+        "ui": "format-explicit/ui.js"
       },
       "-",
       {
