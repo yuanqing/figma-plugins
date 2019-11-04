@@ -1,6 +1,6 @@
 /* global figma */
 import { saveSettings } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../default-settings'
+import { defaultSettings } from '../settings/default-settings'
 
 export default async function () {
   await saveSettings(defaultSettings)

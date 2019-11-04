@@ -6,7 +6,7 @@ import {
   saveSettings,
   showUI
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../default-settings'
+import { defaultSettings } from './default-settings'
 
 export default async function () {
   const settings = (await loadSettings()) || defaultSettings
