@@ -62,12 +62,12 @@
         "ui": "commands/format-currency/fix-currency-format/ui.js"
       },
       {
-        "name": "Change Currency to Short Format",
+        "name": "Change to Short Format",
         "command": "commands/format-currency/format-short/command.js",
         "ui": "commands/format-currency/format-short/ui.js"
       },
       {
-        "name": "Change Currency to Explicit Format",
+        "name": "Change to Explicit Format",
         "command": "commands/format-currency/format-explicit/command.js",
         "ui": "commands/format-currency/format-explicit/ui.js"
       },
