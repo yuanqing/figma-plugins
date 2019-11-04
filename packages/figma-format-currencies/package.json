@@ -25,10 +25,10 @@
   ],
   "scripts": {
     "build": "create-figma-plugin-build",
-    "prebuild": "yarn run data",
-    "pretest": "yarn run data",
-    "prewatch": "yarn run data",
-    "data": "node scripts/build-iso-codes.js",
+    "build-iso-codes": "node scripts/build-iso-codes.js",
+    "prebuild": "yarn run build-iso-codes",
+    "pretest": "yarn run build-iso-codes",
+    "prewatch": "yarn run build-iso-codes",
     "test": "ava",
     "watch": "create-figma-plugin-build --watch"
   },
