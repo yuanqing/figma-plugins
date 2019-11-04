@@ -22,10 +22,12 @@ export default async function () {
   const settings = (await loadSettings()) || defaultSettings
   await loadFonts(layers)
   addEventListener('CONVERT_CURRENCY_RESULT', async function (
+    layers,
     currency,
-    layers
+    roundNumbers
   ) {
     settings.currency = currency
+    settings.roundNumbers = roundNumbers
     await saveSettings(settings)
     for (const { id, characters } of layers) {
       const layer = figma.getNodeById(id)
@@ -39,13 +41,14 @@ export default async function () {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 116 },
+    { width: 240, height: 148 },
     {
       currency: settings.currency,
       locale: settings.locale,
       layers: layers.map(function ({ id, characters }) {
         return { id, characters }
-      })
+      }),
+      roundNumbers: settings.roundNumbers
     }
   )
 }

@@ -1,11 +1,15 @@
 import { SYMBOL_INDEX } from '../data/constants'
 import isoCodes from '../data/iso-codes'
+import { isValidIsoCode } from './is-valid-iso-code'
 
 const dashRegex = /-/
 
 export function mapSymbolToIsoCode (symbol, locale) {
   const isoCodes = collectIsoCodes(symbol)
   if (isoCodes.length === 0) {
+    if (isValidIsoCode(symbol)) {
+      return symbol
+    }
     return ''
   }
   if (isoCodes.length === 1) {
