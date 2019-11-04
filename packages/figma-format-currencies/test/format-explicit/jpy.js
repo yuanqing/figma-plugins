@@ -1,5 +1,5 @@
 import test from 'ava'
-import { formatExplicit } from '../../src/format-explicit/format-explicit'
+import { formatExplicit } from '../../src/commands/format-currency/format-explicit/format-explicit'
 
 test('¥1', function (t) {
   t.is(formatExplicit('¥1', 'en-US'), '¥1 JPY')

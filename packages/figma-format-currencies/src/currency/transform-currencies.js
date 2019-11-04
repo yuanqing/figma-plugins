@@ -8,7 +8,7 @@ import { MINUS } from './special-characters'
 const digitRegex = /\d/
 const nonDigitRegex = /([^\d])/g
 
-export function format (string, locale, transform) {
+export function transformCurrencies (string, locale, transform) {
   if (digitRegex.test(string) === false) {
     return string
   }

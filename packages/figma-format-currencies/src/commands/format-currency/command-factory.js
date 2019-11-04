@@ -7,8 +7,8 @@ import {
   loadSettings,
   showUI
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../default-settings'
-import { getTextLayers } from '../get-text-layers'
+import { defaultSettings } from '../settings/default-settings'
+import { getTextLayers } from '../../utilities/get-text-layers'
 
 export function commandFactory (createSuccessMessage) {
   return async function () {

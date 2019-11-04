@@ -28,7 +28,7 @@
     "prebuild": "yarn run data",
     "pretest": "yarn run data",
     "prewatch": "yarn run data",
-    "data": "node scripts/build-symbol-to-iso-codes-map.js > src/data/symbol-to-iso-codes-map.json && node scripts/build-iso-code-to-decimal-places-map.js > src/data/iso-code-to-decimal-places-map.json",
+    "data": "node scripts/build-iso-codes.js",
     "test": "ava",
     "watch": "create-figma-plugin-build --watch"
   },
@@ -52,35 +52,35 @@
     "menu": [
       {
         "name": "Convert Currency",
-        "command": "convert-currency/command.js",
-        "ui": "convert-currency/ui.js"
+        "command": "commands/convert-currency/command.js",
+        "ui": "commands/convert-currency/ui.js"
       },
       "-",
       {
         "name": "Fix Currency Format",
-        "command": "fix-currency-format/command.js",
-        "ui": "fix-currency-format/ui.js"
+        "command": "commands/format-currency/fix-currency-format/command.js",
+        "ui": "commands/format-currency/fix-currency-format/ui.js"
       },
       {
-        "name": "Format Short",
-        "command": "format-short/command.js",
-        "ui": "format-short/ui.js"
+        "name": "Change Currency to Short Format",
+        "command": "commands/format-currency/format-short/command.js",
+        "ui": "commands/format-currency/format-short/ui.js"
       },
       {
-        "name": "Format Explicit",
-        "command": "format-explicit/command.js",
-        "ui": "format-explicit/ui.js"
+        "name": "Change Currency to Explicit Format",
+        "command": "commands/format-currency/format-explicit/command.js",
+        "ui": "commands/format-currency/format-explicit/ui.js"
       },
       "-",
       {
         "name": "Settings",
-        "command": "settings/command.js",
-        "ui": "settings/ui.js"
+        "command": "commands/settings/command.js",
+        "ui": "commands/settings/ui.js"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "commands/reset/command.js"
       }
     ]
   }

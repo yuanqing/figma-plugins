@@ -1,5 +1,5 @@
 import test from 'ava'
-import { fixCurrencyFormat } from '../../src/fix-currency-format/fix-currency-format'
+import { fixCurrencyFormat } from '../../src/commands/format-currency/fix-currency-format/fix-currency-format'
 
 test('KWD 1', function (t) {
   t.is(fixCurrencyFormat('KWD 1', 'en-US'), 'KWD 1.000')

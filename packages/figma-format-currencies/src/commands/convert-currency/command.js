@@ -8,8 +8,8 @@ import {
   saveSettings,
   showUI
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../default-settings'
-import { getTextLayers } from '../get-text-layers'
+import { defaultSettings } from '../settings/default-settings'
+import { getTextLayers } from '../../utilities/get-text-layers'
 
 export default async function () {
   const layers = getTextLayers()
