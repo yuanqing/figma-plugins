@@ -2,7 +2,7 @@
 
 > A Figma plugin to distribute layers in a given direction and offset
 
-[![Distribute Layers](media/cover.png)](https://www.figma.com/c/plugin/767379264700569551/Distribute-Layers)
+[![Distribute Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-distribute-layers/media/cover.png)](https://www.figma.com/c/plugin/767379264700569551/Distribute-Layers)
 
 ## Commands
 

@@ -2,7 +2,7 @@
 
 > A Figma plugin to automagically organize and clean up your Figma document
 
-[![Clean Document](media/cover.png)](https://www.figma.com/c/plugin/767379019764649932/Clean-Document)
+[![Clean Document](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-clean-document/media/cover.png)](https://www.figma.com/c/plugin/767379019764649932/Clean-Document)
 
 ## Commands
 

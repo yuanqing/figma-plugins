@@ -2,7 +2,7 @@
 
 > A Figma plugin to test your UI in different languages
 
-[![Language Tester](media/cover.png)](https://www.figma.com/c/plugin/767379122107077581/Language-Tester)
+[![Language Tester](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-language-tester/media/cover.png)](https://www.figma.com/c/plugin/767379122107077581/Language-Tester)
 
 ## Commands
 

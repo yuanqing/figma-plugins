@@ -2,7 +2,7 @@
 
 > A Figma plugin to precisely move layers
 
-[![Move Layers](media/cover.png)](https://www.figma.com/c/plugin/767379204511357902/Move-Layers)
+[![Move Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-move-layers/media/cover.png)](https://www.figma.com/c/plugin/767379204511357902/Move-Layers)
 
 ## Commands
 
