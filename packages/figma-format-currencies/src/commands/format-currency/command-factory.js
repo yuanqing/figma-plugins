@@ -5,7 +5,8 @@ import {
   formatSuccessMessage,
   loadFonts,
   loadSettings,
-  showUI
+  showUI,
+  triggerEvent
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../settings/default-settings'
 import { getTextLayers } from '../../utilities/get-text-layers'
@@ -28,14 +29,13 @@ export function commandFactory (createSuccessMessage) {
       }
       figma.closePlugin(formatSuccessMessage(createSuccessMessage(scope)))
     })
-    showUI(
-      { visible: false },
-      {
-        locale: settings.locale,
-        layers: layers.map(function ({ id, characters }) {
-          return { id, characters }
-        })
-      }
+    showUI({ visible: false })
+    triggerEvent(
+      'FORMAT',
+      layers.map(function ({ id, characters }) {
+        return { id, characters }
+      }),
+      settings.locale
     )
   }
 }
