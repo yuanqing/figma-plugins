@@ -6,32 +6,49 @@ import {
   loadFonts,
   loadSettings,
   saveSettings,
-  showUI
+  showUI,
+  triggerEvent
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../settings/default-settings'
 import { getTextLayers } from '../../utilities/get-text-layers'
 
 export default async function () {
-  const layers = getTextLayers()
-  const scope =
-    figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
+  const { layers, scope } = getTextLayers()
   if (layers.length === 0) {
     figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
     return
   }
   const settings = await loadSettings(defaultSettings)
-  await loadFonts(layers)
-  addEventListener('CONVERT_CURRENCY_RESULT', async function (
-    layers,
-    currency,
-    roundNumbers
-  ) {
+  addEventListener('SUBMIT', async function ({ currency, roundNumbers }) {
     await saveSettings({
       ...settings,
       currency,
       roundNumbers
     })
+    const { layers, scope } = getTextLayers()
+    if (layers.length === 0) {
+      figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
+      return
+    }
+    await loadFonts(layers)
+    triggerEvent(
+      'CONVERT_CURRENCY',
+      layers.map(function ({ id, characters }) {
+        return { id, characters }
+      }),
+      scope,
+      currency,
+      roundNumbers
+    )
+  })
+  addEventListener('CONVERT_CURRENCY_RESULT', async function (
+    layers,
+    scope,
+    currency
+  ) {
+    console.log('CONVERT_CURRENCY_RESULT')
     for (const { id, characters } of layers) {
+      console.log(id, characters)
       const layer = figma.getNodeById(id)
       layer.characters = characters
     }
@@ -42,15 +59,5 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUI(
-    { width: 240, height: 148 },
-    {
-      currency: settings.currency,
-      locale: settings.locale,
-      layers: layers.map(function ({ id, characters }) {
-        return { id, characters }
-      }),
-      roundNumbers: settings.roundNumbers
-    }
-  )
+  showUI({ width: 240, height: 148 }, settings)
 }
