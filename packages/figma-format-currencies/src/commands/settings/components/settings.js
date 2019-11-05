@@ -6,7 +6,7 @@ import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import './settings.scss'
 
-export function Settings ({ ...initialState }) {
+export function Settings (initialState) {
   function submitCallback ({ locale }) {
     triggerEvent('SAVE_SETTINGS', { locale })
   }
