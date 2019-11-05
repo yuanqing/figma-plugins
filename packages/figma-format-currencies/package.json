@@ -51,17 +51,6 @@
     "name": "Format Currencies",
     "menu": [
       {
-        "name": "Convert Currency",
-        "command": "commands/convert-currency/command.js",
-        "ui": "commands/convert-currency/ui.js"
-      },
-      "-",
-      {
-        "name": "Fix Currency Format",
-        "command": "commands/format-currency/fix-currency-format/command.js",
-        "ui": "commands/format-currency/fix-currency-format/ui.js"
-      },
-      {
         "name": "Change to Short Format",
         "command": "commands/format-currency/format-short/command.js",
         "ui": "commands/format-currency/format-short/ui.js"
@@ -70,6 +59,17 @@
         "name": "Change to Explicit Format",
         "command": "commands/format-currency/format-explicit/command.js",
         "ui": "commands/format-currency/format-explicit/ui.js"
+      },
+      {
+        "name": "Fix Currency Format",
+        "command": "commands/format-currency/fix-currency-format/command.js",
+        "ui": "commands/format-currency/fix-currency-format/ui.js"
+      },
+      "-",
+      {
+        "name": "Convert Currency",
+        "command": "commands/convert-currency/command.js",
+        "ui": "commands/convert-currency/ui.js"
       },
       "-",
       {
