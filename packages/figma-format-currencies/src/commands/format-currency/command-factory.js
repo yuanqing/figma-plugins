@@ -20,7 +20,7 @@ export function commandFactory (createSuccessMessage) {
       figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
       return
     }
-    const settings = (await loadSettings()) || defaultSettings
+    const { locale } = await loadSettings(defaultSettings)
     await loadFonts(layers)
     addEventListener('FORMAT_RESULT', function (result) {
       for (const { id, characters } of result) {
@@ -35,7 +35,7 @@ export function commandFactory (createSuccessMessage) {
       layers.map(function ({ id, characters }) {
         return { id, characters }
       }),
-      settings.locale
+      locale
     )
   }
 }

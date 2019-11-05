@@ -9,10 +9,12 @@ import {
 import { defaultSettings } from './default-settings'
 
 export default async function () {
-  const settings = (await loadSettings()) || defaultSettings
+  const settings = await loadSettings(defaultSettings)
   addEventListener('SAVE_SETTINGS', async function ({ locale }) {
-    settings.locale = locale
-    await saveSettings(settings)
+    await saveSettings({
+      ...settings,
+      locale
+    })
     figma.closePlugin(formatSuccessMessage('Saved settings'))
   })
   addEventListener('CLOSE', function () {

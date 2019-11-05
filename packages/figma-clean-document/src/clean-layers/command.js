@@ -14,7 +14,7 @@ import { smartSortLayers } from '../smart-sort-layers/smart-sort-layers'
 const MAX_ITERATIONS = 10
 
 export default async function () {
-  const settings = (await loadSettings()) || defaultSettings
+  const settings = await loadSettings(defaultSettings)
   addEventListener('CLEAN_LAYERS', async function (settings) {
     const scope = figma.currentPage.selection.length > 0 ? 'selection' : 'page'
     const notificationHandler = figma.notify(`Cleaning ${scope}…`, {

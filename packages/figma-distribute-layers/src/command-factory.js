@@ -16,7 +16,7 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
     }
-    const settings = (await loadSettings()) || defaultSettings
+    const settings = await loadSettings(defaultSettings)
     addEventListener('DISTRIBUTE_LAYERS', async function (settings) {
       await saveSettings(settings)
       const { space } = settings

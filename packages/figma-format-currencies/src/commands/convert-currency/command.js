@@ -19,16 +19,18 @@ export default async function () {
     figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
     return
   }
-  const settings = (await loadSettings()) || defaultSettings
+  const settings = await loadSettings(defaultSettings)
   await loadFonts(layers)
   addEventListener('CONVERT_CURRENCY_RESULT', async function (
     layers,
     currency,
     roundNumbers
   ) {
-    settings.currency = currency
-    settings.roundNumbers = roundNumbers
-    await saveSettings(settings)
+    await saveSettings({
+      ...settings,
+      currency,
+      roundNumbers
+    })
     for (const { id, characters } of layers) {
       const layer = figma.getNodeById(id)
       layer.characters = characters

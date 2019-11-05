@@ -7,11 +7,12 @@ import {
   showUI,
   traverseLayer
 } from '@create-figma-plugin/utilities'
+import { defaultSettings } from '../default-settings'
 import languages from './languages'
 import { translate } from './translate'
 
 export default async function () {
-  const { apiKey } = await loadSettings()
+  const { apiKey } = await loadSettings(defaultSettings)
   if (typeof apiKey === 'undefined' || apiKey === '') {
     figma.closePlugin(
       formatErrorMessage(

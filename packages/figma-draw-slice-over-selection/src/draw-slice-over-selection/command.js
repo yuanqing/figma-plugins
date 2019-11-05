@@ -16,7 +16,7 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const settings = (await loadSettings()) || defaultSettings
+  const settings = await loadSettings(defaultSettings)
   addEventListener('DRAW_SLICE_OVER_SELECTION', async function (settings) {
     await saveSettings(settings)
     const { padding } = settings
