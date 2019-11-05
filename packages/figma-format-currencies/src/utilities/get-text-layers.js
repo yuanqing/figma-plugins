@@ -3,7 +3,7 @@ import { traverseLayer } from '@create-figma-plugin/utilities'
 
 export function getTextLayers () {
   const selection = figma.currentPage.selection
-  const hasSelection = selection.length === 0
+  const hasSelection = selection.length > 0
   return {
     layers: filterLayers(
       hasSelection ? [figma.currentPage] : selection,

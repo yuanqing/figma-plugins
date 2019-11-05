@@ -73,9 +73,9 @@
       },
       "-",
       {
-        "name": "Settings",
-        "command": "commands/settings/command.js",
-        "ui": "commands/settings/ui.js"
+        "name": "Set Locale",
+        "command": "commands/set-locale/command.js",
+        "ui": "commands/set-locale/ui.js"
       },
       "-",
       {

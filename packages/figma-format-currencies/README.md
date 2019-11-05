@@ -22,11 +22,16 @@ Changes currencies in text layers within the selection or on the current page to
 
 Automagically fixes the format of currencies in text layers within the selection or on the current page.
 
+- Normalises spaces, the number of significant figures, and the separator characters within the currency
+- For negative numbers, ensures that the minus sign is at the beginning of the string
+
 ### Convert Currency
 
 Converts all currencies in text layers within the selection or on the current page.
 
-### Settings
+- Optionally set to round numbers (to the nearest tens or hundreds), so that prices look more “natural”
+
+### Set Locale
 
 Set the current locale, which determines how currencies are formatted.
 

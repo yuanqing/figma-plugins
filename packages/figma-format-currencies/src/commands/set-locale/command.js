@@ -6,19 +6,19 @@ import {
   saveSettings,
   showUI
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from './default-settings'
+import { defaultSettings } from '../../utilities/default-settings'
 
 export default async function () {
   const settings = await loadSettings(defaultSettings)
-  addEventListener('SAVE_SETTINGS', async function ({ locale }) {
+  addEventListener('SET_LOCALE', async function ({ locale }) {
     await saveSettings({
       ...settings,
       locale
     })
-    figma.closePlugin(formatSuccessMessage('Saved settings'))
+    figma.closePlugin(formatSuccessMessage('Set locale'))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 116 }, settings)
+  showUI({ width: 240, height: 88 }, settings)
 }

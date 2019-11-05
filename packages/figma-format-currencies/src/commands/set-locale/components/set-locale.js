@@ -4,11 +4,11 @@ import { Button } from 'figma-ui/src/components/button'
 import { Input } from 'figma-ui/src/components/input'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
-import './settings.scss'
+import './set-locale.scss'
 
-export function Settings (initialState) {
+export function SetLocale (initialState) {
   function submitCallback ({ locale }) {
-    triggerEvent('SAVE_SETTINGS', { locale })
+    triggerEvent('SET_LOCALE', { locale })
   }
   function cancelCallback () {
     triggerEvent('CLOSE')
@@ -19,9 +19,8 @@ export function Settings (initialState) {
     cancelCallback
   )
   return (
-    <div class='settings'>
-      <div class='settings__label'>Set locale…</div>
-      <div class='settings__input'>
+    <div class='set-locale'>
+      <div class='set-locale__input'>
         <Input
           name='locale'
           onChange={handleInput}
@@ -29,9 +28,9 @@ export function Settings (initialState) {
           focused
         />
       </div>
-      <div class='settings__button'>
+      <div class='set-locale__button'>
         <Button type='primary' onClick={handleSubmit}>
-          Save Settings
+          Set Locale
         </Button>
       </div>
     </div>

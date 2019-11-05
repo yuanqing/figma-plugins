@@ -8,7 +8,7 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../settings/default-settings'
+import { defaultSettings } from '../../utilities/default-settings'
 import { getTextLayers } from '../../utilities/get-text-layers'
 
 export function commandFactory (createSuccessMessage) {
