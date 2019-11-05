@@ -6,7 +6,7 @@ export function getTextLayers () {
   const hasSelection = selection.length > 0
   return {
     layers: filterLayers(
-      hasSelection ? [figma.currentPage] : selection,
+      hasSelection ? selection : [figma.currentPage],
       function (layer) {
         return layer.type === 'TEXT'
       }
