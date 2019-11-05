@@ -65,13 +65,11 @@
         "command": "commands/format-currency/fix-currency-format/command.js",
         "ui": "commands/format-currency/fix-currency-format/ui.js"
       },
-      "-",
       {
         "name": "Convert Currency",
         "command": "commands/convert-currency/command.js",
         "ui": "commands/convert-currency/ui.js"
       },
-      "-",
       {
         "name": "Set Locale",
         "command": "commands/set-locale/command.js",
