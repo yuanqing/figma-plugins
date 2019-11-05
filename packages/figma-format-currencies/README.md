@@ -29,7 +29,7 @@ Automagically fixes the format of currencies in text layers within the selection
 
 Converts all currencies in text layers within the selection or on the current page.
 
-- Optionally set to round numbers (to the nearest tens or hundreds), so that prices look more “natural”.
+- Optionally round the converted currencies to the nearest 100s and 1000s, so that prices look more “natural”.
 
 ### Set Locale
 
