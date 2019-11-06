@@ -3,13 +3,15 @@ import {
   addEventListener,
   formatErrorMessage,
   formatSuccessMessage,
+  loadFonts,
   loadSettings,
   showUI,
-  traverseLayer
+  traverseLayer,
+  triggerEvent
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
-import languages from './languages'
-import { translate } from './translate'
+import { getTextLayers } from '../get-text-layers'
+import languages from '../translate/languages'
 
 export default async function () {
   const { apiKey } = await loadSettings(defaultSettings)
@@ -22,74 +24,71 @@ export default async function () {
     )
     return
   }
-  const layers = getTextLayers()
+  const { layers, scope } = getTextLayers()
   if (layers.length === 0) {
-    figma.closePlugin(
-      formatErrorMessage(
-        `No text layers ${
-          figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
-        }`
-      )
-    )
+    figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
     return
   }
   showUI({ width: 240, height: 259 })
   const originalStrings = {} // maps `layer.id` to the original strings
-  addEventListener('SET_LANGUAGE', async function (languageKey) {
-    await setLanguage(originalStrings, languageKey, apiKey)
+  figma.on('close', function () {
+    resetLanguage(originalStrings)
   })
-  addEventListener('RESET_LANGUAGE', async function (close) {
-    await resetLanguage(originalStrings)
-    if (close === true) {
-      figma.closePlugin()
+  let notificationHandler
+  addEventListener('SET_LANGUAGE', async function (languageKey) {
+    notificationHandler = figma.notify('Translating…', { timeout: 60000 })
+    const { layers, scope } = getTextLayers()
+    layers.forEach(function (layer) {
+      if (typeof originalStrings[layer.id] === 'undefined') {
+        originalStrings[layer.id] = layer.characters
+      }
+    })
+    await loadFonts(layers)
+    triggerEvent(
+      'TRANSLATE_REQUEST',
+      layers.map(function ({ id, characters }) {
+        return { id, characters }
+      }),
+      scope,
+      languageKey,
+      apiKey
+    )
+  })
+  addEventListener('TRANSLATE_RESULT', async function (
+    result,
+    scope,
+    languageKey
+  ) {
+    console.log(scope)
+    notificationHandler.cancel()
+    for (const { id, characters } of result) {
+      const layer = figma.getNodeById(id)
+      layer.characters = characters
     }
+    figma.notify(
+      formatSuccessMessage(
+        `Translated text ${scope} to ${languages[languageKey]}`
+      )
+    )
+  })
+  addEventListener('RESET_LANGUAGE', function () {
+    resetLanguage(originalStrings)
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
 }
 
-async function setLanguage (originalStrings, languageKey, apiKey) {
-  const notificationHandler = figma.notify('Translating…', { timeout: 60000 })
-  const layers = getTextLayers()
-  layers.forEach(function (layer) {
-    if (typeof originalStrings[layer.id] === 'undefined') {
-      originalStrings[layer.id] = layer.characters
-    }
-  })
-  await loadFonts(layers)
-  const promises = layers.map(function (layer) {
-    return translate(originalStrings[layer.id], languageKey, apiKey)
-  })
-  const translated = await Promise.all(promises)
-  layers.forEach(function (layer, index) {
-    layer.characters = translated[index]
-  })
-  notificationHandler.cancel()
-  figma.notify(formatSuccessMessage(`Translated to ${languages[languageKey]}`))
-}
-
-async function resetLanguage (originalStrings) {
+function resetLanguage (originalStrings) {
   const layers = filterLayers([figma.currentPage], function (layer) {
     return (
       layer.type === 'TEXT' && typeof originalStrings[layer.id] !== 'undefined'
     )
   })
-  await loadFonts(layers)
   layers.forEach(function (layer) {
     layer.characters = originalStrings[layer.id]
   })
   figma.notify('Reset')
-}
-
-function getTextLayers () {
-  const selection = figma.currentPage.selection
-  return filterLayers(
-    selection.length === 0 ? [figma.currentPage] : selection,
-    function (layer) {
-      return layer.type === 'TEXT'
-    }
-  )
 }
 
 function filterLayers (layers, filter) {
@@ -102,11 +101,4 @@ function filterLayers (layers, filter) {
     })
   }
   return result
-}
-
-function loadFonts (layers) {
-  const promises = layers.map(function (layer) {
-    return figma.loadFontAsync(layer.fontName)
-  })
-  return Promise.all(promises)
 }
