@@ -1,23 +1,11 @@
 module.exports = function (config) {
-  config.module.rules.push({
-    test: /\.js?$/,
-    exclude: /node_modules/,
-    use: {
-      loader: 'babel-loader',
-      options: {
-        plugins: [
-          '@babel/plugin-proposal-object-rest-spread',
-          [
-            '@babel/plugin-transform-react-jsx',
-            {
-              pragma: 'h',
-              pragmaFrag: 'Fragment'
-            }
-          ]
-        ]
-      }
+  config.module.rules[0].use.options.plugins.push([
+    '@babel/plugin-transform-react-jsx',
+    {
+      pragma: 'h',
+      pragmaFrag: 'Fragment'
     }
-  })
+  ])
   config.module.rules.push({
     test: /\.s?css$/,
     use: [
