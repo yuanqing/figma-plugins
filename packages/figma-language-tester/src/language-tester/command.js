@@ -84,10 +84,16 @@ function resetLanguage (originalStrings) {
       layer.type === 'TEXT' && typeof originalStrings[layer.id] !== 'undefined'
     )
   })
+  let didChange = false
   layers.forEach(function (layer) {
-    layer.characters = originalStrings[layer.id]
+    if (layer.characters !== originalStrings[layer.id]) {
+      didChange = true
+      layer.characters = originalStrings[layer.id]
+    }
   })
-  figma.notify('Reset')
+  if (didChange === true) {
+    figma.notify('Reset')
+  }
 }
 
 function filterLayers (layers, filter) {
