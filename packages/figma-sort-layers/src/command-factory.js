@@ -11,10 +11,11 @@ export function commandFactory ({ sortLayers, successMessage }) {
     const selection = figma.currentPage.selection
     const layer = selection[0]
     if (
-      selection.length === 1 &&
-      layer.type !== 'BOOLEAN_OPERATION' &&
-      layer.type !== 'FRAME' &&
-      layer.type !== 'GROUP'
+      selection.length === 0 ||
+      (selection.length === 1 &&
+        layer.type !== 'BOOLEAN_OPERATION' &&
+        layer.type !== 'FRAME' &&
+        layer.type !== 'GROUP')
     ) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
