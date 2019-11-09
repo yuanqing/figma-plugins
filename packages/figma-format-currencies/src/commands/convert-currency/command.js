@@ -46,9 +46,7 @@ export default async function () {
     scope,
     currency
   ) {
-    console.log('CONVERT_CURRENCY_RESULT')
     for (const { id, characters } of layers) {
-      console.log(id, characters)
       const layer = figma.getNodeById(id)
       layer.characters = characters
     }
