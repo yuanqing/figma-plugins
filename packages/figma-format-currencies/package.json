@@ -1,7 +1,7 @@
 {
   "name": "figma-format-currencies",
   "version": "0.0.0",
-  "description": "A Figma plugin to format currencies and convert between currencies",
+  "description": "A Figma plugin to format and convert between currencies",
   "keywords": [
     "currency",
     "figma",
@@ -70,6 +70,7 @@
         "command": "commands/convert-currency/command.js",
         "ui": "commands/convert-currency/ui.js"
       },
+      "-",
       {
         "name": "Set Locale",
         "command": "commands/set-locale/command.js",
