@@ -9,14 +9,14 @@
 Changes currencies in text layers within the selection or on the current page to the Short format.
 
 - `$3.14 USD` &rarr; `$3.14`
-- `123.456 ¥ JPY` &rarr; `123.456 ¥`
+- `123,456 ¥ JPY` &rarr; `123,456 ¥`
 
 ### Change to Explicit Format
 
 Changes currencies in text layers within the selection or on the current page to the Explicit format.
 
 - `$3.14` &rarr; `$3.14 USD`
-- `123.456 ¥` &rarr; `123.456 ¥ JPY`
+- `123,456 ¥` &rarr; `123,456 ¥ JPY`
 
 ### Fix Currency Format
 
