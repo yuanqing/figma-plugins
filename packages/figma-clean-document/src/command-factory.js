@@ -1,7 +1,7 @@
 /* global figma */
 import {
   formatSuccessMessage,
-  getAllOrSelectedLayers,
+  getSelectedLayersOrAllLayers,
   traverseLayer
 } from '@create-figma-plugin/utilities'
 
@@ -24,7 +24,7 @@ export function commandFactory ({
     while (didChange === true && iterations < MAX_ITERATIONS) {
       didChange = false
       iterations++
-      const layers = getAllOrSelectedLayers()
+      const layers = getSelectedLayersOrAllLayers()
       for (const layer of layers) {
         traverseLayer(
           layer,

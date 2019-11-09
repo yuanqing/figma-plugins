@@ -2,7 +2,7 @@
 import {
   addEventListener,
   formatSuccessMessage,
-  getAllOrSelectedLayers,
+  getSelectedLayersOrAllLayers,
   loadSettings,
   mapNumberToWord,
   pluralize,
@@ -26,7 +26,7 @@ export default async function () {
         ? new RegExp(smartRenameLayersWhitelist)
         : null
     let count = 0
-    const layers = getAllOrSelectedLayers()
+    const layers = getSelectedLayersOrAllLayers()
     for (const layer of layers) {
       traverseLayer(layer, function (layer) {
         if (smartRenameLayer(layer, smartRenameLayersWhitelistRegex) === true) {
