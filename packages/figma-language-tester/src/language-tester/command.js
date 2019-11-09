@@ -59,7 +59,6 @@ export default async function () {
     scope,
     languageKey
   ) {
-    console.log(scope)
     notificationHandler.cancel()
     for (const { id, characters } of result) {
       const layer = figma.getNodeById(id)

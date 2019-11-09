@@ -50,6 +50,7 @@ export function commandFactory (languageKey) {
       layers.map(function ({ id, characters }) {
         return { id, characters }
       }),
+      scope,
       languageKey,
       apiKey
     )
