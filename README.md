@@ -1,5 +1,7 @@
 # Figma Plugins [![Build Status](https://img.shields.io/travis/yuanqing/figma-plugins.svg)](https://travis-ci.org/yuanqing/figma-plugins)
 
+> Monorepo for my Figma plugins
+
 Name | Description
 :--|:--
 [**Clean Document**](packages/figma-clean-document) | Automagically organise and clean up your Figma document
