@@ -7,7 +7,7 @@ import {
   saveSettings,
   showUI
 } from '@create-figma-plugin/utilities'
-import defaultSettings from './default-settings'
+import { defaultSettings } from './default-settings'
 
 export function commandFactory ({ direction, sortLayers, distributeLayers }) {
   return async function () {
