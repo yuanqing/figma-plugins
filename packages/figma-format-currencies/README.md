@@ -4,36 +4,29 @@
 
 ## Commands
 
-### Change to Short Format
-
-Changes currencies in text layers within the selection or on the current page to the Short format.
-
-- `$3.14 USD` &rarr; `$3.14`
-- `123.456 ¥ JPY` &rarr; `123.456 ¥`
-
 ### Change to Explicit Format
 
-Changes currencies in text layers within the selection or on the current page to the Explicit format.
+Changes currencies in text layers within the selection or on the current page to the Explicit format (eg. $42.00 → $42.00 USD).
 
-- `$3.14` &rarr; `$3.14 USD`
-- `123.456 ¥` &rarr; `123.456 ¥ JPY`
+### Change to Short Format
+
+Changes currencies in text layers within the selection or on the current page to the Short format  (eg. 37,00 € EUR → 37,00 €).
+
+### Change Locale
+
+Changes the currency format to a different locale (eg. ¥5,800 JPY in the en-US locale → 5.800 ¥ JPY in the de-DE locale).
 
 ### Fix Currency Format
 
 Automagically fixes the format of currencies in text layers within the selection or on the current page.
-
-- Normalises spaces, number of significant figures, and separator characters.
+- Normalizes spaces, the number of significant figures, and separator characters.
 - For negative numbers, ensures that the minus sign is at the beginning of the string.
 
 ### Convert Currency
 
-Converts all currencies in text layers within the selection or on the current page.
+Converts between currencies in text layers within the selection or on the current page.
 
-- Optionally round the converted currencies to the nearest 100s and 1000s, so that prices look more “natural”.
-
-### Set Locale
-
-Set the current locale, which determines how currencies are formatted.
+- Optionally round the converted currencies to the nearest 100s and 1000s, so that prices in your design look more “natural”.
 
 ## License
 
