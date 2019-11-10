@@ -1,0 +1,13 @@
+.vertical-space {
+  &--small {
+    height: 8px;
+  }
+
+  &--medium {
+    height: 16px;
+  }
+
+  &--large {
+    height: 32px;
+  }
+}

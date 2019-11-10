@@ -49,5 +49,5 @@ export default async function () {
         : `Set currencies ${scope} to ${format} format`
     figma.closePlugin(formatSuccessMessage(successMessage))
   })
-  showUI({ width: 240, height: 200 }, { format, locale })
+  showUI({ width: 240, height: 220 }, { format, locale })
 }

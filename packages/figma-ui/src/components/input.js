@@ -13,10 +13,12 @@ export function Input ({ border, focused, onChange, ...rest }) {
     }, [])
   }
   return (
-    <input
-      {...rest}
-      class={`input ${border === true ? 'input--border' : ''}`}
-      onChange={onChange}
-    />
+    <div class='input-wrapper'>
+      <input
+        {...rest}
+        class={`input ${border === true ? 'input--border' : ''}`}
+        onChange={onChange}
+      />
+    </div>
   )
 }

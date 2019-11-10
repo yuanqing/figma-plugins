@@ -2,7 +2,7 @@
 import { h } from 'preact'
 import './segmented-control.scss'
 
-export function SegmentedControl ({ options, title, name, value, ...rest }) {
+export function SegmentedControl ({ options, name, value, ...rest }) {
   return (
     <div class='segmented-control'>
       {options.map(function (option) {

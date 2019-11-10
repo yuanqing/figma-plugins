@@ -2,6 +2,10 @@
 @import "figma-plugin-ds/scss/base/_variables";
 @import "figma-plugin-ds/scss/components/_input";
 
+.input-wrapper {
+  padding: 0 16px;
+}
+
 .input {
   &--border,
   &--border:disabled:hover {
