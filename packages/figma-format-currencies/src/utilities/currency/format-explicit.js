@@ -1,6 +1,6 @@
-import { addIsoCodeSuffix } from '../../utilities/currency/add-iso-code-suffix'
-import { formatCurrencyByLocale } from '../../utilities/currency/format-currency-by-locale'
-import { transformCurrencies } from '../../utilities/currency/transform-currencies'
+import { addIsoCodeSuffix } from './add-iso-code-suffix'
+import { formatCurrencyByLocale } from './format-currency-by-locale'
+import { transformCurrencies } from './transform-currencies'
 
 export function formatExplicit (characters, locale) {
   return transformCurrencies(characters, locale, function ({

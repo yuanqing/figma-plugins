@@ -1,5 +1,5 @@
 {
-  "name": "figma-format-currencies",
+  "name": "figma-format-currency",
   "version": "0.0.0",
   "description": "A Figma plugin to format and convert between currencies",
   "keywords": [
@@ -18,7 +18,7 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/figma-plugins.git",
-    "directory": "packages/figma-format-currencies"
+    "directory": "packages/figma-format-currency"
   },
   "files": [
     "src"
@@ -47,25 +47,14 @@
     ]
   },
   "create-figma-plugin": {
-    "id": "figma-format-currencies",
-    "name": "Format Currencies",
+    "id": "figma-format-currency",
+    "name": "Format Currency",
     "menu": [
       {
-        "name": "Change to Explicit Format",
-        "command": "format-currency/format-explicit/command.js",
-        "ui": "format-currency/format-explicit/ui.js"
+        "name": "Format Currency",
+        "command": "format-currency/command.js",
+        "ui": "format-currency/ui.js"
       },
-      {
-        "name": "Change to Short Format",
-        "command": "format-currency/format-short/command.js",
-        "ui": "format-currency/format-short/ui.js"
-      },
-      {
-        "name": "Change Locale",
-        "command": "format-currency/set-locale/command.js",
-        "ui": "format-currency/set-locale/ui.js"
-      },
-      "-",
       {
         "name": "Convert Currency",
         "command": "convert-currency/command.js",
