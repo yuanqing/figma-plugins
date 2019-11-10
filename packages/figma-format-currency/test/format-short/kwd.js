@@ -1,5 +1,5 @@
 import test from 'ava'
-import { formatShort } from '../../src/format-currency/format-short/format-short'
+import { formatShort } from '../../src/utilities/currency/format-short'
 
 test('KWD 1', function (t) {
   t.is(formatShort('KWD 1', 'en-US'), 'KWD 1.000')
