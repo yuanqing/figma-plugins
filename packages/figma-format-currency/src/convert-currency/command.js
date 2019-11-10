@@ -19,9 +19,10 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
-  addEventListener('SUBMIT', async function ({ currency, roundNumbers }) {
+  addEventListener('SUBMIT', async function (locale, currency, roundNumbers) {
     await saveSettings({
       ...settings,
+      locale,
       currency,
       roundNumbers
     })
@@ -32,11 +33,12 @@ export default async function () {
     }
     await loadFonts(layers)
     triggerEvent(
-      'CONVERT_CURRENCY',
+      'CONVERT_CURRENCY_REQUEST',
       layers.map(function ({ id, characters }) {
         return { id, characters }
       }),
       scope,
+      locale,
       currency,
       roundNumbers
     )
@@ -57,5 +59,5 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 148 }, settings)
+  showUI({ width: 240, height: 274 }, settings)
 }

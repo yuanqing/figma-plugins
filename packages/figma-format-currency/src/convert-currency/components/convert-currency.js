@@ -2,25 +2,27 @@
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { Button } from 'figma-ui/src/components/button'
 import { Checkbox } from 'figma-ui/src/components/checkbox'
+import { Divider } from 'figma-ui/src/components/divider'
+import { Header } from 'figma-ui/src/components/header'
 import { Input } from 'figma-ui/src/components/input'
+import { VerticalSpace } from 'figma-ui/src/components/vertical-space'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { convertCurrency } from '../convert-currency'
-import './convert-currency.scss'
 
 export function ConvertCurrency (initialState) {
-  const { currency, locale, roundNumbers } = initialState
-  function submitCallback ({ currency, roundNumbers }) {
-    triggerEvent('SUBMIT', { currency, roundNumbers })
+  function submitCallback ({ locale, currency, roundNumbers }) {
+    triggerEvent('SUBMIT', locale, currency, roundNumbers)
   }
   function closeCallback () {
     triggerEvent('CLOSE')
   }
   useEffect(function () {
-    addEventListener('CONVERT_CURRENCY', function (
+    addEventListener('CONVERT_CURRENCY_REQUEST', function (
       layers,
       scope,
+      locale,
       currency,
       roundNumbers
     ) {
@@ -39,35 +41,33 @@ export function ConvertCurrency (initialState) {
     })
   }, [])
   const { inputs, handleInput, handleSubmit } = useForm(
-    { currency, roundNumbers },
+    initialState,
     submitCallback,
     closeCallback
   )
   return (
-    <div class='convert-currency'>
-      <div class='convert-currency__label'>Select target currency…</div>
-      <div class='convert-currency__input'>
-        <Input
-          active
-          name='currency'
-          onChange={handleInput}
-          value={inputs.currency}
-          focused
-        />
-      </div>
-      <div class='convert-currency__checkbox'>
-        <Checkbox
-          title='Round numbers'
-          name='roundNumbers'
-          onChange={handleInput}
-          value={inputs.roundNumbers === true}
-        />
-      </div>
-      <div class='convert-currency__button'>
-        <Button type='primary' onClick={handleSubmit}>
-          Convert Currency
-        </Button>
-      </div>
+    <div>
+      <Header>Target Currency</Header>
+      <Input
+        name='currency'
+        onChange={handleInput}
+        value={inputs.currency}
+        focused
+      />
+      <VerticalSpace size='small' />
+      <Checkbox
+        title='Round numbers'
+        name='roundNumbers'
+        onChange={handleInput}
+        value={inputs.roundNumbers === true}
+      />
+      <VerticalSpace size='medium' />
+      <Divider />
+      <Header>Locale</Header>
+      <Input name='locale' onChange={handleInput} value={inputs.locale} />
+      <VerticalSpace size='medium' />
+      <Divider />
+      <Button onClick={handleSubmit}>Convert Currency</Button>
     </div>
   )
 }

@@ -3,8 +3,7 @@
 
 .header {
   @include font-ui-pos("small", "bold");
-  cursor: default;
   margin: 0;
-  padding: 12px 16px 8px;
+  padding: 16px 16px 12px;
   color: $figma-black-8;
 }

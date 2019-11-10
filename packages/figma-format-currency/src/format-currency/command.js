@@ -9,7 +9,6 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { RETAIN } from './formats'
 import { defaultSettings } from '../utilities/default-settings'
 import { getTextLayers } from '../utilities/get-text-layers'
 
@@ -38,16 +37,12 @@ export default async function () {
       locale
     )
   })
-  addEventListener('FORMAT_CURRENCY_RESULT', function (result, scope, format) {
+  addEventListener('FORMAT_CURRENCY_RESULT', function (result, scope) {
     for (const { id, characters } of result) {
       const layer = figma.getNodeById(id)
       layer.characters = characters
     }
-    const successMessage =
-      format === RETAIN
-        ? `Formatted currencies ${scope}`
-        : `Set currencies ${scope} to ${format} format`
-    figma.closePlugin(formatSuccessMessage(successMessage))
+    figma.closePlugin(formatSuccessMessage(`Formatted currencies ${scope}`))
   })
-  showUI({ width: 240, height: 220 }, { format, locale })
+  showUI({ width: 240, height: 236 }, { format, locale })
 }

@@ -1,3 +1,3 @@
 export const EXPLICIT = 'Explicit'
-export const RETAIN = 'Retain'
+export const RETAIN = 'Unchanged'
 export const SHORT = 'Short'

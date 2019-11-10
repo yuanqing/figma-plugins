@@ -9,7 +9,6 @@ import { VerticalSpace } from 'figma-ui/src/components/vertical-space'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
-import './format-currency.scss'
 import { EXPLICIT, RETAIN, SHORT } from '../formats'
 import { formatExplicit } from '../../utilities/currency/format-explicit'
 import { formatRetain } from '../../utilities/currency/format-retain'
@@ -52,7 +51,7 @@ export function FormatCurrency (initialState) {
   )
   return (
     <div>
-      <Header>Set Format</Header>
+      <Header>Format</Header>
       <SegmentedControl
         options={[RETAIN, EXPLICIT, SHORT]}
         name='format'
@@ -61,7 +60,7 @@ export function FormatCurrency (initialState) {
       />
       <VerticalSpace size='medium' />
       <Divider />
-      <Header>Set Locale</Header>
+      <Header>Locale</Header>
       <Input
         name='locale'
         onChange={handleInput}
