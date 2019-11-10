@@ -4,7 +4,15 @@ const exchangeRates = require('./data/exchange-rates')
 
 async function main () {
   const isoCodes = sortObjectByKey(parse(exchangeRates))
-  const filePath = join(__dirname, '..', 'src', 'data', 'iso-codes.json')
+  const filePath = join(
+    __dirname,
+    '..',
+    'src',
+    'utilities',
+    'currency',
+    'data',
+    'iso-codes.json'
+  )
   await outputJson(filePath, isoCodes, { spaces: 2 })
 }
 main()

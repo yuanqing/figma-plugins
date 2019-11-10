@@ -52,34 +52,29 @@
     "menu": [
       {
         "name": "Change to Explicit Format",
-        "command": "commands/format-currency/format-explicit/command.js",
-        "ui": "commands/format-currency/format-explicit/ui.js"
+        "command": "format-currency/format-explicit/command.js",
+        "ui": "format-currency/format-explicit/ui.js"
       },
       {
         "name": "Change to Short Format",
-        "command": "commands/format-currency/format-short/command.js",
-        "ui": "commands/format-currency/format-short/ui.js"
+        "command": "format-currency/format-short/command.js",
+        "ui": "format-currency/format-short/ui.js"
       },
       {
         "name": "Change Locale",
-        "command": "commands/set-locale/command.js",
-        "ui": "commands/set-locale/ui.js"
-      },
-      {
-        "name": "Fix Currency Format",
-        "command": "commands/format-currency/fix-currency-format/command.js",
-        "ui": "commands/format-currency/fix-currency-format/ui.js"
+        "command": "format-currency/change-locale/command.js",
+        "ui": "format-currency/change-locale/ui.js"
       },
       "-",
       {
         "name": "Convert Currency",
-        "command": "commands/convert-currency/command.js",
-        "ui": "commands/convert-currency/ui.js"
+        "command": "convert-currency/command.js",
+        "ui": "convert-currency/ui.js"
       },
       "-",
       {
         "name": "Reset",
-        "command": "commands/reset/command.js"
+        "command": "reset/command.js"
       }
     ]
   }

@@ -1,0 +1,11 @@
+@import "figma-plugin-ds/scss/base/_base";
+
+.format-currency {
+  &__input {
+    padding: 8px 16px 0;
+  }
+
+  &__button {
+    padding: 8px 16px;
+  }
+}
