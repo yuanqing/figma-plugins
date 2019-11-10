@@ -1,4 +1,4 @@
-# Figma Plugins [![Figma Plugins](https://img.shields.io/badge/figma-plugins-1BC47D.svg)](https://www.figma.com/@yuanqing) [![Build Status](https://img.shields.io/travis/yuanqing/figma-plugins.svg)](https://travis-ci.org/yuanqing/figma-plugins)
+# Figma Plugins [![Figma Plugins](https://img.shields.io/badge/figma-@yuanqing-1BC47D.svg)](https://www.figma.com/@yuanqing) [![Build Status](https://img.shields.io/travis/yuanqing/figma-plugins.svg)](https://travis-ci.org/yuanqing/figma-plugins)
 
 > Monorepo for my Figma plugins
 
