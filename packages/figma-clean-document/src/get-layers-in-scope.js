@@ -7,6 +7,6 @@ export function getLayersInScope () {
     return [figma.currentPage.children]
   }
   return selection.length === 1
-    ? [selection[0].children]
+    ? [[selection[0]], selection[0].children]
     : groupSiblingLayers(selection)
 }
