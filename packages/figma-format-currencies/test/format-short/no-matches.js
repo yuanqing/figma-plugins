@@ -1,5 +1,5 @@
 import test from 'ava'
-import { formatShort } from '../../src/commands/format-currency/format-short/format-short'
+import { formatShort } from '../../src/format-currency/format-short/format-short'
 
 test('no matches', function (t) {
   t.is(formatShort('', 'en-US'), '')

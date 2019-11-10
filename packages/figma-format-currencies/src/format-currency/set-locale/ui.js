@@ -1,7 +1,7 @@
-import { changeLocale } from './change-locale'
+import { setLocale } from './set-locale'
 import { uiFactory } from '../ui-factory'
 
 export default uiFactory({
-  transformCallback: changeLocale,
+  transformCallback: setLocale,
   buttonText: 'Set Locale'
 })

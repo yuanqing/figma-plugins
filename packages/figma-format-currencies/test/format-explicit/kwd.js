@@ -1,5 +1,5 @@
 import test from 'ava'
-import { formatExplicit } from '../../src/commands/format-currency/format-explicit/format-explicit'
+import { formatExplicit } from '../../src/format-currency/format-explicit/format-explicit'
 
 test('KWD 1', function (t) {
   t.is(formatExplicit('KWD 1', 'en-US'), 'KWD 1.000')

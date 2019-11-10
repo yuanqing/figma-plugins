@@ -62,8 +62,8 @@
       },
       {
         "name": "Change Locale",
-        "command": "format-currency/change-locale/command.js",
-        "ui": "format-currency/change-locale/ui.js"
+        "command": "format-currency/set-locale/command.js",
+        "ui": "format-currency/set-locale/ui.js"
       },
       "-",
       {
