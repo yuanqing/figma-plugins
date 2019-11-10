@@ -1,8 +1,8 @@
-# Distribute Layers [![Figma Plugin](https://img.shields.io/badge/figma-plugin-1BC47D.svg)](https://www.figma.com/c/plugin/767379264700569551/Distribute-Layers) [![npm Version](https://img.shields.io/npm/v/figma-distribute-layers.svg)](https://www.npmjs.com/package/figma-distribute-layers)
+# Distribute Layers [![Figma Plugin](https://img.shields.io/badge/figma-plugin-1BC47D.svg)](https://figma.com/c/plugin/767379264700569551/Distribute-Layers) [![npm Version](https://img.shields.io/npm/v/figma-distribute-layers.svg)](https://www.npmjs.com/package/figma-distribute-layers)
 
 > A Figma plugin to distribute layers in a given direction and offset
 
-[![Distribute Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-distribute-layers/media/cover.png)](https://www.figma.com/c/plugin/767379264700569551/Distribute-Layers)
+[![Distribute Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-distribute-layers/media/cover.png)](https://figma.com/c/plugin/767379264700569551/Distribute-Layers)
 
 ## Commands
 

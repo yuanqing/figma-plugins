@@ -1,8 +1,8 @@
-# Language Tester [![Figma Plugin](https://img.shields.io/badge/figma-plugin-1BC47D.svg)](https://www.figma.com/c/plugin/767379122107077581/Language-Tester) [![npm Version](https://img.shields.io/npm/v/figma-language-tester.svg)](https://www.npmjs.com/package/figma-anguage-tester)
+# Language Tester [![Figma Plugin](https://img.shields.io/badge/figma-plugin-1BC47D.svg)](https://figma.com/c/plugin/767379122107077581/Language-Tester) [![npm Version](https://img.shields.io/npm/v/figma-language-tester.svg)](https://www.npmjs.com/package/figma-anguage-tester)
 
 > A Figma plugin to test your UI in different languages
 
-[![Language Tester](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-language-tester/media/cover.png)](https://www.figma.com/c/plugin/767379122107077581/Language-Tester)
+[![Language Tester](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-language-tester/media/cover.png)](https://figma.com/c/plugin/767379122107077581/Language-Tester)
 
 ## Commands
 
