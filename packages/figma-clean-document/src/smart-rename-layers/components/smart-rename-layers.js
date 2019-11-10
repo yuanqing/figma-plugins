@@ -10,13 +10,13 @@ export function SmartRenameLayers (initialState) {
   function submitCallback (settings) {
     triggerEvent('SMART_RENAME_LAYERS', settings)
   }
-  function cancelCallback () {
+  function closeCallback () {
     triggerEvent('CLOSE')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    cancelCallback
+    closeCallback
   )
   const { smartRenameLayersWhitelist } = inputs
   return (

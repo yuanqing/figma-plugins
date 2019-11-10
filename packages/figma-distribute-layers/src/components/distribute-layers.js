@@ -12,13 +12,13 @@ export function DistributeLayers ({ direction, iconName, ...initialState }) {
       space: parseFloat(space)
     })
   }
-  function cancelCallback () {
+  function closeCallback () {
     triggerEvent('CLOSE')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    cancelCallback
+    closeCallback
   )
   return (
     <div class='distribute-layers'>

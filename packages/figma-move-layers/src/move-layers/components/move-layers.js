@@ -13,13 +13,13 @@ export function MoveLayers (initialState) {
       verticalOffset: parseFloat(verticalOffset)
     })
   }
-  function cancelCallback () {
+  function closeCallback () {
     triggerEvent('CLOSE')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    cancelCallback
+    closeCallback
   )
   return (
     <div class='move-layers'>

@@ -12,13 +12,13 @@ export function DrawSliceOverSelection (initialState) {
       padding: parseFloat(padding)
     })
   }
-  function cancelCallback () {
+  function closeCallback () {
     triggerEvent('CLOSE')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    cancelCallback
+    closeCallback
   )
   return (
     <div class='draw-slice-over-selection'>
