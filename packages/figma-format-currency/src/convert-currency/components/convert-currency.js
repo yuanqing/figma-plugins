@@ -9,7 +9,7 @@ import { VerticalSpace } from 'figma-ui/src/components/vertical-space'
 import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
-import { convertCurrency } from '../convert-currency'
+import { convertCurrency } from '../../utilities/currency/convert-currency'
 
 export function ConvertCurrency (initialState) {
   function submitCallback ({ targetCurrency, roundNumbers, locale }) {

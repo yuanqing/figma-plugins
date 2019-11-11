@@ -1,8 +1,8 @@
-import { addIsoCodeSuffix } from '../utilities/currency/add-iso-code-suffix'
-import { computeExchangeRate } from '../utilities/currency/compute-exchange-rate'
-import { formatCurrencyByLocale } from '../utilities/currency/format-currency-by-locale'
-import { transformCurrencies } from '../utilities/currency/transform-currencies'
-import { mapIsoCodeToDecimalPlaces } from '../utilities/currency/map-iso-code-to-decimal-places'
+import { addIsoCodeSuffix } from './add-iso-code-suffix'
+import { computeExchangeRate } from './compute-exchange-rate'
+import { formatCurrencyByLocale } from './format-currency-by-locale'
+import { transformCurrencies } from './transform-currencies'
+import { mapIsoCodeToDecimalPlaces } from './map-iso-code-to-decimal-places'
 
 export function convertCurrency ({
   string,
