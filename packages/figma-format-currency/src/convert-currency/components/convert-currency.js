@@ -12,32 +12,36 @@ import { useEffect } from 'preact/hooks'
 import { convertCurrency } from '../convert-currency'
 
 export function ConvertCurrency (initialState) {
-  function submitCallback ({ locale, currency, roundNumbers }) {
-    triggerEvent('SUBMIT', locale, currency, roundNumbers)
+  function submitCallback ({ targetCurrency, roundNumbers, locale }) {
+    triggerEvent('SUBMIT', { targetCurrency, roundNumbers, locale })
   }
   function closeCallback () {
     triggerEvent('CLOSE')
   }
   useEffect(function () {
-    addEventListener('CONVERT_CURRENCY_REQUEST', function (
+    addEventListener('CONVERT_CURRENCY_REQUEST', function ({
       layers,
       scope,
-      locale,
-      currency,
-      roundNumbers
-    ) {
-      const result = layers.map(function (layer) {
+      targetCurrency,
+      roundNumbers,
+      locale
+    }) {
+      const result = layers.map(function ({ id, characters }) {
         return {
-          id: layer.id,
-          characters: convertCurrency(
-            layer.characters,
-            locale,
-            currency,
-            roundNumbers
-          )
+          id,
+          characters: convertCurrency({
+            string: characters,
+            targetCurrency,
+            roundNumbers,
+            locale
+          })
         }
       })
-      triggerEvent('CONVERT_CURRENCY_RESULT', result, scope, currency)
+      triggerEvent('CONVERT_CURRENCY_RESULT', {
+        layers: result,
+        scope,
+        targetCurrency
+      })
     })
   }, [])
   const { inputs, handleInput, handleSubmit } = useForm(
@@ -49,9 +53,9 @@ export function ConvertCurrency (initialState) {
     <div>
       <Header>Target Currency</Header>
       <Input
-        name='currency'
+        name='targetCurrency'
         onChange={handleInput}
-        value={inputs.currency}
+        value={inputs.targetCurrency}
         focused
       />
       <VerticalSpace size='small' />

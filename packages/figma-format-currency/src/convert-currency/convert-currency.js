@@ -4,26 +4,25 @@ import { formatCurrencyByLocale } from '../utilities/currency/format-currency-by
 import { transformCurrencies } from '../utilities/currency/transform-currencies'
 import { mapIsoCodeToDecimalPlaces } from '../utilities/currency/map-iso-code-to-decimal-places'
 
-export function convertCurrency (
-  characters,
-  locale,
-  targetIsoCode,
-  roundNumbers
-) {
-  return transformCurrencies(characters, locale, function ({
+export function convertCurrency ({
+  string,
+  targetCurrency,
+  roundNumbers,
+  locale
+}) {
+  return transformCurrencies(string, locale, function ({
     value,
     isoCode,
-    locale,
     isExplicitFormat
   }) {
-    const exchangeRate = computeExchangeRate(isoCode, targetIsoCode)
+    const exchangeRate = computeExchangeRate(isoCode, targetCurrency)
     let targetValue = value * exchangeRate
-    if (roundNumbers) {
-      targetValue = roundValue(targetValue, targetIsoCode)
+    if (roundNumbers === true) {
+      targetValue = roundValue(targetValue, targetCurrency)
     }
-    const result = formatCurrencyByLocale(targetValue, targetIsoCode, locale)
+    const result = formatCurrencyByLocale(targetValue, targetCurrency, locale)
     if (isExplicitFormat === true) {
-      return addIsoCodeSuffix(result, targetIsoCode)
+      return addIsoCodeSuffix(result, targetCurrency)
     }
     return result
   })

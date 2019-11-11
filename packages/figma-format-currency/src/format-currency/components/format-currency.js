@@ -22,18 +22,18 @@ const transforms = {
 
 export function FormatCurrency (initialState) {
   function submitCallback ({ format, locale }) {
-    triggerEvent('SUBMIT', format, locale)
+    triggerEvent('SUBMIT', { format, locale })
   }
   function closeCallback () {
     triggerEvent('CLOSE')
   }
   useEffect(function () {
-    addEventListener('FORMAT_CURRENCY_REQUEST', function (
+    addEventListener('FORMAT_CURRENCY_REQUEST', function ({
       layers,
       scope,
       format,
       locale
-    ) {
+    }) {
       const transform = transforms[format]
       const result = layers.map(function ({ id, characters }) {
         return {
@@ -41,7 +41,7 @@ export function FormatCurrency (initialState) {
           characters: transform(characters, locale)
         }
       })
-      triggerEvent('FORMAT_CURRENCY_RESULT', result, scope, format, locale)
+      triggerEvent('FORMAT_CURRENCY_RESULT', { layers: result, scope })
     })
   }, [])
   const { inputs, handleInput, handleSubmit } = useForm(
