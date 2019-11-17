@@ -1,12 +1,13 @@
 /** @jsx h */
+import { Button } from '@create-figma-plugin/ui/src/components/button/button'
+import { Container } from '@create-figma-plugin/ui/src/components/container/container'
+import { Header } from '@create-figma-plugin/ui/src/components/header/header'
+import { TextboxNumeric } from '@create-figma-plugin/ui/src/components/textbox/textbox-numeric/textbox-numeric'
+import { useForm } from '@create-figma-plugin/ui/src/hooks/use-form'
 import { triggerEvent } from '@create-figma-plugin/utilities'
-import { Button } from 'figma-ui/src/components/button'
-import { InputWithIcon } from 'figma-ui/src/components/input-with-icon'
-import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
-import './distribute-layers.scss'
 
-export function DistributeLayers ({ direction, iconName, ...initialState }) {
+export function DistributeLayers ({ direction, icon, ...initialState }) {
   function submitCallback ({ space }) {
     triggerEvent('DISTRIBUTE_LAYERS', {
       space: parseFloat(space)
@@ -21,23 +22,18 @@ export function DistributeLayers ({ direction, iconName, ...initialState }) {
     closeCallback
   )
   return (
-    <div class='distribute-layers'>
-      <div class='distribute-layers__input'>
-        <InputWithIcon
-          type='number'
-          iconColor='black-3'
-          iconName={iconName}
-          name='space'
-          onChange={handleInput}
-          value={inputs.space}
-          focused
-        />
-      </div>
-      <div class='distribute-layers__button'>
-        <Button type='primary' onClick={handleSubmit}>
-          Distribute Layers {direction}
-        </Button>
-      </div>
-    </div>
+    <Container>
+      <Header>Space</Header>
+      <TextboxNumeric
+        name='space'
+        icon={icon}
+        onChange={handleInput}
+        value={inputs.space}
+        focused
+      />
+      <Button fullWidth onClick={handleSubmit} style={{ marginTop: 12 }}>
+        Distribute Layers {direction}
+      </Button>
+    </Container>
   )
 }
