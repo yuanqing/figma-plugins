@@ -28,7 +28,7 @@
   "dependencies": {
     "@create-figma-plugin/utilities": "*",
     "figma-ui": "*",
-    "preact": "^10.0.0"
+    "preact": "^10.0.5"
   },
   "create-figma-plugin": {
     "id": "767379204511357902",

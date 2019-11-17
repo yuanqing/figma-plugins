@@ -25,9 +25,9 @@
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {
+    "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
-    "figma-ui": "*",
-    "preact": "^10.0.0"
+    "preact": "^10.0.5"
   },
   "create-figma-plugin": {
     "id": "767379335945775056",
