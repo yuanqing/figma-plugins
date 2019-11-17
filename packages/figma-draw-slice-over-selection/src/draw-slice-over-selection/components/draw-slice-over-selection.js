@@ -1,10 +1,10 @@
 /** @jsx h */
-import { triggerEvent } from '@create-figma-plugin/utilities'
 import { Button } from '@create-figma-plugin/ui/src/components/button/button'
 import { Container } from '@create-figma-plugin/ui/src/components/container/container'
 import { Header } from '@create-figma-plugin/ui/src/components/header/header'
 import { TextboxNumeric } from '@create-figma-plugin/ui/src/components/textbox/textbox-numeric/textbox-numeric'
 import { useForm } from '@create-figma-plugin/ui/src/hooks/use-form'
+import { triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 
 export function DrawSliceOverSelection (initialState) {
@@ -27,8 +27,12 @@ export function DrawSliceOverSelection (initialState) {
       <TextboxNumeric
         name='padding'
         icon={
-          <svg width='10' height='10'>
-            <path d='M7 0H3v1h4V0zM1 1V0H0v1h1zM0 3h1v4H0V3zm9 0h1v4H9V3zm1-2H9V0h1v1zM3 9h4v1H3V9zM1 9H0v1h1V9zm8 1V9h1v1H9z' />
+          <svg width='12' height='12'>
+            <path
+              fill-rule='evenodd'
+              clip-rule='evenodd'
+              d='M2 0H0v2h1V1h1V0zm9 2h1V0h-2v1h1v1zm-1 10v-1h1v-1h1v2h-2zM0 10v2h2v-1H1v-1H0zM4 0h4v1H4V0zm4 11H4v1h4v-1zM0 4h1v4H0V4zm12 0h-1v4h1V4z'
+            />
           </svg>
         }
         onChange={handleInput}
