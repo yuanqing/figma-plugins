@@ -1,9 +1,11 @@
 /** @jsx h */
-import { Button } from '@create-figma-plugin/ui/src/components/button/button'
-import { Container } from '@create-figma-plugin/ui/src/components/container/container'
-import { Header } from '@create-figma-plugin/ui/src/components/header/header'
-import { TextboxNumeric } from '@create-figma-plugin/ui/src/components/textbox/textbox-numeric/textbox-numeric'
-import { useForm } from '@create-figma-plugin/ui/src/hooks/use-form'
+import {
+  Button,
+  Container,
+  Header,
+  TextboxNumeric,
+  useForm
+} from '@create-figma-plugin/ui'
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 
