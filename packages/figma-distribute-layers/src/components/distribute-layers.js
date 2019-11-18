@@ -33,7 +33,7 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
         value={inputs.space}
         focused
       />
-      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '12px' }}>
+      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '24px' }}>
         Distribute Layers {direction}
       </Button>
     </Container>

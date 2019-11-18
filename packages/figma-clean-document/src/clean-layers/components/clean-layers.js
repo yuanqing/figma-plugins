@@ -63,13 +63,12 @@ export function CleanLayers (initialState) {
       >
         Smart rename layers
         <Text
-          bold
+          muted
           style={{
-            margin: '8px 0 10px',
-            opacity: inputs.smartRenameLayers === false ? '0.3' : '1'
+            margin: '8px 0'
           }}
         >
-          Ignore Layers
+          Ignore layers named
         </Text>
         <Textbox
           disabled={inputs.smartRenameLayers === false}
@@ -93,7 +92,7 @@ export function CleanLayers (initialState) {
         fullWidth
         disabled={isSubmitButtonEnabled === false}
         onClick={isSubmitButtonEnabled === true ? handleSubmit : null}
-        style={{ marginTop: '8px' }}
+        style={{ marginTop: '12px' }}
       >
         Clean Layers
       </Button>

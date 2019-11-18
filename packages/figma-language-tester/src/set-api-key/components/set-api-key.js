@@ -34,16 +34,15 @@ export function SetApiKey (initialState) {
         focused
       />
       <Text style={{ marginTop: '8px' }}>
-        Get a{' '}
         <a
           href='https://translate.yandex.com/developers/keys'
           target='_blank'
           rel='noopener noreferrer'
         >
-          Yandex Translate API key
+          Get a Yandex Translate API key
         </a>
       </Text>
-      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '12px' }}>
+      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '20px' }}>
         Set API Key
       </Button>
     </Container>

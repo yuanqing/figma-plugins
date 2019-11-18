@@ -38,7 +38,7 @@ export function MoveLayers (initialState) {
         }
         onChange={handleInput}
         value={inputs.horizontalOffset}
-        style={{ marginTop: '12px' }}
+        style={{ marginTop: '24px' }}
         focused
       />
       <TextboxNumeric
@@ -56,7 +56,7 @@ export function MoveLayers (initialState) {
         value={inputs.verticalOffset}
         style={{ marginTop: '12px' }}
       />
-      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '12px' }}>
+      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '24px' }}>
         Move Selected Layers
       </Button>
     </Container>
