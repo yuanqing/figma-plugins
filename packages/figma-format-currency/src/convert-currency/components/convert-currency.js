@@ -1,12 +1,13 @@
 /** @jsx h */
+import {
+  Button,
+  Checkbox,
+  Container,
+  Header,
+  TextboxAutocomplete,
+  useForm
+} from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
-import { Button } from 'figma-ui/src/components/button'
-import { Checkbox } from 'figma-ui/src/components/checkbox'
-import { Divider } from 'figma-ui/src/components/divider'
-import { Header } from 'figma-ui/src/components/header'
-import { Input } from 'figma-ui/src/components/input'
-import { VerticalSpace } from 'figma-ui/src/components/vertical-space'
-import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { convertCurrency } from '../../utilities/currency/convert-currency'
@@ -44,34 +45,52 @@ export function ConvertCurrency (initialState) {
       })
     })
   }, [])
-  const { inputs, handleInput, handleSubmit } = useForm(
+  const { inputs, setInputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    closeCallback
+    closeCallback,
+    false
   )
+  function handleCurrencyChange (targetCurrency) {
+    setInputs({
+      ...inputs,
+      targetCurrency
+    })
+  }
+  function handleLocaleChange (locale) {
+    setInputs({
+      ...inputs,
+      locale
+    })
+  }
   return (
-    <div>
-      <Header>Target Currency</Header>
-      <Input
-        name='targetCurrency'
-        onChange={handleInput}
+    <Container>
+      <Header>Currency</Header>
+      <TextboxAutocomplete
+        name='currency'
         value={inputs.targetCurrency}
-        focused
+        options={[{ value: 'USD' }, { value: 'EUR' }]}
+        onChange={handleCurrencyChange}
       />
-      <VerticalSpace size='small' />
       <Checkbox
-        title='Round numbers'
         name='roundNumbers'
-        onChange={handleInput}
         value={inputs.roundNumbers === true}
-      />
-      <VerticalSpace size='medium' />
-      <Divider />
+        onChange={handleInput}
+        style={{ marginBottom: '-8px' }}
+      >
+        Round numbers
+      </Checkbox>
       <Header>Locale</Header>
-      <Input name='locale' onChange={handleInput} value={inputs.locale} />
-      <VerticalSpace size='medium' />
-      <Divider />
-      <Button onClick={handleSubmit}>Convert Currency</Button>
-    </div>
+      <TextboxAutocomplete
+        top
+        name='locale'
+        value={inputs.locale}
+        options={[{ value: 'en-US' }, { value: 'de-DE' }]}
+        onChange={handleLocaleChange}
+      />
+      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '24px' }}>
+        Convert Currency
+      </Button>
+    </Container>
   )
 }

@@ -50,5 +50,5 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 236 }, { format, locale })
+  showUI({ width: 240, height: 208 }, { format, locale })
 }

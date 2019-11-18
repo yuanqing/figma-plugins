@@ -1,12 +1,13 @@
 /** @jsx h */
+import {
+  Button,
+  Container,
+  Header,
+  SegmentedControl,
+  TextboxAutocomplete,
+  useForm
+} from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
-import { Button } from 'figma-ui/src/components/button'
-import { Divider } from 'figma-ui/src/components/divider'
-import { Header } from 'figma-ui/src/components/header'
-import { Input } from 'figma-ui/src/components/input'
-import { SegmentedControl } from 'figma-ui/src/components/segmented-control'
-import { VerticalSpace } from 'figma-ui/src/components/vertical-space'
-import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { EXPLICIT, RETAIN, SHORT } from '../formats'
@@ -44,32 +45,38 @@ export function FormatCurrency (initialState) {
       triggerEvent('FORMAT_CURRENCY_RESULT', { layers: result, scope })
     })
   }, [])
-  const { inputs, handleInput, handleSubmit } = useForm(
+  const { inputs, setInputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    closeCallback
+    closeCallback,
+    false
   )
+  function handleLocaleChange (locale) {
+    setInputs({
+      ...inputs,
+      locale
+    })
+  }
   return (
-    <div>
+    <Container>
       <Header>Format</Header>
       <SegmentedControl
-        options={[RETAIN, EXPLICIT, SHORT]}
         name='format'
-        onChange={handleInput}
         value={inputs.format}
-      />
-      <VerticalSpace size='medium' />
-      <Divider />
-      <Header>Locale</Header>
-      <Input
-        name='locale'
+        options={[{ value: EXPLICIT }, { value: SHORT }, { value: RETAIN }]}
         onChange={handleInput}
-        value={inputs.locale}
-        focused
       />
-      <VerticalSpace size='medium' />
-      <Divider />
-      <Button onClick={handleSubmit}>Format Currency</Button>
-    </div>
+      <Header>Locale</Header>
+      <TextboxAutocomplete
+        top
+        name='locale'
+        value={inputs.locale}
+        options={[{ value: 'en-US' }, { value: 'de-DE' }]}
+        onChange={handleLocaleChange}
+      />
+      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '24px' }}>
+        Format Currency
+      </Button>
+    </Container>
   )
 }

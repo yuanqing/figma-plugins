@@ -67,5 +67,5 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 274 }, { targetCurrency, roundNumbers, locale })
+  showUI({ width: 240, height: 236 }, { targetCurrency, roundNumbers, locale })
 }
