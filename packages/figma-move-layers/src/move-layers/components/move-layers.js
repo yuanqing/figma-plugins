@@ -26,11 +26,11 @@ export function MoveLayers (initialState) {
       <TextboxNumeric
         name='horizontalOffset'
         icon={
-          <svg width='12' height='6'>
+          <svg>
             <path
               fill-rule='evenodd'
               clip-rule='evenodd'
-              d='M2.207 3.5l1.647 1.646-.707.708-2.5-2.5L.293 3l.354-.354 2.5-2.5.707.708L2.207 2.5h7.586L8.147.854l.707-.708 2.5 2.5.353.354-.353.354-2.5 2.5-.707-.708L9.793 3.5H2.207z'
+              d='M3 8.5V12H4L4 8.5H11.7929L9.64645 10.6464L10.3536 11.3536L13.3536 8.35355L13.7071 8L13.3536 7.64645L10.3536 4.64645L9.64645 5.35355L11.7929 7.5H4L4 4H3V7.5V8.5Z'
             />
           </svg>
         }
@@ -42,11 +42,11 @@ export function MoveLayers (initialState) {
       <TextboxNumeric
         name='verticalOffset'
         icon={
-          <svg width='6' height='12'>
+          <svg>
             <path
               fill-rule='evenodd'
               clip-rule='evenodd'
-              d='M3 .292l.354.354 2.5 2.5-.707.707-1.646-1.646v7.585l1.646-1.646.707.707-2.5 2.5-.353.354-.354-.354-2.5-2.5.707-.707 1.647 1.646V2.207L.854 3.853l-.707-.707 2.5-2.5.354-.354z'
+              d='M7.5 3H4V4L7.5 4L7.5 11.7929L5.35355 9.64645L4.64645 10.3536L7.64645 13.3536L8 13.7071L8.35355 13.3536L11.3536 10.3536L10.6464 9.64645L8.5 11.7929L8.5 4L12 4V3H8.5H7.5Z'
             />
           </svg>
         }
