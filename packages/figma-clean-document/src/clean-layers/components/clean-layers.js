@@ -62,8 +62,14 @@ export function CleanLayers (initialState) {
         onChange={handleInput}
       >
         Smart rename layers
-        <Text muted style={{ margin: '8px 0 10px' }}>
-          Ignore layers named…
+        <Text
+          bold
+          style={{
+            margin: '8px 0 10px',
+            opacity: inputs.smartRenameLayers === false ? '0.3' : '1'
+          }}
+        >
+          Ignore Layers
         </Text>
         <Textbox
           disabled={inputs.smartRenameLayers === false}
