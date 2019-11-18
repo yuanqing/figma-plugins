@@ -16,7 +16,8 @@ export function SmartRenameLayers (initialState) {
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    closeCallback
+    closeCallback,
+    true
   )
   const { smartRenameLayersWhitelist } = inputs
   return (

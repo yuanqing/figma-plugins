@@ -20,7 +20,8 @@ export function CleanLayers (initialState) {
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    closeCallback
+    closeCallback,
+    true
   )
   const {
     deleteHiddenLayers,

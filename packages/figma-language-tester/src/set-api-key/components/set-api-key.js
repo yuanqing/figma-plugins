@@ -22,7 +22,8 @@ export function SetApiKey (initialState) {
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    closeCallback
+    closeCallback,
+    true
   )
   return (
     <Container>

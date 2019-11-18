@@ -21,7 +21,8 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
   const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
-    closeCallback
+    closeCallback,
+    true
   )
   return (
     <Container>
