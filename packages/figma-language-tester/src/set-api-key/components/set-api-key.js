@@ -1,10 +1,14 @@
 /** @jsx h */
 import { triggerEvent } from '@create-figma-plugin/utilities'
-import { useForm } from 'figma-ui/src/hooks/use-form'
-import { Button } from 'figma-ui/src/components/button'
-import { Input } from 'figma-ui/src/components/input'
+import {
+  Button,
+  Container,
+  Header,
+  Text,
+  Textbox,
+  useForm
+} from '@create-figma-plugin/ui'
 import { h } from 'preact'
-import './set-api-key.scss'
 
 export function SetApiKey (initialState) {
   function submitCallback ({ apiKey }) {
@@ -21,9 +25,16 @@ export function SetApiKey (initialState) {
     closeCallback
   )
   return (
-    <div class='set-api-key'>
-      <div class='set-api-key__description'>
-        Enter a{' '}
+    <Container>
+      <Header>API Key</Header>
+      <Textbox
+        name='apiKey'
+        value={inputs.apiKey}
+        onChange={handleInput}
+        focused
+      />
+      <Text style={{ marginTop: '8px' }}>
+        Get a{' '}
         <a
           href='https://translate.yandex.com/developers/keys'
           target='_blank'
@@ -31,22 +42,10 @@ export function SetApiKey (initialState) {
         >
           Yandex Translate API key
         </a>
-      </div>
-      <div class='set-api-key__input'>
-        <Input
-          type='text'
-          border
-          name='apiKey'
-          onChange={handleInput}
-          value={inputs.apiKey}
-          focused
-        />
-      </div>
-      <div class='set-api-key__button'>
-        <Button type='primary' onClick={handleSubmit}>
-          Set API Key
-        </Button>
-      </div>
-    </div>
+      </Text>
+      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '12px' }}>
+        Set API Key
+      </Button>
+    </Container>
   )
 }

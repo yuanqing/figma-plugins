@@ -1,12 +1,12 @@
 /** @jsx h */
+import { Button } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
-import { Button } from 'figma-ui/src/components/button'
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import { LanguageItem } from './language-item'
 import { translate } from '../../translate/translate'
 import languages from '../../translate/languages'
-import './language-tester.scss'
+import styles from './language-tester.scss'
 
 const DEFAULT_LANGUAGE = 'DEFAULT_LANGUAGE'
 
@@ -54,19 +54,20 @@ export function LanguageTester () {
     },
     [activeLanguageKey]
   )
-  const isResetButtonEnabled = activeLanguageKey !== DEFAULT_LANGUAGE
+  const isResetButtonDisabled = activeLanguageKey === DEFAULT_LANGUAGE
   return (
-    <div class='language-tester'>
-      <div class='language-tester__languages'>
-        {Object.keys(languages).map(function (languageKey) {
+    <div>
+      <div class={styles.languages}>
+        {Object.keys(languages).map(function (languageKey, index) {
           const isActive = activeLanguageKey === languageKey
           return (
             <LanguageItem
-              key={languageKey}
+              key={index}
               isActive={isActive}
               onClick={
-                isActive === false &&
-                handleLanguageClick.bind(null, languageKey)
+                isActive === false
+                  ? handleLanguageClick.bind(null, languageKey)
+                  : null
               }
             >
               {languages[languageKey]}
@@ -74,11 +75,11 @@ export function LanguageTester () {
           )
         })}
       </div>
-      <div class='language-tester__button'>
+      <div class={styles.button}>
         <Button
-          type='primary'
-          disabled={!isResetButtonEnabled}
-          onClick={isResetButtonEnabled && handleResetClick}
+          disabled={isResetButtonDisabled === true}
+          fullWidth
+          onClick={isResetButtonDisabled === true ? null : handleResetClick}
         >
           Reset
         </Button>

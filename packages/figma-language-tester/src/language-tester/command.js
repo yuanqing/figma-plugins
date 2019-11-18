@@ -29,7 +29,7 @@ export default async function () {
     figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
     return
   }
-  showUI({ width: 240, height: 259 })
+  showUI({ width: 240, height: 267 })
   const originalStrings = {} // maps `layer.id` to the original strings
   figma.on('close', function () {
     resetLanguage(originalStrings)
