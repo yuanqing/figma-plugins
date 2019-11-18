@@ -1,11 +1,14 @@
 /** @jsx h */
+import {
+  Button,
+  Checkbox,
+  Container,
+  Text,
+  Textbox,
+  useForm
+} from '@create-figma-plugin/ui'
 import { triggerEvent } from '@create-figma-plugin/utilities'
-import { Button } from 'figma-ui/src/components/button'
-import { Checkbox } from 'figma-ui/src/components/checkbox'
-import { Input } from 'figma-ui/src/components/input'
-import { useForm } from 'figma-ui/src/hooks/use-form'
 import { h } from 'preact'
-import './clean-layers.scss'
 
 export function CleanLayers (initialState) {
   function submitCallback (settings) {
@@ -34,68 +37,60 @@ export function CleanLayers (initialState) {
     smartSortLayers === true ||
     ungroupSingleLayerGroups === true
   return (
-    <div class='clean-layers'>
-      <div class='clean-layers__checkbox'>
-        <Checkbox
-          title='Delete hidden layers'
-          name='deleteHiddenLayers'
-          onChange={handleInput}
-          value={deleteHiddenLayers}
-        />
-      </div>
-      <div class='clean-layers__checkbox'>
-        <Checkbox
-          title='Ungroup single-layer groups'
-          name='ungroupSingleLayerGroups'
-          onChange={handleInput}
-          value={ungroupSingleLayerGroups}
-        />
-      </div>
-      <div class='clean-layers__checkbox'>
-        <Checkbox
-          title='Make pixel-perfect'
-          name='pixelPerfect'
-          onChange={handleInput}
-          value={pixelPerfect}
-        />
-      </div>
-      <div class='clean-layers__checkbox'>
-        <Checkbox
-          title='Smart rename layers'
-          description='Ignore layers named…'
-          name='smartRenameLayers'
-          onChange={handleInput}
-          value={smartRenameLayers}
-        />
-      </div>
-      <div class='clean-layers__input'>
-        <Input
-          type='text'
+    <Container>
+      <Checkbox
+        name='deleteHiddenLayers'
+        value={deleteHiddenLayers}
+        onChange={handleInput}
+        style={{ marginTop: '12px' }}
+      >
+        Delete hidden layers
+      </Checkbox>
+      <Checkbox
+        name='ungroupSingleLayerGroups'
+        value={ungroupSingleLayerGroups}
+        onChange={handleInput}
+      >
+        Ungroup single-layer groups
+      </Checkbox>
+      <Checkbox name='pixelPerfect' value={pixelPerfect} onChange={handleInput}>
+        Make pixel-perfect
+      </Checkbox>
+      <Checkbox
+        name='smartRenameLayers'
+        value={smartRenameLayers}
+        onChange={handleInput}
+      >
+        Smart rename layers
+        <Text muted style={{ margin: '8px 0 10px' }}>
+          Ignore layers named…
+        </Text>
+        <Textbox
           disabled={inputs.smartRenameLayers === false}
-          border
           name='smartRenameLayersWhitelist'
-          onChange={handleInput}
           value={smartRenameLayersWhitelist}
-        />
-      </div>
-      <div class='clean-layers__checkbox'>
-        <Checkbox
-          title='Smart sort layers'
-          description='Sort layers by their X and Y position while maintaining their stacking order on the page'
-          name='smartSortLayers'
           onChange={handleInput}
-          value={smartSortLayers}
         />
-      </div>
-      <div class='clean-layers__button'>
-        <Button
-          type='primary'
-          disabled={isSubmitButtonEnabled === false}
-          onClick={isSubmitButtonEnabled && handleSubmit}
-        >
-          Clean
-        </Button>
-      </div>
-    </div>
+      </Checkbox>
+      <Checkbox
+        name='smartSortLayers'
+        onChange={handleInput}
+        value={smartSortLayers}
+      >
+        Smart sort layers
+        <Text muted style={{ marginTop: '8px' }}>
+          Sort layers by their X and Y position while maintaining their relative
+          stacking order on the page
+        </Text>
+      </Checkbox>
+      <Button
+        fullWidth
+        disabled={isSubmitButtonEnabled === false}
+        onClick={isSubmitButtonEnabled === true ? handleSubmit : null}
+        style={{ marginTop: '8px' }}
+      >
+        Clean Layers
+      </Button>
+    </Container>
   )
 }
