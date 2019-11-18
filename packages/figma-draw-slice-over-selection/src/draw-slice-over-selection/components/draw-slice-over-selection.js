@@ -32,7 +32,7 @@ export function DrawSliceOverSelection (initialState) {
         value={inputs.padding}
         focused
       />
-      <Button fullWidth onClick={handleSubmit} style={{ marginTop: 12 }}>
+      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '12px' }}>
         Draw Slice Over Selection
       </Button>
     </Container>
