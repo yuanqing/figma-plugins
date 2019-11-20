@@ -1,7 +1,6 @@
 /* global figma */
 import {
   addEventListener,
-  formatErrorMessage,
   formatSuccessMessage,
   loadFonts,
   loadSettings,
@@ -10,14 +9,11 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
+import { extractCharacters } from '../utilities/extract-characters'
 import { getTextLayers } from '../utilities/get-text-layers'
 
 export default async function () {
-  const { layers, scope } = getTextLayers()
-  if (layers.length === 0) {
-    figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
-    return
-  }
+  const layers = getTextLayers()
   const {
     targetCurrency,
     roundNumbers,
@@ -25,6 +21,7 @@ export default async function () {
     ...settings
   } = await loadSettings(defaultSettings)
   addEventListener('SUBMIT', async function ({
+    layers,
     targetCurrency,
     roundNumbers,
     locale
@@ -35,37 +32,31 @@ export default async function () {
       roundNumbers,
       locale
     })
-    const { layers, scope } = getTextLayers()
-    if (layers.length === 0) {
-      figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
-      return
-    }
-    await loadFonts(layers)
-    triggerEvent('CONVERT_CURRENCY_REQUEST', {
-      layers: layers.map(function ({ id, characters }) {
-        return { id, characters }
-      }),
-      scope,
-      targetCurrency,
-      roundNumbers,
-      locale
-    })
-  })
-  addEventListener('CONVERT_CURRENCY_RESULT', async function ({
-    layers,
-    scope,
-    targetCurrency
-  }) {
     for (const { id, characters } of layers) {
       const layer = figma.getNodeById(id)
+      await loadFonts([layer])
       layer.characters = characters
     }
     figma.closePlugin(
-      formatSuccessMessage(`Converted currencies ${scope} to ${targetCurrency}`)
+      formatSuccessMessage(
+        `Converted currencies in selection to ${targetCurrency}`
+      )
     )
+  })
+  figma.on('selectionchange', function () {
+    const layers = getTextLayers()
+    triggerEvent('SELECTION_CHANGED', extractCharacters(layers))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 236 }, { targetCurrency, roundNumbers, locale })
+  showUI(
+    { width: 240, height: 357 },
+    {
+      layers: extractCharacters(layers),
+      targetCurrency,
+      roundNumbers,
+      locale
+    }
+  )
 }

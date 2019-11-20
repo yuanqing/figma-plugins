@@ -2,24 +2,10 @@
 import { traverseLayer } from '@create-figma-plugin/utilities'
 
 export function getTextLayers () {
-  const selection = figma.currentPage.selection
-  const hasSelection = selection.length > 0
-  return {
-    layers: filterLayers(
-      hasSelection ? selection : [figma.currentPage],
-      function (layer) {
-        return layer.type === 'TEXT'
-      }
-    ),
-    scope: hasSelection ? 'in selection' : 'on page'
-  }
-}
-
-function filterLayers (layers, filter) {
   const result = []
-  for (const layer of layers) {
+  for (const layer of figma.currentPage.selection) {
     traverseLayer(layer, async function (layer) {
-      if (filter(layer) === true) {
+      if (layer.type === 'TEXT') {
         result.push(layer)
       }
     })
