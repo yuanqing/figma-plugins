@@ -4,6 +4,9 @@ import style from './preview.scss'
 import classnames from '@sindresorhus/class-names'
 
 export function Preview ({ items }) {
+  if (items === false) {
+    return <div class={style.preview} />
+  }
   return (
     <div class={style.preview}>
       <div class={style.inner}>

@@ -13,6 +13,11 @@ import { useEffect } from 'preact/hooks'
 import { Preview } from '../../preview/preview'
 import { convertCurrency } from '../../utilities/currency/convert-currency'
 import { moneyRegex } from '../../utilities/currency/money-regex'
+import isoCodes from '../../utilities/currency/data/iso-codes'
+
+const currencies = Object.keys(isoCodes).map(function (isoCode) {
+  return { value: isoCode }
+})
 
 export function ConvertCurrency (initialState) {
   const { inputs, setInputs, handleInput, handleSubmit } = useForm(
@@ -72,18 +77,27 @@ export function ConvertCurrency (initialState) {
   }, [])
   return (
     <div>
-      <Preview items={preview} />
+      <Preview
+        items={
+          targetCurrency === '' ||
+          typeof isoCodes[targetCurrency] === 'undefined' ||
+          locale === ''
+            ? false
+            : preview
+        }
+      />
       <Container>
         <Header>Currency</Header>
         <TextboxAutocomplete
+          strict
           name='currency'
-          value={inputs.targetCurrency}
-          options={[{ value: 'USD' }, { value: 'EUR' }]}
+          value={targetCurrency}
+          options={currencies}
           onChange={handleCurrencyChange}
         />
         <Checkbox
           name='roundNumbers'
-          value={inputs.roundNumbers === true}
+          value={roundNumbers === true}
           onChange={handleInput}
           style={{ marginBottom: '-8px' }}
         >
@@ -93,7 +107,7 @@ export function ConvertCurrency (initialState) {
         <TextboxAutocomplete
           top
           name='locale'
-          value={inputs.locale}
+          value={locale}
           options={[{ value: 'en-US' }, { value: 'de-DE' }]}
           onChange={handleLocaleChange}
         />
@@ -111,7 +125,7 @@ export function ConvertCurrency (initialState) {
 }
 
 function computePreview ({ layers, targetCurrency, roundNumbers, locale }) {
-  if (layers.length === 0) {
+  if (layers.length === 0 || typeof isoCodes[targetCurrency] === 'undefined') {
     return null
   }
   const result = []
