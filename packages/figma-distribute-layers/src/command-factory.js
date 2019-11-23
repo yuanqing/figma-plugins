@@ -12,8 +12,7 @@ import { defaultSettings } from './default-settings'
 
 export function commandFactory ({ direction, sortLayers, distributeLayers }) {
   return async function () {
-    const layers = [].concat(figma.currentPage.selection)
-    if (layers.length < 2) {
+    if (figma.currentPage.selection.length < 2) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
     }
@@ -21,6 +20,7 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
     addEventListener('DISTRIBUTE_LAYERS', async function (settings) {
       await saveSettings(settings)
       const { space } = settings
+      const layers = [].concat(figma.currentPage.selection)
       layers.sort(sortLayers)
       distributeLayers(layers, space)
       figma.closePlugin(formatSuccessMessage(`Distributed layers ${direction}`))

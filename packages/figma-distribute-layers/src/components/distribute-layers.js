@@ -25,10 +25,10 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
     closeCallback,
     true
   )
-  const [isSubmitButtonEnabled, setIsSubmitButtonEnabled] = useState(true)
+  const [hasSelection, setHasSelection] = useState(true)
   useEffect(function () {
-    addEventListener('SELECTION_CHANGED', function (isSubmitButtonEnabled) {
-      setIsSubmitButtonEnabled(isSubmitButtonEnabled)
+    addEventListener('SELECTION_CHANGED', function (hasSelection) {
+      setHasSelection(hasSelection)
     })
   }, [])
   return (
@@ -43,7 +43,7 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
       />
       <Button
         fullWidth
-        disabled={isSubmitButtonEnabled === false}
+        disabled={hasSelection === false || isNaN(parseFloat(inputs.space))}
         onClick={handleSubmit}
         style={{ marginTop: '24px' }}
       >
