@@ -23,6 +23,7 @@
     "concurrently": "^4.1.2",
     "css-loader": "^3.2.0",
     "esm": "^3.2.25",
+    "eslint-plugin-react-hooks": "^2.3.0",
     "husky": "^3.0.8",
     "lerna": "^3.16.4",
     "lint-staged": "^9.4.1",
@@ -31,7 +32,7 @@
     "prettier-standard": "^15.0.1",
     "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
-    "standard": "^14.3.1",
+    "standardx": "^5.0.0",
     "style-loader": "^1.0.0",
     "stylelint": "^11.0.0",
     "stylelint-config-prettier": "^6.0.0",
@@ -53,6 +54,15 @@
       "prettier",
       "git add"
     ]
+  },
+  "eslintConfig": {
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "stylelint": {
     "extends": [
