@@ -6,13 +6,13 @@ import {
   formatSuccessMessage,
   loadSettings,
   saveSettings,
-  showUI
+  showUI,
+  triggerEvent
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
 
 export default async function () {
-  const selection = figma.currentPage.selection
-  if (selection.length === 0) {
+  if (figma.currentPage.selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
@@ -20,7 +20,7 @@ export default async function () {
   addEventListener('DRAW_SLICE_OVER_SELECTION', async function (settings) {
     await saveSettings(settings)
     const { padding } = settings
-    const maximumBounds = calculateMaximumBounds(selection)
+    const maximumBounds = calculateMaximumBounds(figma.currentPage.selection)
     const slice = figma.createSlice()
     const width = maximumBounds[1].x - maximumBounds[0].x + 2 * padding
     const height = maximumBounds[1].y - maximumBounds[0].y + 2 * padding
@@ -30,6 +30,9 @@ export default async function () {
     slice.name = '@SliceOverSelection'
     slice.locked = true
     figma.closePlugin(formatSuccessMessage('Drew slice over selection'))
+  })
+  figma.on('selectionchange', function () {
+    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

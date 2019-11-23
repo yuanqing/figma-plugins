@@ -6,8 +6,9 @@ import {
   TextboxNumeric,
   useForm
 } from '@create-figma-plugin/ui'
-import { triggerEvent } from '@create-figma-plugin/utilities'
+import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
+import { useEffect, useState } from 'preact/hooks'
 
 export function DrawSliceOverSelection (initialState) {
   function submitCallback ({ padding }) {
@@ -24,6 +25,12 @@ export function DrawSliceOverSelection (initialState) {
     closeCallback,
     true
   )
+  const [hasSelection, setHasSelection] = useState(true)
+  useEffect(function () {
+    addEventListener('SELECTION_CHANGED', function (hasSelection) {
+      setHasSelection(hasSelection)
+    })
+  }, [])
   return (
     <Container>
       <Header>Padding</Header>
@@ -33,7 +40,12 @@ export function DrawSliceOverSelection (initialState) {
         value={inputs.padding}
         focused
       />
-      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '24px' }}>
+      <Button
+        fullWidth
+        disabled={hasSelection === false || isNaN(parseFloat(inputs.padding))}
+        onClick={handleSubmit}
+        style={{ marginTop: '24px' }}
+      >
         Draw Slice Over Selection
       </Button>
     </Container>
