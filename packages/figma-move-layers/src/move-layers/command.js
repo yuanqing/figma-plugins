@@ -6,13 +6,13 @@ import {
   loadSettings,
   pluralize,
   saveSettings,
-  showUI
+  showUI,
+  triggerEvent
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
 
 export default async function () {
-  const selectedLayers = figma.currentPage.selection
-  if (selectedLayers.length === 0) {
+  if (figma.currentPage.selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
@@ -24,6 +24,7 @@ export default async function () {
       figma.closePlugin()
       return
     }
+    const selectedLayers = figma.currentPage.selection
     for (const layer of selectedLayers) {
       layer.x += horizontalOffset
       layer.y += verticalOffset
@@ -33,6 +34,9 @@ export default async function () {
         `Moved selected ${pluralize(selectedLayers.length, 'layer')}`
       )
     )
+  })
+  figma.on('selectionchange', function () {
+    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

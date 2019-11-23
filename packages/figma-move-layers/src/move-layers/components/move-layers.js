@@ -5,14 +5,15 @@ import {
   TextboxNumeric,
   useForm
 } from '@create-figma-plugin/ui'
-import { triggerEvent } from '@create-figma-plugin/utilities'
+import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
+import { useEffect, useState } from 'preact/hooks'
 
 export function MoveLayers (initialState) {
   function submitCallback ({ horizontalOffset, verticalOffset }) {
     triggerEvent('MOVE_LAYERS', {
-      horizontalOffset: parseFloat(horizontalOffset),
-      verticalOffset: parseFloat(verticalOffset)
+      horizontalOffset: castToNumber(horizontalOffset),
+      verticalOffset: castToNumber(verticalOffset)
     })
   }
   function closeCallback () {
@@ -24,6 +25,12 @@ export function MoveLayers (initialState) {
     closeCallback,
     true
   )
+  const [hasSelection, setHasSelection] = useState(true)
+  useEffect(function () {
+    addEventListener('SELECTION_CHANGED', function (hasSelection) {
+      setHasSelection(hasSelection)
+    })
+  }, [])
   return (
     <Container>
       <TextboxNumeric
@@ -57,9 +64,23 @@ export function MoveLayers (initialState) {
         value={inputs.verticalOffset}
         style={{ marginTop: '12px' }}
       />
-      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '24px' }}>
+      <Button
+        fullWidth
+        disabled={
+          hasSelection === false ||
+          (isNaN(parseFloat(inputs.horizontalOffset)) &&
+            isNaN(parseFloat(inputs.verticalOffset)))
+        }
+        onClick={handleSubmit}
+        style={{ marginTop: '24px' }}
+      >
         Move Selected Layers
       </Button>
     </Container>
   )
+}
+
+function castToNumber (string) {
+  const result = parseFloat(string)
+  return isNaN(result) === true ? 0 : result
 }
