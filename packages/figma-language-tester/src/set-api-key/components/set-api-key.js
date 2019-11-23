@@ -43,7 +43,12 @@ export function SetApiKey (initialState) {
           Get a Yandex Translate API key
         </a>
       </Text>
-      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '20px' }}>
+      <Button
+        fullWidth
+        disabled={inputs.apiKey === ''}
+        onClick={handleSubmit}
+        style={{ marginTop: '20px' }}
+      >
         Set API Key
       </Button>
     </Container>
