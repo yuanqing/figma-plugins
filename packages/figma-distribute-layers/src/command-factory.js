@@ -5,6 +5,7 @@ import {
   formatSuccessMessage,
   loadSettings,
   saveSettings,
+  triggerEvent,
   showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from './default-settings'
@@ -23,6 +24,9 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
       layers.sort(sortLayers)
       distributeLayers(layers, space)
       figma.closePlugin(formatSuccessMessage(`Distributed layers ${direction}`))
+    })
+    figma.on('selectionchange', function () {
+      triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length > 1)
     })
     addEventListener('CLOSE', function () {
       figma.closePlugin()
