@@ -27,8 +27,8 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
   )
   const [isSubmitButtonEnabled, setIsSubmitButtonEnabled] = useState(true)
   useEffect(function () {
-    addEventListener('SELECTION_CHANGED', function (isSubmiButtonEnabled) {
-      setIsSubmitButtonEnabled(isSubmiButtonEnabled)
+    addEventListener('SELECTION_CHANGED', function (isSubmitButtonEnabled) {
+      setIsSubmitButtonEnabled(isSubmitButtonEnabled)
     })
   }, [])
   return (
