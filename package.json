@@ -8,7 +8,7 @@
     "fix-js": "prettier-standard '*.js' 'packages/*/{scripts,src,test}/**/*.js'",
     "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
     "lint-css": "stylelint 'packages/*/src/**/*.scss'",
-    "lint-js": "standard '*.js' 'packages/*/{scripts,src,test}/**/*.js'",
+    "lint-js": "standardx '*.js' 'packages/*/{scripts,src,test}/**/*.js'",
     "postinstall": "yarn run build && yarn run typings",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf figma.d.ts node_modules 'packages/*/node_modules' yarn.lock && yarn install",
