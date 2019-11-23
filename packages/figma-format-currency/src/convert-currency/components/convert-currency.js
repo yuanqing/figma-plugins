@@ -10,8 +10,13 @@ import {
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
-import { Preview } from '../../preview/preview'
+import {
+  Preview,
+  INVALID_SETTINGS,
+  NO_TEXT_LAYERS
+} from '../../preview/preview'
 import { convertCurrency } from '../../utilities/currency/convert-currency'
+import { isValidLocale } from '../../utilities/currency/is-valid-locale'
 import { moneyRegex } from '../../utilities/currency/money-regex'
 import isoCodes from '../../utilities/currency/data/iso-codes'
 
@@ -24,10 +29,10 @@ export function ConvertCurrency (initialState) {
     initialState,
     submitCallback,
     closeCallback,
-    false
+    true
   )
   const { layers, targetCurrency, roundNumbers, locale } = inputs
-  const preview = computePreview({
+  const previewItems = computePreview({
     layers,
     targetCurrency,
     roundNumbers,
@@ -77,18 +82,11 @@ export function ConvertCurrency (initialState) {
   }, [])
   return (
     <div>
-      <Preview
-        items={
-          targetCurrency === '' ||
-          typeof isoCodes[targetCurrency] === 'undefined' ||
-          locale === ''
-            ? false
-            : preview
-        }
-      />
+      <Preview items={previewItems} />
       <Container>
         <Header>Currency</Header>
         <TextboxAutocomplete
+          filter
           strict
           name='currency'
           value={targetCurrency}
@@ -105,6 +103,8 @@ export function ConvertCurrency (initialState) {
         </Checkbox>
         <Header>Locale</Header>
         <TextboxAutocomplete
+          filter
+          strict
           top
           name='locale'
           value={locale}
@@ -113,7 +113,11 @@ export function ConvertCurrency (initialState) {
         />
         <Button
           fullWidth
-          disabled={preview === null || preview.length === 0}
+          disabled={
+            previewItems === INVALID_SETTINGS ||
+            previewItems === NO_TEXT_LAYERS ||
+            previewItems.length === 0
+          }
           onClick={handleSubmit}
           style={{ marginTop: '24px' }}
         >
@@ -125,8 +129,14 @@ export function ConvertCurrency (initialState) {
 }
 
 function computePreview ({ layers, targetCurrency, roundNumbers, locale }) {
-  if (layers.length === 0 || typeof isoCodes[targetCurrency] === 'undefined') {
-    return null
+  if (
+    typeof isoCodes[targetCurrency] === 'undefined' ||
+    isValidLocale(locale) === false
+  ) {
+    return INVALID_SETTINGS
+  }
+  if (layers.length === 0) {
+    return NO_TEXT_LAYERS
   }
   const result = []
   const originalStrings = {}

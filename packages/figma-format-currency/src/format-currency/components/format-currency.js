@@ -11,10 +11,15 @@ import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { EXPLICIT, RETAIN, SHORT } from '../formats'
-import { Preview } from '../../preview/preview'
+import {
+  Preview,
+  INVALID_SETTINGS,
+  NO_TEXT_LAYERS
+} from '../../preview/preview'
 import { formatExplicit } from '../../utilities/currency/format-explicit'
 import { formatRetain } from '../../utilities/currency/format-retain'
 import { formatShort } from '../../utilities/currency/format-short'
+import { isValidLocale } from '../../utilities/currency/is-valid-locale'
 import { moneyRegex } from '../../utilities/currency/money-regex'
 
 const transforms = {
@@ -28,10 +33,10 @@ export function FormatCurrency (initialState) {
     initialState,
     submitCallback,
     closeCallback,
-    false
+    true
   )
   const { layers, format, locale } = inputs
-  const preview = computePreview({
+  const previewItems = computePreview({
     layers,
     format,
     locale
@@ -69,7 +74,7 @@ export function FormatCurrency (initialState) {
   }, [])
   return (
     <div>
-      <Preview items={preview} />
+      <Preview items={previewItems} />
       <Container>
         <Header>Format</Header>
         <SegmentedControl
@@ -80,6 +85,8 @@ export function FormatCurrency (initialState) {
         />
         <Header>Locale</Header>
         <TextboxAutocomplete
+          filter
+          strict
           top
           name='locale'
           value={inputs.locale}
@@ -88,7 +95,11 @@ export function FormatCurrency (initialState) {
         />
         <Button
           fullWidth
-          disabled={preview === null || preview.length === 0}
+          disabled={
+            previewItems === INVALID_SETTINGS ||
+            previewItems === NO_TEXT_LAYERS ||
+            previewItems.length === 0
+          }
           onClick={handleSubmit}
           style={{ marginTop: '24px' }}
         >
@@ -100,8 +111,11 @@ export function FormatCurrency (initialState) {
 }
 
 function computePreview ({ layers, format, locale }) {
+  if (isValidLocale(locale) === false) {
+    return INVALID_SETTINGS
+  }
   if (layers.length === 0) {
-    return null
+    return NO_TEXT_LAYERS
   }
   const result = []
   const originalStrings = {}

@@ -3,14 +3,17 @@ import { h } from 'preact'
 import style from './preview.scss'
 import classnames from '@sindresorhus/class-names'
 
+export const INVALID_SETTINGS = 'INVALID_SETTINGS'
+export const NO_TEXT_LAYERS = 'NO_TEXT_LAYERS'
+
 export function Preview ({ items }) {
-  if (items === false) {
+  if (items === INVALID_SETTINGS) {
     return <div class={style.preview} />
   }
   return (
     <div class={style.preview}>
       <div class={style.inner}>
-        {items === null ? (
+        {items === NO_TEXT_LAYERS ? (
           <div class={style.empty}>Select a text layer</div>
         ) : items.length === 0 ? (
           <div class={style.empty}>No currencies in selection</div>
