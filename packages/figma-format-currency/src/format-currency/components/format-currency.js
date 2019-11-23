@@ -64,14 +64,17 @@ export function FormatCurrency (initialState) {
       locale
     })
   }
-  useEffect(function () {
-    addEventListener('SELECTION_CHANGED', function (layers) {
-      setInputs({
-        ...inputs,
-        layers
+  useEffect(
+    function () {
+      addEventListener('SELECTION_CHANGED', function (layers) {
+        setInputs({
+          ...inputs,
+          layers
+        })
       })
-    })
-  }, [])
+    },
+    [inputs, setInputs]
+  )
   return (
     <div>
       <Preview items={previewItems} />
