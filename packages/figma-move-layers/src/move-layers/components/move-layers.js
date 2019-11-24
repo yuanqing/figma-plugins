@@ -74,7 +74,7 @@ export function MoveLayers (initialState) {
         onClick={handleSubmit}
         style={{ marginTop: '24px' }}
       >
-        Move Selected Layers
+        Move Layers
       </Button>
     </Container>
   )
