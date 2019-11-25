@@ -14,7 +14,7 @@ Changes the format and/or locale of currencies in text layers within the selecti
 
 Converts currencies in text layers within the selection or on the current page.
 
-- Optionally round the converted currencies to the nearest 100s and 1000s, so that prices in your design look more “natural”.
+- Optionally round the converted currencies to the nearest 100s and 1000s.
 
 ## License
 
