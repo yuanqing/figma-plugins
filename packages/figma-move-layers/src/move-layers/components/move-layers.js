@@ -31,6 +31,7 @@ export function MoveLayers (initialState) {
       setHasSelection(hasSelection)
     })
   }, [])
+  console.log(inputs)
   return (
     <Container>
       <TextboxNumeric
@@ -68,8 +69,8 @@ export function MoveLayers (initialState) {
         fullWidth
         disabled={
           hasSelection === false ||
-          (isNaN(parseFloat(inputs.horizontalOffset)) &&
-            isNaN(parseFloat(inputs.verticalOffset)))
+          (castToNumber(inputs.horizontalOffset) === 0 &&
+            castToNumber(inputs.verticalOffset) === 0)
         }
         onClick={handleSubmit}
         style={{ marginTop: '24px' }}
