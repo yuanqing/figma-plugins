@@ -21,12 +21,17 @@ import { formatRetain } from '../../utilities/currency/format-retain'
 import { formatShort } from '../../utilities/currency/format-short'
 import { isValidLocale } from '../../utilities/currency/is-valid-locale'
 import { moneyRegex } from '../../utilities/currency/money-regex'
+import localesJson from '../../utilities/currency/data/locales'
 
 const transforms = {
   [EXPLICIT]: formatExplicit,
   [RETAIN]: formatRetain,
   [SHORT]: formatShort
 }
+
+const locales = localesJson.map(function (locale) {
+  return { value: locale }
+})
 
 export function FormatCurrency (initialState) {
   const { inputs, setInputs, handleInput, handleSubmit } = useForm(
@@ -93,7 +98,7 @@ export function FormatCurrency (initialState) {
           top
           name='locale'
           value={inputs.locale}
-          options={[{ value: 'en-US' }, { value: 'de-DE' }]}
+          options={locales}
           onChange={handleLocaleChange}
         />
         <Button
