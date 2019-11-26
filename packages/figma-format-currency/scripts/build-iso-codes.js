@@ -45,6 +45,9 @@ function parseSymbol (isoCode, locale) {
   if (symbol[symbol.length - 1] === '$') {
     return '$'
   }
+  if (symbol[symbol.length - 1] === '¥') {
+    return '¥'
+  }
   return symbol
 }
 

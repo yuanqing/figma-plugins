@@ -22,11 +22,14 @@ export function mapSymbolToIsoCode (symbol, locale) {
       return isoCode
     }
   }
-  if (symbol === '$') {
-    return 'USD'
-  }
   if (symbol === '£') {
     return 'GBP'
+  }
+  if (symbol === '¥') {
+    return 'JPY'
+  }
+  if (symbol === '$') {
+    return 'USD'
   }
   return isoCodes[0]
 }
