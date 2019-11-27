@@ -31,7 +31,6 @@ export function MoveLayers (initialState) {
       setHasSelection(hasSelection)
     })
   }, [])
-  console.log(inputs)
   return (
     <Container>
       <TextboxNumeric
