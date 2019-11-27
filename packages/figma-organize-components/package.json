@@ -27,7 +27,8 @@
   "dependencies": {
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
-    "preact": "^10.0.5"
+    "preact": "^10.0.5",
+    "natural-compare-lite": "^1.4.0"
   },
   "create-figma-plugin": {
     "id": "figma-organize-components",

@@ -19,19 +19,15 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
-  addEventListener('ORGANIZE_COMPONENTS', async function ({
-    layers,
-    groupDefinition,
-    horizontalSpace,
-    verticalSpace
-  }) {
-    await saveSettings({ groupDefinition, horizontalSpace, verticalSpace })
-    const groups = groupLayers(layers, groupDefinition)
+  addEventListener('ORGANIZE_COMPONENTS', async function (settings) {
+    await saveSettings(settings)
+    const { groupDefinition, horizontalSpace, verticalSpace } = settings
+    const groups = groupLayers(getComponentLayers(), groupDefinition)
     arrangeGroups(groups, horizontalSpace, verticalSpace)
     figma.closePlugin(formatSuccessMessage('Organized components'))
   })
   figma.on('selectionchange', function () {
-    triggerEvent('SELECTION_CHANGED', extractLayerNames(getComponentLayers()))
+    triggerEvent('SELECTION_CHANGED', getComponentLayers())
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()
@@ -39,20 +35,18 @@ export default async function () {
   showUI(
     { width: 240, height: 377 },
     {
-      layers: extractLayerNames(layers),
+      layers,
       ...settings
     }
   )
 }
 
 function getComponentLayers () {
-  return figma.currentPage.children.filter(function (layer) {
-    return layer.type === 'COMPONENT'
+  const result = []
+  figma.currentPage.children.filter(function ({ id, name, type }) {
+    if (type === 'COMPONENT') {
+      result.push({ id, name })
+    }
   })
-}
-
-function extractLayerNames (layers) {
-  return layers.map(function ({ id, name }) {
-    return { id, name }
-  })
+  return result
 }
