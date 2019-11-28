@@ -27,7 +27,7 @@ export function OrganizeComponents (initialState) {
   function closeCallback () {
     triggerEvent('CLOSE')
   }
-  const { inputs, setInput, handleInput, handleSubmit } = useForm(
+  const { inputs, setInputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
     closeCallback,
@@ -36,13 +36,13 @@ export function OrganizeComponents (initialState) {
   useEffect(
     function () {
       addEventListener('SELECTION_CHANGED', function (layers) {
-        setInput({
+        setInputs({
           ...inputs,
           layers
         })
       })
     },
-    [setInput, inputs]
+    [setInputs, inputs]
   )
   return (
     <div>

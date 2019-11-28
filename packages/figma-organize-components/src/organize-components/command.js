@@ -8,9 +8,11 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
+import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
+import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'
 import { defaultSettings } from '../default-settings'
-import { groupLayers } from './group-layers'
 import { arrangeGroups } from './arrange-groups'
+import { groupLayers } from './group-layers'
 
 export default async function () {
   const layers = getComponentLayers()
@@ -22,8 +24,10 @@ export default async function () {
   addEventListener('ORGANIZE_COMPONENTS', async function (settings) {
     await saveSettings(settings)
     const { groupDefinition, horizontalSpace, verticalSpace } = settings
-    const groups = groupLayers(getComponentLayers(), groupDefinition)
+    const layers = getComponentLayers()
+    const groups = groupLayers(layers, groupDefinition)
     arrangeGroups(groups, horizontalSpace, verticalSpace)
+    sortLayers(layers)
     figma.closePlugin(formatSuccessMessage('Organized components'))
   })
   figma.on('selectionchange', function () {
@@ -49,4 +53,12 @@ function getComponentLayers () {
     }
   })
   return result
+}
+
+function sortLayers (layers) {
+  const components = layers.map(function ({ id }) {
+    return figma.getNodeById(id)
+  })
+  const result = sortLayersByName(components)
+  updateLayersSortOrder(result)
 }
