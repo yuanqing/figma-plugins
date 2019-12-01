@@ -1,11 +1,14 @@
 /** @jsx h */
 import {
   Button,
+  Columns,
   Container,
   Checkbox,
-  Header,
   SegmentedControl,
+  Stack,
+  Text,
   TextboxNumeric,
+  VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
@@ -62,63 +65,69 @@ export function OrganizeComponents (initialState) {
   return (
     <div>
       <Preview {...inputs} />
-      <Container>
-        <Header>Group by text before</Header>
-        <SegmentedControl
-          name='groupDefinition'
-          value={Math.min(
-            inputs.groupDefinition,
-            inputs.maximumGroupDefinition
-          )}
-          options={groupDefinitions.slice(0, inputs.maximumGroupDefinition)}
-          onChange={handleInput}
-        />
-        <Header>Space</Header>
-        <TextboxNumeric
-          name='horizontalSpace'
-          icon={
-            <svg>
-              <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
-                d='M2 3H4V13H2V14H4.5H5V13.5V2.5V2H4.5H2V3ZM12 2H12.5H15V3H13V13H15V14H12.5H12V13.5V2.5V2ZM8 11V5H9V11H8Z'
+      <Container medium>
+        <VerticalSpace large />
+        <Stack large>
+          <Stack small>
+            <Text muted>Group by text before</Text>
+            <SegmentedControl
+              name='groupDefinition'
+              value={Math.min(
+                inputs.groupDefinition,
+                inputs.maximumGroupDefinition
+              )}
+              options={groupDefinitions.slice(0, inputs.maximumGroupDefinition)}
+              onChange={handleInput}
+            />
+          </Stack>
+          <Stack small>
+            <Text muted>Space</Text>
+            <Columns extraSmall>
+              <TextboxNumeric
+                name='horizontalSpace'
+                icon={
+                  <svg>
+                    <path
+                      fill-rule='evenodd'
+                      clip-rule='evenodd'
+                      d='M2 3H4V13H2V14H4.5H5V13.5V2.5V2H4.5H2V3ZM12 2H12.5H15V3H13V13H15V14H12.5H12V13.5V2.5V2ZM8 11V5H9V11H8Z'
+                    />
+                  </svg>
+                }
+                onChange={handleInput}
+                value={inputs.horizontalSpace}
               />
-            </svg>
-          }
-          onChange={handleInput}
-          value={inputs.horizontalSpace}
-        />
-        <TextboxNumeric
-          name='verticalSpace'
-          icon={
-            <svg>
-              <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
-                d='M2 2V4.5V5H2.5H13.5H14V4.5V2H13V4H3V2H2ZM11 9H5V8H11V9ZM2 12H2.5H13.5H14V12.5V15H13V13H3V15H2V12.5V12Z'
+              <TextboxNumeric
+                name='verticalSpace'
+                icon={
+                  <svg>
+                    <path
+                      fill-rule='evenodd'
+                      clip-rule='evenodd'
+                      d='M2 2V4.5V5H2.5H13.5H14V4.5V2H13V4H3V2H2ZM11 9H5V8H11V9ZM2 12H2.5H13.5H14V12.5V15H13V13H3V15H2V12.5V12Z'
+                    />
+                  </svg>
+                }
+                onChange={handleInput}
+                value={inputs.verticalSpace}
               />
-            </svg>
-          }
-          onChange={handleInput}
-          value={inputs.verticalSpace}
-          style={{ marginTop: '12px' }}
-        />
-        <Checkbox
-          name='shouldDeleteNonComponents'
-          value={inputs.shouldDeleteNonComponents}
-          onChange={handleInput}
-          style={{ marginTop: '12px' }}
-        >
-          Delete non-components on page
-        </Checkbox>
-        <Button
-          fullWidth
-          disabled={inputs.layers.length === 0}
-          onClick={handleSubmit}
-          style={{ marginTop: '16px' }}
-        >
-          Organize Components
-        </Button>
+            </Columns>
+          </Stack>
+          <Checkbox
+            name='shouldDeleteNonComponents'
+            value={inputs.shouldDeleteNonComponents}
+            onChange={handleInput}
+          >
+            Delete non-components on page
+          </Checkbox>
+          <Button
+            fullWidth
+            disabled={inputs.layers.length === 0}
+            onClick={handleSubmit}
+          >
+            Organize Components
+          </Button>
+        </Stack>
       </Container>
     </div>
   )

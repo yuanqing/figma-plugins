@@ -50,7 +50,7 @@ export default async function () {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 409 },
+    { width: 240, height: 357 },
     {
       layers: extractIdAndName(layers),
       maximumGroupDefinition: computeMaximumGroupDefinition(layers),
