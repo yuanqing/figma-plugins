@@ -47,7 +47,7 @@ export default async function () {
 
 function getComponentLayers () {
   const result = []
-  figma.currentPage.children.filter(function ({ id, name, type }) {
+  figma.currentPage.children.forEach(function ({ id, name, type }) {
     if (type === 'COMPONENT') {
       result.push({ id, name })
     }
