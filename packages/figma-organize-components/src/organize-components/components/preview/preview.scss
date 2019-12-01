@@ -2,30 +2,20 @@
 @import "@create-figma-plugin/ui/src/scss/text";
 
 .preview {
-  // reset
-  box-sizing: border-box;
-
-  @include text-11-regular;
-  cursor: default;
-  user-select: none;
-  position: relative;
-  height: 121px;
-  padding: 16px 16px 16px 0;
-  overflow: auto;
-  background-color: #f7f7f7;
-  border-bottom: 1px solid $color-silver;
-
-  &:before {
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 16px;
-    vertical-align: middle;
-  }
+  display: flex;
+  padding-right: 16px;
 }
 
-.inner {
-  display: inline-block;
-  vertical-align: middle;
-  width: 208px;
+.group {
+  flex-grow: 1;
+  padding-left: 16px;
+}
+
+.item {
+  color: $color-black-3;
+
+  strong {
+    color: $color-black-8;
+    font-weight: $font-weight-regular;
+  }
 }

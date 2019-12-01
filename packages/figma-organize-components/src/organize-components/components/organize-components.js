@@ -46,7 +46,7 @@ export function OrganizeComponents (initialState) {
   )
   return (
     <div>
-      <Preview />
+      <Preview {...inputs} />
       <Container>
         <Header>Group definition</Header>
         <Textbox

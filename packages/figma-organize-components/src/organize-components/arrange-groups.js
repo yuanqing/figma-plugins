@@ -9,7 +9,7 @@ export function arrangeGroups (groups, horizontalSpace, verticalSpace) {
       const layer = figma.getNodeById(id)
       layer.x = x
       layer.y = y
-      y += layer.y + layer.height + verticalSpace
+      y = layer.y + layer.height + verticalSpace
       maxWidth = Math.max(maxWidth, layer.width)
     }
     x += maxWidth + horizontalSpace
