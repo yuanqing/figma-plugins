@@ -3,7 +3,7 @@ import {
   Button,
   Container,
   Header,
-  Textbox,
+  SegmentedControl,
   TextboxNumeric,
   useForm
 } from '@create-figma-plugin/ui'
@@ -11,6 +11,14 @@ import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { Preview } from './preview/preview'
+
+const groupDefinitions = [
+  { value: 1, text: '1st /' },
+  { value: 2, text: '2nd /' },
+  { value: 3, text: '3rd /' },
+  { value: 4, text: '4th /' },
+  { value: 5, text: '5th /' }
+]
 
 export function OrganizeComponents (initialState) {
   function submitCallback ({
@@ -48,11 +56,12 @@ export function OrganizeComponents (initialState) {
     <div>
       <Preview {...inputs} />
       <Container>
-        <Header>Group definition</Header>
-        <Textbox
+        <Header>Group by text before</Header>
+        <SegmentedControl
           name='groupDefinition'
-          onChange={handleInput}
           value={inputs.groupDefinition}
+          options={groupDefinitions}
+          onChange={handleInput}
         />
         <Header>Space</Header>
         <TextboxNumeric
