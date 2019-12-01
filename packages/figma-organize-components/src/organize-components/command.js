@@ -8,22 +8,30 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
-import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'
-import { defaultSettings } from '../default-settings'
 import { arrangeGroups } from './arrange-groups'
+import { defaultSettings } from '../default-settings'
+import { deleteNonComponents } from './delete-non-components'
 import { groupLayers } from './group-layers'
+import { sortLayers } from './sort-layers'
 
 export default async function () {
   const layers = getComponentLayers()
   if (layers.length === 0) {
-    figma.closePlugin(formatErrorMessage('No components on the page'))
+    figma.closePlugin(formatErrorMessage('No components on page'))
     return
   }
   const settings = await loadSettings(defaultSettings)
   addEventListener('ORGANIZE_COMPONENTS', async function (settings) {
     await saveSettings(settings)
-    const { groupDefinition, horizontalSpace, verticalSpace } = settings
+    const {
+      groupDefinition,
+      horizontalSpace,
+      shouldDeleteNonComponents,
+      verticalSpace
+    } = settings
+    if (shouldDeleteNonComponents === true) {
+      deleteNonComponents(figma.currentPage.children)
+    }
     const layers = getComponentLayers()
     const groups = groupLayers(layers, groupDefinition)
     arrangeGroups(groups, horizontalSpace, verticalSpace)
@@ -31,34 +39,47 @@ export default async function () {
     figma.closePlugin(formatSuccessMessage('Organized components'))
   })
   figma.on('selectionchange', function () {
-    triggerEvent('SELECTION_CHANGED', getComponentLayers())
+    const layers = getComponentLayers()
+    triggerEvent(
+      'SELECTION_CHANGED',
+      extractIdAndName(layers),
+      computeMaximumGroupDefinition(layers)
+    )
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 377 },
+    { width: 240, height: 409 },
     {
-      layers,
+      layers: extractIdAndName(layers),
+      maximumGroupDefinition: computeMaximumGroupDefinition(layers),
       ...settings
     }
   )
 }
 
 function getComponentLayers () {
-  const result = []
-  figma.currentPage.children.forEach(function ({ id, name, type }) {
-    if (type === 'COMPONENT') {
-      result.push({ id, name })
-    }
+  return figma.currentPage.children.filter(function ({ type }) {
+    return type === 'COMPONENT'
   })
-  return result
 }
 
-function sortLayers (layers) {
-  const components = layers.map(function ({ id }) {
-    return figma.getNodeById(id)
+function extractIdAndName (layers) {
+  return layers.map(function ({ id, name }) {
+    return { id, name }
   })
-  const result = sortLayersByName(components)
-  updateLayersSortOrder(result)
+}
+
+const slashRegex = /\//g
+
+function computeMaximumGroupDefinition (layers) {
+  let maximum = 1
+  layers.forEach(function ({ name }) {
+    const matches = name.match(slashRegex)
+    if (matches !== null) {
+      maximum = Math.max(maximum, matches.length)
+    }
+  })
+  return maximum
 }

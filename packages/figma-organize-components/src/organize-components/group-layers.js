@@ -12,7 +12,7 @@ export function groupLayers (layers, groupDefinition) {
   return result
 }
 
-const slashRegex = new RegExp(/\//)
+const slashRegex = /\//
 
 function extractGroupName (layerName, groupDefinition) {
   const split = layerName.split(slashRegex)

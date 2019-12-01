@@ -2,6 +2,7 @@
 import {
   Button,
   Container,
+  Checkbox,
   Header,
   SegmentedControl,
   TextboxNumeric,
@@ -24,11 +25,13 @@ export function OrganizeComponents (initialState) {
   function submitCallback ({
     groupDefinition,
     horizontalSpace,
+    shouldDeleteNonComponents,
     verticalSpace
   }) {
     triggerEvent('ORGANIZE_COMPONENTS', {
       groupDefinition,
       horizontalSpace: castToNumber(horizontalSpace),
+      shouldDeleteNonComponents,
       verticalSpace: castToNumber(verticalSpace)
     })
   }
@@ -43,10 +46,14 @@ export function OrganizeComponents (initialState) {
   )
   useEffect(
     function () {
-      addEventListener('SELECTION_CHANGED', function (layers) {
+      addEventListener('SELECTION_CHANGED', function (
+        layers,
+        maximumGroupDefinition
+      ) {
         setInputs({
           ...inputs,
-          layers
+          layers,
+          maximumGroupDefinition
         })
       })
     },
@@ -59,8 +66,11 @@ export function OrganizeComponents (initialState) {
         <Header>Group by text before</Header>
         <SegmentedControl
           name='groupDefinition'
-          value={inputs.groupDefinition}
-          options={groupDefinitions}
+          value={Math.min(
+            inputs.groupDefinition,
+            inputs.maximumGroupDefinition
+          )}
+          options={groupDefinitions.slice(0, inputs.maximumGroupDefinition)}
           onChange={handleInput}
         />
         <Header>Space</Header>
@@ -93,11 +103,19 @@ export function OrganizeComponents (initialState) {
           value={inputs.verticalSpace}
           style={{ marginTop: '12px' }}
         />
+        <Checkbox
+          name='shouldDeleteNonComponents'
+          value={inputs.shouldDeleteNonComponents}
+          onChange={handleInput}
+          style={{ marginTop: '12px' }}
+        >
+          Delete non-components on page
+        </Checkbox>
         <Button
           fullWidth
           disabled={inputs.layers.length === 0}
           onClick={handleSubmit}
-          style={{ marginTop: '24px' }}
+          style={{ marginTop: '16px' }}
         >
           Organize Components
         </Button>

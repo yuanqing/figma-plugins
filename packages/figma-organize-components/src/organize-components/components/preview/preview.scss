@@ -4,6 +4,7 @@
 .preview {
   display: flex;
   padding-right: 16px;
+  color: $color-black-3;
 }
 
 .group {
@@ -11,11 +12,7 @@
   padding-left: 16px;
 }
 
-.item {
-  color: $color-black-3;
-
-  strong {
-    color: $color-black-8;
-    font-weight: $font-weight-regular;
-  }
+.item strong {
+  font-weight: $font-weight-regular;
+  color: $color-black-8;
 }
