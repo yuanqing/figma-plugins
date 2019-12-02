@@ -5,6 +5,13 @@ import { groupLayers } from '../../group-layers'
 import style from './preview.scss'
 
 export function Preview ({ layers, groupDefinition }) {
+  if (layers.length === 0) {
+    return (
+      <PreviewContainer>
+        <div class={style.empty}>No components on page</div>
+      </PreviewContainer>
+    )
+  }
   const groups = groupLayers(layers, groupDefinition)
   return (
     <PreviewContainer>
