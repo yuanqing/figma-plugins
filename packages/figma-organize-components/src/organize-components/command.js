@@ -36,7 +36,7 @@ export default async function () {
     const groups = groupLayers(layers, groupDefinition)
     arrangeGroups(groups, horizontalSpace, verticalSpace)
     sortLayers(layers)
-    figma.closePlugin(formatSuccessMessage('Organized components'))
+    figma.closePlugin(formatSuccessMessage('Organized components on page'))
   })
   figma.on('selectionchange', function () {
     const layers = getComponentLayers()
