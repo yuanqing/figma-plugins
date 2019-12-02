@@ -2,9 +2,10 @@
 import {
   Button,
   Container,
-  Header,
   SegmentedControl,
+  Text,
   TextboxAutocomplete,
+  VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
@@ -83,15 +84,19 @@ export function FormatCurrency (initialState) {
   return (
     <div>
       <Preview items={previewItems} />
-      <Container>
-        <Header>Format</Header>
+      <Container space='medium'>
+        <VerticalSpace space='large' />
+        <Text muted>Format</Text>
+        <VerticalSpace space='small' />
         <SegmentedControl
           name='format'
           value={inputs.format}
           options={[{ value: EXPLICIT }, { value: SHORT }, { value: RETAIN }]}
           onChange={handleInput}
         />
-        <Header>Locale</Header>
+        <VerticalSpace space='large' />
+        <Text muted>Locale</Text>
+        <VerticalSpace space='small' />
         <TextboxAutocomplete
           filter
           strict
@@ -101,6 +106,7 @@ export function FormatCurrency (initialState) {
           options={locales}
           onChange={handleLocaleChange}
         />
+        <VerticalSpace space='extraLarge' />
         <Button
           fullWidth
           disabled={
@@ -109,7 +115,6 @@ export function FormatCurrency (initialState) {
             previewItems.length === 0
           }
           onClick={handleSubmit}
-          style={{ marginTop: '24px' }}
         >
           Format Currency
         </Button>

@@ -3,8 +3,9 @@ import {
   Button,
   Checkbox,
   Container,
-  Header,
+  Text,
   TextboxAutocomplete,
+  VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
@@ -86,8 +87,10 @@ export function ConvertCurrency (initialState) {
   return (
     <div>
       <Preview items={previewItems} />
-      <Container>
-        <Header>Currency</Header>
+      <Container space='medium'>
+        <VerticalSpace space='large' />
+        <Text muted>Currency</Text>
+        <VerticalSpace space='small' />
         <TextboxAutocomplete
           filter
           strict
@@ -96,15 +99,17 @@ export function ConvertCurrency (initialState) {
           options={currencies}
           onChange={handleCurrencyChange}
         />
+        <VerticalSpace space='small' />
         <Checkbox
           name='roundNumbers'
           value={roundNumbers === true}
           onChange={handleInput}
-          style={{ marginBottom: '-8px' }}
         >
-          Round numbers
+          <Text>Round numbers</Text>
         </Checkbox>
-        <Header>Locale</Header>
+        <VerticalSpace space='large' />
+        <Text muted>Locale</Text>
+        <VerticalSpace space='small' />
         <TextboxAutocomplete
           filter
           strict
@@ -114,6 +119,7 @@ export function ConvertCurrency (initialState) {
           options={[{ value: 'en-US' }, { value: 'de-DE' }]}
           onChange={handleLocaleChange}
         />
+        <VerticalSpace space='extraLarge' />
         <Button
           fullWidth
           disabled={
@@ -122,7 +128,6 @@ export function ConvertCurrency (initialState) {
             previewItems.length === 0
           }
           onClick={handleSubmit}
-          style={{ marginTop: '24px' }}
         >
           Convert Currency
         </Button>
