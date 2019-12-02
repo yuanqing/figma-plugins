@@ -2,8 +2,9 @@
 import {
   Button,
   Container,
-  Header,
+  Text,
   TextboxNumeric,
+  VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
@@ -32,8 +33,10 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
     })
   }, [])
   return (
-    <Container>
-      <Header>Space</Header>
+    <Container space='medium'>
+      <VerticalSpace space='large' />
+      <Text muted>Space</Text>
+      <VerticalSpace space='small' />
       <TextboxNumeric
         name='space'
         icon={icon}
@@ -41,11 +44,11 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
         value={inputs.space}
         focused
       />
+      <VerticalSpace space='extraLarge' />
       <Button
         fullWidth
         disabled={hasSelection === false || isNaN(parseFloat(inputs.space))}
         onClick={handleSubmit}
-        style={{ marginTop: '24px' }}
       >
         Distribute Layers {direction}
       </Button>

@@ -2,8 +2,9 @@
 import {
   Button,
   Container,
-  Header,
+  Text,
   TextboxNumeric,
+  VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
@@ -32,19 +33,21 @@ export function DrawSliceOverSelection (initialState) {
     })
   }, [])
   return (
-    <Container>
-      <Header>Padding</Header>
+    <Container space='medium'>
+      <VerticalSpace space='large' />
+      <Text muted>Padding</Text>
+      <VerticalSpace space='small' />
       <TextboxNumeric
         name='padding'
         onChange={handleInput}
         value={inputs.padding}
         focused
       />
+      <VerticalSpace space='extraLarge' />
       <Button
         fullWidth
         disabled={hasSelection === false || isNaN(parseFloat(inputs.padding))}
         onClick={handleSubmit}
-        style={{ marginTop: '24px' }}
       >
         Draw Slice Over Selection
       </Button>
