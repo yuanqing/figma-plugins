@@ -8,7 +8,8 @@
 
 Organizes components on the current page.
 
-- Customise the way components are group and the spacing between components.
+- Customise the way components are grouped.
+- Set the space between components.
 - Optionally delete non-components on the page.
 
 ## License
