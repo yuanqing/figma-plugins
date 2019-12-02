@@ -9,7 +9,7 @@
   user-select: none;
   cursor: default;
   position: relative;
-  padding: 8px 16px;
+  padding: $space-extra-small $space-medium;
 
   &:hover {
     background-color: $color-selection-b;
@@ -20,11 +20,25 @@
   background-color: $color-selection-b;
 }
 
-.icon {
+.spinner {
+  animation: rotating 0.5s linear infinite;
+}
+
+.icon,
+.spinner {
   position: absolute;
-  right: 12px;
-  top: 8px;
+  right: $space-small;
+  top: $space-extra-small;
   width: 16px;
   height: 16px;
   fill: $color-blue;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,5 +1,10 @@
 /** @jsx h */
-import { Button } from '@create-figma-plugin/ui'
+import {
+  Container,
+  Button,
+  Divider,
+  VerticalSpace
+} from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
@@ -12,6 +17,7 @@ const DEFAULT_LANGUAGE = 'DEFAULT_LANGUAGE'
 
 export function LanguageTester () {
   const [activeLanguageKey, setLanguageKey] = useState(DEFAULT_LANGUAGE)
+  const [isLoading, setIsLoading] = useState(false)
   function handleLanguageClick (languageKey) {
     setLanguageKey(languageKey)
     triggerEvent('SET_LANGUAGE', languageKey)
@@ -32,10 +38,12 @@ export function LanguageTester () {
       languageKey,
       apiKey
     ) {
+      setIsLoading(true)
       const promises = layers.map(function ({ characters }) {
         return translate(characters, languageKey, apiKey)
       })
       const translated = await Promise.all(promises)
+      setIsLoading(false)
       const result = layers.map(function ({ id }, index) {
         return {
           id,
@@ -64,6 +72,7 @@ export function LanguageTester () {
             <LanguageItem
               key={index}
               isActive={isActive}
+              isLoading={isActive === true ? isLoading : false}
               onClick={
                 isActive === false
                   ? handleLanguageClick.bind(null, languageKey)
@@ -75,7 +84,9 @@ export function LanguageTester () {
           )
         })}
       </div>
-      <div class={styles.button}>
+      <Divider />
+      <VerticalSpace space='small' />
+      <Container space='medium'>
         <Button
           disabled={isResetButtonDisabled === true}
           fullWidth
@@ -83,7 +94,7 @@ export function LanguageTester () {
         >
           Reset
         </Button>
-      </div>
+      </Container>
     </div>
   )
 }
