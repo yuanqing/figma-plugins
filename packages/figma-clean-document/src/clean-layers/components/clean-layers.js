@@ -3,8 +3,10 @@ import {
   Button,
   Checkbox,
   Container,
+  Stack,
   Text,
   Textbox,
+  VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
 import { triggerEvent } from '@create-figma-plugin/utilities'
@@ -38,62 +40,64 @@ export function CleanLayers (initialState) {
     smartSortLayers === true ||
     ungroupSingleLayerGroups === true
   return (
-    <Container>
-      <Checkbox
-        name='deleteHiddenLayers'
-        value={deleteHiddenLayers}
-        onChange={handleInput}
-        style={{ marginTop: '12px' }}
-      >
-        Delete hidden layers
-      </Checkbox>
-      <Checkbox
-        name='ungroupSingleLayerGroups'
-        value={ungroupSingleLayerGroups}
-        onChange={handleInput}
-      >
-        Ungroup single-layer groups
-      </Checkbox>
-      <Checkbox name='pixelPerfect' value={pixelPerfect} onChange={handleInput}>
-        Make pixel-perfect
-      </Checkbox>
-      <Checkbox
-        name='smartRenameLayers'
-        value={smartRenameLayers}
-        onChange={handleInput}
-      >
-        Smart rename layers
-        <Text
-          muted
-          style={{
-            margin: '8px 0'
-          }}
-        >
-          Ignore layers named
-        </Text>
-        <Textbox
-          disabled={inputs.smartRenameLayers === false}
-          name='smartRenameLayersWhitelist'
-          value={smartRenameLayersWhitelist}
+    <Container space='medium'>
+      <VerticalSpace space='extraLarge' />
+      <Stack space='large'>
+        <Checkbox
+          name='deleteHiddenLayers'
+          value={deleteHiddenLayers}
           onChange={handleInput}
-        />
-      </Checkbox>
-      <Checkbox
-        name='smartSortLayers'
-        onChange={handleInput}
-        value={smartSortLayers}
-      >
-        Smart sort layers
-        <Text muted style={{ marginTop: '8px' }}>
-          Sort layers by their X and Y position while maintaining their relative
-          stacking order on the page
-        </Text>
-      </Checkbox>
+        >
+          <Text>Delete hidden layers</Text>
+        </Checkbox>
+        <Checkbox
+          name='ungroupSingleLayerGroups'
+          value={ungroupSingleLayerGroups}
+          onChange={handleInput}
+        >
+          <Text>Ungroup single-layer groups</Text>
+        </Checkbox>
+        <Checkbox
+          name='pixelPerfect'
+          value={pixelPerfect}
+          onChange={handleInput}
+        >
+          <Text>Make pixel-perfect</Text>
+        </Checkbox>
+        <Checkbox
+          name='smartRenameLayers'
+          value={smartRenameLayers}
+          onChange={handleInput}
+        >
+          <Text>Smart rename layers</Text>
+          <VerticalSpace space='medium' />
+          <Text muted>Ignore layers named</Text>
+          <VerticalSpace space='small' />
+          <Textbox
+            disabled={inputs.smartRenameLayers === false}
+            name='smartRenameLayersWhitelist'
+            value={smartRenameLayersWhitelist}
+            onChange={handleInput}
+          />
+        </Checkbox>
+        <Checkbox
+          name='smartSortLayers'
+          onChange={handleInput}
+          value={smartSortLayers}
+        >
+          <Text>Smart sort layers</Text>
+          <VerticalSpace space='medium' />
+          <Text muted>
+            Sort layers by their X and Y position while maintaining their
+            relative stacking order on the page
+          </Text>
+        </Checkbox>
+      </Stack>
+      <VerticalSpace space='extraLarge' />
       <Button
         fullWidth
         disabled={isSubmitButtonEnabled === false}
         onClick={isSubmitButtonEnabled === true ? handleSubmit : null}
-        style={{ marginTop: '12px' }}
       >
         Clean Layers
       </Button>
