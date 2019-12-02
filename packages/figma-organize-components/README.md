@@ -8,6 +8,9 @@
 
 Organizes components on the current page.
 
+- Customise the way components are group and the spacing between components.
+- Optionally delete non-components on the page.
+
 ## License
 
 MIT
