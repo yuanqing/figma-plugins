@@ -10,4 +10,5 @@ Name | Description
 [**Format Currency**](packages/figma-format-currency) | Format and convert between currencies
 [**Language Tester**](packages/figma-language-tester) | Test your UI in different languages
 [**Move Layers**](packages/figma-move-layers) | Precisely move layers
+[**Organize Layers**](packages/figma-organize-layers) | Organize layers on the page
 [**Sort Layers**](packages/figma-sort-layers) | Sort layers by name or position
