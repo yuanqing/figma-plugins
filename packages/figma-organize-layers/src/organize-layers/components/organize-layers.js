@@ -3,7 +3,6 @@ import {
   Button,
   Columns,
   Container,
-  Checkbox,
   SegmentedControl,
   Text,
   TextboxNumeric,
@@ -27,13 +26,11 @@ export function OrganizeLayers (initialState) {
   function submitCallback ({
     groupDefinition,
     horizontalSpace,
-    shouldDeleteNonComponents,
     verticalSpace
   }) {
-    triggerEvent('ORGANIZE_COMPONENTS', {
+    triggerEvent('ORGANIZE_LAYERS', {
       groupDefinition,
       horizontalSpace: castToNumber(horizontalSpace),
-      shouldDeleteNonComponents,
       verticalSpace: castToNumber(verticalSpace)
     })
   }
@@ -66,7 +63,7 @@ export function OrganizeLayers (initialState) {
       <Preview {...inputs} />
       <Container space='medium'>
         <VerticalSpace space='large' />
-        <Text muted>Group by text before</Text>
+        <Text muted>Group layers by name</Text>
         <VerticalSpace space='small' />
         <SegmentedControl
           name='groupDefinition'
@@ -78,7 +75,7 @@ export function OrganizeLayers (initialState) {
           onChange={handleInput}
         />
         <VerticalSpace space='large' />
-        <Text muted>Space</Text>
+        <Text muted>Space between layers</Text>
         <VerticalSpace space='small' />
         <Columns space='extraSmall'>
           <TextboxNumeric
@@ -111,20 +108,12 @@ export function OrganizeLayers (initialState) {
           />
         </Columns>
         <VerticalSpace space='large' />
-        <Checkbox
-          name='shouldDeleteNonComponents'
-          value={inputs.shouldDeleteNonComponents}
-          onChange={handleInput}
-        >
-          <Text>Delete non-components on page</Text>
-        </Checkbox>
-        <VerticalSpace space='large' />
         <Button
           fullWidth
           disabled={inputs.layers.length === 0}
           onClick={handleSubmit}
         >
-          Organize Components
+          Organize Layers
         </Button>
       </Container>
     </div>
