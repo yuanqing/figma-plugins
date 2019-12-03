@@ -1,21 +1,22 @@
 {
-  "name": "figma-organize-components",
+  "name": "figma-organize-layers",
   "version": "0.0.0",
-  "description": "A Figma plugin to organize components on the page",
+  "description": "A Figma plugin to organize layers on the page",
   "keywords": [
-    "components",
+    "layers",
     "create-figma-plugin",
     "figma",
     "figma-plugin",
     "figma-plugins",
-    "organize-components"
+    "organize",
+    "organize-layers"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/figma-plugins.git",
-    "directory": "packages/figma-organize-components"
+    "directory": "packages/figma-organize-layers"
   },
   "files": [
     "src"
@@ -32,13 +33,13 @@
     "preact": "^10.0.5"
   },
   "create-figma-plugin": {
-    "id": "figma-organize-components",
-    "name": "Organize Components",
+    "id": "figma-organize-layers",
+    "name": "Organize Layers",
     "menu": [
       {
-        "name": "Organize Components",
-        "command": "organize-components/command.js",
-        "ui": "organize-components/ui.js"
+        "name": "Organize Layers",
+        "command": "organize-layers/command.js",
+        "ui": "organize-layers/ui.js"
       },
       "-",
       {

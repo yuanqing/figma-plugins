@@ -23,7 +23,7 @@ const groupDefinitions = [
   { value: 5, text: '5th /' }
 ]
 
-export function OrganizeComponents (initialState) {
+export function OrganizeLayers (initialState) {
   function submitCallback ({
     groupDefinition,
     horizontalSpace,
