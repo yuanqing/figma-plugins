@@ -3,9 +3,9 @@ import { triggerEvent } from '@create-figma-plugin/utilities'
 import {
   Button,
   Container,
-  Header,
   Text,
   Textbox,
+  VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
 import { h } from 'preact'
@@ -27,14 +27,17 @@ export function SetApiKey (initialState) {
   )
   return (
     <Container>
-      <Header>API Key</Header>
+      <VerticalSpace space='large' />
+      <Text muted>API Key</Text>
+      <VerticalSpace space='small' />
       <Textbox
         name='apiKey'
         value={inputs.apiKey}
         onChange={handleInput}
         focused
       />
-      <Text style={{ marginTop: '8px' }}>
+      <VerticalSpace space='small' />
+      <Text>
         <a
           href='https://translate.yandex.com/developers/keys'
           target='_blank'
@@ -43,12 +46,8 @@ export function SetApiKey (initialState) {
           Get a Yandex Translate API key
         </a>
       </Text>
-      <Button
-        fullWidth
-        disabled={inputs.apiKey === ''}
-        onClick={handleSubmit}
-        style={{ marginTop: '20px' }}
-      >
+      <VerticalSpace space='extraLarge' />
+      <Button fullWidth disabled={inputs.apiKey === ''} onClick={handleSubmit}>
         Set API Key
       </Button>
     </Container>

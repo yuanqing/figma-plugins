@@ -3,8 +3,9 @@ import { triggerEvent } from '@create-figma-plugin/utilities'
 import {
   Button,
   Container,
-  Header,
+  Text,
   Textbox,
+  VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
 import { h } from 'preact'
@@ -24,14 +25,17 @@ export function SmartRenameLayers (initialState) {
   )
   const { smartRenameLayersWhitelist } = inputs
   return (
-    <Container>
-      <Header>Ignore layers named</Header>
+    <Container space='medium'>
+      <VerticalSpace space='large' />
+      <Text muted>Ignore layers named</Text>
+      <VerticalSpace space='small' />
       <Textbox
         name='smartRenameLayersWhitelist'
         value={smartRenameLayersWhitelist}
         onChange={handleInput}
       />
-      <Button fullWidth onClick={handleSubmit} style={{ marginTop: '24px' }}>
+      <VerticalSpace space='extraLarge' />
+      <Button fullWidth onClick={handleSubmit}>
         Smart Rename Layers
       </Button>
     </Container>
