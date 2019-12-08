@@ -43,12 +43,12 @@
     "name": "Component Utilities",
     "menu": [
       {
-        "name": "Copy Component",
-        "command": "copy-component/command.js"
-      },
-      {
         "name": "Create Component from Layer",
         "command": "create-component-from-layer/command.js"
+      },
+      {
+        "name": "Copy Component",
+        "command": "copy-component/command.js"
       },
       "-",
       {
