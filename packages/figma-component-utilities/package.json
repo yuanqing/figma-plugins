@@ -15,7 +15,8 @@
     "instance",
     "instances",
     "replace",
-    "replace-component"
+    "replace-component",
+    "utilities"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",
