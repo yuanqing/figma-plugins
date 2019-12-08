@@ -33,7 +33,6 @@
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
     "figma-sort-layers": "*",
-    "natural-compare-lite": "^1.4.0",
     "preact": "^10.0.5"
   },
   "create-figma-plugin": {
