@@ -22,9 +22,9 @@ Rounds the X and Y position and dimensions of layers within the selection or on 
 
 Intelligently renames layers within the selection or on the current page.
 
-- Layers of type `Text` will be named based on their text content.
-- Layers of type `Instance` will be given the same name as their Master Component.
-- Layers of all other layer types will be named based on their layer type. (For example, a layer of type `Rectangle` will be named “Rectangle”, a layer of type `Group` will be named “Group”, and so on.)
+- Layers of type Text will be named based on their text content.
+- Layers of type Instance will be given the same name as their Master Component.
+- Layers of all other layer types will be named based on their layer type. (For example, a layer of type Rectangle will be named “Rectangle”, a layer of type Group will be named “Group”, and so on.)
 - Layers with export settings will not be renamed.
 
 Optionally specify a whitelist Regular Expression to skip the renaming of particular layers.
