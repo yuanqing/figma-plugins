@@ -5,6 +5,7 @@
 Name | Description
 :--|:--
 [**Clean Document**](packages/figma-clean-document) | Automagically organise and clean up your Figma document
+[**Component Utilities**](packages/figma-component-utilities) | Copy and create components, and replace layers with components
 [**Distribute Layers**](packages/figma-distribute-layers) | Distribute layers in a given direction and offset
 [**Draw Slice Over Selection**](packages/figma-draw-slice-over-selection) | Draw a slice over the selection
 [**Format Currency**](packages/figma-format-currency) | Format and convert between currencies
