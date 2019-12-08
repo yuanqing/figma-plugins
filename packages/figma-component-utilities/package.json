@@ -52,7 +52,7 @@
       },
       "-",
       {
-        "name": "Replace With Component",
+        "name": "Replace with Component",
         "command": "replace-with-component/command.js",
         "ui": "replace-with-component/ui.js"
       },
