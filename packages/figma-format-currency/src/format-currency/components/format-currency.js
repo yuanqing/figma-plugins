@@ -90,7 +90,7 @@ export function FormatCurrency (initialState) {
         <VerticalSpace space='small' />
         <SegmentedControl
           name='format'
-          value={inputs.format}
+          value={format}
           options={[{ value: EXPLICIT }, { value: SHORT }, { value: RETAIN }]}
           onChange={handleInput}
         />
@@ -102,7 +102,7 @@ export function FormatCurrency (initialState) {
           strict
           top
           name='locale'
-          value={inputs.locale}
+          value={locale}
           options={locales}
           onChange={handleLocaleChange}
         />
