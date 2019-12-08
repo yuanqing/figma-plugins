@@ -54,6 +54,11 @@
         "name": "Replace With Component",
         "command": "replace-with-component/command.js",
         "ui": "replace-with-component/ui.js"
+      },
+      "-",
+      {
+        "name": "Reset",
+        "command": "reset/command.js"
       }
     ]
   }
