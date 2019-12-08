@@ -2,6 +2,7 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
+  insertBeforeLayer,
   mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
@@ -20,6 +21,7 @@ export default async function () {
     const clone = component.clone()
     clone.x = component.x + OFFSET
     clone.y = component.y + OFFSET
+    insertBeforeLayer(clone, component)
     newSelection.push(clone)
   }
   figma.currentPage.selection = newSelection
