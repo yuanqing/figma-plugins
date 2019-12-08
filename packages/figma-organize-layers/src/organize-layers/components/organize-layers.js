@@ -63,7 +63,7 @@ export function OrganizeLayers (initialState) {
       <Preview {...inputs} />
       <Container space='medium'>
         <VerticalSpace space='large' />
-        <Text muted>Group layers by name</Text>
+        <Text muted>Group by text before</Text>
         <VerticalSpace space='small' />
         <SegmentedControl
           name='groupDefinition'
