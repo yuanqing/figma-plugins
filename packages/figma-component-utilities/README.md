@@ -10,11 +10,11 @@ Creates a copy of the selected Master Component.
 
 ### Create Component from Layer
 
-Creates a Master Component from the selected layer. The selected layer becomes an Instance of the new Master Component.
+Creates a Master Component from the selected layer. The selected layer then becomes an Instance of the new Master Component.
 
-### Replace With Component
+### Replace with Component
 
-Replace the selected layers with an Instance of a Component in the document.
+Replaces the selected layers with an Instance of a Component in the document.
 
 ## License
 
