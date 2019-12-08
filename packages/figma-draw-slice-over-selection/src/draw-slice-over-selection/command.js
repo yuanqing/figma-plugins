@@ -1,5 +1,4 @@
 /* global figma */
-import { calculateMaximumBounds } from './calculate-maximum-bounds'
 import {
   addEventListener,
   formatErrorMessage,
@@ -9,6 +8,7 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
+import { calculateMaximumBounds } from './calculate-maximum-bounds'
 import { defaultSettings } from '../default-settings'
 
 export default async function () {
