@@ -13,7 +13,7 @@
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf figma.d.ts node_modules 'packages/*/node_modules' yarn.lock && yarn install",
     "test": "lerna run test",
-    "typings": "curl --remote-name --silent https://figma.com/plugin-docs/figma.d.ts",
+    "typings": "curl --remote-name --silent https://www.figma.com/plugin-docs/figma.d.ts",
     "watch": "yarn run clean && lerna run watch"
   },
   "devDependencies": {
