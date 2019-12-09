@@ -1,1 +1,1 @@
-export const OFFSET = 20
+export const OFFSET = 50
