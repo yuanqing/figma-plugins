@@ -347,15 +347,15 @@
     arrify "^1.0.1"
 
 "@create-figma-plugin/build@*":
-  version "0.0.36"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.36.tgz#28013a683654483cfa542ff4e1b2f3c38e7cd18e"
-  integrity sha512-cdeV3t2lJLgf9I+YXQorcbf9e30X3meGTXI9HXsHmQAHgsYybH2WiNWjIYzJfpJF0yfD25xmeNiVnI8RuPFlWQ==
+  version "0.0.37"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.37.tgz#33be2d2e25774902b4eab7d3d2edc0f63866ae88"
+  integrity sha512-2AUxaxEnq8/KZkvFL3HI8M46khOV1NGD1aHRugEaGmHRaRXXacE5hpwBDlX8XuS1EbcPjYR8CII9adU4UxoOJQ==
   dependencies:
     "@babel/core" "^7.7.4"
     "@babel/plugin-proposal-object-rest-spread" "^7.7.4"
     "@babel/plugin-transform-react-jsx" "^7.7.4"
-    "@create-figma-plugin/common" "^0.0.36"
-    "@create-figma-plugin/utilities" "^0.0.36"
+    "@create-figma-plugin/common" "^0.0.37"
+    "@create-figma-plugin/utilities" "^0.0.37"
     babel-loader "^8.0.6"
     chokidar "^3.3.0"
     css-loader "^3.2.0"
@@ -368,10 +368,10 @@
     terser-webpack-plugin "^2.2.1"
     webpack "^4.41.2"
 
-"@create-figma-plugin/common@^0.0.36":
-  version "0.0.36"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.36.tgz#0bf0787a58bdd1ce1cc9b9765f6443c94d451ece"
-  integrity sha512-LDREuILUpNznG1h4LKuX8DFKXCTxIB28GcdAYNC6XqdhUDnzWky+oHnpLj1/Shgc4xDANYdLpZzYSrDAMXRmig==
+"@create-figma-plugin/common@^0.0.37":
+  version "0.0.37"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.37.tgz#24730ccbb9368c3cfbcd435acae67b2598264b04"
+  integrity sha512-tUsTYRen3wownSlrvBW1UCaPg+oYVJt59VFHkkAriss92R7oGtTqkF0aUhUFcZZ4Szg4KNdoXyBWdMtLd18ZYw==
   dependencies:
     "@sindresorhus/slugify" "^0.9.1"
     chalk "^3.0.0"
@@ -379,16 +379,16 @@
     npmlog "^4.1.2"
 
 "@create-figma-plugin/ui@*":
-  version "0.0.36"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/ui/-/ui-0.0.36.tgz#dda7b0342e71e08614fb7cd78dfcf7406999414b"
-  integrity sha512-O02Ovw7lApaOc88k4SHNP7aXF2cuDj9Kp7X9gWhjB10LjgwDtGpymWfLNIG9qLp76keo1gH2UyQ9yVMZ9NLU1w==
+  version "0.0.37"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/ui/-/ui-0.0.37.tgz#111befb4018ecbcc679321ded5c2cfe1e9f2f0a1"
+  integrity sha512-LOKgxTQlWXjaZ1R8lfuWmoD4SgY2lvD/PUDswjddqvU+KdQCIIQB0iwLjfrKIOw9vvrZbpeyUS61GS2eNcTwXg==
   dependencies:
     "@sindresorhus/class-names" "^1.1.0"
 
-"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.36":
-  version "0.0.36"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.36.tgz#bea06322c1f2f3d16600dba7192693b7cc369296"
-  integrity sha512-mhpzKGqwPnOmSIJ/bD6piUtESqnqzwM7yiBkrmNpFWaeKO2DycyDljuOrSWe+7jb7XxxOfaNV2lW12jIDSILnA==
+"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.37":
+  version "0.0.37"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.37.tgz#de9d536beb132564f90c23c6921f1a6662493138"
+  integrity sha512-afh7vjAkepNIqfFZiAIVhrhALd5e2kbaBDPXM5AMQT8kP9J6tCmE/4ETL2Gx9bJv7kKXdLrW7rdHgIG3fypZsw==
 
 "@evocateur/libnpmaccess@^3.1.2":
   version "3.1.2"
@@ -1306,9 +1306,9 @@
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
 "@types/node@*", "@types/node@>= 8":
-  version "12.12.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.14.tgz#1c1d6e3c75dba466e0326948d56e8bd72a1903d2"
-  integrity sha512-u/SJDyXwuihpwjXy7hOOghagLEV1KdAST6syfnOk6QZAMzZuWZqXy5aYYZbh8Jdpd4escVFP0MvftHNDb9pruA==
+  version "12.12.15"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.15.tgz#8dfb6ce22fedd469128137640a3aa8f17415422f"
+  integrity sha512-Pv+vWicyFd07Hw/SmNnTUguqrHgDfMtjabvD9sQyxeqbpCEg8CmViLBaVPHtNsoBgZECrRf5/pgV6FJIBrGSjw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -2966,9 +2966,9 @@ copy-descriptor@^0.1.0:
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
 core-js@^2.0.0:
-  version "2.6.10"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.10.tgz#8a5b8391f8cc7013da703411ce5b585706300d7f"
-  integrity sha512-I39t74+4t+zau64EN1fE5v2W31Adtc/REhzWN+gWRRXg6WH5qAsZm62DHpQ1+Yhe4047T55jvzz7MUqF/dBBlA==
+  version "2.6.11"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
+  integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -8759,9 +8759,9 @@ serialize-error@^2.1.0:
   integrity sha1-ULZ51WNc34Rme9yOWa9OW4HV9go=
 
 serialize-javascript@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-2.1.1.tgz#952907a04a3e3a75af7f73d92d15e233862048b2"
-  integrity sha512-MPLPRpD4FNqWq9tTIjYG5LesFouDhdyH0EPY3gVK4DRD5+g4aDqdNSzLIwceulo3Yj+PL1bPh6laE5+H6LTcrQ==
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-2.1.2.tgz#ecec53b0e0317bdc95ef76ab7074b7384785fa61"
+  integrity sha512-rs9OggEUF0V4jUSecXazOYsLfu7OGK2qIn3c7IPBiffz32XniEp/TX9Xmc9LQfK2nQ2QKHvZ2oygKUGU0lG4jQ==
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
@@ -9845,9 +9845,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 uglify-js@^3.1.4:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.1.tgz#35c7de17971a4aa7689cd2eae0a5b39bb838c0c5"
-  integrity sha512-pnOF7jY82wdIhATVn87uUY/FHU+MDUdPLkmGFvGoclQmeu229eTkbG5gjGGBi3R7UuYYSEeYXY/TTY5j2aym2g==
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.2.tgz#cb1a601e67536e9ed094a92dd1e333459643d3f9"
+  integrity sha512-uhRwZcANNWVLrxLfNFEdltoPNhECUR3lc+UdJoG9CBpMcSnKyWA94tc3eAujB1GcMY5Uwq8ZMp4qWpxWYDQmaA==
   dependencies:
     commander "~2.20.3"
     source-map "~0.6.1"
