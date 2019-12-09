@@ -19,13 +19,15 @@ export default async function () {
   for (const layer of layers) {
     const component =
       layer.type !== 'COMPONENT' ? createComponent(layer) : layer
-    const instance = component.createInstance()
-    instance.x = layer.x
-    instance.y = layer.y
-    if (layer.type !== 'COMPONENT') {
-      layer.remove()
+    if (isLayerWithinInstance(layer) === false) {
+      const instance = component.createInstance()
+      instance.x = layer.x
+      instance.y = layer.y
+      insertBeforeLayer(instance, layer)
+      if (layer.type !== 'COMPONENT') {
+        layer.remove()
+      }
     }
-    insertBeforeLayer(instance, component)
     component.x += OFFSET
     component.y += OFFSET
     newSelection.push(component)
@@ -40,4 +42,15 @@ export default async function () {
       )}`
     )
   )
+}
+
+function isLayerWithinInstance (layer) {
+  const parentType = layer.parent.type
+  if (parentType === 'PAGE') {
+    return false
+  }
+  if (parentType === 'INSTANCE') {
+    return true
+  }
+  return isLayerWithinInstance(layer.parent)
 }
