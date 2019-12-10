@@ -1,6 +1,8 @@
-# Component Utilities ![Figma Plugin](https://img.shields.io/badge/figma-Component%20Utilities-1BC47D.svg) [![npm Version](https://img.shields.io/npm/v/figma-component-utilities.svg)](https://www.npmjs.com/package/figma-component-utilities)
+# Component Utilities [![Figma Plugin](https://img.shields.io/badge/figma-Component%20Utilities-1BC47D.svg)](https://www.figma.com/c/plugin/785894722513806497/Component-Utilities) [![npm Version](https://img.shields.io/npm/v/figma-component-utilities.svg)](https://www.npmjs.com/package/figma-component-utilities)
 
 > A Figma plugin to copy and create Components, and replace layers with Components
+
+[![Component Utilities](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-component-utilities/media/cover.png)](https://www.figma.com/c/plugin/785894722513806497/Component-Utilities)
 
 ## Commands
 
