@@ -1,7 +1,7 @@
 {
   "name": "figma-component-utilities",
   "version": "0.0.0",
-  "description": "A Figma plugin to copy and create components, and replace layers with components",
+  "description": "A Figma plugin to copy and create Components, and replace layers with Components",
   "keywords": [
     "clone",
     "component",
