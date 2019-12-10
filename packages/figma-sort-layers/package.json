@@ -1,6 +1,6 @@
 {
   "name": "figma-sort-layers",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Figma plugin to sort layers by name or position",
   "keywords": [
     "create-figma-plugin",
