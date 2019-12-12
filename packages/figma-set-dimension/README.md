@@ -8,6 +8,8 @@
 
 Set the width or height of the selected layers to one of 4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96, or 120.
 
+- Use the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> keys to set the dimension to the next number on the scale.
+
 ## License
 
 MIT
