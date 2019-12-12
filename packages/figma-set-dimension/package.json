@@ -1,7 +1,7 @@
 {
   "name": "figma-set-dimension",
   "version": "0.0.0",
-  "description": "",
+  "description": "A Figma plugin to set the width or height of layers with a single click",
   "keywords": [
     "create-figma-plugin",
     "dimension",
