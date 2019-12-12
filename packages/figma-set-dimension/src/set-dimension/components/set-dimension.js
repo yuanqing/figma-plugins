@@ -12,27 +12,15 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useEffect, useState } from 'preact/hooks'
-import { FIT_PARENT, HEIGHT, WIDTH } from '../../constants'
-import styles from './set-dimension.scss'
+import { useCallback, useEffect, useState } from 'preact/hooks'
+import { dimensions } from '../../dimensions'
+import { HEIGHT, WIDTH } from '../../constants'
 
-const dimensions = [
-  FIT_PARENT,
-  4,
-  8,
-  12,
-  16,
-  20,
-  24,
-  32,
-  40,
-  48,
-  56,
-  64,
-  80,
-  96,
-  120
-]
+const ESCAPE_KEY_CODE = 27
+const LEFT_KEY_CODE = 37
+const UP_KEY_CODE = 38
+const RIGHT_KEY_CODE = 39
+const DOWN_KEY_CODE = 40
 
 export function SetDimension (initialState) {
   const [attribute, setAttribute] = useState(initialState.attribute)
@@ -53,6 +41,41 @@ export function SetDimension (initialState) {
     },
     [setLayers]
   )
+  const handleKeyDown = useCallback(
+    function (event) {
+      if (event.keyCode === ESCAPE_KEY_CODE) {
+        triggerEvent('CLOSE')
+        return
+      }
+      let dimension = null
+      const index = dimensions.indexOf(
+        computeActiveDimension(layers, attribute)
+      )
+      if (event.keyCode === UP_KEY_CODE || event.keyCode === LEFT_KEY_CODE) {
+        dimension = dimensions[index === 0 ? dimensions.length - 1 : index - 1]
+      }
+      if (event.keyCode === DOWN_KEY_CODE || event.keyCode === RIGHT_KEY_CODE) {
+        dimension = dimensions[index === dimensions.length - 1 ? 0 : index + 1]
+      }
+      if (dimension === null) {
+        return
+      }
+      triggerEvent('SET_DIMENSION', {
+        attribute,
+        dimension
+      })
+    },
+    [attribute, layers]
+  )
+  useEffect(
+    function () {
+      window.addEventListener('keydown', handleKeyDown)
+      return function () {
+        window.removeEventListener('keydown', handleKeyDown)
+      }
+    },
+    [handleKeyDown]
+  )
   const isDisabled = layers.length === 0
   const activeDimension = computeActiveDimension(layers, attribute)
   return (
@@ -63,29 +86,27 @@ export function SetDimension (initialState) {
           name='attribute'
           value={attribute}
           options={[
-            { value: WIDTH, text: 'Width' },
-            { value: HEIGHT, text: 'Height' }
+            { value: WIDTH, text: 'Width', disabled: isDisabled },
+            { value: HEIGHT, text: 'Height', disabled: isDisabled }
           ]}
           onChange={setAttribute}
         />
         <VerticalSpace space='small' />
       </Container>
       <Divider />
-      <div class={styles.dimensions}>
-        {dimensions.map(function (dimension, index) {
-          return (
-            <SelectableItem
-              key={index}
-              disabled={isDisabled === true}
-              data-dimension={dimension}
-              selected={activeDimension === dimension}
-              onClick={isDisabled === true ? null : handleDimensionClick}
-            >
-              {dimension === FIT_PARENT ? 'Fit parent' : dimension}
-            </SelectableItem>
-          )
-        })}
-      </div>
+      {dimensions.map(function (dimension, index) {
+        return (
+          <SelectableItem
+            key={index}
+            disabled={isDisabled === true}
+            data-dimension={dimension}
+            selected={activeDimension === dimension}
+            onClick={isDisabled === true ? null : handleDimensionClick}
+          >
+            {dimension}
+          </SelectableItem>
+        )
+      })}
     </div>
   )
 }

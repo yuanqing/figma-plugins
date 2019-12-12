@@ -3,14 +3,12 @@ import {
   addEventListener,
   extractLayerAttributes,
   formatErrorMessage,
-  formatSuccessMessage,
   loadSettings,
-  pluralize,
   saveSettings,
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { FIT_PARENT, HEIGHT, WIDTH } from '../constants'
+import { HEIGHT, WIDTH } from '../constants'
 import { defaultSettings } from '../default-settings'
 
 export default async function () {
@@ -27,30 +25,21 @@ export default async function () {
     const layers = figma.currentPage.selection
     for (const layer of layers) {
       if (attribute === WIDTH) {
-        layer.resize(
-          dimension === FIT_PARENT ? layer.parent.width : dimension,
-          layer.height
-        )
+        layer.resize(dimension, layer.height)
       } else {
-        layer.resize(
-          layer.width,
-          dimension === FIT_PARENT ? layer.parent.height : dimension
-        )
+        layer.resize(layer.width, dimension)
       }
     }
     triggerEvent('SELECTION_CHANGED', getLayers())
-    figma.notify(
-      formatSuccessMessage(
-        `Set ${pluralize(layers.length, attribute)} to ${dimension}`
-      ),
-      { timeout: 500 }
-    )
   })
   figma.on('selectionchange', function () {
     triggerEvent('SELECTION_CHANGED', getLayers())
   })
+  addEventListener('CLOSE', function () {
+    figma.closePlugin()
+  })
   showUI(
-    { width: 240, height: 263 },
+    { width: 240, height: 501 },
     { attribute: settings.attribute, layers: getLayers() }
   )
 }
