@@ -40,14 +40,14 @@ export function MoveLayers (initialState) {
       <VerticalSpace space='large' />
       <Columns space='extraSmall'>
         <TextboxNumeric
-          name='horizontalOffset'
+          key='horizontalOffset'
           icon={moveRightIcon}
           onChange={handleInput}
           value={inputs.horizontalOffset}
           focused
         />
         <TextboxNumeric
-          name='verticalOffset'
+          key='verticalOffset'
           icon={moveDownIcon}
           onChange={handleInput}
           value={inputs.verticalOffset}

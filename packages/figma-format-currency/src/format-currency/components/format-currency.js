@@ -89,7 +89,7 @@ export function FormatCurrency (initialState) {
         <Text muted>Format</Text>
         <VerticalSpace space='small' />
         <SegmentedControl
-          name='format'
+          key='format'
           value={format}
           options={[{ value: EXPLICIT }, { value: SHORT }, { value: RETAIN }]}
           onChange={handleInput}
@@ -101,7 +101,7 @@ export function FormatCurrency (initialState) {
           filter
           strict
           top
-          name='locale'
+          key='locale'
           value={locale}
           options={locales}
           onChange={handleLocaleChange}

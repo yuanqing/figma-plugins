@@ -83,7 +83,7 @@ export function SetDimension (initialState) {
       <Container space='medium'>
         <VerticalSpace space='small' />
         <SegmentedControl
-          name='attribute'
+          key='attribute'
           value={attribute}
           options={[
             { value: WIDTH, text: 'Width', disabled: isDisabled },

@@ -38,7 +38,7 @@ export function DrawSliceOverSelection (initialState) {
       <Text muted>Padding</Text>
       <VerticalSpace space='small' />
       <TextboxNumeric
-        name='padding'
+        key='padding'
         onChange={handleInput}
         value={inputs.padding}
         focused

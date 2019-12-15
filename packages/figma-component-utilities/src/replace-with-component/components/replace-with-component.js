@@ -93,7 +93,7 @@ export function ReplaceWithComponent (initialState) {
       <Container space='medium'>
         <VerticalSpace space='medium' />
         <Checkbox
-          name='shouldResizeToFitLayer'
+          key='shouldResizeToFitLayer'
           value={shouldResizeToFitLayer === true}
           onChange={handleInput}
         >
