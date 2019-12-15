@@ -68,7 +68,7 @@ export function OrganizeLayers (initialState) {
         <Text muted>Group by text before</Text>
         <VerticalSpace space='small' />
         <SegmentedControl
-          key='groupDefinition'
+          name='groupDefinition'
           value={Math.min(
             inputs.groupDefinition,
             inputs.maximumGroupDefinition
@@ -81,13 +81,13 @@ export function OrganizeLayers (initialState) {
         <VerticalSpace space='small' />
         <Columns space='extraSmall'>
           <TextboxNumeric
-            key='horizontalSpace'
+            name='horizontalSpace'
             icon={spaceHorizontalIcon}
             onChange={handleInput}
             value={inputs.horizontalSpace}
           />
           <TextboxNumeric
-            key='verticalSpace'
+            name='verticalSpace'
             icon={spaceVerticalIcon}
             onChange={handleInput}
             value={inputs.verticalSpace}

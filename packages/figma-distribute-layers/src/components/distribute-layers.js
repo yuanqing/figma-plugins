@@ -38,7 +38,7 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
       <Text muted>Space</Text>
       <VerticalSpace space='small' />
       <TextboxNumeric
-        key='space'
+        name='space'
         icon={icon}
         onChange={handleInput}
         value={inputs.space}

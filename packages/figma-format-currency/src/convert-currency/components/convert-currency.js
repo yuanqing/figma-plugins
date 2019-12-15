@@ -94,14 +94,14 @@ export function ConvertCurrency (initialState) {
         <TextboxAutocomplete
           filter
           strict
-          key='currency'
+          name='currency'
           value={targetCurrency}
           options={currencies}
           onChange={handleCurrencyChange}
         />
         <VerticalSpace space='small' />
         <Checkbox
-          key='roundNumbers'
+          name='roundNumbers'
           value={roundNumbers === true}
           onChange={handleInput}
         >
@@ -114,7 +114,7 @@ export function ConvertCurrency (initialState) {
           filter
           strict
           top
-          key='locale'
+          name='locale'
           value={locale}
           options={[{ value: 'en-US' }, { value: 'de-DE' }]}
           onChange={handleLocaleChange}

@@ -44,28 +44,28 @@ export function CleanLayers (initialState) {
       <VerticalSpace space='extraLarge' />
       <Stack space='large'>
         <Checkbox
-          key='deleteHiddenLayers'
+          name='deleteHiddenLayers'
           value={deleteHiddenLayers}
           onChange={handleInput}
         >
           <Text>Delete hidden layers</Text>
         </Checkbox>
         <Checkbox
-          key='ungroupSingleLayerGroups'
+          name='ungroupSingleLayerGroups'
           value={ungroupSingleLayerGroups}
           onChange={handleInput}
         >
           <Text>Ungroup single-layer groups</Text>
         </Checkbox>
         <Checkbox
-          key='pixelPerfect'
+          name='pixelPerfect'
           value={pixelPerfect}
           onChange={handleInput}
         >
           <Text>Make pixel-perfect</Text>
         </Checkbox>
         <Checkbox
-          key='smartRenameLayers'
+          name='smartRenameLayers'
           value={smartRenameLayers}
           onChange={handleInput}
         >
@@ -75,13 +75,13 @@ export function CleanLayers (initialState) {
           <VerticalSpace space='small' />
           <Textbox
             disabled={inputs.smartRenameLayers === false}
-            key='smartRenameLayersWhitelist'
+            name='smartRenameLayersWhitelist'
             value={smartRenameLayersWhitelist}
             onChange={handleInput}
           />
         </Checkbox>
         <Checkbox
-          key='smartSortLayers'
+          name='smartSortLayers'
           onChange={handleInput}
           value={smartSortLayers}
         >

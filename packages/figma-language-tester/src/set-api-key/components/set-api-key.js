@@ -31,7 +31,7 @@ export function SetApiKey (initialState) {
       <Text muted>API Key</Text>
       <VerticalSpace space='small' />
       <Textbox
-        key='apiKey'
+        name='apiKey'
         value={inputs.apiKey}
         onChange={handleInput}
         focused

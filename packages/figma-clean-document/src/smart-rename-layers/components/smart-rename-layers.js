@@ -30,7 +30,7 @@ export function SmartRenameLayers (initialState) {
       <Text muted>Ignore layers named</Text>
       <VerticalSpace space='small' />
       <Textbox
-        key='smartRenameLayersWhitelist'
+        name='smartRenameLayersWhitelist'
         value={smartRenameLayersWhitelist}
         onChange={handleInput}
       />
