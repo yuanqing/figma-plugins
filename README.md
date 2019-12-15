@@ -12,5 +12,6 @@ Name | Description
 [**Language Tester**](packages/figma-language-tester) | Test your UI in different languages
 [**Move Layers**](packages/figma-move-layers) | Precisely move layers
 [**Organize Layers**](packages/figma-organize-layers) | Organize layers on the page
+[**Select Layers**](packages/figma-select-layers) | Select layers based on name, type or similarity
 [**Set Dimension**](packages/figma-set-dimension) | Set the width or height of layers with a single click
 [**Sort Layers**](packages/figma-sort-layers) | Sort layers by name or position
