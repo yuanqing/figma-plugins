@@ -46,6 +46,10 @@ export function smartRenameLayer (layer, whitelistRegex) {
       layer.name = layer.masterComponent.name
       break
     }
+    case 'LINE': {
+      layer.name = 'Line'
+      break
+    }
     case 'POLYGON': {
       layer.name = 'Polygon'
       break
