@@ -51,6 +51,7 @@ export function SelectLayersByName (initialState) {
   const { exactMatch, layerName, layers, hasSelection } = inputs
   const selectedLayersCount = filterLayersByName(layers, layerName, exactMatch)
     .length
+  const scope = hasSelection ? 'within selection' : 'on page'
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -76,14 +77,18 @@ export function SelectLayersByName (initialState) {
         disabled={selectedLayersCount === 0}
         onClick={handleSubmit}
       >
-        {selectedLayersCount === 0
-          ? 'No Matches'
-          : `Select ${selectedLayersCount} ${pluralize(
-              selectedLayersCount,
-              'Layer'
-            )}`}{' '}
-        {hasSelection ? 'Within Selection' : 'on Page'}
+        Select Layers
       </Button>
+      <VerticalSpace space='small' />
+      <Text muted align='center'>
+        {selectedLayersCount === 0
+          ? 'No matches'
+          : `${selectedLayersCount} ${pluralize(
+              selectedLayersCount,
+              'match',
+              'matches'
+            )} ${scope}`}
+      </Text>
     </Container>
   )
 }

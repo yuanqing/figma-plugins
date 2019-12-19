@@ -2,7 +2,9 @@
 import {
   addEventListener,
   formatSuccessMessage,
+  getSelectedLayersOrAllLayers,
   loadSettings,
+  mapNumberToWord,
   onSelectionChange,
   pluralize,
   saveSettings,
@@ -31,14 +33,16 @@ export default async function () {
       layerName,
       exactMatch
     )
+    const scope = hasSelection ? 'within selection' : 'on page'
     figma.currentPage.selection = layers.map(function ({ id }) {
       return figma.getNodeById(id)
     })
     figma.closePlugin(
       formatSuccessMessage(
-        `Selected ${layers.length} ${pluralize(layers.length, 'layer')} ${
-          hasSelection ? 'within selection' : 'on page'
-        }`
+        `Selected ${mapNumberToWord(layers.length)} ${pluralize(
+          layers.length,
+          'layer'
+        )} ${scope}`
       )
     )
   })
@@ -47,7 +51,7 @@ export default async function () {
   })
   const { layerName, exactMatch } = settings
   showUI(
-    { width: 240, height: 156 },
+    { width: 240, height: 188 },
     {
       layerName,
       exactMatch,
@@ -59,10 +63,7 @@ export default async function () {
 
 export function getLayerIdsAndNames () {
   const result = []
-  const layers =
-    figma.currentPage.selection.length > 0
-      ? figma.currentPage.selection
-      : [figma.currentPage]
+  const layers = getSelectedLayersOrAllLayers()
   for (const layer of layers) {
     traverseLayer(layer, function ({ id, name }) {
       result.push({ id, name })
