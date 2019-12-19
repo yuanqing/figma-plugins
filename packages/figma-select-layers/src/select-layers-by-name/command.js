@@ -25,6 +25,7 @@ export default async function () {
   addEventListener('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const { exactMatch, layerName } = settings
+    const hasSelection = figma.currentPage.selection.length > 0
     const layers = filterLayersByName(
       getLayerIdsAndNames(),
       layerName,
@@ -35,7 +36,9 @@ export default async function () {
     })
     figma.closePlugin(
       formatSuccessMessage(
-        `Selected ${layers.length} ${pluralize(layers.length, 'layer')}`
+        `Selected ${layers.length} ${pluralize(layers.length, 'layer')} ${
+          hasSelection ? 'within selection' : 'on page'
+        }`
       )
     )
   })
