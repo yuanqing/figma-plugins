@@ -99,7 +99,7 @@
             "handler": "vector"
           },
           {
-            "name": "Select Boolean Operations",
+            "name": "Select Boolean Operation Layers",
             "command": "select-layers-by-type/command.js",
             "handler": "booleanOperation"
           },
