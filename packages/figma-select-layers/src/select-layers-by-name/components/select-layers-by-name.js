@@ -14,7 +14,8 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useCallback, useEffect } from 'preact/hooks'
+import { useEffect } from 'preact/hooks'
+import { filterLayersByName } from '../filter-layers-by-name'
 
 export function SelectLayersByName (initialState) {
   function submitCallback ({ exactMatch, layerName }) {
@@ -26,7 +27,7 @@ export function SelectLayersByName (initialState) {
   function closeCallback () {
     triggerEvent('CLOSE')
   }
-  const { inputs, setInputs, handleSubmit } = useForm(
+  const { inputs, setInputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
     closeCallback,
@@ -34,20 +35,22 @@ export function SelectLayersByName (initialState) {
   )
   useEffect(
     function () {
-      return addEventListener('FILTER_LAYERS_BY_NAME_RESULT', setInputs)
-    },
-    [setInputs]
-  )
-  const handleChange = useCallback(
-    function (value, name) {
-      triggerEvent('FILTER_LAYERS_BY_NAME_REQUEST', {
-        ...inputs,
-        [name]: value
+      return addEventListener('SELECTION_CHANGED', function (
+        layers,
+        hasSelection
+      ) {
+        setInputs({
+          ...inputs,
+          layers,
+          hasSelection
+        })
       })
     },
-    [inputs]
+    [inputs, handleInput]
   )
-  const { exactMatch, layerName, selectedLayersCount } = inputs
+  const { exactMatch, layerName, layers, hasSelection } = inputs
+  const selectedLayersCount = filterLayersByName(layers, layerName, exactMatch)
+    .length
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -56,14 +59,14 @@ export function SelectLayersByName (initialState) {
       <Textbox
         name='layerName'
         value={layerName}
-        onChange={handleChange}
+        onChange={handleInput}
         focused
       />
       <VerticalSpace space='small' />
       <Checkbox
         name='exactMatch'
         value={exactMatch === true}
-        onChange={handleChange}
+        onChange={handleInput}
       >
         <Text>Exact match</Text>
       </Checkbox>
@@ -78,7 +81,8 @@ export function SelectLayersByName (initialState) {
           : `Select ${selectedLayersCount} ${pluralize(
               selectedLayersCount,
               'Layer'
-            )}`}
+            )}`}{' '}
+        {hasSelection ? 'Within Selection' : 'on Page'}
       </Button>
     </Container>
   )

@@ -1,20 +1,17 @@
-/* global figma */
-import { traverseLayer } from '@create-figma-plugin/utilities'
-
-export function filterLayersByName (layerName, exactMatch) {
+export function filterLayersByName (layers, layerName, exactMatch) {
   if (layerName === '') {
     return []
   }
   const regex = new RegExp(layerName, 'i')
   const result = []
-  traverseLayer(figma.currentPage, function (layer) {
+  for (const layer of layers) {
     const matches = layer.name.match(regex)
     if (matches !== null) {
       if (exactMatch === true && layer.name !== matches[0]) {
-        return
+        continue
       }
       result.push(layer)
     }
-  })
+  }
   return result
 }
