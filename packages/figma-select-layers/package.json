@@ -98,6 +98,11 @@
             "command": "select-layers-by-type/command.js",
             "handler": "vector"
           },
+          {
+            "name": "Select Boolean Operations",
+            "command": "select-layers-by-type/command.js",
+            "handler": "booleanOperation"
+          },
           "-",
           {
             "name": "Select Images",

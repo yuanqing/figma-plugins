@@ -27,6 +27,10 @@ export const ellipse = commandFactory(filterByTypeFactory('ELLIPSE'), 'ellipse')
 export const polygon = commandFactory(filterByTypeFactory('POLYGON'), 'polygon')
 export const star = commandFactory(filterByTypeFactory('STAR'), 'star')
 export const vector = commandFactory(filterByTypeFactory('VECTOR'), 'vector')
+export const booleanOperation = commandFactory(
+  filterByTypeFactory('BOOLEAN_OPERATION'),
+  'boolean operation'
+)
 export const image = commandFactory(filterImages, 'image')
 export const text = commandFactory(filterByTypeFactory('TEXT'), 'text')
 
