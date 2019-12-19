@@ -46,7 +46,7 @@ export function SelectLayersByName (initialState) {
         })
       })
     },
-    [inputs, handleInput]
+    [inputs, setInputs]
   )
   const { exactMatch, layerName, layers, hasSelection } = inputs
   const selectedLayersCount = filterLayersByName(layers, layerName, exactMatch)
