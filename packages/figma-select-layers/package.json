@@ -38,6 +38,80 @@
         "command": "select-layers-by-name/command.js",
         "ui": "select-layers-by-name/ui.js"
       },
+      {
+        "name": "Select Layers by Type",
+        "menu": [
+          {
+            "name": "Select Components",
+            "command": "select-layers-by-type/command.js",
+            "handler": "component"
+          },
+          {
+            "name": "Select Instances",
+            "command": "select-layers-by-type/command.js",
+            "handler": "instance"
+          },
+          "-",
+          {
+            "name": "Select Frames",
+            "command": "select-layers-by-type/command.js",
+            "handler": "frame"
+          },
+          {
+            "name": "Select Groups",
+            "command": "select-layers-by-type/command.js",
+            "handler": "group"
+          },
+          {
+            "name": "Select Slices",
+            "command": "select-layers-by-type/command.js",
+            "handler": "slice"
+          },
+          "-",
+          {
+            "name": "Select Rectangles",
+            "command": "select-layers-by-type/command.js",
+            "handler": "rectangle"
+          },
+          {
+            "name": "Select Lines",
+            "command": "select-layers-by-type/command.js",
+            "handler": "line"
+          },
+          {
+            "name": "Select Ellipses",
+            "command": "select-layers-by-type/command.js",
+            "handler": "ellipse"
+          },
+          {
+            "name": "Select Polygons",
+            "command": "select-layers-by-type/command.js",
+            "handler": "polygon"
+          },
+          {
+            "name": "Select Stars",
+            "command": "select-layers-by-type/command.js",
+            "handler": "star"
+          },
+          {
+            "name": "Select Vectors",
+            "command": "select-layers-by-type/command.js",
+            "handler": "vector"
+          },
+          "-",
+          {
+            "name": "Select Images",
+            "command": "select-layers-by-type/command.js",
+            "handler": "image"
+          },
+          "-",
+          {
+            "name": "Select Text Layers",
+            "command": "select-layers-by-type/command.js",
+            "handler": "text"
+          }
+        ]
+      },
       "-",
       {
         "name": "Reset",
