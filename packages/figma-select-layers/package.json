@@ -117,6 +117,10 @@
           }
         ]
       },
+      {
+        "name": "Select Similar Layers",
+        "command": "select-similar-layers/command.js"
+      },
       "-",
       {
         "name": "Reset",
