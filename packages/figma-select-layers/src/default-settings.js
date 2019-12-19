@@ -1,4 +1,4 @@
 export const defaultSettings = {
-  exactMatch: true,
+  exactMatch: false,
   layerName: ''
 }
