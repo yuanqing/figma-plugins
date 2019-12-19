@@ -6,11 +6,7 @@ import {
   SelectableItem,
   VerticalSpace
 } from '@create-figma-plugin/ui'
-import {
-  addEventListener,
-  removeEventListener,
-  triggerEvent
-} from '@create-figma-plugin/utilities'
+import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 import { dimensions } from '../../dimensions'
@@ -34,10 +30,7 @@ export function SetDimension (initialState) {
   }
   useEffect(
     function () {
-      addEventListener('SELECTION_CHANGED', setLayers)
-      return function () {
-        removeEventListener('SELECTION_CHANGED', setLayers)
-      }
+      return addEventListener('SELECTION_CHANGED', setLayers)
     },
     [setLayers]
   )
