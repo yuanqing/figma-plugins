@@ -7,14 +7,18 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import {
+  addEventListener,
+  evaluateNumericExpression,
+  triggerEvent
+} from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
 export function DrawSliceOverSelection (initialState) {
   function submitCallback ({ padding }) {
     triggerEvent('DRAW_SLICE_OVER_SELECTION', {
-      padding: parseFloat(padding)
+      padding: evaluateNumericExpression(padding)
     })
   }
   function closeCallback () {
@@ -28,7 +32,7 @@ export function DrawSliceOverSelection (initialState) {
   )
   const [hasSelection, setHasSelection] = useState(true)
   useEffect(function () {
-    addEventListener('SELECTION_CHANGED', function (hasSelection) {
+    return addEventListener('SELECTION_CHANGED', function (hasSelection) {
       setHasSelection(hasSelection)
     })
   }, [])
