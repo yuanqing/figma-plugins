@@ -40,6 +40,8 @@ export function MoveLayers (initialState) {
     })
   }, [])
   const { horizontalOffset, verticalOffset } = inputs
+  const evaluatedHorizontalOffset = evaluateNumericExpression(horizontalOffset)
+  const evaluatedVerticalOffset = evaluateNumericExpression(verticalOffset)
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -65,8 +67,9 @@ export function MoveLayers (initialState) {
         fullWidth
         disabled={
           hasSelection === false ||
-          (evaluateNumericExpression(horizontalOffset) === null &&
-            evaluateNumericExpression(verticalOffset) === null)
+          ((evaluatedHorizontalOffset === null ||
+            evaluatedHorizontalOffset === 0) &&
+            (evaluatedVerticalOffset === null || evaluatedVerticalOffset === 0))
         }
         onClick={handleSubmit}
       >
