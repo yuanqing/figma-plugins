@@ -4,11 +4,10 @@ import {
   Checkbox,
   Container,
   Divider,
+  SearchTextbox,
   SelectableItem,
   Text,
-  Textbox,
   VerticalSpace,
-  searchIcon,
   useForm
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
@@ -64,31 +63,36 @@ export function ReplaceWithComponent (initialState) {
     }) === -1
   return (
     <div>
-      <Container space='medium'>
-        <VerticalSpace space='extraSmall' />
-        <Textbox
-          icon={searchIcon}
-          onChange={handleSearchTermChange}
-          placeholder='Search'
-          value={searchTerm}
-          focused
-        />
-        <VerticalSpace space='extraSmall' />
-      </Container>
-      <div class={styles.components}>
-        {filteredComponents.map(function ({ id, name }, index) {
-          return (
-            <SelectableItem
-              key={index}
-              data-component-id={id}
-              selected={id === componentId}
-              onClick={handleComponentClick}
-            >
-              {name}
-            </SelectableItem>
-          )
-        })}
-      </div>
+      <SearchTextbox
+        onChange={handleSearchTermChange}
+        propagateEscapeKeyDown
+        placeholder='Search'
+        value={searchTerm}
+        focused
+      />
+      <Divider />
+      {filteredComponents.length === 0 ? (
+        <div class={styles.emptyState}>
+          <Text muted align='center'>
+            No results for “{searchTerm}”
+          </Text>
+        </div>
+      ) : (
+        <div class={styles.components}>
+          {filteredComponents.map(function ({ id, name }, index) {
+            return (
+              <SelectableItem
+                key={index}
+                data-component-id={id}
+                selected={id === componentId}
+                onClick={handleComponentClick}
+              >
+                {name}
+              </SelectableItem>
+            )
+          })}
+        </div>
+      )}
       <Divider />
       <Container space='medium'>
         <VerticalSpace space='medium' />

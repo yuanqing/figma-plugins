@@ -70,7 +70,7 @@ export default async function () {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 347 },
+    { width: 240, height: 340 },
     {
       components: extractComponentLayerNames(sortLayersByName(components)),
       shouldResizeToFitLayer
