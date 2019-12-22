@@ -32,7 +32,7 @@ export function LanguageTester () {
     }
   }
   useEffect(function () {
-    addEventListener('TRANSLATE_REQUEST', async function (
+    return addEventListener('TRANSLATE_REQUEST', async function (
       layers,
       scope,
       languageKey,
