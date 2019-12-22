@@ -34,6 +34,9 @@ export const booleanOperation = commandFactory(
 export const image = commandFactory(filterImages, 'image')
 export const text = commandFactory(filterByTypeFactory('TEXT'), 'text')
 
+export const locked = commandFactory(filterLocked, 'locked')
+export const hidden = commandFactory(filterHidden, 'hidden')
+
 function commandFactory (filterCallback, label) {
   return function () {
     const layers = getSelectedLayersOrAllLayers().filter(filterCallback)
@@ -67,4 +70,12 @@ function filterImages (layer) {
     layer.fills.length === 1 &&
     layer.fills[0].type === 'IMAGE'
   )
+}
+
+function filterLocked (layer) {
+  return layer.locked === true
+}
+
+function filterHidden (layer) {
+  return layer.visible === false
 }
