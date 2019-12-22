@@ -83,7 +83,7 @@ export function SelectLayersByName (initialState) {
       <VerticalSpace space='small' />
       <Text muted align='center'>
         {selectedLayersCount === 0
-          ? 'No matches'
+          ? `No matches ${scope}`
           : `${selectedLayersCount} ${pluralize(
               selectedLayersCount,
               'match',
