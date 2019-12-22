@@ -4,6 +4,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
+  onSelectionChange,
   saveSettings,
   showUI,
   triggerEvent
@@ -20,6 +21,14 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
+  onSelectionChange(function () {
+    const layers = figma.currentPage.children
+    triggerEvent(
+      'SELECTION_CHANGED',
+      extractIdAndName(layers),
+      computeMaximumGroupDefinition(layers)
+    )
+  })
   addEventListener('ORGANIZE_LAYERS', async function (settings) {
     await saveSettings(settings)
     const { groupDefinition, horizontalSpace, verticalSpace } = settings
@@ -28,14 +37,6 @@ export default async function () {
     arrangeGroups(groups, horizontalSpace, verticalSpace)
     sortLayers(layers)
     figma.closePlugin(formatSuccessMessage('Organized layers on page'))
-  })
-  figma.on('selectionchange', function () {
-    const layers = figma.currentPage.children
-    triggerEvent(
-      'SELECTION_CHANGED',
-      extractIdAndName(layers),
-      computeMaximumGroupDefinition(layers)
-    )
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

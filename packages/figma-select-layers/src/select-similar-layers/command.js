@@ -13,7 +13,7 @@ export default function () {
     figma.closePlugin(
       formatErrorMessage(
         length === 0
-          ? 'Select a reference layer'
+          ? 'Select one reference layer'
           : 'Select only one reference layer'
       )
     )

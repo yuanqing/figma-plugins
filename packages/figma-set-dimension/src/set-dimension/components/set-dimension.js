@@ -1,5 +1,10 @@
 /** @jsx h */
 import {
+  ESCAPE_KEY_CODE,
+  LEFT_KEY_CODE,
+  UP_KEY_CODE,
+  RIGHT_KEY_CODE,
+  DOWN_KEY_CODE,
   Container,
   Divider,
   SegmentedControl,
@@ -11,12 +16,6 @@ import { h } from 'preact'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 import { dimensions } from '../../dimensions'
 import { HEIGHT, WIDTH } from '../../constants'
-
-const ESCAPE_KEY_CODE = 27
-const LEFT_KEY_CODE = 37
-const UP_KEY_CODE = 38
-const RIGHT_KEY_CODE = 39
-const DOWN_KEY_CODE = 40
 
 export function SetDimension (initialState) {
   const [attribute, setAttribute] = useState(initialState.attribute)

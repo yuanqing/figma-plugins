@@ -7,14 +7,18 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import {
+  addEventListener,
+  evaluateNumericExpression,
+  triggerEvent
+} from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
 export function DistributeLayers ({ direction, icon, ...initialState }) {
   function submitCallback ({ space }) {
     triggerEvent('DISTRIBUTE_LAYERS', {
-      space: parseFloat(space)
+      space: evaluateNumericExpression(space)
     })
   }
   function closeCallback () {
@@ -28,10 +32,11 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
   )
   const [hasSelection, setHasSelection] = useState(true)
   useEffect(function () {
-    addEventListener('SELECTION_CHANGED', function (hasSelection) {
+    return addEventListener('SELECTION_CHANGED', function (hasSelection) {
       setHasSelection(hasSelection)
     })
   }, [])
+  const { space } = inputs
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -41,13 +46,16 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
         name='space'
         icon={icon}
         onChange={handleInput}
-        value={inputs.space}
+        propagateEscapeKeyDown
+        value={space}
         focused
       />
       <VerticalSpace space='extraLarge' />
       <Button
         fullWidth
-        disabled={hasSelection === false || isNaN(parseFloat(inputs.space))}
+        disabled={
+          hasSelection === false || evaluateNumericExpression(space) === null
+        }
         onClick={handleSubmit}
       >
         Distribute Layers {direction}

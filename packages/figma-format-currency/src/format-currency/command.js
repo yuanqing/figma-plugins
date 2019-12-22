@@ -4,6 +4,7 @@ import {
   formatSuccessMessage,
   loadFonts,
   loadSettings,
+  onSelectionChange,
   saveSettings,
   showUI,
   triggerEvent
@@ -15,6 +16,10 @@ import { getTextLayers } from '../utilities/get-text-layers'
 export default async function () {
   const layers = getTextLayers()
   const { format, locale, ...settings } = await loadSettings(defaultSettings)
+  onSelectionChange(function () {
+    const layers = getTextLayers()
+    triggerEvent('SELECTION_CHANGED', extractCharacters(layers))
+  })
   addEventListener('SUBMIT', async function ({ layers, format, locale }) {
     await saveSettings({
       ...settings,
@@ -27,10 +32,6 @@ export default async function () {
       layer.characters = characters
     }
     figma.closePlugin(formatSuccessMessage('Formatted currencies in selection'))
-  })
-  figma.on('selectionchange', function () {
-    const layers = getTextLayers()
-    triggerEvent('SELECTION_CHANGED', extractCharacters(layers))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

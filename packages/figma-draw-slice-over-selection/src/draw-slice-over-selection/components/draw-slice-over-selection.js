@@ -36,6 +36,7 @@ export function DrawSliceOverSelection (initialState) {
       setHasSelection(hasSelection)
     })
   }, [])
+  const { padding } = inputs
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -44,13 +45,16 @@ export function DrawSliceOverSelection (initialState) {
       <TextboxNumeric
         name='padding'
         onChange={handleInput}
-        value={inputs.padding}
+        propagateEscapeKeyDown
+        value={padding}
         focused
       />
       <VerticalSpace space='extraLarge' />
       <Button
         fullWidth
-        disabled={hasSelection === false || isNaN(parseFloat(inputs.padding))}
+        disabled={
+          hasSelection === false || evaluateNumericExpression(padding) === null
+        }
         onClick={handleSubmit}
       >
         Draw Slice Over Selection

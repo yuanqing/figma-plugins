@@ -4,6 +4,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
+  onSelectionChange,
   saveSettings,
   showUI,
   triggerEvent
@@ -17,6 +18,9 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
+  onSelectionChange(function () {
+    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
+  })
   addEventListener('DRAW_SLICE_OVER_SELECTION', async function (settings) {
     await saveSettings(settings)
     const { padding } = settings
@@ -30,9 +34,6 @@ export default async function () {
     slice.name = '@SliceOverSelection'
     slice.locked = true
     figma.closePlugin(formatSuccessMessage('Drew slice over selection'))
-  })
-  figma.on('selectionchange', function () {
-    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

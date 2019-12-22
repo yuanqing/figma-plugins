@@ -11,7 +11,11 @@ import {
   spaceVerticalIcon,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import {
+  addEventListener,
+  evaluateNumericExpression,
+  triggerEvent
+} from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { Preview } from './preview/preview'
@@ -32,8 +36,8 @@ export function OrganizeLayers (initialState) {
   }) {
     triggerEvent('ORGANIZE_LAYERS', {
       groupDefinition,
-      horizontalSpace: castToNumber(horizontalSpace),
-      verticalSpace: castToNumber(verticalSpace)
+      horizontalSpace: evaluateNumericExpression(horizontalSpace) || 0,
+      verticalSpace: evaluateNumericExpression(verticalSpace) || 0
     })
   }
   function closeCallback () {
@@ -47,7 +51,7 @@ export function OrganizeLayers (initialState) {
   )
   useEffect(
     function () {
-      addEventListener('SELECTION_CHANGED', function (
+      return addEventListener('SELECTION_CHANGED', function (
         layers,
         maximumGroupDefinition
       ) {
@@ -58,8 +62,15 @@ export function OrganizeLayers (initialState) {
         })
       })
     },
-    [setInputs, inputs]
+    [inputs, setInputs]
   )
+  const {
+    groupDefinition,
+    horizontalSpace,
+    layers,
+    maximumGroupDefinition,
+    verticalSpace
+  } = inputs
   return (
     <div>
       <Preview {...inputs} />
@@ -69,11 +80,8 @@ export function OrganizeLayers (initialState) {
         <VerticalSpace space='small' />
         <SegmentedControl
           name='groupDefinition'
-          value={Math.min(
-            inputs.groupDefinition,
-            inputs.maximumGroupDefinition
-          )}
-          options={groupDefinitions.slice(0, inputs.maximumGroupDefinition)}
+          value={Math.min(groupDefinition, maximumGroupDefinition)}
+          options={groupDefinitions.slice(0, maximumGroupDefinition)}
           onChange={handleInput}
         />
         <VerticalSpace space='large' />
@@ -84,29 +92,20 @@ export function OrganizeLayers (initialState) {
             name='horizontalSpace'
             icon={spaceHorizontalIcon}
             onChange={handleInput}
-            value={inputs.horizontalSpace}
+            value={horizontalSpace}
           />
           <TextboxNumeric
             name='verticalSpace'
             icon={spaceVerticalIcon}
             onChange={handleInput}
-            value={inputs.verticalSpace}
+            value={verticalSpace}
           />
         </Columns>
         <VerticalSpace space='large' />
-        <Button
-          fullWidth
-          disabled={inputs.layers.length === 0}
-          onClick={handleSubmit}
-        >
+        <Button fullWidth disabled={layers.length === 0} onClick={handleSubmit}>
           Organize Layers
         </Button>
       </Container>
     </div>
   )
-}
-
-function castToNumber (string) {
-  const result = parseFloat(string)
-  return isNaN(result) === true ? 0 : result
 }

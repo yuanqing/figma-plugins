@@ -9,15 +9,19 @@ import {
   moveRightIcon,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import {
+  addEventListener,
+  evaluateNumericExpression,
+  triggerEvent
+} from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
 export function MoveLayers (initialState) {
   function submitCallback ({ horizontalOffset, verticalOffset }) {
     triggerEvent('MOVE_LAYERS', {
-      horizontalOffset: castToNumber(horizontalOffset),
-      verticalOffset: castToNumber(verticalOffset)
+      horizontalOffset: evaluateNumericExpression(horizontalOffset),
+      verticalOffset: evaluateNumericExpression(verticalOffset)
     })
   }
   function closeCallback () {
@@ -31,10 +35,11 @@ export function MoveLayers (initialState) {
   )
   const [hasSelection, setHasSelection] = useState(true)
   useEffect(function () {
-    addEventListener('SELECTION_CHANGED', function (hasSelection) {
+    return addEventListener('SELECTION_CHANGED', function (hasSelection) {
       setHasSelection(hasSelection)
     })
   }, [])
+  const { horizontalOffset, verticalOffset } = inputs
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -43,14 +48,16 @@ export function MoveLayers (initialState) {
           name='horizontalOffset'
           icon={moveRightIcon}
           onChange={handleInput}
-          value={inputs.horizontalOffset}
+          propagateEscapeKeyDown
+          value={horizontalOffset}
           focused
         />
         <TextboxNumeric
           name='verticalOffset'
           icon={moveDownIcon}
           onChange={handleInput}
-          value={inputs.verticalOffset}
+          propagateEscapeKeyDown
+          value={verticalOffset}
         />
       </Columns>
       <VerticalSpace space='large' />
@@ -58,8 +65,8 @@ export function MoveLayers (initialState) {
         fullWidth
         disabled={
           hasSelection === false ||
-          (castToNumber(inputs.horizontalOffset) === 0 &&
-            castToNumber(inputs.verticalOffset) === 0)
+          (evaluateNumericExpression(horizontalOffset) === null &&
+            evaluateNumericExpression(verticalOffset) === null)
         }
         onClick={handleSubmit}
       >
@@ -67,9 +74,4 @@ export function MoveLayers (initialState) {
       </Button>
     </Container>
   )
-}
-
-function castToNumber (string) {
-  const result = parseFloat(string)
-  return isNaN(result) === true ? 0 : result
 }

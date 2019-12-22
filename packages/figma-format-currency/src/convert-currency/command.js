@@ -4,6 +4,7 @@ import {
   formatSuccessMessage,
   loadFonts,
   loadSettings,
+  onSelectionChange,
   saveSettings,
   showUI,
   triggerEvent
@@ -20,6 +21,10 @@ export default async function () {
     locale,
     ...settings
   } = await loadSettings(defaultSettings)
+  onSelectionChange(function () {
+    const layers = getTextLayers()
+    triggerEvent('SELECTION_CHANGED', extractCharacters(layers))
+  })
   addEventListener('SUBMIT', async function ({
     layers,
     targetCurrency,
@@ -42,10 +47,6 @@ export default async function () {
         `Converted currencies in selection to ${targetCurrency}`
       )
     )
-  })
-  figma.on('selectionchange', function () {
-    const layers = getTextLayers()
-    triggerEvent('SELECTION_CHANGED', extractCharacters(layers))
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

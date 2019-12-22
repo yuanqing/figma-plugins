@@ -75,7 +75,7 @@ export function ConvertCurrency (initialState) {
   }
   useEffect(
     function () {
-      addEventListener('SELECTION_CHANGED', function (layers) {
+      return addEventListener('SELECTION_CHANGED', function (layers) {
         setInputs({
           ...inputs,
           layers

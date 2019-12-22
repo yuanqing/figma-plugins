@@ -4,6 +4,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
+  onSelectionChange,
   pluralize,
   saveSettings,
   showUI,
@@ -17,6 +18,9 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
+  onSelectionChange(function () {
+    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
+  })
   addEventListener('MOVE_LAYERS', async function (settings) {
     await saveSettings(settings)
     const { horizontalOffset, verticalOffset } = settings
@@ -34,9 +38,6 @@ export default async function () {
         `Moved selected ${pluralize(selectedLayers.length, 'layer')}`
       )
     )
-  })
-  figma.on('selectionchange', function () {
-    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

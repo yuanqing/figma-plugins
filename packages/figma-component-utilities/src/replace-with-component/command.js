@@ -6,6 +6,7 @@ import {
   formatSuccessMessage,
   loadSettings,
   mapNumberToWord,
+  onSelectionChange,
   pluralize,
   saveSettings,
   showUI,
@@ -27,6 +28,9 @@ export default async function () {
   const { shouldResizeToFitLayer, ...settings } = await loadSettings(
     defaultSettings
   )
+  onSelectionChange(function () {
+    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
+  })
   addEventListener('SUBMIT', async function ({
     componentId,
     shouldResizeToFitLayer
@@ -61,9 +65,6 @@ export default async function () {
         )} with component`
       )
     )
-  })
-  figma.on('selectionchange', function () {
-    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

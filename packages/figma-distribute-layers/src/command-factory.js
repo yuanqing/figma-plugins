@@ -4,6 +4,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
+  onSelectionChange,
   saveSettings,
   triggerEvent,
   showUI
@@ -17,6 +18,9 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
       return
     }
     const settings = await loadSettings(defaultSettings)
+    onSelectionChange(function () {
+      triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length > 1)
+    })
     addEventListener('DISTRIBUTE_LAYERS', async function (settings) {
       await saveSettings(settings)
       const { space } = settings
@@ -24,9 +28,6 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
       layers.sort(sortLayers)
       distributeLayers(layers, space)
       figma.closePlugin(formatSuccessMessage(`Distributed layers ${direction}`))
-    })
-    figma.on('selectionchange', function () {
-      triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length > 1)
     })
     addEventListener('CLOSE', function () {
       figma.closePlugin()

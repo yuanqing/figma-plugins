@@ -35,6 +35,18 @@ export function ReplaceWithComponent (initialState) {
     closeCallback,
     true
   )
+  function handleSearchTermChange (searchTerm) {
+    setSearchTerm(searchTerm)
+  }
+  function handleComponentClick (event) {
+    const componentId = event.target.getAttribute('data-component-id')
+    setComponentId(componentId)
+  }
+  useEffect(function () {
+    return addEventListener('SELECTION_CHANGED', function (hasSelection) {
+      setHasSelection(hasSelection)
+    })
+  }, [])
   const { components, shouldResizeToFitLayer } = inputs
   /* eslint-disable indent */
   const filteredComponents =
@@ -44,18 +56,6 @@ export function ReplaceWithComponent (initialState) {
           return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
         })
   /* eslint-enable indent */
-  function handleSearchTermChange (searchTerm) {
-    setSearchTerm(searchTerm)
-  }
-  function handleComponentClick (event) {
-    const componentId = event.target.getAttribute('data-component-id')
-    setComponentId(componentId)
-  }
-  useEffect(function () {
-    addEventListener('SELECTION_CHANGED', function (hasSelection) {
-      setHasSelection(hasSelection)
-    })
-  }, [])
   const isSubmitButtonDisabled =
     componentId === null ||
     hasSelection === false ||

@@ -4,6 +4,7 @@ import {
   extractLayerAttributes,
   formatErrorMessage,
   loadSettings,
+  onSelectionChange,
   saveSettings,
   showUI,
   triggerEvent
@@ -17,6 +18,9 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
+  onSelectionChange(function () {
+    triggerEvent('SELECTION_CHANGED', getLayers())
+  })
   addEventListener('SET_DIMENSION', async function ({ attribute, dimension }) {
     await saveSettings({
       ...settings,
@@ -30,9 +34,6 @@ export default async function () {
         layer.resize(layer.width, dimension)
       }
     }
-    triggerEvent('SELECTION_CHANGED', getLayers())
-  })
-  figma.on('selectionchange', function () {
     triggerEvent('SELECTION_CHANGED', getLayers())
   })
   addEventListener('CLOSE', function () {
