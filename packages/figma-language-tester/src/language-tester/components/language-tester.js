@@ -5,7 +5,11 @@ import {
   Divider,
   VerticalSpace
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import {
+  addEventListener,
+  triggerEvent,
+  ESCAPE_KEY_CODE
+} from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import { LanguageItem } from './language-item'
@@ -27,7 +31,7 @@ export function LanguageTester () {
     triggerEvent('RESET_LANGUAGE')
   }
   function handleKeyDown (event) {
-    if (event.key === 'Escape') {
+    if (event.keyCode === ESCAPE_KEY_CODE) {
       triggerEvent('CLOSE')
     }
   }
