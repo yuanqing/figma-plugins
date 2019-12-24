@@ -1,7 +1,7 @@
 {
-  "name": "figma-frame-navigator",
+  "name": "figma-navigator",
   "version": "0.0.0",
-  "description": "A Figma plugin to navigate between frames on the page",
+  "description": "A Figma plugin to navigate between frames and components on the page",
   "keywords": [
     "create-figma-plugin",
     "figma",
@@ -19,7 +19,7 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/figma-plugins.git",
-    "directory": "packages/figma-frame-navigator"
+    "directory": "packages/figma-navigator"
   },
   "files": [
     "src"
@@ -33,23 +33,23 @@
     "@create-figma-plugin/utilities": "*"
   },
   "create-figma-plugin": {
-    "id": "figma-frame-navigator",
-    "name": "Frame Navigator",
+    "id": "figma-navigator",
+    "name": "Navigator",
     "menu": [
       {
-        "name": "Go to Frame",
-        "command": "go-to-frame/command.js",
-        "ui": "go-to-frame/ui.js"
+        "name": "Jump to Component/Frame",
+        "command": "jump-to-layer/command.js",
+        "ui": "jump-to-layer/ui.js"
       },
       {
-        "name": "Go to Previous Frame",
-        "command": "navigate-between-frames/command.js",
-        "handler": "goToPreviousFrame"
+        "name": "Go to Previous Component/Frame",
+        "command": "navigate-between-layers/command.js",
+        "handler": "previous"
       },
       {
-        "name": "Go to Next Frame",
-        "command": "navigate-between-frames/command.js",
-        "handler": "goToNextFrame"
+        "name": "Go to Next Component/Frame",
+        "command": "navigate-between-layers/command.js",
+        "handler": "next"
       },
       "-",
       {

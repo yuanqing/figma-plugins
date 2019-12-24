@@ -30,16 +30,13 @@ export function Settings (initialState) {
     <Container>
       <VerticalSpace space='extraLarge' />
       <Checkbox name='wrapAround' value={wrapAround} onChange={handleInput}>
-        <Text>Loop</Text>
-        <VerticalSpace space='medium' />
-        <Text muted>
-          Loop back to the first frame after reaching the last frame
-        </Text>
+        <Text>Loop back to the first component/frame</Text>
       </Checkbox>
       <VerticalSpace space='extraLarge' />
       <Button fullWidth onClick={handleSubmit}>
         Save Settings
       </Button>
+      <VerticalSpace space='small' />
     </Container>
   )
 }
