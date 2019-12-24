@@ -7,11 +7,13 @@ import {
   SelectableItem,
   Text,
   VerticalSpace,
-  useForm
+  useForm,
+  UP_KEY_CODE,
+  DOWN_KEY_CODE
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { useCallback, useEffect } from 'preact/hooks'
 import styles from './go-to-frame.scss'
 
 export function GoToFrame (initialState) {
@@ -26,26 +28,57 @@ export function GoToFrame (initialState) {
   const { inputs, handleInput, handleSubmit } = useForm(
     {
       ...initialState,
-      selectedFrameId: null,
+      filteredFrames: [].concat(initialState.frames),
       searchTerm: ''
     },
     submitCallback,
     closeCallback,
     true
   )
-  const { frames, selectedFrameId, searchTerm } = inputs
+  const { frames, filteredFrames, selectedFrameId, searchTerm } = inputs
   function handleSearchTermChange (value, name) {
-    const result = filterFramesByName(frames, value)
-    handleInput(
-      result.length === 1 ? result[0].id : selectedFrameId,
-      'selectedFrameId'
-    )
     handleInput(value, name)
+    const filteredFrames = filterFramesByName(frames, value)
+    handleInput(filteredFrames, 'filteredFrames')
+    if (filteredFrames.length === 1) {
+      handleInput(filteredFrames[0].id, 'selectedFrameId')
+    }
   }
   function handleItemClick (event) {
     const selectedFrameId = event.target.getAttribute('data-frame-id')
     handleInput(selectedFrameId, 'selectedFrameId')
   }
+
+  const handleKeyDown = useCallback(
+    function (event) {
+      if (event.keyCode === UP_KEY_CODE || event.keyCode === DOWN_KEY_CODE) {
+        event.preventDefault()
+        if (selectedFrameId === null) {
+          if (event.keyCode === UP_KEY_CODE) {
+            handleInput(
+              filteredFrames[filteredFrames.length - 1].id,
+              'selectedFrameId'
+            )
+            return
+          }
+          handleInput(filteredFrames[0].id, 'selectedFrameId')
+          return
+        }
+        const currentIndex = filteredFrames.findIndex(function ({ id }) {
+          return id === selectedFrameId
+        })
+        let nextIndex = currentIndex + (event.keyCode === UP_KEY_CODE ? -1 : 1)
+        if (nextIndex === -1) {
+          nextIndex = filteredFrames.length - 1
+        }
+        if (nextIndex === filteredFrames.length) {
+          nextIndex = 0
+        }
+        handleInput(filteredFrames[nextIndex].id, 'selectedFrameId')
+      }
+    },
+    [filteredFrames, handleInput, selectedFrameId]
+  )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ frames }) {
@@ -54,18 +87,25 @@ export function GoToFrame (initialState) {
     },
     [handleInput]
   )
-  /* eslint-disable indent */
-  const result = filterFramesByName(frames, searchTerm)
-  /* eslint-enable indent */
+  useEffect(
+    function () {
+      window.addEventListener('keydown', handleKeyDown)
+      return function () {
+        window.removeEventListener('keydown', handleKeyDown)
+      }
+    },
+    [handleKeyDown]
+  )
   const isSubmitButtonDisabled =
     selectedFrameId === null ||
-    result.findIndex(function ({ id }) {
+    filteredFrames.findIndex(function ({ id }) {
       return id === selectedFrameId
     }) === -1
   return (
     <div>
       <SearchTextbox
         name='searchTerm'
+        onKeyDown={handleKeyDown}
         onChange={handleSearchTermChange}
         propagateEscapeKeyDown
         placeholder='Search'
@@ -73,7 +113,7 @@ export function GoToFrame (initialState) {
         focused
       />
       <Divider />
-      {result.length === 0 ? (
+      {filteredFrames.length === 0 ? (
         <div class={styles.emptyState}>
           <Text muted align='center'>
             No results for “{searchTerm}”
@@ -81,7 +121,7 @@ export function GoToFrame (initialState) {
         </div>
       ) : (
         <div class={styles.frames}>
-          {result.map(function ({ id, name }, index) {
+          {filteredFrames.map(function ({ id, name }, index) {
             return (
               <SelectableItem
                 key={index}

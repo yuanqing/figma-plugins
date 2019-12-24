@@ -10,6 +10,7 @@ import {
 } from '@create-figma-plugin/utilities'
 import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
 import { getAllTopLevelFrames } from '../utilities/get-all-top-level-frames'
+import { getSelectedTopLevelFrames } from '../utilities/get-selected-top-level-frames'
 
 export default function () {
   const frames = getFrames()
@@ -31,10 +32,18 @@ export default function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 308 }, { frames })
+  showUI(
+    { width: 240, height: 308 },
+    { frames, selectedFrameId: getSelectedFrameId() }
+  )
 }
 
 function getFrames () {
   const frames = sortLayersByName(getAllTopLevelFrames())
   return extractLayerAttributes(frames, ['id', 'name'])
+}
+
+function getSelectedFrameId () {
+  const selectedFrames = getSelectedTopLevelFrames()
+  return selectedFrames.length === 1 ? selectedFrames[0].id : null
 }
