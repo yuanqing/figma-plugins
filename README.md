@@ -9,6 +9,7 @@ Name | Description
 [**Distribute Layers**](packages/figma-distribute-layers) | Distribute layers in a given direction and offset
 [**Draw Slice Over Selection**](packages/figma-draw-slice-over-selection) | Draw a slice over the selection
 [**Format Currency**](packages/figma-format-currency) | Format and convert between currencies
+[**Frame Navigator**](packages/figma-frame-navigator) | Navigate between frames on the page
 [**Language Tester**](packages/figma-language-tester) | Test your UI in different languages
 [**Move Layers**](packages/figma-move-layers) | Precisely move layers
 [**Organize Layers**](packages/figma-organize-layers) | Organize layers on the page
