@@ -1,0 +1,18 @@
+@import "@create-figma-plugin/ui/src/scss/constants";
+@import "@create-figma-plugin/ui/src/scss/text";
+
+.emptyState,
+.frames {
+  height: 210px;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $space-medium;
+}
+
+.frames {
+  overflow: auto;
+}

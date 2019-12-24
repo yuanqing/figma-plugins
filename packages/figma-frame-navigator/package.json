@@ -1,0 +1,67 @@
+{
+  "name": "figma-frame-navigator",
+  "version": "0.0.0",
+  "description": "A Figma plugin to navigate between frames in a document",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins",
+    "frame",
+    "frame-navigator",
+    "navigate",
+    "navigator",
+    "next",
+    "previous"
+  ],
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/figma-plugins.git",
+    "directory": "packages/figma-frame-navigator"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "create-figma-plugin-build",
+    "watch": "create-figma-plugin-build --watch"
+  },
+  "dependencies": {
+    "@create-figma-plugin/ui": "*",
+    "@create-figma-plugin/utilities": "*"
+  },
+  "create-figma-plugin": {
+    "id": "figma-frame-navigator",
+    "name": "Frame Navigator",
+    "menu": [
+      {
+        "name": "Go to Frame",
+        "command": "go-to-frame/command.js",
+        "ui": "go-to-frame/ui.js"
+      },
+      {
+        "name": "Go to Previous Frame",
+        "command": "navigate-between-frames/command.js",
+        "handler": "goToPreviousFrame"
+      },
+      {
+        "name": "Go to Next Frame",
+        "command": "navigate-between-frames/command.js",
+        "handler": "goToNextFrame"
+      },
+      "-",
+      {
+        "name": "Settings",
+        "command": "settings/command.js",
+        "ui": "settings/ui.js"
+      },
+      "-",
+      {
+        "name": "Reset",
+        "command": "reset/command.js"
+      }
+    ]
+  }
+}
