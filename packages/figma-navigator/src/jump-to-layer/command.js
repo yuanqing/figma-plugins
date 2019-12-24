@@ -42,7 +42,7 @@ export default function () {
 
 function getLayers () {
   const layers = sortLayersByName(getAllTopLevelLayers())
-  return extractLayerAttributes(layers, ['id', 'name'])
+  return extractLayerAttributes(layers, ['id', 'name', 'type'])
 }
 
 function getSelectedLayerId () {

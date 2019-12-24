@@ -3,8 +3,8 @@ import {
   Button,
   Container,
   Divider,
+  Layer,
   SearchTextbox,
-  SelectableItem,
   Text,
   VerticalSpace,
   useForm,
@@ -121,16 +121,17 @@ export function JumpToLayer (initialState) {
         </div>
       ) : (
         <div class={styles.layers}>
-          {filteredLayers.map(function ({ id, name }, index) {
+          {filteredLayers.map(function ({ id, name, type }, index) {
             return (
-              <SelectableItem
+              <Layer
                 key={index}
+                type={type.toLowerCase()}
                 data-layer-id={id}
                 selected={id === selectedLayerId}
                 onClick={handleItemClick}
               >
                 {name}
-              </SelectableItem>
+              </Layer>
             )
           })}
         </div>
