@@ -4,8 +4,8 @@ import {
   loadSettings
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
-import { getAllTopLevelLayers } from '../utilities/get-all-top-level-layers'
-import { getSelectedTopLevelLayers } from '../utilities/get-selected-top-level-layers'
+import { getAllLayers } from '../utilities/get-all-layers'
+import { getSelectedLayers } from '../utilities/get-selected-layers'
 
 export const previous = commandFactory(1, 'At first component/frame on page')
 export const next = commandFactory(-1, 'At last component/frame on page')
@@ -18,20 +18,21 @@ function commandFactory (indexOffset, noMoreLayersMessage) {
       figma.closePlugin(formatErrorMessage('Select a component/frame'))
       return
     }
-    const selectedLayers = getSelectedTopLevelLayers()
+    const selectedLayers = getSelectedLayers()
     if (selectedLayers.length > 1) {
       figma.closePlugin(formatErrorMessage('Select only one component/frame'))
       return
     }
-    const layers = getAllTopLevelLayers()
+    const selectedLayer = selectedLayers[0]
+    const layers = getAllLayers()
     if (layers.length === 1) {
       figma.viewport.scrollAndZoomIntoView(layers)
       figma.closePlugin(formatErrorMessage('No other component/frames on page'))
       return
     }
-    const nextLayer = getNextLayer(selectedLayers[0], indexOffset, loop)
+    const nextLayer = getNextLayer(layers, selectedLayer, indexOffset, loop)
     if (nextLayer === null) {
-      figma.viewport.scrollAndZoomIntoView(selectedLayers)
+      figma.viewport.scrollAndZoomIntoView([selectedLayer])
       figma.closePlugin(noMoreLayersMessage)
       return
     }
@@ -41,8 +42,7 @@ function commandFactory (indexOffset, noMoreLayersMessage) {
   }
 }
 
-function getNextLayer (currentLayer, indexOffset, loop) {
-  const layers = getAllTopLevelLayers()
+function getNextLayer (layers, currentLayer, indexOffset, loop) {
   const currentIndex = layers.indexOf(currentLayer)
   const nextIndex = currentIndex + indexOffset
   if (nextIndex === -1) {

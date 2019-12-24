@@ -9,8 +9,8 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
-import { getAllTopLevelLayers } from '../utilities/get-all-top-level-layers'
-import { getSelectedTopLevelLayers } from '../utilities/get-selected-top-level-layers'
+import { getAllLayers } from '../utilities/get-all-layers'
+import { getSelectedLayers } from '../utilities/get-selected-layers'
 
 export default function () {
   const layers = getLayers()
@@ -41,11 +41,11 @@ export default function () {
 }
 
 function getLayers () {
-  const layers = sortLayersByName(getAllTopLevelLayers())
+  const layers = sortLayersByName(getAllLayers())
   return extractLayerAttributes(layers, ['id', 'name', 'type'])
 }
 
 function getSelectedLayerId () {
-  const selectedLayers = getSelectedTopLevelLayers()
+  const selectedLayers = getSelectedLayers()
   return selectedLayers.length === 1 ? selectedLayers[0].id : null
 }
