@@ -4,24 +4,23 @@ import {
   Checkbox,
   Container,
   Divider,
+  Layer,
   SearchTextbox,
-  SelectableItem,
   Text,
   VerticalSpace,
-  useForm
+  useForm,
+  DOWN_KEY_CODE,
+  UP_KEY_CODE
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useEffect, useState } from 'preact/hooks'
+import { useCallback, useEffect } from 'preact/hooks'
 import styles from './replace-with-component.scss'
 
 export function ReplaceWithComponent (initialState) {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [componentId, setComponentId] = useState(null)
-  const [hasSelection, setHasSelection] = useState(true)
-  function submitCallback ({ shouldResizeToFitLayer }) {
+  function submitCallback ({ selectedLayerId, shouldResizeToFitLayer }) {
     triggerEvent('SUBMIT', {
-      componentId,
+      selectedLayerId,
       shouldResizeToFitLayer
     })
   }
@@ -29,37 +28,86 @@ export function ReplaceWithComponent (initialState) {
     triggerEvent('CLOSE')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
+    {
+      ...initialState,
+      filteredLayers: [].concat(initialState.layers),
+      searchTerm: '',
+      selectedLayerId: null
+    },
     submitCallback,
     closeCallback,
     true
   )
-  function handleSearchTermChange (searchTerm) {
-    setSearchTerm(searchTerm)
+  const {
+    layers,
+    filteredLayers,
+    searchTerm,
+    selectedLayerId,
+    shouldResizeToFitLayer
+  } = inputs
+  function handleSearchTermChange (value) {
+    handleInput(value, 'searchTerm')
+    const filteredLayers = filterLayersByName(layers, value)
+    handleInput(filteredLayers, 'filteredLayers')
+    if (filteredLayers.length === 1) {
+      handleInput(filteredLayers[0].id, 'selectedLayerId')
+    }
   }
-  function handleComponentClick (event) {
-    const componentId = event.target.getAttribute('data-component-id')
-    setComponentId(componentId)
+  function handleLayerClick (event) {
+    const selectedLayerId = event.target.getAttribute('data-layer-id')
+    handleInput(selectedLayerId, 'selectedLayerId')
   }
-  useEffect(function () {
-    return addEventListener('SELECTION_CHANGED', function (hasSelection) {
-      setHasSelection(hasSelection)
-    })
-  }, [])
-  const { components, shouldResizeToFitLayer } = inputs
-  /* eslint-disable indent */
-  const filteredComponents =
-    searchTerm === ''
-      ? components
-      : components.filter(function ({ name }) {
-          return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+  const handleKeyDown = useCallback(
+    function (event) {
+      if (event.keyCode === UP_KEY_CODE || event.keyCode === DOWN_KEY_CODE) {
+        event.preventDefault()
+        if (selectedLayerId === null) {
+          if (event.keyCode === UP_KEY_CODE) {
+            handleInput(
+              filteredLayers[filteredLayers.length - 1].id,
+              'selectedLayerId'
+            )
+            return
+          }
+          handleInput(filteredLayers[0].id, 'selectedLayerId')
+          return
+        }
+        const currentIndex = filteredLayers.findIndex(function ({ id }) {
+          return id === selectedLayerId
         })
-  /* eslint-enable indent */
+        let nextIndex = currentIndex + (event.keyCode === UP_KEY_CODE ? -1 : 1)
+        if (nextIndex === -1) {
+          nextIndex = filteredLayers.length - 1
+        }
+        if (nextIndex === filteredLayers.length) {
+          nextIndex = 0
+        }
+        handleInput(filteredLayers[nextIndex].id, 'selectedLayerId')
+      }
+    },
+    [filteredLayers, handleInput, selectedLayerId]
+  )
+  useEffect(
+    function () {
+      return addEventListener('SELECTION_CHANGED', function ({ layers }) {
+        handleInput(layers, 'layers')
+      })
+    },
+    [handleInput]
+  )
+  useEffect(
+    function () {
+      window.addEventListener('keydown', handleKeyDown)
+      return function () {
+        window.removeEventListener('keydown', handleKeyDown)
+      }
+    },
+    [handleKeyDown]
+  )
   const isSubmitButtonDisabled =
-    componentId === null ||
-    hasSelection === false ||
-    filteredComponents.findIndex(function ({ id }) {
-      return id === componentId
+    selectedLayerId === null ||
+    filteredLayers.findIndex(function ({ id }) {
+      return id === selectedLayerId
     }) === -1
   return (
     <div>
@@ -71,24 +119,25 @@ export function ReplaceWithComponent (initialState) {
         focused
       />
       <Divider />
-      {filteredComponents.length === 0 ? (
+      {filteredLayers.length === 0 ? (
         <div class={styles.emptyState}>
           <Text muted align='center'>
             No results for “{searchTerm}”
           </Text>
         </div>
       ) : (
-        <div class={styles.components}>
-          {filteredComponents.map(function ({ id, name }, index) {
+        <div class={styles.layers}>
+          {filteredLayers.map(function ({ id, name }, index) {
             return (
-              <SelectableItem
+              <Layer
                 key={index}
-                data-component-id={id}
-                selected={id === componentId}
-                onClick={handleComponentClick}
+                type='component'
+                data-layer-id={id}
+                selected={id === selectedLayerId}
+                onClick={handleLayerClick}
               >
                 {name}
-              </SelectableItem>
+              </Layer>
             )
           })}
         </div>
@@ -114,4 +163,13 @@ export function ReplaceWithComponent (initialState) {
       </Container>
     </div>
   )
+}
+
+function filterLayersByName (layers, searchTerm) {
+  if (searchTerm === '') {
+    return layers
+  }
+  return layers.filter(function ({ name }) {
+    return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+  })
 }

@@ -2,6 +2,7 @@
 import {
   addEventListener,
   getDocumentComponents,
+  extractLayerAttributes,
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
@@ -20,8 +21,8 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const components = getDocumentComponents()
-  if (components.length === 0) {
+  const layers = getComponents()
+  if (layers.length === 0) {
     figma.closePlugin(formatErrorMessage('No components in document'))
     return
   }
@@ -29,10 +30,10 @@ export default async function () {
     defaultSettings
   )
   onSelectionChange(function () {
-    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
+    triggerEvent('SELECTION_CHANGED', { layers: getComponents() })
   })
   addEventListener('SUBMIT', async function ({
-    componentId,
+    selectedLayerId,
     shouldResizeToFitLayer
   }) {
     await saveSettings({
@@ -40,7 +41,7 @@ export default async function () {
       shouldResizeToFitLayer
     })
     const layers = figma.currentPage.selection
-    const component = figma.getNodeById(componentId)
+    const component = figma.getNodeById(selectedLayerId)
     const newSelection = []
     for (const layer of layers) {
       const parent = layer.parent
@@ -62,7 +63,7 @@ export default async function () {
           layers.length,
           'layer',
           `${mapNumberToWord(layers.length)} layers`
-        )} with component`
+        )} with “${component.name}”`
       )
     )
   })
@@ -72,14 +73,13 @@ export default async function () {
   showUI(
     { width: 240, height: 340 },
     {
-      components: extractComponentLayerNames(sortLayersByName(components)),
+      layers,
       shouldResizeToFitLayer
     }
   )
 }
 
-function extractComponentLayerNames (layers) {
-  return layers.map(function ({ id, name }) {
-    return { id, name }
-  })
+function getComponents () {
+  const components = getDocumentComponents()
+  return extractLayerAttributes(sortLayersByName(components), ['id', 'name'])
 }

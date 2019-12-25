@@ -2,7 +2,7 @@
 @import "@create-figma-plugin/ui/src/scss/text";
 
 .emptyState,
-.components {
+.layers {
   height: 210px;
 }
 
@@ -13,6 +13,6 @@
   padding: 0 $space-medium;
 }
 
-.components {
+.layers {
   overflow: auto;
 }
