@@ -8,8 +8,8 @@ import {
   Text,
   VerticalSpace,
   useForm,
-  UP_KEY_CODE,
-  DOWN_KEY_CODE
+  DOWN_KEY_CODE,
+  UP_KEY_CODE
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
@@ -29,26 +29,26 @@ export function JumpToLayer (initialState) {
     {
       ...initialState,
       filteredLayers: [].concat(initialState.layers),
-      searchTerm: ''
+      searchTerm: '',
+      selectedLayerId: null
     },
     submitCallback,
     closeCallback,
     true
   )
   const { layers, filteredLayers, selectedLayerId, searchTerm } = inputs
-  function handleSearchTermChange (value, name) {
-    handleInput(value, name)
+  function handleSearchTermChange (value) {
+    handleInput(value, 'searchTerm')
     const filteredLayers = filterLayersByName(layers, value)
     handleInput(filteredLayers, 'filteredLayers')
     if (filteredLayers.length === 1) {
       handleInput(filteredLayers[0].id, 'selectedLayerId')
     }
   }
-  function handleItemClick (event) {
+  function handleLayerClick (event) {
     const selectedLayerId = event.target.getAttribute('data-layer-id')
     handleInput(selectedLayerId, 'selectedLayerId')
   }
-
   const handleKeyDown = useCallback(
     function (event) {
       if (event.keyCode === UP_KEY_CODE || event.keyCode === DOWN_KEY_CODE) {
@@ -104,7 +104,6 @@ export function JumpToLayer (initialState) {
   return (
     <div>
       <SearchTextbox
-        name='searchTerm'
         onKeyDown={handleKeyDown}
         onChange={handleSearchTermChange}
         propagateEscapeKeyDown
@@ -128,7 +127,7 @@ export function JumpToLayer (initialState) {
                 type={type.toLowerCase()}
                 data-layer-id={id}
                 selected={id === selectedLayerId}
-                onClick={handleItemClick}
+                onClick={handleLayerClick}
               >
                 {name}
               </Layer>
