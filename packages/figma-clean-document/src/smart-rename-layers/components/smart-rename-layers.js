@@ -12,7 +12,7 @@ import { h } from 'preact'
 
 export function SmartRenameLayers (initialState) {
   function submitCallback (settings) {
-    triggerEvent('SMART_RENAME_LAYERS', settings)
+    triggerEvent('SUBMIT', settings)
   }
   function closeCallback () {
     triggerEvent('CLOSE')
@@ -38,6 +38,7 @@ export function SmartRenameLayers (initialState) {
       <Button fullWidth onClick={handleSubmit}>
         Smart Rename Layers
       </Button>
+      <VerticalSpace space='small' />
     </Container>
   )
 }

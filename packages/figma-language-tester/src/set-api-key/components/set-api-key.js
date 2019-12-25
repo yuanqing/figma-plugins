@@ -12,7 +12,7 @@ import { h } from 'preact'
 
 export function SetApiKey (initialState) {
   function submitCallback ({ apiKey }) {
-    triggerEvent('SAVE_API_KEY', {
+    triggerEvent('SUBMIT', {
       apiKey
     })
   }
@@ -50,6 +50,7 @@ export function SetApiKey (initialState) {
       <Button fullWidth disabled={inputs.apiKey === ''} onClick={handleSubmit}>
         Set API Key
       </Button>
+      <VerticalSpace space='small' />
     </Container>
   )
 }

@@ -57,16 +57,12 @@ export function LanguageTester () {
       triggerEvent('TRANSLATE_RESULT', result, scope, languageKey)
     })
   }, [])
-  useEffect(
-    function () {
-      window.addEventListener('keydown', handleKeyDown)
-      return function () {
-        window.removeEventListener('keydown', handleKeyDown)
-      }
-    },
-    [activeLanguageKey]
-  )
-  const isResetButtonDisabled = activeLanguageKey === DEFAULT_LANGUAGE
+  useEffect(function () {
+    window.addEventListener('keydown', handleKeyDown)
+    return function () {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
   return (
     <div>
       <div class={styles.languages}>
@@ -92,13 +88,14 @@ export function LanguageTester () {
       <VerticalSpace space='small' />
       <Container space='medium'>
         <Button
-          disabled={isResetButtonDisabled === true}
+          disabled={activeLanguageKey === DEFAULT_LANGUAGE}
           fullWidth
-          onClick={isResetButtonDisabled === true ? null : handleResetClick}
+          onClick={handleResetClick}
         >
           Reset
         </Button>
       </Container>
+      <VerticalSpace space='small' />
     </div>
   )
 }

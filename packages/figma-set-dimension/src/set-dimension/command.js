@@ -19,7 +19,7 @@ export default async function () {
   }
   const settings = await loadSettings(defaultSettings)
   onSelectionChange(function () {
-    triggerEvent('SELECTION_CHANGED', getLayers())
+    triggerEvent('SELECTION_CHANGED', { layers: getLayers() })
   })
   addEventListener('SET_DIMENSION', async function ({ attribute, dimension }) {
     await saveSettings({
@@ -34,7 +34,7 @@ export default async function () {
         layer.resize(layer.width, dimension)
       }
     }
-    triggerEvent('SELECTION_CHANGED', getLayers())
+    triggerEvent('SELECTION_CHANGED', { layers: getLayers() })
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

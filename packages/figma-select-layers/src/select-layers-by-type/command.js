@@ -43,6 +43,7 @@ function commandFactory (filterCallback, label) {
     const scope =
       figma.currentPage.selection.length > 0 ? 'within selection' : 'on page'
     figma.currentPage.selection = layers
+    figma.viewport.scrollAndZoomIntoView(layers)
     /* eslint-disable indent */
     figma.closePlugin(
       layers.length === 0

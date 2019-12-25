@@ -25,7 +25,9 @@ export default function () {
     figma.closePlugin(formatErrorMessage('No similar layers on page'))
     return
   }
-  figma.currentPage.selection = [referenceLayer, ...layers]
+  const selection = [referenceLayer, ...layers]
+  figma.currentPage.selection = selection
+  figma.viewport.scrollAndZoomIntoView(selection)
   figma.closePlugin(
     formatSuccessMessage(
       `Selected ${mapNumberToWord(layers.length)} ${pluralize(

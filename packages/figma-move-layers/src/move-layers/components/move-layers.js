@@ -15,11 +15,11 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect } from 'preact/hooks'
 
 export function MoveLayers (initialState) {
   function submitCallback ({ horizontalOffset, verticalOffset }) {
-    triggerEvent('MOVE_LAYERS', {
+    triggerEvent('SUBMIT', {
       horizontalOffset: evaluateNumericExpression(horizontalOffset),
       verticalOffset: evaluateNumericExpression(verticalOffset)
     })
@@ -33,15 +33,21 @@ export function MoveLayers (initialState) {
     closeCallback,
     true
   )
-  const [hasSelection, setHasSelection] = useState(true)
-  useEffect(function () {
-    return addEventListener('SELECTION_CHANGED', function (hasSelection) {
-      setHasSelection(hasSelection)
-    })
-  }, [])
-  const { horizontalOffset, verticalOffset } = inputs
+  useEffect(
+    function () {
+      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+        handleInput(hasSelection, 'hasSelection')
+      })
+    },
+    [handleInput]
+  )
+  const { hasSelection, horizontalOffset, verticalOffset } = inputs
   const evaluatedHorizontalOffset = evaluateNumericExpression(horizontalOffset)
   const evaluatedVerticalOffset = evaluateNumericExpression(verticalOffset)
+  const isSubmitButtonDisabled =
+    hasSelection === false ||
+    ((evaluatedHorizontalOffset === null || evaluatedHorizontalOffset === 0) &&
+      (evaluatedVerticalOffset === null || evaluatedVerticalOffset === 0))
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -65,16 +71,12 @@ export function MoveLayers (initialState) {
       <VerticalSpace space='large' />
       <Button
         fullWidth
-        disabled={
-          hasSelection === false ||
-          ((evaluatedHorizontalOffset === null ||
-            evaluatedHorizontalOffset === 0) &&
-            (evaluatedVerticalOffset === null || evaluatedVerticalOffset === 0))
-        }
+        disabled={isSubmitButtonDisabled}
         onClick={handleSubmit}
       >
         Move Layers
       </Button>
+      <VerticalSpace space='small' />
     </Container>
   )
 }

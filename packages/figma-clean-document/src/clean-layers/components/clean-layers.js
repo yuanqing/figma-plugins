@@ -14,7 +14,7 @@ import { h } from 'preact'
 
 export function CleanLayers (initialState) {
   function submitCallback (settings) {
-    triggerEvent('CLEAN_LAYERS', settings)
+    triggerEvent('SUBMIT', settings)
   }
   function closeCallback () {
     triggerEvent('CLOSE')
@@ -74,7 +74,7 @@ export function CleanLayers (initialState) {
           <Text muted>Ignore layers named</Text>
           <VerticalSpace space='small' />
           <Textbox
-            disabled={inputs.smartRenameLayers === false}
+            disabled={smartRenameLayers === false}
             name='smartRenameLayersWhitelist'
             value={smartRenameLayersWhitelist}
             onChange={handleInput}
@@ -101,6 +101,7 @@ export function CleanLayers (initialState) {
       >
         Clean Layers
       </Button>
+      <VerticalSpace space='small' />
     </Container>
   )
 }

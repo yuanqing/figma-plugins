@@ -13,11 +13,11 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect } from 'preact/hooks'
 
 export function DistributeLayers ({ direction, icon, ...initialState }) {
   function submitCallback ({ space }) {
-    triggerEvent('DISTRIBUTE_LAYERS', {
+    triggerEvent('SUBMIT', {
       space: evaluateNumericExpression(space)
     })
   }
@@ -25,18 +25,23 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
     triggerEvent('CLOSE')
   }
   const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
+    {
+      ...initialState,
+      hasSelection: true
+    },
     submitCallback,
     closeCallback,
     true
   )
-  const [hasSelection, setHasSelection] = useState(true)
-  useEffect(function () {
-    return addEventListener('SELECTION_CHANGED', function (hasSelection) {
-      setHasSelection(hasSelection)
-    })
-  }, [])
-  const { space } = inputs
+  useEffect(
+    function () {
+      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+        handleInput(hasSelection, 'hasSelection')
+      })
+    },
+    [handleInput]
+  )
+  const { hasSelection, space } = inputs
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -60,6 +65,7 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
       >
         Distribute Layers {direction}
       </Button>
+      <VerticalSpace space='small' />
     </Container>
   )
 }

@@ -1,6 +1,7 @@
 /* global figma */
 import {
   addEventListener,
+  extractLayerAttributes,
   formatSuccessMessage,
   loadFonts,
   loadSettings,
@@ -10,11 +11,10 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
-import { extractCharacters } from '../utilities/extract-characters'
 import { getTextLayers } from '../utilities/get-text-layers'
 
 export default async function () {
-  const layers = getTextLayers()
+  const layers = getLayers()
   const {
     targetCurrency,
     roundNumbers,
@@ -22,8 +22,7 @@ export default async function () {
     ...settings
   } = await loadSettings(defaultSettings)
   onSelectionChange(function () {
-    const layers = getTextLayers()
-    triggerEvent('SELECTION_CHANGED', extractCharacters(layers))
+    triggerEvent('SELECTION_CHANGED', { layers: getLayers() })
   })
   addEventListener('SUBMIT', async function ({
     layers,
@@ -54,10 +53,14 @@ export default async function () {
   showUI(
     { width: 240, height: 357 },
     {
-      layers: extractCharacters(layers),
+      layers,
       targetCurrency,
       roundNumbers,
       locale
     }
   )
+}
+
+function getLayers () {
+  return extractLayerAttributes(getTextLayers(), ['id', 'characters'])
 }

@@ -15,7 +15,7 @@ import { smartRenameLayer } from './smart-rename-layer'
 
 export default async function () {
   const settings = await loadSettings(defaultSettings)
-  addEventListener('SMART_RENAME_LAYERS', async function (settings) {
+  addEventListener('SUBMIT', async function (settings) {
     const notificationHandler = figma.notify('Renaming layers…', {
       timeout: 60000
     })

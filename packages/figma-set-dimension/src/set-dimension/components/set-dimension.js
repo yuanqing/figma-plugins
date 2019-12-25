@@ -1,15 +1,15 @@
 /** @jsx h */
 import {
-  ESCAPE_KEY_CODE,
-  LEFT_KEY_CODE,
-  UP_KEY_CODE,
-  RIGHT_KEY_CODE,
-  DOWN_KEY_CODE,
   Container,
   Divider,
   SegmentedControl,
   SelectableItem,
-  VerticalSpace
+  VerticalSpace,
+  ESCAPE_KEY_CODE,
+  LEFT_KEY_CODE,
+  UP_KEY_CODE,
+  RIGHT_KEY_CODE,
+  DOWN_KEY_CODE
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
@@ -27,12 +27,11 @@ export function SetDimension (initialState) {
       dimension
     })
   }
-  useEffect(
-    function () {
-      return addEventListener('SELECTION_CHANGED', setLayers)
-    },
-    [setLayers]
-  )
+  useEffect(function () {
+    return addEventListener('SELECTION_CHANGED', function ({ layers }) {
+      setLayers(layers)
+    })
+  }, [])
   const handleKeyDown = useCallback(
     function (event) {
       if (event.keyCode === ESCAPE_KEY_CODE) {
@@ -90,7 +89,7 @@ export function SetDimension (initialState) {
         return (
           <SelectableItem
             key={index}
-            disabled={isDisabled === true}
+            disabled={isDisabled}
             data-dimension={dimension}
             selected={activeDimension === dimension}
             onClick={isDisabled === true ? null : handleDimensionClick}

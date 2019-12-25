@@ -35,18 +35,6 @@ const locales = localesJson.map(function (locale) {
 })
 
 export function FormatCurrency (initialState) {
-  const { inputs, setInputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
-  const { layers, format, locale } = inputs
-  const previewItems = computePreview({
-    layers,
-    format,
-    locale
-  })
   function submitCallback ({ layers, format, locale }) {
     const transform = transforms[format]
     const result = layers.map(function ({ id, characters }) {
@@ -64,22 +52,25 @@ export function FormatCurrency (initialState) {
   function closeCallback () {
     triggerEvent('CLOSE')
   }
-  function handleLocaleChange (locale) {
-    setInputs({
-      ...inputs,
-      locale
-    })
-  }
+  const { inputs, handleInput, handleSubmit } = useForm(
+    initialState,
+    submitCallback,
+    closeCallback,
+    true
+  )
+  const { layers, format, locale } = inputs
+  const previewItems = computePreview({
+    layers,
+    format,
+    locale
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function (layers) {
-        setInputs({
-          ...inputs,
-          layers
-        })
+      return addEventListener('SELECTION_CHANGED', function ({ layers }) {
+        handleInput(layers, 'layers')
       })
     },
-    [inputs, setInputs]
+    [handleInput]
   )
   return (
     <div>
@@ -98,13 +89,11 @@ export function FormatCurrency (initialState) {
         <Text muted>Locale</Text>
         <VerticalSpace space='small' />
         <TextboxAutocomplete
-          filter
-          strict
           top
           name='locale'
           value={locale}
           options={locales}
-          onChange={handleLocaleChange}
+          onChange={handleInput}
         />
         <VerticalSpace space='extraLarge' />
         <Button
@@ -118,6 +107,7 @@ export function FormatCurrency (initialState) {
         >
           Format Currency
         </Button>
+        <VerticalSpace space='small' />
       </Container>
     </div>
   )

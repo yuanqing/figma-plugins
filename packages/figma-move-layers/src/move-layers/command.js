@@ -18,10 +18,12 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
-  onSelectionChange(function () {
-    triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length !== 0)
+  onSelectionChange(function (selectedLayers) {
+    triggerEvent('SELECTION_CHANGED', {
+      hasSelection: selectedLayers.length !== 0
+    })
   })
-  addEventListener('MOVE_LAYERS', async function (settings) {
+  addEventListener('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const { horizontalOffset, verticalOffset } = settings
     if (horizontalOffset === 0 && verticalOffset === 0) {

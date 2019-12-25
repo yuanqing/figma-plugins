@@ -1,6 +1,7 @@
 /* global figma */
 import {
   addEventListener,
+  extractLayerAttributes,
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
@@ -23,13 +24,12 @@ export default async function () {
   const settings = await loadSettings(defaultSettings)
   onSelectionChange(function () {
     const layers = figma.currentPage.children
-    triggerEvent(
-      'SELECTION_CHANGED',
-      extractIdAndName(layers),
-      computeMaximumGroupDefinition(layers)
-    )
+    triggerEvent('SELECTION_CHANGED', {
+      layers: extractLayerAttributes(layers, ['id', 'name']),
+      maximumGroupDefinition: computeMaximumGroupDefinition(layers)
+    })
   })
-  addEventListener('ORGANIZE_LAYERS', async function (settings) {
+  addEventListener('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const { groupDefinition, horizontalSpace, verticalSpace } = settings
     const layers = figma.currentPage.children
@@ -44,17 +44,11 @@ export default async function () {
   showUI(
     { width: 240, height: 325 },
     {
-      layers: extractIdAndName(layers),
+      layers: extractLayerAttributes(layers, ['id', 'name']),
       maximumGroupDefinition: computeMaximumGroupDefinition(layers),
       ...settings
     }
   )
-}
-
-function extractIdAndName (layers) {
-  return layers.map(function ({ id, name }) {
-    return { id, name }
-  })
 }
 
 const slashRegex = /\//g

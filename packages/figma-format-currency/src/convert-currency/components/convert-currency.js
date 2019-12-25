@@ -19,26 +19,18 @@ import {
 import { convertCurrency } from '../../utilities/currency/convert-currency'
 import { isValidLocale } from '../../utilities/currency/is-valid-locale'
 import { moneyRegex } from '../../utilities/currency/money-regex'
+import localesJson from '../../utilities/currency/data/locales'
 import isoCodes from '../../utilities/currency/data/iso-codes'
 
 const currencies = Object.keys(isoCodes).map(function (isoCode) {
   return { value: isoCode }
 })
 
+const locales = localesJson.map(function (locale) {
+  return { value: locale }
+})
+
 export function ConvertCurrency (initialState) {
-  const { inputs, setInputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
-  const { layers, targetCurrency, roundNumbers, locale } = inputs
-  const previewItems = computePreview({
-    layers,
-    targetCurrency,
-    roundNumbers,
-    locale
-  })
   function submitCallback ({ layers, targetCurrency, roundNumbers, locale }) {
     const result = layers.map(function ({ id, characters }) {
       return {
@@ -61,28 +53,26 @@ export function ConvertCurrency (initialState) {
   function closeCallback () {
     triggerEvent('CLOSE')
   }
-  function handleCurrencyChange (targetCurrency) {
-    setInputs({
-      ...inputs,
-      targetCurrency
-    })
-  }
-  function handleLocaleChange (locale) {
-    setInputs({
-      ...inputs,
-      locale
-    })
-  }
+  const { inputs, handleInput, handleSubmit } = useForm(
+    initialState,
+    submitCallback,
+    closeCallback,
+    true
+  )
+  const { layers, targetCurrency, roundNumbers, locale } = inputs
+  const previewItems = computePreview({
+    layers,
+    targetCurrency,
+    roundNumbers,
+    locale
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function (layers) {
-        setInputs({
-          ...inputs,
-          layers
-        })
+      return addEventListener('SELECTION_CHANGED', function ({ layers }) {
+        handleInput(layers, 'layers')
       })
     },
-    [inputs, setInputs]
+    [handleInput]
   )
   return (
     <div>
@@ -94,10 +84,10 @@ export function ConvertCurrency (initialState) {
         <TextboxAutocomplete
           filter
           strict
-          name='currency'
+          name='targetCurrency'
           value={targetCurrency}
           options={currencies}
-          onChange={handleCurrencyChange}
+          onChange={handleInput}
         />
         <VerticalSpace space='small' />
         <Checkbox
@@ -112,12 +102,11 @@ export function ConvertCurrency (initialState) {
         <VerticalSpace space='small' />
         <TextboxAutocomplete
           filter
-          strict
           top
           name='locale'
           value={locale}
-          options={[{ value: 'en-US' }, { value: 'de-DE' }]}
-          onChange={handleLocaleChange}
+          options={locales}
+          onChange={handleInput}
         />
         <VerticalSpace space='extraLarge' />
         <Button
@@ -131,6 +120,7 @@ export function ConvertCurrency (initialState) {
         >
           Convert Currency
         </Button>
+        <VerticalSpace space='small' />
       </Container>
     </div>
   )

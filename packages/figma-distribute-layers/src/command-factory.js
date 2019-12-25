@@ -18,10 +18,12 @@ export function commandFactory ({ direction, sortLayers, distributeLayers }) {
       return
     }
     const settings = await loadSettings(defaultSettings)
-    onSelectionChange(function () {
-      triggerEvent('SELECTION_CHANGED', figma.currentPage.selection.length > 1)
+    onSelectionChange(function (selectedLayers) {
+      triggerEvent('SELECTION_CHANGED', {
+        hasSelection: selectedLayers.length > 1
+      })
     })
-    addEventListener('DISTRIBUTE_LAYERS', async function (settings) {
+    addEventListener('SUBMIT', async function (settings) {
       await saveSettings(settings)
       const { space } = settings
       const layers = [].concat(figma.currentPage.selection)

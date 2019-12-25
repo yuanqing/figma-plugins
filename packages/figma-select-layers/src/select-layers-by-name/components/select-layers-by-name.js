@@ -27,7 +27,7 @@ export function SelectLayersByName (initialState) {
   function closeCallback () {
     triggerEvent('CLOSE')
   }
-  const { inputs, setInputs, handleInput, handleSubmit } = useForm(
+  const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
     closeCallback,
@@ -35,18 +35,15 @@ export function SelectLayersByName (initialState) {
   )
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function (
-        layers,
-        hasSelection
-      ) {
-        setInputs({
-          ...inputs,
-          layers,
-          hasSelection
-        })
+      return addEventListener('SELECTION_CHANGED', function ({
+        hasSelection,
+        layers
+      }) {
+        handleInput(hasSelection, 'hasSelection')
+        handleInput(layers, 'layers')
       })
     },
-    [inputs, setInputs]
+    [handleInput]
   )
   const { exactMatch, layerName, layers, hasSelection } = inputs
   const selectedLayersCount = filterLayersByName(layers, layerName, exactMatch)
@@ -90,6 +87,7 @@ export function SelectLayersByName (initialState) {
               'matches'
             )} ${scope}`}
       </Text>
+      <VerticalSpace space='small' />
     </Container>
   )
 }

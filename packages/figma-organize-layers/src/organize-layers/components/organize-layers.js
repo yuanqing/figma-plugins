@@ -34,7 +34,7 @@ export function OrganizeLayers (initialState) {
     horizontalSpace,
     verticalSpace
   }) {
-    triggerEvent('ORGANIZE_LAYERS', {
+    triggerEvent('SUBMIT', {
       groupDefinition,
       horizontalSpace: evaluateNumericExpression(horizontalSpace) || 0,
       verticalSpace: evaluateNumericExpression(verticalSpace) || 0
@@ -43,7 +43,7 @@ export function OrganizeLayers (initialState) {
   function closeCallback () {
     triggerEvent('CLOSE')
   }
-  const { inputs, setInputs, handleInput, handleSubmit } = useForm(
+  const { inputs, handleInput, handleSubmit } = useForm(
     initialState,
     submitCallback,
     closeCallback,
@@ -51,18 +51,15 @@ export function OrganizeLayers (initialState) {
   )
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function (
+      return addEventListener('SELECTION_CHANGED', function ({
         layers,
         maximumGroupDefinition
-      ) {
-        setInputs({
-          ...inputs,
-          layers,
-          maximumGroupDefinition
-        })
+      }) {
+        handleInput(layers, 'layers')
+        handleInput(maximumGroupDefinition, 'maximumGroupDefinition')
       })
     },
-    [inputs, setInputs]
+    [handleInput]
   )
   const {
     groupDefinition,
@@ -105,6 +102,7 @@ export function OrganizeLayers (initialState) {
         <Button fullWidth disabled={layers.length === 0} onClick={handleSubmit}>
           Organize Layers
         </Button>
+        <VerticalSpace space='small' />
       </Container>
     </div>
   )

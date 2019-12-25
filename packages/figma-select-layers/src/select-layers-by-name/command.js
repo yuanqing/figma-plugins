@@ -17,12 +17,11 @@ import { filterLayersByName } from './filter-layers-by-name'
 
 export default async function () {
   const settings = await loadSettings(defaultSettings)
-  onSelectionChange(function () {
-    triggerEvent(
-      'SELECTION_CHANGED',
-      getLayerIdsAndNames(),
-      figma.currentPage.selection.length > 0
-    )
+  onSelectionChange(function (selectedLayers) {
+    triggerEvent('SELECTION_CHANGED', {
+      hasSelection: selectedLayers.length > 0,
+      layers: getLayerIdsAndNames()
+    })
   })
   addEventListener('SUBMIT', async function (settings) {
     await saveSettings(settings)
@@ -34,9 +33,11 @@ export default async function () {
       exactMatch
     )
     const scope = hasSelection ? 'within selection' : 'on page'
-    figma.currentPage.selection = layers.map(function ({ id }) {
+    const selection = layers.map(function ({ id }) {
       return figma.getNodeById(id)
     })
+    figma.currentPage.selection = selection
+    figma.viewport.scrollAndZoomIntoView(selection)
     figma.closePlugin(
       formatSuccessMessage(
         `Selected ${mapNumberToWord(layers.length)} ${pluralize(

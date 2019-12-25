@@ -160,6 +160,7 @@ export function ReplaceWithComponent (initialState) {
         >
           Replace With Component
         </Button>
+        <VerticalSpace space='small' />
       </Container>
     </div>
   )

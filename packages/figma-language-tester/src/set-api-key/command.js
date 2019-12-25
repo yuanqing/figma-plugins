@@ -10,7 +10,7 @@ import { defaultSettings } from '../default-settings'
 
 export default async function () {
   const settings = await loadSettings(defaultSettings)
-  addEventListener('SAVE_API_KEY', async function (settings) {
+  addEventListener('SUBMIT', async function (settings) {
     await saveSettings(settings)
     figma.closePlugin(formatSuccessMessage('Saved API key'))
   })

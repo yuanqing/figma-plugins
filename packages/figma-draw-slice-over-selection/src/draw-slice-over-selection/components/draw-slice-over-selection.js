@@ -13,11 +13,11 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect } from 'preact/hooks'
 
 export function DrawSliceOverSelection (initialState) {
   function submitCallback ({ padding }) {
-    triggerEvent('DRAW_SLICE_OVER_SELECTION', {
+    triggerEvent('SUBMIT', {
       padding: evaluateNumericExpression(padding)
     })
   }
@@ -30,13 +30,15 @@ export function DrawSliceOverSelection (initialState) {
     closeCallback,
     true
   )
-  const [hasSelection, setHasSelection] = useState(true)
-  useEffect(function () {
-    return addEventListener('SELECTION_CHANGED', function (hasSelection) {
-      setHasSelection(hasSelection)
-    })
-  }, [])
-  const { padding } = inputs
+  useEffect(
+    function () {
+      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+        handleInput(hasSelection, 'hasSelection')
+      })
+    },
+    [handleInput]
+  )
+  const { hasSelection, padding } = inputs
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -59,6 +61,7 @@ export function DrawSliceOverSelection (initialState) {
       >
         Draw Slice Over Selection
       </Button>
+      <VerticalSpace space='small' />
     </Container>
   )
 }
