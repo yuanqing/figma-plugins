@@ -21,8 +21,7 @@ export function JumpToLayer (initialState) {
     {
       ...initialState,
       filteredLayers: [].concat(initialState.layers),
-      searchTerm: '',
-      selectedLayerId: null
+      searchTerm: ''
     },
     {
       validate: function ({ filteredLayers, selectedLayerId }) {

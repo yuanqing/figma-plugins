@@ -27,7 +27,9 @@ export default function () {
     const layer = figma.getNodeById(selectedLayerId)
     figma.viewport.scrollAndZoomIntoView([layer])
     figma.currentPage.selection = [layer]
-    figma.closePlugin(formatSuccessMessage(`Jumped to “${layer.name}”`))
+    figma.closePlugin(
+      formatSuccessMessage(`Jumped to ${layer.type.toLowerCase()}`)
+    )
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()
