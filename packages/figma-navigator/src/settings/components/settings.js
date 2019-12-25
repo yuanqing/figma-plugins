@@ -11,20 +11,16 @@ import {
 import { h } from 'preact'
 
 export function Settings (initialState) {
-  function submitCallback ({ wrapAround }) {
-    triggerEvent('SUBMIT', {
-      wrapAround
-    })
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
+  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
+    submit: function ({ wrapAround }) {
+      triggerEvent('SUBMIT', {
+        wrapAround
+      })
+    },
+    close: function () {
+      triggerEvent('CLOSE')
+    }
+  })
   const { wrapAround } = inputs
   return (
     <Container>

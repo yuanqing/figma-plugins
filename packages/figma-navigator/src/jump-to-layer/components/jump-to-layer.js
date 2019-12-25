@@ -17,24 +17,34 @@ import { useCallback, useEffect } from 'preact/hooks'
 import styles from './jump-to-layer.scss'
 
 export function JumpToLayer (initialState) {
-  function submitCallback ({ selectedLayerId }) {
-    triggerEvent('SUBMIT', {
-      selectedLayerId
-    })
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
+  const { inputs, handleInput, handleSubmit, isValid } = useForm(
     {
       ...initialState,
       filteredLayers: [].concat(initialState.layers),
       searchTerm: '',
       selectedLayerId: null
     },
-    submitCallback,
-    closeCallback,
-    true
+    {
+      validate: function ({ filteredLayers, selectedLayerId }) {
+        return (
+          selectedLayerId !== null &&
+          filteredLayers.findIndex(function ({ id }) {
+            return id === selectedLayerId
+          }) !== -1
+        )
+      },
+      submit: function ({ selectedLayerId }) {
+        if (selectedLayerId === null) {
+          return
+        }
+        triggerEvent('SUBMIT', {
+          selectedLayerId
+        })
+      },
+      close: function () {
+        triggerEvent('CLOSE')
+      }
+    }
   )
   const { layers, filteredLayers, selectedLayerId, searchTerm } = inputs
   function handleSearchTermChange (value) {
@@ -96,11 +106,6 @@ export function JumpToLayer (initialState) {
     },
     [handleKeyDown]
   )
-  const isSubmitButtonDisabled =
-    selectedLayerId === null ||
-    filteredLayers.findIndex(function ({ id }) {
-      return id === selectedLayerId
-    }) === -1
   return (
     <div>
       <SearchTextbox
@@ -138,11 +143,7 @@ export function JumpToLayer (initialState) {
       <Divider />
       <Container space='medium'>
         <VerticalSpace space='small' />
-        <Button
-          fullWidth
-          disabled={isSubmitButtonDisabled}
-          onClick={handleSubmit}
-        >
+        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
           Jump to Component/Frame
         </Button>
         <VerticalSpace space='small' />

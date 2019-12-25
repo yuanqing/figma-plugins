@@ -18,25 +18,32 @@ import { useCallback, useEffect } from 'preact/hooks'
 import styles from './replace-with-component.scss'
 
 export function ReplaceWithComponent (initialState) {
-  function submitCallback ({ selectedLayerId, shouldResizeToFitLayer }) {
-    triggerEvent('SUBMIT', {
-      selectedLayerId,
-      shouldResizeToFitLayer
-    })
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
+  const { inputs, handleInput, handleSubmit, isValid } = useForm(
     {
       ...initialState,
       filteredLayers: [].concat(initialState.layers),
       searchTerm: '',
       selectedLayerId: null
     },
-    submitCallback,
-    closeCallback,
-    true
+    {
+      validate: function ({ filteredLayers, selectedLayerId }) {
+        return (
+          selectedLayerId !== null &&
+          filteredLayers.findIndex(function ({ id }) {
+            return id === selectedLayerId
+          }) !== -1
+        )
+      },
+      submit: function ({ selectedLayerId, shouldResizeToFitLayer }) {
+        triggerEvent('SUBMIT', {
+          selectedLayerId,
+          shouldResizeToFitLayer
+        })
+      },
+      close: function () {
+        triggerEvent('CLOSE')
+      }
+    }
   )
   const {
     layers,
@@ -45,18 +52,24 @@ export function ReplaceWithComponent (initialState) {
     selectedLayerId,
     shouldResizeToFitLayer
   } = inputs
-  function handleSearchTermChange (value) {
-    handleInput(value, 'searchTerm')
-    const filteredLayers = filterLayersByName(layers, value)
-    handleInput(filteredLayers, 'filteredLayers')
-    if (filteredLayers.length === 1) {
-      handleInput(filteredLayers[0].id, 'selectedLayerId')
-    }
-  }
-  function handleLayerClick (event) {
-    const selectedLayerId = event.target.getAttribute('data-layer-id')
-    handleInput(selectedLayerId, 'selectedLayerId')
-  }
+  const handleSearchTermChange = useCallback(
+    function (value) {
+      handleInput(value, 'searchTerm')
+      const filteredLayers = filterLayersByName(layers, value)
+      handleInput(filteredLayers, 'filteredLayers')
+      if (filteredLayers.length === 1) {
+        handleInput(filteredLayers[0].id, 'selectedLayerId')
+      }
+    },
+    [handleInput, layers]
+  )
+  const handleLayerClick = useCallback(
+    function (event) {
+      const selectedLayerId = event.target.getAttribute('data-layer-id')
+      handleInput(selectedLayerId, 'selectedLayerId')
+    },
+    [handleInput]
+  )
   const handleKeyDown = useCallback(
     function (event) {
       if (event.keyCode === UP_KEY_CODE || event.keyCode === DOWN_KEY_CODE) {
@@ -104,11 +117,6 @@ export function ReplaceWithComponent (initialState) {
     },
     [handleKeyDown]
   )
-  const isSubmitButtonDisabled =
-    selectedLayerId === null ||
-    filteredLayers.findIndex(function ({ id }) {
-      return id === selectedLayerId
-    }) === -1
   return (
     <div>
       <SearchTextbox
@@ -153,11 +161,7 @@ export function ReplaceWithComponent (initialState) {
           <Text>Resize component to fit layer</Text>
         </Checkbox>
         <VerticalSpace space='medium' />
-        <Button
-          fullWidth
-          disabled={isSubmitButtonDisabled}
-          onClick={handleSubmit}
-        >
+        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
           Replace With Component
         </Button>
         <VerticalSpace space='small' />

@@ -11,18 +11,14 @@ import {
 import { h } from 'preact'
 
 export function SmartRenameLayers (initialState) {
-  function submitCallback (settings) {
-    triggerEvent('SUBMIT', settings)
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
+  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
+    submit: function (settings) {
+      triggerEvent('SUBMIT', settings)
+    },
+    close: function () {
+      triggerEvent('CLOSE')
+    }
+  })
   const { smartRenameLayersWhitelist } = inputs
   return (
     <Container space='medium'>

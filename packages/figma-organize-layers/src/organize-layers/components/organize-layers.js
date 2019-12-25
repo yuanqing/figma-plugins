@@ -29,26 +29,21 @@ const groupDefinitions = [
 ]
 
 export function OrganizeLayers (initialState) {
-  function submitCallback ({
-    groupDefinition,
-    horizontalSpace,
-    verticalSpace
-  }) {
-    triggerEvent('SUBMIT', {
-      groupDefinition,
-      horizontalSpace: evaluateNumericExpression(horizontalSpace) || 0,
-      verticalSpace: evaluateNumericExpression(verticalSpace) || 0
-    })
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
+  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ layers }) {
+      return layers.length > 0
+    },
+    submit: function ({ groupDefinition, horizontalSpace, verticalSpace }) {
+      triggerEvent('SUBMIT', {
+        groupDefinition,
+        horizontalSpace: evaluateNumericExpression(horizontalSpace) || 0,
+        verticalSpace: evaluateNumericExpression(verticalSpace) || 0
+      })
+    },
+    close: function () {
+      triggerEvent('CLOSE')
+    }
+  })
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({
@@ -64,7 +59,6 @@ export function OrganizeLayers (initialState) {
   const {
     groupDefinition,
     horizontalSpace,
-    layers,
     maximumGroupDefinition,
     verticalSpace
   } = inputs
@@ -99,7 +93,7 @@ export function OrganizeLayers (initialState) {
           />
         </Columns>
         <VerticalSpace space='large' />
-        <Button fullWidth disabled={layers.length === 0} onClick={handleSubmit}>
+        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
           Organize Layers
         </Button>
         <VerticalSpace space='small' />

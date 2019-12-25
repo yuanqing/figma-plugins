@@ -31,34 +31,30 @@ const locales = localesJson.map(function (locale) {
 })
 
 export function ConvertCurrency (initialState) {
-  function submitCallback ({ layers, targetCurrency, roundNumbers, locale }) {
-    const result = layers.map(function ({ id, characters }) {
-      return {
-        id,
-        characters: convertCurrency({
-          string: characters,
-          targetCurrency,
-          roundNumbers,
-          locale
-        })
-      }
-    })
-    triggerEvent('SUBMIT', {
-      layers: result,
-      targetCurrency,
-      roundNumbers,
-      locale
-    })
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
+  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
+    submit: function ({ layers, targetCurrency, roundNumbers, locale }) {
+      const result = layers.map(function ({ id, characters }) {
+        return {
+          id,
+          characters: convertCurrency({
+            string: characters,
+            targetCurrency,
+            roundNumbers,
+            locale
+          })
+        }
+      })
+      triggerEvent('SUBMIT', {
+        layers: result,
+        targetCurrency,
+        roundNumbers,
+        locale
+      })
+    },
+    close: function () {
+      triggerEvent('CLOSE')
+    }
+  })
   const { layers, targetCurrency, roundNumbers, locale } = inputs
   const previewItems = computePreview({
     layers,

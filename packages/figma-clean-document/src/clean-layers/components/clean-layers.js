@@ -13,18 +13,14 @@ import { triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 
 export function CleanLayers (initialState) {
-  function submitCallback (settings) {
-    triggerEvent('SUBMIT', settings)
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
+  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
+    submit: function (settings) {
+      triggerEvent('SUBMIT', settings)
+    },
+    close: function () {
+      triggerEvent('CLOSE')
+    }
+  })
   const {
     deleteHiddenLayers,
     pixelPerfect,

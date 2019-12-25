@@ -18,21 +18,20 @@ import { useEffect } from 'preact/hooks'
 import { filterLayersByName } from '../filter-layers-by-name'
 
 export function SelectLayersByName (initialState) {
-  function submitCallback ({ exactMatch, layerName }) {
-    triggerEvent('SUBMIT', {
-      exactMatch,
-      layerName
-    })
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
+  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ exactMatch, layerName, layers }) {
+      return filterLayersByName(layers, layerName, exactMatch).length > 0
+    },
+    submit: function ({ exactMatch, layerName }) {
+      triggerEvent('SUBMIT', {
+        exactMatch,
+        layerName
+      })
+    },
+    close: function () {
+      triggerEvent('CLOSE')
+    }
+  })
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({
@@ -70,11 +69,7 @@ export function SelectLayersByName (initialState) {
         <Text>Exact match</Text>
       </Checkbox>
       <VerticalSpace space='medium' />
-      <Button
-        fullWidth
-        disabled={selectedLayersCount === 0}
-        onClick={handleSubmit}
-      >
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Select Layers
       </Button>
       <VerticalSpace space='small' />

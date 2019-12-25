@@ -35,29 +35,25 @@ const locales = localesJson.map(function (locale) {
 })
 
 export function FormatCurrency (initialState) {
-  function submitCallback ({ layers, format, locale }) {
-    const transform = transforms[format]
-    const result = layers.map(function ({ id, characters }) {
-      return {
-        id,
-        characters: transform(characters, locale)
-      }
-    })
-    triggerEvent('SUBMIT', {
-      layers: result,
-      format,
-      locale
-    })
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
+  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
+    submit: function ({ layers, format, locale }) {
+      const transform = transforms[format]
+      const result = layers.map(function ({ id, characters }) {
+        return {
+          id,
+          characters: transform(characters, locale)
+        }
+      })
+      triggerEvent('SUBMIT', {
+        layers: result,
+        format,
+        locale
+      })
+    },
+    close: function () {
+      triggerEvent('CLOSE')
+    }
+  })
   const { layers, format, locale } = inputs
   const previewItems = computePreview({
     layers,

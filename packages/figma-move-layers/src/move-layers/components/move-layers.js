@@ -18,21 +18,29 @@ import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function MoveLayers (initialState) {
-  function submitCallback ({ horizontalOffset, verticalOffset }) {
-    triggerEvent('SUBMIT', {
-      horizontalOffset: evaluateNumericExpression(horizontalOffset),
-      verticalOffset: evaluateNumericExpression(verticalOffset)
-    })
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
+  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
+      const evaluatedHorizontalOffset = evaluateNumericExpression(
+        horizontalOffset
+      )
+      const evaluatedVerticalOffset = evaluateNumericExpression(verticalOffset)
+      return (
+        hasSelection === true &&
+        ((evaluatedHorizontalOffset !== null &&
+          evaluatedHorizontalOffset !== 0) ||
+          (evaluatedVerticalOffset !== null && evaluatedVerticalOffset !== 0))
+      )
+    },
+    submit: function ({ horizontalOffset, verticalOffset }) {
+      triggerEvent('SUBMIT', {
+        horizontalOffset: evaluateNumericExpression(horizontalOffset),
+        verticalOffset: evaluateNumericExpression(verticalOffset)
+      })
+    },
+    close: function () {
+      triggerEvent('CLOSE')
+    }
+  })
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
@@ -41,13 +49,7 @@ export function MoveLayers (initialState) {
     },
     [handleInput]
   )
-  const { hasSelection, horizontalOffset, verticalOffset } = inputs
-  const evaluatedHorizontalOffset = evaluateNumericExpression(horizontalOffset)
-  const evaluatedVerticalOffset = evaluateNumericExpression(verticalOffset)
-  const isSubmitButtonDisabled =
-    hasSelection === false ||
-    ((evaluatedHorizontalOffset === null || evaluatedHorizontalOffset === 0) &&
-      (evaluatedVerticalOffset === null || evaluatedVerticalOffset === 0))
+  const { horizontalOffset, verticalOffset } = inputs
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -69,11 +71,7 @@ export function MoveLayers (initialState) {
         />
       </Columns>
       <VerticalSpace space='large' />
-      <Button
-        fullWidth
-        disabled={isSubmitButtonDisabled}
-        onClick={handleSubmit}
-      >
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Move Layers
       </Button>
       <VerticalSpace space='small' />

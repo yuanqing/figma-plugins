@@ -16,20 +16,21 @@ import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function DrawSliceOverSelection (initialState) {
-  function submitCallback ({ padding }) {
-    triggerEvent('SUBMIT', {
-      padding: evaluateNumericExpression(padding)
-    })
-  }
-  function closeCallback () {
-    triggerEvent('CLOSE')
-  }
-  const { inputs, handleInput, handleSubmit } = useForm(
-    initialState,
-    submitCallback,
-    closeCallback,
-    true
-  )
+  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ hasSelection, padding }) {
+      return (
+        hasSelection === true && evaluateNumericExpression(padding) !== null
+      )
+    },
+    submit: function ({ padding }) {
+      triggerEvent('SUBMIT', {
+        padding: evaluateNumericExpression(padding)
+      })
+    },
+    close: function () {
+      triggerEvent('CLOSE')
+    }
+  })
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
@@ -38,7 +39,7 @@ export function DrawSliceOverSelection (initialState) {
     },
     [handleInput]
   )
-  const { hasSelection, padding } = inputs
+  const { padding } = inputs
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -52,13 +53,7 @@ export function DrawSliceOverSelection (initialState) {
         focused
       />
       <VerticalSpace space='extraLarge' />
-      <Button
-        fullWidth
-        disabled={
-          hasSelection === false || evaluateNumericExpression(padding) === null
-        }
-        onClick={handleSubmit}
-      >
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Draw Slice Over Selection
       </Button>
       <VerticalSpace space='small' />
