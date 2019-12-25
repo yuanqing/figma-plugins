@@ -15,9 +15,7 @@ import { getSelectedLayers } from '../utilities/get-selected-layers'
 export default function () {
   const layers = getLayers()
   if (layers.length === 0) {
-    figma.closePlugin(
-      formatErrorMessage('No top-level frames/components on page')
-    )
+    figma.closePlugin(formatErrorMessage('No frames/components on page'))
     return
   }
   onSelectionChange(function () {
