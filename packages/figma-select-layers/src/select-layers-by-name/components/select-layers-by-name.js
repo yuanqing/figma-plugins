@@ -18,18 +18,25 @@ import { useEffect } from 'preact/hooks'
 import { filterLayersByName } from '../filter-layers-by-name'
 
 export function SelectLayersByName (initialState) {
-  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ exactMatch, layerName, layers }) {
-      return filterLayersByName(layers, layerName, exactMatch).length > 0
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    transform: function (state) {
+      const { layers, layerName, exactMatch } = state
+      return {
+        ...state,
+        count: filterLayersByName(layers, layerName, exactMatch).length
+      }
     },
-    submit: function ({ exactMatch, layerName }) {
+    validate: function ({ count }) {
+      return count > 0
+    },
+    onClose: function () {
+      triggerEvent('CLOSE')
+    },
+    onSubmit: function ({ exactMatch, layerName }) {
       triggerEvent('SUBMIT', {
         exactMatch,
         layerName
       })
-    },
-    close: function () {
-      triggerEvent('CLOSE')
     }
   })
   useEffect(
@@ -38,15 +45,13 @@ export function SelectLayersByName (initialState) {
         hasSelection,
         layers
       }) {
-        handleInput(hasSelection, 'hasSelection')
-        handleInput(layers, 'layers')
+        handleChange(hasSelection, 'hasSelection')
+        handleChange(layers, 'layers')
       })
     },
-    [handleInput]
+    [handleChange]
   )
-  const { exactMatch, layerName, layers, hasSelection } = inputs
-  const selectedLayersCount = filterLayersByName(layers, layerName, exactMatch)
-    .length
+  const { count, exactMatch, layerName, hasSelection } = state
   const scope = hasSelection ? 'within selection' : 'on page'
   return (
     <Container space='medium'>
@@ -56,7 +61,7 @@ export function SelectLayersByName (initialState) {
       <Textbox
         name='layerName'
         value={layerName}
-        onChange={handleInput}
+        onChange={handleChange}
         propagateEscapeKeyDown
         focused
       />
@@ -64,7 +69,7 @@ export function SelectLayersByName (initialState) {
       <Checkbox
         name='exactMatch'
         value={exactMatch === true}
-        onChange={handleInput}
+        onChange={handleChange}
       >
         <Text>Exact match</Text>
       </Checkbox>
@@ -74,13 +79,9 @@ export function SelectLayersByName (initialState) {
       </Button>
       <VerticalSpace space='small' />
       <Text muted align='center'>
-        {selectedLayersCount === 0
+        {count === 0
           ? `No matches ${scope}`
-          : `${selectedLayersCount} ${pluralize(
-              selectedLayersCount,
-              'match',
-              'matches'
-            )} ${scope}`}
+          : `${count} ${pluralize(count, 'match', 'matches')} ${scope}`}
       </Text>
       <VerticalSpace space='small' />
     </Container>
