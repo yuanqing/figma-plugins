@@ -13,14 +13,32 @@ import { triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 
 export function CleanLayers (initialState) {
-  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
-    submit: function (settings) {
-      triggerEvent('SUBMIT', settings)
-    },
-    close: function () {
-      triggerEvent('CLOSE')
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+    initialState,
+    {
+      validate: function ({
+        deleteHiddenLayers,
+        pixelPerfect,
+        smartRenameLayers,
+        smartSortLayers,
+        ungroupSingleLayerGroups
+      }) {
+        return (
+          deleteHiddenLayers === true ||
+          pixelPerfect === true ||
+          smartRenameLayers === true ||
+          smartSortLayers === true ||
+          ungroupSingleLayerGroups === true
+        )
+      },
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function (settings) {
+        triggerEvent('SUBMIT', settings)
+      }
     }
-  })
+  )
   const {
     deleteHiddenLayers,
     pixelPerfect,
@@ -28,13 +46,7 @@ export function CleanLayers (initialState) {
     smartRenameLayersWhitelist,
     smartSortLayers,
     ungroupSingleLayerGroups
-  } = inputs
-  const isSubmitButtonEnabled =
-    deleteHiddenLayers === true ||
-    pixelPerfect === true ||
-    smartRenameLayers === true ||
-    smartSortLayers === true ||
-    ungroupSingleLayerGroups === true
+  } = state
   return (
     <Container space='medium'>
       <VerticalSpace space='extraLarge' />
@@ -42,28 +54,28 @@ export function CleanLayers (initialState) {
         <Checkbox
           name='deleteHiddenLayers'
           value={deleteHiddenLayers}
-          onChange={handleInput}
+          onChange={handleChange}
         >
           <Text>Delete hidden layers</Text>
         </Checkbox>
         <Checkbox
           name='ungroupSingleLayerGroups'
           value={ungroupSingleLayerGroups}
-          onChange={handleInput}
+          onChange={handleChange}
         >
           <Text>Ungroup single-layer groups</Text>
         </Checkbox>
         <Checkbox
           name='pixelPerfect'
           value={pixelPerfect}
-          onChange={handleInput}
+          onChange={handleChange}
         >
           <Text>Make pixel-perfect</Text>
         </Checkbox>
         <Checkbox
           name='smartRenameLayers'
           value={smartRenameLayers}
-          onChange={handleInput}
+          onChange={handleChange}
         >
           <Text>Smart rename layers</Text>
           <VerticalSpace space='medium' />
@@ -73,12 +85,12 @@ export function CleanLayers (initialState) {
             disabled={smartRenameLayers === false}
             name='smartRenameLayersWhitelist'
             value={smartRenameLayersWhitelist}
-            onChange={handleInput}
+            onChange={handleChange}
           />
         </Checkbox>
         <Checkbox
           name='smartSortLayers'
-          onChange={handleInput}
+          onChange={handleChange}
           value={smartSortLayers}
         >
           <Text>Smart sort layers</Text>
@@ -90,11 +102,7 @@ export function CleanLayers (initialState) {
         </Checkbox>
       </Stack>
       <VerticalSpace space='extraLarge' />
-      <Button
-        fullWidth
-        disabled={isSubmitButtonEnabled === false}
-        onClick={isSubmitButtonEnabled === true ? handleSubmit : null}
-      >
+      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
         Clean Layers
       </Button>
       <VerticalSpace space='small' />

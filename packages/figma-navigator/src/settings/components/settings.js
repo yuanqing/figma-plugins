@@ -11,21 +11,21 @@ import {
 import { h } from 'preact'
 
 export function Settings (initialState) {
-  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
-    submit: function ({ wrapAround }) {
+  const { state, handleChange, handleSubmit } = useForm(initialState, {
+    onClose: function () {
+      triggerEvent('CLOSE')
+    },
+    onSubmit: function ({ wrapAround }) {
       triggerEvent('SUBMIT', {
         wrapAround
       })
-    },
-    close: function () {
-      triggerEvent('CLOSE')
     }
   })
-  const { wrapAround } = inputs
+  const { wrapAround } = state
   return (
     <Container>
       <VerticalSpace space='extraLarge' />
-      <Checkbox name='wrapAround' value={wrapAround} onChange={handleInput}>
+      <Checkbox name='wrapAround' value={wrapAround} onChange={handleChange}>
         <Text>Loop back to the first component/frame</Text>
       </Checkbox>
       <VerticalSpace space='extraLarge' />

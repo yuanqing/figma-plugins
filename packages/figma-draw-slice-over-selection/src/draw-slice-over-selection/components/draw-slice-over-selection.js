@@ -16,30 +16,33 @@ import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function DrawSliceOverSelection (initialState) {
-  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ hasSelection, padding }) {
-      return (
-        hasSelection === true && evaluateNumericExpression(padding) !== null
-      )
-    },
-    submit: function ({ padding }) {
-      triggerEvent('SUBMIT', {
-        padding: evaluateNumericExpression(padding)
-      })
-    },
-    close: function () {
-      triggerEvent('CLOSE')
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+    initialState,
+    {
+      validate: function ({ hasSelection, padding }) {
+        return (
+          hasSelection === true && evaluateNumericExpression(padding) !== null
+        )
+      },
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ padding }) {
+        triggerEvent('SUBMIT', {
+          padding: evaluateNumericExpression(padding)
+        })
+      }
     }
-  })
+  )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleInput(hasSelection, 'hasSelection')
+        handleChange({ hasSelection })
       })
     },
-    [handleInput]
+    [handleChange]
   )
-  const { padding } = inputs
+  const { padding } = state
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -47,13 +50,13 @@ export function DrawSliceOverSelection (initialState) {
       <VerticalSpace space='small' />
       <TextboxNumeric
         name='padding'
-        onChange={handleInput}
+        onChange={handleChange}
         propagateEscapeKeyDown
         value={padding}
         focused
       />
       <VerticalSpace space='extraLarge' />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button fullWidth disabled={isInvalid() === false} onClick={handleSubmit}>
         Draw Slice Over Selection
       </Button>
       <VerticalSpace space='small' />

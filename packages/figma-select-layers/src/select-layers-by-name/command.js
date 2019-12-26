@@ -52,7 +52,7 @@ export default async function () {
   })
   const { layerName, exactMatch } = settings
   showUI(
-    { width: 240, height: 188 },
+    { width: 240, height: 164 },
     {
       layerName,
       exactMatch,

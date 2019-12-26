@@ -29,42 +29,44 @@ const groupDefinitions = [
 ]
 
 export function OrganizeLayers (initialState) {
-  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ layers }) {
-      return layers.length > 0
-    },
-    submit: function ({ groupDefinition, horizontalSpace, verticalSpace }) {
-      triggerEvent('SUBMIT', {
-        groupDefinition,
-        horizontalSpace: evaluateNumericExpression(horizontalSpace) || 0,
-        verticalSpace: evaluateNumericExpression(verticalSpace) || 0
-      })
-    },
-    close: function () {
-      triggerEvent('CLOSE')
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+    initialState,
+    {
+      validate: function ({ layers }) {
+        return layers.length > 0
+      },
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ groupDefinition, horizontalSpace, verticalSpace }) {
+        triggerEvent('SUBMIT', {
+          groupDefinition,
+          horizontalSpace: evaluateNumericExpression(horizontalSpace) || 0,
+          verticalSpace: evaluateNumericExpression(verticalSpace) || 0
+        })
+      }
     }
-  })
+  )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({
         layers,
         maximumGroupDefinition
       }) {
-        handleInput(layers, 'layers')
-        handleInput(maximumGroupDefinition, 'maximumGroupDefinition')
+        handleChange({ layers, maximumGroupDefinition })
       })
     },
-    [handleInput]
+    [handleChange]
   )
   const {
     groupDefinition,
     horizontalSpace,
     maximumGroupDefinition,
     verticalSpace
-  } = inputs
+  } = state
   return (
     <div>
-      <Preview {...inputs} />
+      <Preview {...state} />
       <Container space='medium'>
         <VerticalSpace space='large' />
         <Text muted>Group by text before</Text>
@@ -73,7 +75,7 @@ export function OrganizeLayers (initialState) {
           name='groupDefinition'
           value={Math.min(groupDefinition, maximumGroupDefinition)}
           options={groupDefinitions.slice(0, maximumGroupDefinition)}
-          onChange={handleInput}
+          onChange={handleChange}
         />
         <VerticalSpace space='large' />
         <Text muted>Space between layers</Text>
@@ -82,18 +84,22 @@ export function OrganizeLayers (initialState) {
           <TextboxNumeric
             name='horizontalSpace'
             icon={spaceHorizontalIcon}
-            onChange={handleInput}
+            onChange={handleChange}
             value={horizontalSpace}
           />
           <TextboxNumeric
             name='verticalSpace'
             icon={spaceVerticalIcon}
-            onChange={handleInput}
+            onChange={handleChange}
             value={verticalSpace}
           />
         </Columns>
         <VerticalSpace space='large' />
-        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+        <Button
+          fullWidth
+          disabled={isInvalid() === true}
+          onClick={handleSubmit}
+        >
           Organize Layers
         </Button>
         <VerticalSpace space='small' />

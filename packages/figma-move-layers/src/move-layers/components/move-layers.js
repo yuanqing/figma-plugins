@@ -18,38 +18,43 @@ import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function MoveLayers (initialState) {
-  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
-      const evaluatedHorizontalOffset = evaluateNumericExpression(
-        horizontalOffset
-      )
-      const evaluatedVerticalOffset = evaluateNumericExpression(verticalOffset)
-      return (
-        hasSelection === true &&
-        ((evaluatedHorizontalOffset !== null &&
-          evaluatedHorizontalOffset !== 0) ||
-          (evaluatedVerticalOffset !== null && evaluatedVerticalOffset !== 0))
-      )
-    },
-    submit: function ({ horizontalOffset, verticalOffset }) {
-      triggerEvent('SUBMIT', {
-        horizontalOffset: evaluateNumericExpression(horizontalOffset),
-        verticalOffset: evaluateNumericExpression(verticalOffset)
-      })
-    },
-    close: function () {
-      triggerEvent('CLOSE')
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+    initialState,
+    {
+      validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
+        const evaluatedHorizontalOffset = evaluateNumericExpression(
+          horizontalOffset
+        )
+        const evaluatedVerticalOffset = evaluateNumericExpression(
+          verticalOffset
+        )
+        return (
+          hasSelection === true &&
+          ((evaluatedHorizontalOffset !== null &&
+            evaluatedHorizontalOffset !== 0) ||
+            (evaluatedVerticalOffset !== null && evaluatedVerticalOffset !== 0))
+        )
+      },
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ horizontalOffset, verticalOffset }) {
+        triggerEvent('SUBMIT', {
+          horizontalOffset: evaluateNumericExpression(horizontalOffset),
+          verticalOffset: evaluateNumericExpression(verticalOffset)
+        })
+      }
     }
-  })
+  )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleInput(hasSelection, 'hasSelection')
+        handleChange({ hasSelection })
       })
     },
-    [handleInput]
+    [handleChange]
   )
-  const { horizontalOffset, verticalOffset } = inputs
+  const { horizontalOffset, verticalOffset } = state
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -57,7 +62,7 @@ export function MoveLayers (initialState) {
         <TextboxNumeric
           name='horizontalOffset'
           icon={moveRightIcon}
-          onChange={handleInput}
+          onChange={handleChange}
           propagateEscapeKeyDown
           value={horizontalOffset}
           focused
@@ -65,13 +70,13 @@ export function MoveLayers (initialState) {
         <TextboxNumeric
           name='verticalOffset'
           icon={moveDownIcon}
-          onChange={handleInput}
+          onChange={handleChange}
           propagateEscapeKeyDown
           value={verticalOffset}
         />
       </Columns>
       <VerticalSpace space='large' />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
         Move Layers
       </Button>
       <VerticalSpace space='small' />

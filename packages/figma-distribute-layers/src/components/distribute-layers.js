@@ -16,28 +16,33 @@ import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function DistributeLayers ({ direction, icon, ...initialState }) {
-  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ hasSelection, space }) {
-      return hasSelection === true && evaluateNumericExpression(space) !== null
-    },
-    submit: function ({ space }) {
-      triggerEvent('SUBMIT', {
-        space: evaluateNumericExpression(space)
-      })
-    },
-    close: function () {
-      triggerEvent('CLOSE')
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+    initialState,
+    {
+      validate: function ({ hasSelection, space }) {
+        return (
+          hasSelection === true && evaluateNumericExpression(space) !== null
+        )
+      },
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ space }) {
+        triggerEvent('SUBMIT', {
+          space: evaluateNumericExpression(space)
+        })
+      }
     }
-  })
+  )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleInput(hasSelection, 'hasSelection')
+        handleChange({ hasSelection })
       })
     },
-    [handleInput]
+    [handleChange]
   )
-  const { space } = inputs
+  const { space } = state
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -46,13 +51,13 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
       <TextboxNumeric
         name='space'
         icon={icon}
-        onChange={handleInput}
+        onChange={handleChange}
         propagateEscapeKeyDown
         value={space}
         focused
       />
       <VerticalSpace space='extraLarge' />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
         Distribute Layers {direction}
       </Button>
       <VerticalSpace space='small' />

@@ -31,45 +31,61 @@ const locales = localesJson.map(function (locale) {
 })
 
 export function ConvertCurrency (initialState) {
-  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
-    submit: function ({ layers, targetCurrency, roundNumbers, locale }) {
-      const result = layers.map(function ({ id, characters }) {
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+    initialState,
+    {
+      transform: function (state) {
+        const { layers, targetCurrency, roundNumbers, locale } = state
         return {
-          id,
-          characters: convertCurrency({
-            string: characters,
+          ...state,
+          previewItems: computePreview({
+            layers,
             targetCurrency,
             roundNumbers,
             locale
           })
         }
-      })
-      triggerEvent('SUBMIT', {
-        layers: result,
-        targetCurrency,
-        roundNumbers,
-        locale
-      })
-    },
-    close: function () {
-      triggerEvent('CLOSE')
+      },
+      validate: function ({ previewItems }) {
+        return (
+          previewItems !== INVALID_SETTINGS &&
+          previewItems !== NO_TEXT_LAYERS &&
+          previewItems.length > 0
+        )
+      },
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ layers, targetCurrency, roundNumbers, locale }) {
+        const result = layers.map(function ({ id, characters }) {
+          return {
+            id,
+            characters: convertCurrency({
+              string: characters,
+              targetCurrency,
+              roundNumbers,
+              locale
+            })
+          }
+        })
+        triggerEvent('SUBMIT', {
+          layers: result,
+          targetCurrency,
+          roundNumbers,
+          locale
+        })
+      }
     }
-  })
-  const { layers, targetCurrency, roundNumbers, locale } = inputs
-  const previewItems = computePreview({
-    layers,
-    targetCurrency,
-    roundNumbers,
-    locale
-  })
+  )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ layers }) {
-        handleInput(layers, 'layers')
+        handleChange({ layers })
       })
     },
-    [handleInput]
+    [handleChange]
   )
+  const { locale, previewItems, roundNumbers, targetCurrency } = state
   return (
     <div>
       <Preview items={previewItems} />
@@ -83,13 +99,13 @@ export function ConvertCurrency (initialState) {
           name='targetCurrency'
           value={targetCurrency}
           options={currencies}
-          onChange={handleInput}
+          onChange={handleChange}
         />
         <VerticalSpace space='small' />
         <Checkbox
           name='roundNumbers'
           value={roundNumbers === true}
-          onChange={handleInput}
+          onChange={handleChange}
         >
           <Text>Round numbers</Text>
         </Checkbox>
@@ -102,16 +118,12 @@ export function ConvertCurrency (initialState) {
           name='locale'
           value={locale}
           options={locales}
-          onChange={handleInput}
+          onChange={handleChange}
         />
         <VerticalSpace space='extraLarge' />
         <Button
           fullWidth
-          disabled={
-            previewItems === INVALID_SETTINGS ||
-            previewItems === NO_TEXT_LAYERS ||
-            previewItems.length === 0
-          }
+          disabled={isInvalid() === true}
           onClick={handleSubmit}
         >
           Convert Currency

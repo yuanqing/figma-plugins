@@ -11,15 +11,15 @@ import {
 import { h } from 'preact'
 
 export function SmartRenameLayers (initialState) {
-  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
-    submit: function (settings) {
-      triggerEvent('SUBMIT', settings)
-    },
-    close: function () {
+  const { state, handleChange, handleSubmit } = useForm(initialState, {
+    onClose: function () {
       triggerEvent('CLOSE')
+    },
+    onSubmit: function (settings) {
+      triggerEvent('SUBMIT', settings)
     }
   })
-  const { smartRenameLayersWhitelist } = inputs
+  const { smartRenameLayersWhitelist } = state
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -28,7 +28,7 @@ export function SmartRenameLayers (initialState) {
       <Textbox
         name='smartRenameLayersWhitelist'
         value={smartRenameLayersWhitelist}
-        onChange={handleInput}
+        onChange={handleChange}
       />
       <VerticalSpace space='extraLarge' />
       <Button fullWidth onClick={handleSubmit}>

@@ -11,26 +11,29 @@ import {
 import { h } from 'preact'
 
 export function SetApiKey (initialState) {
-  const { inputs, handleInput, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ apiKey }) {
-      return apiKey !== ''
-    },
-    submit: function ({ apiKey }) {
-      triggerEvent('SUBMIT', {
-        apiKey
-      })
-    },
-    close: function () {
-      triggerEvent('CLOSE')
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+    initialState,
+    {
+      validate: function ({ apiKey }) {
+        return apiKey !== ''
+      },
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ apiKey }) {
+        triggerEvent('SUBMIT', {
+          apiKey
+        })
+      }
     }
-  })
-  const { apiKey } = inputs
+  )
+  const { apiKey } = state
   return (
     <Container>
       <VerticalSpace space='large' />
       <Text muted>API Key</Text>
       <VerticalSpace space='small' />
-      <Textbox name='apiKey' value={apiKey} onChange={handleInput} focused />
+      <Textbox name='apiKey' value={apiKey} onChange={handleChange} focused />
       <VerticalSpace space='small' />
       <Text>
         <a
@@ -42,7 +45,7 @@ export function SetApiKey (initialState) {
         </a>
       </Text>
       <VerticalSpace space='extraLarge' />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
         Set API Key
       </Button>
       <VerticalSpace space='small' />

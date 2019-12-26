@@ -17,7 +17,7 @@ import { useCallback, useEffect } from 'preact/hooks'
 import styles from './jump-to-layer.scss'
 
 export function JumpToLayer (initialState) {
-  const { inputs, handleInput, handleSubmit, isValid } = useForm(
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
     {
       ...initialState,
       filteredLayers: [].concat(initialState.layers),
@@ -32,31 +32,30 @@ export function JumpToLayer (initialState) {
           }) !== -1
         )
       },
-      submit: function ({ selectedLayerId }) {
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ selectedLayerId }) {
         if (selectedLayerId === null) {
           return
         }
         triggerEvent('SUBMIT', {
           selectedLayerId
         })
-      },
-      close: function () {
-        triggerEvent('CLOSE')
       }
     }
   )
-  const { layers, filteredLayers, selectedLayerId, searchTerm } = inputs
-  function handleSearchTermChange (value) {
-    handleInput(value, 'searchTerm')
-    const filteredLayers = filterLayersByName(layers, value)
-    handleInput(filteredLayers, 'filteredLayers')
+  const { layers, filteredLayers, selectedLayerId, searchTerm } = state
+  function handleSearchTermChange (searchTerm) {
+    const filteredLayers = filterLayersByName(layers, searchTerm)
+    handleChange({ searchTerm, filteredLayers }, 'searchTerm')
     if (filteredLayers.length === 1) {
-      handleInput(filteredLayers[0].id, 'selectedLayerId')
+      handleChange({ selectedLayerId: filteredLayers[0].id })
     }
   }
   function handleLayerClick (event) {
     const selectedLayerId = event.target.getAttribute('data-layer-id')
-    handleInput(selectedLayerId, 'selectedLayerId')
+    handleChange({ selectedLayerId })
   }
   const handleKeyDown = useCallback(
     function (event) {
@@ -64,13 +63,12 @@ export function JumpToLayer (initialState) {
         event.preventDefault()
         if (selectedLayerId === null) {
           if (event.keyCode === UP_KEY_CODE) {
-            handleInput(
-              filteredLayers[filteredLayers.length - 1].id,
-              'selectedLayerId'
-            )
+            handleChange({
+              selectedLayerId: filteredLayers[filteredLayers.length - 1].id
+            })
             return
           }
-          handleInput(filteredLayers[0].id, 'selectedLayerId')
+          handleChange({ selectedLayerId: filteredLayers[0].id })
           return
         }
         const currentIndex = filteredLayers.findIndex(function ({ id }) {
@@ -83,18 +81,18 @@ export function JumpToLayer (initialState) {
         if (nextIndex === filteredLayers.length) {
           nextIndex = 0
         }
-        handleInput(filteredLayers[nextIndex].id, 'selectedLayerId')
+        handleChange({ selectedLayerId: filteredLayers[nextIndex].id })
       }
     },
-    [filteredLayers, handleInput, selectedLayerId]
+    [filteredLayers, handleChange, selectedLayerId]
   )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ layers }) {
-        handleInput(layers, 'layers')
+        handleChange({ layers })
       })
     },
-    [handleInput]
+    [handleChange]
   )
   useEffect(
     function () {
@@ -142,7 +140,11 @@ export function JumpToLayer (initialState) {
       <Divider />
       <Container space='medium'>
         <VerticalSpace space='small' />
-        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+        <Button
+          fullWidth
+          disabled={isInvalid() === true}
+          onClick={handleSubmit}
+        >
           Jump to Component/Frame
         </Button>
         <VerticalSpace space='small' />

@@ -18,35 +18,37 @@ import { useEffect } from 'preact/hooks'
 import { filterLayersByName } from '../filter-layers-by-name'
 
 export function SelectLayersByName (initialState) {
-  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
-    transform: function (state) {
-      const { layers, layerName, exactMatch } = state
-      return {
-        ...state,
-        count: filterLayersByName(layers, layerName, exactMatch).length
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+    initialState,
+    {
+      transform: function (state) {
+        const { layers, layerName, exactMatch } = state
+        return {
+          ...state,
+          count: filterLayersByName(layers, layerName, exactMatch).length
+        }
+      },
+      validate: function ({ count }) {
+        return count > 0
+      },
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ exactMatch, layerName }) {
+        triggerEvent('SUBMIT', {
+          exactMatch,
+          layerName
+        })
       }
-    },
-    validate: function ({ count }) {
-      return count > 0
-    },
-    onClose: function () {
-      triggerEvent('CLOSE')
-    },
-    onSubmit: function ({ exactMatch, layerName }) {
-      triggerEvent('SUBMIT', {
-        exactMatch,
-        layerName
-      })
     }
-  })
+  )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({
         hasSelection,
         layers
       }) {
-        handleChange(hasSelection, 'hasSelection')
-        handleChange(layers, 'layers')
+        handleChange({ hasSelection, layers })
       })
     },
     [handleChange]
@@ -56,10 +58,9 @@ export function SelectLayersByName (initialState) {
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
-      <Text muted>Layer name</Text>
-      <VerticalSpace space='small' />
       <Textbox
         name='layerName'
+        placeholder='Layer name'
         value={layerName}
         onChange={handleChange}
         propagateEscapeKeyDown
@@ -74,7 +75,7 @@ export function SelectLayersByName (initialState) {
         <Text>Exact match</Text>
       </Checkbox>
       <VerticalSpace space='medium' />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
         Select Layers
       </Button>
       <VerticalSpace space='small' />
@@ -83,7 +84,7 @@ export function SelectLayersByName (initialState) {
           ? `No matches ${scope}`
           : `${count} ${pluralize(count, 'match', 'matches')} ${scope}`}
       </Text>
-      <VerticalSpace space='small' />
+      <VerticalSpace space='large' />
     </Container>
   )
 }

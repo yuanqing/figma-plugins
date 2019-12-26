@@ -18,10 +18,10 @@ import { useCallback, useEffect } from 'preact/hooks'
 import styles from './replace-with-component.scss'
 
 export function ReplaceWithComponent (initialState) {
-  const { inputs, handleInput, handleSubmit, isValid } = useForm(
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
     {
       ...initialState,
-      filteredLayers: [].concat(initialState.layers),
+      filteredLayers: initialState.layers,
       searchTerm: '',
       selectedLayerId: null
     },
@@ -34,14 +34,14 @@ export function ReplaceWithComponent (initialState) {
           }) !== -1
         )
       },
-      submit: function ({ selectedLayerId, shouldResizeToFitLayer }) {
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ selectedLayerId, shouldResizeToFitLayer }) {
         triggerEvent('SUBMIT', {
           selectedLayerId,
           shouldResizeToFitLayer
         })
-      },
-      close: function () {
-        triggerEvent('CLOSE')
       }
     }
   )
@@ -51,24 +51,23 @@ export function ReplaceWithComponent (initialState) {
     searchTerm,
     selectedLayerId,
     shouldResizeToFitLayer
-  } = inputs
+  } = state
   const handleSearchTermChange = useCallback(
-    function (value) {
-      handleInput(value, 'searchTerm')
-      const filteredLayers = filterLayersByName(layers, value)
-      handleInput(filteredLayers, 'filteredLayers')
+    function (searchTerm) {
+      const filteredLayers = filterLayersByName(layers, searchTerm)
+      handleChange({ searchTerm, filteredLayers })
       if (filteredLayers.length === 1) {
-        handleInput(filteredLayers[0].id, 'selectedLayerId')
+        handleChange({ selectedLayerId: filteredLayers[0].id })
       }
     },
-    [handleInput, layers]
+    [handleChange, layers]
   )
   const handleLayerClick = useCallback(
     function (event) {
       const selectedLayerId = event.target.getAttribute('data-layer-id')
-      handleInput(selectedLayerId, 'selectedLayerId')
+      handleChange({ selectedLayerId })
     },
-    [handleInput]
+    [handleChange]
   )
   const handleKeyDown = useCallback(
     function (event) {
@@ -76,13 +75,12 @@ export function ReplaceWithComponent (initialState) {
         event.preventDefault()
         if (selectedLayerId === null) {
           if (event.keyCode === UP_KEY_CODE) {
-            handleInput(
-              filteredLayers[filteredLayers.length - 1].id,
-              'selectedLayerId'
-            )
+            handleChange({
+              selectedLayerId: filteredLayers[filteredLayers.length - 1].id
+            })
             return
           }
-          handleInput(filteredLayers[0].id, 'selectedLayerId')
+          handleChange({ selectedLayerId: filteredLayers[0].id })
           return
         }
         const currentIndex = filteredLayers.findIndex(function ({ id }) {
@@ -95,18 +93,18 @@ export function ReplaceWithComponent (initialState) {
         if (nextIndex === filteredLayers.length) {
           nextIndex = 0
         }
-        handleInput(filteredLayers[nextIndex].id, 'selectedLayerId')
+        handleChange({ selectedLayerId: filteredLayers[nextIndex].id })
       }
     },
-    [filteredLayers, handleInput, selectedLayerId]
+    [filteredLayers, handleChange, selectedLayerId]
   )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ layers }) {
-        handleInput(layers, 'layers')
+        handleChange({ layers })
       })
     },
-    [handleInput]
+    [handleChange]
   )
   useEffect(
     function () {
@@ -156,12 +154,16 @@ export function ReplaceWithComponent (initialState) {
         <Checkbox
           name='shouldResizeToFitLayer'
           value={shouldResizeToFitLayer === true}
-          onChange={handleInput}
+          onChange={handleChange}
         >
           <Text>Resize component to fit layer</Text>
         </Checkbox>
         <VerticalSpace space='medium' />
-        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+        <Button
+          fullWidth
+          disabled={isInvalid() === true}
+          onClick={handleSubmit}
+        >
           Replace With Component
         </Button>
         <VerticalSpace space='small' />

@@ -24,7 +24,7 @@ import { isValidLocale } from '../../utilities/currency/is-valid-locale'
 import { moneyRegex } from '../../utilities/currency/money-regex'
 import localesJson from '../../utilities/currency/data/locales'
 
-const transforms = {
+const formatters = {
   [EXPLICIT]: formatExplicit,
   [RETAIN]: formatRetain,
   [SHORT]: formatShort
@@ -35,39 +35,55 @@ const locales = localesJson.map(function (locale) {
 })
 
 export function FormatCurrency (initialState) {
-  const { inputs, handleInput, handleSubmit } = useForm(initialState, {
-    submit: function ({ layers, format, locale }) {
-      const transform = transforms[format]
-      const result = layers.map(function ({ id, characters }) {
+  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+    initialState,
+    {
+      transform: function (state) {
+        const { layers, format, locale } = state
         return {
-          id,
-          characters: transform(characters, locale)
+          ...state,
+          previewItems: computePreview({
+            layers,
+            format,
+            locale
+          })
         }
-      })
-      triggerEvent('SUBMIT', {
-        layers: result,
-        format,
-        locale
-      })
-    },
-    close: function () {
-      triggerEvent('CLOSE')
+      },
+      validate: function ({ previewItems }) {
+        return (
+          previewItems !== INVALID_SETTINGS &&
+          previewItems !== NO_TEXT_LAYERS &&
+          previewItems.length > 0
+        )
+      },
+      onClose: function () {
+        triggerEvent('CLOSE')
+      },
+      onSubmit: function ({ layers, format, locale }) {
+        const formatter = formatters[format]
+        const result = layers.map(function ({ id, characters }) {
+          return {
+            id,
+            characters: formatter(characters, locale)
+          }
+        })
+        triggerEvent('SUBMIT', {
+          layers: result,
+          format,
+          locale
+        })
+      }
     }
-  })
-  const { layers, format, locale } = inputs
-  const previewItems = computePreview({
-    layers,
-    format,
-    locale
-  })
+  )
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({ layers }) {
-        handleInput(layers, 'layers')
+        handleChange({ layers })
       })
     },
-    [handleInput]
+    [handleChange]
   )
+  const { format, locale, previewItems } = state
   return (
     <div>
       <Preview items={previewItems} />
@@ -79,7 +95,7 @@ export function FormatCurrency (initialState) {
           name='format'
           value={format}
           options={[{ value: EXPLICIT }, { value: SHORT }, { value: RETAIN }]}
-          onChange={handleInput}
+          onChange={handleChange}
         />
         <VerticalSpace space='large' />
         <Text muted>Locale</Text>
@@ -89,16 +105,12 @@ export function FormatCurrency (initialState) {
           name='locale'
           value={locale}
           options={locales}
-          onChange={handleInput}
+          onChange={handleChange}
         />
         <VerticalSpace space='extraLarge' />
         <Button
           fullWidth
-          disabled={
-            previewItems === INVALID_SETTINGS ||
-            previewItems === NO_TEXT_LAYERS ||
-            previewItems.length === 0
-          }
+          disabled={isInvalid() === true}
           onClick={handleSubmit}
         >
           Format Currency
@@ -124,10 +136,10 @@ function computePreview ({ layers, format, locale }) {
         return
       }
       originalStrings[original] = true
-      const transform = transforms[format]
+      const formatter = formatters[format]
       result.push({
         original,
-        result: transform(original, locale)
+        result: formatter(original, locale)
       })
     })
   })
