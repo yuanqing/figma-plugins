@@ -26,6 +26,16 @@ export function ReplaceWithComponent (initialState) {
       selectedLayerId: null
     },
     {
+      transform: function (state) {
+        const { layers, searchTerm, selectedLayerId } = state
+        const filteredLayers = filterLayersByName(layers, searchTerm)
+        return {
+          ...state,
+          filteredLayers,
+          selectedLayerId:
+            filteredLayers.length === 1 ? filteredLayers[0].id : selectedLayerId
+        }
+      },
       validate: function ({ filteredLayers, selectedLayerId }) {
         return (
           selectedLayerId !== null &&
@@ -46,22 +56,11 @@ export function ReplaceWithComponent (initialState) {
     }
   )
   const {
-    layers,
     filteredLayers,
     searchTerm,
     selectedLayerId,
     shouldResizeToFitLayer
   } = state
-  const handleSearchTermChange = useCallback(
-    function (searchTerm) {
-      const filteredLayers = filterLayersByName(layers, searchTerm)
-      handleChange({ searchTerm, filteredLayers })
-      if (filteredLayers.length === 1) {
-        handleChange({ selectedLayerId: filteredLayers[0].id })
-      }
-    },
-    [handleChange, layers]
-  )
   const handleLayerClick = useCallback(
     function (event) {
       const selectedLayerId = event.target.getAttribute('data-layer-id')
@@ -118,7 +117,8 @@ export function ReplaceWithComponent (initialState) {
   return (
     <div>
       <SearchTextbox
-        onChange={handleSearchTermChange}
+        name='searchTerm'
+        onChange={handleChange}
         propagateEscapeKeyDown
         placeholder='Search'
         value={searchTerm}
@@ -176,6 +176,7 @@ function filterLayersByName (layers, searchTerm) {
   if (searchTerm === '') {
     return layers
   }
+  console.log(layers, searchTerm)
   return layers.filter(function ({ name }) {
     return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
   })
