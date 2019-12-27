@@ -1,5 +1,3 @@
-/* global figma */
-
 export function navigateToLayer (layer) {
   const page = resolveLayerPage(layer)
   if (figma.currentPage !== page) {

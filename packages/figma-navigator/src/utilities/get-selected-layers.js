@@ -1,5 +1,3 @@
-/* global figma */
-
 export function getSelectedLayers () {
   const result = {}
   for (const selectedLayer of figma.currentPage.selection) {

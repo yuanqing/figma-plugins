@@ -1,4 +1,3 @@
-/* global figma */
 import { formatSuccessMessage } from '@create-figma-plugin/utilities'
 import { getLayersInScope } from '../get-layers-in-scope'
 import { smartSortLayers } from './smart-sort-layers'

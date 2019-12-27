@@ -1,4 +1,3 @@
-/* global figma */
 import { cloneObject, insertBeforeLayer } from '@create-figma-plugin/utilities'
 
 export function createComponent (layer) {

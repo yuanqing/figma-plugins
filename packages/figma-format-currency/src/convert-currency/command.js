@@ -1,4 +1,3 @@
-/* global figma */
 import {
   addEventListener,
   extractLayerAttributes,

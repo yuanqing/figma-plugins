@@ -1,5 +1,3 @@
-/* global figma */
-
 export function arrangeGroups (groups, horizontalSpace, verticalSpace) {
   let x = 0
   for (const key in groups) {

@@ -1,4 +1,3 @@
-/* global figma */
 import { formatSuccessMessage } from '@create-figma-plugin/utilities'
 import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
 import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'

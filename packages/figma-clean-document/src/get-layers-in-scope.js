@@ -1,4 +1,3 @@
-/* global figma */
 import { groupSiblingLayers } from '@create-figma-plugin/utilities'
 
 export function getLayersInScope () {

@@ -1,4 +1,3 @@
-/* global figma */
 import { compareObjects, traverseLayer } from '@create-figma-plugin/utilities'
 
 export function getSimilarLayers (referenceLayer) {
