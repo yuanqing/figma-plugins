@@ -21,50 +21,56 @@ export function ReplaceWithComponent (initialState) {
   const { state, handleChange, handleSubmit, isInvalid } = useForm(
     {
       ...initialState,
-      filteredLayers: initialState.layers,
-      searchTerm: '',
-      selectedLayerId: null
+      componentId: null,
+      filteredComponents: initialState.components,
+      searchTerm: ''
     },
     {
       transform: function (state) {
-        const { layers, searchTerm, selectedLayerId } = state
-        const filteredLayers = filterLayersByName(layers, searchTerm)
+        const { componentId, components, searchTerm } = state
+        const filteredComponents = filterLayersByName(components, searchTerm)
         return {
           ...state,
-          filteredLayers,
-          selectedLayerId:
-            filteredLayers.length === 1 ? filteredLayers[0].id : selectedLayerId
+          componentId:
+            filteredComponents.length === 1
+              ? filteredComponents[0].id
+              : componentId,
+          filteredComponents
         }
       },
-      validate: function ({ filteredLayers, selectedLayerId }) {
+      validate: function ({ componentId, filteredComponents, selectedLayers }) {
         return (
-          selectedLayerId !== null &&
-          filteredLayers.findIndex(function ({ id }) {
-            return id === selectedLayerId
+          componentId !== null &&
+          selectedLayers.length > 0 &&
+          selectedLayers.filter(function ({ id }) {
+            return id !== componentId
+          }).length > 0 &&
+          filteredComponents.findIndex(function ({ id }) {
+            return id === componentId
           }) !== -1
         )
       },
       onClose: function () {
         triggerEvent('CLOSE')
       },
-      onSubmit: function ({ selectedLayerId, shouldResizeToFitLayer }) {
+      onSubmit: function ({ componentId, shouldResizeToFitLayer }) {
         triggerEvent('SUBMIT', {
-          selectedLayerId,
+          componentId,
           shouldResizeToFitLayer
         })
       }
     }
   )
   const {
-    filteredLayers,
+    componentId,
+    filteredComponents,
     searchTerm,
-    selectedLayerId,
     shouldResizeToFitLayer
   } = state
   const handleLayerClick = useCallback(
     function (event) {
-      const selectedLayerId = event.target.getAttribute('data-layer-id')
-      handleChange({ selectedLayerId })
+      const componentId = event.target.getAttribute('data-layer-id')
+      handleChange({ componentId })
     },
     [handleChange]
   )
@@ -72,35 +78,38 @@ export function ReplaceWithComponent (initialState) {
     function (event) {
       if (event.keyCode === UP_KEY_CODE || event.keyCode === DOWN_KEY_CODE) {
         event.preventDefault()
-        if (selectedLayerId === null) {
+        if (componentId === null) {
           if (event.keyCode === UP_KEY_CODE) {
             handleChange({
-              selectedLayerId: filteredLayers[filteredLayers.length - 1].id
+              componentId: filteredComponents[filteredComponents.length - 1].id
             })
             return
           }
-          handleChange({ selectedLayerId: filteredLayers[0].id })
+          handleChange({ componentId: filteredComponents[0].id })
           return
         }
-        const currentIndex = filteredLayers.findIndex(function ({ id }) {
-          return id === selectedLayerId
+        const currentIndex = filteredComponents.findIndex(function ({ id }) {
+          return id === componentId
         })
         let nextIndex = currentIndex + (event.keyCode === UP_KEY_CODE ? -1 : 1)
         if (nextIndex === -1) {
-          nextIndex = filteredLayers.length - 1
+          nextIndex = filteredComponents.length - 1
         }
-        if (nextIndex === filteredLayers.length) {
+        if (nextIndex === filteredComponents.length) {
           nextIndex = 0
         }
-        handleChange({ selectedLayerId: filteredLayers[nextIndex].id })
+        handleChange({ componentId: filteredComponents[nextIndex].id })
       }
     },
-    [filteredLayers, handleChange, selectedLayerId]
+    [filteredComponents, handleChange, componentId]
   )
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ layers }) {
-        handleChange({ layers })
+      return addEventListener('SELECTION_CHANGED', function ({
+        components,
+        selectedLayers
+      }) {
+        handleChange({ components, selectedLayers })
       })
     },
     [handleChange]
@@ -125,7 +134,7 @@ export function ReplaceWithComponent (initialState) {
         focused
       />
       <Divider />
-      {filteredLayers.length === 0 ? (
+      {filteredComponents.length === 0 ? (
         <div class={styles.emptyState}>
           <Text muted align='center'>
             No results for “{searchTerm}”
@@ -133,13 +142,13 @@ export function ReplaceWithComponent (initialState) {
         </div>
       ) : (
         <div class={styles.layers}>
-          {filteredLayers.map(function ({ id, name }, index) {
+          {filteredComponents.map(function ({ id, name }, index) {
             return (
               <Layer
                 key={index}
                 type='component'
                 data-layer-id={id}
-                selected={id === selectedLayerId}
+                selected={id === componentId}
                 onClick={handleLayerClick}
               >
                 {name}

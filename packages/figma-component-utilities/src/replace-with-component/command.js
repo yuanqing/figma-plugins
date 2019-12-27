@@ -20,8 +20,8 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const layers = getComponents()
-  if (layers.length === 0) {
+  const components = getComponents()
+  if (components.length === 0) {
     figma.closePlugin(formatErrorMessage('No components in document'))
     return
   }
@@ -29,20 +29,29 @@ export default async function () {
     defaultSettings
   )
   onSelectionChange(function () {
-    triggerEvent('SELECTION_CHANGED', { layers: getComponents() })
+    triggerEvent('SELECTION_CHANGED', {
+      components: getComponents(),
+      selectedLayers: getSelectedLayer()
+    })
   })
   addEventListener('SUBMIT', async function ({
-    selectedLayerId,
+    componentId,
     shouldResizeToFitLayer
   }) {
     await saveSettings({
       ...settings,
       shouldResizeToFitLayer
     })
-    const layers = figma.currentPage.selection
-    const component = figma.getNodeById(selectedLayerId)
+    const selectedLayers = figma.currentPage.selection
+    const component = figma.getNodeById(componentId)
     const newSelection = []
-    for (const layer of layers) {
+    let count = 0
+    for (const layer of selectedLayers) {
+      if (layer.id === componentId) {
+        newSelection.push(layer)
+        continue
+      }
+      count++
       const parent = layer.parent
       const index = parent.children.indexOf(layer)
       const instance = component.createInstance()
@@ -56,12 +65,17 @@ export default async function () {
       newSelection.push(instance)
     }
     figma.currentPage.selection = newSelection
+    figma.viewport.scrollAndZoomIntoView(newSelection)
+    if (count === 0) {
+      figma.closePlugin()
+      return
+    }
     figma.closePlugin(
       formatSuccessMessage(
         `Replaced ${pluralize(
-          layers.length,
+          count,
           'layer',
-          `${mapNumberToWord(layers.length)} layers`
+          `${mapNumberToWord(count)} layers`
         )} with component`
       )
     )
@@ -72,7 +86,8 @@ export default async function () {
   showUI(
     { width: 240, height: 340 },
     {
-      layers,
+      components,
+      selectedLayers: getSelectedLayer(),
       shouldResizeToFitLayer
     }
   )
@@ -81,4 +96,8 @@ export default async function () {
 function getComponents () {
   const components = getDocumentComponents()
   return extractLayerAttributes(sortLayersByName(components), ['id', 'name'])
+}
+
+function getSelectedLayer () {
+  return extractLayerAttributes(figma.currentPage.selection, ['id', 'name'])
 }
