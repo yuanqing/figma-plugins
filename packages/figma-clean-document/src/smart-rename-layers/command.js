@@ -36,7 +36,6 @@ export default async function () {
     const scope =
       figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
     notificationHandler.cancel()
-    /* eslint-disable indent */
     figma.closePlugin(
       count === 0
         ? `No layers renamed ${scope}`
@@ -47,7 +46,6 @@ export default async function () {
             )} ${scope}`
           )
     )
-    /* eslint-enable indent */
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

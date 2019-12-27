@@ -7,14 +7,12 @@ export function smartSortChildLayers (layer, childLayerIds) {
   ) {
     return null
   }
-  /* eslint-disable indent */
   const childLayers =
     typeof childLayerIds === 'undefined'
       ? children
       : children.filter(function (layer) {
           return childLayerIds.indexOf(layer.id) !== -1
         })
-  /* eslint-enable indent */
   const [firstChildLayer, ...remainingChildLayers] = childLayers
   const result = [firstChildLayer]
   for (const childLayer of remainingChildLayers) {

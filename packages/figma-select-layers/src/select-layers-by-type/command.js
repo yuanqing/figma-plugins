@@ -43,7 +43,6 @@ function commandFactory (filterCallback, label) {
       figma.currentPage.selection.length > 0 ? 'within selection' : 'on page'
     figma.currentPage.selection = layers
     figma.viewport.scrollAndZoomIntoView(layers)
-    /* eslint-disable indent */
     figma.closePlugin(
       layers.length === 0
         ? formatErrorMessage(`No ${label}s ${scope}`)
@@ -54,7 +53,6 @@ function commandFactory (filterCallback, label) {
             )} ${scope}`
           )
     )
-    /* eslint-enable indent */
   }
 }
 
