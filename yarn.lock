@@ -347,15 +347,15 @@
     arrify "^1.0.1"
 
 "@create-figma-plugin/build@*":
-  version "0.0.39"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.39.tgz#20c2471a0ae16ad82f59b09412031fd319ff1351"
-  integrity sha512-sNYRVpRKAl5L2pm36ZgLjsL8SbSf7Sy9spGm5fWPBO5qXZY2Tfbn6VY2N75btPgfkOrj8LB8Jb9X66i49FeX9w==
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.42.tgz#0b3d342a66401ba9741f56a78f473eeb2d031432"
+  integrity sha512-hhwYeN8UOppVfoPhcjVBFX0Jj6wAn3rg8lfwvMvp4YZDCzmVDcpHiOaLIUByzi0WFvQvwDKZcPgS/fsEnTtmSA==
   dependencies:
     "@babel/core" "^7.7.4"
     "@babel/plugin-proposal-object-rest-spread" "^7.7.4"
     "@babel/plugin-transform-react-jsx" "^7.7.4"
-    "@create-figma-plugin/common" "^0.0.39"
-    "@create-figma-plugin/utilities" "^0.0.39"
+    "@create-figma-plugin/common" "^0.0.42"
+    "@create-figma-plugin/utilities" "^0.0.42"
     babel-loader "^8.0.6"
     chokidar "^3.3.0"
     css-loader "^3.2.0"
@@ -368,10 +368,10 @@
     terser-webpack-plugin "^2.2.1"
     webpack "^4.41.2"
 
-"@create-figma-plugin/common@^0.0.39":
-  version "0.0.39"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.39.tgz#6d9234c74df451465aff56a6f2f774993dbd8d2c"
-  integrity sha512-939FsAs6Gy2Odi2SPQdoC1s/b8zpXdpcKswQPKhk/fcJwl5fMsHDvdaWCxU2kGyFwwvCMlkp93ed/2ehLjVqGg==
+"@create-figma-plugin/common@^0.0.42":
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.42.tgz#f13471418085e143f001b6e9dd6a08acc346616a"
+  integrity sha512-E5DcbBv3ov9oCULDeoOdFwf9d10H1KzXdUZtbMPvau8JwUy+DFK07akhIPpbp9PDDAyVV1+wJOz1QMWXizEqzA==
   dependencies:
     "@sindresorhus/slugify" "^0.9.1"
     chalk "^3.0.0"
@@ -379,16 +379,17 @@
     npmlog "^4.1.2"
 
 "@create-figma-plugin/ui@*":
-  version "0.0.39"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/ui/-/ui-0.0.39.tgz#18a4673a1965a122b895fe948dde123438ca85bc"
-  integrity sha512-LCJiRd1d48KLsHMGJYwEMyoZM7pzDYrQeGUpZ1CdueysRbcgshJkdL4kRHKjrpGFCCNUEFm6k7BESfWeidvqdQ==
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/ui/-/ui-0.0.42.tgz#f8ebe566eb194dbc754374f5ba3fa63fe7747105"
+  integrity sha512-uW/w14pV6mcbdEO6wc/8oJEGuaPl/eSRbNCnKAX1hJJ1UBZRtEBKaBOZq/Vx/CU2kDPVUp0qBOO4E0cEH9krOQ==
   dependencies:
+    "@create-figma-plugin/utilities" "^0.0.42"
     "@sindresorhus/class-names" "^1.1.0"
 
-"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.39":
-  version "0.0.39"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.39.tgz#12a9b942b11eb96011eb7cab2a39508e7e54d221"
-  integrity sha512-jtr7qSWRvvFd7q5FTNG/kBS2SnCiePygPRr6opiR8ece+C93QHVdbFs+VgPo8UkUSpNFIq6RiauztSAxE14Pmw==
+"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.42":
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.42.tgz#b27a2f068af23d2567913664797e7d529efec65b"
+  integrity sha512-0Dzio4Ncyf04yUqYu81Dge2NH1RjeqRCXmH5Ki6o8yjeWRB9udI+uudutXadVg6pLNUYAGhTTTmWmxnmLzGAOQ==
 
 "@evocateur/libnpmaccess@^3.1.2":
   version "3.1.2"
@@ -1225,9 +1226,9 @@
     universal-user-agent "^4.0.0"
 
 "@octokit/rest@^16.28.4":
-  version "16.35.2"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.35.2.tgz#0098c9e2a895d4afb0fa6578479283553543143c"
-  integrity sha512-iijaNZpn9hBpUdh8YdXqNiWazmq4R1vCUsmxpBB0kCQ0asHZpCx+HNs22eiHuwYKRhO31ZSAGBJLi0c+3XHaKQ==
+  version "16.36.0"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.36.0.tgz#99892c57ba632c2a7b21845584004387b56c2cb7"
+  integrity sha512-zoZj7Ya4vWBK4fjTwK2Cnmu7XBB1p9ygSvTk2TthN6DVJXM4hQZQoAiknWFLJWSTix4dnA3vuHtjPZbExYoCZA==
   dependencies:
     "@octokit/request" "^5.2.0"
     "@octokit/request-error" "^1.0.2"
@@ -1306,9 +1307,9 @@
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
 "@types/node@*", "@types/node@>= 8":
-  version "13.1.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.0.tgz#225cbaac5fdb2b9ac651b02c070d8aa3c37cc812"
-  integrity sha512-zwrxviZS08kRX40nqBrmERElF2vpw4IUTd5khkhBTfFH8AOaeoLVx48EC4+ZzS2/Iga7NevncqnsUSYjM4OWYA==
+  version "13.1.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.1.tgz#6d11a8c2d58405b3db9388ab740106cbfa64c3c9"
+  integrity sha512-hx6zWtudh3Arsbl3cXay+JnkvVgCKzCWKv42C9J01N2T2np4h8w5X8u6Tpz5mj38kE3M9FM0Pazx8vKFFMnjLQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -6789,9 +6790,9 @@ node-pre-gyp@*:
     tar "^4.4.2"
 
 node-releases@^1.1.42:
-  version "1.1.43"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.43.tgz#2c6ca237f88ce11d49631f11190bb01f8d0549f2"
-  integrity sha512-Rmfnj52WNhvr83MvuAWHEqXVoZXCcDQssSOffU4n4XOL9sPrP61mSZ88g25NqmABDvH7PiAlFCzoSCSdzA293w==
+  version "1.1.44"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.44.tgz#cd66438a6eb875e3eb012b6a12e48d9f4326ffd7"
+  integrity sha512-NwbdvJyR7nrcGrXvKAvzc5raj/NkoJudkarh2yIpJ4t0NH4aqjUDz/486P+ynIW5eokKOfzGNRdYoLfBlomruw==
   dependencies:
     semver "^6.3.0"
 
@@ -9338,9 +9339,9 @@ strong-log-transformer@^2.0.0:
     through "^2.3.4"
 
 style-loader@^1.0.0, style-loader@^1.0.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.1.1.tgz#8290d915dffe820916790cdcab5aa58c38ab605c"
-  integrity sha512-oIVF12trRq0od4Yojg7q0K3Lq/O6Ix/AYgVosykrVg+kWxxxUyk8KhKCCmekyGSUiVK1xxlAQymLWWdh6S9lOg==
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.1.2.tgz#1b519c19faf548df6182b93e72ea1a4156022c2f"
+  integrity sha512-0Mpq1ZHFDCNq1F+6avNBgv+7q8V+mWRuzehxyJT+aKgzyN/yfKTwjYqaYwBgx+11UpQxL21zNQfzzlz+JcGURw==
   dependencies:
     loader-utils "^1.2.3"
     schema-utils "^2.0.1"
@@ -9363,9 +9364,9 @@ stylelint-prettier@^1.1.1:
     prettier-linter-helpers "^1.0.0"
 
 stylelint@^12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-12.0.0.tgz#2e8613675f7be11769ce474f45137fdf7751380a"
-  integrity sha512-TwqtATrFOT07SPlUGyHN7tVhWqxwitn5BlAvyBQy/ekA+Nwu4mLU9L1dvGQPNxHUBLowjvkSW18QzHHR6/FVVQ==
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-12.0.1.tgz#5b1f3bf7333320acce322b49852c8b85e94ce7e4"
+  integrity sha512-1mn39pqZiC/e8KUPoRMc1WMM83Upb2ILaSGxkCvKxALHutEOs2txcPQocJiXdO4Zx4FY4prGqjlkwrbthAxqig==
   dependencies:
     autoprefixer "^9.7.1"
     balanced-match "^1.0.0"
@@ -9823,9 +9824,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 uglify-js@^3.1.4:
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.2.tgz#cb1a601e67536e9ed094a92dd1e333459643d3f9"
-  integrity sha512-uhRwZcANNWVLrxLfNFEdltoPNhECUR3lc+UdJoG9CBpMcSnKyWA94tc3eAujB1GcMY5Uwq8ZMp4qWpxWYDQmaA==
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.3.tgz#f918fce9182f466d5140f24bb0ff35c2d32dcc6a"
+  integrity sha512-7tINm46/3puUA4hCkKYo4Xdts+JDaVC9ZPRcG8Xw9R4nhO/gZgUM3TENq8IF4Vatk8qCig4MzP/c8G4u2BkVQg==
   dependencies:
     commander "~2.20.3"
     source-map "~0.6.1"
