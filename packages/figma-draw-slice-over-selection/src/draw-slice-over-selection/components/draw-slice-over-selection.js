@@ -56,7 +56,7 @@ export function DrawSliceOverSelection (initialState) {
         focused
       />
       <VerticalSpace space='extraLarge' />
-      <Button fullWidth disabled={isInvalid() === false} onClick={handleSubmit}>
+      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
         Draw Slice Over Selection
       </Button>
       <VerticalSpace space='small' />
