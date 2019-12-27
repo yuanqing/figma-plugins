@@ -347,15 +347,15 @@
     arrify "^1.0.1"
 
 "@create-figma-plugin/build@*":
-  version "0.0.42"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.42.tgz#0b3d342a66401ba9741f56a78f473eeb2d031432"
-  integrity sha512-hhwYeN8UOppVfoPhcjVBFX0Jj6wAn3rg8lfwvMvp4YZDCzmVDcpHiOaLIUByzi0WFvQvwDKZcPgS/fsEnTtmSA==
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.43.tgz#7c4490d9d507adc49afe6cb0e7f613056564b7fd"
+  integrity sha512-KipBV+K/sazSLE9qptl0l5Ds3Cv+vAAfe194jOKjLshwNg3iQ+z9Hs3SJNTriIgJ/V0wKKq3LQi3OS+TQil9pw==
   dependencies:
     "@babel/core" "^7.7.4"
     "@babel/plugin-proposal-object-rest-spread" "^7.7.4"
     "@babel/plugin-transform-react-jsx" "^7.7.4"
-    "@create-figma-plugin/common" "^0.0.42"
-    "@create-figma-plugin/utilities" "^0.0.42"
+    "@create-figma-plugin/common" "^0.0.43"
+    "@create-figma-plugin/utilities" "^0.0.43"
     babel-loader "^8.0.6"
     chokidar "^3.3.0"
     css-loader "^3.2.0"
@@ -368,10 +368,10 @@
     terser-webpack-plugin "^2.2.1"
     webpack "^4.41.2"
 
-"@create-figma-plugin/common@^0.0.42":
-  version "0.0.42"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.42.tgz#f13471418085e143f001b6e9dd6a08acc346616a"
-  integrity sha512-E5DcbBv3ov9oCULDeoOdFwf9d10H1KzXdUZtbMPvau8JwUy+DFK07akhIPpbp9PDDAyVV1+wJOz1QMWXizEqzA==
+"@create-figma-plugin/common@^0.0.43":
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.43.tgz#bfd0c5da5ffd101ee101c5d2c3ea9f0849a1fc75"
+  integrity sha512-PCQAAQP6bR1++3j92Qngw+SbxObkVuFPDCta+bK+B4xfjrpkd5hHST7uOuw/8G4tSbdrUkiko0W8bsPHazLsLA==
   dependencies:
     "@sindresorhus/slugify" "^0.9.1"
     chalk "^3.0.0"
@@ -379,17 +379,17 @@
     npmlog "^4.1.2"
 
 "@create-figma-plugin/ui@*":
-  version "0.0.42"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/ui/-/ui-0.0.42.tgz#f8ebe566eb194dbc754374f5ba3fa63fe7747105"
-  integrity sha512-uW/w14pV6mcbdEO6wc/8oJEGuaPl/eSRbNCnKAX1hJJ1UBZRtEBKaBOZq/Vx/CU2kDPVUp0qBOO4E0cEH9krOQ==
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/ui/-/ui-0.0.43.tgz#33104d45123939f9ed2947dc868fee37fc5f7b7d"
+  integrity sha512-zGc+3yIZl7BNwbZqcoE8rANaOEDgv5G4G7lvl6rf2vSyTMadOjh+tU9DoXLFV+IRgQwysWlZFNjN2f+x/3saGQ==
   dependencies:
-    "@create-figma-plugin/utilities" "^0.0.42"
+    "@create-figma-plugin/utilities" "^0.0.43"
     "@sindresorhus/class-names" "^1.1.0"
 
-"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.42":
-  version "0.0.42"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.42.tgz#b27a2f068af23d2567913664797e7d529efec65b"
-  integrity sha512-0Dzio4Ncyf04yUqYu81Dge2NH1RjeqRCXmH5Ki6o8yjeWRB9udI+uudutXadVg6pLNUYAGhTTTmWmxnmLzGAOQ==
+"@create-figma-plugin/utilities@*", "@create-figma-plugin/utilities@^0.0.43":
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.43.tgz#a711da64fff74d4f219545649cd1af5e5e5dcf7b"
+  integrity sha512-z9GXipw8mazliobmp0hB2i87rVEBFgD/xXZoiVYI0XWwwzppSgOSkUViNXwddvq955H2pZcSScPKX2DibyMhxg==
 
 "@evocateur/libnpmaccess@^3.1.2":
   version "3.1.2"
