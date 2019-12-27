@@ -8,7 +8,7 @@ export function Preview ({ layers, groupDefinition }) {
   if (layers.length === 0) {
     return (
       <PreviewContainer>
-        <div class={style.empty}>No components on page</div>
+        <div class={style.empty}>No layers on page</div>
       </PreviewContainer>
     )
   }

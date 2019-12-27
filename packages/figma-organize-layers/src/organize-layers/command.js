@@ -9,22 +9,23 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { arrangeGroups } from './arrange-groups'
 import { defaultSettings } from '../default-settings'
+import { arrangeGroups } from './arrange-groups'
+import { computeMaximumGroupDefinition } from './compute-maximum-group-definition'
 import { groupLayers } from './group-layers'
 import { sortLayers } from './sort-layers'
 
 export default async function () {
-  const layers = figma.currentPage.children
+  const layers = getLayers()
   if (layers.length === 0) {
     figma.closePlugin(formatErrorMessage('No layers on page'))
     return
   }
   const settings = await loadSettings(defaultSettings)
   onSelectionChange(function () {
-    const layers = figma.currentPage.children
+    const layers = getLayers()
     triggerEvent('SELECTION_CHANGED', {
-      layers: extractLayerAttributes(layers, ['id', 'name']),
+      layers,
       maximumGroupDefinition: computeMaximumGroupDefinition(layers)
     })
   })
@@ -35,6 +36,7 @@ export default async function () {
     const groups = groupLayers(layers, groupDefinition)
     arrangeGroups(groups, horizontalSpace, verticalSpace)
     sortLayers(layers)
+    figma.viewport.scrollAndZoomIntoView(layers)
     figma.closePlugin(formatSuccessMessage('Organized layers on page'))
   })
   addEventListener('CLOSE', function () {
@@ -43,22 +45,13 @@ export default async function () {
   showUI(
     { width: 240, height: 325 },
     {
-      layers: extractLayerAttributes(layers, ['id', 'name']),
-      maximumGroupDefinition: computeMaximumGroupDefinition(layers),
-      ...settings
+      ...settings,
+      layers,
+      maximumGroupDefinition: computeMaximumGroupDefinition(layers)
     }
   )
 }
 
-const slashRegex = /\//g
-
-function computeMaximumGroupDefinition (layers) {
-  let maximum = 1
-  layers.forEach(function ({ name }) {
-    const matches = name.match(slashRegex)
-    if (matches !== null) {
-      maximum = Math.max(maximum, matches.length)
-    }
-  })
-  return maximum
+function getLayers () {
+  return extractLayerAttributes(figma.currentPage.children, ['id', 'name'])
 }
