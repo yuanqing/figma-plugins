@@ -4,11 +4,16 @@ import {
   loadSettings
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
-import { getAllLayers } from '../utilities/get-all-layers'
 import { getSelectedLayers } from '../utilities/get-selected-layers'
+import { getLayers } from './get-layers'
+import { getNextLayer } from './get-next-layer'
+import { navigateToLayer } from './navigate-to-layer'
 
-export const previous = commandFactory(1, 'At first component/frame on page')
-export const next = commandFactory(-1, 'At last component/frame on page')
+export const previous = commandFactory(
+  1,
+  'At first component/frame of document'
+)
+export const next = commandFactory(-1, 'At last component/frame of document')
 
 function commandFactory (indexOffset, noMoreLayersMessage) {
   return async function () {
@@ -24,32 +29,22 @@ function commandFactory (indexOffset, noMoreLayersMessage) {
       return
     }
     const selectedLayer = selectedLayers[0]
-    const layers = getAllLayers()
+    const layers = getLayers()
     if (layers.length === 1) {
-      figma.viewport.scrollAndZoomIntoView(layers)
-      figma.closePlugin(formatErrorMessage('No other component/frames on page'))
+      navigateToLayer(layers[0])
+      figma.closePlugin(
+        formatErrorMessage('No other component/frames in document')
+      )
       return
     }
     const nextLayer = getNextLayer(layers, selectedLayer, indexOffset, loop)
     if (nextLayer === null) {
-      figma.viewport.scrollAndZoomIntoView([selectedLayer])
+      navigateToLayer(selectedLayer)
       figma.closePlugin(noMoreLayersMessage)
       return
     }
-    figma.viewport.scrollAndZoomIntoView([nextLayer])
+    navigateToLayer(nextLayer)
     figma.currentPage.selection = [nextLayer]
     figma.closePlugin()
   }
-}
-
-function getNextLayer (layers, currentLayer, indexOffset, loop) {
-  const currentIndex = layers.indexOf(currentLayer)
-  const nextIndex = currentIndex + indexOffset
-  if (nextIndex === -1) {
-    return loop === true ? layers[layers.length - 1] : null
-  }
-  if (nextIndex === layers.length) {
-    return loop === true ? layers[0] : null
-  }
-  return layers[nextIndex]
 }

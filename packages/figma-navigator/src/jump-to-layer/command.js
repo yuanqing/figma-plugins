@@ -1,18 +1,21 @@
 /* global figma */
 import {
   addEventListener,
-  extractLayerAttributes,
   formatErrorMessage,
   formatSuccessMessage,
+  loadSettings,
   onSelectionChange,
+  saveSettings,
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
-import { getAllLayers } from '../utilities/get-all-layers'
+import { defaultSettings } from '../default-settings'
 import { getSelectedLayers } from '../utilities/get-selected-layers'
+import { getLayers } from './get-layers'
 
-export default function () {
+export default async function () {
+  const settings = await loadSettings(defaultSettings)
+  const { searchCurrentPageOnly } = settings
   const layers = getLayers()
   if (layers.length === 0) {
     figma.closePlugin(formatErrorMessage('No frames/components on page'))
@@ -20,10 +23,18 @@ export default function () {
   }
   onSelectionChange(function () {
     triggerEvent('SELECTION_CHANGED', {
+      currentPageId: figma.currentPage.id,
       layers: getLayers()
     })
   })
-  addEventListener('SUBMIT', function ({ selectedLayerId }) {
+  addEventListener('SUBMIT', async function ({
+    selectedLayerId,
+    searchCurrentPageOnly
+  }) {
+    await saveSettings({
+      ...settings,
+      searchCurrentPageOnly
+    })
     const layer = figma.getNodeById(selectedLayerId)
     figma.viewport.scrollAndZoomIntoView([layer])
     figma.currentPage.selection = [layer]
@@ -35,14 +46,14 @@ export default function () {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 308 },
-    { layers, selectedLayerId: getSelectedLayerId() }
+    { width: 240, height: 340 },
+    {
+      currentPageId: figma.currentPage.id,
+      layers,
+      searchCurrentPageOnly,
+      selectedLayerId: getSelectedLayerId()
+    }
   )
-}
-
-function getLayers () {
-  const layers = sortLayersByName(getAllLayers())
-  return extractLayerAttributes(layers, ['id', 'name', 'type'])
 }
 
 function getSelectedLayerId () {

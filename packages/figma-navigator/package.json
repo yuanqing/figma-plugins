@@ -47,6 +47,7 @@
         "command": "jump-to-layer/command.js",
         "ui": "jump-to-layer/ui.js"
       },
+      "-",
       {
         "name": "Go to Previous Component/Frame",
         "command": "navigate-between-layers/command.js",
@@ -57,7 +58,6 @@
         "command": "navigate-between-layers/command.js",
         "handler": "next"
       },
-      "-",
       {
         "name": "Settings",
         "command": "settings/command.js",

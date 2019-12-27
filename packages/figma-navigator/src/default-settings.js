@@ -1,3 +1,4 @@
 export const defaultSettings = {
-  loop: true
+  loop: true,
+  searchCurrentPageOnly: false
 }

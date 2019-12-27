@@ -1,6 +1,7 @@
 /** @jsx h */
 import {
   Button,
+  Checkbox,
   Container,
   Divider,
   Layer,
@@ -20,10 +21,37 @@ export function JumpToLayer (initialState) {
   const { state, handleChange, handleSubmit, isInvalid } = useForm(
     {
       ...initialState,
-      filteredLayers: [].concat(initialState.layers),
+      filteredLayers:
+        initialState.searchCurrentPageOnly === true
+          ? filterLayersByPageId(
+              initialState.layers,
+              initialState.currentPageId
+            )
+          : initialState.layers,
       searchTerm: ''
     },
     {
+      transform: function (state) {
+        const {
+          currentPageId,
+          layers,
+          searchCurrentPageOnly,
+          searchTerm,
+          selectedLayerId
+        } = state
+        const filteredLayers = filterLayersByName(
+          searchCurrentPageOnly === true
+            ? filterLayersByPageId(layers, currentPageId)
+            : layers,
+          searchTerm
+        )
+        return {
+          ...state,
+          filteredLayers,
+          selectedLayerId:
+            filteredLayers.length === 1 ? filteredLayers[0].id : selectedLayerId
+        }
+      },
       validate: function ({ filteredLayers, selectedLayerId }) {
         return (
           selectedLayerId !== null &&
@@ -45,14 +73,12 @@ export function JumpToLayer (initialState) {
       }
     }
   )
-  const { layers, filteredLayers, selectedLayerId, searchTerm } = state
-  function handleSearchTermChange (searchTerm) {
-    const filteredLayers = filterLayersByName(layers, searchTerm)
-    handleChange({ searchTerm, filteredLayers }, 'searchTerm')
-    if (filteredLayers.length === 1) {
-      handleChange({ selectedLayerId: filteredLayers[0].id })
-    }
-  }
+  const {
+    filteredLayers,
+    searchCurrentPageOnly,
+    searchTerm,
+    selectedLayerId
+  } = state
   function handleLayerClick (event) {
     const selectedLayerId = event.target.getAttribute('data-layer-id')
     handleChange({ selectedLayerId })
@@ -88,8 +114,11 @@ export function JumpToLayer (initialState) {
   )
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ layers }) {
-        handleChange({ layers })
+      return addEventListener('SELECTION_CHANGED', function ({
+        currentPageId,
+        layers
+      }) {
+        handleChange({ currentPageId, layers })
       })
     },
     [handleChange]
@@ -106,8 +135,9 @@ export function JumpToLayer (initialState) {
   return (
     <div>
       <SearchTextbox
+        name='searchTerm'
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
-        onChange={handleSearchTermChange}
         propagateEscapeKeyDown
         placeholder='Search'
         value={searchTerm}
@@ -139,7 +169,15 @@ export function JumpToLayer (initialState) {
       )}
       <Divider />
       <Container space='medium'>
-        <VerticalSpace space='small' />
+        <VerticalSpace space='medium' />
+        <Checkbox
+          name='searchCurrentPageOnly'
+          value={searchCurrentPageOnly}
+          onChange={handleChange}
+        >
+          <Text>Search current page only</Text>
+        </Checkbox>
+        <VerticalSpace space='medium' />
         <Button
           fullWidth
           disabled={isInvalid() === true}
@@ -159,5 +197,14 @@ function filterLayersByName (layers, searchTerm) {
   }
   return layers.filter(function ({ name }) {
     return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+  })
+}
+
+function filterLayersByPageId (layers, currentPageId) {
+  if (currentPageId === null) {
+    return layers
+  }
+  return layers.filter(function ({ pageId }) {
+    return pageId === currentPageId
   })
 }
