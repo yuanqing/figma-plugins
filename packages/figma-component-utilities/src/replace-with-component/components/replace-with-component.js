@@ -176,7 +176,6 @@ function filterLayersByName (layers, searchTerm) {
   if (searchTerm === '') {
     return layers
   }
-  console.log(layers, searchTerm)
   return layers.filter(function ({ name }) {
     return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
   })
