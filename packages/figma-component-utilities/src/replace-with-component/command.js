@@ -20,6 +20,13 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
+  const selectedLayers = getSelectedLayers()
+  if (selectedLayers.length === 0) {
+    figma.closePlugin(
+      formatErrorMessage('Can only replace layers not within an instance')
+    )
+    return
+  }
   const components = getComponents()
   if (components.length === 0) {
     figma.closePlugin(formatErrorMessage('No components in document'))
@@ -31,7 +38,7 @@ export default async function () {
   onSelectionChange(function () {
     triggerEvent('SELECTION_CHANGED', {
       components: getComponents(),
-      selectedLayers: getSelectedLayer()
+      selectedLayers: getSelectedLayers()
     })
   })
   addEventListener('SUBMIT', async function ({
@@ -47,6 +54,9 @@ export default async function () {
     const newSelection = []
     let count = 0
     for (const layer of selectedLayers) {
+      if (isLayerWithinInstance(layer) === true) {
+        continue
+      }
       if (layer.id === componentId) {
         newSelection.push(layer)
         continue
@@ -65,7 +75,6 @@ export default async function () {
       newSelection.push(instance)
     }
     figma.currentPage.selection = newSelection
-    figma.viewport.scrollAndZoomIntoView(newSelection)
     if (count === 0) {
       figma.closePlugin()
       return
@@ -87,7 +96,7 @@ export default async function () {
     { width: 240, height: 340 },
     {
       components,
-      selectedLayers: getSelectedLayer(),
+      selectedLayers,
       shouldResizeToFitLayer
     }
   )
@@ -98,6 +107,20 @@ function getComponents () {
   return extractLayerAttributes(sortLayersByName(components), ['id', 'name'])
 }
 
-function getSelectedLayer () {
-  return extractLayerAttributes(figma.currentPage.selection, ['id', 'name'])
+function getSelectedLayers () {
+  const layers = figma.currentPage.selection.filter(function (layer) {
+    return isLayerWithinInstance(layer) === false
+  })
+  return extractLayerAttributes(layers, ['id', 'name'])
+}
+
+function isLayerWithinInstance (layer) {
+  const parent = layer.parent
+  if (parent.type === 'INSTANCE') {
+    return true
+  }
+  if (parent.type === 'PAGE') {
+    return false
+  }
+  return isLayerWithinInstance(parent)
 }
