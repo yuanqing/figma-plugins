@@ -63,7 +63,7 @@ export default async function () {
           layers.length,
           'layer',
           `${mapNumberToWord(layers.length)} layers`
-        )} with “${component.name}”`
+        )} with component`
       )
     )
   })
