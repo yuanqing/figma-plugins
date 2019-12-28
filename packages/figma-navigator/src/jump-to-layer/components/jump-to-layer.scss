@@ -8,7 +8,8 @@
 
 .emptyState {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   padding: 0 $space-medium;
+  justify-content: center;
+  overflow-wrap: break-word;
 }

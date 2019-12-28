@@ -1,4 +1,4 @@
-import { traverseLayer } from '@create-figma-plugin/utilities'
+import { sortLayersByName, traverseLayer } from '@create-figma-plugin/utilities'
 
 export function getLayers () {
   const result = {}
@@ -7,7 +7,7 @@ export function getLayers () {
       traverseLayer(
         layer,
         function (layer) {
-          const { id, name, type } = layer
+          const { id, name, type, x, y } = layer
           if (
             (type === 'COMPONENT' || type === 'FRAME') &&
             typeof result[id] === 'undefined'
@@ -17,7 +17,9 @@ export function getLayers () {
               name,
               pageId: page.id,
               pageName: page.name,
-              type
+              type,
+              x,
+              y
             }
           }
         },
@@ -27,20 +29,5 @@ export function getLayers () {
       )
     }
   }
-  return Object.values(result).sort(sortComparator)
-}
-
-function sortComparator (a, b) {
-  const options = { numeric: true }
-  const aName = a.name.toLowerCase()
-  const bName = b.name.toLowerCase()
-  if (aName === bName) {
-    const aPageName = a.pageName.toLowerCase()
-    const bPageName = b.pageName.toLowerCase()
-    if (aPageName === bPageName) {
-      return a.id.localeCompare(b.id, options)
-    }
-    return aPageName.localeCompare(bPageName, options)
-  }
-  return aName.localeCompare(bName, options)
+  return sortLayersByName(Object.values(result))
 }

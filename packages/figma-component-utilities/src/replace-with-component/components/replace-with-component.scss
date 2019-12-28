@@ -9,6 +9,7 @@
 .emptyState {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 0 $space-medium;
+  justify-content: center;
+  overflow-wrap: break-word;
 }
