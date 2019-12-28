@@ -1,4 +1,4 @@
-import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
+import { sortLayersByName } from '@create-figma-plugin/utilities'
 
 export function groupLayers (layers, groupDefinition) {
   const result = {}
