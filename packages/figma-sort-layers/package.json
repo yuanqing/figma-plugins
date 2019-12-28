@@ -31,8 +31,7 @@
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "*",
-    "natural-compare-lite": "^1.4.0"
+    "@create-figma-plugin/utilities": "*"
   },
   "create-figma-plugin": {
     "id": "767379414704079825",

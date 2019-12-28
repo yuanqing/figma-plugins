@@ -33,7 +33,7 @@
   "dependencies": {
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
-    "preact": "^10.0.5"
+    "preact": "^10.1.1"
   },
   "create-figma-plugin": {
     "id": "figma-set-dimension",

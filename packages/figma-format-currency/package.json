@@ -42,7 +42,7 @@
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
     "@sindresorhus/class-names": "^1.1.0",
-    "preact": "^10.0.5"
+    "preact": "^10.1.1"
   },
   "ava": {
     "files": [

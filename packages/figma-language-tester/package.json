@@ -39,7 +39,7 @@
     "@create-figma-plugin/utilities": "*",
     "@sindresorhus/class-names": "^1.1.0",
     "p-memoize": "^3.1.0",
-    "preact": "^10.0.5"
+    "preact": "^10.1.1"
   },
   "create-figma-plugin": {
     "id": "767379122107077581",
