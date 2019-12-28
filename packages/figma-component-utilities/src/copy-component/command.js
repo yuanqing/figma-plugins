@@ -5,9 +5,13 @@ import {
   mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
-import { OFFSET } from '../constants'
+import { OFFSET } from '../utilities/constants'
 
 export default async function () {
+  if (figma.currentPage.selection.length === 0) {
+    figma.closePlugin(formatErrorMessage('Select a component'))
+    return
+  }
   const components = figma.currentPage.selection.filter(function (layer) {
     return layer.type === 'COMPONENT'
   })

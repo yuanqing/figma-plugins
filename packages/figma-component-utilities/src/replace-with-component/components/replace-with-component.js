@@ -9,8 +9,7 @@ import {
   Text,
   VerticalSpace,
   useForm,
-  DOWN_KEY_CODE,
-  UP_KEY_CODE
+  useMenu
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
@@ -69,40 +68,23 @@ export function ReplaceWithComponent (initialState) {
   } = state
   const handleLayerClick = useCallback(
     function (event) {
-      const componentId = event.target.getAttribute('data-layer-id')
+      const componentId = event.target.getAttribute('data-id')
       handleChange({ componentId })
     },
     [handleChange]
   )
-  const handleKeyDown = useCallback(
-    function (event) {
-      if (event.keyCode === UP_KEY_CODE || event.keyCode === DOWN_KEY_CODE) {
-        event.preventDefault()
-        if (componentId === null) {
-          if (event.keyCode === UP_KEY_CODE) {
-            handleChange({
-              componentId: filteredComponents[filteredComponents.length - 1].id
-            })
-            return
-          }
-          handleChange({ componentId: filteredComponents[0].id })
-          return
-        }
-        const currentIndex = filteredComponents.findIndex(function ({ id }) {
-          return id === componentId
-        })
-        let nextIndex = currentIndex + (event.keyCode === UP_KEY_CODE ? -1 : 1)
-        if (nextIndex === -1) {
-          nextIndex = filteredComponents.length - 1
-        }
-        if (nextIndex === filteredComponents.length) {
-          nextIndex = 0
-        }
-        handleChange({ componentId: filteredComponents[nextIndex].id })
-      }
+  const { handleKeyDown, menuElementRef } = useMenu({
+    getSelectedItemElement: function (menuElement, selectedItem) {
+      return menuElement.querySelector(`[data-id='${selectedItem}']`)
     },
-    [filteredComponents, handleChange, componentId]
-  )
+    onChange: function (componentId) {
+      handleChange({ componentId })
+    },
+    items: filteredComponents.map(function ({ id }) {
+      return id
+    }),
+    selectedItem: componentId
+  })
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({
@@ -141,13 +123,14 @@ export function ReplaceWithComponent (initialState) {
           </Text>
         </div>
       ) : (
-        <div class={styles.layers}>
-          {filteredComponents.map(function ({ id, name }, index) {
+        <div class={styles.layers} ref={menuElementRef}>
+          {filteredComponents.map(function ({ id, name, pageName }, index) {
             return (
               <Layer
                 key={index}
                 type='component'
-                data-layer-id={id}
+                data-id={id}
+                pageName={pageName}
                 selected={id === componentId}
                 onClick={handleLayerClick}
               >

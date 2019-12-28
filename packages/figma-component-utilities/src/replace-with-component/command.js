@@ -1,7 +1,5 @@
 import {
   addEventListener,
-  getDocumentComponents,
-  extractLayerAttributes,
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
@@ -12,8 +10,10 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
-import { defaultSettings } from '../default-settings'
+import { defaultSettings } from '../utilities/default-settings'
+import { isLayerWithinInstance } from '../utilities/is-layer-within-instance'
+import { getComponents } from './get-components'
+import { getSelectedLayers } from './get-selected-layers'
 
 export default async function () {
   if (figma.currentPage.selection.length === 0) {
@@ -100,27 +100,4 @@ export default async function () {
       shouldResizeToFitLayer
     }
   )
-}
-
-function getComponents () {
-  const components = getDocumentComponents()
-  return extractLayerAttributes(sortLayersByName(components), ['id', 'name'])
-}
-
-function getSelectedLayers () {
-  const layers = figma.currentPage.selection.filter(function (layer) {
-    return isLayerWithinInstance(layer) === false
-  })
-  return extractLayerAttributes(layers, ['id', 'name'])
-}
-
-function isLayerWithinInstance (layer) {
-  const parent = layer.parent
-  if (parent.type === 'INSTANCE') {
-    return true
-  }
-  if (parent.type === 'PAGE') {
-    return false
-  }
-  return isLayerWithinInstance(parent)
 }

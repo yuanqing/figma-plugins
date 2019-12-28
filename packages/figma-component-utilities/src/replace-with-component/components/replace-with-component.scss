@@ -8,11 +8,7 @@
 
 .emptyState {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
   padding: 0 $space-medium;
-}
-
-.layers {
-  overflow: auto;
 }

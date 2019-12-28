@@ -9,12 +9,11 @@ import {
   Text,
   VerticalSpace,
   useForm,
-  DOWN_KEY_CODE,
-  UP_KEY_CODE
+  useMenu
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useCallback, useEffect } from 'preact/hooks'
+import { useEffect } from 'preact/hooks'
 import styles from './jump-to-layer.scss'
 
 export function JumpToLayer (initialState) {
@@ -80,38 +79,21 @@ export function JumpToLayer (initialState) {
     selectedLayerId
   } = state
   function handleLayerClick (event) {
-    const selectedLayerId = event.target.getAttribute('data-layer-id')
+    const selectedLayerId = event.target.getAttribute('data-id')
     handleChange({ selectedLayerId })
   }
-  const handleKeyDown = useCallback(
-    function (event) {
-      if (event.keyCode === UP_KEY_CODE || event.keyCode === DOWN_KEY_CODE) {
-        event.preventDefault()
-        if (selectedLayerId === null) {
-          if (event.keyCode === UP_KEY_CODE) {
-            handleChange({
-              selectedLayerId: filteredLayers[filteredLayers.length - 1].id
-            })
-            return
-          }
-          handleChange({ selectedLayerId: filteredLayers[0].id })
-          return
-        }
-        const currentIndex = filteredLayers.findIndex(function ({ id }) {
-          return id === selectedLayerId
-        })
-        let nextIndex = currentIndex + (event.keyCode === UP_KEY_CODE ? -1 : 1)
-        if (nextIndex === -1) {
-          nextIndex = filteredLayers.length - 1
-        }
-        if (nextIndex === filteredLayers.length) {
-          nextIndex = 0
-        }
-        handleChange({ selectedLayerId: filteredLayers[nextIndex].id })
-      }
+  const { handleKeyDown, menuElementRef } = useMenu({
+    getSelectedItemElement: function (menuElement, selectedItem) {
+      return menuElement.querySelector(`[data-id='${selectedItem}']`)
     },
-    [filteredLayers, handleChange, selectedLayerId]
-  )
+    onChange: function (selectedLayerId) {
+      handleChange({ selectedLayerId })
+    },
+    items: filteredLayers.map(function ({ id }) {
+      return id
+    }),
+    selectedItem: selectedLayerId
+  })
   useEffect(
     function () {
       return addEventListener('SELECTION_CHANGED', function ({
@@ -151,13 +133,14 @@ export function JumpToLayer (initialState) {
           </Text>
         </div>
       ) : (
-        <div class={styles.layers}>
-          {filteredLayers.map(function ({ id, name, type }, index) {
+        <div class={styles.layers} ref={menuElementRef}>
+          {filteredLayers.map(function ({ id, name, pageName, type }, index) {
             return (
               <Layer
                 key={index}
+                pageName={pageName}
                 type={type.toLowerCase()}
-                data-layer-id={id}
+                data-id={id}
                 selected={id === selectedLayerId}
                 onClick={handleLayerClick}
               >

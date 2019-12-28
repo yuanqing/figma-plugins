@@ -6,7 +6,8 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 import { createComponent } from './create-component'
-import { OFFSET } from '../constants'
+import { isLayerWithinInstance } from '../utilities/is-layer-within-instance'
+import { OFFSET } from '../utilities/constants'
 
 export default async function () {
   const layers = figma.currentPage.selection
@@ -41,15 +42,4 @@ export default async function () {
       )}`
     )
   )
-}
-
-function isLayerWithinInstance (layer) {
-  const parentType = layer.parent.type
-  if (parentType === 'PAGE') {
-    return false
-  }
-  if (parentType === 'INSTANCE') {
-    return true
-  }
-  return isLayerWithinInstance(layer.parent)
 }
