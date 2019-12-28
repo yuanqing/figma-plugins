@@ -1,6 +1,8 @@
-import { formatSuccessMessage } from '@create-figma-plugin/utilities'
-import { sortLayersByName } from 'figma-sort-layers/src/sort-layers-by-name'
-import { updateLayersSortOrder } from 'figma-sort-layers/src/update-layers-sort-order'
+import {
+  formatSuccessMessage,
+  sortLayersByName,
+  updateLayersSortOrder
+} from '@create-figma-plugin/utilities'
 
 export default function () {
   const result = sortLayersByName(figma.root.children)
