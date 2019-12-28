@@ -30,9 +30,9 @@ export function commandFactory (languageKey) {
     }
     showUI({ visible: false })
     const notificationHandler = figma.notify('Translating…', { timeout: 60000 })
-    addEventListener('TRANSLATE_RESULT', function (result) {
+    addEventListener('TRANSLATE_RESULT', function ({ layers }) {
       notificationHandler.cancel()
-      for (const { id, characters } of result) {
+      for (const { id, characters } of layers) {
         const layer = figma.getNodeById(id)
         layer.characters = characters
       }
@@ -44,14 +44,13 @@ export function commandFactory (languageKey) {
     })
     showUI({ visible: false })
     await loadFonts(layers)
-    triggerEvent(
-      'TRANSLATE_REQUEST',
-      layers.map(function ({ id, characters }) {
+    triggerEvent('TRANSLATE_REQUEST', {
+      apiKey,
+      languageKey,
+      layers: layers.map(function ({ id, characters }) {
         return { id, characters }
       }),
-      scope,
-      languageKey,
-      apiKey
-    )
+      scope
+    })
   }
 }

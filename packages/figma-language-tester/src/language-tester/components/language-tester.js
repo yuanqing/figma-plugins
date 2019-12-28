@@ -24,7 +24,7 @@ export function LanguageTester () {
   const [isLoading, setIsLoading] = useState(false)
   function handleLanguageClick (languageKey) {
     setLanguageKey(languageKey)
-    triggerEvent('SET_LANGUAGE', languageKey)
+    triggerEvent('SET_LANGUAGE', { languageKey })
   }
   function handleResetClick () {
     setLanguageKey(DEFAULT_LANGUAGE)
@@ -36,25 +36,28 @@ export function LanguageTester () {
     }
   }
   useEffect(function () {
-    return addEventListener('TRANSLATE_REQUEST', async function (
-      layers,
-      scope,
+    return addEventListener('TRANSLATE_REQUEST', async function ({
+      apiKey,
       languageKey,
-      apiKey
-    ) {
+      layers,
+      scope
+    }) {
       setIsLoading(true)
       const promises = layers.map(function ({ characters }) {
         return translate(characters, languageKey, apiKey)
       })
       const translated = await Promise.all(promises)
       setIsLoading(false)
-      const result = layers.map(function ({ id }, index) {
-        return {
-          id,
-          characters: translated[index]
-        }
+      triggerEvent('TRANSLATE_RESULT', {
+        languageKey,
+        layers: layers.map(function ({ id }, index) {
+          return {
+            id,
+            characters: translated[index]
+          }
+        }),
+        scope
       })
-      triggerEvent('TRANSLATE_RESULT', result, scope, languageKey)
     })
   }, [])
   useEffect(function () {

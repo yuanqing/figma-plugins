@@ -34,7 +34,7 @@ export default async function () {
     resetLanguage(originalStrings)
   })
   let notificationHandler
-  addEventListener('SET_LANGUAGE', async function (languageKey) {
+  addEventListener('SET_LANGUAGE', async function ({ languageKey }) {
     notificationHandler = figma.notify('Translating…', { timeout: 60000 })
     const { layers, scope } = getTextLayers()
     layers.forEach(function (layer) {
@@ -43,23 +43,22 @@ export default async function () {
       }
     })
     await loadFonts(layers)
-    triggerEvent(
-      'TRANSLATE_REQUEST',
-      layers.map(function ({ id, characters }) {
+    triggerEvent('TRANSLATE_REQUEST', {
+      apiKey,
+      languageKey,
+      layers: layers.map(function ({ id, characters }) {
         return { id, characters }
       }),
-      scope,
-      languageKey,
-      apiKey
-    )
+      scope
+    })
   })
-  addEventListener('TRANSLATE_RESULT', async function (
-    result,
-    scope,
-    languageKey
-  ) {
+  addEventListener('TRANSLATE_RESULT', async function ({
+    languageKey,
+    layers,
+    scope
+  }) {
     notificationHandler.cancel()
-    for (const { id, characters } of result) {
+    for (const { id, characters } of layers) {
       const layer = figma.getNodeById(id)
       layer.characters = characters
     }
