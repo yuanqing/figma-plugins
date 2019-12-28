@@ -3,7 +3,8 @@ import { traverseLayer } from '@create-figma-plugin/utilities'
 export function getLayers () {
   const result = {}
   for (const page of figma.root.children) {
-    for (const layer of page.children) {
+    const layers = [].concat(page.children).reverse()
+    for (const layer of layers) {
       traverseLayer(
         layer,
         function (layer) {

@@ -9,10 +9,10 @@ import { getNextLayer } from './get-next-layer'
 import { navigateToLayer } from './navigate-to-layer'
 
 export const previous = commandFactory(
-  1,
+  -1,
   'At first component/frame of document'
 )
-export const next = commandFactory(-1, 'At last component/frame of document')
+export const next = commandFactory(1, 'At last component/frame of document')
 
 function commandFactory (indexOffset, noMoreLayersMessage) {
   return async function () {
