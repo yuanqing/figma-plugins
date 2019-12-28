@@ -24,12 +24,6 @@
   ],
   "scripts": {
     "build": "create-figma-plugin-build",
-    "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
-    "fix-css": "prettier --write 'src/**/*.scss'",
-    "fix-js": "prettier-standard '{scripts,src,test}/**/*.js'",
-    "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
-    "lint-css": "stylelint 'src/**/*.scss'",
-    "lint-js": "standardx '{scripts,src,test}/**/*.js'",
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {
