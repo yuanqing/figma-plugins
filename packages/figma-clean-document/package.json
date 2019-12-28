@@ -38,6 +38,7 @@
   "dependencies": {
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
+    "figma-sort-layers": "*",
     "preact": "^10.0.5"
   },
   "create-figma-plugin": {

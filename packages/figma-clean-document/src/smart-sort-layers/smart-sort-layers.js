@@ -1,8 +1,8 @@
 import {
-  smartSortChildLayers,
   traverseLayer,
   updateLayersSortOrder
 } from '@create-figma-plugin/utilities'
+import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-child-layers'
 import { isLayerAnIllustration } from './is-layer-an-illustration'
 
 export function smartSortLayers (layers) {
