@@ -52,7 +52,6 @@ export function DrawSliceOverSelection (initialState) {
         name='padding'
         value={padding}
         onChange={handleChange}
-        propagateEscapeKeyDown
         focused
       />
       <VerticalSpace space='extraLarge' />

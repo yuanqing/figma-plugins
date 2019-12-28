@@ -110,7 +110,6 @@ export function ReplaceWithComponent (initialState) {
       <SearchTextbox
         name='searchTerm'
         onChange={handleChange}
-        propagateEscapeKeyDown
         placeholder='Search'
         value={searchTerm}
         focused

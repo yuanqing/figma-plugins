@@ -118,11 +118,10 @@ export function JumpToLayer (initialState) {
     <div>
       <SearchTextbox
         name='searchTerm'
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        propagateEscapeKeyDown
         placeholder='Search'
         value={searchTerm}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
         focused
       />
       <Divider />

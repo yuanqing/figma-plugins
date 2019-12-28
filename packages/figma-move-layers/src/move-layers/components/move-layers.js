@@ -64,7 +64,6 @@ export function MoveLayers (initialState) {
           icon={moveRightIcon}
           value={horizontalOffset}
           onChange={handleChange}
-          propagateEscapeKeyDown
           focused
         />
         <TextboxNumeric
@@ -72,7 +71,6 @@ export function MoveLayers (initialState) {
           icon={moveDownIcon}
           value={verticalOffset}
           onChange={handleChange}
-          propagateEscapeKeyDown
         />
       </Columns>
       <VerticalSpace space='large' />

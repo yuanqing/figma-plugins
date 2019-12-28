@@ -53,7 +53,6 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
         icon={icon}
         value={space}
         onChange={handleChange}
-        propagateEscapeKeyDown
         focused
       />
       <VerticalSpace space='extraLarge' />

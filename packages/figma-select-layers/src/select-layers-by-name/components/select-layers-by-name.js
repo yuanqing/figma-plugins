@@ -63,7 +63,6 @@ export function SelectLayersByName (initialState) {
         placeholder='Layer name'
         value={layerName}
         onChange={handleChange}
-        propagateEscapeKeyDown
         focused
       />
       <VerticalSpace space='small' />
