@@ -55,6 +55,11 @@
       {
         "name": "Smart Sort Layers",
         "command": "commands/smart-sort-layers.js"
+      },
+      "-",
+      {
+        "name": "Sort Pages",
+        "command": "commands/sort-pages.js"
       }
     ]
   }
