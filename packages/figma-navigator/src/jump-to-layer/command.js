@@ -10,6 +10,7 @@ import {
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
 import { getSelectedLayers } from '../utilities/get-selected-layers'
+import { navigateToLayer } from '../utilities/navigate-to-layer'
 import { getLayers } from './get-layers'
 
 export default async function () {
@@ -35,7 +36,7 @@ export default async function () {
       searchCurrentPageOnly
     })
     const layer = figma.getNodeById(selectedLayerId)
-    figma.viewport.scrollAndZoomIntoView([layer])
+    navigateToLayer(layer)
     figma.currentPage.selection = [layer]
     figma.closePlugin(
       formatSuccessMessage(`Jumped to ${layer.type.toLowerCase()}`)

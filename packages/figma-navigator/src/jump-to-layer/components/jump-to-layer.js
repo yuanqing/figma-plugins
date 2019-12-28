@@ -20,13 +20,6 @@ export function JumpToLayer (initialState) {
   const { state, handleChange, handleSubmit, isInvalid } = useForm(
     {
       ...initialState,
-      filteredLayers:
-        initialState.searchCurrentPageOnly === true
-          ? filterLayersByPageId(
-              initialState.layers,
-              initialState.currentPageId
-            )
-          : initialState.layers,
       searchTerm: ''
     },
     {

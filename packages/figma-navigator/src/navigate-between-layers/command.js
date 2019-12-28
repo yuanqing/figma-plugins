@@ -4,9 +4,9 @@ import {
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
 import { getSelectedLayers } from '../utilities/get-selected-layers'
+import { navigateToLayer } from '../utilities/navigate-to-layer'
 import { getLayers } from './get-layers'
 import { getNextLayer } from './get-next-layer'
-import { navigateToLayer } from './navigate-to-layer'
 
 export const previous = commandFactory(
   -1,
