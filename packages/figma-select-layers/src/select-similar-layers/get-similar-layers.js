@@ -5,7 +5,24 @@ export function getSimilarLayers (referenceLayer) {
   const type = referenceLayer.type
   if (type === 'SLICE' || type === 'GROUP') {
     traverseLayer(figma.currentPage, function (layer) {
-      if (layer.type === type) {
+      if (layer.type === type && layer.id !== referenceLayer.id) {
+        result.push(layer)
+      }
+    })
+    return result
+  }
+  if (type === 'COMPONENT' || type === 'INSTANCE') {
+    const masterComponentId =
+      type === 'INSTANCE'
+        ? referenceLayer.masterComponent.id
+        : referenceLayer.id
+    traverseLayer(figma.currentPage, function (layer) {
+      if (
+        ((layer.type === 'COMPONENT' && layer.id === masterComponentId) ||
+          (layer.type === 'INSTANCE' &&
+            layer.masterComponent.id === masterComponentId)) &&
+        layer.id !== referenceLayer.id
+      ) {
         result.push(layer)
       }
     })
@@ -16,8 +33,8 @@ export function getSimilarLayers (referenceLayer) {
       return
     }
     if (
-      layer.id !== referenceLayer.id &&
-      compareAttributes(referenceLayer, layer) === true
+      compareAttributes(referenceLayer, layer) === true &&
+      layer.id !== referenceLayer.id
     ) {
       result.push(layer)
     }
