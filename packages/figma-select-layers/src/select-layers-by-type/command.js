@@ -1,10 +1,4 @@
-import {
-  formatErrorMessage,
-  formatSuccessMessage,
-  getSelectedLayersOrAllLayers,
-  mapNumberToWord,
-  pluralize
-} from '@create-figma-plugin/utilities'
+import { commandFactory } from './command-factory'
 
 export const component = commandFactory(
   filterByTypeFactory('COMPONENT'),
@@ -35,26 +29,6 @@ export const text = commandFactory(filterByTypeFactory('TEXT'), 'text')
 
 export const locked = commandFactory(filterLocked, 'locked')
 export const hidden = commandFactory(filterHidden, 'hidden')
-
-function commandFactory (filterCallback, label) {
-  return function () {
-    const layers = getSelectedLayersOrAllLayers().filter(filterCallback)
-    const scope =
-      figma.currentPage.selection.length > 0 ? 'within selection' : 'on page'
-    figma.currentPage.selection = layers
-    figma.viewport.scrollAndZoomIntoView(layers)
-    figma.closePlugin(
-      layers.length === 0
-        ? formatErrorMessage(`No ${label}s ${scope}`)
-        : formatSuccessMessage(
-            `Selected ${mapNumberToWord(layers.length)} ${pluralize(
-              layers.length,
-              label
-            )} ${scope}`
-          )
-    )
-  }
-}
 
 function filterByTypeFactory (type) {
   return function (layer) {
