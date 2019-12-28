@@ -22,6 +22,10 @@ Sort the selected layers by their Y position.
 
 Sort the selected layers by their X and Y position while maintaining their relative stacking order on the page.
 
+### Sort Pages
+
+Sorts pages of the current document in alphabetical order.
+
 ## License
 
 MIT

@@ -8,7 +8,7 @@
 
 ### Organize Layers
 
-Organizes all layers on the current page; useful for organizing a page of Components.
+Organizes all layers on the current page based on layer name; useful for organizing a page of Components.
 
 - Customize how layers are grouped, and set the space between layers.
 
