@@ -94,12 +94,12 @@ export function ConvertCurrency (initialState) {
         <Text muted>Currency</Text>
         <VerticalSpace space='small' />
         <TextboxAutocomplete
-          filter
-          strict
           name='targetCurrency'
           value={targetCurrency}
           options={currencies}
           onChange={handleChange}
+          filter
+          strict
         />
         <VerticalSpace space='small' />
         <Checkbox
@@ -113,12 +113,12 @@ export function ConvertCurrency (initialState) {
         <Text muted>Locale</Text>
         <VerticalSpace space='small' />
         <TextboxAutocomplete
-          filter
-          top
           name='locale'
           value={locale}
           options={locales}
           onChange={handleChange}
+          filter
+          top
         />
         <VerticalSpace space='extraLarge' />
         <Button

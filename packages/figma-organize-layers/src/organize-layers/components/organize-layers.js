@@ -84,14 +84,14 @@ export function OrganizeLayers (initialState) {
           <TextboxNumeric
             name='horizontalSpace'
             icon={spaceHorizontalIcon}
-            onChange={handleChange}
             value={horizontalSpace}
+            onChange={handleChange}
           />
           <TextboxNumeric
             name='verticalSpace'
             icon={spaceVerticalIcon}
-            onChange={handleChange}
             value={verticalSpace}
+            onChange={handleChange}
           />
         </Columns>
         <VerticalSpace space='large' />

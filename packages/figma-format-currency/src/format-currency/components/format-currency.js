@@ -101,11 +101,11 @@ export function FormatCurrency (initialState) {
         <Text muted>Locale</Text>
         <VerticalSpace space='small' />
         <TextboxAutocomplete
-          top
           name='locale'
           value={locale}
           options={locales}
           onChange={handleChange}
+          top
         />
         <VerticalSpace space='extraLarge' />
         <Button

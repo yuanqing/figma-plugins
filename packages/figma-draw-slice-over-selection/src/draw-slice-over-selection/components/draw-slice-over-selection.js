@@ -50,9 +50,9 @@ export function DrawSliceOverSelection (initialState) {
       <VerticalSpace space='small' />
       <TextboxNumeric
         name='padding'
+        value={padding}
         onChange={handleChange}
         propagateEscapeKeyDown
-        value={padding}
         focused
       />
       <VerticalSpace space='extraLarge' />

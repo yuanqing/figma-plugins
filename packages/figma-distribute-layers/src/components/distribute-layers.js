@@ -51,9 +51,9 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
       <TextboxNumeric
         name='space'
         icon={icon}
+        value={space}
         onChange={handleChange}
         propagateEscapeKeyDown
-        value={space}
         focused
       />
       <VerticalSpace space='extraLarge' />
