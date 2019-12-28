@@ -24,7 +24,7 @@ Sort the selected layers by their X and Y position while maintaining their relat
 
 ### Sort Pages
 
-Sorts pages of the current document in alphabetical order.
+Sort pages of the current document in alphabetical order.
 
 ## License
 
