@@ -51,6 +51,7 @@ export function DrawSliceOverSelection (initialState) {
       <TextboxNumeric
         name='padding'
         value={padding}
+        minimum={0}
         onChange={handleChange}
         focused
       />
