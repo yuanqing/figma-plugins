@@ -1,6 +1,6 @@
 import {
   addEventListener,
-  extractLayerAttributes,
+  extractAttributes,
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
@@ -53,5 +53,5 @@ export default async function () {
 }
 
 function getLayers () {
-  return extractLayerAttributes(figma.currentPage.children, ['id', 'name'])
+  return extractAttributes(figma.currentPage.children, ['id', 'name'])
 }

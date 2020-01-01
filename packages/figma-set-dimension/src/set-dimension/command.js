@@ -1,6 +1,6 @@
 import {
   addEventListener,
-  extractLayerAttributes,
+  extractAttributes,
   formatErrorMessage,
   loadSettings,
   onSelectionChange,
@@ -45,5 +45,5 @@ export default async function () {
 }
 
 function getLayers () {
-  return extractLayerAttributes(figma.currentPage.selection, [WIDTH, HEIGHT])
+  return extractAttributes(figma.currentPage.selection, ['id', WIDTH, HEIGHT])
 }

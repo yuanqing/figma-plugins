@@ -1,6 +1,6 @@
 import {
   addEventListener,
-  extractLayerAttributes,
+  extractAttributes,
   formatSuccessMessage,
   loadFonts,
   loadSettings,
@@ -45,5 +45,5 @@ export default async function () {
 }
 
 function getLayers () {
-  return extractLayerAttributes(getTextLayers(), ['id', 'characters'])
+  return extractAttributes(getTextLayers(), ['id', 'characters'])
 }
