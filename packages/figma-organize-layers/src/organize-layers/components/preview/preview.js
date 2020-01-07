@@ -23,18 +23,18 @@ export function Preview ({
         {groups.map(function ({ groupName, layers }, index) {
           return (
             <div class={style.group} key={index}>
-              {layers.map(function ({ name: layerName }, index) {
-                if (groupName === null) {
+              {layers.map(function ({ name }, index) {
+                if (groupName === null || layers.length === 1) {
                   return (
                     <div class={style.item} key={index}>
-                      {layerName}
+                      {name}
                     </div>
                   )
                 }
                 return (
                   <div class={style.item} key={index}>
                     <strong class={style.groupName}>{groupName}</strong>
-                    {layerName.substring(groupName.length)}
+                    {name.substring(groupName.length)}
                   </div>
                 )
               })}
