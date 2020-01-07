@@ -49,9 +49,11 @@ export default async function () {
               ungroupSingleLayerGroups
             }) || didChange
         }
-        if (smartSort === true) {
-          didChange = smartSortLayers(layers) || didChange
-        }
+      }
+    }
+    if (smartSort === true) {
+      for (const layers of getLayersInScope()) {
+        smartSortLayers(layers)
       }
     }
     notificationHandler.cancel()
