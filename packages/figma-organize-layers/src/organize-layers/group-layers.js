@@ -1,15 +1,46 @@
 import { sortLayersByName } from '@create-figma-plugin/utilities'
 
-export function groupLayers (layers, groupDefinition) {
-  const result = {}
+export function groupLayers (
+  layers,
+  combineSingleLayerGroups,
+  groupDefinition
+) {
+  const groups = {}
   for (const layer of sortLayersByName(layers)) {
     const groupName = extractGroupName(layer.name, groupDefinition)
-    if (typeof result[groupName] === 'undefined') {
-      result[groupName] = []
+    if (typeof groups[groupName] === 'undefined') {
+      groups[groupName] = { groupName, layers: [] }
     }
-    result[groupName].push(layer)
+    groups[groupName].layers.push(layer)
   }
-  return result
+  if (
+    combineSingleLayerGroups === false ||
+    countSingleLayerGroups(groups) < 2
+  ) {
+    return Object.values(groups)
+  }
+  const result = []
+  const singleLayers = { groupName: null, layers: [] }
+  for (const groupName in groups) {
+    const group = groups[groupName]
+    if (group.layers.length === 1) {
+      singleLayers.layers.push(group.layers[0])
+      continue
+    }
+    result.push(group)
+  }
+  return [singleLayers, ...result]
+}
+
+function countSingleLayerGroups (groups) {
+  let count = 0
+  for (const groupName in groups) {
+    const group = groups[groupName]
+    if (group.layers.length === 1) {
+      count++
+    }
+  }
+  return count
 }
 
 const slashRegex = /\//

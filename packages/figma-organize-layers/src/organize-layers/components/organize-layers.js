@@ -1,6 +1,7 @@
 /** @jsx h */
 import {
   Button,
+  Checkbox,
   Columns,
   Container,
   SegmentedControl,
@@ -38,8 +39,14 @@ export function OrganizeLayers (initialState) {
       onClose: function () {
         triggerEvent('CLOSE')
       },
-      onSubmit: function ({ groupDefinition, horizontalSpace, verticalSpace }) {
+      onSubmit: function ({
+        combineSingleLayerGroups,
+        groupDefinition,
+        horizontalSpace,
+        verticalSpace
+      }) {
         triggerEvent('SUBMIT', {
+          combineSingleLayerGroups,
           groupDefinition,
           horizontalSpace: evaluateNumericExpression(horizontalSpace) || 0,
           verticalSpace: evaluateNumericExpression(verticalSpace) || 0
@@ -59,6 +66,7 @@ export function OrganizeLayers (initialState) {
     [handleChange]
   )
   const {
+    combineSingleLayerGroups,
     groupDefinition,
     horizontalSpace,
     maximumGroupDefinition,
@@ -96,6 +104,14 @@ export function OrganizeLayers (initialState) {
             onChange={handleChange}
           />
         </Columns>
+        <VerticalSpace space='large' />
+        <Checkbox
+          name='combineSingleLayerGroups'
+          onChange={handleChange}
+          value={combineSingleLayerGroups}
+        >
+          <Text>Combine single-layer groups</Text>
+        </Checkbox>
         <VerticalSpace space='large' />
         <Button
           fullWidth

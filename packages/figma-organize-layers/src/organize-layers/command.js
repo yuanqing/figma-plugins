@@ -31,9 +31,18 @@ export default async function () {
   })
   addEventListener('SUBMIT', async function (settings) {
     await saveSettings(settings)
-    const { groupDefinition, horizontalSpace, verticalSpace } = settings
+    const {
+      combineSingleLayerGroups,
+      groupDefinition,
+      horizontalSpace,
+      verticalSpace
+    } = settings
     const layers = figma.currentPage.children
-    const groups = groupLayers(layers, groupDefinition)
+    const groups = groupLayers(
+      layers,
+      combineSingleLayerGroups,
+      groupDefinition
+    )
     arrangeGroups(groups, horizontalSpace, verticalSpace)
     sortLayers(layers)
     figma.viewport.scrollAndZoomIntoView(layers)
@@ -43,7 +52,7 @@ export default async function () {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 325 },
+    { width: 240, height: 357 },
     {
       ...settings,
       layers,
