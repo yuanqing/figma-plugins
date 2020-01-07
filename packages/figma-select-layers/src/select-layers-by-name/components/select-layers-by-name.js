@@ -25,19 +25,21 @@ export function SelectLayersByName (initialState) {
         const { layers, layerName, exactMatch } = state
         return {
           ...state,
-          count: filterLayersByName(layers, layerName, exactMatch).length
+          result: filterLayersByName(layers, layerName, exactMatch)
         }
       },
-      validate: function ({ count }) {
-        return count > 0
+      validate: function ({ result }) {
+        return result.length > 0
       },
       onClose: function () {
         triggerEvent('CLOSE')
       },
-      onSubmit: function ({ exactMatch, layerName }) {
+      onSubmit: function ({ exactMatch, hasSelection, layerName, result }) {
         triggerEvent('SUBMIT', {
           exactMatch,
-          layerName
+          hasSelection,
+          layerName,
+          result
         })
       }
     }
@@ -53,7 +55,8 @@ export function SelectLayersByName (initialState) {
     },
     [handleChange]
   )
-  const { count, exactMatch, layerName, hasSelection } = state
+  const { result, exactMatch, layerName, hasSelection } = state
+  const count = result.length
   const scope = hasSelection ? 'within selection' : 'on page'
   return (
     <Container space='medium'>

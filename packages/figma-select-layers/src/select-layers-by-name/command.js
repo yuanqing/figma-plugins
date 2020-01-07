@@ -12,35 +12,32 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
-import { filterLayersByName } from './filter-layers-by-name'
 
 export default async function () {
-  const settings = await loadSettings(defaultSettings)
+  const { selectLayersByName: settings } = await loadSettings(defaultSettings)
   onSelectionChange(function (selectedLayers) {
     triggerEvent('SELECTION_CHANGED', {
       hasSelection: selectedLayers.length > 0,
       layers: getLayerIdsAndNames()
     })
   })
-  addEventListener('SUBMIT', async function (settings) {
-    await saveSettings(settings)
-    const { exactMatch, layerName } = settings
-    const hasSelection = figma.currentPage.selection.length > 0
-    const layers = filterLayersByName(
-      getLayerIdsAndNames(),
-      layerName,
-      exactMatch
-    )
-    const scope = hasSelection ? 'within selection' : 'on page'
-    const selection = layers.map(function ({ id }) {
+  addEventListener('SUBMIT', async function ({
+    exactMatch,
+    hasSelection,
+    layerName,
+    result
+  }) {
+    await saveSettings({ exactMatch, layerName })
+    const scope = hasSelection > 0 ? 'within selection' : 'on page'
+    const selection = result.map(function ({ id }) {
       return figma.getNodeById(id)
     })
     figma.currentPage.selection = selection
     figma.viewport.scrollAndZoomIntoView(selection)
     figma.closePlugin(
       formatSuccessMessage(
-        `Selected ${mapNumberToWord(layers.length)} ${pluralize(
-          layers.length,
+        `Selected ${mapNumberToWord(selection.length)} ${pluralize(
+          selection.length,
           'layer'
         )} ${scope}`
       )
