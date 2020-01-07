@@ -1,4 +1,5 @@
 import { sortLayersByName } from '@create-figma-plugin/utilities'
+import { extractGroupName } from './extract-group-name'
 
 export function groupLayers (
   layers,
@@ -41,17 +42,4 @@ function countSingleLayerGroups (groups) {
     }
   }
   return count
-}
-
-const slashRegex = /\//
-
-function extractGroupName (layerName, groupDefinition) {
-  const split = layerName.split(slashRegex)
-  if (split.length === 1) {
-    return layerName
-  }
-  if (split.length <= groupDefinition) {
-    return layerName
-  }
-  return split.slice(0, groupDefinition).join('/')
 }

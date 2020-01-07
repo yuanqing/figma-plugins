@@ -20,14 +20,7 @@ import {
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { Preview } from './preview/preview'
-
-const groupDefinitions = [
-  { value: 1, text: '1st /' },
-  { value: 2, text: '2nd /' },
-  { value: 3, text: '3rd /' },
-  { value: 4, text: '4th /' },
-  { value: 5, text: '5th /' }
-]
+import { groupDefinitions } from '../group-definitions'
 
 export function OrganizeLayers (initialState) {
   const { state, handleChange, handleSubmit, isInvalid } = useForm(

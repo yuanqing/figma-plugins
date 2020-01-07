@@ -27,12 +27,22 @@
   ],
   "scripts": {
     "build": "create-figma-plugin-build",
+    "test": "ava",
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
     "preact": "^10.1.1"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "verbose": true,
+    "require": [
+      "esm"
+    ]
   },
   "create-figma-plugin": {
     "id": "786286754606650597",
