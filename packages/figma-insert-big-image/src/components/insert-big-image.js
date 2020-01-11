@@ -1,6 +1,6 @@
 /** @jsx h */
-import { Text } from '@create-figma-plugin/ui'
-import { triggerEvent, ESCAPE_KEY_CODE } from '@create-figma-plugin/utilities'
+import { Text, ESCAPE_KEY_CODE } from '@create-figma-plugin/ui'
+import { triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import styles from './insert-big-image.scss'
