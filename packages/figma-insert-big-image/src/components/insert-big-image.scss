@@ -1,0 +1,15 @@
+@import "@create-figma-plugin/ui/src/scss/constants";
+@import "@create-figma-plugin/ui/src/scss/text";
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  padding-bottom: 16px;
+  text-align: center;
+}
+
+.input {
+  display: none;
+}
