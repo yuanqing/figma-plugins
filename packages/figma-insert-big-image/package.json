@@ -35,12 +35,7 @@
   "create-figma-plugin": {
     "id": "figma-insert-big-image",
     "name": "Insert Big Image",
-    "menu": [
-      {
-        "name": "Insert Big Image",
-        "command": "command.js",
-        "ui": "ui.js"
-      }
-    ]
+    "command": "command.js",
+    "ui": "ui.js"
   }
 }
