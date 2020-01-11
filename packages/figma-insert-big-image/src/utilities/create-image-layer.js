@@ -1,5 +1,6 @@
 export function createImageLayer ([bytes, x, y, width, height]) {
   const rectangle = figma.createRectangle()
+  rectangle.name = 'Image'
   rectangle.x = x
   rectangle.y = y
   rectangle.resize(width, height)

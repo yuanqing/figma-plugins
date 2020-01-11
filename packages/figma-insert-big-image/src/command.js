@@ -11,9 +11,15 @@ export default async function () {
     for (const image of images) {
       imageLayers.push(createImageLayer(image))
     }
-    const group = figma.group(imageLayers, figma.currentPage)
-    group.name = name
-    const selection = [group]
+    let selection
+    if (imageLayers.length === 1) {
+      imageLayers[0].name = name
+      selection = imageLayers
+    } else {
+      const group = figma.group(imageLayers, figma.currentPage)
+      group.name = name
+      selection = [group]
+    }
     figma.currentPage.selection = selection
     figma.viewport.scrollAndZoomIntoView(selection)
     figma.closePlugin(formatSuccessMessage('Inserted image'))
