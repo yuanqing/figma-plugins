@@ -135,6 +135,12 @@
       },
       "-",
       {
+        "name": "Select Similar Layers",
+        "command": "select-similar-layers/command.js",
+        "ui": "select-similar-layers/ui.js"
+      },
+      "-",
+      {
         "name": "Reset",
         "command": "reset/command.js"
       }

@@ -4,40 +4,36 @@ export const defaultSettings = {
     layerName: ''
   },
   selectSimilarLayers: {
-    attributes: {
-      width: true,
-      height: true,
-
-      x: true,
-      y: true,
-
-      rotation: true,
+    blendMode: true,
+    cornerRadius: {
       bottomLeftRadius: true,
       bottomRightRadius: true,
       topLeftRadius: true,
-      topRightRadius: true,
-
-      opacity: true,
-      blendMode: true,
-
-      effects: true,
-      effectsStyleId: true,
-
-      visible: true,
-      locked: true,
-      isMask: true,
-
+      topRightRadius: true
+    },
+    dimension: {
+      width: true,
+      height: true
+    },
+    effectsStyleId: true,
+    fill: {
       fills: true,
-      fillsStyleId: true,
-
+      fillsStyleId: true
+    },
+    type: true,
+    locked: true,
+    isMask: true,
+    opacity: true,
+    rotation: true,
+    stroke: {
       dashPattern: true,
       strokeAlign: true,
       strokeCap: true,
       strokeJoin: true,
-      strokes: true,
       strokesStyleId: true,
-      strokeWeight: true,
-
+      strokeWeight: true
+    },
+    text: {
       fontName: true,
       fontSize: true,
       letterSpacing: true,
@@ -49,6 +45,7 @@ export const defaultSettings = {
       textCase: true,
       textDecoration: true,
       textStyleId: true
-    }
+    },
+    visible: true
   }
 }
