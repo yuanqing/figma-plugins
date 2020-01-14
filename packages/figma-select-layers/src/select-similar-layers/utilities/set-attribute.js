@@ -1,19 +1,29 @@
-import { setAllAttributes } from './set-all-attributes'
-
 export function setAttribute (attributes, targetKey, newValue) {
   const result = {}
   for (const key in attributes) {
-    const value = attributes[key]
+    const object = attributes[key]
     if (key === targetKey) {
       result[key] =
-        typeof value === 'object' ? setAllAttributes(value, newValue) : newValue
+        typeof object === 'object'
+          ? setAllAttributes(object, newValue)
+          : newValue
       continue
     }
-    if (typeof value === 'object') {
-      result[key] = setAttribute(value, targetKey, newValue)
+    if (typeof object === 'object') {
+      result[key] = setAttribute(object, targetKey, newValue)
       continue
     }
-    result[key] = value
+    result[key] = object
+  }
+  return result
+}
+
+function setAllAttributes (attributes, newValue) {
+  const result = {}
+  for (const key in attributes) {
+    const value = attributes[key]
+    result[key] =
+      typeof value === 'object' ? setAllAttributes(value, newValue) : newValue
   }
   return result
 }

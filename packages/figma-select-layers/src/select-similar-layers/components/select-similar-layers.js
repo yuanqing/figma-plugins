@@ -11,9 +11,11 @@ import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 import { Attributes } from './attributes.js'
-import { checkAttributes } from '../utilities/check-attributes'
+import { everyAttribute } from '../utilities/every-attribute'
+import { extractKeysByReferenceLayerType } from '../utilities/extract-keys-by-reference-layer-type'
+import { extractKeysBySearchTerm } from '../utilities/extract-keys-by-search-term'
 import { setAttribute } from '../utilities/set-attribute'
-import { setAllAttributes } from '../utilities/set-all-attributes'
+import { toggleAttributes } from '../utilities/toggle-attributes'
 import styles from './select-similar-layers.scss'
 
 export function SelectSimilarLayers (initialState) {
@@ -21,16 +23,28 @@ export function SelectSimilarLayers (initialState) {
     { ...initialState, searchTerm: '' },
     {
       transform: function (state) {
-        const { attributes } = state
+        const { attributes, referenceLayerType, searchTerm } = state
+        const keysByReferenceLayerType = extractKeysByReferenceLayerType(
+          attributes,
+          referenceLayerType
+        )
+        const keysBySearchTerm = extractKeysBySearchTerm(attributes, searchTerm)
         return {
           ...state,
-          areAllAttributesChecked: checkAttributes(attributes, true) === true
+          areAllAttributesChecked:
+            everyAttribute(attributes, keysByReferenceLayerType, true) === true,
+          keysByReferenceLayerType,
+          keysBySearchTerm
         }
       },
-      validate: function ({ referenceLayerType, attributes }) {
+      validate: function ({
+        attributes,
+        keysByReferenceLayerType,
+        referenceLayerType
+      }) {
         return (
           referenceLayerType !== null &&
-          checkAttributes(attributes, false) === false
+          everyAttribute(attributes, keysByReferenceLayerType, false) === false
         )
       },
       onClose: function () {
@@ -46,14 +60,16 @@ export function SelectSimilarLayers (initialState) {
   const {
     areAllAttributesChecked,
     attributes,
-    referenceLayerType,
+    keysByReferenceLayerType,
+    keysBySearchTerm,
     searchTerm
   } = state
   const handleAttributeClick = useCallback(
     function (object, newValue, targetKey) {
+      const { attributes } = state
       handleChange({
         ...state,
-        attributes: setAttribute(state.attributes, targetKey, newValue)
+        attributes: setAttribute(attributes, targetKey, newValue)
       })
     },
     [handleChange, state]
@@ -63,10 +79,20 @@ export function SelectSimilarLayers (initialState) {
       const newValue = !(areAllAttributesChecked === true)
       handleChange({
         ...state,
-        attributes: setAllAttributes(attributes, newValue)
+        attributes: toggleAttributes(
+          attributes,
+          keysByReferenceLayerType,
+          newValue
+        )
       })
     },
-    [areAllAttributesChecked, attributes, handleChange, state]
+    [
+      areAllAttributesChecked,
+      attributes,
+      keysByReferenceLayerType,
+      handleChange,
+      state
+    ]
   )
   useEffect(
     function () {
@@ -104,8 +130,8 @@ export function SelectSimilarLayers (initialState) {
       <Divider />
       <Attributes
         attributes={attributes}
-        searchTerm={searchTerm}
-        referenceLayerType={referenceLayerType}
+        keysByReferenceLayerType={keysByReferenceLayerType}
+        keysBySearchTerm={keysBySearchTerm}
         onClick={handleAttributeClick}
       />
       <Divider />
