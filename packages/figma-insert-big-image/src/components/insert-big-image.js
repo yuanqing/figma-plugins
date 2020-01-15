@@ -2,7 +2,6 @@
 import {
   LoadingIndicator,
   Text,
-  imageIcon,
   ESCAPE_KEY_CODE
 } from '@create-figma-plugin/ui'
 import { triggerEvent } from '@create-figma-plugin/utilities'
@@ -59,7 +58,6 @@ export function InsertBigImage () {
           multiple
           onChange={handleFiles}
         />
-        <div class={styles.icon}>{imageIcon}</div>
         <Text align='center'>
           Click to select <code>png</code> or <code>jpeg</code> files
         </Text>
