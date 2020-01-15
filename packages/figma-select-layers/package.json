@@ -1,7 +1,7 @@
 {
   "name": "figma-select-layers",
   "version": "0.0.0",
-  "description": "A Figma plugin to select layers based on similarity, name, or type",
+  "description": "A Figma plugin to select layers based on name, type, or similarity",
   "keywords": [
     "create-figma-plugin",
     "figma",
