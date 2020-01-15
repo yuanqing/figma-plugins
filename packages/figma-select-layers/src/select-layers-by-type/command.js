@@ -1,5 +1,5 @@
-import { commandFactory } from '../command-factory'
-import { checkLayerType } from './check-layer-type'
+import { commandFactory } from './utilities/command-factory'
+import { checkLayerType } from './utilities/check-layer-type'
 
 export const selectComponents = commandFactory(
   'component',

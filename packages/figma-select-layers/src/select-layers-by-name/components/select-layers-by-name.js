@@ -8,56 +8,37 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import {
-  addEventListener,
-  pluralize,
-  triggerEvent
-} from '@create-figma-plugin/utilities'
+import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
-import { filterLayersByName } from '../filter-layers-by-name'
 
 export function SelectLayersByName (initialState) {
   const { state, handleChange, handleSubmit, isInvalid } = useForm(
     initialState,
     {
-      transform: function (state) {
-        const { layers, layerName, exactMatch } = state
-        return {
-          ...state,
-          result: filterLayersByName(layers, layerName, exactMatch)
-        }
-      },
-      validate: function ({ result }) {
-        return result.length > 0
+      validate: function ({ layerName }) {
+        return layerName !== ''
       },
       onClose: function () {
         triggerEvent('CLOSE')
       },
-      onSubmit: function ({ exactMatch, hasSelection, layerName, result }) {
+      onSubmit: function ({ exactMatch, layerName }) {
         triggerEvent('SUBMIT', {
           exactMatch,
-          hasSelection,
-          layerName,
-          result
+          layerName
         })
       }
     }
   )
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({
-        hasSelection,
-        layers
-      }) {
-        handleChange({ hasSelection, layers })
+      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+        handleChange({ hasSelection })
       })
     },
     [handleChange]
   )
-  const { result, exactMatch, layerName, hasSelection } = state
-  const count = result.length
-  const scope = hasSelection ? 'within selection' : 'on page'
+  const { exactMatch, layerName, hasSelection } = state
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
@@ -82,9 +63,9 @@ export function SelectLayersByName (initialState) {
       </Button>
       <VerticalSpace space='small' />
       <Text muted align='center'>
-        {count === 0
-          ? `No matches ${scope}`
-          : `${count} ${pluralize(count, 'match', 'matches')} ${scope}`}
+        {hasSelection === true
+          ? 'Matching within selection'
+          : 'Matching on page'}
       </Text>
       <VerticalSpace space='large' />
     </Container>

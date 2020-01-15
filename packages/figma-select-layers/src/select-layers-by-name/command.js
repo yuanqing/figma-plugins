@@ -1,5 +1,6 @@
 import {
   addEventListener,
+  formatErrorMessage,
   formatSuccessMessage,
   getSelectedLayersOrAllLayers,
   loadSettings,
@@ -8,36 +9,38 @@ import {
   pluralize,
   saveSettings,
   showUI,
-  traverseLayer,
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
+import { filterLayersByName } from './utilities/filter-layers-by-name'
 
 export default async function () {
   const { selectLayersByName: settings } = await loadSettings(defaultSettings)
   onSelectionChange(function (selectedLayers) {
     triggerEvent('SELECTION_CHANGED', {
-      hasSelection: selectedLayers.length > 0,
-      layers: getLayerIdsAndNames()
+      hasSelection: selectedLayers.length > 0
     })
   })
   addEventListener('SUBMIT', async function ({
     exactMatch,
-    hasSelection,
     layerName,
-    result
+    layerType
   }) {
-    await saveSettings({ exactMatch, layerName })
-    const scope = hasSelection > 0 ? 'within selection' : 'on page'
-    const selection = result.map(function ({ id }) {
-      return figma.getNodeById(id)
-    })
-    figma.currentPage.selection = selection
-    figma.viewport.scrollAndZoomIntoView(selection)
+    await saveSettings({ exactMatch, layerName, layerType })
+    const scope =
+      figma.currentPage.selection.length === 0 ? 'on page' : 'within selection'
+    const layers = getSelectedLayersOrAllLayers()
+    const result = filterLayersByName(layers, layerName, layerType, exactMatch)
+    if (result.length === 0) {
+      figma.closePlugin(formatErrorMessage(`No layers match “${layerName}”`))
+      return
+    }
+    figma.currentPage.selection = result
+    figma.viewport.scrollAndZoomIntoView(result)
     figma.closePlugin(
       formatSuccessMessage(
-        `Selected ${mapNumberToWord(selection.length)} ${pluralize(
-          selection.length,
+        `Selected ${mapNumberToWord(result.length)} ${pluralize(
+          result.length,
           'layer'
         )} ${scope}`
       )
@@ -52,19 +55,7 @@ export default async function () {
     {
       layerName,
       exactMatch,
-      layers: getLayerIdsAndNames(),
       hasSelection: figma.currentPage.selection.length > 0
     }
   )
-}
-
-export function getLayerIdsAndNames () {
-  const result = []
-  const layers = getSelectedLayersOrAllLayers()
-  for (const layer of layers) {
-    traverseLayer(layer, function ({ id, name }) {
-      result.push({ id, name })
-    })
-  }
-  return result
 }

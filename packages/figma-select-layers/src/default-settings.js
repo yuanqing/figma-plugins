@@ -1,7 +1,8 @@
 export const defaultSettings = {
   selectLayersByName: {
     exactMatch: false,
-    layerName: ''
+    layerName: '',
+    layerType: null
   },
   selectSimilarLayers: {
     blendMode: true,

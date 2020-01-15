@@ -1,4 +1,4 @@
-export function filterLayersByName (layers, layerName, exactMatch) {
+export function filterLayersByName (layers, layerName, layerType, exactMatch) {
   if (layerName === '') {
     return []
   }
@@ -8,6 +8,9 @@ export function filterLayersByName (layers, layerName, exactMatch) {
     const matches = layer.name.match(regex)
     if (matches !== null) {
       if (exactMatch === true && layer.name !== matches[0]) {
+        continue
+      }
+      if (layerType !== null && layer.type !== layerType) {
         continue
       }
       result.push(layer)
