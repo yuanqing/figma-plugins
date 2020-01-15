@@ -41,6 +41,9 @@ export function Attributes ({
         </SelectableItem>
       )
       for (const key in object) {
+        if (keysBySearchTerm.includes(key) === false) {
+          continue
+        }
         // item
         const isDisabled = keysByReferenceLayerType.includes(key) === false
         result.push(

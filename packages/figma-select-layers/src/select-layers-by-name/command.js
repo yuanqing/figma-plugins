@@ -15,22 +15,21 @@ import { defaultSettings } from '../default-settings'
 import { filterLayersByName } from './utilities/filter-layers-by-name'
 
 export default async function () {
-  const { selectLayersByName: settings } = await loadSettings(defaultSettings)
+  const settings = await loadSettings(defaultSettings)
   onSelectionChange(function (selectedLayers) {
     triggerEvent('SELECTION_CHANGED', {
       hasSelection: selectedLayers.length > 0
     })
   })
-  addEventListener('SUBMIT', async function ({
-    exactMatch,
-    layerName,
-    layerType
-  }) {
-    await saveSettings({ exactMatch, layerName, layerType })
+  addEventListener('SUBMIT', async function ({ exactMatch, layerName }) {
+    await saveSettings({
+      ...settings,
+      selectLayersByName: { exactMatch, layerName }
+    })
     const scope =
       figma.currentPage.selection.length === 0 ? 'on page' : 'within selection'
     const layers = getSelectedLayersOrAllLayers()
-    const result = filterLayersByName(layers, layerName, layerType, exactMatch)
+    const result = filterLayersByName(layers, layerName, exactMatch)
     if (result.length === 0) {
       figma.closePlugin(formatErrorMessage(`No layers match “${layerName}”`))
       return
@@ -49,7 +48,7 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  const { layerName, exactMatch } = settings
+  const { layerName, exactMatch } = settings.selectLayersByName
   showUI(
     { width: 240, height: 164 },
     {

@@ -1,8 +1,7 @@
 export const defaultSettings = {
   selectLayersByName: {
     exactMatch: false,
-    layerName: '',
-    layerType: null
+    layerName: ''
   },
   selectSimilarLayers: {
     blendMode: true,
@@ -13,13 +12,13 @@ export const defaultSettings = {
       topRightRadius: true
     },
     dimension: {
-      width: true,
-      height: true
+      height: true,
+      width: true
     },
     effectsStyleId: true,
     fill: {
-      fills: true,
-      fillsStyleId: true
+      fillsStyleId: true,
+      fills: true
     },
     type: true,
     locked: true,
@@ -30,11 +29,13 @@ export const defaultSettings = {
       dashPattern: true,
       strokeAlign: true,
       strokeCap: true,
-      strokeJoin: true,
       strokesStyleId: true,
-      strokeWeight: true
+      strokeJoin: true,
+      strokeWeight: true,
+      strokes: true
     },
     text: {
+      textCase: true,
       fontName: true,
       fontSize: true,
       letterSpacing: true,
@@ -43,7 +44,6 @@ export const defaultSettings = {
       paragraphSpacing: true,
       textAlignHorizontal: true,
       textAlignVertical: true,
-      textCase: true,
       textDecoration: true,
       textStyleId: true
     },

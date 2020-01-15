@@ -43,76 +43,76 @@
         "menu": [
           {
             "name": "Select Components",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectComponents"
           },
           {
             "name": "Select Instance Layers",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectInstanceLayers"
           },
           "-",
           {
             "name": "Select Frames",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectFrames"
           },
           {
             "name": "Select Groups",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectGroups"
           },
           {
             "name": "Select Slices",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectSlices"
           },
           "-",
           {
             "name": "Select Vector Layers",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectVectorLayers"
           },
           {
             "name": "Select Rectangles",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectRectangles"
           },
           {
             "name": "Select Lines",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectLines"
           },
           {
             "name": "Select Ellipses",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectEllipses"
           },
           {
             "name": "Select Polygons",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectPolygons"
           },
           {
             "name": "Select Stars",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectStars"
           },
           {
             "name": "Select Boolean Groups",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectBooleanGroups"
           },
           "-",
           {
             "name": "Select Images",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectImages"
           },
           "-",
           {
             "name": "Select Text Layers",
-            "command": "select-layers-by-type/command.js",
+            "command": "select-layers-by-attribute/command.js",
             "handler": "selectTextLayers"
           }
         ]
@@ -120,17 +120,17 @@
       "-",
       {
         "name": "Select Mask Layers",
-        "command": "select-layers-by-state/command.js",
+        "command": "select-layers-by-attribute/command.js",
         "handler": "selectMaskLayers"
       },
       {
         "name": "Select Hidden Layers",
-        "command": "select-layers-by-state/command.js",
+        "command": "select-layers-by-attribute/command.js",
         "handler": "selectHiddenLayers"
       },
       {
         "name": "Select Locked Layers",
-        "command": "select-layers-by-state/command.js",
+        "command": "select-layers-by-attribute/command.js",
         "handler": "selectLockedLayers"
       },
       "-",

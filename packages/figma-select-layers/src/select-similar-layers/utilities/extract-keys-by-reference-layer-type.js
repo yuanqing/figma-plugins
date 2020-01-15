@@ -1,16 +1,20 @@
-import { extractKeys } from './extract-keys'
-
 export function extractKeysByReferenceLayerType (
   attributes,
   referenceLayerType
 ) {
-  return extractKeys(attributes, function (key) {
+  let result = []
+  for (const key in attributes) {
     if (
       (referenceLayerType === 'TEXT' && key === 'cornerRadius') ||
       (referenceLayerType !== 'TEXT' && key === 'text')
     ) {
-      return false
+      continue
     }
-    return true
-  })
+    result.push(key)
+    const object = attributes[key]
+    if (typeof object === 'object') {
+      result = result.concat(Object.keys(object))
+    }
+  }
+  return result
 }

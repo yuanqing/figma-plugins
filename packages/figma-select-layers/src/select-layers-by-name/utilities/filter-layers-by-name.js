@@ -1,19 +1,20 @@
-export function filterLayersByName (layers, layerName, layerType, exactMatch) {
+export function filterLayersByName (layers, layerName, exactMatch) {
   if (layerName === '') {
     return []
   }
-  const regex = new RegExp(layerName, 'i')
   const result = []
-  for (const layer of layers) {
-    const matches = layer.name.match(regex)
-    if (matches !== null) {
-      if (exactMatch === true && layer.name !== matches[0]) {
-        continue
+  if (exactMatch === true) {
+    for (const layer of layers) {
+      if (layer.name === layerName) {
+        result.push(layer)
       }
-      if (layerType !== null && layer.type !== layerType) {
-        continue
+    }
+  } else {
+    const regex = new RegExp(layerName, 'i')
+    for (const layer of layers) {
+      if (regex.test(layer.name) === true) {
+        result.push(layer)
       }
-      result.push(layer)
     }
   }
   return result

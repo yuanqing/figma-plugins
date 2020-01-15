@@ -12,20 +12,20 @@ export function commandFactory (label, filterCallback, stopTraversalCallback) {
     const layers = getLayers(filterCallback, stopTraversalCallback)
     const scope =
       figma.currentPage.selection.length > 0 ? 'within selection' : 'on page'
-    if (layers.length > 0) {
-      figma.currentPage.selection = layers
-      figma.viewport.scrollAndZoomIntoView(layers)
-      figma.closePlugin(
-        formatSuccessMessage(
-          `Selected ${mapNumberToWord(layers.length)} ${pluralize(
-            layers.length,
-            label
-          )} ${scope}`
-        )
-      )
+    if (layers.length === 0) {
+      figma.closePlugin(formatErrorMessage(`No ${label}s ${scope}`))
       return
     }
-    figma.closePlugin(formatErrorMessage(`No ${label}s ${scope}`))
+    figma.currentPage.selection = layers
+    figma.viewport.scrollAndZoomIntoView(layers)
+    figma.closePlugin(
+      formatSuccessMessage(
+        `Selected ${mapNumberToWord(layers.length)} ${pluralize(
+          layers.length,
+          label
+        )} ${scope}`
+      )
+    )
   }
 }
 
