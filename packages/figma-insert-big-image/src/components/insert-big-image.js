@@ -60,8 +60,8 @@ export function InsertBigImage () {
           onChange={handleFiles}
         />
         <div class={styles.icon}>{imageIcon}</div>
-        <Text>
-          Click to select a <code>png</code> or <code>jpeg</code> file
+        <Text align='center'>
+          Click to select <code>png</code> or <code>jpeg</code> files
         </Text>
       </div>
     </label>
@@ -71,7 +71,7 @@ export function InsertBigImage () {
         <div class={styles.loadingIndicator}>
           <LoadingIndicator />
         </div>
-        <Text>
+        <Text align='center'>
           {total === 1
             ? 'Processing image…'
             : `Processing image ${current} of ${total}`}
