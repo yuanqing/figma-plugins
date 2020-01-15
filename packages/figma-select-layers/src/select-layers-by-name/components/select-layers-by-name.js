@@ -64,10 +64,10 @@ export function SelectLayersByName (initialState) {
       <VerticalSpace space='small' />
       <Text muted align='center'>
         {hasSelection === true
-          ? 'Matching within selection'
-          : 'Matching on page'}
+          ? 'Matching layers within selection'
+          : 'Matching layers on page'}
       </Text>
-      <VerticalSpace space='large' />
+      <VerticalSpace space='extralarge' />
     </Container>
   )
 }
