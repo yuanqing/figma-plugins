@@ -12,7 +12,6 @@ Name | Description
 [**Insert Big Image**](packages/figma-insert-big-image) | Insert and retain the original resolution of big images
 [**Language Tester**](packages/figma-language-tester) | Test your UI in different languages
 [**Move Layers**](packages/figma-move-layers) | Precisely move layers
-[**Navigator**](packages/figma-navigator) | Navigate between components/frames on the page
 [**Organize Layers**](packages/figma-organize-layers) | Organize layers on the page
-[**Select Layers**](packages/figma-select-layers) | Select layers based on similarity, name, or type
+[**Select Layers**](packages/figma-select-layers) | Select layers based on name, type, or similarity
 [**Sort Layers**](packages/figma-sort-layers) | Sort layers by name or position
