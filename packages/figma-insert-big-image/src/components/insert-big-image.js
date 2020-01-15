@@ -15,16 +15,28 @@ import { splitImage } from '../utilities/split-image'
 import { trimExtension } from '../utilities/trim-extension'
 
 export function InsertBigImage () {
-  const [isLoading, setIsLoading] = useState(false)
-  async function handleChange (event) {
-    setIsLoading(true)
-    const file = event.target.files[0]
-    const image = await createImageFromFile(file)
-    const widths = computeDimensions(image.width)
-    const heights = computeDimensions(image.height)
-    const images = await splitImage(image, widths, heights)
-    const name = trimExtension(file.name)
-    triggerEvent('SUBMIT', { images, name })
+  const [total, setTotal] = useState(0)
+  const [current, setCurrent] = useState(null)
+  async function handleFiles (event) {
+    const files = event.target.files
+    const total = files.length
+    setTotal(total)
+    let current = 0
+    for (const file of files) {
+      current++
+      setCurrent(current)
+      const image = await createImageFromFile(file)
+      const widths = computeDimensions(image.width)
+      const heights = computeDimensions(image.height)
+      const images = await splitImage(image, widths, heights)
+      const name = trimExtension(file.name)
+      triggerEvent('INSERT_BIG_IMAGE', {
+        images,
+        name,
+        width: image.width,
+        isDone: current === total
+      })
+    }
   }
   function handleKeyDown (event) {
     if (event.keyCode === ESCAPE_KEY_CODE) {
@@ -37,14 +49,15 @@ export function InsertBigImage () {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [])
-  return isLoading === false ? (
+  return total === 0 ? (
     <label class={styles.container}>
       <div>
         <input
           class={styles.input}
           type='file'
           accept='image/png, image/jpeg'
-          onChange={handleChange}
+          multiple
+          onChange={handleFiles}
         />
         <div class={styles.icon}>{imageIcon}</div>
         <Text>
@@ -58,7 +71,11 @@ export function InsertBigImage () {
         <div class={styles.loadingIndicator}>
           <LoadingIndicator />
         </div>
-        <Text>Processing image…</Text>
+        <Text>
+          {total === 1
+            ? 'Processing image…'
+            : `Processing image ${current} of ${total}`}
+        </Text>
       </div>
     </div>
   )

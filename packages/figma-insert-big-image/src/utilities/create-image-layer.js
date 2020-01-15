@@ -1,8 +1,12 @@
-export function createImageLayer ([bytes, x, y, width, height]) {
+export function createImageLayer (
+  [bytes, x, y, width, height],
+  xOffset,
+  yOffset
+) {
   const rectangle = figma.createRectangle()
   rectangle.name = 'Image'
-  rectangle.x = x
-  rectangle.y = y
+  rectangle.x = x + xOffset
+  rectangle.y = y + yOffset
   rectangle.resize(width, height)
   const image = figma.createImage(bytes)
   rectangle.fills = [
