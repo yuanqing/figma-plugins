@@ -5,9 +5,9 @@ import {
   mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
-import { createComponent } from './create-component'
-import { isLayerWithinInstance } from '../utilities/is-layer-within-instance'
-import { OFFSET } from '../utilities/constants'
+import { createComponent } from './utilities/create-component'
+import { isLayerWithinInstance } from '../is-layer-within-instance'
+import { OFFSET } from '../constants'
 
 export default async function () {
   const layers = figma.currentPage.selection

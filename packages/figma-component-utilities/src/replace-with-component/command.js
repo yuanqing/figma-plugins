@@ -10,10 +10,10 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../utilities/default-settings'
-import { isLayerWithinInstance } from '../utilities/is-layer-within-instance'
-import { getComponents } from './get-components'
-import { getSelectedLayers } from './get-selected-layers'
+import { defaultSettings } from '../default-settings'
+import { isLayerWithinInstance } from '../is-layer-within-instance'
+import { getComponents } from './utilities/get-components'
+import { getSelectedLayers } from './utilities/get-selected-layers'
 
 export default async function () {
   if (figma.currentPage.selection.length === 0) {

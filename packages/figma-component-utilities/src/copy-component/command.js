@@ -5,7 +5,7 @@ import {
   mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
-import { OFFSET } from '../utilities/constants'
+import { OFFSET } from '../constants'
 
 export default async function () {
   if (figma.currentPage.selection.length === 0) {
