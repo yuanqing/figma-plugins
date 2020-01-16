@@ -33,7 +33,7 @@
     "preact": "^10.1.1"
   },
   "create-figma-plugin": {
-    "id": "figma-insert-big-image",
+    "id": "799646392992487942",
     "name": "Insert Big Image",
     "command": "command.js",
     "ui": "ui.js"
