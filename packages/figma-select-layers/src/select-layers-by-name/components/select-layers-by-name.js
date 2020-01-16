@@ -59,7 +59,7 @@ export function SelectLayersByName (initialState) {
       </Checkbox>
       <VerticalSpace space='medium' />
       <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
-        Select Layers
+        Select Layers by Name
       </Button>
       <VerticalSpace space='small' />
       <Text muted align='center'>
