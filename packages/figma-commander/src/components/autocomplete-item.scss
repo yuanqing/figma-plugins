@@ -1,0 +1,47 @@
+@import "@create-figma-plugin/ui/src/scss/constants";
+@import "@create-figma-plugin/ui/src/scss/text";
+
+.label {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 16px;
+  height: 32px;
+  color: $color-black-80;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:hover {
+    background-color: $color-selection-b;
+  }
+}
+
+.isChecked,
+.isChecked:hover {
+  background-color: $color-selection-a;
+}
+
+.isDisabled {
+  cursor: not-allowed;
+  opacity: $opacity-30;
+  background-color: $color-black-30;
+
+  &:hover {
+    background-color: $color-black-30;
+  }
+}
+
+.input {
+  display: none;
+}
+
+.text {
+  @include text-11-regular;
+  pointer-events: none;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

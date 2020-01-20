@@ -5,6 +5,7 @@ import { h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 import { computeAutocompleteItems } from '../utilities/compute-autocomplete-items'
 import { CommandTextbox } from './command-textbox'
+import { AutocompleteItem } from './autocomplete-item'
 import styles from './commander.scss'
 
 const defaultState = {
@@ -75,7 +76,7 @@ export function Commander (initialState) {
   )
 
   const handleAutocompleteItemClick = useCallback(
-    function (event) {
+    function (object, value, key, event) {
       const selectedItemId = event.target.getAttribute('data-id')
       executePlugin(selectedItemId)
     },
@@ -139,19 +140,16 @@ export function Commander (initialState) {
           index
         ) {
           return (
-            <h1
+            <AutocompleteItem
               key={index}
               data-value={value}
               data-id={id}
-              onClick={isDisabled === true ? null : handleAutocompleteItemClick}
-              style={{
-                color: selectedItemId === id ? 'white' : 'black',
-                backgroundColor: selectedItemId === id ? 'blue' : 'white',
-                opacity: isDisabled === true ? '.2' : '1'
-              }}
+              disabled={isDisabled === true}
+              value={selectedItemId === id}
+              onClick={handleAutocompleteItemClick}
             >
               {label}
-            </h1>
+            </AutocompleteItem>
           )
         })}
       </div>
