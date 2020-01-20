@@ -1,7 +1,7 @@
 /** @jsx h */
 import { computeNextValue } from '@create-figma-plugin/ui/src/components/textbox/utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '@create-figma-plugin/ui/src/components/textbox/utilities/is-keycode-character-generating'
-import { ESCAPE_KEY_CODE } from '@create-figma-plugin/utilities'
+import { ESCAPE_KEY_CODE } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
 import { validateCommandString } from '../utilities/validate-command-string'
@@ -33,6 +33,7 @@ export function CommandTextbox ({
           return
         }
         onChange({ [name]: '' })
+        event.stopPropagation()
         return
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
