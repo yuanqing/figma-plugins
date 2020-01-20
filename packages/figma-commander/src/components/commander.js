@@ -29,10 +29,10 @@ export function Commander (initialState) {
           ...state,
           autocompleteItems,
           selectedItemId:
-            autocompleteItems.length === 1 ||
-            (state.autocompleteItems.length === 0 &&
-              autocompleteItems.length > 0)
-              ? autocompleteItems[0].id
+            selectedItemId === null
+              ? autocompleteItems.length > 0
+                ? autocompleteItems[0].id
+                : null
               : selectedItemId
         }
       },
@@ -82,6 +82,16 @@ export function Commander (initialState) {
     [executePlugin]
   )
 
+  const handleCommandStringChange = useCallback(
+    function ({ commandString }) {
+      handleChange({
+        commandString,
+        selectedItemId: null
+      })
+    },
+    [handleChange]
+  )
+
   const { handleKeyDown: handleMenuKeyDown, menuElementRef } = useMenu({
     getSelectedItemElement: function (menuElement, selectedItem) {
       return menuElement.querySelector(`[data-id='${selectedItem}']`)
@@ -120,7 +130,7 @@ export function Commander (initialState) {
         name='commandString'
         placeholder='Enter command'
         value={commandString}
-        onChange={handleChange}
+        onChange={handleCommandStringChange}
       />
       <Divider />
       <div class={styles.autocompleteItems} ref={menuElementRef}>
