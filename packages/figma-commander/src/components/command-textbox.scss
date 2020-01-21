@@ -1,14 +1,36 @@
 @import "@create-figma-plugin/ui/src/scss/constants";
 @import "@create-figma-plugin/ui/src/scss/text";
 
+.commandTextbox {
+  display: flex;
+  align-items: center;
+}
+
 .input {
   @include text-11-regular;
+  flex-grow: 1;
   padding-left: 16px;
   width: 100%;
-  height: 32px;
+  height: 40px;
   color: $color-black-80;
 
   &::placeholder {
     color: $color-black-30;
+  }
+}
+
+.clear {
+  flex: 0 0 40px;
+  height: 40px;
+  padding: 12px;
+  color: $color-black-30;
+
+  &:hover {
+    color: $color-black-80;
+  }
+
+  &:focus {
+    outline: none;
+    color: $color-black-80;
   }
 }

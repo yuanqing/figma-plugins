@@ -13,7 +13,7 @@ export function AutocompleteItem ({
   onClick,
   ...rest
 }) {
-  const handleChange = useCallback(
+  const handleClick = useCallback(
     function (event) {
       const newValue = !(value === true)
       onClick({ [name]: newValue }, newValue, name, event)
@@ -37,7 +37,7 @@ export function AutocompleteItem ({
         name={name}
         checked={value === true}
         disabled={isDisabled === true}
-        onChange={handleChange}
+        onClick={handleClick}
         tabIndex='-1'
       />
       <div class={styles.text}>{children}</div>

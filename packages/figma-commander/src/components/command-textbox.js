@@ -1,7 +1,7 @@
 /** @jsx h */
 import { computeNextValue } from '@create-figma-plugin/ui/src/components/textbox/utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '@create-figma-plugin/ui/src/components/textbox/utilities/is-keycode-character-generating'
-import { ESCAPE_KEY_CODE } from '@create-figma-plugin/ui'
+import { crossIcon, ESCAPE_KEY_CODE } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
 import { validateCommandString } from '../utilities/validate-command-string'
@@ -16,6 +16,14 @@ export function CommandTextbox ({
   ...rest
 }) {
   const inputElementRef = useRef(null)
+
+  const handleClearClick = useCallback(
+    function () {
+      onChange({ [name]: '' })
+      inputElementRef.current.focus()
+    },
+    [name, onChange]
+  )
 
   const handleInput = useCallback(
     function () {
@@ -51,17 +59,24 @@ export function CommandTextbox ({
   }, [])
 
   return (
-    <input
-      {...rest}
-      ref={inputElementRef}
-      type='text'
-      name={name}
-      class={styles.input}
-      placeholder={placeholder}
-      value={value}
-      onInput={handleInput}
-      onKeyDown={handleKeyDown}
-      tabIndex='0'
-    />
+    <div class={styles.commandTextbox}>
+      <input
+        {...rest}
+        ref={inputElementRef}
+        type='text'
+        name={name}
+        class={styles.input}
+        placeholder={placeholder}
+        value={value}
+        onInput={handleInput}
+        onKeyDown={handleKeyDown}
+        tabIndex='0'
+      />
+      {value === null || value === '' ? null : (
+        <div class={styles.clear} onClick={handleClearClick} tabIndex='0'>
+          {crossIcon}
+        </div>
+      )}
+    </div>
   )
 }

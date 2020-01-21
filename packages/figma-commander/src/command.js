@@ -8,7 +8,7 @@ import { getPlugin } from './utilities/get-plugin'
 
 export default async function () {
   addEventListener('EXECUTE_PLUGIN', function ({ shorthand, value }) {
-    getPlugin(shorthand).implementation(value)
+    getPlugin(shorthand).command(value)
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

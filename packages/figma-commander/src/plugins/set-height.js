@@ -2,10 +2,8 @@ import { formatSuccessMessage } from '@create-figma-plugin/utilities'
 import { generateAutocompleteItems } from '../utilities/generate-autocomplete-items'
 import { NUMBER } from '../utilities/argument-types'
 
-const shorthand = 'h'
-
 export const setHeight = {
-  shorthand,
+  shorthand: 'h',
   validate: [NUMBER],
   getAutocompleteItems: function (values, { hasSelection }) {
     if (values.length === 0) {
@@ -14,7 +12,6 @@ export const setHeight = {
     const value = values[0]
     return generateAutocompleteItems(value, function (value) {
       return {
-        shorthand,
         id: `setHeight-${value}`,
         label: `Set height to ${value}`,
         isDisabled: hasSelection === false,
@@ -22,10 +19,12 @@ export const setHeight = {
       }
     })
   },
-  implementation: function (height) {
+  command: function (height) {
     for (const layer of figma.currentPage.selection) {
       layer.resize(layer.width, height)
     }
-    figma.notify(formatSuccessMessage(`Set height to ${height}`))
+    figma.notify(formatSuccessMessage(`Set height to ${height}`), {
+      timeout: 300
+    })
   }
 }

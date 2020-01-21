@@ -1,10 +1,9 @@
 import { plugins } from '../plugins/plugins'
 
-export const shorthands = Object.keys(plugins)
-  .reduce(function (result, key) {
-    result.push(plugins[key].shorthand)
-    return result
-  }, [])
+export const shorthands = plugins
+  .map(function ({ shorthand }) {
+    return shorthand
+  })
   .sort(function (a, b) {
     if (a.length !== b.length) {
       return b.length - a.length

@@ -17,6 +17,7 @@ const defaultState = {
 export function Commander (initialState) {
   const { state, handleChange } = useForm(
     {
+      isCommandTextboxFocused: true,
       ...initialState,
       ...defaultState
     },
@@ -40,14 +41,17 @@ export function Commander (initialState) {
       onClose: function () {
         triggerEvent('CLOSE')
       },
-      onSubmit: function ({ selectedItemId }) {
+      onSubmit: function ({ selectedItemId }, event) {
+        // Clear only if `shift` was not pressed
+        const clearCommandString = event.shiftKey === false
         if (selectedItemId === null) {
           executePlugin(
-            autocompleteItems.length > 0 ? autocompleteItems[0].id : null
+            autocompleteItems.length > 0 ? autocompleteItems[0].id : null,
+            clearCommandString
           )
           return
         }
-        executePlugin(selectedItemId)
+        executePlugin(selectedItemId, clearCommandString)
       }
     }
   )
@@ -55,7 +59,7 @@ export function Commander (initialState) {
   const { autocompleteItems, commandString, selectedItemId } = state
 
   const executePlugin = useCallback(
-    function (selectedItemId) {
+    function (selectedItemId, clearCommandString) {
       if (selectedItemId === null) {
         return
       }
@@ -70,7 +74,9 @@ export function Commander (initialState) {
       }
       const { shorthand, value } = selectedItem
       triggerEvent('EXECUTE_PLUGIN', { shorthand, value })
-      handleChange(defaultState)
+      if (clearCommandString === true) {
+        handleChange(defaultState)
+      }
     },
     [autocompleteItems, handleChange]
   )
@@ -78,7 +84,8 @@ export function Commander (initialState) {
   const handleAutocompleteItemClick = useCallback(
     function (object, value, key, event) {
       const selectedItemId = event.target.getAttribute('data-id')
-      executePlugin(selectedItemId)
+      // Clear only if `shift` was not pressed
+      executePlugin(selectedItemId, event.shiftKey === false)
     },
     [executePlugin]
   )
@@ -126,7 +133,7 @@ export function Commander (initialState) {
   )
 
   return (
-    <div>
+    <label>
       <CommandTextbox
         name='commandString'
         placeholder='Enter command'
@@ -153,6 +160,6 @@ export function Commander (initialState) {
           )
         })}
       </div>
-    </div>
+    </label>
   )
 }

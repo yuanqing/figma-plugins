@@ -1,7 +1,6 @@
 import { plugins } from '../plugins/plugins'
 
-const object = Object.keys(plugins).reduce(function (result, key) {
-  const plugin = plugins[key]
+const object = plugins.reduce(function (result, plugin) {
   result[plugin.shorthand] = plugin
   return result
 }, {})
