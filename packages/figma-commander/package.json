@@ -36,12 +36,7 @@
   "create-figma-plugin": {
     "id": "figma-commander",
     "name": "Commander",
-    "menu": [
-      {
-        "name": "Commander",
-        "command": "command.js",
-        "ui": "ui.js"
-      }
-    ]
+    "command": "command.js",
+    "ui": "ui.js"
   }
 }
