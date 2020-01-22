@@ -7,8 +7,9 @@ export function computeAutocompleteItems (commandString, state) {
   if (shorthand === null) {
     return []
   }
-  return getPlugin(shorthand)
-    .getAutocompleteItems(castValues(values), state)
+  const plugin = getPlugin(shorthand)
+  return plugin
+    .getAutocompleteItems(castValues(values, plugin.argumentTypes), state)
     .map(function (autocompleteItem) {
       return {
         ...autocompleteItem,

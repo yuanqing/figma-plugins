@@ -4,12 +4,12 @@ import { NUMBER } from '../utilities/argument-types'
 
 export const setWidth = {
   shorthand: 'w',
-  validate: [NUMBER],
+  argumentTypes: [NUMBER],
   getAutocompleteItems: function (values, { hasSelection }) {
     if (values.length === 0) {
       return []
     }
-    const value = values[0]
+    const value = Math.max(values[0], 0)
     return generateAutocompleteItems(value, function (value) {
       return {
         id: `setWidth-${value}`,

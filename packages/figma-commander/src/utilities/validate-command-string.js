@@ -1,4 +1,4 @@
-import { isValidNumericInput } from '@create-figma-plugin/utilities/src/number'
+import { isValidNumericInput } from '@create-figma-plugin/utilities'
 import { getPlugin } from './get-plugin'
 import { parseCommandString } from './parse-command-string'
 import { NUMBER } from './argument-types'
@@ -8,17 +8,23 @@ export function validateCommandString (commandString) {
   if (shorthand === null) {
     return false
   }
-  const validate = getPlugin(shorthand).validate
-  if (typeof validate === 'function') {
-    return validate(values)
+  const { argumentTypes } = getPlugin(shorthand)
+  if (values.length > argumentTypes.length) {
+    return false
+  }
+  if (
+    values.length === argumentTypes.length &&
+    commandString[commandString.length - 1] === ' '
+  ) {
+    return false
+  }
+  if (typeof argumentTypes === 'function') {
+    return argumentTypes(values)
   }
   let result = true
   values.forEach(function (value, index) {
-    const argumentType = validate[index]
-    if (
-      typeof argumentType === 'undefined' ||
-      (argumentType === NUMBER && isValidNumericInput(value) === false)
-    ) {
+    const argumentType = argumentTypes[index]
+    if (argumentType === NUMBER && isValidNumericInput(value) === false) {
       result = false
     }
   })

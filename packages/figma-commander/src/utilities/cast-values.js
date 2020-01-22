@@ -1,13 +1,17 @@
-const nonDigitRegex = /[^\d.]/
+import { evaluateNumericExpression } from '@create-figma-plugin/utilities'
+import { NUMBER } from './argument-types'
 
-export function castValues (values) {
+export function castValues (values, argumentTypes) {
   const result = []
-  for (const value of values) {
-    if (nonDigitRegex.test(value) === true) {
-      result.push(value)
-      continue
+  values.forEach(function (value, index) {
+    if (argumentTypes[index] === NUMBER) {
+      const number = evaluateNumericExpression(value)
+      if (typeof number === 'undefined') {
+        return
+      }
+      result.push(number)
     }
-    result.push(parseFloat(value))
-  }
+    result.push(value)
+  })
   return result
 }
