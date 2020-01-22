@@ -1,26 +1,4 @@
-import {
-  getAbsolutePosition,
-  setAbsolutePosition
-} from '@create-figma-plugin/utilities'
 import { commandFactory } from '../command-factory'
+import { distributeLayersLeft } from './distribute-layers-left'
 
-export default commandFactory({
-  direction: 'left',
-  sortLayers: function (a, b) {
-    const aAbsolute = getAbsolutePosition(a)
-    const bAbsolute = getAbsolutePosition(b)
-    const difference = aAbsolute.x - bAbsolute.x
-    return difference !== 0 ? difference : aAbsolute.y - bAbsolute.y
-  },
-  distributeLayers: function (layers, space) {
-    let x = null
-    for (const layer of layers) {
-      if (x === null) {
-        x = layer.absoluteTransform[0][2] + layer.width + space
-        continue
-      }
-      setAbsolutePosition(layer, { x })
-      x = x + layer.width + space
-    }
-  }
-})
+export default commandFactory('left', distributeLayersLeft)
