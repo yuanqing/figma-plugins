@@ -13,6 +13,7 @@ export function computeAutocompleteItems (commandString, state) {
     .map(function (autocompleteItem) {
       return {
         ...autocompleteItem,
+        id: `${shorthand}-${autocompleteItem.value}`,
         shorthand
       }
     })

@@ -9,10 +9,8 @@ export const setHeight = {
     if (values.length === 0) {
       return []
     }
-    const value = Math.max(values[0], 0)
-    return generateAutocompleteItems(value, function (value) {
+    return generateAutocompleteItems(Math.max(values[0], 0), function (value) {
       return {
-        id: `setHeight-${value}`,
         label: `Set height to ${value}`,
         isDisabled: hasSelection === false,
         value
