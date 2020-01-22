@@ -85,9 +85,13 @@ export function Commander (initialState) {
     function (object, value, key, event) {
       const selectedItemId = event.target.getAttribute('data-id')
       // Clear only if `shift` was not pressed
-      executePlugin(selectedItemId, event.shiftKey === false)
+      const clearCommandString = event.shiftKey === false
+      if (clearCommandString === false) {
+        handleChange({ selectedItemId })
+      }
+      executePlugin(selectedItemId, clearCommandString)
     },
-    [executePlugin]
+    [executePlugin, handleChange]
   )
 
   const handleCommandStringChange = useCallback(
