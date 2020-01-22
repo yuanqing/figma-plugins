@@ -11,17 +11,23 @@ export const shorthands = plugins
     return a.localeCompare(b)
   })
 
-const whitespaceRegex = /\s+/
-
 export function parseCommandString (commandString) {
   const trimmed = commandString.trim()
   if (trimmed !== '') {
+    // exact match
     for (const shorthand of shorthands) {
       if (trimmed.indexOf(shorthand) === 0) {
-        const values = commandString.substring(shorthand.length).trim()
-        return {
-          shorthand,
-          values: values === '' ? [] : values.split(whitespaceRegex)
+        return { shorthand, values: extractValues(shorthand, commandString) }
+      }
+    }
+    // partial match
+    for (const shorthand of shorthands) {
+      let i = -1
+      while (++i < shorthand.length) {
+        if (
+          trimmed.indexOf(shorthand.substring(0, shorthand.length - i)) === 0
+        ) {
+          return { shorthand, values: extractValues(shorthand, commandString) }
         }
       }
     }
@@ -30,4 +36,11 @@ export function parseCommandString (commandString) {
     shorthand: null,
     values: []
   }
+}
+
+const whitespaceRegex = /\s+/
+
+function extractValues (shorthand, commandString) {
+  const values = commandString.substring(shorthand.length).trim()
+  return values === '' ? [] : values.split(whitespaceRegex)
 }

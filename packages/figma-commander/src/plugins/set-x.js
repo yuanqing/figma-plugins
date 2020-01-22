@@ -1,18 +1,24 @@
-import { formatSuccessMessage } from '@create-figma-plugin/utilities'
 import { generateAutocompleteItems } from '../utilities/generate-autocomplete-items'
 import { NUMBER } from '../utilities/argument-types'
 
 export const setX = {
   shorthand: 'x',
   argumentTypes: [NUMBER],
-  getAutocompleteItems: function (values, { hasSelection }) {
+  getAutocompleteItems: function (values, { selectedLayers }) {
+    const isDisabled = selectedLayers.length === 0
     if (values.length === 0) {
-      return []
+      return [
+        {
+          label: 'Set X to 0',
+          isDisabled,
+          value: 0
+        }
+      ]
     }
     return generateAutocompleteItems(values[0], function (value) {
       return {
         label: `Set X to ${value}`,
-        isDisabled: hasSelection === false,
+        isDisabled,
         value
       }
     })
@@ -21,8 +27,6 @@ export const setX = {
     for (const layer of figma.currentPage.selection) {
       layer.x = x
     }
-    figma.notify(formatSuccessMessage(`Set X to ${x}`), {
-      timeout: 300
-    })
+    return { successMessage: `Set X to ${x}` }
   }
 }

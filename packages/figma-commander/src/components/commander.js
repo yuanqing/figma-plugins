@@ -23,9 +23,9 @@ export function Commander (initialState) {
     },
     {
       transform: function (state) {
-        const { commandString, hasSelection, selectedItemId } = state
+        const { commandString, selectedItemId, selectedLayers } = state
         const autocompleteItems = computeAutocompleteItems(commandString, {
-          hasSelection
+          selectedLayers
         })
         return {
           ...state,
@@ -129,8 +129,10 @@ export function Commander (initialState) {
 
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleChange({ hasSelection })
+      return addEventListener('SELECTION_CHANGED', function ({
+        selectedLayers
+      }) {
+        handleChange({ selectedLayers })
       })
     },
     [handleChange]

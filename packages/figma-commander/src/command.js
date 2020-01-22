@@ -1,5 +1,7 @@
 import {
   addEventListener,
+  extractAttributes,
+  formatSuccessMessage,
   onSelectionChange,
   showUI,
   triggerEvent
@@ -8,18 +10,24 @@ import { getPlugin } from './utilities/get-plugin'
 
 export default async function () {
   addEventListener('EXECUTE_PLUGIN', function ({ shorthand, value }) {
-    getPlugin(shorthand).command(value)
+    const result = getPlugin(shorthand).command(value)
+    if (result !== null) {
+      figma.notify(formatSuccessMessage(result.successMessage), {
+        timeout: 300
+      })
+    }
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  onSelectionChange(function (selectedLayers) {
+  onSelectionChange(function () {
     triggerEvent('SELECTION_CHANGED', {
-      hasSelection: selectedLayers.length > 0
+      selectedLayers: getSelectedLayers()
     })
   })
-  showUI(
-    { width: 240, height: 243 },
-    { hasSelection: figma.currentPage.selection.length !== 0 }
-  )
+  showUI({ width: 240, height: 243 }, { selectedLayers: getSelectedLayers() })
+}
+
+function getSelectedLayers () {
+  return extractAttributes(figma.currentPage.selection, ['id', 'name'])
 }
