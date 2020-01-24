@@ -104,3 +104,10 @@ export const selectLockedLayers = commandFactory('locked layer', function (
 ) {
   return layer.locked === true
 })
+
+export const selectLayersWithExports = commandFactory(
+  ['layer with export settings', 'layers with export settings'],
+  function (layer) {
+    return layer.exportSettings.length > 0
+  }
+)

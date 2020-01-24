@@ -133,6 +133,11 @@
         "command": "select-layers-by-attribute/command.js",
         "handler": "selectLockedLayers"
       },
+      {
+        "name": "Select Layers With Exports",
+        "command": "select-layers-by-attribute/command.js",
+        "handler": "selectLayersWithExports"
+      },
       "-",
       {
         "name": "Select Similar Layers",
