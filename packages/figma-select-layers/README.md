@@ -31,9 +31,9 @@ Selects layers of a particular type:
 - Image
 - Text Layer
 
-### Select Mask / Hidden / Locked Layers
+### Select Mask Layers / Hidden Layers / Locked Layers / Layers With Exports
 
-Selects layers that are masks, hidden, or locked.
+Selects layers with the specified attribute.
 
 ### Select Similar Layers
 
