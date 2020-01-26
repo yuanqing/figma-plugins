@@ -1,4 +1,4 @@
-import { commandFactory } from '../command-factory'
-import { distributeLayersUp } from './distribute-layers-up'
+import { commandFactory } from '../utilities/command-factory'
+import { distributeLayersUp } from './utilities/distribute-layers-up'
 
 export default commandFactory('up', distributeLayersUp)

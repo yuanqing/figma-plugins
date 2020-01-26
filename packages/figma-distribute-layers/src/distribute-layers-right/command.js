@@ -1,4 +1,4 @@
-import { commandFactory } from '../command-factory'
-import { distributeLayersRight } from './distribute-layers-right'
+import { commandFactory } from '../utilities/command-factory'
+import { distributeLayersRight } from './utilities/distribute-layers-right'
 
 export default commandFactory('right', distributeLayersRight)
