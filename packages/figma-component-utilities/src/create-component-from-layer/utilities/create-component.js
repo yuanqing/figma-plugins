@@ -1,4 +1,6 @@
 import { cloneObject, insertBeforeLayer } from '@create-figma-plugin/utilities'
+import { copyAttributes } from './copy-attributes'
+import { getReferenceLayer } from './get-reference-layer'
 
 export function createComponent (layer) {
   const component = figma.createComponent()
@@ -6,33 +8,29 @@ export function createComponent (layer) {
   component.resizeWithoutConstraints(layer.width, layer.height)
   component.x = layer.absoluteTransform[0][2]
   component.y = layer.absoluteTransform[1][2]
-  // Copy `exportSettings`
-  if (layer.exportSettings.length > 0) {
-    component.exportSettings = cloneObject(layer.exportSettings)
-  }
+  component.fills = []
   // Copy either `layer` itself or `layer.children` into `component`
-  if (typeof layer.children !== 'undefined') {
+  if (
+    (layer.type === 'FRAME' ||
+      layer.type === 'GROUP' ||
+      layer.type === 'INSTANCE') &&
+    typeof layer.children !== 'undefined'
+  ) {
     for (const childLayer of layer.children) {
       component.appendChild(childLayer.clone())
     }
+    copyAttributes(layer, component)
   } else {
     const clone = layer.clone()
     component.appendChild(clone)
     clone.x = 0
     clone.y = 0
+    if (clone.exportSettings.length > 0) {
+      component.exportSettings = cloneObject(clone.exportSettings)
+      clone.exportSettings = []
+    }
   }
   const referenceLayer = getReferenceLayer(layer)
   insertBeforeLayer(component, referenceLayer)
   return component
-}
-
-function getReferenceLayer (layer) {
-  const parentType = layer.parent.type
-  if (parentType === 'PAGE') {
-    return layer
-  }
-  if (parentType === 'COMPONENT') {
-    return layer.parent
-  }
-  return getReferenceLayer(layer.parent)
 }

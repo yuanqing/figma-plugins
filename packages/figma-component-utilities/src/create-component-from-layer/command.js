@@ -6,8 +6,8 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 import { createComponent } from './utilities/create-component'
-import { isLayerWithinInstance } from '../is-layer-within-instance'
-import { OFFSET } from '../constants'
+import { isLayerWithinInstance } from '../utilities/is-layer-within-instance'
+import { OFFSET } from '../utilities/constants'
 
 export default async function () {
   const layers = figma.currentPage.selection
@@ -18,7 +18,7 @@ export default async function () {
   const newSelection = []
   for (const layer of layers) {
     const component =
-      layer.type !== 'COMPONENT' ? createComponent(layer) : layer
+      layer.type === 'COMPONENT' ? layer : createComponent(layer)
     if (isLayerWithinInstance(layer) === false) {
       const instance = component.createInstance()
       instance.x = layer.x
