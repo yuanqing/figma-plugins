@@ -10,7 +10,7 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../default-settings'
+import { defaultSettings } from '../utilities/default-settings'
 import { getSimilarLayers } from './utilities/get-similar-layers'
 
 export default async function () {

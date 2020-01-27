@@ -35,6 +35,10 @@ Selects layers of a particular type:
 
 Selects layers with the specified attribute.
 
+### Select Parent Layers / Root Layers
+
+Selects layers at the specified hierarchy.
+
 ### Select Similar Layers
 
 Selects layers with one or more attributes that are identical to the one currently-selected layer.

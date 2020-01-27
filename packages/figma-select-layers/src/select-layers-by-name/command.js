@@ -11,7 +11,7 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../default-settings'
+import { defaultSettings } from '../utilities/default-settings'
 import { filterLayersByName } from './utilities/filter-layers-by-name'
 
 export default async function () {
