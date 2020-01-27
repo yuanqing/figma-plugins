@@ -47,7 +47,6 @@ export function SelectLayersByName (initialState) {
         placeholder='Layer name'
         value={layerName}
         onChange={handleChange}
-        focused
       />
       <VerticalSpace space='small' />
       <Checkbox

@@ -33,7 +33,7 @@ export function SetApiKey (initialState) {
       <VerticalSpace space='large' />
       <Text muted>API Key</Text>
       <VerticalSpace space='small' />
-      <Textbox name='apiKey' value={apiKey} onChange={handleChange} focused />
+      <Textbox name='apiKey' value={apiKey} onChange={handleChange} />
       <VerticalSpace space='small' />
       <Text>
         <a

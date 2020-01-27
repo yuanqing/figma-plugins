@@ -112,7 +112,6 @@ export function ReplaceWithComponent (initialState) {
         onChange={handleChange}
         placeholder='Search'
         value={searchTerm}
-        focused
       />
       <Divider />
       {filteredComponents.length === 0 ? (

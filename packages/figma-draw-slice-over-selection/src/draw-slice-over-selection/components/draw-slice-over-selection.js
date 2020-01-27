@@ -53,7 +53,6 @@ export function DrawSliceOverSelection (initialState) {
         value={padding}
         minimum={0}
         onChange={handleChange}
-        focused
       />
       <VerticalSpace space='extraLarge' />
       <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>

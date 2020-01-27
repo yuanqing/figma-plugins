@@ -75,7 +75,6 @@ export function SetLayerSize (initialState) {
           value={width === MIXED ? null : width}
           minimum={0}
           onChange={handleChange}
-          focused
           disabled={hasSelection === false}
         />
         <TextboxNumeric

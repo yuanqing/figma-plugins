@@ -53,7 +53,6 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
         icon={icon}
         value={space}
         onChange={handleChange}
-        focused
       />
       <VerticalSpace space='extraLarge' />
       <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>

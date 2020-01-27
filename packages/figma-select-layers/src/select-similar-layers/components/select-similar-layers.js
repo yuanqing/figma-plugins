@@ -113,7 +113,6 @@ export function SelectSimilarLayers (initialState) {
             placeholder='Search'
             value={searchTerm}
             onChange={handleChange}
-            focused
           />
         </div>
         {searchTerm === '' ? (
