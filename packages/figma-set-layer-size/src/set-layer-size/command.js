@@ -9,7 +9,7 @@ import {
   triggerEvent
 } from '@create-figma-plugin/utilities'
 import { computeDimensions } from './utilities/compute-dimensions'
-import { defaultSettings } from '../default-settings'
+import { defaultSettings } from '../utilities/default-settings'
 import { getSelectedLayers } from './utilities/get-selected-layers'
 import { setLayerSize } from './utilities/set-layer-size'
 
