@@ -1,5 +1,4 @@
 /** @jsx h */
-import { triggerEvent } from '@create-figma-plugin/utilities'
 import {
   Button,
   Container,
@@ -8,6 +7,7 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
+import { triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 
 export function SmartRenameLayers (initialState) {
