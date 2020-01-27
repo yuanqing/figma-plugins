@@ -58,7 +58,7 @@ export function InsertBigImage (initialState) {
         })
       }
     },
-    [insertAs2x]
+    [handleChange, insertAs2x]
   )
   return (
     <Container space='medium'>
