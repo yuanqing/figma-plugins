@@ -25,14 +25,22 @@ export default async function () {
   addEventListener('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const { horizontalOffset, verticalOffset } = settings
-    if (horizontalOffset === 0 && verticalOffset === 0) {
+    const isHorizontalOffsetValid =
+      horizontalOffset !== 0 && horizontalOffset !== null
+    const isVerticalOffsetValid =
+      verticalOffset !== 0 && verticalOffset !== null
+    if (isHorizontalOffsetValid === false && isVerticalOffsetValid === false) {
       figma.closePlugin()
       return
     }
     const selectedLayers = figma.currentPage.selection
     for (const layer of selectedLayers) {
-      layer.x += horizontalOffset
-      layer.y += verticalOffset
+      if (isHorizontalOffsetValid === true) {
+        layer.x += horizontalOffset
+      }
+      if (isVerticalOffsetValid === true) {
+        layer.y += verticalOffset
+      }
     }
     figma.closePlugin(
       formatSuccessMessage(

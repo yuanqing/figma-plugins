@@ -62,14 +62,13 @@ export function MoveLayers (initialState) {
         <TextboxNumeric
           name='horizontalOffset'
           icon={moveRightIcon}
-          value={horizontalOffset}
+          value={horizontalOffset === null ? '' : horizontalOffset}
           onChange={handleChange}
-          focused
         />
         <TextboxNumeric
           name='verticalOffset'
           icon={moveDownIcon}
-          value={verticalOffset}
+          value={verticalOffset === null ? '' : verticalOffset}
           onChange={handleChange}
         />
       </Columns>
