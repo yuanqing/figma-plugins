@@ -1,7 +1,7 @@
 /** @jsx h */
+import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import style from './preview.scss'
-import classnames from '@sindresorhus/class-names'
 
 export const INVALID_SETTINGS = 'INVALID_SETTINGS'
 export const NO_TEXT_LAYERS = 'NO_TEXT_LAYERS'
@@ -14,7 +14,7 @@ export function Preview ({ items }) {
     <div class={style.preview}>
       <div class={style.inner}>
         {items === NO_TEXT_LAYERS ? (
-          <div class={style.empty}>Select a text layer</div>
+          <div class={style.empty}>Select one or more text layers</div>
         ) : items.length === 0 ? (
           <div class={style.empty}>No currencies in selection</div>
         ) : (

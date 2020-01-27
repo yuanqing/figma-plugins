@@ -2,9 +2,6 @@
 @import "@create-figma-plugin/ui/src/scss/text";
 
 .preview {
-  // reset
-  box-sizing: border-box;
-
   @include text-11-regular;
   cursor: default;
   user-select: none;
@@ -40,9 +37,6 @@
 
 .original,
 .result {
-  // reset
-  box-sizing: border-box;
-
   width: 104px;
   display: inline-block;
   white-space: nowrap;

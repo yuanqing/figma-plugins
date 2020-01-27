@@ -1,6 +1,5 @@
 import {
   addEventListener,
-  extractAttributes,
   formatSuccessMessage,
   loadFonts,
   loadSettings,
@@ -13,7 +12,7 @@ import { defaultSettings } from '../utilities/default-settings'
 import { getTextLayers } from '../utilities/get-text-layers'
 
 export default async function () {
-  const layers = getLayers()
+  const layers = getTextLayers()
   const {
     targetCurrency,
     roundNumbers,
@@ -21,7 +20,7 @@ export default async function () {
     ...settings
   } = await loadSettings(defaultSettings)
   onSelectionChange(function () {
-    triggerEvent('SELECTION_CHANGED', { layers: getLayers() })
+    triggerEvent('SELECTION_CHANGED', { layers: getTextLayers() })
   })
   addEventListener('SUBMIT', async function ({
     layers,
@@ -58,8 +57,4 @@ export default async function () {
       locale
     }
   )
-}
-
-function getLayers () {
-  return extractAttributes(getTextLayers(), ['id', 'characters'])
 }
