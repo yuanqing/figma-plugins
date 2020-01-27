@@ -25,7 +25,8 @@
     "watch": "create-figma-plugin-build --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "*"
+    "@create-figma-plugin/utilities": "*",
+    "array-shuffle": "^1.0.1"
   },
   "create-figma-plugin": {
     "id": "767379414704079825",
@@ -33,26 +34,32 @@
     "menu": [
       {
         "name": "Sort Layers by Name",
-        "command": "commands/sort-layers-by-name.js"
+        "command": "sort-layers-by-name/command.js"
       },
-      "-",
       {
         "name": "Sort Layers by X Position",
-        "command": "commands/sort-layers-by-x-position.js"
+        "command": "sort-layers-by-x-position/command.js"
       },
       {
         "name": "Sort Layers by Y Position",
-        "command": "commands/sort-layers-by-y-position.js"
+        "command": "sort-layers-by-y-position/command.js"
       },
-      "-",
       {
         "name": "Smart Sort Layers",
-        "command": "commands/smart-sort-layers.js"
+        "command": "smart-sort-layers/command.js"
+      },
+      {
+        "name": "Reverse Layer Sort Order",
+        "command": "reverse-layer-sort-order/command.js"
+      },
+      {
+        "name": "Randomize Layer Sort Order",
+        "command": "randomize-layer-sort-order/command.js"
       },
       "-",
       {
         "name": "Sort Pages",
-        "command": "commands/sort-pages.js"
+        "command": "sort-pages/command.js"
       }
     ]
   }

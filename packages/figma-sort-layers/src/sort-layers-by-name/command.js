@@ -1,5 +1,5 @@
 import { sortLayersByName } from '@create-figma-plugin/utilities'
-import { commandFactory } from '../command-factory'
+import { commandFactory } from '../utilities/command-factory'
 
 export default commandFactory({
   sortLayers: sortLayersByName,

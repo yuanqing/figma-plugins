@@ -22,9 +22,17 @@ Sort the selected layers by their Y position.
 
 Sort the selected layers by their X and Y position while maintaining their relative stacking order on the page.
 
+### Reverse Layer Sort Order
+
+Reverse the sort order of the selected layers.
+
+### Randomize Layer Sort Order
+
+Randomize the sort order of the selected layers.
+
 ### Sort Pages
 
-Sort pages of the current document in alphabetical order.
+Sort the pages of the current document in alphabetical order.
 
 ## License
 

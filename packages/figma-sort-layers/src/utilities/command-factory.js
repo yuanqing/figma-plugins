@@ -8,20 +8,18 @@ import {
 export function commandFactory ({ sortLayers, successMessage }) {
   return function () {
     const selection = figma.currentPage.selection
-    const layer = selection[0]
     if (
       selection.length === 0 ||
       (selection.length === 1 &&
-        layer.type !== 'BOOLEAN_OPERATION' &&
-        layer.type !== 'FRAME' &&
-        layer.type !== 'GROUP')
+        typeof selection[0].children !== 'undefined' &&
+        selection[0].children.length < 2)
     ) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
     }
     const groups =
       selection.length === 1
-        ? [selection[0].children]
+        ? [selection[0].children.slice().reverse()]
         : groupSiblingLayers(selection)
     let didChange = false
     for (const layers of groups) {
