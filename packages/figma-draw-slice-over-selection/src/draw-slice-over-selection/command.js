@@ -8,8 +8,8 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { calculateMaximumBounds } from './utilities/calculate-maximum-bounds'
-import { defaultSettings } from '../default-settings'
+import { defaultSettings } from '../utilities/default-settings'
+import { drawSliceOverSelection } from './utilities/draw-slice-over-selection'
 
 export default async function () {
   if (figma.currentPage.selection.length === 0) {
@@ -25,15 +25,7 @@ export default async function () {
   addEventListener('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const { padding } = settings
-    const maximumBounds = calculateMaximumBounds(figma.currentPage.selection)
-    const slice = figma.createSlice()
-    const width = maximumBounds[1].x - maximumBounds[0].x + 2 * padding
-    const height = maximumBounds[1].y - maximumBounds[0].y + 2 * padding
-    slice.x = maximumBounds[0].x - padding
-    slice.y = maximumBounds[0].y - padding
-    slice.resize(width, height)
-    slice.name = '@SliceOverSelection'
-    slice.locked = true
+    drawSliceOverSelection(padding)
     figma.closePlugin(formatSuccessMessage('Drew slice over selection'))
   })
   addEventListener('CLOSE', function () {
