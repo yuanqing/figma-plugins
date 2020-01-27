@@ -85,10 +85,10 @@ export function InsertBigImage (initialState) {
       <VerticalSpace space='small' />
       <Text align='center' muted>
         {total === 0
-          ? 'JPEG, PNG'
+          ? 'Supported formats: JPEG, PNG'
           : total === 1
           ? 'Processing image…'
-          : `Processing image ${currentIndex} of ${total}`}
+          : `Processing image ${currentIndex} of ${total}…`}
       </Text>
       <VerticalSpace space='large' />
     </Container>
