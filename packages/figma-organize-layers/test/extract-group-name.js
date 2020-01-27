@@ -1,5 +1,5 @@
 import test from 'ava'
-import { extractGroupName } from '../src/organize-layers/extract-group-name'
+import { extractGroupName } from '../src/organize-layers/utilities/extract-group-name'
 
 test('empty string', function (t) {
   t.is(extractGroupName('', 1), '')
