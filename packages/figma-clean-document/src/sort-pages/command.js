@@ -6,6 +6,10 @@ import {
 
 export default function () {
   const result = sortLayersByName(figma.root.children)
-  updateLayersSortOrder(result)
-  figma.closePlugin(formatSuccessMessage('Sorted pages'))
+  const didChange = updateLayersSortOrder(result)
+  figma.closePlugin(
+    didChange === true
+      ? formatSuccessMessage('Sorted pages')
+      : 'No change to page sort order'
+  )
 }

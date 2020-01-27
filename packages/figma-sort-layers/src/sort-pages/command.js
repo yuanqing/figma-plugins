@@ -10,6 +10,6 @@ export default function () {
   figma.closePlugin(
     didChange === true
       ? formatSuccessMessage('Sorted pages')
-      : 'No change to sort order'
+      : 'No change to page sort order'
   )
 }
