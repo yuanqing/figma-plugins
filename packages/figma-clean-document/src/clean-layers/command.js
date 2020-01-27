@@ -8,10 +8,10 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { cleanLayer } from './clean-layer'
+import { cleanLayer } from './utilities/clean-layer'
 import { defaultSettings } from '../utilities/default-settings'
 import { getLayersInScope } from '../utilities/get-layers-in-scope'
-import { smartSortLayers } from '../smart-sort-layers/smart-sort-layers'
+import { smartSortLayers } from '../smart-sort-layers/utilities/smart-sort-layers'
 
 const MAX_ITERATIONS = 10
 

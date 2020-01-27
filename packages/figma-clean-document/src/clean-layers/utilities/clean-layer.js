@@ -1,8 +1,8 @@
 import { traverseLayer } from '@create-figma-plugin/utilities'
-import { deleteHiddenLayer } from '../delete-hidden-layers/delete-hidden-layer'
-import { makePixelPerfect } from '../make-pixel-perfect/make-pixel-perfect'
-import { smartRenameLayer } from '../smart-rename-layers/smart-rename-layer'
-import { ungroupSingleLayerGroup } from '../ungroup-single-layer-groups/ungroup-single-layer-group'
+import { deleteHiddenLayer } from '../../utilities/delete-hidden-layer'
+import { makePixelPerfect } from '../../utilities/make-pixel-perfect'
+import { smartRenameLayer } from '../../utilities/smart-rename-layer'
+import { ungroupSingleLayerGroup } from '../../utilities/ungroup-single-layer-group'
 
 export function cleanLayer (
   layer,

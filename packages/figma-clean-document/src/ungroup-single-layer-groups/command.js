@@ -1,10 +1,10 @@
 import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
 import { commandFactory } from '../utilities/command-factory'
-import { ungroupSingleLayerGroup } from './ungroup-single-layer-group'
+import { ungroupSingleLayerGroup } from '../utilities/ungroup-single-layer-group'
 
 export default commandFactory({
-  callback: ungroupSingleLayerGroup,
-  filter: function (layer) {
+  processLayer: ungroupSingleLayerGroup,
+  filterCallback: function (layer) {
     return layer.type !== 'INSTANCE'
   },
   createLoadingMessage: function () {

@@ -7,8 +7,8 @@ import {
 const MAX_ITERATIONS = 10
 
 export function commandFactory ({
-  callback,
-  filter,
+  processLayer,
+  filterCallback,
   createLoadingMessage,
   createSuccessMessage,
   createFailureMessage
@@ -28,12 +28,12 @@ export function commandFactory ({
         traverseLayer(
           layer,
           function (layer) {
-            if (callback(layer) === true) {
+            if (processLayer(layer) === true) {
               count++
               didChange = true
             }
           },
-          filter
+          filterCallback
         )
       }
     }

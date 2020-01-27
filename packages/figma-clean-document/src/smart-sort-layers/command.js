@@ -1,6 +1,6 @@
 import { formatSuccessMessage } from '@create-figma-plugin/utilities'
 import { getLayersInScope } from '../utilities/get-layers-in-scope'
-import { smartSortLayers } from './smart-sort-layers'
+import { smartSortLayers } from './utilities/smart-sort-layers'
 
 export default function () {
   const notificationHandler = figma.notify('Sorting layers…', {

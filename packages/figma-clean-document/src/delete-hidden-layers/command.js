@@ -1,10 +1,10 @@
 import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
 import { commandFactory } from '../utilities/command-factory'
-import { deleteHiddenLayer } from './delete-hidden-layer'
+import { deleteHiddenLayer } from '../utilities/delete-hidden-layer'
 
 export default commandFactory({
-  callback: deleteHiddenLayer,
-  filter: function (layer) {
+  processLayer: deleteHiddenLayer,
+  filterCallback: function (layer) {
     return layer.type !== 'COMPONENT' && layer.type !== 'INSTANCE'
   },
   createLoadingMessage: function () {

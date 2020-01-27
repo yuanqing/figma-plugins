@@ -10,7 +10,7 @@ import {
   traverseLayer
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
-import { smartRenameLayer } from './smart-rename-layer'
+import { smartRenameLayer } from '../utilities/smart-rename-layer'
 
 export default async function () {
   const settings = await loadSettings(defaultSettings)

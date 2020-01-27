@@ -1,10 +1,10 @@
 import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
 import { commandFactory } from '../utilities/command-factory'
-import { makePixelPerfect } from './make-pixel-perfect'
+import { makePixelPerfect } from '../utilities/make-pixel-perfect'
 
 export default commandFactory({
-  callback: makePixelPerfect,
-  filter: function (layer) {
+  processLayer: makePixelPerfect,
+  filterCallback: function (layer) {
     return layer.type !== 'INSTANCE' && layer.type !== 'VECTOR'
   },
   createLoadingMessage: function () {
