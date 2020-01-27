@@ -9,7 +9,7 @@ import {
   showUI,
   traverseLayer
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../default-settings'
+import { defaultSettings } from '../utilities/default-settings'
 import { smartRenameLayer } from './smart-rename-layer'
 
 export default async function () {

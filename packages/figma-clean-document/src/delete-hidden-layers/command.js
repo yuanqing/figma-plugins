@@ -1,5 +1,5 @@
 import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
-import { commandFactory } from '../command-factory'
+import { commandFactory } from '../utilities/command-factory'
 import { deleteHiddenLayer } from './delete-hidden-layer'
 
 export default commandFactory({

@@ -1,19 +1,31 @@
 import {
   addEventListener,
+  formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
+  onSelectionChange,
   saveSettings,
-  showUI
+  showUI,
+  triggerEvent
 } from '@create-figma-plugin/utilities'
 import { cleanLayer } from './clean-layer'
-import { defaultSettings } from '../default-settings'
-import { getLayersInScope } from '../get-layers-in-scope'
+import { defaultSettings } from '../utilities/default-settings'
+import { getLayersInScope } from '../utilities/get-layers-in-scope'
 import { smartSortLayers } from '../smart-sort-layers/smart-sort-layers'
 
 const MAX_ITERATIONS = 10
 
 export default async function () {
+  if (figma.currentPage.children.length === 0) {
+    figma.closePlugin(formatErrorMessage('No layers on page'))
+    return
+  }
   const settings = await loadSettings(defaultSettings)
+  onSelectionChange(function (selectedLayers) {
+    triggerEvent('SELECTION_CHANGED', {
+      hasSelection: selectedLayers.length !== 0
+    })
+  })
   addEventListener('SUBMIT', async function (settings) {
     const scope = figma.currentPage.selection.length > 0 ? 'selection' : 'page'
     const notificationHandler = figma.notify(`Cleaning ${scope}…`, {
@@ -62,5 +74,8 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 352 }, settings)
+  showUI(
+    { width: 240, height: 384 },
+    { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
+  )
 }

@@ -9,8 +9,9 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { triggerEvent } from '@create-figma-plugin/utilities'
+import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
+import { useEffect } from 'preact/hooks'
 
 export function CleanLayers (initialState) {
   const { state, handleChange, handleSubmit, isInvalid } = useForm(
@@ -39,8 +40,17 @@ export function CleanLayers (initialState) {
       }
     }
   )
+  useEffect(
+    function () {
+      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+        handleChange({ hasSelection })
+      })
+    },
+    [handleChange]
+  )
   const {
     deleteHiddenLayers,
+    hasSelection,
     pixelPerfect,
     smartRenameLayers,
     smartRenameLayersWhitelist,
@@ -106,6 +116,12 @@ export function CleanLayers (initialState) {
         Clean Layers
       </Button>
       <VerticalSpace space='small' />
+      <Text muted align='center'>
+        {hasSelection === true
+          ? 'Cleaning layers in selection'
+          : 'Cleaning layers on page'}
+      </Text>
+      <VerticalSpace space='extraLarge' />
     </Container>
   )
 }
