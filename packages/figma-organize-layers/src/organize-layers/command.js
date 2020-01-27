@@ -4,16 +4,16 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
+  mapNumberToWord,
   onSelectionChange,
+  pluralize,
   saveSettings,
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../default-settings'
-import { arrangeGroups } from './arrange-groups'
-import { computeMaximumGroupDefinition } from './compute-maximum-group-definition'
-import { groupLayers } from './group-layers'
-import { sortLayers } from './sort-layers'
+import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
+import { defaultSettings } from '../utilities/default-settings'
+import { organizeLayers } from './utilities/organize-layers'
 
 export default async function () {
   const layers = getLayers()
@@ -38,15 +38,22 @@ export default async function () {
       verticalSpace
     } = settings
     const layers = figma.currentPage.children
-    const groups = groupLayers(
+    organizeLayers(
       layers,
       combineSingleLayerGroups,
-      groupDefinition
+      groupDefinition,
+      horizontalSpace,
+      verticalSpace
     )
-    arrangeGroups(groups, horizontalSpace, verticalSpace)
-    sortLayers(layers)
     figma.viewport.scrollAndZoomIntoView(layers)
-    figma.closePlugin(formatSuccessMessage('Organized layers on page'))
+    figma.closePlugin(
+      formatSuccessMessage(
+        `Organized ${mapNumberToWord(layers.length)} ${pluralize(
+          layers.length,
+          'layer'
+        )} on page`
+      )
+    )
   })
   addEventListener('CLOSE', function () {
     figma.closePlugin()

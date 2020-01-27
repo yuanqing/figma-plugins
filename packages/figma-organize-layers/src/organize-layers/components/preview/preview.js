@@ -1,7 +1,7 @@
 /** @jsx h */
 import { Preview as PreviewContainer } from '@create-figma-plugin/ui'
 import { h } from 'preact'
-import { groupLayers } from '../../group-layers'
+import { groupLayers } from '../../utilities/group-layers'
 import style from './preview.scss'
 
 export function Preview ({

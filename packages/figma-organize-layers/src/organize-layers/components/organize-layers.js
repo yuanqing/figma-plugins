@@ -20,7 +20,7 @@ import {
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { Preview } from './preview/preview'
-import { groupDefinitions } from '../group-definitions'
+import { groupDefinitions } from '../utilities/group-definitions'
 
 export function OrganizeLayers (initialState) {
   const { state, handleChange, handleSubmit, isInvalid } = useForm(
