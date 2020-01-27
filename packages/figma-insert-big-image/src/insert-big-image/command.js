@@ -1,14 +1,18 @@
 import {
   addEventListener,
   formatSuccessMessage,
+  loadSettings,
+  saveSettings,
   mapNumberToWord,
   pluralize,
   showUI,
   updateLayersSortOrder
 } from '@create-figma-plugin/utilities'
 import { createImageLayer } from './utilities/create-image-layer'
+import { defaultSettings } from '../utilities/default-settings'
 
 export default async function () {
+  const settings = await loadSettings(defaultSettings)
   const center = figma.viewport.center
   let x = Math.round(center.x)
   const y = Math.round(center.y)
@@ -16,14 +20,16 @@ export default async function () {
   addEventListener('INSERT_BIG_IMAGE', async function ({
     name,
     images,
+    insertAs2x,
     width,
     isDone
   }) {
+    saveSettings({ ...settings, insertAs2x })
     const imageLayers = []
     for (const image of images) {
-      imageLayers.push(createImageLayer(image, x, y))
+      imageLayers.push(createImageLayer(image, x, y, insertAs2x))
     }
-    x += width
+    x += insertAs2x === true ? width / 2 : width
     if (imageLayers.length === 1) {
       imageLayers[0].name = name
       result.push(imageLayers[0])
@@ -32,10 +38,10 @@ export default async function () {
       group.name = name
       result.push(group)
     }
-    updateLayersSortOrder(result)
     if (isDone === false) {
       return
     }
+    updateLayersSortOrder(result)
     figma.currentPage.selection = result
     figma.viewport.scrollAndZoomIntoView(result)
     figma.closePlugin(
@@ -50,5 +56,5 @@ export default async function () {
   addEventListener('CLOSE', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 200 })
+  showUI({ width: 240, height: 116 }, settings)
 }
