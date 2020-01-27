@@ -4,7 +4,7 @@ import {
 } from '@create-figma-plugin/utilities'
 
 export function distributeLayersDown (layers, space) {
-  const sortedLayers = [].concat(layers).sort(sortComparator)
+  const sortedLayers = layers.slice().sort(sortComparator)
   let y = null
   for (const layer of sortedLayers) {
     if (y === null) {

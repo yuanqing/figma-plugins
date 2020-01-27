@@ -18,7 +18,7 @@ export function getTextLayers () {
 }
 
 function sortLayers (layers) {
-  return [].concat(layers).sort(function (a, b) {
+  return layers.slice().sort(function (a, b) {
     if (a.y !== b.y) {
       return a.y - b.y
     }
