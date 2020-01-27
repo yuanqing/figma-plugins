@@ -9,7 +9,7 @@ import {
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { defaultSettings } from '../default-settings'
+import { defaultSettings } from '../utilities/default-settings'
 
 export default async function () {
   if (figma.currentPage.selection.length === 0) {
