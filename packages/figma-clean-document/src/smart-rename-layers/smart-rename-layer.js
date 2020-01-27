@@ -73,6 +73,20 @@ export function smartRenameLayer (layer, whitelistRegex) {
       break
     }
     case 'VECTOR': {
+      const segments = layer.vectorNetwork.segments
+      if (segments.length === 1) {
+        const tangentStart = segments[0].tangentStart
+        const tangentEnd = segments[0].tangentEnd
+        if (
+          tangentStart.x === 0 &&
+          tangentStart.y === 0 &&
+          tangentEnd.x === 0 &&
+          tangentEnd.y === 0
+        ) {
+          layer.name = 'Line'
+          break
+        }
+      }
       layer.name = 'Vector'
       break
     }
