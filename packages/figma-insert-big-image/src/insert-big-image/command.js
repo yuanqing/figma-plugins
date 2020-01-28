@@ -34,6 +34,7 @@ export default async function () {
       imageLayers[0].name = name
       result.push(imageLayers[0])
     } else {
+      updateLayersSortOrder(imageLayers)
       const group = figma.group(imageLayers, figma.currentPage)
       group.name = name
       result.push(group)
