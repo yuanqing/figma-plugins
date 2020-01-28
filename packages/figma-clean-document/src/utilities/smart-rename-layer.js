@@ -75,8 +75,7 @@ export function smartRenameLayer (layer, whitelistRegex) {
     case 'VECTOR': {
       const segments = layer.vectorNetwork.segments
       if (segments.length === 1) {
-        const tangentStart = segments[0].tangentStart
-        const tangentEnd = segments[0].tangentEnd
+        const { tangentStart, tangentEnd } = segments[0]
         if (
           tangentStart.x === 0 &&
           tangentStart.y === 0 &&
