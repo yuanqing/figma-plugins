@@ -62,7 +62,7 @@ export function InsertBigImage (initialState) {
   )
   return (
     <Container space='medium'>
-      <VerticalSpace space='large' />
+      <VerticalSpace space='extraLarge' />
       <Checkbox
         name='insertAs2x'
         value={insertAs2x === true}
@@ -71,7 +71,7 @@ export function InsertBigImage (initialState) {
       >
         <Text>Insert as 2x</Text>
       </Checkbox>
-      <VerticalSpace space='small' />
+      <VerticalSpace space='medium' />
       <ButtonUploadFile
         accept='image/png, image/jpeg'
         multiple
@@ -82,7 +82,7 @@ export function InsertBigImage (initialState) {
       >
         Choose image files
       </ButtonUploadFile>
-      <VerticalSpace space='small' />
+      <VerticalSpace space='medium' />
       <Text align='center' muted>
         {total === 0
           ? 'Supported formats: JPEG, PNG'
@@ -90,7 +90,7 @@ export function InsertBigImage (initialState) {
           ? 'Processing image…'
           : `Processing image ${currentIndex} of ${total}…`}
       </Text>
-      <VerticalSpace space='large' />
+      <VerticalSpace space='extraLarge' />
     </Container>
   )
 }
