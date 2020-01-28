@@ -6,7 +6,7 @@
 
 ## Commands
 
-All commands make a sub-selection within the currently-selected layers, or creates a new selection of layers if the selection is empty.
+With the exception of Select Similar Layers, all commands make a sub-selection within the currently-selected layers, or creates a new selection of layers if the selection is empty.
 
 ### Select Layers by Name
 
