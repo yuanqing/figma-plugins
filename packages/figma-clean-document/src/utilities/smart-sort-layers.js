@@ -1,10 +1,10 @@
 import {
   compareObjects,
+  isLayerWithinInstance,
   updateLayersSortOrder
 } from '@create-figma-plugin/utilities'
 import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-layers/utilities/smart-sort-child-layers'
 import { isLayerAnIllustration } from './is-layer-an-illustration'
-import { isLayerWithinInstance } from './is-layer-within-instance'
 import { traverseLayerDepthFirst } from './traverse-layer-depth-first'
 
 export function smartSortLayers (layers) {

@@ -2,6 +2,7 @@ import {
   addEventListener,
   formatErrorMessage,
   formatSuccessMessage,
+  isLayerWithinInstance,
   loadSettings,
   mapNumberToWord,
   onSelectionChange,
@@ -13,7 +14,6 @@ import {
 import { defaultSettings } from '../utilities/default-settings'
 import { getComponents } from './utilities/get-components'
 import { getSelectedLayers } from './utilities/get-selected-layers'
-import { isLayerWithinInstance } from '../utilities/is-layer-within-instance'
 
 export default async function () {
   if (figma.currentPage.selection.length === 0) {

@@ -1,4 +1,4 @@
-import { isLayerWithinInstance } from './is-layer-within-instance'
+import { isLayerWithinInstance } from '@create-figma-plugin/utilities'
 
 export function makePixelPerfect (layer) {
   if (

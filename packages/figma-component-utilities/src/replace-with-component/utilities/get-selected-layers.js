@@ -1,5 +1,7 @@
-import { extractAttributes } from '@create-figma-plugin/utilities'
-import { isLayerWithinInstance } from '../../utilities/is-layer-within-instance'
+import {
+  extractAttributes,
+  isLayerWithinInstance
+} from '@create-figma-plugin/utilities'
 
 export function getSelectedLayers () {
   const layers = figma.currentPage.selection.filter(function (layer) {

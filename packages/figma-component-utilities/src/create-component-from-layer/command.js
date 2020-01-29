@@ -2,11 +2,11 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   insertBeforeLayer,
+  isLayerWithinInstance,
   mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
 import { createComponent } from './utilities/create-component'
-import { isLayerWithinInstance } from '../utilities/is-layer-within-instance'
 import { OFFSET } from '../utilities/constants'
 
 export default async function () {
