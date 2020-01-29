@@ -17,6 +17,6 @@ export default commandFactory({
     )} ${scope} pixel-perfect`
   },
   createFailureMessage: function (scope) {
-    return `All layers ${scope} already pixel-perfect`
+    return `No change to layers ${scope}`
   }
 })
