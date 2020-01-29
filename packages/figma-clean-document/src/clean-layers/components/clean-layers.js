@@ -35,7 +35,7 @@ export function CleanLayers (initialState) {
       onClose: function () {
         triggerEvent('CLOSE')
       },
-      onSubmit: function (settings) {
+      onSubmit: function ({ hasSelection, ...settings }) {
         triggerEvent('SUBMIT', settings)
       }
     }
