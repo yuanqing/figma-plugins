@@ -17,10 +17,9 @@ export function commandFactory ({ sortLayers, successMessage }) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
     }
-    const groups =
-      selection.length === 1
-        ? [selection[0].children.slice().reverse()]
-        : groupSiblingLayers(selection)
+    const groups = groupSiblingLayers(
+      selection.length === 1 ? selection[0].children : selection
+    )
     let didChange = false
     for (const layers of groups) {
       const result = sortLayers(layers)
