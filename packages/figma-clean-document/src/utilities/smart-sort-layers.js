@@ -13,7 +13,7 @@ export function smartSortLayers (layers) {
   }
   let didChange = false
   const parentLayer = layers[0].parent
-  const layerIds = collectLayerIds(layers.slice().reverse())
+  const layerIds = collectLayerIds(layers)
   const result = smartSortChildLayers(parentLayer, layerIds)
   if (
     result !== null &&

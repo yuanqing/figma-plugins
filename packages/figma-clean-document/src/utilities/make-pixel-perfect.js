@@ -4,6 +4,7 @@ export function makePixelPerfect (layer) {
   if (
     layer.type === 'GROUP' ||
     layer.type === 'VECTOR' ||
+    layer.type === 'BOOLEAN_OPERATION' ||
     isLayerWithinInstance(layer) === true
   ) {
     return false

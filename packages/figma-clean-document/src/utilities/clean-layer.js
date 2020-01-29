@@ -14,7 +14,13 @@ export function cleanLayer (layer, settings) {
   if (layer.removed === true) {
     return false
   }
-  if (deleteHiddenLayers === true && deleteHiddenLayer(layer)) {
+  if (deleteHiddenLayers === true && deleteHiddenLayer(layer) === true) {
+    return true
+  }
+  if (
+    ungroupSingleLayerGroups === true &&
+    ungroupSingleLayerGroup(layer) === true
+  ) {
     return true
   }
   let didChange = false
@@ -32,9 +38,6 @@ export function cleanLayer (layer, settings) {
         didChange = cleanLayer(childLayer, settings) || didChange
       }
     }
-  }
-  if (ungroupSingleLayerGroups === true) {
-    didChange = ungroupSingleLayerGroup(layer) || didChange
   }
   if (pixelPerfect === true) {
     didChange = makePixelPerfect(layer) || didChange
