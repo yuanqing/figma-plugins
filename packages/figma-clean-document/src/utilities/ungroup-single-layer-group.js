@@ -1,5 +1,10 @@
+import { isLayerWithinInstance } from './is-layer-within-instance'
+
 export function ungroupSingleLayerGroup (layer) {
-  if (shouldUngroupLayer(layer) === false) {
+  if (
+    isSingleLayerGroup(layer) === false ||
+    isLayerWithinInstance(layer) === true
+  ) {
     return false
   }
   const index = layer.parent.children.indexOf(layer)
@@ -7,7 +12,7 @@ export function ungroupSingleLayerGroup (layer) {
   return true
 }
 
-function shouldUngroupLayer (layer) {
+function isSingleLayerGroup (layer) {
   return (
     layer.type === 'GROUP' &&
     layer.children.length === 1 &&

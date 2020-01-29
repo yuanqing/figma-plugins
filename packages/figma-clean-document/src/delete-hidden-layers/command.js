@@ -4,8 +4,8 @@ import { deleteHiddenLayer } from '../utilities/delete-hidden-layer'
 
 export default commandFactory({
   processLayer: deleteHiddenLayer,
-  filterCallback: function (layer) {
-    return layer.type !== 'COMPONENT' && layer.type !== 'INSTANCE'
+  stopTraversal: function (layer) {
+    return layer.type === 'INSTANCE'
   },
   createLoadingMessage: function (scope) {
     return `Deleting hidden layers ${scope}…`

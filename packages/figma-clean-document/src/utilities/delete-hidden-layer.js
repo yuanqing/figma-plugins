@@ -1,7 +1,9 @@
+import { isLayerWithinInstance } from './is-layer-within-instance'
+
 export function deleteHiddenLayer (layer) {
-  if (layer.visible === false) {
-    layer.remove()
-    return true
+  if (layer.visible === true || isLayerWithinInstance(layer) === true) {
+    return false
   }
-  return false
+  layer.remove()
+  return true
 }

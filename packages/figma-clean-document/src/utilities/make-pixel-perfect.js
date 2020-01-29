@@ -1,5 +1,11 @@
+import { isLayerWithinInstance } from './is-layer-within-instance'
+
 export function makePixelPerfect (layer) {
-  if (layer.type === 'GROUP' || layer.type === 'VECTOR') {
+  if (
+    layer.type === 'GROUP' ||
+    layer.type === 'VECTOR' ||
+    isLayerWithinInstance(layer) === true
+  ) {
     return false
   }
   let didChange = false

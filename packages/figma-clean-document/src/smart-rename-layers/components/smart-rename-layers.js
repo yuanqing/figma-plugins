@@ -46,8 +46,8 @@ export function SmartRenameLayers (initialState) {
       <VerticalSpace space='small' />
       <Text muted align='center'>
         {hasSelection === true
-          ? 'Will rename layers in selection'
-          : 'Will rename layers on page'}
+          ? 'Renaming layers in selection'
+          : 'Renaming layers on page'}
       </Text>
       <VerticalSpace space='extraLarge' />
     </Container>

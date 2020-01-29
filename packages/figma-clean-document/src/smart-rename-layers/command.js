@@ -23,18 +23,24 @@ export default async function () {
     await saveSettings(settings)
     const { smartRenameLayersWhitelist } = settings
     const smartRenameLayersWhitelistRegex =
-      smartRenameLayersWhitelist !== ''
-        ? new RegExp(smartRenameLayersWhitelist)
-        : null
+      smartRenameLayersWhitelist === ''
+        ? null
+        : new RegExp(smartRenameLayersWhitelist)
     commandFactory({
       processLayer: function (layer) {
         return smartRenameLayer(layer, smartRenameLayersWhitelistRegex)
+      },
+      stopTraversal: function (layer) {
+        return (
+          smartRenameLayersWhitelistRegex !== null &&
+          smartRenameLayersWhitelistRegex.test(layer.name) === true
+        )
       },
       createLoadingMessage: function (scope) {
         return `Renaming layers ${scope}…`
       },
       createSuccessMessage: function (scope, count) {
-        return `Smart renamed ${mapNumberToWord(count)} ${pluralize(
+        return `Renamed ${mapNumberToWord(count)} ${pluralize(
           count,
           'layer'
         )} ${scope}`

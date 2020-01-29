@@ -4,8 +4,8 @@ import { makePixelPerfect } from '../utilities/make-pixel-perfect'
 
 export default commandFactory({
   processLayer: makePixelPerfect,
-  filterCallback: function (layer) {
-    return layer.type !== 'INSTANCE' && layer.type !== 'VECTOR'
+  stopTraversal: function (layer) {
+    return layer.type === 'INSTANCE'
   },
   createLoadingMessage: function (scope) {
     return `Making layers ${scope} pixel-perfect…`

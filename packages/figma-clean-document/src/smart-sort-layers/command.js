@@ -1,8 +1,15 @@
-import { formatSuccessMessage } from '@create-figma-plugin/utilities'
+import {
+  formatErrorMessage,
+  formatSuccessMessage
+} from '@create-figma-plugin/utilities'
 import { getLayersInScope } from '../utilities/get-layers-in-scope'
 import { smartSortLayers } from '../utilities/smart-sort-layers'
 
 export default function () {
+  if (figma.currentPage.children.length === 0) {
+    figma.closePlugin(formatErrorMessage('No layers on page'))
+    return
+  }
   const groups = getLayersInScope()
   const scope =
     figma.currentPage.selection.length === 0

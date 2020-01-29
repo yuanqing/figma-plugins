@@ -1,4 +1,5 @@
 import {
+  formatErrorMessage,
   formatSuccessMessage,
   getSelectedLayersOrAllLayers
 } from '@create-figma-plugin/utilities'
@@ -6,12 +7,16 @@ import { traverseLayerDepthFirst } from './traverse-layer-depth-first'
 
 export function commandFactory ({
   processLayer,
-  filterCallback,
+  stopTraversal,
   createLoadingMessage,
   createSuccessMessage,
   createFailureMessage
 }) {
   return function () {
+    if (figma.currentPage.children.length === 0) {
+      figma.closePlugin(formatErrorMessage('No layers on page'))
+      return
+    }
     const layers = getSelectedLayersOrAllLayers()
     const scope =
       figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
@@ -27,7 +32,7 @@ export function commandFactory ({
             count++
           }
         },
-        filterCallback
+        stopTraversal
       )
     }
     notificationHandler.cancel()

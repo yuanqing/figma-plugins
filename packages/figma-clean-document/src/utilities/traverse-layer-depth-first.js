@@ -1,14 +1,14 @@
-export function traverseLayerDepthFirst (layer, callback, filter) {
+export function traverseLayerDepthFirst (layer, processLayer, stopTraversal) {
   if (layer.removed === true) {
     return
   }
-  if (typeof filter === 'function' && filter(layer) === false) {
-    return
-  }
-  if (typeof layer.children !== 'undefined') {
+  if (
+    typeof layer.children !== 'undefined' &&
+    (typeof stopTraversal !== 'function' || stopTraversal(layer) === false)
+  ) {
     for (const childLayer of layer.children) {
-      traverseLayerDepthFirst(childLayer, callback, filter)
+      traverseLayerDepthFirst(childLayer, processLayer, stopTraversal)
     }
   }
-  callback(layer)
+  processLayer(layer)
 }
