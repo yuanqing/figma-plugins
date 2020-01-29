@@ -1,10 +1,8 @@
 import {
   formatSuccessMessage,
-  getSelectedLayersOrAllLayers,
-  traverseLayer
+  getSelectedLayersOrAllLayers
 } from '@create-figma-plugin/utilities'
-
-const MAX_ITERATIONS = 10
+import { traverseLayerDepthFirst } from './traverse-layer-depth-first'
 
 export function commandFactory ({
   processLayer,
@@ -14,31 +12,24 @@ export function commandFactory ({
   createFailureMessage
 }) {
   return function () {
-    const notificationHandler = figma.notify(createLoadingMessage(), {
+    const layers = getSelectedLayersOrAllLayers()
+    const scope =
+      figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
+    const notificationHandler = figma.notify(createLoadingMessage(scope), {
       timeout: 60000
     })
     let count = 0
-    let didChange = true
-    let iterations = 0
-    while (didChange === true && iterations < MAX_ITERATIONS) {
-      didChange = false
-      iterations++
-      const layers = getSelectedLayersOrAllLayers()
-      for (const layer of layers) {
-        traverseLayer(
-          layer,
-          function (layer) {
-            if (processLayer(layer) === true) {
-              count++
-              didChange = true
-            }
-          },
-          filterCallback
-        )
-      }
+    for (const layer of layers) {
+      traverseLayerDepthFirst(
+        layer,
+        function (layer) {
+          if (processLayer(layer) === true) {
+            count++
+          }
+        },
+        filterCallback
+      )
     }
-    const scope =
-      figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
     notificationHandler.cancel()
     figma.closePlugin(
       `${

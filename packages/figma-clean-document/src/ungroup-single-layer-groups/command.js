@@ -1,14 +1,11 @@
 import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
 import { commandFactory } from '../utilities/command-factory'
-import { ungroupSingleLayerGroup } from '../utilities/ungroup-single-layer-group'
+import { smartSortLayers } from '../utilities/smart-sort-layers'
 
 export default commandFactory({
-  processLayer: ungroupSingleLayerGroup,
-  filterCallback: function (layer) {
-    return layer.type !== 'INSTANCE'
-  },
-  createLoadingMessage: function () {
-    return 'Ungrouping single-layer groups…'
+  processLayer: smartSortLayers,
+  createLoadingMessage: function (scope) {
+    return `Ungrouping single-layer groups ${scope}…`
   },
   createSuccessMessage: function (scope, count) {
     return `Ungrouped ${mapNumberToWord(count)} single-layer ${pluralize(

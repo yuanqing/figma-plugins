@@ -3,19 +3,19 @@ import { getLayersInScope } from '../utilities/get-layers-in-scope'
 import { smartSortLayers } from '../utilities/smart-sort-layers'
 
 export default function () {
-  const notificationHandler = figma.notify('Sorting layers…', {
+  const groups = getLayersInScope()
+  const scope =
+    figma.currentPage.selection.length === 0
+      ? 'layers on page'
+      : 'selected layers'
+  const notificationHandler = figma.notify(`Sorting layers ${scope}…`, {
     timeout: 60000
   })
-  const groups = getLayersInScope()
   let didChange = false
   for (const layers of groups) {
     didChange = smartSortLayers(layers) || didChange
   }
   notificationHandler.cancel()
-  const scope =
-    figma.currentPage.selection.length === 0
-      ? 'layers on page'
-      : 'selected layers'
   figma.closePlugin(
     didChange === true
       ? formatSuccessMessage(`Smart sorted ${scope}`)

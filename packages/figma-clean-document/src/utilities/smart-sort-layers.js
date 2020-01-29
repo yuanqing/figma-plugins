@@ -6,10 +6,10 @@ import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-layers/ut
 import { isLayerAnIllustration } from './is-layer-an-illustration'
 
 export function smartSortLayers (layers) {
-  let didChange = false
   const parentLayer = layers[0].parent
   const layerIds = collectLayerIds(layers)
   const result = smartSortChildLayers(parentLayer, layerIds)
+  let didChange = false
   if (result !== null) {
     updateLayersSortOrder(result)
     didChange = true
