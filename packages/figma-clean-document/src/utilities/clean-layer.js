@@ -14,6 +14,9 @@ export function cleanLayer (layer, settings) {
   if (layer.removed === true) {
     return false
   }
+  if (deleteHiddenLayers === true && deleteHiddenLayer(layer)) {
+    return true
+  }
   let didChange = false
   if (typeof layer.children !== 'undefined') {
     if (layer.type === 'INSTANCE') {
@@ -29,9 +32,6 @@ export function cleanLayer (layer, settings) {
         didChange = cleanLayer(childLayer, settings) || didChange
       }
     }
-  }
-  if (deleteHiddenLayers === true) {
-    didChange = deleteHiddenLayer(layer) || didChange
   }
   if (ungroupSingleLayerGroups === true) {
     didChange = ungroupSingleLayerGroup(layer) || didChange
