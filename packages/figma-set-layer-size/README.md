@@ -6,7 +6,7 @@
 
 ### Set Layer Size
 
-Set the width and/or height of the selected layers, with an option to ignore constraints. (This is to workaround a limitation in Figma where you cannot ignore constraints when setting the width or height via the Properties panel.)
+Set the width and/or height of the selected layers, with an option to ignore constraints. (This is to work around a limitation in Figma where you cannot ignore constraints when setting the width or height via the Properties panel.)
 
 ## License
 
