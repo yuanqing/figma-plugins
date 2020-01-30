@@ -15,7 +15,7 @@ import { useEffect } from 'preact/hooks'
 
 export function CleanLayers (initialState) {
   const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
+    { ...initialState, isLoading: false },
     {
       validate: function ({
         deleteHiddenLayers,
@@ -35,7 +35,8 @@ export function CleanLayers (initialState) {
       onClose: function () {
         triggerEvent('CLOSE')
       },
-      onSubmit: function ({ hasSelection, ...settings }) {
+      onSubmit: function ({ hasSelection, isLoading, ...settings }) {
+        handleChange({ isLoading: true })
         triggerEvent('SUBMIT', settings)
       }
     }
@@ -51,6 +52,7 @@ export function CleanLayers (initialState) {
   const {
     deleteHiddenLayers,
     hasSelection,
+    isLoading,
     pixelPerfect,
     smartRenameLayers,
     smartRenameLayersWhitelist,
@@ -65,6 +67,7 @@ export function CleanLayers (initialState) {
           name='deleteHiddenLayers'
           value={deleteHiddenLayers}
           onChange={handleChange}
+          disabled={isLoading === true}
         >
           <Text>Delete hidden layers</Text>
         </Checkbox>
@@ -72,6 +75,7 @@ export function CleanLayers (initialState) {
           name='ungroupSingleLayerGroups'
           value={ungroupSingleLayerGroups}
           onChange={handleChange}
+          disabled={isLoading === true}
         >
           <Text>Ungroup single-layer groups</Text>
         </Checkbox>
@@ -79,6 +83,7 @@ export function CleanLayers (initialState) {
           name='pixelPerfect'
           value={pixelPerfect}
           onChange={handleChange}
+          disabled={isLoading === true}
         >
           <Text>Make pixel-perfect</Text>
         </Checkbox>
@@ -86,6 +91,7 @@ export function CleanLayers (initialState) {
           name='smartRenameLayers'
           value={smartRenameLayers}
           onChange={handleChange}
+          disabled={isLoading === true}
         >
           <Text>Smart rename layers</Text>
           <VerticalSpace space='medium' />
@@ -102,6 +108,7 @@ export function CleanLayers (initialState) {
           name='smartSortLayers'
           onChange={handleChange}
           value={smartSortLayers}
+          disabled={isLoading === true}
         >
           <Text>Smart sort layers</Text>
           <VerticalSpace space='medium' />
@@ -112,7 +119,12 @@ export function CleanLayers (initialState) {
         </Checkbox>
       </Stack>
       <VerticalSpace space='extraLarge' />
-      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
+      <Button
+        fullWidth
+        disabled={isInvalid() === true || isLoading === true}
+        loading={isLoading === true}
+        onClick={handleSubmit}
+      >
         Clean Layers
       </Button>
       <VerticalSpace space='small' />

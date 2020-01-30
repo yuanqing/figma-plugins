@@ -11,7 +11,9 @@ import {
 } from '@create-figma-plugin/utilities'
 import { cleanLayer } from '../utilities/clean-layer'
 import { defaultSettings } from '../utilities/default-settings'
-import { getLayersInScope } from '../utilities/get-layers-in-scope'
+import { getSiblingLayerGroups } from '../utilities/get-sibling-layer-groups'
+import { getScope } from '../utilities/get-scope'
+import { showLoadingNotification } from '../utilities/show-loading-notification'
 import { smartSortLayers } from '../utilities/smart-sort-layers'
 
 export default async function () {
@@ -38,10 +40,10 @@ export default async function () {
       smartRenameLayersWhitelist === ''
         ? null
         : new RegExp(smartRenameLayersWhitelist)
-    const scope = figma.currentPage.selection.length > 0 ? 'selection' : 'page'
-    const notificationHandler = figma.notify(`Cleaning ${scope}…`, {
-      timeout: 60000
-    })
+    const scope = getScope()
+    const hideLoadingNotification = showLoadingNotification(
+      `Cleaning ${scope}…`
+    )
     let didChange = false
     for (const layer of getSelectedLayersOrAllLayers()) {
       didChange =
@@ -54,11 +56,11 @@ export default async function () {
         }) || didChange
     }
     if (settings.smartSortLayers === true) {
-      for (const layers of getLayersInScope()) {
+      for (const layers of getSiblingLayerGroups()) {
         didChange = smartSortLayers(layers) || didChange
       }
     }
-    notificationHandler.cancel()
+    hideLoadingNotification()
     figma.closePlugin(
       didChange === true
         ? formatSuccessMessage(`Cleaned ${scope}`)

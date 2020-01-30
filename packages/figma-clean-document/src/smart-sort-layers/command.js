@@ -2,7 +2,9 @@ import {
   formatErrorMessage,
   formatSuccessMessage
 } from '@create-figma-plugin/utilities'
-import { getLayersInScope } from '../utilities/get-layers-in-scope'
+import { getSiblingLayerGroups } from '../utilities/get-sibling-layer-groups'
+import { getScope } from '../utilities/get-scope'
+import { showLoadingNotification } from '../utilities/show-loading-notification'
 import { smartSortLayers } from '../utilities/smart-sort-layers'
 
 export default function () {
@@ -10,22 +12,19 @@ export default function () {
     figma.closePlugin(formatErrorMessage('No layers on page'))
     return
   }
-  const groups = getLayersInScope()
-  const scope =
-    figma.currentPage.selection.length === 0
-      ? 'layers on page'
-      : 'selected layers'
-  const notificationHandler = figma.notify(`Sorting layers ${scope}…`, {
-    timeout: 60000
-  })
+  const groups = getSiblingLayerGroups()
+  const scope = getScope()
+  const hideLoadingNotification = showLoadingNotification(
+    `Sorting layers ${scope}…`
+  )
   let didChange = false
   for (const layers of groups) {
     didChange = smartSortLayers(layers) || didChange
   }
-  notificationHandler.cancel()
+  hideLoadingNotification()
   figma.closePlugin(
     didChange === true
-      ? formatSuccessMessage(`Smart sorted ${scope}`)
+      ? formatSuccessMessage(`Smart sorted layers ${scope}`)
       : 'No change to sort order'
   )
 }

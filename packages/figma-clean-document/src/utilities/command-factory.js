@@ -3,6 +3,8 @@ import {
   formatSuccessMessage,
   getSelectedLayersOrAllLayers
 } from '@create-figma-plugin/utilities'
+import { getScope } from '../utilities/get-scope'
+import { showLoadingNotification } from '../utilities/show-loading-notification'
 import { traverseLayerDepthFirst } from './traverse-layer-depth-first'
 
 export function commandFactory ({
@@ -18,11 +20,10 @@ export function commandFactory ({
       return
     }
     const layers = getSelectedLayersOrAllLayers()
-    const scope =
-      figma.currentPage.selection.length > 0 ? 'in selection' : 'on page'
-    const notificationHandler = figma.notify(createLoadingMessage(scope), {
-      timeout: 60000
-    })
+    const scope = getScope()
+    const hideLoadingNotification = showLoadingNotification(
+      createLoadingMessage(scope)
+    )
     let count = 0
     for (const layer of layers) {
       traverseLayerDepthFirst(
@@ -35,7 +36,7 @@ export function commandFactory ({
         stopTraversal
       )
     }
-    notificationHandler.cancel()
+    hideLoadingNotification()
     figma.closePlugin(
       `${
         count > 0

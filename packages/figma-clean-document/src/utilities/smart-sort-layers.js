@@ -8,7 +8,7 @@ import { isLayerAnIllustration } from './is-layer-an-illustration'
 import { traverseLayerDepthFirst } from './traverse-layer-depth-first'
 
 export function smartSortLayers (layers) {
-  if (layers.length === 0 || isLayerWithinInstance(layers[0]) === true) {
+  if (isLayerWithinInstance(layers[0]) === true) {
     return false
   }
   let didChange = false

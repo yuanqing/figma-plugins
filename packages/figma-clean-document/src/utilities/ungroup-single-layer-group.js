@@ -7,8 +7,19 @@ export function ungroupSingleLayerGroup (layer) {
   ) {
     return false
   }
-  const index = layer.parent.children.indexOf(layer)
-  layer.parent.insertChild(index, layer.children[0])
+  const parentLayer = layer.parent
+  const index = parentLayer.children.indexOf(layer)
+  const childLayer = layer.children[0]
+  const selection = figma.currentPage.selection
+  if (selection.indexOf(layer) !== -1) {
+    // Replace the removed `layer` in `selection` with the `childLayer`
+    const newSelection = selection.filter(function ({ id }) {
+      return id !== layer.id
+    })
+    newSelection.push(childLayer)
+    figma.currentPage.selection = newSelection
+  }
+  parentLayer.insertChild(index, childLayer)
   return true
 }
 
