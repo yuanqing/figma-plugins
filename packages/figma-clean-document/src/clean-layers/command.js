@@ -42,7 +42,7 @@ export default async function () {
         : new RegExp(smartRenameLayersWhitelist)
     const scope = getScope()
     const hideLoadingNotification = showLoadingNotification(
-      `Cleaning ${scope}…`
+      `Cleaning layers ${scope}…`
     )
     let didChange = false
     for (const layer of getSelectedLayersOrAllLayers()) {
@@ -63,8 +63,8 @@ export default async function () {
     hideLoadingNotification()
     figma.closePlugin(
       didChange === true
-        ? formatSuccessMessage(`Cleaned ${scope}`)
-        : `No change to ${scope}`
+        ? formatSuccessMessage(`Cleaned layers ${scope}`)
+        : `No change to layers ${scope}`
     )
   })
   addEventListener('CLOSE', function () {
