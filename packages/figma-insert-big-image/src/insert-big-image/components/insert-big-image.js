@@ -79,6 +79,7 @@ export function InsertBigImage (initialState) {
         fullWidth
         loading={isLoading === true}
         disabled={isLoading === true}
+        focused
       >
         Choose image files
       </ButtonUploadFile>

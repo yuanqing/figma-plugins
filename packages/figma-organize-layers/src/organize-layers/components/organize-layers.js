@@ -109,6 +109,7 @@ export function OrganizeLayers (initialState) {
         <Button
           fullWidth
           disabled={isInvalid() === true}
+          focused
           onClick={handleSubmit}
         >
           Organize Layers

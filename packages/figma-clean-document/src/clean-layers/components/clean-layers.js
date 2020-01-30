@@ -123,6 +123,7 @@ export function CleanLayers (initialState) {
         fullWidth
         disabled={isInvalid() === true || isLoading === true}
         loading={isLoading === true}
+        focused
         onClick={handleSubmit}
       >
         Clean Layers
