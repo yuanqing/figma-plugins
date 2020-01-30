@@ -98,7 +98,7 @@ export function CleanLayers (initialState) {
           <Text muted>Ignore layers named</Text>
           <VerticalSpace space='small' />
           <Textbox
-            disabled={smartRenameLayers === false}
+            disabled={smartRenameLayers === false || isLoading === true}
             name='smartRenameLayersWhitelist'
             value={smartRenameLayersWhitelist}
             onChange={handleChange}
@@ -132,7 +132,7 @@ export function CleanLayers (initialState) {
       <Text muted align='center'>
         {hasSelection === true
           ? 'Cleaning layers in selection'
-          : 'Cleaning layers on page'}
+          : 'Cleaning all layers on page'}
       </Text>
       <VerticalSpace space='extraLarge' />
     </Container>
