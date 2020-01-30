@@ -57,6 +57,11 @@
       },
       "-",
       {
+        "name": "Reset Instance Size",
+        "command": "reset-instance-size/command.js"
+      },
+      "-",
+      {
         "name": "Reset",
         "command": "reset/command.js"
       }

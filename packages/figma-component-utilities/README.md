@@ -18,6 +18,10 @@ Creates a copy of the selected Master Component.
 
 Replaces the selected layers with an Instance of a component in the document.
 
+### Reset Instance Size
+
+Reset the size of the selected Instances to the size of their respective Master Components.
+
 ## License
 
 MIT
