@@ -10,7 +10,7 @@
 
 Creates a Master Component from the selected layer. The selected layer then becomes an Instance of the new Master Component.
 
-### Copy Component
+### Duplicate Component
 
 Creates a copy of the selected Master Component.
 
