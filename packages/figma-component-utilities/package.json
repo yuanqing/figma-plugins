@@ -46,10 +46,9 @@
         "command": "create-component-from-layer/command.js"
       },
       {
-        "name": "Copy Component",
-        "command": "copy-component/command.js"
+        "name": "Duplicate Component",
+        "command": "duplicate-component/command.js"
       },
-      "-",
       {
         "name": "Replace with Component",
         "command": "replace-with-component/command.js",

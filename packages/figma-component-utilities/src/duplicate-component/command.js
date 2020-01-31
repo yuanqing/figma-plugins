@@ -30,7 +30,7 @@ export default async function () {
   figma.currentPage.selection = newSelection
   figma.closePlugin(
     formatSuccessMessage(
-      `Copied ${mapNumberToWord(components.length)} ${pluralize(
+      `Duplicated ${mapNumberToWord(components.length)} ${pluralize(
         components.length,
         'component'
       )}`
