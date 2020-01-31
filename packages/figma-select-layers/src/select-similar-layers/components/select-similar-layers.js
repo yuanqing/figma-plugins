@@ -8,7 +8,7 @@ import {
   useForm
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { Fragment, h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 import { Attributes } from './attributes.js'
 import { everyAttribute } from '../utilities/every-attribute'
@@ -105,7 +105,7 @@ export function SelectSimilarLayers (initialState) {
     [handleChange]
   )
   return (
-    <div>
+    <Fragment>
       <div class={styles.wrapper}>
         <div class={styles.search}>
           <SearchTextbox
@@ -145,6 +145,6 @@ export function SelectSimilarLayers (initialState) {
         </Button>
         <VerticalSpace space='small' />
       </Container>
-    </div>
+    </Fragment>
   )
 }

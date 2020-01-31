@@ -9,7 +9,7 @@ import {
   useForm
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { Fragment, h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { EXPLICIT, RETAIN, SHORT } from '../formats'
 import {
@@ -85,7 +85,7 @@ export function FormatCurrency (initialState) {
   )
   const { format, locale, previewItems } = state
   return (
-    <div>
+    <Fragment>
       <Preview items={previewItems} />
       <Container space='medium'>
         <VerticalSpace space='large' />
@@ -117,7 +117,7 @@ export function FormatCurrency (initialState) {
         </Button>
         <VerticalSpace space='small' />
       </Container>
-    </div>
+    </Fragment>
   )
 }
 

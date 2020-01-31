@@ -7,7 +7,7 @@ import {
   ESCAPE_KEY_CODE
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { Fragment, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import { LanguageItem } from './language-item'
 import { translate } from '../../translate/translate'
@@ -64,7 +64,7 @@ export function LanguageTester () {
     }
   }, [])
   return (
-    <div>
+    <Fragment>
       <div class={styles.languages}>
         {Object.keys(languages).map(function (languageKey, index) {
           const isActive = activeLanguageKey === languageKey
@@ -96,6 +96,6 @@ export function LanguageTester () {
         </Button>
       </Container>
       <VerticalSpace space='small' />
-    </div>
+    </Fragment>
   )
 }

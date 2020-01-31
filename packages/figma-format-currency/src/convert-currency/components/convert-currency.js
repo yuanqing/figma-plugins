@@ -9,7 +9,7 @@ import {
   useForm
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { Fragment, h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import {
   Preview,
@@ -87,7 +87,7 @@ export function ConvertCurrency (initialState) {
   )
   const { locale, previewItems, roundNumbers, targetCurrency } = state
   return (
-    <div>
+    <Fragment>
       <Preview items={previewItems} />
       <Container space='medium'>
         <VerticalSpace space='large' />
@@ -130,7 +130,7 @@ export function ConvertCurrency (initialState) {
         </Button>
         <VerticalSpace space='small' />
       </Container>
-    </div>
+    </Fragment>
   )
 }
 

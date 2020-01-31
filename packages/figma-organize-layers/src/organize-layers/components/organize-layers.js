@@ -17,7 +17,7 @@ import {
   evaluateNumericExpression,
   triggerEvent
 } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { Fragment, h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { Preview } from './preview/preview'
 import { groupDefinitions } from '../utilities/group-definitions'
@@ -66,7 +66,7 @@ export function OrganizeLayers (initialState) {
     verticalSpace
   } = state
   return (
-    <div>
+    <Fragment>
       <Preview {...state} />
       <Container space='medium'>
         <VerticalSpace space='large' />
@@ -116,6 +116,6 @@ export function OrganizeLayers (initialState) {
         </Button>
         <VerticalSpace space='small' />
       </Container>
-    </div>
+    </Fragment>
   )
 }

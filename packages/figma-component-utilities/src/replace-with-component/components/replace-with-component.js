@@ -12,7 +12,7 @@ import {
   useMenu
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { Fragment, h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 import styles from './replace-with-component.scss'
 
@@ -106,7 +106,7 @@ export function ReplaceWithComponent (initialState) {
     [handleKeyDown]
   )
   return (
-    <div>
+    <Fragment>
       <SearchTextbox
         name='searchTerm'
         onChange={handleChange}
@@ -158,7 +158,7 @@ export function ReplaceWithComponent (initialState) {
         </Button>
         <VerticalSpace space='small' />
       </Container>
-    </div>
+    </Fragment>
   )
 }
 
