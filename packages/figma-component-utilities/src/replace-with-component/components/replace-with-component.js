@@ -9,12 +9,14 @@ import {
   Text,
   VerticalSpace,
   useForm,
-  useMenu
+  useScrollableMenu
 } from '@create-figma-plugin/ui'
 import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 import styles from './replace-with-component.scss'
+
+const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-scrollable-menu-id'
 
 export function ReplaceWithComponent (initialState) {
   const { state, handleChange, handleSubmit, isInvalid } = useForm(
@@ -68,22 +70,18 @@ export function ReplaceWithComponent (initialState) {
   } = state
   const handleLayerClick = useCallback(
     function (event) {
-      const componentId = event.target.getAttribute('data-id')
+      const componentId = event.target.getAttribute(ITEM_ELEMENT_ATTRIBUTE_NAME)
       handleChange({ componentId })
     },
     [handleChange]
   )
-  const { handleKeyDown, menuElementRef } = useMenu({
-    getSelectedItemElement: function (menuElement, selectedItem) {
-      return menuElement.querySelector(`[data-id='${selectedItem}']`)
-    },
+  const { handleKeyDown, menuElementRef } = useScrollableMenu({
+    itemElementAttributeName: ITEM_ELEMENT_ATTRIBUTE_NAME,
+    selectedItemId: componentId,
     onChange: function (componentId) {
       handleChange({ componentId })
     },
-    items: filteredComponents.map(function ({ id }) {
-      return id
-    }),
-    selectedItem: componentId
+    changeOnMouseOver: false
   })
   useEffect(
     function () {
@@ -127,10 +125,10 @@ export function ReplaceWithComponent (initialState) {
               <Layer
                 key={index}
                 type='component'
-                data-id={id}
                 pageName={pageName}
                 selected={id === componentId}
                 onClick={handleLayerClick}
+                {...{ [ITEM_ELEMENT_ATTRIBUTE_NAME]: id }}
               >
                 {name}
               </Layer>
