@@ -3,17 +3,10 @@
   "version": "1.0.0",
   "description": "A Figma plugin to organize layers on the page",
   "keywords": [
-    "arrange",
-    "arrange-layers",
     "create-figma-plugin",
     "figma",
     "figma-plugin",
-    "figma-plugins",
-    "layers",
-    "organize",
-    "organize-layers",
-    "tidy",
-    "tidy-layers"
+    "figma-plugins"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",

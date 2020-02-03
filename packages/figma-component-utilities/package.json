@@ -3,20 +3,10 @@
   "version": "1.0.0",
   "description": "A Figma plugin to create and copy components, and replace layers with components",
   "keywords": [
-    "clone",
-    "component",
-    "components",
-    "component-utilities",
-    "copy",
     "create-figma-plugin",
     "figma",
     "figma-plugin",
-    "figma-plugins",
-    "instance",
-    "instances",
-    "replace",
-    "replace-component",
-    "utilities"
+    "figma-plugins"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",

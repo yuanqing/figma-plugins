@@ -6,13 +6,7 @@
     "create-figma-plugin",
     "figma",
     "figma-plugin",
-    "figma-plugins",
-    "i18n",
-    "internationalisation",
-    "l20n",
-    "language",
-    "language-tester",
-    "localization"
+    "figma-plugins"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",

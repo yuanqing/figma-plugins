@@ -3,15 +3,10 @@
   "version": "1.0.0",
   "description": "A Figma plugin to insert and retain the original resolution of big images",
   "keywords": [
-    "big-image",
+    "create-figma-plugin",
     "figma",
     "figma-plugin",
-    "figma-plugins",
-    "image",
-    "images",
-    "insert-big-image",
-    "jpeg",
-    "png"
+    "figma-plugins"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",

@@ -4,11 +4,9 @@
   "description": "A Figma plugin to draw a slice over the selection",
   "keywords": [
     "create-figma-plugin",
-    "draw-slice-over-selection",
     "figma",
     "figma-plugin",
-    "figma-plugins",
-    "slice"
+    "figma-plugins"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",

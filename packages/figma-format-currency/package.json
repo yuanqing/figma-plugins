@@ -3,15 +3,10 @@
   "version": "1.0.2",
   "description": "A Figma plugin to format and convert between currencies",
   "keywords": [
-    "currency",
+    "create-figma-plugin",
     "figma",
     "figma-plugin",
-    "figma-plugins",
-    "i18n",
-    "internationalisation",
-    "l20n",
-    "localization",
-    "money"
+    "figma-plugins"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",

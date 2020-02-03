@@ -6,9 +6,7 @@
     "create-figma-plugin",
     "figma",
     "figma-plugin",
-    "figma-plugins",
-    "select",
-    "select-layers"
+    "figma-plugins"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",
