@@ -1,11 +1,11 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
-  getSelectedLayersOrAllLayers
+  getSelectedLayersOrAllLayers,
+  traverseLayer
 } from '@create-figma-plugin/utilities'
 import { getScope } from '../utilities/get-scope'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
-import { traverseLayerDepthFirst } from './traverse-layer-depth-first'
 
 export function commandFactory ({
   processLayer,
@@ -26,7 +26,7 @@ export function commandFactory ({
     )
     let count = 0
     for (const layer of layers) {
-      traverseLayerDepthFirst(
+      traverseLayer(
         layer,
         function (layer) {
           if (processLayer(layer) === true) {
