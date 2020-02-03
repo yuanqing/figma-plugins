@@ -4,6 +4,8 @@
 
 [![Distribute Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-distribute-layers/media/cover.png)](https://figma.com/c/plugin/767379264700569551/Distribute-Layers)
 
+`arrange` `distribute` `layer` `move` `space`
+
 ## Commands
 
 ### Distribute Layers Left / Right / Up / Down

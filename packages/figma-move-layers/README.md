@@ -4,6 +4,8 @@
 
 [![Move Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-move-layers/media/cover.png)](https://figma.com/c/plugin/767379204511357902/Move-Layers)
 
+`arrange` `distribute` `move` `layer`
+
 ## Commands
 
 ### Move Layers

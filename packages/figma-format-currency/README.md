@@ -4,6 +4,8 @@
 
 [![Format Currency](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-format-currency/media/cover.png)](https://figma.com/c/plugin/780785006732555859)
 
+`convert` `currency` `format` `i18n` `internalization` `money` `price` `string` `text`
+
 ## Commands
 
 ### Format Currency

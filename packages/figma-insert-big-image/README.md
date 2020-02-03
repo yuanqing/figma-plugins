@@ -4,6 +4,8 @@
 
 [![Insert Big Image](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-insert-big-image/media/cover.png)](https://figma.com/c/plugin/799646392992487942/Insert-Big-Image)
 
+`big` `image` `large` `original` `photo` `photograph` `picture` `resolution` `upload`
+
 ## Commands
 
 ### Insert Big Image
