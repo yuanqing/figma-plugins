@@ -66,7 +66,7 @@ export function SelectLayersByName (initialState) {
           ? 'Matching layers within selection'
           : 'Matching layers on page'}
       </Text>
-      <VerticalSpace space='large' />
+      <VerticalSpace space='extraLarge' />
     </Container>
   )
 }
