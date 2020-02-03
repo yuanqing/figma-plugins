@@ -6,8 +6,6 @@
 
 ## Commands
 
-With the exception of Select Similar Layers, all commands make a sub-selection within the currently-selected layers, or creates a new selection of layers if the selection is empty.
-
 ### Select Layers by Name
 
 Selects layers that partially or exactly match the given name.
@@ -42,6 +40,10 @@ Selects layers at the specified hierarchy.
 ### Select Similar Layers
 
 Selects layers with one or more attributes that are identical to the one currently-selected layer.
+
+---
+
+With the exception of Select Similar Layers, all commands make a sub-selection within the currently-selected layers, or creates a new selection of layers if the selection is empty.
 
 ## License
 

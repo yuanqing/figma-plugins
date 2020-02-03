@@ -8,7 +8,7 @@
 
 ### Insert Big Image
 
-Opens a dialog through which one or more images on disk can be selected. Intelligently splits up and inserts each selected image as a set of smaller images. (This is to work around a limitation in Figma where images with a dimension larger than 4096 pixels are scaled down.)
+Opens a dialog through which one or more image files can be selected. Intelligently splits up and inserts each image file as a set of smaller images. (This is to work around a limitation in Figma where images with a dimension larger than 4096 pixels are scaled down.)
 
 ## License
 
