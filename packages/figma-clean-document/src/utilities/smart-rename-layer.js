@@ -39,6 +39,10 @@ export function smartRenameLayer (layer, whitelistRegex) {
       break
     }
     case 'GROUP': {
+      if (layer.children[0].isMask === true) {
+        layer.name = 'Mask Group'
+        break
+      }
       layer.name = 'Group'
       break
     }
@@ -55,6 +59,10 @@ export function smartRenameLayer (layer, whitelistRegex) {
       break
     }
     case 'RECTANGLE': {
+      if (layer.isMask === true) {
+        layer.name = 'Mask'
+        break
+      }
       if (layer.fills.length === 1 && layer.fills[0].type === 'IMAGE') {
         layer.name = 'Image'
         break
