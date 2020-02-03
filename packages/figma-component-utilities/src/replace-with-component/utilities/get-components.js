@@ -14,16 +14,10 @@ export function getComponents () {
             x,
             y
           })
-          return false
         }
       },
       function ({ type }) {
-        return (
-          type === 'COMPONENT' ||
-          type === 'FRAME' ||
-          type === 'GROUP' ||
-          type === 'PAGE'
-        )
+        return type === 'COMPONENT' || type === 'INSTANCE'
       }
     )
   }
