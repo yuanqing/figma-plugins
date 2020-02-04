@@ -1,6 +1,6 @@
 {
   "name": "figma-distribute-layers",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A Figma plugin to distribute layers in a given direction and offset",
   "keywords": [
     "create-figma-plugin",
