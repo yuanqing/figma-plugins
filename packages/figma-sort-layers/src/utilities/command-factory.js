@@ -11,8 +11,8 @@ export function commandFactory ({ sortLayers, successMessage }) {
     if (
       selection.length === 0 ||
       (selection.length === 1 &&
-        typeof selection[0].children !== 'undefined' &&
-        selection[0].children.length < 2)
+        (typeof selection[0].children === 'undefined' ||
+          selection[0].children.length < 2))
     ) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
