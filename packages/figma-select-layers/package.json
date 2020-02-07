@@ -41,117 +41,159 @@
         "menu": [
           {
             "name": "Select Components",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectComponents"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectComponents"
+            }
           },
           {
             "name": "Select Instance Layers",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectInstanceLayers"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectInstanceLayers"
+            }
           },
           "-",
           {
             "name": "Select Frames",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectFrames"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectFrames"
+            }
           },
           {
             "name": "Select Groups",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectGroups"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectGroups"
+            }
           },
           {
             "name": "Select Slices",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectSlices"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectSlices"
+            }
           },
           "-",
           {
             "name": "Select Vector Layers",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectVectorLayers"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectVectorLayers"
+            }
           },
           {
             "name": "Select Rectangles",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectRectangles"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectRectangles"
+            }
           },
           {
             "name": "Select Lines",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectLines"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectLines"
+            }
           },
           {
             "name": "Select Ellipses",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectEllipses"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectEllipses"
+            }
           },
           {
             "name": "Select Polygons",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectPolygons"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectPolygons"
+            }
           },
           {
             "name": "Select Stars",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectStars"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectStars"
+            }
           },
           {
             "name": "Select Boolean Groups",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectBooleanGroups"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectBooleanGroups"
+            }
           },
           "-",
           {
             "name": "Select Images",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectImages"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectImages"
+            }
           },
           "-",
           {
             "name": "Select Text Layers",
-            "command": "select-layers-by-attribute/command.js",
-            "handler": "selectTextLayers"
+            "command": {
+              "src": "select-layers-by-attribute/command.js",
+              "handler": "selectTextLayers"
+            }
           }
         ]
       },
       "-",
       {
         "name": "Select Mask Layers",
-        "command": "select-layers-by-attribute/command.js",
-        "handler": "selectMaskLayers"
+        "command": {
+          "src": "select-layers-by-attribute/command.js",
+          "handler": "selectMaskLayers"
+        }
       },
       {
         "name": "Select Hidden Layers",
-        "command": "select-layers-by-attribute/command.js",
-        "handler": "selectHiddenLayers"
+        "command": {
+          "src": "select-layers-by-attribute/command.js",
+          "handler": "selectHiddenLayers"
+        }
       },
       {
         "name": "Select Locked Layers",
-        "command": "select-layers-by-attribute/command.js",
-        "handler": "selectLockedLayers"
+        "command": {
+          "src": "select-layers-by-attribute/command.js",
+          "handler": "selectLockedLayers"
+        }
       },
       {
         "name": "Select Layers With Exports",
-        "command": "select-layers-by-attribute/command.js",
-        "handler": "selectLayersWithExports"
+        "command": {
+          "src": "select-layers-by-attribute/command.js",
+          "handler": "selectLayersWithExports"
+        }
       },
       "-",
       {
         "name": "Select Parent Layers",
-        "command": "select-layers-by-hierarchy/command.js",
-        "handler": "selectParentLayers"
+        "command": {
+          "src": "select-layers-by-hierarchy/command.js",
+          "handler": "selectParentLayers"
+        }
       },
       {
         "name": "Select Root Layers",
-        "command": "select-layers-by-hierarchy/command.js",
-        "handler": "selectRootLayers"
+        "command": {
+          "src": "select-layers-by-hierarchy/command.js",
+          "handler": "selectRootLayers"
+        }
       },
       "-",
       {
         "name": "Select Similar Layers",
-        "command": "select-similar-layers/command.js",
-        "ui": "select-similar-layers/ui.js"
+        "command": {
+          "src": "select-similar-layers/command.js",
+          "ui": "select-similar-layers/ui.js"
+        }
       },
       "-",
       {
