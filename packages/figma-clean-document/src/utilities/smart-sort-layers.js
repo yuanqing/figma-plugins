@@ -8,11 +8,14 @@ import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-layers/ut
 import { isLayerAnIllustration } from './is-layer-an-illustration'
 
 export function smartSortLayers (layers) {
-  if (isLayerWithinInstance(layers[0]) === true) {
+  if (layers.length < 2 || isLayerWithinInstance(layers[0]) === true) {
+    return false
+  }
+  const parentLayer = layers[0].parent
+  if (hasAutoLayout(parentLayer) === true) {
     return false
   }
   let didChange = false
-  const parentLayer = layers[0].parent
   const layerIds = collectLayerIds(layers)
   const result = smartSortChildLayers(parentLayer, layerIds)
   if (
@@ -26,6 +29,9 @@ export function smartSortLayers (layers) {
     traverseLayer(
       layer,
       function (parentLayer) {
+        if (hasAutoLayout(parentLayer) === true) {
+          return
+        }
         const layers = parentLayer.children
         if (typeof layers === 'undefined') {
           return
@@ -56,4 +62,8 @@ function collectLayerIds (layers) {
     result.push(layer.id)
   }
   return result
+}
+
+function hasAutoLayout (layer) {
+  return layer.layoutMode === 'HORIZONTAL' || layer.layoutMode === 'VERTICAL'
 }
