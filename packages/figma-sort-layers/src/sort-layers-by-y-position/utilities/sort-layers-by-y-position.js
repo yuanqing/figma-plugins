@@ -1,5 +1,9 @@
 export function sortLayersByYPosition (layers) {
-  return layers.slice().sort(function (a, b) {
+  const parentLayer = layers[0].parent
+  if (parentLayer.layoutMode === 'VERTICAL') {
+    return null
+  }
+  const result = layers.slice().sort(function (a, b) {
     if (a.y !== b.y) {
       return a.y - b.y
     }
@@ -13,4 +17,5 @@ export function sortLayersByYPosition (layers) {
     }
     return a.id.localeCompare(b.id, { numeric: true })
   })
+  return parentLayer.layoutMode === 'HORIZONTAL' ? result.reverse() : result
 }
