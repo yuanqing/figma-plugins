@@ -35,8 +35,8 @@
     "menu": [
       {
         "name": "Language Tester",
-        "command": "language-tester/command.js",
-        "ui": "language-tester/ui.js"
+        "command": "language-tester/command",
+        "ui": "language-tester/ui"
       },
       {
         "name": "Translate",
@@ -44,175 +44,175 @@
           {
             "name": "Chinese",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "zh"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Czech",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "cs"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Danish",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "da"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Dutch",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "nl"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "English",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "en"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Finnish",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "fi"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "French",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "fr"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "German",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "de"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Hindi",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "hi"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Italian",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "it"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Japanese",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "ja"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Korean",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "ko"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Malay",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "ms"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Norwegian",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "no"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Polish",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "pl"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Portuguese",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "pt"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Spanish",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "es"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Swedish",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "sv"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Thai",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "th"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           },
           {
             "name": "Turkish",
             "command": {
-              "src": "translate/command.js",
+              "src": "translate/command",
               "handler": "tr"
             },
-            "ui": "translate/ui.js"
+            "ui": "translate/ui"
           }
         ]
       },
       "-",
       {
         "name": "Set API Key",
-        "command": "set-api-key/command.js",
-        "ui": "set-api-key/ui.js"
+        "command": "set-api-key/command",
+        "ui": "set-api-key/ui"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ]
   }

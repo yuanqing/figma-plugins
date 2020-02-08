@@ -33,13 +33,13 @@
     "menu": [
       {
         "name": "Insert Big Image",
-        "command": "insert-big-image/command.js",
-        "ui": "insert-big-image/ui.js"
+        "command": "insert-big-image/command",
+        "ui": "insert-big-image/ui"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ]
   }

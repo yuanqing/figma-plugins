@@ -34,47 +34,47 @@
     "menu": [
       {
         "name": "Clean Layers",
-        "command": "clean-layers/command.js",
-        "ui": "clean-layers/ui.js"
+        "command": "clean-layers/command",
+        "ui": "clean-layers/ui"
       },
       "-",
       {
         "name": "Delete Hidden Layers",
-        "command": "delete-hidden-layers/command.js"
+        "command": "delete-hidden-layers/command"
       },
       {
         "name": "Ungroup Single-Layer Groups",
-        "command": "ungroup-single-layer-groups/command.js"
+        "command": "ungroup-single-layer-groups/command"
       },
       {
         "name": "Make Pixel-Perfect",
-        "command": "make-pixel-perfect/command.js"
+        "command": "make-pixel-perfect/command"
       },
       {
         "name": "Smart Rename Layers",
-        "command": "smart-rename-layers/command.js",
-        "ui": "smart-rename-layers/ui.js"
+        "command": "smart-rename-layers/command",
+        "ui": "smart-rename-layers/ui"
       },
       {
         "name": "Smart Sort Layers",
-        "command": "smart-sort-layers/command.js"
+        "command": "smart-sort-layers/command"
       },
       "-",
       {
         "name": "Sort Pages",
-        "command": "sort-pages/command.js"
+        "command": "sort-pages/command"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ],
     "relaunchButtons": {
       "cleanLayers": {
         "name": "Clean Layers",
-        "command": "clean-layers/command.js",
-        "ui": "clean-layers/ui.js"
+        "command": "clean-layers/command",
+        "ui": "clean-layers/ui"
       }
     }
   }

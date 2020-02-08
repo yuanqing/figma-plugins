@@ -33,26 +33,26 @@
     "menu": [
       {
         "name": "Create Component from Layer",
-        "command": "create-component-from-layer/command.js"
+        "command": "create-component-from-layer/command"
       },
       {
         "name": "Copy Component",
-        "command": "copy-component/command.js"
+        "command": "copy-component/command"
       },
       {
         "name": "Replace with Component",
-        "command": "replace-with-component/command.js",
-        "ui": "replace-with-component/ui.js"
+        "command": "replace-with-component/command",
+        "ui": "replace-with-component/ui"
       },
       "-",
       {
         "name": "Reset Instance Size",
-        "command": "reset-instance-size/command.js"
+        "command": "reset-instance-size/command"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ]
   }

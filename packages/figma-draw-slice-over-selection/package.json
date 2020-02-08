@@ -33,13 +33,13 @@
     "menu": [
       {
         "name": "Draw Slice Over Selection",
-        "command": "draw-slice-over-selection/command.js",
-        "ui": "draw-slice-over-selection/ui.js"
+        "command": "draw-slice-over-selection/command",
+        "ui": "draw-slice-over-selection/ui"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ]
   }

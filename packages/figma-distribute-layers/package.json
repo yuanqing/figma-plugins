@@ -33,28 +33,28 @@
     "menu": [
       {
         "name": "Distribute Layers Left",
-        "command": "distribute-layers-left/command.js",
-        "ui": "distribute-layers-left/ui.js"
+        "command": "distribute-layers-left/command",
+        "ui": "distribute-layers-left/ui"
       },
       {
         "name": "Distribute Layers Right",
-        "command": "distribute-layers-right/command.js",
-        "ui": "distribute-layers-right/ui.js"
+        "command": "distribute-layers-right/command",
+        "ui": "distribute-layers-right/ui"
       },
       {
         "name": "Distribute Layers Up",
-        "command": "distribute-layers-up/command.js",
-        "ui": "distribute-layers-up/ui.js"
+        "command": "distribute-layers-up/command",
+        "ui": "distribute-layers-up/ui"
       },
       {
         "name": "Distribute Layers Down",
-        "command": "distribute-layers-down/command.js",
-        "ui": "distribute-layers-down/ui.js"
+        "command": "distribute-layers-down/command",
+        "ui": "distribute-layers-down/ui"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ]
   }

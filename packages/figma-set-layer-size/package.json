@@ -33,13 +33,13 @@
     "menu": [
       {
         "name": "Set Layer Size",
-        "command": "set-layer-size/command.js",
-        "ui": "set-layer-size/ui.js"
+        "command": "set-layer-size/command",
+        "ui": "set-layer-size/ui"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ]
   }

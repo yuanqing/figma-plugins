@@ -33,13 +33,13 @@
     "menu": [
       {
         "name": "Move Layers",
-        "command": "move-layers/command.js",
-        "ui": "move-layers/ui.js"
+        "command": "move-layers/command",
+        "ui": "move-layers/ui"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ]
   }

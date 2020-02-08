@@ -32,32 +32,32 @@
     "menu": [
       {
         "name": "Sort Layers by Name",
-        "command": "sort-layers-by-name/command.js"
+        "command": "sort-layers-by-name/command"
       },
       {
         "name": "Sort Layers by X Position",
-        "command": "sort-layers-by-x-position/command.js"
+        "command": "sort-layers-by-x-position/command"
       },
       {
         "name": "Sort Layers by Y Position",
-        "command": "sort-layers-by-y-position/command.js"
+        "command": "sort-layers-by-y-position/command"
       },
       {
         "name": "Smart Sort Layers",
-        "command": "smart-sort-layers/command.js"
+        "command": "smart-sort-layers/command"
       },
       {
         "name": "Reverse Layer Sort Order",
-        "command": "reverse-layer-sort-order/command.js"
+        "command": "reverse-layer-sort-order/command"
       },
       {
         "name": "Randomize Layer Sort Order",
-        "command": "randomize-layer-sort-order/command.js"
+        "command": "randomize-layer-sort-order/command"
       },
       "-",
       {
         "name": "Sort Pages",
-        "command": "sort-pages/command.js"
+        "command": "sort-pages/command"
       }
     ]
   }

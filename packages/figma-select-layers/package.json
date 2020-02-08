@@ -33,8 +33,8 @@
     "menu": [
       {
         "name": "Select Layers by Name",
-        "command": "select-layers-by-name/command.js",
-        "ui": "select-layers-by-name/ui.js"
+        "command": "select-layers-by-name/command",
+        "ui": "select-layers-by-name/ui"
       },
       {
         "name": "Select Layers by Type",
@@ -42,14 +42,14 @@
           {
             "name": "Select Components",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectComponents"
             }
           },
           {
             "name": "Select Instance Layers",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectInstanceLayers"
             }
           },
@@ -57,21 +57,21 @@
           {
             "name": "Select Frames",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectFrames"
             }
           },
           {
             "name": "Select Groups",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectGroups"
             }
           },
           {
             "name": "Select Slices",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectSlices"
             }
           },
@@ -79,49 +79,49 @@
           {
             "name": "Select Vector Layers",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectVectorLayers"
             }
           },
           {
             "name": "Select Rectangles",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectRectangles"
             }
           },
           {
             "name": "Select Lines",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectLines"
             }
           },
           {
             "name": "Select Ellipses",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectEllipses"
             }
           },
           {
             "name": "Select Polygons",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectPolygons"
             }
           },
           {
             "name": "Select Stars",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectStars"
             }
           },
           {
             "name": "Select Boolean Groups",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectBooleanGroups"
             }
           },
@@ -129,7 +129,7 @@
           {
             "name": "Select Images",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectImages"
             }
           },
@@ -137,7 +137,7 @@
           {
             "name": "Select Text Layers",
             "command": {
-              "src": "select-layers-by-attribute/command.js",
+              "src": "select-layers-by-attribute/command",
               "handler": "selectTextLayers"
             }
           }
@@ -147,28 +147,28 @@
       {
         "name": "Select Mask Layers",
         "command": {
-          "src": "select-layers-by-attribute/command.js",
+          "src": "select-layers-by-attribute/command",
           "handler": "selectMaskLayers"
         }
       },
       {
         "name": "Select Hidden Layers",
         "command": {
-          "src": "select-layers-by-attribute/command.js",
+          "src": "select-layers-by-attribute/command",
           "handler": "selectHiddenLayers"
         }
       },
       {
         "name": "Select Locked Layers",
         "command": {
-          "src": "select-layers-by-attribute/command.js",
+          "src": "select-layers-by-attribute/command",
           "handler": "selectLockedLayers"
         }
       },
       {
         "name": "Select Layers With Exports",
         "command": {
-          "src": "select-layers-by-attribute/command.js",
+          "src": "select-layers-by-attribute/command",
           "handler": "selectLayersWithExports"
         }
       },
@@ -176,14 +176,14 @@
       {
         "name": "Select Parent Layers",
         "command": {
-          "src": "select-layers-by-hierarchy/command.js",
+          "src": "select-layers-by-hierarchy/command",
           "handler": "selectParentLayers"
         }
       },
       {
         "name": "Select Root Layers",
         "command": {
-          "src": "select-layers-by-hierarchy/command.js",
+          "src": "select-layers-by-hierarchy/command",
           "handler": "selectRootLayers"
         }
       },
@@ -191,14 +191,14 @@
       {
         "name": "Select Similar Layers",
         "command": {
-          "src": "select-similar-layers/command.js",
-          "ui": "select-similar-layers/ui.js"
+          "src": "select-similar-layers/command",
+          "ui": "select-similar-layers/ui"
         }
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ]
   }

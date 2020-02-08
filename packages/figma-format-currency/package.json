@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "create-figma-plugin-build",
-    "build-iso-codes": "node scripts/build-iso-codes.js",
+    "build-iso-codes": "node scripts/build-iso-codes",
     "prebuild": "yarn run build-iso-codes",
     "pretest": "yarn run build-iso-codes",
     "prewatch": "yarn run build-iso-codes",
@@ -35,7 +35,7 @@
   },
   "ava": {
     "files": [
-      "test/**/*.js"
+      "test/**/*"
     ],
     "verbose": true,
     "require": [
@@ -48,18 +48,18 @@
     "menu": [
       {
         "name": "Format Currency",
-        "command": "format-currency/command.js",
-        "ui": "format-currency/ui.js"
+        "command": "format-currency/command",
+        "ui": "format-currency/ui"
       },
       {
         "name": "Convert Currency",
-        "command": "convert-currency/command.js",
-        "ui": "convert-currency/ui.js"
+        "command": "convert-currency/command",
+        "ui": "convert-currency/ui"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ]
   }

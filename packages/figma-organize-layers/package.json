@@ -30,7 +30,7 @@
   },
   "ava": {
     "files": [
-      "test/**/*.js"
+      "test/**/*"
     ],
     "verbose": true,
     "require": [
@@ -43,20 +43,20 @@
     "menu": [
       {
         "name": "Organize Layers",
-        "command": "organize-layers/command.js",
-        "ui": "organize-layers/ui.js"
+        "command": "organize-layers/command",
+        "ui": "organize-layers/ui"
       },
       "-",
       {
         "name": "Reset",
-        "command": "reset/command.js"
+        "command": "reset/command"
       }
     ],
     "relaunchButtons": {
       "organizeLayers": {
         "name": "Organize Layers",
-        "command": "organize-layers/command.js",
-        "ui": "organize-layers/ui.js"
+        "command": "organize-layers/command",
+        "ui": "organize-layers/ui"
       }
     }
   }
