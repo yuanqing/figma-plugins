@@ -8,6 +8,7 @@ import {
   onSelectionChange,
   pluralize,
   saveSettings,
+  setRelaunchButton,
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
@@ -46,6 +47,7 @@ export default async function () {
       verticalSpace
     )
     figma.viewport.scrollAndZoomIntoView(layers)
+    setRelaunchButton(figma.currentPage, 'organizeLayers')
     figma.closePlugin(
       formatSuccessMessage(
         `Organized ${mapNumberToWord(layers.length)} ${pluralize(

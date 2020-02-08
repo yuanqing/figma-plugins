@@ -51,6 +51,13 @@
         "name": "Reset",
         "command": "reset/command.js"
       }
-    ]
+    ],
+    "relaunchButtons": {
+      "organizeLayers": {
+        "name": "Organize Layers",
+        "command": "organize-layers/command.js",
+        "ui": "organize-layers/ui.js"
+      }
+    }
   }
 }
