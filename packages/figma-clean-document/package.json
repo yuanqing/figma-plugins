@@ -69,6 +69,13 @@
         "name": "Reset",
         "command": "reset/command.js"
       }
-    ]
+    ],
+    "relaunchButtons": {
+      "cleanLayers": {
+        "name": "Clean Layers",
+        "command": "clean-layers/command.js",
+        "ui": "clean-layers/ui.js"
+      }
+    }
   }
 }

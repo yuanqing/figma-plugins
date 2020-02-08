@@ -6,6 +6,7 @@ import {
   loadSettings,
   onSelectionChange,
   saveSettings,
+  setRelaunchButton,
   showUI,
   triggerEvent
 } from '@create-figma-plugin/utilities'
@@ -61,6 +62,7 @@ export default async function () {
       }
     }
     hideLoadingNotification()
+    setRelaunchButton(figma.currentPage, 'cleanLayers')
     figma.closePlugin(
       didChange === true
         ? formatSuccessMessage(`Cleaned layers ${scope}`)
