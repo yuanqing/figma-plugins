@@ -93,7 +93,7 @@ export default async function () {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 340 },
+    { width: 360, height: 402 },
     {
       components,
       selectedLayers,
