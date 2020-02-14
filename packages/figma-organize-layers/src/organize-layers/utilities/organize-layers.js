@@ -1,4 +1,5 @@
 import {
+  collapseLayer,
   sortLayersByName,
   updateLayersSortOrder
 } from '@create-figma-plugin/utilities'
@@ -14,6 +15,9 @@ export function organizeLayers (
 ) {
   const groups = groupLayers(layers, combineSingleLayerGroups, groupDefinition)
   arrangeGroups(groups, horizontalSpace, verticalSpace)
+  for (const layer of layers) {
+    collapseLayer(layer)
+  }
   const result = sortLayersByName(layers)
   updateLayersSortOrder(result)
 }

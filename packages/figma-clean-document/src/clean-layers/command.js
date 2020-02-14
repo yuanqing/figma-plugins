@@ -1,5 +1,6 @@
 import {
   addEventListener,
+  collapseLayer,
   formatErrorMessage,
   formatSuccessMessage,
   getSelectedLayersOrAllLayers,
@@ -55,6 +56,7 @@ export default async function () {
           smartRenameLayersWhitelistRegex,
           ungroupSingleLayerGroups
         }) || didChange
+      didChange = collapseLayer(layer) || didChange
     }
     if (settings.smartSortLayers === true) {
       for (const layers of getSiblingLayerGroups()) {
