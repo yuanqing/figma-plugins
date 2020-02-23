@@ -4,7 +4,7 @@
 
 [![Language Tester](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-language-tester/media/cover.png)](https://figma.com/c/plugin/767379122107077581/Language-Tester)
 
-`i18n` `internationalization` `language` `languages` `string` `text` `test` `translate` `translation` `translations` `translator`
+`convert` `i18n` `internationalization` `language` `translate` `translation` `translator` `yandex`
 
 ## Commands
 

@@ -4,7 +4,7 @@
 
 [![Draw Mask Under Selection](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-draw-mask-under-selection/media/cover.png)](https://www.figma.com/c/plugin/806532458729477508/Draw-Mask-Under-Selection)
 
-`crop` `layer` `mask`
+`crop` `layers` `mask`
 
 ## Commands
 

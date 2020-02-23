@@ -4,7 +4,7 @@
 
 [![Clean Document](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-clean-document/media/cover.png)](https://figma.com/c/plugin/767379019764649932/Clean-Document)
 
-`clean` `hidden` `layer` `organize` `page` `pixel` `prettier` `rename` `smart` `sort` `standard` `tidy`
+`clean` `format` `layers` `lint` `linter` `organize` `organizer` `pixels` `rename` `sort` `tidy`
 
 ## Commands
 

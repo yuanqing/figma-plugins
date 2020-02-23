@@ -4,7 +4,7 @@
 
 [![Select Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-select-layers/media/cover.png)](https://figma.com/c/plugin/799648692768237063/Select-Layers)
 
-`attribute` `hidden` `locked` `layer` `name` `parent` `root` `select` `similar` `type`
+`attributes` `hidden` `layers` `locked` `select` `selector` `similar` `similarity` `style` `styles` `type`
 
 ## Commands
 

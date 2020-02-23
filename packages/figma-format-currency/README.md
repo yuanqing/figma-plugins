@@ -4,7 +4,7 @@
 
 [![Format Currency](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-format-currency/media/cover.png)](https://figma.com/c/plugin/780785006732555859)
 
-`convert` `currency` `format` `i18n` `internationalization` `language` `money` `price` `string` `text` `translate` `translation`
+`convert` `converter` `currency` `format` `i18n` `internationalization` `language` `money` `price` `translate` `translation` `translator`
 
 ## Commands
 

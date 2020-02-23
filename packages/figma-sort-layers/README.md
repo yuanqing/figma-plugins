@@ -4,7 +4,7 @@
 
 [![Sort Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-sort-layers/media/cover.png)](https://figma.com/c/plugin/767379414704079825/Sort-Layers)
 
-`arrange` `layer` `name` `organize` `random` `randomize` `reverse` `smart` `sort` `tidy` `x` `y`
+`arrange` `clean` `layers` `organize` `organizer` `random` `randomize` `reverse` `sort` `tidy`
 
 ## Commands
 

@@ -4,7 +4,7 @@
 
 [![Component Utilities](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-component-utilities/media/cover.png)](https://figma.com/c/plugin/785894722513806497/Component-Utilities)
 
-`clone` `component` `copy` `duplicate` `instance` `layer` `master` `replace` `size`
+`clone` `component` `components` `copy` `duplicate` `instance` `layers` `master` `replace` `reset` `size`
 
 ## Commands
 
