@@ -1,3 +1,5 @@
+import { computeBoundingBox } from './compute-bounding-box'
+
 export function smartSortChildLayers (layer, childLayerIds) {
   const children = layer.children
   if (
@@ -38,20 +40,23 @@ export function smartSortChildLayers (layer, childLayerIds) {
 }
 
 function checkIfLayersOverlap (a, b) {
-  // Returns `true` if `a` and `b` overlap
+  const aa = computeBoundingBox(a)
+  const bb = computeBoundingBox(b)
   return !(
-    a.x + a.width <= b.x ||
-    b.x + b.width <= a.x ||
-    a.y + a.height <= b.y ||
-    b.y + b.height <= a.y
+    aa.x + aa.width <= bb.x ||
+    bb.x + bb.width <= aa.x ||
+    aa.y + aa.height <= bb.y ||
+    bb.y + bb.height <= aa.y
   )
 }
 
 function compareLayerPosition (a, b) {
   // Returns `true` if `a` should be moved before `b` in the list
-  const yPositionDifference = a.y - b.y
+  const aa = computeBoundingBox(a)
+  const bb = computeBoundingBox(b)
+  const yPositionDifference = aa.y - bb.y
   if (yPositionDifference !== 0) {
     return yPositionDifference < 0
   }
-  return a.x - b.x < 0
+  return aa.x - bb.x < 0
 }
