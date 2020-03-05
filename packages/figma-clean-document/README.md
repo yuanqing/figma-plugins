@@ -37,7 +37,7 @@ Sort layers within the selection or on the current page by their X and Y positio
 
 ### Clean Layers
 
-Run all the above commands on layers within the selection or on the current page.
+Run all the above commands on layers within the selection or on the current page. Optionally skip processing of Locked layers.
 
 ### Sort Pages
 
