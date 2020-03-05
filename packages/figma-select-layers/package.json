@@ -190,10 +190,8 @@
       "-",
       {
         "name": "Select Similar Layers",
-        "command": {
-          "src": "select-similar-layers/command",
-          "ui": "select-similar-layers/ui"
-        }
+        "command": "select-similar-layers/command",
+        "ui": "select-similar-layers/ui"
       },
       "-",
       {
