@@ -7,7 +7,7 @@ import {
 import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-layers/utilities/smart-sort-child-layers'
 import { isLayerAnIllustration } from './is-layer-an-illustration'
 
-export function smartSortLayers (layers) {
+export function smartSortLayers (layers, skipLockedLayers) {
   if (layers.length < 2 || isLayerWithinInstance(layers[0]) === true) {
     return false
   }
@@ -30,6 +30,9 @@ export function smartSortLayers (layers) {
       layer,
       function (parentLayer) {
         if (hasAutoLayout(parentLayer) === true) {
+          return
+        }
+        if (skipLockedLayers === true && parentLayer.locked === true) {
           return
         }
         const layers = parentLayer.children

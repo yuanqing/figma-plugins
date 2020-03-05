@@ -34,6 +34,7 @@ export default async function () {
     const {
       deleteHiddenLayers,
       pixelPerfect,
+      skipLockedLayers,
       smartRenameLayers,
       smartRenameLayersWhitelist,
       ungroupSingleLayerGroups
@@ -52,15 +53,16 @@ export default async function () {
         cleanLayer(layer, {
           deleteHiddenLayers,
           pixelPerfect,
+          skipLockedLayers,
           smartRenameLayers,
           smartRenameLayersWhitelistRegex,
           ungroupSingleLayerGroups
         }) || didChange
-      didChange = collapseLayer(layer) || didChange
+      collapseLayer(layer)
     }
     if (settings.smartSortLayers === true) {
       for (const layers of getSiblingLayerGroups()) {
-        didChange = smartSortLayers(layers) || didChange
+        didChange = smartSortLayers(layers, skipLockedLayers) || didChange
       }
     }
     hideLoadingNotification()
@@ -75,7 +77,7 @@ export default async function () {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 384 },
+    { width: 240, height: 416 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )
 }

@@ -54,6 +54,7 @@ export function CleanLayers (initialState) {
     hasSelection,
     isLoading,
     pixelPerfect,
+    skipLockedLayers,
     smartRenameLayers,
     smartRenameLayersWhitelist,
     smartSortLayers,
@@ -116,6 +117,14 @@ export function CleanLayers (initialState) {
             Sort layers by their X and Y position while maintaining their
             relative stacking order on the page
           </Text>
+        </Checkbox>
+        <Checkbox
+          name='skipLockedLayers'
+          value={skipLockedLayers}
+          onChange={handleChange}
+          disabled={isLoading === true}
+        >
+          <Text>Skip locked layers</Text>
         </Checkbox>
       </Stack>
       <VerticalSpace space='extraLarge' />

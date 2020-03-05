@@ -7,10 +7,14 @@ export function cleanLayer (layer, settings) {
   const {
     deleteHiddenLayers,
     pixelPerfect,
+    skipLockedLayers,
     smartRenameLayers,
     smartRenameLayersWhitelistRegex,
     ungroupSingleLayerGroups
   } = settings
+  if (skipLockedLayers === true && layer.locked === true) {
+    return false
+  }
   if (layer.removed === true) {
     return false
   }

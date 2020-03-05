@@ -19,7 +19,7 @@ export default function () {
   )
   let didChange = false
   for (const layers of groups) {
-    didChange = smartSortLayers(layers) || didChange
+    didChange = smartSortLayers(layers, false) || didChange
   }
   hideLoadingNotification()
   figma.closePlugin(
