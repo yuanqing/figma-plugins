@@ -83,7 +83,7 @@ export function OffsetLayerSize (initialState) {
           disabled={hasSelection === false}
         />
       </Columns>
-      <VerticalSpace space='large' />
+      <VerticalSpace space='medium' />
       <Checkbox
         name='resizeWithConstraints'
         value={resizeWithConstraints}
@@ -92,7 +92,7 @@ export function OffsetLayerSize (initialState) {
       >
         <Text>Resize with constraints</Text>
       </Checkbox>
-      <VerticalSpace space='large' />
+      <VerticalSpace space='medium' />
       <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
         Offset Layer Size
       </Button>

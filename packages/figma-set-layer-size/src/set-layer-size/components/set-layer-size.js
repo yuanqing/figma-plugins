@@ -86,7 +86,7 @@ export function SetLayerSize (initialState) {
           disabled={hasSelection === false}
         />
       </Columns>
-      <VerticalSpace space='large' />
+      <VerticalSpace space='medium' />
       <Checkbox
         name='resizeWithConstraints'
         value={resizeWithConstraints}
@@ -95,7 +95,7 @@ export function SetLayerSize (initialState) {
       >
         <Text>Resize with constraints</Text>
       </Checkbox>
-      <VerticalSpace space='large' />
+      <VerticalSpace space='medium' />
       <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
         Set Layer Size
       </Button>

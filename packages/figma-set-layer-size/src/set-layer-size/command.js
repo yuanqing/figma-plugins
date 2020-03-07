@@ -43,7 +43,7 @@ export default async function () {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 148 },
+    { width: 240, height: 140 },
     { ...settings, selectedLayers, ...computeDimensions(selectedLayers) }
   )
 }
