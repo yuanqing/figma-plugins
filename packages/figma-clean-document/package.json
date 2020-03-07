@@ -1,6 +1,6 @@
 {
   "name": "figma-clean-document",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A Figma plugin to automagically organize and clean up your Figma document",
   "keywords": [
     "create-figma-plugin",
