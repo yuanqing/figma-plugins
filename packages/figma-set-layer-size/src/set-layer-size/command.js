@@ -10,8 +10,9 @@ import {
 } from '@create-figma-plugin/utilities'
 import { computeDimensions } from './utilities/compute-dimensions'
 import { defaultSettings } from '../utilities/default-settings'
-import { getSelectedLayers } from './utilities/get-selected-layers'
+import { getSelectedLayers } from '../utilities/get-selected-layers'
 import { setLayerSize } from './utilities/set-layer-size'
+import { updateSelectedLayers } from '../utilities/update-selected-layers'
 
 export default async function () {
   const selectedLayers = getSelectedLayers()
@@ -31,6 +32,7 @@ export default async function () {
     const { selectedLayers, width, height, resizeWithConstraints } = settings
     await saveSettings({ resizeWithConstraints })
     setLayerSize(selectedLayers, width, height, resizeWithConstraints)
+    updateSelectedLayers(selectedLayers)
     figma.closePlugin(formatSuccessMessage('Set layer size'))
   })
   addEventListener('CLOSE', function () {
