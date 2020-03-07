@@ -17,6 +17,10 @@ import { updateSelectedLayers } from '../utilities/update-selected-layers'
 export default async function () {
   const selectedLayers = getSelectedLayers()
   if (selectedLayers.length === 0) {
+    if (figma.currentPage.selection.length > 0) {
+      figma.closePlugin(formatErrorMessage('Select layers outside instances'))
+      return
+    }
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
