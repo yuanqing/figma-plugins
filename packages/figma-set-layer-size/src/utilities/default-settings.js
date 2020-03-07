@@ -1,5 +1,5 @@
 export const defaultSettings = {
-  height: 0,
-  resizeWithConstraints: false,
-  width: 0
+  offsetWidth: null,
+  offsetHeight: null,
+  resizeWithConstraints: false
 }

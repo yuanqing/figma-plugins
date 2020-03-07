@@ -36,6 +36,11 @@
         "command": "set-layer-size/command",
         "ui": "set-layer-size/ui"
       },
+      {
+        "name": "Offset Layer Size",
+        "command": "offset-layer-size/command",
+        "ui": "offset-layer-size/ui"
+      },
       "-",
       {
         "name": "Reset",
