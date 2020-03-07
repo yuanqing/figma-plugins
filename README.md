@@ -15,5 +15,5 @@ Name | Description
 [**Move Layers**](packages/figma-move-layers) | Precisely move layers
 [**Organize Layers**](packages/figma-organize-layers) | Organize layers on the page
 [**Select Layers**](packages/figma-select-layers) | Select layers based on name, type, or similarity
-[**Set Layer Size**](packages/figma-set-layer-size) | Precisely set or offset the size of layers, with an option to ignore constraints
+[**Set Layer Size**](packages/figma-set-layer-size) | Precisely set or offset the size of layers, while ignoring constraints
 [**Sort Layers**](packages/figma-sort-layers) | Sort layers by name or position
