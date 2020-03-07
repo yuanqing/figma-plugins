@@ -1,8 +1,8 @@
-# Set Layer Size ![Figma Plugin](https://img.shields.io/badge/figma-Set%20Layer%20Size-1BC47D.svg) [![npm Version](https://img.shields.io/npm/v/figma-set-layer-size.svg)](https://www.npmjs.com/package/figma-set-layer-size)
+# Set Layer Size [![Figma Plugin](https://img.shields.io/badge/figma-Set%20Layer%20Size-1BC47D.svg)](https://figma.com/community/plugin/817982008781589678/Set-Layer-Size) [![npm Version](https://img.shields.io/npm/v/figma-set-layer-size.svg)](https://www.npmjs.com/package/figma-set-layer-size)
 
 > A Figma plugin to precisely set or offset the size of layers, while ignoring constraints
 
-![Set Layer Size](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-set-layer-size/media/cover.png)
+[![Set Layer Size](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-set-layer-size/media/cover.png)](https://figma.com/community/plugin/817982008781589678/Set-Layer-Size)
 
 `constraints` `dimension` `layers` `offset` `resize` `size`
 
