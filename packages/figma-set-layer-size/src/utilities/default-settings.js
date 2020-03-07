@@ -1,5 +1,5 @@
 export const defaultSettings = {
-  height: 100,
+  height: 0,
   resizeWithConstraints: false,
-  width: 100
+  width: 0
 }
