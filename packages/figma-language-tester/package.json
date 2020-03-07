@@ -1,6 +1,6 @@
 {
   "name": "figma-language-tester",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A Figma plugin to test your UI in different languages",
   "keywords": [
     "create-figma-plugin",
