@@ -31,7 +31,7 @@
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
     "@sindresorhus/class-names": "^1.1.0",
-    "preact": "^10.1.1"
+    "preact": "^10.3.4"
   },
   "ava": {
     "files": [
@@ -58,8 +58,8 @@
       },
       "-",
       {
-        "name": "Reset",
-        "command": "reset/command"
+        "name": "Reset Plugin",
+        "command": "reset-plugin/command"
       }
     ]
   }

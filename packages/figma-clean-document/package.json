@@ -26,7 +26,7 @@
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
     "figma-sort-layers": "*",
-    "preact": "^10.1.1"
+    "preact": "^10.3.4"
   },
   "create-figma-plugin": {
     "id": "767379019764649932",
@@ -66,8 +66,8 @@
       },
       "-",
       {
-        "name": "Reset",
-        "command": "reset/command"
+        "name": "Reset Plugin",
+        "command": "reset-plugin/command"
       }
     ],
     "relaunchButtons": {
