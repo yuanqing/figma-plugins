@@ -2,7 +2,8 @@
 import {
   Checkbox,
   Container,
-  ButtonUploadFile,
+  FileUploadButton,
+  FileUploadDropzone,
   Text,
   VerticalSpace,
   useForm
@@ -10,6 +11,7 @@ import {
 import { triggerEvent } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+import { Loading } from './loading/loading'
 import { computeDimensions } from '../utilities/compute-dimensions'
 import { createImageFromFile } from '../utilities/create-image-from-file'
 import { splitImage } from '../utilities/split-image'
@@ -60,9 +62,48 @@ export function InsertBigImage (initialState) {
     },
     [handleChange, insertAs2x]
   )
+  if (isLoading === true) {
+    return (
+      <Loading>
+        {total === 1
+          ? 'Uploading image…'
+          : `Uploading image ${currentIndex} of ${total}…`}
+      </Loading>
+    )
+  }
+  const acceptedFileTypes = ['image/png', 'image/jpeg']
   return (
     <Container space='medium'>
-      <VerticalSpace space='extraLarge' />
+      <VerticalSpace space='medium' />
+      <FileUploadDropzone
+        acceptedFileTypes={acceptedFileTypes}
+        multiple
+        onSelectedFiles={handleSelectedFiles}
+      >
+        <Text align='center' bold>
+          Drop image files here
+        </Text>
+        <VerticalSpace space='small' />
+        <Text align='center' muted>
+          or
+        </Text>
+        <VerticalSpace space='small' />
+        <FileUploadButton
+          acceptedFileTypes={acceptedFileTypes}
+          multiple
+          onSelectedFiles={handleSelectedFiles}
+          loading={isLoading === true}
+          disabled={isLoading === true}
+          focused
+        >
+          Choose Image Files
+        </FileUploadButton>
+        <VerticalSpace space='medium' />
+        <Text align='center' muted>
+          Supported formats: JPEG, PNG
+        </Text>
+      </FileUploadDropzone>
+      <VerticalSpace space='medium' />
       <Checkbox
         name='insertAs2x'
         value={insertAs2x === true}
@@ -71,27 +112,6 @@ export function InsertBigImage (initialState) {
       >
         <Text>Insert as 2x</Text>
       </Checkbox>
-      <VerticalSpace space='medium' />
-      <ButtonUploadFile
-        accept='image/png, image/jpeg'
-        multiple
-        onSelectedFiles={handleSelectedFiles}
-        fullWidth
-        loading={isLoading === true}
-        disabled={isLoading === true}
-        focused
-      >
-        Choose image files
-      </ButtonUploadFile>
-      <VerticalSpace space='medium' />
-      <Text align='center' muted>
-        {total === 0
-          ? 'Supported formats: JPEG, PNG'
-          : total === 1
-          ? 'Processing image…'
-          : `Processing image ${currentIndex} of ${total}…`}
-      </Text>
-      <VerticalSpace space='extraLarge' />
     </Container>
   )
 }
