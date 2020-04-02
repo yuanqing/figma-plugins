@@ -1,4 +1,4 @@
-# Select Layers [![Figma Plugin](https://img.shields.io/badge/figma-Select%20Layers-1BC47D.svg)](https://figma.com/c/plugin/799648692768237063/Select-Layers) [![npm Version](https://img.shields.io/npm/v/figma-select-layers.svg)](https://www.npmjs.com/package/figma-select-layers)
+# Select Layers [![Figma Plugin](https://img.shields.io/badge/figma-Select%20Layers-yellow.svg)](https://figma.com/c/plugin/799648692768237063/Select-Layers) [![npm Version](https://img.shields.io/npm/v/figma-select-layers.svg)](https://www.npmjs.com/package/figma-select-layers)
 
 > A Figma plugin to select layers based on name, type, or similarity
 

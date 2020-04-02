@@ -1,4 +1,4 @@
-# Draw Mask Under Selection [![Figma Plugin](https://img.shields.io/badge/figma-Draw%20Mask%20Under%20Selection-1BC47D.svg)](https://www.figma.com/c/plugin/806532458729477508/Draw-Mask-Under-Selection) [![npm Version](https://img.shields.io/npm/v/figma-draw-mask-under-selection.svg)](https://www.npmjs.com/package/figma-draw-mask-under-selection)
+# Draw Mask Under Selection [![Figma Plugin](https://img.shields.io/badge/figma-Draw%20Mask%20Under%20Selection-yellow.svg)](https://www.figma.com/c/plugin/806532458729477508/Draw-Mask-Under-Selection) [![npm Version](https://img.shields.io/npm/v/figma-draw-mask-under-selection.svg)](https://www.npmjs.com/package/figma-draw-mask-under-selection)
 
 > A Figma plugin to draw a mask under the selection
 

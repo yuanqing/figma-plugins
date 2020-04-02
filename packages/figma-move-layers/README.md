@@ -1,4 +1,4 @@
-# Move Layers [![Figma Plugin](https://img.shields.io/badge/figma-Move%20Layers-1BC47D.svg)](https://figma.com/c/plugin/767379204511357902/Move-Layers) [![npm Version](https://img.shields.io/npm/v/figma-move-layers.svg)](https://www.npmjs.com/package/figma-move-layers)
+# Move Layers [![Figma Plugin](https://img.shields.io/badge/figma-Move%20Layers-yellow.svg)](https://figma.com/c/plugin/767379204511357902/Move-Layers) [![npm Version](https://img.shields.io/npm/v/figma-move-layers.svg)](https://www.npmjs.com/package/figma-move-layers)
 
 > A Figma plugin to precisely move layers
 
