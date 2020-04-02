@@ -1,4 +1,4 @@
-# Insert Big Image [![Figma Plugin](https://img.shields.io/badge/figma-Insert%20Big%20Image-yellow.svg)](https://figma.com/c/plugin/799646392992487942/Insert-Big-Image) [![npm Version](https://img.shields.io/npm/v/figma-insert-big-image.svg)](https://www.npmjs.com/package/figma-insert-big-image)
+# Insert Big Image [![Figma Plugin](https://badgen.net/badge/figma/Insert%20Big%20Image/yellow)](https://figma.com/c/plugin/799646392992487942/Insert-Big-Image) [![npm Version](https://badgen.net/npm/v/figma-insert-big-image)](https://www.npmjs.com/package/figma-insert-big-image)
 
 > A Figma plugin to insert and retain the original resolution of big images
 
