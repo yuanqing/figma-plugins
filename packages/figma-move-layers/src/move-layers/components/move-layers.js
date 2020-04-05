@@ -10,45 +10,40 @@ import {
   useForm
 } from '@create-figma-plugin/ui'
 import {
-  addEventListener,
+  emit,
   evaluateNumericExpression,
-  triggerEvent
+  on
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function MoveLayers (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
-        const evaluatedHorizontalOffset = evaluateNumericExpression(
-          horizontalOffset
-        )
-        const evaluatedVerticalOffset = evaluateNumericExpression(
-          verticalOffset
-        )
-        return (
-          hasSelection === true &&
-          ((evaluatedHorizontalOffset !== null &&
-            evaluatedHorizontalOffset !== 0) ||
-            (evaluatedVerticalOffset !== null && evaluatedVerticalOffset !== 0))
-        )
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({ horizontalOffset, verticalOffset }) {
-        triggerEvent('SUBMIT', {
-          horizontalOffset: evaluateNumericExpression(horizontalOffset),
-          verticalOffset: evaluateNumericExpression(verticalOffset)
-        })
-      }
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
+      const evaluatedHorizontalOffset = evaluateNumericExpression(
+        horizontalOffset
+      )
+      const evaluatedVerticalOffset = evaluateNumericExpression(verticalOffset)
+      return (
+        hasSelection === true &&
+        ((evaluatedHorizontalOffset !== null &&
+          evaluatedHorizontalOffset !== 0) ||
+          (evaluatedVerticalOffset !== null && evaluatedVerticalOffset !== 0))
+      )
+    },
+    onSubmit: function ({ horizontalOffset, verticalOffset }) {
+      emit('SUBMIT', {
+        horizontalOffset: evaluateNumericExpression(horizontalOffset),
+        verticalOffset: evaluateNumericExpression(verticalOffset)
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+      return on('SELECTION_CHANGED', function ({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },
@@ -73,7 +68,7 @@ export function MoveLayers (initialState) {
         />
       </Columns>
       <VerticalSpace space='large' />
-      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Move Layers
       </Button>
       <VerticalSpace space='small' />

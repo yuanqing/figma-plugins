@@ -13,9 +13,9 @@ import {
   useForm
 } from '@create-figma-plugin/ui'
 import {
-  addEventListener,
+  emit,
   evaluateNumericExpression,
-  triggerEvent
+  on
 } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect } from 'preact/hooks'
@@ -23,33 +23,30 @@ import { Preview } from './preview/preview'
 import { groupDefinitions } from '../utilities/group-definitions'
 
 export function OrganizeLayers (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      validate: function ({ layers }) {
-        return layers.length > 0
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ layers }) {
+      return layers.length > 0
+    },
+    onSubmit: function ({
+      combineSingleLayerGroups,
+      groupDefinition,
+      horizontalSpace,
+      verticalSpace
+    }) {
+      emit('SUBMIT', {
         combineSingleLayerGroups,
         groupDefinition,
-        horizontalSpace,
-        verticalSpace
-      }) {
-        triggerEvent('SUBMIT', {
-          combineSingleLayerGroups,
-          groupDefinition,
-          horizontalSpace: evaluateNumericExpression(horizontalSpace) || 0,
-          verticalSpace: evaluateNumericExpression(verticalSpace) || 0
-        })
-      }
+        horizontalSpace: evaluateNumericExpression(horizontalSpace) || 0,
+        verticalSpace: evaluateNumericExpression(verticalSpace) || 0
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({
+      return on('SELECTION_CHANGED', function ({
         layers,
         maximumGroupDefinition
       }) {
@@ -108,7 +105,7 @@ export function OrganizeLayers (initialState) {
         <VerticalSpace space='large' />
         <Button
           fullWidth
-          disabled={isInvalid() === true}
+          disabled={isValid() === false}
           focused
           onClick={handleSubmit}
         >

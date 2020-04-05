@@ -1,5 +1,5 @@
 /** @jsx h */
-import { triggerEvent } from '@create-figma-plugin/utilities'
+import { emit } from '@create-figma-plugin/utilities'
 import {
   Button,
   Container,
@@ -11,22 +11,19 @@ import {
 import { h } from 'preact'
 
 export function SetApiKey (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      validate: function ({ apiKey }) {
-        return apiKey !== ''
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({ apiKey }) {
-        triggerEvent('SUBMIT', {
-          apiKey
-        })
-      }
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ apiKey }) {
+      return apiKey !== ''
+    },
+    onSubmit: function ({ apiKey }) {
+      emit('SUBMIT', {
+        apiKey
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   const { apiKey } = state
   return (
     <Container>
@@ -45,7 +42,7 @@ export function SetApiKey (initialState) {
         </a>
       </Text>
       <VerticalSpace space='extraLarge' />
-      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Set API Key
       </Button>
       <VerticalSpace space='small' />

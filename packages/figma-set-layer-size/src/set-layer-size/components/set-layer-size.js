@@ -10,50 +10,47 @@ import {
   useForm
 } from '@create-figma-plugin/ui'
 import {
-  addEventListener,
+  emit,
   evaluateNumericExpression,
-  triggerEvent
+  on
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { MIXED } from '../utilities/constants'
 
 export function SetLayerSize (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      validate: function ({ selectedLayers, width, height }) {
-        if (selectedLayers.length === 0) {
-          return false
-        }
-        const evaluatedWidth = evaluateNumericExpression(width)
-        const evaluatedHeight = evaluateNumericExpression(height)
-        return (
-          (evaluatedWidth !== null && evaluatedWidth !== 0) ||
-          (evaluatedHeight !== null && evaluatedHeight !== 0)
-        )
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({
-        selectedLayers,
-        width,
-        height,
-        resizeWithConstraints
-      }) {
-        triggerEvent('SUBMIT', {
-          selectedLayers,
-          width: evaluateNumericExpression(width),
-          height: evaluateNumericExpression(height),
-          resizeWithConstraints
-        })
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ selectedLayers, width, height }) {
+      if (selectedLayers.length === 0) {
+        return false
       }
+      const evaluatedWidth = evaluateNumericExpression(width)
+      const evaluatedHeight = evaluateNumericExpression(height)
+      return (
+        (evaluatedWidth !== null && evaluatedWidth !== 0) ||
+        (evaluatedHeight !== null && evaluatedHeight !== 0)
+      )
+    },
+    onSubmit: function ({
+      selectedLayers,
+      width,
+      height,
+      resizeWithConstraints
+    }) {
+      emit('SUBMIT', {
+        selectedLayers,
+        width: evaluateNumericExpression(width),
+        height: evaluateNumericExpression(height),
+        resizeWithConstraints
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({
+      return on('SELECTION_CHANGED', function ({
         selectedLayers,
         width,
         height
@@ -96,7 +93,7 @@ export function SetLayerSize (initialState) {
         <Text>Resize with constraints</Text>
       </Checkbox>
       <VerticalSpace space='medium' />
-      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Set Layer Size
       </Button>
       <VerticalSpace space='small' />

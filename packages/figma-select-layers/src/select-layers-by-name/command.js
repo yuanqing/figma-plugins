@@ -1,27 +1,26 @@
 import {
-  addEventListener,
+  emit,
   formatErrorMessage,
   formatSuccessMessage,
   getSelectedLayersOrAllLayers,
   loadSettings,
   mapNumberToWord,
-  onSelectionChange,
+  on,
   pluralize,
   saveSettings,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
 import { filterLayersByName } from './utilities/filter-layers-by-name'
 
 export default async function () {
   const settings = await loadSettings(defaultSettings)
-  onSelectionChange(function (selectedLayers) {
-    triggerEvent('SELECTION_CHANGED', {
-      hasSelection: selectedLayers.length > 0
+  figma.on('selectionchange', function () {
+    emit('SELECTION_CHANGED', {
+      hasSelection: figma.currentPage.selection.length > 0
     })
   })
-  addEventListener('SUBMIT', async function ({ exactMatch, layerName }) {
+  on('SUBMIT', async function ({ exactMatch, layerName }) {
     await saveSettings({
       ...settings,
       selectLayersByName: { exactMatch, layerName }
@@ -45,7 +44,7 @@ export default async function () {
       )
     )
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
   const { layerName, exactMatch } = settings.selectLayersByName

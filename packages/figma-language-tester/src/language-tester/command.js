@@ -1,12 +1,12 @@
 import {
-  addEventListener,
+  emit,
   formatErrorMessage,
   formatSuccessMessage,
   loadFonts,
   loadSettings,
+  on,
   showUI,
-  traverseLayer,
-  triggerEvent
+  traverseLayer
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
 import { getTextLayers } from '../get-text-layers'
@@ -34,7 +34,7 @@ export default async function () {
     resetLanguage(originalStrings)
   })
   let notificationHandler
-  addEventListener('SET_LANGUAGE', async function ({ languageKey }) {
+  on('SET_LANGUAGE', async function ({ languageKey }) {
     notificationHandler = figma.notify('Translating…', { timeout: 60000 })
     const { layers, scope } = getTextLayers()
     layers.forEach(function (layer) {
@@ -43,7 +43,7 @@ export default async function () {
       }
     })
     await loadFonts(layers)
-    triggerEvent('TRANSLATE_REQUEST', {
+    emit('TRANSLATE_REQUEST', {
       apiKey,
       languageKey,
       layers: layers.map(function ({ id, characters }) {
@@ -52,11 +52,7 @@ export default async function () {
       scope
     })
   })
-  addEventListener('TRANSLATE_RESULT', async function ({
-    languageKey,
-    layers,
-    scope
-  }) {
+  on('TRANSLATE_RESULT', async function ({ languageKey, layers, scope }) {
     notificationHandler.cancel()
     for (const { id, characters } of layers) {
       const layer = figma.getNodeById(id)
@@ -68,10 +64,10 @@ export default async function () {
       )
     )
   })
-  addEventListener('RESET_LANGUAGE', function () {
+  on('RESET_LANGUAGE', function () {
     resetLanguage(originalStrings)
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
 }

@@ -7,7 +7,7 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 import { Attributes } from './attributes.js'
@@ -19,7 +19,7 @@ import { toggleAttributes } from '../utilities/toggle-attributes'
 import styles from './select-similar-layers.scss'
 
 export function SelectSimilarLayers (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+  const { state, handleChange, handleSubmit, isValid } = useForm(
     { ...initialState, searchTerm: '' },
     {
       transform: function (state) {
@@ -47,13 +47,13 @@ export function SelectSimilarLayers (initialState) {
           everyAttribute(attributes, keysByReferenceLayerType, false) === false
         )
       },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
       onSubmit: function ({ attributes }) {
-        triggerEvent('SUBMIT', {
+        emit('SUBMIT', {
           attributes
         })
+      },
+      onClose: function () {
+        emit('CLOSE_UI')
       }
     }
   )
@@ -96,9 +96,7 @@ export function SelectSimilarLayers (initialState) {
   )
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({
-        referenceLayerType
-      }) {
+      return on('SELECTION_CHANGED', function ({ referenceLayerType }) {
         handleChange({ referenceLayerType })
       })
     },
@@ -136,11 +134,7 @@ export function SelectSimilarLayers (initialState) {
       <Divider />
       <Container space='medium'>
         <VerticalSpace space='small' />
-        <Button
-          fullWidth
-          disabled={isInvalid() === true}
-          onClick={handleSubmit}
-        >
+        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
           Select Similar Layers
         </Button>
         <VerticalSpace space='small' />

@@ -9,12 +9,12 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function CleanLayers (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+  const { state, handleChange, handleSubmit, isValid } = useForm(
     { ...initialState, isLoading: false },
     {
       validate: function ({
@@ -32,18 +32,18 @@ export function CleanLayers (initialState) {
           ungroupSingleLayerGroups === true
         )
       },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
       onSubmit: function ({ hasSelection, isLoading, ...settings }) {
         handleChange({ isLoading: true })
-        triggerEvent('SUBMIT', settings)
+        emit('SUBMIT', settings)
+      },
+      onClose: function () {
+        emit('CLOSE_UI')
       }
     }
   )
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+      return on('SELECTION_CHANGED', function ({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },
@@ -130,7 +130,7 @@ export function CleanLayers (initialState) {
       <VerticalSpace space='extraLarge' />
       <Button
         fullWidth
-        disabled={isInvalid() === true || isLoading === true}
+        disabled={isValid() === false || isLoading === true}
         loading={isLoading === true}
         focused
         onClick={handleSubmit}

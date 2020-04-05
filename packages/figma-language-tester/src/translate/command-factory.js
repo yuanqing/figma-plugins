@@ -1,11 +1,11 @@
 import {
-  addEventListener,
+  emit,
   formatErrorMessage,
   formatSuccessMessage,
   loadFonts,
   loadSettings,
-  showUI,
-  triggerEvent
+  on,
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
 import { getTextLayers } from '../get-text-layers'
@@ -30,7 +30,7 @@ export function commandFactory (languageKey) {
     }
     showUI({ visible: false })
     const notificationHandler = figma.notify('Translating…', { timeout: 60000 })
-    addEventListener('TRANSLATE_RESULT', function ({ layers }) {
+    on('TRANSLATE_RESULT', function ({ layers }) {
       notificationHandler.cancel()
       for (const { id, characters } of layers) {
         const layer = figma.getNodeById(id)
@@ -44,7 +44,7 @@ export function commandFactory (languageKey) {
     })
     showUI({ visible: false })
     await loadFonts(layers)
-    triggerEvent('TRANSLATE_REQUEST', {
+    emit('TRANSLATE_REQUEST', {
       apiKey,
       languageKey,
       layers: layers.map(function ({ id, characters }) {
