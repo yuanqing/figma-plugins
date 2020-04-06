@@ -8,7 +8,7 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { EXPLICIT, RETAIN, SHORT } from '../formats'
@@ -35,49 +35,46 @@ const locales = localesJson.map(function (locale) {
 })
 
 export function FormatCurrency (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      transform: function (state) {
-        const { layers, format, locale } = state
-        return {
-          ...state,
-          previewItems: computePreview({
-            layers,
-            format,
-            locale
-          })
-        }
-      },
-      validate: function ({ previewItems }) {
-        return (
-          previewItems !== INVALID_SETTINGS &&
-          previewItems !== NO_TEXT_LAYERS &&
-          previewItems.length > 0
-        )
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({ layers, format, locale }) {
-        const formatter = formatters[format]
-        const result = layers.map(function ({ id, characters }) {
-          return {
-            id,
-            characters: formatter(characters, locale)
-          }
-        })
-        triggerEvent('SUBMIT', {
-          layers: result,
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    transform: function (state) {
+      const { layers, format, locale } = state
+      return {
+        ...state,
+        previewItems: computePreview({
+          layers,
           format,
           locale
         })
       }
+    },
+    validate: function ({ previewItems }) {
+      return (
+        previewItems !== INVALID_SETTINGS &&
+        previewItems !== NO_TEXT_LAYERS &&
+        previewItems.length > 0
+      )
+    },
+    onSubmit: function ({ layers, format, locale }) {
+      const formatter = formatters[format]
+      const result = layers.map(function ({ id, characters }) {
+        return {
+          id,
+          characters: formatter(characters, locale)
+        }
+      })
+      emit('SUBMIT', {
+        layers: result,
+        format,
+        locale
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ layers }) {
+      return on('SELECTION_CHANGED', function ({ layers }) {
         handleChange({ layers })
       })
     },
@@ -108,11 +105,7 @@ export function FormatCurrency (initialState) {
           top
         />
         <VerticalSpace space='extraLarge' />
-        <Button
-          fullWidth
-          disabled={isInvalid() === true}
-          onClick={handleSubmit}
-        >
+        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
           Format Currency
         </Button>
         <VerticalSpace space='small' />

@@ -1,15 +1,14 @@
 import {
-  addEventListener,
+  emit,
   formatErrorMessage,
   formatSuccessMessage,
   isLayerWithinInstance,
   loadSettings,
   mapNumberToWord,
-  onSelectionChange,
+  on,
   pluralize,
   saveSettings,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
 import { getComponents } from './utilities/get-components'
@@ -35,16 +34,13 @@ export default async function () {
   const { shouldResizeToFitLayer, ...settings } = await loadSettings(
     defaultSettings
   )
-  onSelectionChange(function () {
-    triggerEvent('SELECTION_CHANGED', {
+  figma.on('selectionchange', function () {
+    emit('SELECTION_CHANGED', {
       components: getComponents(),
       selectedLayers: getSelectedLayers()
     })
   })
-  addEventListener('SUBMIT', async function ({
-    componentId,
-    shouldResizeToFitLayer
-  }) {
+  on('SUBMIT', async function ({ componentId, shouldResizeToFitLayer }) {
     await saveSettings({
       ...settings,
       shouldResizeToFitLayer
@@ -89,7 +85,7 @@ export default async function () {
       )
     )
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

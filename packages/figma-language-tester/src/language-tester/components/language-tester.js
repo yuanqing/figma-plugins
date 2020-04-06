@@ -6,7 +6,7 @@ import {
   VerticalSpace,
   ESCAPE_KEY_CODE
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import { LanguageItem } from './language-item'
@@ -21,19 +21,19 @@ export function LanguageTester () {
   const [isLoading, setIsLoading] = useState(false)
   function handleLanguageClick (languageKey) {
     setLanguageKey(languageKey)
-    triggerEvent('SET_LANGUAGE', { languageKey })
+    emit('SET_LANGUAGE', { languageKey })
   }
   function handleResetClick () {
     setLanguageKey(DEFAULT_LANGUAGE)
-    triggerEvent('RESET_LANGUAGE')
+    emit('RESET_LANGUAGE')
   }
   function handleKeyDown (event) {
     if (event.keyCode === ESCAPE_KEY_CODE) {
-      triggerEvent('CLOSE')
+      emit('CLOSE_UI')
     }
   }
   useEffect(function () {
-    return addEventListener('TRANSLATE_REQUEST', async function ({
+    return on('TRANSLATE_REQUEST', async function ({
       apiKey,
       languageKey,
       layers,
@@ -45,7 +45,7 @@ export function LanguageTester () {
       })
       const translated = await Promise.all(promises)
       setIsLoading(false)
-      triggerEvent('TRANSLATE_RESULT', {
+      emit('TRANSLATE_RESULT', {
         languageKey,
         layers: layers.map(function ({ id }, index) {
           return {

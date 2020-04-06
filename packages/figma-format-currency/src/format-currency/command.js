@@ -1,23 +1,23 @@
 import {
-  addEventListener,
+  emit,
   formatSuccessMessage,
   loadFonts,
   loadSettings,
-  onSelectionChange,
+  on,
   saveSettings,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
 import { getTextLayers } from '../utilities/get-text-layers'
 
 export default async function () {
-  const layers = getTextLayers()
   const { format, locale, ...settings } = await loadSettings(defaultSettings)
-  onSelectionChange(function () {
-    triggerEvent('SELECTION_CHANGED', { layers: getTextLayers() })
+  figma.on('selectionchange', function () {
+    emit('SELECTION_CHANGED', {
+      layers: getTextLayers()
+    })
   })
-  addEventListener('SUBMIT', async function ({ layers, format, locale }) {
+  on('SUBMIT', async function ({ layers, format, locale }) {
     await saveSettings({
       ...settings,
       format,
@@ -30,9 +30,10 @@ export default async function () {
     }
     figma.closePlugin(formatSuccessMessage('Formatted currencies in selection'))
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
+  const layers = getTextLayers()
   showUI(
     { width: 240, height: 329 },
     {

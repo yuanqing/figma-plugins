@@ -1,28 +1,28 @@
 import {
-  addEventListener,
+  emit,
   formatSuccessMessage,
   loadFonts,
   loadSettings,
-  onSelectionChange,
+  on,
   saveSettings,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
 import { getTextLayers } from '../utilities/get-text-layers'
 
 export default async function () {
-  const layers = getTextLayers()
   const {
     targetCurrency,
     roundNumbers,
     locale,
     ...settings
   } = await loadSettings(defaultSettings)
-  onSelectionChange(function () {
-    triggerEvent('SELECTION_CHANGED', { layers: getTextLayers() })
+  figma.on('selectionchange', function () {
+    emit('SELECTION_CHANGED', {
+      layers: getTextLayers()
+    })
   })
-  addEventListener('SUBMIT', async function ({
+  on('SUBMIT', async function ({
     layers,
     targetCurrency,
     roundNumbers,
@@ -45,9 +45,10 @@ export default async function () {
       )
     )
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
+  const layers = getTextLayers()
   showUI(
     { width: 240, height: 357 },
     {

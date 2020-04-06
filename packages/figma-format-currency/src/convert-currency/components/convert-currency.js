@@ -8,7 +8,7 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import {
@@ -31,55 +31,52 @@ const locales = localesJson.map(function (locale) {
 })
 
 export function ConvertCurrency (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      transform: function (state) {
-        const { layers, targetCurrency, roundNumbers, locale } = state
-        return {
-          ...state,
-          previewItems: computePreview({
-            layers,
-            targetCurrency,
-            roundNumbers,
-            locale
-          })
-        }
-      },
-      validate: function ({ previewItems }) {
-        return (
-          previewItems !== INVALID_SETTINGS &&
-          previewItems !== NO_TEXT_LAYERS &&
-          previewItems.length > 0
-        )
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({ layers, targetCurrency, roundNumbers, locale }) {
-        const result = layers.map(function ({ id, characters }) {
-          return {
-            id,
-            characters: convertCurrency({
-              string: characters,
-              targetCurrency,
-              roundNumbers,
-              locale
-            })
-          }
-        })
-        triggerEvent('SUBMIT', {
-          layers: result,
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    transform: function (state) {
+      const { layers, targetCurrency, roundNumbers, locale } = state
+      return {
+        ...state,
+        previewItems: computePreview({
+          layers,
           targetCurrency,
           roundNumbers,
           locale
         })
       }
+    },
+    validate: function ({ previewItems }) {
+      return (
+        previewItems !== INVALID_SETTINGS &&
+        previewItems !== NO_TEXT_LAYERS &&
+        previewItems.length > 0
+      )
+    },
+    onSubmit: function ({ layers, targetCurrency, roundNumbers, locale }) {
+      const result = layers.map(function ({ id, characters }) {
+        return {
+          id,
+          characters: convertCurrency({
+            string: characters,
+            targetCurrency,
+            roundNumbers,
+            locale
+          })
+        }
+      })
+      emit('SUBMIT', {
+        layers: result,
+        targetCurrency,
+        roundNumbers,
+        locale
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ layers }) {
+      return on('SELECTION_CHANGED', function ({ layers }) {
         handleChange({ layers })
       })
     },
@@ -121,11 +118,7 @@ export function ConvertCurrency (initialState) {
           top
         />
         <VerticalSpace space='extraLarge' />
-        <Button
-          fullWidth
-          disabled={isInvalid() === true}
-          onClick={handleSubmit}
-        >
+        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
           Convert Currency
         </Button>
         <VerticalSpace space='small' />

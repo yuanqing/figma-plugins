@@ -1,16 +1,15 @@
 import {
-  addEventListener,
+  emit,
   extractAttributes,
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
   mapNumberToWord,
-  onSelectionChange,
+  on,
   pluralize,
   saveSettings,
   setRelaunchButton,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
 import { defaultSettings } from '../utilities/default-settings'
@@ -23,14 +22,14 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
-  onSelectionChange(function () {
+  figma.on('selectionchange', function () {
     const layers = getLayers()
-    triggerEvent('SELECTION_CHANGED', {
+    emit('SELECTION_CHANGED', {
       layers,
       maximumGroupDefinition: computeMaximumGroupDefinition(layers)
     })
   })
-  addEventListener('SUBMIT', async function (settings) {
+  on('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const {
       combineSingleLayerGroups,
@@ -57,7 +56,7 @@ export default async function () {
       )
     )
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

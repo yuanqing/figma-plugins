@@ -8,7 +8,7 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { triggerEvent } from '@create-figma-plugin/utilities'
+import { emit } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 import { Loading } from './loading/loading'
@@ -33,7 +33,7 @@ export function InsertBigImage (initialState) {
         }
       },
       onClose: function () {
-        triggerEvent('CLOSE')
+        emit('CLOSE_UI')
       }
     }
   )
@@ -51,7 +51,7 @@ export function InsertBigImage (initialState) {
         const heights = computeDimensions(image.height)
         const images = await splitImage(image, widths, heights)
         const name = trimExtension(file.name)
-        triggerEvent('INSERT_BIG_IMAGE', {
+        emit('INSERT_BIG_IMAGE', {
           name,
           images,
           insertAs2x,

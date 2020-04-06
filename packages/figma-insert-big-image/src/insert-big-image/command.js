@@ -1,9 +1,9 @@
 import {
-  addEventListener,
   formatSuccessMessage,
   loadSettings,
   saveSettings,
   mapNumberToWord,
+  on,
   pluralize,
   showUI,
   updateLayersSortOrder
@@ -12,12 +12,12 @@ import { createImageLayer } from './utilities/create-image-layer'
 import { defaultSettings } from '../utilities/default-settings'
 
 export default async function () {
-  const settings = await loadSettings(defaultSettings)
   const center = figma.viewport.center
   let x = Math.round(center.x)
   const y = Math.round(center.y)
   const result = []
-  addEventListener('INSERT_BIG_IMAGE', async function ({
+  const settings = await loadSettings(defaultSettings)
+  on('INSERT_BIG_IMAGE', async function ({
     name,
     images,
     insertAs2x,
@@ -54,7 +54,7 @@ export default async function () {
       )
     )
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI({ width: 240, height: 224 }, settings)

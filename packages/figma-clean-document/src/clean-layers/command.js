@@ -1,15 +1,14 @@
 import {
-  addEventListener,
+  emit,
   collapseLayer,
   formatErrorMessage,
   formatSuccessMessage,
   getSelectedLayersOrAllLayers,
   loadSettings,
-  onSelectionChange,
+  on,
   saveSettings,
   setRelaunchButton,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { cleanLayer } from '../utilities/clean-layer'
 import { defaultSettings } from '../utilities/default-settings'
@@ -24,12 +23,12 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
-  onSelectionChange(function (selectedLayers) {
-    triggerEvent('SELECTION_CHANGED', {
-      hasSelection: selectedLayers.length > 0
+  figma.on('selectionchange', function () {
+    emit('SELECTION_CHANGED', {
+      hasSelection: figma.currentPage.selection.length > 0
     })
   })
-  addEventListener('SUBMIT', async function (settings) {
+  on('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const {
       deleteHiddenLayers,
@@ -73,7 +72,7 @@ export default async function () {
         : `No change to layers ${scope}`
     )
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

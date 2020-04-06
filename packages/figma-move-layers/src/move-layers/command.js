@@ -1,13 +1,12 @@
 import {
-  addEventListener,
+  emit,
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
-  onSelectionChange,
+  on,
   pluralize,
   saveSettings,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
 
@@ -17,12 +16,12 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
-  onSelectionChange(function (selectedLayers) {
-    triggerEvent('SELECTION_CHANGED', {
-      hasSelection: selectedLayers.length !== 0
+  figma.on('selectionchange', function () {
+    emit('SELECTION_CHANGED', {
+      hasSelection: figma.currentPage.selection.length > 0
     })
   })
-  addEventListener('SUBMIT', async function (settings) {
+  on('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const { horizontalOffset, verticalOffset } = settings
     const isHorizontalOffsetValid =
@@ -48,7 +47,7 @@ export default async function () {
       )
     )
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI({ width: 240, height: 116 }, { ...settings, hasSelection: true })

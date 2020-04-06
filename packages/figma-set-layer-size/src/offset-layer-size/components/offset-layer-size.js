@@ -10,48 +10,43 @@ import {
   useForm
 } from '@create-figma-plugin/ui'
 import {
-  addEventListener,
+  emit,
   evaluateNumericExpression,
-  triggerEvent
+  on
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function OffsetLayerSize (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      validate: function ({ selectedLayers, offsetWidth, offsetHeight }) {
-        if (selectedLayers.length === 0) {
-          return false
-        }
-        const evaluatedWidth = evaluateNumericExpression(offsetWidth)
-        const evaluatedHeight = evaluateNumericExpression(offsetHeight)
-        return evaluatedWidth !== null || evaluatedHeight !== null
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({
-        selectedLayers,
-        offsetWidth,
-        offsetHeight,
-        resizeWithConstraints
-      }) {
-        triggerEvent('SUBMIT', {
-          selectedLayers,
-          offsetWidth: evaluateNumericExpression(offsetWidth),
-          offsetHeight: evaluateNumericExpression(offsetHeight),
-          resizeWithConstraints
-        })
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ selectedLayers, offsetWidth, offsetHeight }) {
+      if (selectedLayers.length === 0) {
+        return false
       }
+      const evaluatedWidth = evaluateNumericExpression(offsetWidth)
+      const evaluatedHeight = evaluateNumericExpression(offsetHeight)
+      return evaluatedWidth !== null || evaluatedHeight !== null
+    },
+    onSubmit: function ({
+      selectedLayers,
+      offsetWidth,
+      offsetHeight,
+      resizeWithConstraints
+    }) {
+      emit('SUBMIT', {
+        selectedLayers,
+        offsetWidth: evaluateNumericExpression(offsetWidth),
+        offsetHeight: evaluateNumericExpression(offsetHeight),
+        resizeWithConstraints
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({
-        selectedLayers
-      }) {
+      return on('SELECTION_CHANGED', function ({ selectedLayers }) {
         handleChange({ selectedLayers })
       })
     },
@@ -93,7 +88,7 @@ export function OffsetLayerSize (initialState) {
         <Text>Resize with constraints</Text>
       </Checkbox>
       <VerticalSpace space='medium' />
-      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Offset Layer Size
       </Button>
       <VerticalSpace space='small' />

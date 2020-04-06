@@ -8,31 +8,28 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function SelectLayersByName (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      validate: function ({ layerName }) {
-        return layerName !== ''
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({ exactMatch, layerName }) {
-        triggerEvent('SUBMIT', {
-          exactMatch,
-          layerName
-        })
-      }
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ layerName }) {
+      return layerName !== ''
+    },
+    onSubmit: function ({ exactMatch, layerName }) {
+      emit('SUBMIT', {
+        exactMatch,
+        layerName
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+      return on('SELECTION_CHANGED', function ({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },
@@ -57,7 +54,7 @@ export function SelectLayersByName (initialState) {
         <Text>Exact match</Text>
       </Checkbox>
       <VerticalSpace space='medium' />
-      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Select Layers by Name
       </Button>
       <VerticalSpace space='small' />

@@ -8,35 +8,32 @@ import {
   useForm
 } from '@create-figma-plugin/ui'
 import {
-  addEventListener,
+  emit,
   evaluateNumericExpression,
-  triggerEvent
+  on
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function DrawSliceOverSelection (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      validate: function ({ hasSelection, padding }) {
-        return (
-          hasSelection === true && evaluateNumericExpression(padding) !== null
-        )
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({ padding }) {
-        triggerEvent('SUBMIT', {
-          padding: evaluateNumericExpression(padding)
-        })
-      }
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ hasSelection, padding }) {
+      return (
+        hasSelection === true && evaluateNumericExpression(padding) !== null
+      )
+    },
+    onSubmit: function ({ padding }) {
+      emit('SUBMIT', {
+        padding: evaluateNumericExpression(padding)
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+      return on('SELECTION_CHANGED', function ({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },
@@ -55,7 +52,7 @@ export function DrawSliceOverSelection (initialState) {
         onChange={handleChange}
       />
       <VerticalSpace space='extraLarge' />
-      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Draw Slice Over Selection
       </Button>
       <VerticalSpace space='small' />

@@ -7,7 +7,7 @@ import {
   VerticalSpace,
   useForm
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
@@ -15,17 +15,17 @@ export function SmartRenameLayers (initialState) {
   const { state, handleChange, handleSubmit } = useForm(
     { ...initialState, isLoading: false },
     {
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
       onSubmit: function ({ smartRenameLayersWhitelist }) {
-        triggerEvent('SUBMIT', { smartRenameLayersWhitelist })
+        emit('SUBMIT', { smartRenameLayersWhitelist })
+      },
+      onClose: function () {
+        emit('CLOSE_UI')
       }
     }
   )
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+      return on('SELECTION_CHANGED', function ({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },

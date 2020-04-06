@@ -11,7 +11,7 @@ import {
   useForm,
   useScrollableMenu
 } from '@create-figma-plugin/ui'
-import { addEventListener, triggerEvent } from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 import styles from './replace-with-component.scss'
@@ -19,7 +19,7 @@ import styles from './replace-with-component.scss'
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-scrollable-menu-id'
 
 export function ReplaceWithComponent (initialState) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
+  const { state, handleChange, handleSubmit, isValid } = useForm(
     {
       ...initialState,
       componentId: null,
@@ -51,14 +51,14 @@ export function ReplaceWithComponent (initialState) {
           }) !== -1
         )
       },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
       onSubmit: function ({ componentId, shouldResizeToFitLayer }) {
-        triggerEvent('SUBMIT', {
+        emit('SUBMIT', {
           componentId,
           shouldResizeToFitLayer
         })
+      },
+      onClose: function () {
+        emit('CLOSE_UI')
       }
     }
   )
@@ -85,10 +85,7 @@ export function ReplaceWithComponent (initialState) {
   })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({
-        components,
-        selectedLayers
-      }) {
+      return on('SELECTION_CHANGED', function ({ components, selectedLayers }) {
         handleChange({ components, selectedLayers })
       })
     },
@@ -147,11 +144,7 @@ export function ReplaceWithComponent (initialState) {
           <Text>Resize component to fit layer</Text>
         </Checkbox>
         <VerticalSpace space='medium' />
-        <Button
-          fullWidth
-          disabled={isInvalid() === true}
-          onClick={handleSubmit}
-        >
+        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
           Replace With Component
         </Button>
         <VerticalSpace space='small' />

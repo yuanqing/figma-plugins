@@ -1,12 +1,11 @@
 import {
-  addEventListener,
+  emit,
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
-  onSelectionChange,
+  on,
   saveSettings,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
 import { drawSliceOverSelection } from './utilities/draw-slice-over-selection'
@@ -17,19 +16,25 @@ export default async function () {
     return
   }
   const settings = await loadSettings(defaultSettings)
-  onSelectionChange(function (selectedLayers) {
-    triggerEvent('SELECTION_CHANGED', {
-      hasSelection: selectedLayers.length !== 0
+  figma.on('selectionchange', function () {
+    emit('SELECTION_CHANGED', {
+      hasSelection: figma.currentPage.selection.length > 0
     })
   })
-  addEventListener('SUBMIT', async function (settings) {
+  on('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const { padding } = settings
     drawSliceOverSelection(padding)
     figma.closePlugin(formatSuccessMessage('Drew slice over selection'))
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 140 }, { ...settings, hasSelection: true })
+  showUI(
+    {
+      width: 240,
+      height: 140
+    },
+    { ...settings, hasSelection: true }
+  )
 }

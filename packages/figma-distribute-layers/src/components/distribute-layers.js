@@ -8,35 +8,30 @@ import {
   useForm
 } from '@create-figma-plugin/ui'
 import {
-  addEventListener,
+  emit,
   evaluateNumericExpression,
-  triggerEvent
+  on
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
 export function DistributeLayers ({ direction, icon, ...initialState }) {
-  const { state, handleChange, handleSubmit, isInvalid } = useForm(
-    initialState,
-    {
-      validate: function ({ hasSelection, space }) {
-        return (
-          hasSelection === true && evaluateNumericExpression(space) !== null
-        )
-      },
-      onClose: function () {
-        triggerEvent('CLOSE')
-      },
-      onSubmit: function ({ space }) {
-        triggerEvent('SUBMIT', {
-          space: evaluateNumericExpression(space)
-        })
-      }
+  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+    validate: function ({ hasSelection, space }) {
+      return hasSelection === true && evaluateNumericExpression(space) !== null
+    },
+    onSubmit: function ({ space }) {
+      emit('SUBMIT', {
+        space: evaluateNumericExpression(space)
+      })
+    },
+    onClose: function () {
+      emit('CLOSE_UI')
     }
-  )
+  })
   useEffect(
     function () {
-      return addEventListener('SELECTION_CHANGED', function ({ hasSelection }) {
+      return on('SELECTION_CHANGED', function ({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },
@@ -55,7 +50,7 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
         onChange={handleChange}
       />
       <VerticalSpace space='extraLarge' />
-      <Button fullWidth disabled={isInvalid() === true} onClick={handleSubmit}>
+      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Distribute Layers {direction}
       </Button>
       <VerticalSpace space='small' />

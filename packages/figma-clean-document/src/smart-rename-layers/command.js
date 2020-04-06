@@ -1,12 +1,11 @@
 import {
-  addEventListener,
+  emit,
   loadSettings,
   mapNumberToWord,
-  onSelectionChange,
+  on,
   pluralize,
   saveSettings,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { commandFactory } from '../utilities/command-factory'
 import { defaultSettings } from '../utilities/default-settings'
@@ -14,12 +13,12 @@ import { smartRenameLayer } from '../utilities/smart-rename-layer'
 
 export default async function () {
   const settings = await loadSettings(defaultSettings)
-  onSelectionChange(function (selectedLayers) {
-    triggerEvent('SELECTION_CHANGED', {
-      hasSelection: selectedLayers.length > 0
+  figma.on('selectionchange', function () {
+    emit('SELECTION_CHANGED', {
+      hasSelection: figma.currentPage.selection.length > 0
     })
   })
-  addEventListener('SUBMIT', async function (settings) {
+  on('SUBMIT', async function (settings) {
     await saveSettings(settings)
     const { smartRenameLayersWhitelist } = settings
     const smartRenameLayersWhitelistRegex =
@@ -50,7 +49,7 @@ export default async function () {
       }
     })()
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

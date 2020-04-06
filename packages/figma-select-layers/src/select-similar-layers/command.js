@@ -1,39 +1,38 @@
 import {
-  addEventListener,
+  emit,
   formatErrorMessage,
   formatSuccessMessage,
   loadSettings,
   mapNumberToWord,
-  onSelectionChange,
+  on,
   pluralize,
   saveSettings,
-  showUI,
-  triggerEvent
+  showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
 import { getSimilarLayers } from './utilities/get-similar-layers'
 
 export default async function () {
-  const settings = await loadSettings(defaultSettings)
   const selectedLayers = figma.currentPage.selection
   const length = selectedLayers.length
   if (length !== 1) {
     figma.closePlugin(createErrorMessage(length))
     return
   }
-  const removeSelectionChangeListener = onSelectionChange(function (
-    selectedLayers
-  ) {
+  const settings = await loadSettings(defaultSettings)
+  function onSelectionChange () {
+    const selectedLayers = figma.currentPage.selection
     const length = selectedLayers.length
     if (length !== 1) {
       figma.notify(createErrorMessage(length))
     }
-    triggerEvent('SELECTION_CHANGED', {
+    emit('SELECTION_CHANGED', {
       referenceLayerType: length === 1 ? selectedLayers[0].type : null
     })
-  })
-  addEventListener('SUBMIT', async function ({ attributes }) {
-    removeSelectionChangeListener()
+  }
+  figma.on('selectionchange', onSelectionChange)
+  on('SUBMIT', async function ({ attributes }) {
+    figma.off('selectionchange', onSelectionChange)
     await saveSettings({
       ...settings,
       selectSimilarLayers: attributes
@@ -55,7 +54,7 @@ export default async function () {
       )
     )
   })
-  addEventListener('CLOSE', function () {
+  on('CLOSE_UI', function () {
     figma.closePlugin()
   })
   const { selectSimilarLayers } = settings
