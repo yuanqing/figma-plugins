@@ -45,4 +45,4 @@ Sorts pages of the current document in alphabetical order.
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

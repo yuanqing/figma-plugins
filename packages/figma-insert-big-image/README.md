@@ -14,4 +14,4 @@ Opens a dialog through which one or more image files can be selected. Intelligen
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

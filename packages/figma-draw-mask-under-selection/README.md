@@ -14,4 +14,4 @@ Draws a mask under the selected layers, and creates a group containing the selec
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

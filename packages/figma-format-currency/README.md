@@ -22,4 +22,4 @@ Converts currencies in text layers within the selection or on the current page.
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

@@ -14,4 +14,4 @@ Set or offset the width and/or height of the selected layers, while ignoring con
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

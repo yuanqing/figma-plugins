@@ -49,4 +49,4 @@ With the exception of Select Similar Layers, all commands make a sub-selection w
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

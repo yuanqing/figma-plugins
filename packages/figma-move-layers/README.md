@@ -14,4 +14,4 @@ Moves the selected layers leftwards/rightwards or upwards/downwards by a specifi
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

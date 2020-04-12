@@ -22,4 +22,4 @@ Translate the text layers within the selection or on the current page to the sel
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

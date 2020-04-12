@@ -26,4 +26,4 @@ Sets the size of the selected Instances to the size of their respective Master C
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

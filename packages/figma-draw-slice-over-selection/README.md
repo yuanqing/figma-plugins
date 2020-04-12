@@ -14,4 +14,4 @@ Draws a slice over the selected layers. Optionally specify a padding for the sli
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

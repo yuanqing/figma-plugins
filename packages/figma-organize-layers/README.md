@@ -16,4 +16,4 @@ Organizes all layers on the current page based on layer name; useful for organiz
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)

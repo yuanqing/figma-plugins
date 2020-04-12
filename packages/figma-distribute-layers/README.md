@@ -14,4 +14,4 @@ Distributes the selected layers leftwards, rightwards, upwards, or downwards by 
 
 ## License
 
-MIT
+[MIT](/LICENSE.md)
