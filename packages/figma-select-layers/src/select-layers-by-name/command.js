@@ -3,25 +3,25 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   getSelectedLayersOrAllLayers,
-  loadSettings,
+  loadSettingsAsync,
   mapNumberToWord,
   on,
   pluralize,
-  saveSettings,
+  saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
 import { filterLayersByName } from './utilities/filter-layers-by-name'
 
 export default async function () {
-  const settings = await loadSettings(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
     emit('SELECTION_CHANGED', {
       hasSelection: figma.currentPage.selection.length > 0
     })
   })
   on('SUBMIT', async function ({ exactMatch, layerName }) {
-    await saveSettings({
+    await saveSettingsAsync({
       ...settings,
       selectLayersByName: { exactMatch, layerName }
     })

@@ -3,11 +3,11 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   isLayerWithinInstance,
-  loadSettings,
+  loadSettingsAsync,
   mapNumberToWord,
   on,
   pluralize,
-  saveSettings,
+  saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
@@ -31,7 +31,7 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('No components in document'))
     return
   }
-  const { shouldResizeToFitLayer, ...settings } = await loadSettings(
+  const { shouldResizeToFitLayer, ...settings } = await loadSettingsAsync(
     defaultSettings
   )
   figma.on('selectionchange', function () {
@@ -41,7 +41,7 @@ export default async function () {
     })
   })
   on('SUBMIT', async function ({ componentId, shouldResizeToFitLayer }) {
-    await saveSettings({
+    await saveSettingsAsync({
       ...settings,
       shouldResizeToFitLayer
     })

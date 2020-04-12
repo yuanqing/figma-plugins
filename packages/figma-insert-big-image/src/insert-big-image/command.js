@@ -1,7 +1,7 @@
 import {
   formatSuccessMessage,
-  loadSettings,
-  saveSettings,
+  loadSettingsAsync,
+  saveSettingsAsync,
   mapNumberToWord,
   on,
   pluralize,
@@ -16,7 +16,7 @@ export default async function () {
   let x = Math.round(center.x)
   const y = Math.round(center.y)
   const result = []
-  const settings = await loadSettings(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings)
   on('INSERT_BIG_IMAGE', async function ({
     name,
     images,
@@ -24,7 +24,7 @@ export default async function () {
     width,
     isDone
   }) {
-    saveSettings({ ...settings, insertAs2x })
+    saveSettingsAsync({ ...settings, insertAs2x })
     const imageLayers = []
     for (const image of images) {
       imageLayers.push(createImageLayer(image, x, y, insertAs2x))

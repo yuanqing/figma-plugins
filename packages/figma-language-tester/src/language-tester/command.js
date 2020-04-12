@@ -2,8 +2,8 @@ import {
   emit,
   formatErrorMessage,
   formatSuccessMessage,
-  loadFonts,
-  loadSettings,
+  loadFontsAsync,
+  loadSettingsAsync,
   on,
   showUI,
   traverseLayer
@@ -13,7 +13,7 @@ import { getTextLayers } from '../get-text-layers'
 import languages from '../translate/languages'
 
 export default async function () {
-  const { apiKey } = await loadSettings(defaultSettings)
+  const { apiKey } = await loadSettingsAsync(defaultSettings)
   if (typeof apiKey === 'undefined' || apiKey === '') {
     figma.closePlugin(
       formatErrorMessage(
@@ -42,7 +42,7 @@ export default async function () {
         originalStrings[layer.id] = layer.characters
       }
     })
-    await loadFonts(layers)
+    await loadFontsAsync(layers)
     emit('TRANSLATE_REQUEST', {
       apiKey,
       languageKey,

@@ -2,11 +2,11 @@ import {
   emit,
   formatErrorMessage,
   formatSuccessMessage,
-  loadSettings,
+  loadSettingsAsync,
   mapNumberToWord,
   on,
   pluralize,
-  saveSettings,
+  saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
@@ -19,7 +19,7 @@ export default async function () {
     figma.closePlugin(createErrorMessage(length))
     return
   }
-  const settings = await loadSettings(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings)
   function onSelectionChange () {
     const selectedLayers = figma.currentPage.selection
     const length = selectedLayers.length
@@ -33,7 +33,7 @@ export default async function () {
   figma.on('selectionchange', onSelectionChange)
   on('SUBMIT', async function ({ attributes }) {
     figma.off('selectionchange', onSelectionChange)
-    await saveSettings({
+    await saveSettingsAsync({
       ...settings,
       selectSimilarLayers: attributes
     })

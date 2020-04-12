@@ -3,7 +3,7 @@ import {
   formatSuccessMessage,
   groupSiblingLayers,
   isLayerWithinInstance,
-  loadSettings
+  loadSettingsAsync
 } from '@create-figma-plugin/utilities'
 import { rasterizeLayersAsync } from './utilities/rasterize-layers-async'
 import { defaultSettings } from '../utilities/default-settings'
@@ -28,7 +28,7 @@ export default async function () {
     )
     return
   }
-  const { resolution } = await loadSettings(defaultSettings)
+  const { resolution } = await loadSettingsAsync(defaultSettings)
   const layer = await rasterizeLayersAsync(layers, resolution)
   figma.currentPage.selection = [layer]
   figma.closePlugin(

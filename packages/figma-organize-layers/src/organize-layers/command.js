@@ -3,11 +3,11 @@ import {
   extractAttributes,
   formatErrorMessage,
   formatSuccessMessage,
-  loadSettings,
+  loadSettingsAsync,
   mapNumberToWord,
   on,
   pluralize,
-  saveSettings,
+  saveSettingsAsync,
   setRelaunchButton,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -21,7 +21,7 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('No layers on page'))
     return
   }
-  const settings = await loadSettings(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
     const layers = getLayers()
     emit('SELECTION_CHANGED', {
@@ -30,7 +30,7 @@ export default async function () {
     })
   })
   on('SUBMIT', async function (settings) {
-    await saveSettings(settings)
+    await saveSettingsAsync(settings)
     const {
       combineSingleLayerGroups,
       groupDefinition,

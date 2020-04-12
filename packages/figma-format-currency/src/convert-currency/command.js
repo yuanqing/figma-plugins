@@ -1,10 +1,10 @@
 import {
   emit,
   formatSuccessMessage,
-  loadFonts,
-  loadSettings,
+  loadFontsAsync,
+  loadSettingsAsync,
   on,
-  saveSettings,
+  saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
@@ -16,7 +16,7 @@ export default async function () {
     roundNumbers,
     locale,
     ...settings
-  } = await loadSettings(defaultSettings)
+  } = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
     emit('SELECTION_CHANGED', {
       layers: getTextLayers()
@@ -28,7 +28,7 @@ export default async function () {
     roundNumbers,
     locale
   }) {
-    await saveSettings({
+    await saveSettingsAsync({
       ...settings,
       targetCurrency,
       roundNumbers,
@@ -36,7 +36,7 @@ export default async function () {
     })
     for (const { id, characters } of layers) {
       const layer = figma.getNodeById(id)
-      await loadFonts([layer])
+      await loadFontsAsync([layer])
       layer.characters = characters
     }
     figma.closePlugin(

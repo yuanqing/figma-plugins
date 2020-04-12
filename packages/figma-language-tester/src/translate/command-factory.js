@@ -2,8 +2,8 @@ import {
   emit,
   formatErrorMessage,
   formatSuccessMessage,
-  loadFonts,
-  loadSettings,
+  loadFontsAsync,
+  loadSettingsAsync,
   on,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -13,7 +13,7 @@ import languages from './languages'
 
 export function commandFactory (languageKey) {
   return async function () {
-    const { apiKey } = await loadSettings(defaultSettings)
+    const { apiKey } = await loadSettingsAsync(defaultSettings)
     if (typeof apiKey === 'undefined' || apiKey === '') {
       figma.closePlugin(
         formatErrorMessage(
@@ -43,7 +43,7 @@ export function commandFactory (languageKey) {
       )
     })
     showUI({ visible: false })
-    await loadFonts(layers)
+    await loadFontsAsync(layers)
     emit('TRANSLATE_REQUEST', {
       apiKey,
       languageKey,

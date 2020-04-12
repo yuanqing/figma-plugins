@@ -2,10 +2,10 @@ import {
   emit,
   formatErrorMessage,
   formatSuccessMessage,
-  loadSettings,
+  loadSettingsAsync,
   on,
   pluralize,
-  saveSettings,
+  saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
@@ -15,14 +15,14 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const settings = await loadSettings(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
     emit('SELECTION_CHANGED', {
       hasSelection: figma.currentPage.selection.length > 0
     })
   })
   on('SUBMIT', async function (settings) {
-    await saveSettings(settings)
+    await saveSettingsAsync(settings)
     const { horizontalOffset, verticalOffset } = settings
     const isHorizontalOffsetValid =
       horizontalOffset !== 0 && horizontalOffset !== null

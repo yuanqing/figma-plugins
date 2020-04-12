@@ -2,9 +2,9 @@ import {
   emit,
   formatErrorMessage,
   formatSuccessMessage,
-  loadSettings,
+  loadSettingsAsync,
   on,
-  saveSettings,
+  saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
 import { computeDimensions } from './utilities/compute-dimensions'
@@ -23,7 +23,7 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const settings = await loadSettings(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
     const selectedLayers = getSelectedLayers()
     emit('SELECTION_CHANGED', {
@@ -33,7 +33,7 @@ export default async function () {
   })
   on('SUBMIT', async function (settings) {
     const { selectedLayers, width, height, resizeWithConstraints } = settings
-    await saveSettings({ resizeWithConstraints })
+    await saveSettingsAsync({ resizeWithConstraints })
     setLayerSize(selectedLayers, width, height, resizeWithConstraints)
     updateSelectedLayers(selectedLayers)
     figma.closePlugin(formatSuccessMessage('Set layer size'))

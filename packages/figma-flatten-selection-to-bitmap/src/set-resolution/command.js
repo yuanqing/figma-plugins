@@ -1,16 +1,16 @@
 import {
   formatSuccessMessage,
-  loadSettings,
+  loadSettingsAsync,
   on,
-  saveSettings,
+  saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../utilities/default-settings'
 
 export default async function () {
-  const settings = await loadSettings(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings)
   on('SUBMIT', async function (settings) {
-    await saveSettings(settings)
+    await saveSettingsAsync(settings)
     figma.closePlugin(formatSuccessMessage('Set resolution'))
   })
   on('CLOSE_UI', function () {

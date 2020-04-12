@@ -4,9 +4,9 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   getSelectedLayersOrAllLayers,
-  loadSettings,
+  loadSettingsAsync,
   on,
-  saveSettings,
+  saveSettingsAsync,
   setRelaunchButton,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -22,14 +22,14 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('No layers on page'))
     return
   }
-  const settings = await loadSettings(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
     emit('SELECTION_CHANGED', {
       hasSelection: figma.currentPage.selection.length > 0
     })
   })
   on('SUBMIT', async function (settings) {
-    await saveSettings(settings)
+    await saveSettingsAsync(settings)
     const {
       deleteHiddenLayers,
       pixelPerfect,
