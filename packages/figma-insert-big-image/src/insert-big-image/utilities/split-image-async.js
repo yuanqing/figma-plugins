@@ -1,6 +1,6 @@
 /* global FileReader */
 
-export async function splitImage (image, widths, heights) {
+export async function splitImageAsync (image, widths, heights) {
   const canvasElement = createCanvasElement(image.width, image.height)
   const context = canvasElement.getContext('2d')
   context.drawImage(image, 0, 0)

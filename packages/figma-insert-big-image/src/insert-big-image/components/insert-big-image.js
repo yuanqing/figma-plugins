@@ -13,8 +13,8 @@ import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 import { Loading } from './loading/loading'
 import { computeDimensions } from '../utilities/compute-dimensions'
-import { createImageFromFile } from '../utilities/create-image-from-file'
-import { splitImage } from '../utilities/split-image'
+import { createImageFromFileAsync } from '../utilities/create-image-from-file-async'
+import { splitImageAsync } from '../utilities/split-image-async'
 import { trimExtension } from '../utilities/trim-extension'
 
 export function InsertBigImage (initialState) {
@@ -46,10 +46,10 @@ export function InsertBigImage (initialState) {
       for (const file of files) {
         currentIndex++
         handleChange({ currentIndex })
-        const image = await createImageFromFile(file)
+        const image = await createImageFromFileAsync(file)
         const widths = computeDimensions(image.width)
         const heights = computeDimensions(image.height)
-        const images = await splitImage(image, widths, heights)
+        const images = await splitImageAsync(image, widths, heights)
         const name = trimExtension(file.name)
         emit('INSERT_BIG_IMAGE', {
           name,

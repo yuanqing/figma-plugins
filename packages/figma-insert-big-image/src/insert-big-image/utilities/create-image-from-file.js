@@ -1,6 +1,6 @@
 /* global Image */
 
-export async function createImageFromFile (file) {
+export async function createImageFromFileAsync (file) {
   return new Promise(function (resolve, reject) {
     const imageElement = new Image()
     imageElement.onload = function () {
