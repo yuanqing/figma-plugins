@@ -1,4 +1,4 @@
-# Clean Document [![Figma Plugin](https://badgen.net/badge/figma/Clean%20Document/yellow)](https://figma.com/c/plugin/767379019764649932/Clean-Document) [![npm Version](https://badgen.net/npm/v/figma-clean-document)](https://www.npmjs.com/package/figma-clean-document)
+# Clean Document [![Figma Plugin](https://img.shields.io/badge/figma-Clean%20Document-yellow?cacheSeconds=1800)](https://figma.com/c/plugin/767379019764649932/Clean-Document) [![npm Version](https://img.shields.io/npm/v/figma-clean-document?cacheSeconds=1800](https://www.npmjs.com/package/figma-clean-document)
 
 > A Figma plugin to automagically organize and clean up your Figma document
 

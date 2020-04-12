@@ -1,4 +1,4 @@
-# Figma Plugins [![Figma Plugins](https://badgen.net/badge/figma/@yuanqing/yellow)](https://figma.com/@yuanqing) [![build](https://github.com/yuanqing/figma-plugins/workflows/build/badge.svg)](https://github.com/yuanqing/figma-plugins/actions?query=workflow%3Abuild)
+# Figma Plugins [![Figma Plugins](https://img.shields.io/badge/figma-%40yuanqing-yellow?cacheSeconds=1800)](https://figma.com/@yuanqing) [![build](https://github.com/yuanqing/figma-plugins/workflows/build/badge.svg)](https://github.com/yuanqing/figma-plugins/actions?query=workflow%3Abuild)
 
 > Monorepo for my Figma plugins
 
