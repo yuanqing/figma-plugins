@@ -37,7 +37,7 @@ export default async function () {
   })
   const layers = getTextLayers()
   showUI(
-    { width: 240, height: 329 },
+    { width: 240, height: 333 },
     {
       layers,
       format,
