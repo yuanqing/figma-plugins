@@ -1,7 +1,7 @@
 {
   "name": "figma-flatten-selection-to-bitmap",
   "version": "0.0.0",
-  "description": "A Figma plugin to rasterize the selected layers at a high resolution",
+  "description": "A Figma plugin to rasterize layers at a high resolution",
   "keywords": [
     "create-figma-plugin",
     "figma",

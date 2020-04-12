@@ -9,7 +9,7 @@ Name | Description
 [**Distribute Layers**](packages/figma-distribute-layers) | Distribute layers in a given direction and offset
 [**Draw Mask Under Selection**](packages/figma-draw-mask-under-selection) | Draw a mask under the selection
 [**Draw Slice Over Selection**](packages/figma-draw-slice-over-selection) | Draw a slice over the selection
-[**Flatten Selection to Bitmap**](packages/figma-flatten-selection-to-bitmap) | Rasterize the selected layers at a high resolution
+[**Flatten Selection to Bitmap**](packages/figma-flatten-selection-to-bitmap) | Rasterize layers at a high resolution
 [**Format Currency**](packages/figma-format-currency) | Format and convert between currencies
 [**Insert Big Image**](packages/figma-insert-big-image) | Insert and retain the original resolution of big images
 [**Language Tester**](packages/figma-language-tester) | Test your UI in different languages
