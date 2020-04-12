@@ -3,9 +3,9 @@ import {
   insertBeforeLayer
 } from '@create-figma-plugin/utilities'
 
-export async function rasterizeLayersAsync (layers) {
+export async function rasterizeLayersAsync (layers, resolution) {
   const group = createGroupFromLayers(layers)
-  const image = await createImageLayerFromGroupAsync(group)
+  const image = await createImageLayerFromGroupAsync(group, resolution)
   insertBeforeLayer(image, group)
   image.x = group.x
   image.y = group.y
@@ -22,7 +22,7 @@ function createGroupFromLayers (layers) {
   return group
 }
 
-async function createImageLayerFromGroupAsync (group) {
+async function createImageLayerFromGroupAsync (group, resolution) {
   const rectangle = figma.createRectangle()
   rectangle.name =
     group.children.length === 1 ? group.children[0].name : 'Image'
@@ -31,7 +31,7 @@ async function createImageLayerFromGroupAsync (group) {
     format: 'PNG',
     constraint: {
       type: 'SCALE',
-      value: 2
+      value: resolution
     }
   })
   rectangle.fills = [createImagePaint(bytes)]

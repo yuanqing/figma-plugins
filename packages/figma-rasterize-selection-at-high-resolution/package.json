@@ -28,6 +28,21 @@
   "create-figma-plugin": {
     "id": "figma-rasterize-selection-at-high-resolution",
     "name": "Rasterize Selection at High Resolution",
-    "command": "command"
+    "menu": [
+      {
+        "name": "Rasterize Selection at High Resolution",
+        "command": "rasterize-selection-at-high-resolution/command"
+      },
+      {
+        "name": "Set Resolution",
+        "command": "set-resolution/command",
+        "ui": "set-resolution/ui"
+      },
+      "-",
+      {
+        "name": "Reset Plugin",
+        "command": "reset-plugin/command"
+      }
+    ]
   }
 }
