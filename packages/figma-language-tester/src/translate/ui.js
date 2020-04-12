@@ -1,5 +1,5 @@
 import { emit, on } from '@create-figma-plugin/utilities'
-import { translate } from './translate'
+import { translateAsync } from './translate-async'
 
 export default function () {
   on('TRANSLATE_REQUEST', async function ({
@@ -9,7 +9,7 @@ export default function () {
     scope
   }) {
     const promises = layers.map(function ({ characters }) {
-      return translate(characters, languageKey, apiKey)
+      return translateAsync(characters, languageKey, apiKey)
     })
     const translated = await Promise.all(promises)
     emit('TRANSLATE_RESULT', {

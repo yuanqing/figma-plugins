@@ -1,6 +1,10 @@
 import pMemoize from 'p-memoize'
 
-export const translate = pMemoize(async function (text, languageKey, apiKey) {
+export const translateAsync = pMemoize(async function (
+  text,
+  languageKey,
+  apiKey
+) {
   const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${apiKey}&text=${encode(
     text
   )}&lang=${languageKey}`

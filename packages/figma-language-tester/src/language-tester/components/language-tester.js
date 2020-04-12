@@ -10,7 +10,7 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import { LanguageItem } from './language-item'
-import { translate } from '../../translate/translate'
+import { translateAsync } from '../../translate/translate-async'
 import languages from '../../translate/languages'
 import styles from './language-tester.scss'
 
@@ -41,7 +41,7 @@ export function LanguageTester () {
     }) {
       setIsLoading(true)
       const promises = layers.map(function ({ characters }) {
-        return translate(characters, languageKey, apiKey)
+        return translateAsync(characters, languageKey, apiKey)
       })
       const translated = await Promise.all(promises)
       setIsLoading(false)
