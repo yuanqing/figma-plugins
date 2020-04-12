@@ -17,3 +17,11 @@ Name | Description
 [**Select Layers**](packages/figma-select-layers) | Select layers based on name, type, or similarity
 [**Set Layer Size**](packages/figma-set-layer-size) | Precisely set or offset the size of layers, while ignoring constraints
 [**Sort Layers**](packages/figma-sort-layers) | Sort layers by name or position
+
+## See also
+
+- [Create Figma Plugin](https://github.com/yuanqing/create-figma-plugin)
+
+## License
+
+[MIT](LICENSE.md)
