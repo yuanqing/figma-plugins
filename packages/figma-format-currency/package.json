@@ -19,13 +19,13 @@
     "src"
   ],
   "scripts": {
-    "build": "create-figma-plugin-build",
+    "build": "build-figma-plugin",
     "build-iso-codes": "node scripts/build-iso-codes",
     "prebuild": "yarn run build-iso-codes",
     "pretest": "yarn run build-iso-codes",
     "prewatch": "yarn run build-iso-codes",
     "test": "ava",
-    "watch": "create-figma-plugin-build --watch"
+    "watch": "build-figma-plugin --watch"
   },
   "dependencies": {
     "@create-figma-plugin/ui": "*",

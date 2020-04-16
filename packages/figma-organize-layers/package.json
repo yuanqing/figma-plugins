@@ -19,9 +19,9 @@
     "src"
   ],
   "scripts": {
-    "build": "create-figma-plugin-build",
+    "build": "build-figma-plugin",
     "test": "ava",
-    "watch": "create-figma-plugin-build --watch"
+    "watch": "build-figma-plugin --watch"
   },
   "dependencies": {
     "@create-figma-plugin/ui": "*",
