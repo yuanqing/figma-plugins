@@ -38,5 +38,7 @@ export default async function () {
   figma.currentPage.selection = [imageLayer]
 
   // Show a success message.
-  figma.closePlugin(formatSuccessMessage('Flattened selection to bitmap'))
+  figma.closePlugin(
+    formatSuccessMessage(`Flattened selection at ${resolution}x`)
+  )
 }
