@@ -10,4 +10,5 @@ export function drawSliceOverSelection (padding) {
   slice.resize(width, height)
   slice.name = '@SliceOverSelection'
   slice.locked = true
+  return slice
 }

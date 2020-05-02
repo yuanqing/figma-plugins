@@ -24,7 +24,8 @@ export default async function () {
   once('SUBMIT', async function (settings) {
     await saveSettingsAsync(settings)
     const { padding } = settings
-    drawSliceOverSelection(padding)
+    const slice = drawSliceOverSelection(padding)
+    figma.currentPage.selection = [slice]
     figma.closePlugin(formatSuccessMessage('Drew slice over selection'))
   })
   once('CLOSE_UI', function () {
