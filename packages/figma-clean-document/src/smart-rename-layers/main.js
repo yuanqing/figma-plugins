@@ -7,8 +7,8 @@ import {
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
-import { mainFactory } from '../utilities/main-factory'
 import { defaultSettings } from '../utilities/default-settings'
+import { mainFactory } from '../utilities/main-factory'
 import { smartRenameLayer } from '../utilities/smart-rename-layer'
 
 export default async function () {

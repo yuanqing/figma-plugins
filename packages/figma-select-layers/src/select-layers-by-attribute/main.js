@@ -1,6 +1,6 @@
-import { mainFactory } from './utilities/main-factory'
 import { isImage } from './utilities/is-image'
 import { isLayerTypeFactory } from './utilities/is-layer-type-factory'
+import { mainFactory } from './utilities/main-factory'
 
 export const selectComponents = mainFactory(
   'component',
