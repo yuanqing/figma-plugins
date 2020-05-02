@@ -26,7 +26,7 @@
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
     "figma-sort-layers": "*",
-    "preact": "^10.3.4"
+    "preact": "^10.4.1"
   },
   "figma-plugin": {
     "id": "767379019764649932",
