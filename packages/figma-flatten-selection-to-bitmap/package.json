@@ -33,15 +33,11 @@
         "name": "Flatten Selection to Bitmap",
         "main": "flatten-selection-to-bitmap/main"
       },
-      {
-        "name": "Set Resolution",
-        "main": "set-resolution/main",
-        "ui": "set-resolution/ui"
-      },
       "-",
       {
-        "name": "Reset Plugin",
-        "main": "reset-plugin/main"
+        "name": "Settings",
+        "main": "settings/main",
+        "ui": "settings/ui"
       }
     ]
   }

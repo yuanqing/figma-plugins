@@ -11,7 +11,7 @@ export default async function () {
   const settings = await loadSettingsAsync(defaultSettings)
   once('SUBMIT', async function (settings) {
     await saveSettingsAsync(settings)
-    figma.closePlugin(formatSuccessMessage('Set resolution'))
+    figma.closePlugin(formatSuccessMessage('Saved settings'))
   })
   once('CLOSE_UI', function () {
     figma.closePlugin()

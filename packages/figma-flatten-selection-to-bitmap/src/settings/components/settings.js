@@ -10,7 +10,7 @@ import {
 import { emit } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 
-export function SetResolution (initialState) {
+export function Settings (initialState) {
   const { state, handleChange, handleSubmit } = useForm(initialState, {
     onSubmit: function ({ resolution }) {
       emit('SUBMIT', {
@@ -39,7 +39,7 @@ export function SetResolution (initialState) {
       />
       <VerticalSpace space='large' />
       <Button fullWidth onClick={handleSubmit}>
-        Set Resolution
+        Save Settings
       </Button>
       <VerticalSpace space='small' />
     </Container>
