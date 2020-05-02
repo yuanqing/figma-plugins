@@ -2,5 +2,4 @@
 *.log
 build/
 node_modules/
-figma.d.ts
 manifest.json
