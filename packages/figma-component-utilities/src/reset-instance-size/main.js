@@ -1,7 +1,6 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
-  mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
 import { resetInstanceSize } from './utilities/reset-instance-size'
@@ -31,10 +30,7 @@ export default async function () {
   figma.currentPage.selection = instances
   figma.closePlugin(
     formatSuccessMessage(
-      `Reset the size of ${mapNumberToWord(count)} ${pluralize(
-        count,
-        'instance'
-      )}`
+      `Reset the size of ${count} ${pluralize(count, 'instance')}`
     )
   )
 }

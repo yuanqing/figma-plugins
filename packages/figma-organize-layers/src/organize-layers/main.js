@@ -4,7 +4,6 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
-  mapNumberToWord,
   on,
   pluralize,
   saveSettingsAsync,
@@ -49,7 +48,7 @@ export default async function () {
     setRelaunchButton(figma.currentPage, 'organizeLayers')
     figma.closePlugin(
       formatSuccessMessage(
-        `Organized ${mapNumberToWord(layers.length)} ${pluralize(
+        `Organized ${layers.length} ${pluralize(
           layers.length,
           'layer'
         )} on page`

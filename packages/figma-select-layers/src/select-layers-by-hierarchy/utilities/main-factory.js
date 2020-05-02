@@ -1,7 +1,6 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
-  mapNumberToWord,
   pluralize,
   removeDuplicateLayers
 } from '@create-figma-plugin/utilities'
@@ -25,10 +24,7 @@ export function mainFactory (label, getLayersCallback) {
     figma.viewport.scrollAndZoomIntoView(layers)
     figma.closePlugin(
       formatSuccessMessage(
-        `Selected ${mapNumberToWord(layers.length)} ${pluralize(
-          layers.length,
-          label
-        )}`
+        `Selected ${layers.length} ${pluralize(layers.length, label)}`
       )
     )
   }

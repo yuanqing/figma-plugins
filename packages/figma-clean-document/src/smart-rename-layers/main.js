@@ -1,7 +1,6 @@
 import {
   emit,
   loadSettingsAsync,
-  mapNumberToWord,
   on,
   pluralize,
   saveSettingsAsync,
@@ -39,10 +38,7 @@ export default async function () {
         return `Renaming layers ${scope}…`
       },
       createSuccessMessage: function (scope, count) {
-        return `Renamed ${mapNumberToWord(count)} ${pluralize(
-          count,
-          'layer'
-        )} ${scope}`
+        return `Renamed ${count} ${pluralize(count, 'layer')} ${scope}`
       },
       createFailureMessage: function (scope) {
         return `No layers renamed ${scope}`

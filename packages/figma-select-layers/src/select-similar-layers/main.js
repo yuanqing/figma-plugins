@@ -3,7 +3,6 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
-  mapNumberToWord,
   on,
   pluralize,
   saveSettingsAsync,
@@ -47,10 +46,7 @@ export default async function () {
     figma.viewport.scrollAndZoomIntoView(result)
     figma.closePlugin(
       formatSuccessMessage(
-        `Selected ${mapNumberToWord(result.length)} ${pluralize(
-          result.length,
-          'similar layer'
-        )}`
+        `Selected ${result.length} ${pluralize(result.length, 'similar layer')}`
       )
     )
   })

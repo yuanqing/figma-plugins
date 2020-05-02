@@ -1,4 +1,4 @@
-import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
+import { pluralize } from '@create-figma-plugin/utilities'
 import { mainFactory } from '../utilities/main-factory'
 import { makePixelPerfect } from '../utilities/make-pixel-perfect'
 
@@ -11,10 +11,7 @@ export default mainFactory({
     return `Making layers ${scope} pixel-perfect…`
   },
   createSuccessMessage: function (scope, count) {
-    return `Made ${mapNumberToWord(count)} ${pluralize(
-      count,
-      'layer'
-    )} ${scope} pixel-perfect`
+    return `Made ${count} ${pluralize(count, 'layer')} ${scope} pixel-perfect`
   },
   createFailureMessage: function (scope) {
     return `No change to layers ${scope}`

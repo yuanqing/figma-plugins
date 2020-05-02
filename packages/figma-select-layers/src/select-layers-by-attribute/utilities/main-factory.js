@@ -2,7 +2,6 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   getSelectedLayersOrAllLayers,
-  mapNumberToWord,
   pluralize,
   traverseLayer
 } from '@create-figma-plugin/utilities'
@@ -22,7 +21,7 @@ export function mainFactory (label, filterCallback, stopTraversalCallback) {
     figma.viewport.scrollAndZoomIntoView(layers)
     figma.closePlugin(
       formatSuccessMessage(
-        `Selected ${mapNumberToWord(layers.length)} ${pluralize(
+        `Selected ${layers.length} ${pluralize(
           layers.length,
           labelSingular,
           labelPlural

@@ -2,7 +2,6 @@ import {
   formatSuccessMessage,
   loadSettingsAsync,
   saveSettingsAsync,
-  mapNumberToWord,
   on,
   pluralize,
   showUI,
@@ -47,10 +46,7 @@ export default async function () {
     figma.viewport.scrollAndZoomIntoView(result)
     figma.closePlugin(
       formatSuccessMessage(
-        `Inserted ${mapNumberToWord(result.length)} ${pluralize(
-          result.length,
-          'image'
-        )}`
+        `Inserted ${result.length} ${pluralize(result.length, 'image')}`
       )
     )
   })

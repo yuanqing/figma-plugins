@@ -3,7 +3,6 @@ import {
   formatSuccessMessage,
   insertBeforeLayer,
   isLayerWithinInstance,
-  mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
 import { createComponent } from './utilities/create-component'
@@ -38,7 +37,7 @@ export default async function () {
       `Created ${pluralize(
         layers.length,
         'component from layer',
-        `components from ${mapNumberToWord(layers.length)} layers`
+        `components from ${layers.length} layers`
       )}`
     )
   )

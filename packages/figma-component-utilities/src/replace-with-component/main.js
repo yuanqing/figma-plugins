@@ -4,7 +4,6 @@ import {
   formatSuccessMessage,
   isLayerWithinInstance,
   loadSettingsAsync,
-  mapNumberToWord,
   on,
   pluralize,
   saveSettingsAsync,
@@ -80,7 +79,7 @@ export default async function () {
         `Replaced ${pluralize(
           count,
           'layer',
-          `${mapNumberToWord(count)} layers`
+          `${count} layers`
         )} with component`
       )
     )

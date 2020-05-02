@@ -3,7 +3,6 @@ import {
   formatSuccessMessage,
   groupSiblingLayers,
   isLayerWithinInstance,
-  mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
 import { createMaskGroup } from './utilities/create-mask-group'
@@ -32,7 +31,7 @@ export default async function () {
   figma.currentPage.selection = [mask]
   figma.closePlugin(
     formatSuccessMessage(
-      `Added mask under ${mapNumberToWord(layers.length)} ${pluralize(
+      `Added mask under ${layers.length} ${pluralize(
         layers.length,
         'selected layer'
       )}`

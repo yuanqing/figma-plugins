@@ -2,7 +2,6 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   insertBeforeLayer,
-  mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
 import { OFFSET } from '../utilities/constants'
@@ -30,10 +29,7 @@ export default async function () {
   figma.currentPage.selection = newSelection
   figma.closePlugin(
     formatSuccessMessage(
-      `Copied ${mapNumberToWord(components.length)} ${pluralize(
-        components.length,
-        'component'
-      )}`
+      `Copied ${components.length} ${pluralize(components.length, 'component')}`
     )
   )
 }
