@@ -26,7 +26,7 @@
     "@create-figma-plugin/utilities": "*"
   },
   "figma-plugin": {
-    "id": "figma-flatten-selection-to-bitmap",
+    "id": "837846252158418235",
     "name": "Flatten Selection to Bitmap",
     "menu": [
       {
