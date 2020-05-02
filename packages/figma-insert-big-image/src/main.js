@@ -9,7 +9,7 @@ import {
   updateLayersSortOrder
 } from '@create-figma-plugin/utilities'
 import { createImageLayer } from './utilities/create-image-layer'
-import { defaultSettings } from '../utilities/default-settings'
+import { defaultSettings } from './utilities/default-settings'
 
 export default async function () {
   const center = figma.viewport.center

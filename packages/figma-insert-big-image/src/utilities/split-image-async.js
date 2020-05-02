@@ -1,7 +1,15 @@
 /* global FileReader */
 
 export async function splitImageAsync (image, widths, heights) {
-  const canvasElement = createCanvasElement(image.width, image.height)
+  const parentElement = document.createElement('div')
+  document.body.appendChild(parentElement)
+  parentElement.style.cssText =
+    'position: absolute; pointer-events: none; visibility: hidden; overflow: hidden;'
+  const canvasElement = createCanvasElement(
+    image.width,
+    image.height,
+    parentElement
+  )
   const context = canvasElement.getContext('2d')
   context.drawImage(image, 0, 0)
   const promises = []
@@ -10,17 +18,17 @@ export async function splitImageAsync (image, widths, heights) {
     let x = 0
     for (const width of widths) {
       const imageData = context.getImageData(x, y, width, height)
-      promises.push(encodeImage(imageData, x, y, width, height))
+      promises.push(encodeImage(imageData, x, y, width, height, parentElement))
       x += width
     }
     y += height
   }
-  document.body.removeChild(canvasElement)
+  document.body.removeChild(parentElement)
   return Promise.all(promises)
 }
 
-async function encodeImage (imageData, x, y, width, height) {
-  const canvasElement = createCanvasElement(width, height)
+async function encodeImage (imageData, x, y, width, height, parentElement) {
+  const canvasElement = createCanvasElement(width, height, parentElement)
   canvasElement.getContext('2d').putImageData(imageData, 0, 0)
   const result = await new Promise(function (resolve, reject) {
     canvasElement.toBlob(function (blob) {
@@ -32,16 +40,15 @@ async function encodeImage (imageData, x, y, width, height) {
       reader.readAsArrayBuffer(blob)
     })
   })
-  document.body.removeChild(canvasElement)
+  parentElement.removeChild(canvasElement)
   return result
 }
 
-function createCanvasElement (width, height) {
+function createCanvasElement (width, height, parentElement) {
   const canvasElement = document.createElement('canvas')
-  document.body.appendChild(canvasElement)
+  parentElement.appendChild(canvasElement)
   canvasElement.width = width
   canvasElement.height = height
-  canvasElement.style.cssText =
-    'position: absolute; pointer-events: none; visibility: hidden;'
+  canvasElement.style.cssText = 'position: absolute;'
   return canvasElement
 }

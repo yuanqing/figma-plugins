@@ -30,17 +30,7 @@
   "figma-plugin": {
     "id": "799646392992487942",
     "name": "Insert Big Image",
-    "menu": [
-      {
-        "name": "Insert Big Image",
-        "main": "insert-big-image/main",
-        "ui": "insert-big-image/ui"
-      },
-      "-",
-      {
-        "name": "Reset Plugin",
-        "main": "reset-plugin/main"
-      }
-    ]
+    "main": "main",
+    "ui": "ui"
   }
 }
