@@ -1,7 +1,7 @@
 import {
+  computeSiblingLayers,
   formatErrorMessage,
   formatSuccessMessage,
-  groupSiblingLayers,
   updateLayersSortOrder
 } from '@create-figma-plugin/utilities'
 
@@ -17,7 +17,7 @@ export function mainFactory ({ sortLayers, successMessage }) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
     }
-    const groups = groupSiblingLayers(
+    const groups = computeSiblingLayers(
       selection.length === 1 ? selection[0].children : selection
     )
     let didChange = false
