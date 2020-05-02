@@ -42,24 +42,24 @@
       "esm"
     ]
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "780785006732555859",
     "name": "Format Currency",
     "menu": [
       {
         "name": "Format Currency",
-        "command": "format-currency/command",
+        "main": "format-currency/main",
         "ui": "format-currency/ui"
       },
       {
         "name": "Convert Currency",
-        "command": "convert-currency/command",
+        "main": "convert-currency/main",
         "ui": "convert-currency/ui"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ]
   }

@@ -37,25 +37,25 @@
       "esm"
     ]
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "786286754606650597",
     "name": "Organize Layers",
     "menu": [
       {
         "name": "Organize Layers",
-        "command": "organize-layers/command",
+        "main": "organize-layers/main",
         "ui": "organize-layers/ui"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ],
     "relaunchButtons": {
       "organizeLayers": {
         "name": "Organize Layers",
-        "command": "organize-layers/command",
+        "main": "organize-layers/main",
         "ui": "organize-layers/ui"
       }
     }

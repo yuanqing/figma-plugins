@@ -7,7 +7,7 @@ import {
   traverseLayer
 } from '@create-figma-plugin/utilities'
 
-export function commandFactory (label, filterCallback, stopTraversalCallback) {
+export function mainFactory (label, filterCallback, stopTraversalCallback) {
   const [labelSingular, labelPlural] =
     typeof label === 'string' ? [label, `${label}s`] : label
   return function () {

@@ -27,13 +27,13 @@
     "@create-figma-plugin/utilities": "*",
     "preact": "^10.3.4"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "799648692768237063",
     "name": "Select Layers",
     "menu": [
       {
         "name": "Select Layers by Name",
-        "command": "select-layers-by-name/command",
+        "main": "select-layers-by-name/main",
         "ui": "select-layers-by-name/ui"
       },
       {
@@ -41,103 +41,103 @@
         "menu": [
           {
             "name": "Select Components",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectComponents"
             }
           },
           {
             "name": "Select Instance Layers",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectInstanceLayers"
             }
           },
           "-",
           {
             "name": "Select Frames",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectFrames"
             }
           },
           {
             "name": "Select Groups",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectGroups"
             }
           },
           {
             "name": "Select Slices",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectSlices"
             }
           },
           "-",
           {
             "name": "Select Vector Layers",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectVectorLayers"
             }
           },
           {
             "name": "Select Rectangles",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectRectangles"
             }
           },
           {
             "name": "Select Lines",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectLines"
             }
           },
           {
             "name": "Select Ellipses",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectEllipses"
             }
           },
           {
             "name": "Select Polygons",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectPolygons"
             }
           },
           {
             "name": "Select Stars",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectStars"
             }
           },
           {
             "name": "Select Boolean Groups",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectBooleanGroups"
             }
           },
           "-",
           {
             "name": "Select Images",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectImages"
             }
           },
           "-",
           {
             "name": "Select Text Layers",
-            "command": {
-              "src": "select-layers-by-attribute/command",
+            "main": {
+              "src": "select-layers-by-attribute/main",
               "handler": "selectTextLayers"
             }
           }
@@ -146,57 +146,57 @@
       "-",
       {
         "name": "Select Mask Layers",
-        "command": {
-          "src": "select-layers-by-attribute/command",
+        "main": {
+          "src": "select-layers-by-attribute/main",
           "handler": "selectMaskLayers"
         }
       },
       {
         "name": "Select Hidden Layers",
-        "command": {
-          "src": "select-layers-by-attribute/command",
+        "main": {
+          "src": "select-layers-by-attribute/main",
           "handler": "selectHiddenLayers"
         }
       },
       {
         "name": "Select Locked Layers",
-        "command": {
-          "src": "select-layers-by-attribute/command",
+        "main": {
+          "src": "select-layers-by-attribute/main",
           "handler": "selectLockedLayers"
         }
       },
       {
         "name": "Select Layers With Exports",
-        "command": {
-          "src": "select-layers-by-attribute/command",
+        "main": {
+          "src": "select-layers-by-attribute/main",
           "handler": "selectLayersWithExports"
         }
       },
       "-",
       {
         "name": "Select Parent Layers",
-        "command": {
-          "src": "select-layers-by-hierarchy/command",
+        "main": {
+          "src": "select-layers-by-hierarchy/main",
           "handler": "selectParentLayers"
         }
       },
       {
         "name": "Select Root Layers",
-        "command": {
-          "src": "select-layers-by-hierarchy/command",
+        "main": {
+          "src": "select-layers-by-hierarchy/main",
           "handler": "selectRootLayers"
         }
       },
       "-",
       {
         "name": "Select Similar Layers",
-        "command": "select-similar-layers/command",
+        "main": "select-similar-layers/main",
         "ui": "select-similar-layers/ui"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ]
   }

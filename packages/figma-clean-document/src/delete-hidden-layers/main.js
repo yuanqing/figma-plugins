@@ -1,8 +1,8 @@
 import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
-import { commandFactory } from '../utilities/command-factory'
 import { deleteHiddenLayer } from '../utilities/delete-hidden-layer'
+import { mainFactory } from '../utilities/main-factory'
 
-export default commandFactory({
+export default mainFactory({
   processLayer: deleteHiddenLayer,
   stopTraversal: function (layer) {
     return layer.type === 'INSTANCE'

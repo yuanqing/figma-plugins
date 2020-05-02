@@ -1,8 +1,8 @@
-import { commandFactory } from './utilities/command-factory'
+import { mainFactory } from './utilities/main-factory'
 import { isImage } from './utilities/is-image'
 import { isLayerTypeFactory } from './utilities/is-layer-type-factory'
 
-export const selectComponents = commandFactory(
+export const selectComponents = mainFactory(
   'component',
   isLayerTypeFactory('COMPONENT'),
   function (layer) {
@@ -11,16 +11,16 @@ export const selectComponents = commandFactory(
   }
 )
 
-export const selectInstanceLayers = commandFactory(
+export const selectInstanceLayers = mainFactory(
   'instance layer',
   isLayerTypeFactory('INSTANCE')
 )
 
-export const selectFrames = commandFactory('frame', isLayerTypeFactory('FRAME'))
+export const selectFrames = mainFactory('frame', isLayerTypeFactory('FRAME'))
 
-export const selectGroups = commandFactory('group', isLayerTypeFactory('GROUP'))
+export const selectGroups = mainFactory('group', isLayerTypeFactory('GROUP'))
 
-export const selectSlices = commandFactory('slice', isLayerTypeFactory('SLICE'))
+export const selectSlices = mainFactory('slice', isLayerTypeFactory('SLICE'))
 
 const vectorLayerTypes = [
   'BOOLEAN_OPERATION',
@@ -31,7 +31,7 @@ const vectorLayerTypes = [
   'STAR',
   'VECTOR'
 ]
-export const selectVectorLayers = commandFactory(
+export const selectVectorLayers = mainFactory(
   'vector layer',
   function isVector (layer) {
     return vectorLayerTypes.includes(layer.type) && isImage(layer) === false
@@ -42,11 +42,11 @@ export const selectVectorLayers = commandFactory(
   }
 )
 
-export const selectRectangles = commandFactory('rectangle', function (layer) {
+export const selectRectangles = mainFactory('rectangle', function (layer) {
   return layer.type === 'RECTANGLE' && isImage(layer) === false
 })
 
-export const selectLines = commandFactory('line', function (layer) {
+export const selectLines = mainFactory('line', function (layer) {
   if (layer.type === 'LINE') {
     return true
   }
@@ -65,47 +65,43 @@ export const selectLines = commandFactory('line', function (layer) {
   )
 })
 
-export const selectEllipses = commandFactory(
+export const selectEllipses = mainFactory(
   'ellipse',
   isLayerTypeFactory('ELLIPSE')
 )
 
-export const selectPolygons = commandFactory(
+export const selectPolygons = mainFactory(
   'polygon',
   isLayerTypeFactory('POLYGON')
 )
 
-export const selectStars = commandFactory('star', isLayerTypeFactory('STAR'))
+export const selectStars = mainFactory('star', isLayerTypeFactory('STAR'))
 
-export const selectBooleanGroups = commandFactory(
+export const selectBooleanGroups = mainFactory(
   'boolean group',
   isLayerTypeFactory('BOOLEAN_OPERATION')
 )
 
-export const selectImages = commandFactory('image', isImage)
+export const selectImages = mainFactory('image', isImage)
 
-export const selectTextLayers = commandFactory(
+export const selectTextLayers = mainFactory(
   'text layer',
   isLayerTypeFactory('TEXT')
 )
 
-export const selectMaskLayers = commandFactory('mask layer', function (layer) {
+export const selectMaskLayers = mainFactory('mask layer', function (layer) {
   return layer.isMask === true
 })
 
-export const selectHiddenLayers = commandFactory('hidden layer', function (
-  layer
-) {
+export const selectHiddenLayers = mainFactory('hidden layer', function (layer) {
   return layer.visible === false
 })
 
-export const selectLockedLayers = commandFactory('locked layer', function (
-  layer
-) {
+export const selectLockedLayers = mainFactory('locked layer', function (layer) {
   return layer.locked === true
 })
 
-export const selectLayersWithExports = commandFactory(
+export const selectLayersWithExports = mainFactory(
   ['layer with export settings', 'layers with export settings'],
   function (layer) {
     return layer.exportSettings.length > 0

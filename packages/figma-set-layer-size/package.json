@@ -27,24 +27,24 @@
     "@create-figma-plugin/utilities": "*",
     "preact": "^10.3.4"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "817982008781589678",
     "name": "Set Layer Size",
     "menu": [
       {
         "name": "Set Layer Size",
-        "command": "set-layer-size/command",
+        "main": "set-layer-size/main",
         "ui": "set-layer-size/ui"
       },
       {
         "name": "Offset Layer Size",
-        "command": "offset-layer-size/command",
+        "main": "offset-layer-size/main",
         "ui": "offset-layer-size/ui"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ]
   }

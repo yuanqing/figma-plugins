@@ -29,13 +29,13 @@
     "p-memoize": "^3.1.0",
     "preact": "^10.3.4"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "767379122107077581",
     "name": "Language Tester",
     "menu": [
       {
         "name": "Language Tester",
-        "command": "language-tester/command",
+        "main": "language-tester/main",
         "ui": "language-tester/ui"
       },
       {
@@ -43,160 +43,160 @@
         "menu": [
           {
             "name": "Chinese",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "zh"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Czech",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "cs"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Danish",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "da"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Dutch",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "nl"
             },
             "ui": "translate/ui"
           },
           {
             "name": "English",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "en"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Finnish",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "fi"
             },
             "ui": "translate/ui"
           },
           {
             "name": "French",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "fr"
             },
             "ui": "translate/ui"
           },
           {
             "name": "German",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "de"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Hindi",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "hi"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Italian",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "it"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Japanese",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "ja"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Korean",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "ko"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Malay",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "ms"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Norwegian",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "no"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Polish",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "pl"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Portuguese",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "pt"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Spanish",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "es"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Swedish",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "sv"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Thai",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "th"
             },
             "ui": "translate/ui"
           },
           {
             "name": "Turkish",
-            "command": {
-              "src": "translate/command",
+            "main": {
+              "src": "translate/main",
               "handler": "tr"
             },
             "ui": "translate/ui"
@@ -206,13 +206,13 @@
       "-",
       {
         "name": "Set API Key",
-        "command": "set-api-key/command",
+        "main": "set-api-key/main",
         "ui": "set-api-key/ui"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ]
   }

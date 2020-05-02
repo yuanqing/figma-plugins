@@ -7,7 +7,7 @@ import {
 import { getScope } from '../utilities/get-scope'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
 
-export function commandFactory ({
+export function mainFactory ({
   processLayer,
   stopTraversal,
   createLoadingMessage,

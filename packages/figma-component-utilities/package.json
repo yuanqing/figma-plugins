@@ -27,32 +27,32 @@
     "@create-figma-plugin/utilities": "*",
     "preact": "^10.3.4"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "785894722513806497",
     "name": "Component Utilities",
     "menu": [
       {
         "name": "Create Component from Layer",
-        "command": "create-component-from-layer/command"
+        "main": "create-component-from-layer/main"
       },
       {
         "name": "Copy Component",
-        "command": "copy-component/command"
+        "main": "copy-component/main"
       },
       {
         "name": "Replace with Component",
-        "command": "replace-with-component/command",
+        "main": "replace-with-component/main",
         "ui": "replace-with-component/ui"
       },
       "-",
       {
         "name": "Reset Instance Size",
-        "command": "reset-instance-size/command"
+        "main": "reset-instance-size/main"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ]
   }

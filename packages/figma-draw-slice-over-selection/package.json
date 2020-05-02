@@ -27,19 +27,19 @@
     "@create-figma-plugin/utilities": "*",
     "preact": "^10.3.4"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "767379335945775056",
     "name": "Draw Slice Over Selection",
     "menu": [
       {
         "name": "Draw Slice Over Selection",
-        "command": "draw-slice-over-selection/command",
+        "main": "draw-slice-over-selection/main",
         "ui": "draw-slice-over-selection/ui"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ]
   }

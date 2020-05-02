@@ -27,19 +27,19 @@
     "@create-figma-plugin/utilities": "*",
     "preact": "^10.3.4"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "767379204511357902",
     "name": "Move Layers",
     "menu": [
       {
         "name": "Move Layers",
-        "command": "move-layers/command",
+        "main": "move-layers/main",
         "ui": "move-layers/ui"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ]
   }

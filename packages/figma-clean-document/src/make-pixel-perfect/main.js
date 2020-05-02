@@ -1,8 +1,8 @@
 import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
-import { commandFactory } from '../utilities/command-factory'
+import { mainFactory } from '../utilities/main-factory'
 import { makePixelPerfect } from '../utilities/make-pixel-perfect'
 
-export default commandFactory({
+export default mainFactory({
   processLayer: makePixelPerfect,
   stopTraversal: function (layer) {
     return layer.type === 'INSTANCE' || layer.type === 'BOOLEAN_OPERATION'

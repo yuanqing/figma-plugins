@@ -28,52 +28,52 @@
     "figma-sort-layers": "*",
     "preact": "^10.3.4"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "767379019764649932",
     "name": "Clean Document",
     "menu": [
       {
         "name": "Clean Layers",
-        "command": "clean-layers/command",
+        "main": "clean-layers/main",
         "ui": "clean-layers/ui"
       },
       "-",
       {
         "name": "Delete Hidden Layers",
-        "command": "delete-hidden-layers/command"
+        "main": "delete-hidden-layers/main"
       },
       {
         "name": "Ungroup Single-Layer Groups",
-        "command": "ungroup-single-layer-groups/command"
+        "main": "ungroup-single-layer-groups/main"
       },
       {
         "name": "Make Pixel-Perfect",
-        "command": "make-pixel-perfect/command"
+        "main": "make-pixel-perfect/main"
       },
       {
         "name": "Smart Rename Layers",
-        "command": "smart-rename-layers/command",
+        "main": "smart-rename-layers/main",
         "ui": "smart-rename-layers/ui"
       },
       {
         "name": "Smart Sort Layers",
-        "command": "smart-sort-layers/command"
+        "main": "smart-sort-layers/main"
       },
       "-",
       {
         "name": "Sort Pages",
-        "command": "sort-pages/command"
+        "main": "sort-pages/main"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ],
     "relaunchButtons": {
       "cleanLayers": {
         "name": "Clean Layers",
-        "command": "clean-layers/command",
+        "main": "clean-layers/main",
         "ui": "clean-layers/ui"
       }
     }

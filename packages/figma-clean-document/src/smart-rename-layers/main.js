@@ -7,7 +7,7 @@ import {
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
-import { commandFactory } from '../utilities/command-factory'
+import { mainFactory } from '../utilities/main-factory'
 import { defaultSettings } from '../utilities/default-settings'
 import { smartRenameLayer } from '../utilities/smart-rename-layer'
 
@@ -25,7 +25,7 @@ export default async function () {
       smartRenameLayersWhitelist === ''
         ? null
         : new RegExp(smartRenameLayersWhitelist)
-    commandFactory({
+    mainFactory({
       processLayer: function (layer) {
         return smartRenameLayer(layer, smartRenameLayersWhitelistRegex)
       },

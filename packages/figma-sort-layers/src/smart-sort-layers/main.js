@@ -1,7 +1,7 @@
-import { commandFactory } from '../utilities/command-factory'
+import { mainFactory } from '../utilities/main-factory'
 import { smartSortLayers } from './utilities/smart-sort-layers'
 
-export default commandFactory({
+export default mainFactory({
   sortLayers: smartSortLayers,
   successMessage: 'Smart sorted selected layers'
 })

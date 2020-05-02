@@ -27,34 +27,34 @@
     "@create-figma-plugin/utilities": "*",
     "preact": "^10.3.4"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "767379264700569551",
     "name": "Distribute Layers",
     "menu": [
       {
         "name": "Distribute Layers Left",
-        "command": "distribute-layers-left/command",
+        "main": "distribute-layers-left/main",
         "ui": "distribute-layers-left/ui"
       },
       {
         "name": "Distribute Layers Right",
-        "command": "distribute-layers-right/command",
+        "main": "distribute-layers-right/main",
         "ui": "distribute-layers-right/ui"
       },
       {
         "name": "Distribute Layers Up",
-        "command": "distribute-layers-up/command",
+        "main": "distribute-layers-up/main",
         "ui": "distribute-layers-up/ui"
       },
       {
         "name": "Distribute Layers Down",
-        "command": "distribute-layers-down/command",
+        "main": "distribute-layers-down/main",
         "ui": "distribute-layers-down/ui"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ]
   }

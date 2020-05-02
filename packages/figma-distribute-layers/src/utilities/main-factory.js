@@ -9,7 +9,7 @@ import {
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from './default-settings'
 
-export function commandFactory (direction, distributeLayers) {
+export function mainFactory (direction, distributeLayers) {
   return async function () {
     if (figma.currentPage.selection.length < 2) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))

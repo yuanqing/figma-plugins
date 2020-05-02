@@ -27,38 +27,38 @@
     "array-shuffle": "^1.0.1",
     "mem": "^6.0.1"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "767379414704079825",
     "name": "Sort Layers",
     "menu": [
       {
         "name": "Sort Layers by Name",
-        "command": "sort-layers-by-name/command"
+        "main": "sort-layers-by-name/main"
       },
       {
         "name": "Sort Layers by X Position",
-        "command": "sort-layers-by-x-position/command"
+        "main": "sort-layers-by-x-position/main"
       },
       {
         "name": "Sort Layers by Y Position",
-        "command": "sort-layers-by-y-position/command"
+        "main": "sort-layers-by-y-position/main"
       },
       {
         "name": "Smart Sort Layers",
-        "command": "smart-sort-layers/command"
+        "main": "smart-sort-layers/main"
       },
       {
         "name": "Reverse Layer Sort Order",
-        "command": "reverse-layer-sort-order/command"
+        "main": "reverse-layer-sort-order/main"
       },
       {
         "name": "Randomize Layer Sort Order",
-        "command": "randomize-layer-sort-order/command"
+        "main": "randomize-layer-sort-order/main"
       },
       "-",
       {
         "name": "Sort Pages",
-        "command": "sort-pages/command"
+        "main": "sort-pages/main"
       }
     ]
   }

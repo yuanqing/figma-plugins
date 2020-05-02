@@ -1,8 +1,8 @@
 import { mapNumberToWord, pluralize } from '@create-figma-plugin/utilities'
-import { commandFactory } from '../utilities/command-factory'
+import { mainFactory } from '../utilities/main-factory'
 import { ungroupSingleLayerGroup } from '../utilities/ungroup-single-layer-group'
 
-export default commandFactory({
+export default mainFactory({
   processLayer: ungroupSingleLayerGroup,
   stopTraversal: function (layer) {
     return layer.type === 'INSTANCE'

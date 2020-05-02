@@ -25,23 +25,23 @@
   "dependencies": {
     "@create-figma-plugin/utilities": "*"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "figma-flatten-selection-to-bitmap",
     "name": "Flatten Selection to Bitmap",
     "menu": [
       {
         "name": "Flatten Selection to Bitmap",
-        "command": "flatten-selection-to-bitmap/command"
+        "main": "flatten-selection-to-bitmap/main"
       },
       {
         "name": "Set Resolution",
-        "command": "set-resolution/command",
+        "main": "set-resolution/main",
         "ui": "set-resolution/ui"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "command": "reset-plugin/command"
+        "main": "reset-plugin/main"
       }
     ]
   }

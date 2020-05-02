@@ -1,7 +1,7 @@
-import { commandFactory } from '../utilities/command-factory'
+import { mainFactory } from '../utilities/main-factory'
 import { sortLayersByYPosition } from './utilities/sort-layers-by-y-position'
 
-export default commandFactory({
+export default mainFactory({
   sortLayers: sortLayersByYPosition,
   successMessage: 'Sorted selected layers by Y position'
 })

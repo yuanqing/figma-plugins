@@ -11,7 +11,7 @@ import { defaultSettings } from '../default-settings'
 import { getTextLayers } from '../get-text-layers'
 import languages from './languages'
 
-export function commandFactory (languageKey) {
+export function mainFactory (languageKey) {
   return async function () {
     const { apiKey } = await loadSettingsAsync(defaultSettings)
     if (typeof apiKey === 'undefined' || apiKey === '') {

@@ -5,7 +5,7 @@ import {
   updateLayersSortOrder
 } from '@create-figma-plugin/utilities'
 
-export function commandFactory ({ sortLayers, successMessage }) {
+export function mainFactory ({ sortLayers, successMessage }) {
   return function () {
     const selection = figma.currentPage.selection
     if (
