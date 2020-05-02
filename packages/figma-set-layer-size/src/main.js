@@ -8,10 +8,10 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 import { computeDimensions } from './utilities/compute-dimensions'
-import { defaultSettings } from '../utilities/default-settings'
-import { getSelectedLayers } from '../utilities/get-selected-layers'
+import { defaultSettings } from './utilities/default-settings'
+import { getSelectedLayers } from './utilities/get-selected-layers'
 import { setLayerSize } from './utilities/set-layer-size'
-import { updateSelectedLayers } from '../utilities/update-selected-layers'
+import { updateSelectedLayers } from './utilities/update-selected-layers'
 
 export default async function () {
   const selectedLayers = getSelectedLayers()

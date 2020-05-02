@@ -1,7 +1,7 @@
 {
   "name": "figma-set-layer-size",
   "version": "1.0.1",
-  "description": "A Figma plugin to precisely set or offset the size of layers, while ignoring constraints",
+  "description": "A Figma plugin to precisely set the size of layers, while ignoring constraints",
   "keywords": [
     "create-figma-plugin",
     "figma",
@@ -30,17 +30,7 @@
   "figma-plugin": {
     "id": "817982008781589678",
     "name": "Set Layer Size",
-    "menu": [
-      {
-        "name": "Set Layer Size",
-        "main": "set-layer-size/main",
-        "ui": "set-layer-size/ui"
-      },
-      {
-        "name": "Offset Layer Size",
-        "main": "offset-layer-size/main",
-        "ui": "offset-layer-size/ui"
-      }
-    ]
+    "main": "main",
+    "ui": "ui"
   }
 }
