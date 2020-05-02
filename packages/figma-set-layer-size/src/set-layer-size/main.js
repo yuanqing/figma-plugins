@@ -3,7 +3,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
-  on,
+  once,
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -31,14 +31,14 @@ export default async function () {
       ...computeDimensions(selectedLayers)
     })
   })
-  on('SUBMIT', async function (settings) {
+  once('SUBMIT', async function (settings) {
     const { selectedLayers, width, height, resizeWithConstraints } = settings
     await saveSettingsAsync({ resizeWithConstraints })
     setLayerSize(selectedLayers, width, height, resizeWithConstraints)
     updateSelectedLayers(selectedLayers)
     figma.closePlugin(formatSuccessMessage('Set layer size'))
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

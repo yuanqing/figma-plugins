@@ -4,7 +4,7 @@ import {
   formatSuccessMessage,
   isLayerWithinInstance,
   loadSettingsAsync,
-  on,
+  once,
   pluralize,
   saveSettingsAsync,
   showUI
@@ -39,7 +39,7 @@ export default async function () {
       selectedLayers: getSelectedLayers()
     })
   })
-  on('SUBMIT', async function ({ componentId, shouldResizeToFitLayer }) {
+  once('SUBMIT', async function ({ componentId, shouldResizeToFitLayer }) {
     await saveSettingsAsync({
       ...settings,
       shouldResizeToFitLayer
@@ -84,7 +84,7 @@ export default async function () {
       )
     )
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

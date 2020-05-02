@@ -1,7 +1,7 @@
 import {
   emit,
   loadSettingsAsync,
-  on,
+  once,
   pluralize,
   saveSettingsAsync,
   showUI
@@ -17,7 +17,7 @@ export default async function () {
       hasSelection: figma.currentPage.selection.length > 0
     })
   })
-  on('SUBMIT', async function (settings) {
+  once('SUBMIT', async function (settings) {
     await saveSettingsAsync(settings)
     const { smartRenameLayersWhitelist } = settings
     const smartRenameLayersWhitelistRegex =
@@ -45,7 +45,7 @@ export default async function () {
       }
     })()
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

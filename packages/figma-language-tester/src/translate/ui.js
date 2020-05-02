@@ -1,8 +1,8 @@
-import { emit, on } from '@create-figma-plugin/utilities'
+import { emit, once } from '@create-figma-plugin/utilities'
 import { translateAsync } from './translate-async'
 
 export default function () {
-  on('TRANSLATE_REQUEST', async function ({
+  once('TRANSLATE_REQUEST', async function ({
     apiKey,
     languageKey,
     layers,

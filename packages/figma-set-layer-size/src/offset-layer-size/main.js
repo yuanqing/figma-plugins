@@ -3,7 +3,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
-  on,
+  once,
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -28,7 +28,7 @@ export default async function () {
       selectedLayers: getSelectedLayers()
     })
   })
-  on('SUBMIT', async function (settings) {
+  once('SUBMIT', async function (settings) {
     const {
       selectedLayers,
       offsetWidth,
@@ -49,7 +49,7 @@ export default async function () {
     updateSelectedLayers(selectedLayers)
     figma.closePlugin(formatSuccessMessage('Offset layer size'))
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI({ width: 240, height: 140 }, { ...settings, selectedLayers })

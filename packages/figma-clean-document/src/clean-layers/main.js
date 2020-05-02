@@ -5,7 +5,7 @@ import {
   formatSuccessMessage,
   getSelectedLayersOrAllLayers,
   loadSettingsAsync,
-  on,
+  once,
   saveSettingsAsync,
   setRelaunchButton,
   showUI
@@ -28,7 +28,7 @@ export default async function () {
       hasSelection: figma.currentPage.selection.length > 0
     })
   })
-  on('SUBMIT', async function (settings) {
+  once('SUBMIT', async function (settings) {
     await saveSettingsAsync(settings)
     const {
       deleteHiddenLayers,
@@ -72,7 +72,7 @@ export default async function () {
         : `No change to layers ${scope}`
     )
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

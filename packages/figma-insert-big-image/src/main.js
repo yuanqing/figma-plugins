@@ -3,6 +3,7 @@ import {
   loadSettingsAsync,
   saveSettingsAsync,
   on,
+  once,
   pluralize,
   showUI,
   updateLayersSortOrder
@@ -50,7 +51,7 @@ export default async function () {
       )
     )
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI({ width: 240, height: 224 }, settings)

@@ -3,7 +3,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
-  on,
+  once,
   pluralize,
   saveSettingsAsync,
   showUI
@@ -30,7 +30,7 @@ export default async function () {
     })
   }
   figma.on('selectionchange', onSelectionChange)
-  on('SUBMIT', async function ({ attributes }) {
+  once('SUBMIT', async function ({ attributes }) {
     figma.off('selectionchange', onSelectionChange)
     await saveSettingsAsync({
       ...settings,
@@ -50,7 +50,7 @@ export default async function () {
       )
     )
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   const { selectSimilarLayers } = settings

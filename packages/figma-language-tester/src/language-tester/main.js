@@ -5,6 +5,7 @@ import {
   loadFontsAsync,
   loadSettingsAsync,
   on,
+  once,
   showUI,
   traverseLayer
 } from '@create-figma-plugin/utilities'
@@ -67,7 +68,7 @@ export default async function () {
   on('RESET_LANGUAGE', function () {
     resetLanguage(originalStrings)
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
 }

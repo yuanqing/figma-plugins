@@ -4,7 +4,7 @@ import {
   formatSuccessMessage,
   loadFontsAsync,
   loadSettingsAsync,
-  on,
+  once,
   showUI
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
@@ -30,7 +30,7 @@ export function mainFactory (languageKey) {
     }
     showUI({ visible: false })
     const notificationHandler = figma.notify('Translating…', { timeout: 60000 })
-    on('TRANSLATE_RESULT', function ({ layers }) {
+    once('TRANSLATE_RESULT', function ({ layers }) {
       notificationHandler.cancel()
       for (const { id, characters } of layers) {
         const layer = figma.getNodeById(id)

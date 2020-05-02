@@ -3,7 +3,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
-  on,
+  once,
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -21,13 +21,13 @@ export default async function () {
       hasSelection: figma.currentPage.selection.length > 0
     })
   })
-  on('SUBMIT', async function (settings) {
+  once('SUBMIT', async function (settings) {
     await saveSettingsAsync(settings)
     const { padding } = settings
     drawSliceOverSelection(padding)
     figma.closePlugin(formatSuccessMessage('Drew slice over selection'))
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

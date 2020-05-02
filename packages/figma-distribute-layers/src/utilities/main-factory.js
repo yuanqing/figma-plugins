@@ -3,7 +3,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
-  on,
+  once,
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -21,13 +21,13 @@ export function mainFactory (direction, distributeLayers) {
         hasSelection: figma.currentPage.selection.length > 1
       })
     })
-    on('SUBMIT', async function (settings) {
+    once('SUBMIT', async function (settings) {
       await saveSettingsAsync(settings)
       const { space } = settings
       distributeLayers(figma.currentPage.selection, space)
       figma.closePlugin(formatSuccessMessage(`Distributed layers ${direction}`))
     })
-    on('CLOSE_UI', function () {
+    once('CLOSE_UI', function () {
       figma.closePlugin()
     })
     showUI({ width: 240, height: 140 }, { ...settings, hasSelection: true })

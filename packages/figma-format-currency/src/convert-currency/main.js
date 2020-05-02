@@ -3,7 +3,7 @@ import {
   formatSuccessMessage,
   loadFontsAsync,
   loadSettingsAsync,
-  on,
+  once,
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -22,7 +22,7 @@ export default async function () {
       layers: getTextLayers()
     })
   })
-  on('SUBMIT', async function ({
+  once('SUBMIT', async function ({
     layers,
     targetCurrency,
     roundNumbers,
@@ -45,7 +45,7 @@ export default async function () {
       )
     )
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   const layers = getTextLayers()

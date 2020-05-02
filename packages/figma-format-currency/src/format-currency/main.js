@@ -3,7 +3,7 @@ import {
   formatSuccessMessage,
   loadFontsAsync,
   loadSettingsAsync,
-  on,
+  once,
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -19,7 +19,7 @@ export default async function () {
       layers: getTextLayers()
     })
   })
-  on('SUBMIT', async function ({ layers, format, locale }) {
+  once('SUBMIT', async function ({ layers, format, locale }) {
     await saveSettingsAsync({
       ...settings,
       format,
@@ -32,7 +32,7 @@ export default async function () {
     }
     figma.closePlugin(formatSuccessMessage('Formatted currencies in selection'))
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   const layers = getTextLayers()

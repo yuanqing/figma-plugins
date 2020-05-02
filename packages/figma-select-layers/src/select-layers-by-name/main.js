@@ -4,7 +4,7 @@ import {
   formatSuccessMessage,
   getSelectedLayersOrAllLayers,
   loadSettingsAsync,
-  on,
+  once,
   pluralize,
   saveSettingsAsync,
   showUI
@@ -19,7 +19,7 @@ export default async function () {
       hasSelection: figma.currentPage.selection.length > 0
     })
   })
-  on('SUBMIT', async function ({ exactMatch, layerName }) {
+  once('SUBMIT', async function ({ exactMatch, layerName }) {
     await saveSettingsAsync({
       ...settings,
       selectLayersByName: { exactMatch, layerName }
@@ -43,7 +43,7 @@ export default async function () {
       )
     )
   })
-  on('CLOSE_UI', function () {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   const { layerName, exactMatch } = settings.selectLayersByName
