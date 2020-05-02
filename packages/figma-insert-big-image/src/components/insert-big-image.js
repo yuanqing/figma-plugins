@@ -110,7 +110,7 @@ export function InsertBigImage (initialState) {
         onChange={handleChange}
         disabled={isLoading === true}
       >
-        <Text>Insert as an @2x image</Text>
+        <Text>Insert as a @2x image</Text>
       </Checkbox>
     </Container>
   )
