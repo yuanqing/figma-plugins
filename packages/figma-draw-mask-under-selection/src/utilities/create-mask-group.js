@@ -1,19 +1,28 @@
 import {
   computeMaximumBounds,
   insertAfterLayer,
-  setAbsolutePosition
+  setAbsolutePosition,
+  sortSiblingLayersByLayerListOrder
 } from '@create-figma-plugin/utilities'
 
 export function createMaskGroup (layers) {
   const mask = insertMaskLayer(layers)
-  const group = figma.group([...layers, mask], layers[0].parent)
+  const parent = mask.parent
+  const group = figma.group(
+    [...layers, mask],
+    parent,
+    parent.children.indexOf(mask)
+  )
   group.name = 'Mask Group'
   return mask
 }
 
 function insertMaskLayer (layers) {
   const mask = figma.createRectangle()
-  insertAfterLayer(mask, layers[layers.length - 1])
+  const bottomMostLayer = sortSiblingLayersByLayerListOrder(layers)[
+    layers.length - 1
+  ]
+  insertAfterLayer(mask, bottomMostLayer)
   mask.name = 'Mask'
   const maximumBounds = computeMaximumBounds(layers)
   setAbsolutePosition(mask, {

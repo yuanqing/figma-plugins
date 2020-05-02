@@ -1,7 +1,7 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
-  groupSiblingLayers,
+  computeSiblingLayers,
   isLayerWithinInstance,
   pluralize
 } from '@create-figma-plugin/utilities'
@@ -13,7 +13,7 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const groups = groupSiblingLayers(selection)
+  const groups = computeSiblingLayers(selection)
   if (groups.length > 1) {
     figma.closePlugin(
       formatErrorMessage('Select sibling layers at the same hierarchy')
@@ -27,11 +27,11 @@ export default async function () {
     )
     return
   }
-  const mask = createMaskGroup(layers)
+  const mask = createMaskGroup(layers) // `createMaskGroup` returns the `mask`
   figma.currentPage.selection = [mask]
   figma.closePlugin(
     formatSuccessMessage(
-      `Added mask under ${layers.length} ${pluralize(
+      `Drew mask under ${layers.length} ${pluralize(
         layers.length,
         'selected layer'
       )}`
