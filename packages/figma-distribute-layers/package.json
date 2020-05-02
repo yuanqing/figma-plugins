@@ -50,11 +50,6 @@
         "name": "Distribute Layers Down",
         "main": "distribute-layers-down/main",
         "ui": "distribute-layers-down/ui"
-      },
-      "-",
-      {
-        "name": "Reset Plugin",
-        "main": "reset-plugin/main"
       }
     ]
   }

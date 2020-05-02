@@ -30,17 +30,7 @@
   "figma-plugin": {
     "id": "767379335945775056",
     "name": "Draw Slice Over Selection",
-    "menu": [
-      {
-        "name": "Draw Slice Over Selection",
-        "main": "draw-slice-over-selection/main",
-        "ui": "draw-slice-over-selection/ui"
-      },
-      "-",
-      {
-        "name": "Reset Plugin",
-        "main": "reset-plugin/main"
-      }
-    ]
+    "main": "main",
+    "ui": "ui"
   }
 }

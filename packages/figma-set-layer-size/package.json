@@ -40,11 +40,6 @@
         "name": "Offset Layer Size",
         "main": "offset-layer-size/main",
         "ui": "offset-layer-size/ui"
-      },
-      "-",
-      {
-        "name": "Reset Plugin",
-        "main": "reset-plugin/main"
       }
     ]
   }

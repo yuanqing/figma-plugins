@@ -30,17 +30,7 @@
   "figma-plugin": {
     "id": "767379204511357902",
     "name": "Move Layers",
-    "menu": [
-      {
-        "name": "Move Layers",
-        "main": "move-layers/main",
-        "ui": "move-layers/ui"
-      },
-      "-",
-      {
-        "name": "Reset Plugin",
-        "main": "reset-plugin/main"
-      }
-    ]
+    "main": "main",
+    "ui": "ui"
   }
 }

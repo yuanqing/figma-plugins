@@ -48,11 +48,6 @@
       {
         "name": "Reset Instance Size",
         "main": "reset-instance-size/main"
-      },
-      "-",
-      {
-        "name": "Reset Plugin",
-        "main": "reset-plugin/main"
       }
     ]
   }
