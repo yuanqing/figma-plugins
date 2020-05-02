@@ -25,7 +25,7 @@ export function Settings (initialState) {
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />
-      <Text muted>Resolution</Text>
+      <Text muted>Bitmap resolution</Text>
       <VerticalSpace space='small' />
       <SegmentedControl
         name='resolution'
