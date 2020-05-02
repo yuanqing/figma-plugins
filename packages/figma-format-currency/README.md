@@ -20,6 +20,10 @@ Converts currencies in text layers within the selection or on the current page.
 
 - Optionally round the converted currencies to the nearest 100s and 1000s.
 
+### Reset Plugin
+
+Resets all settings to their defaults.
+
 ## License
 
 [MIT](/LICENSE.md)

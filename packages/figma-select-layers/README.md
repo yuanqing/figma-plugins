@@ -43,6 +43,10 @@ Selects layers at the specified hierarchy.
 
 Selects layers with one or more attributes that are identical to the one currently-selected layer.
 
+### Reset Plugin
+
+Resets all settings to their defaults.
+
 ---
 
 With the exception of Select Similar Layers, all commands make a sub-selection within the currently-selected layers, or creates a new selection of layers if the selection is empty.

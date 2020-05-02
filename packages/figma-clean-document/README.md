@@ -43,6 +43,10 @@ Run all the above commands on layers within the selection or on the current page
 
 Sorts pages of the current document in alphabetical order.
 
+### Reset Plugin
+
+Resets all settings to their defaults.
+
 ## License
 
 [MIT](/LICENSE.md)

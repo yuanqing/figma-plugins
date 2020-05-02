@@ -20,6 +20,10 @@ Opens a dialog with a list of languages. Select a language in the list to transl
 
 Translate the text layers within the selection or on the current page to the selected language.
 
+### Reset Plugin
+
+Resets all settings to their defaults.
+
 ## License
 
 [MIT](/LICENSE.md)

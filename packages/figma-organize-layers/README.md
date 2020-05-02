@@ -14,6 +14,10 @@ Organizes all layers on the current page based on layer name; useful for organiz
 
 - Optionally customize how layers are grouped, and set the space between layers.
 
+### Reset Plugin
+
+Resets all settings to their defaults.
+
 ## License
 
 [MIT](/LICENSE.md)
