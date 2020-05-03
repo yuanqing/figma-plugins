@@ -33,7 +33,9 @@ export function Settings (initialState) {
         options={[
           { text: '2x', value: 2 },
           { text: '3x', value: 3 },
-          { text: '4x', value: 4 }
+          { text: '4x', value: 4 },
+          { text: '8x', value: 8 },
+          { text: '10x', value: 10 }
         ]}
         onChange={handleChange}
       />

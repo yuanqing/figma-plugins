@@ -10,7 +10,7 @@
 
 ### Flatten Selection to Bitmap
 
-Rasterize the selected layers at a high resolution (`2x`, `3x`, or `4x`). (This is to work around a limitation in Figma where layers can only be rasterized at `1x` resolution.)
+Rasterize the selected layers at a high resolution (`2x`, `3x`, `4x`, `8x`, or `10x`). (This is to work around a limitation in Figma where layers can only be rasterized at `1x` resolution.)
 
 ### Settings
 
