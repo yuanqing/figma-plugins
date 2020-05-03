@@ -18,7 +18,7 @@ Creates a copy of the selected Master Component.
 
 ### Replace with Component
 
-Opens a dialog with a list of components in the document. Choose a component in the list to replace the selected layers.
+Opens a modal with a list of components in the document. Choose a component in the list to replace the selected layers.
 
 ### Reset Instance Size
 
