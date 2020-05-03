@@ -1,4 +1,4 @@
-# Sort Layers [![Figma Plugin](https://img.shields.io/badge/figma-Sort%20Layers-yellow?cacheSeconds=1800)](https://figma.com/c/plugin/767379414704079825/Sort-Layers) [![npm Version](https://img.shields.io/npm/v/figma-sort-layers?cacheSeconds=1800](https://www.npmjs.com/package/figma-sort-layers)
+# Sort Layers [![Figma Plugin](https://img.shields.io/badge/figma-Sort%20Layers-yellow?cacheSeconds=1800)](https://figma.com/c/plugin/767379414704079825/Sort-Layers) [![npm Version](https://img.shields.io/npm/v/figma-sort-layers?cacheSeconds=1800](https://npmjs.com/package/figma-sort-layers)
 
 > A Figma plugin to sort layers by name or position
 
