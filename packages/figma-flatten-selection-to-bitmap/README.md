@@ -1,8 +1,8 @@
-# Flatten Selection to Bitmap ![Figma Plugin](https://img.shields.io/badge/figma-Flatten%20Selection%20to%20Bitmap-yellow?cacheSeconds=1800) [![npm Version](https://img.shields.io/npm/v/figma-flatten-selection-to-bitmap?cacheSeconds=1800)](https://npmjs.com/package/figma-flatten-selection-to-bitmap)
+# Flatten Selection to Bitmap [![Figma Plugin](https://img.shields.io/badge/figma-Flatten%20Selection%20to%20Bitmap-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/837846252158418235/Flatten-Selection-to-Bitmap) [![npm Version](https://img.shields.io/npm/v/figma-flatten-selection-to-bitmap?cacheSeconds=1800)](https://npmjs.com/package/figma-flatten-selection-to-bitmap)
 
 > A Figma plugin to rasterize layers at a high resolution
 
-![Flatten Selection to Bitmap](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-flatten-selection-to-bitmap/media/cover.png)
+[![Flatten Selection to Bitmap](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-flatten-selection-to-bitmap/media/cover.png)](https://figma.com/community/plugin/837846252158418235/Flatten-Selection-to-Bitmap)
 
 `asset` `bitmap` `export` `flatten` `image` `images` `resolution`
 
