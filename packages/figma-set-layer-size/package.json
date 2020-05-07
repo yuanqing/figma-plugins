@@ -1,6 +1,6 @@
 {
   "name": "figma-set-layer-size",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A Figma plugin to precisely set the size of layers, while ignoring constraints",
   "keywords": [
     "create-figma-plugin",
