@@ -12,7 +12,7 @@
 
 Rasterize the selected layers at a high resolution (`2x`, `3x`, `4x`, `8x`, or `10x`). (This is to work around a limitation in Figma where layers can only be rasterized at `1x` resolution.)
 
-If layers in the selection contains strokes or effects that extend beyond the layers’ bounding box, the position of the resulting image layer may be different from that of the original layers.
+If layers in the selection contain strokes or effects that extend beyond the layers’ bounding box, the position of the resulting image layer may be different from that of the original layers.
 
 ### Settings
 
