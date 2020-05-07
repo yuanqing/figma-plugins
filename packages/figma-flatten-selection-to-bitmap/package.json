@@ -31,7 +31,8 @@
     "menu": [
       {
         "name": "Flatten Selection to Bitmap",
-        "main": "flatten-selection-to-bitmap/main"
+        "main": "flatten-selection-to-bitmap/main",
+        "ui": "flatten-selection-to-bitmap/ui"
       },
       "-",
       {

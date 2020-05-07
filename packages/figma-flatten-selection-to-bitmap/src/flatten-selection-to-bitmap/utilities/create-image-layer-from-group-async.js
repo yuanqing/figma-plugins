@@ -1,10 +1,12 @@
 import {
   createImagePaint,
-  insertBeforeLayer
+  emit,
+  insertBeforeLayer,
+  once,
+  showUI
 } from '@create-figma-plugin/utilities'
 
 export async function createImageLayerFromGroupAsync (group, resolution) {
-  // Export the `group` as a PNG image at `2x` resolution.
   const exportSettings = {
     format: 'PNG',
     constraint: {
@@ -13,20 +15,24 @@ export async function createImageLayerFromGroupAsync (group, resolution) {
     }
   }
   const imageBytes = await group.exportAsync(exportSettings)
-
-  // Convert `imageBytes` into an `ImagePaint` object.
+  const { width, height } = await computeImageDimensions(imageBytes)
   const imagePaint = createImagePaint(imageBytes)
-
-  // Create a rectangle layer with the same dimensions and position as
-  // the `group` layer.
   const layer = figma.createRectangle()
   insertBeforeLayer(layer, group)
-  layer.resize(group.width, group.height)
+  layer.resize(width / resolution, height / resolution)
   layer.x = group.x
   layer.y = group.y
-
-  // Apply the `imagePaint` as a fill on the `layer`.
   layer.fills = [imagePaint]
-
   return layer
+}
+
+async function computeImageDimensions (imageBytes) {
+  return new Promise(function (resolve) {
+    once('COMPUTE_IMAGE_WIDTH_RESULT', function (dimensions) {
+      figma.ui.hide()
+      resolve(dimensions)
+    })
+    showUI({ visible: false })
+    emit('COMPUTE_IMAGE_WIDTH_REQUEST', { imageBytes })
+  })
 }
