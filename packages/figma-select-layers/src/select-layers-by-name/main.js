@@ -29,7 +29,9 @@ export default async function () {
     const layers = getSelectedLayersOrAllLayers()
     const result = filterLayersByName(layers, layerName, exactMatch)
     if (result.length === 0) {
-      figma.closePlugin(formatErrorMessage(`No layers match “${layerName}”`))
+      figma.closePlugin(
+        formatErrorMessage(`No layers match “${layerName}” ${scope}`)
+      )
       return
     }
     figma.currentPage.selection = result
