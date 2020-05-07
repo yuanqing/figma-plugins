@@ -1,6 +1,7 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
+  formatWarningMessage,
   loadSettingsAsync
 } from '@create-figma-plugin/utilities'
 import { createGroup } from './utilities/create-group'
@@ -18,9 +19,15 @@ export default async function () {
   const group = createGroup(layers)
   const { resolution } = await loadSettingsAsync(defaultSettings)
   const imageLayer = await createImageLayerFromGroupAsync(group, resolution)
+  const didPositionChange =
+    imageLayer.width !== group.width || imageLayer.height !== group.height
   group.remove()
   figma.currentPage.selection = [imageLayer]
   figma.closePlugin(
-    formatSuccessMessage(`Flattened selection at ${resolution}x`)
+    didPositionChange === true
+      ? formatWarningMessage(
+          `Flattened at ${resolution}x; position on canvas may have changed`
+        )
+      : formatSuccessMessage(`Flattened at ${resolution}x`)
   )
 }
