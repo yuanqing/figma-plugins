@@ -105,7 +105,12 @@ export function FormatCurrency (initialState) {
           top
         />
         <VerticalSpace space='extraLarge' />
-        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+        <Button
+          fullWidth
+          disabled={isValid() === false}
+          focused
+          onClick={handleSubmit}
+        >
           Format Currency
         </Button>
         <VerticalSpace space='small' />
