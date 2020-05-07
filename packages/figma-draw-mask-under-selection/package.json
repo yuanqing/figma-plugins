@@ -1,6 +1,6 @@
 {
   "name": "figma-draw-mask-under-selection",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Figma plugin to draw a mask under the selection",
   "keywords": [
     "create-figma-plugin",
