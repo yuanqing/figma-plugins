@@ -15,13 +15,15 @@ export async function createImageLayerFromGroupAsync (group, resolution) {
     }
   }
   const imageBytes = await group.exportAsync(exportSettings)
-  const { width, height } = await computeImageDimensions(imageBytes)
+  const dimensions = await computeImageDimensions(imageBytes)
   const imagePaint = createImagePaint(imageBytes)
   const layer = figma.createRectangle()
   insertBeforeLayer(layer, group)
-  layer.resize(width / resolution, height / resolution)
-  layer.x = group.x
-  layer.y = group.y
+  const width = dimensions.width / resolution
+  const height = dimensions.height / resolution
+  layer.resize(width, height)
+  layer.x = group.x - (width - group.width) / 2
+  layer.y = group.y - (height - group.height) / 2
   layer.fills = [imagePaint]
   return layer
 }
