@@ -10,16 +10,16 @@
     "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
     "lint-css": "stylelint 'packages/*/src/**/*.scss'",
     "lint-js": "standardx '*.js' 'packages/*/{scripts,src,test}/**/*.js' 'scripts/*.js'",
-    "postinstall": "yarn run build && yarn run typings",
+    "postinstall": "yarn run build",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules 'packages/*/node_modules' yarn.lock && yarn install",
     "test": "lerna run test",
-    "typings": "mkdir -p node_modules/@types/figma && cd node_modules/@types/figma && curl --remote-name --silent https://www.figma.com/plugin-docs/figma.d.ts",
     "watch": "yarn run clean && lerna run watch"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.9.4",
     "@create-figma-plugin/build": "*",
+    "@figma/plugin-typings": "^1.15.0",
     "ava": "^3.8.1",
     "concurrently": "^5.2.0",
     "eslint-plugin-react-hooks": "^4.0.0",
