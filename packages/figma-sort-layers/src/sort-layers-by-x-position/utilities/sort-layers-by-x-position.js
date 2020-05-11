@@ -1,3 +1,5 @@
+import naturalCompare from 'natural-compare-lite'
+
 export function sortLayersByXPosition (layers) {
   const parentLayer = layers[0].parent
   if (parentLayer.layoutMode === 'HORIZONTAL') {
@@ -13,9 +15,9 @@ export function sortLayersByXPosition (layers) {
     const aName = a.name.toLowerCase()
     const bName = b.name.toLowerCase()
     if (aName !== bName) {
-      return aName.localeCompare(bName, { numeric: true })
+      return naturalCompare(aName, bName)
     }
-    return a.id.localeCompare(b.id, { numeric: true })
+    return naturalCompare(a.id, b.id)
   })
   return parentLayer.layoutMode === 'VERTICAL' ? result.reverse() : result
 }

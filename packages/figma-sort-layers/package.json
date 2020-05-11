@@ -25,7 +25,8 @@
   "dependencies": {
     "@create-figma-plugin/utilities": "*",
     "array-shuffle": "^1.0.1",
-    "mem": "^6.1.0"
+    "mem": "^6.1.0",
+    "natural-compare-lite": "^1.4.0"
   },
   "figma-plugin": {
     "id": "767379414704079825",
