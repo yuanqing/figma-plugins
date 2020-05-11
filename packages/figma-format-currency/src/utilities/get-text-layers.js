@@ -1,5 +1,6 @@
 import {
   extractAttributes,
+  sortLayersByName,
   traverseLayer
 } from '@create-figma-plugin/utilities'
 
@@ -14,17 +15,5 @@ export function getTextLayers () {
       }
     })
   }
-  return extractAttributes(sortLayers(result), attributes)
-}
-
-function sortLayers (layers) {
-  return layers.slice().sort(function (a, b) {
-    if (a.y !== b.y) {
-      return a.y - b.y
-    }
-    if (a.x !== b.x) {
-      return a.x - b.x
-    }
-    return a.name.localeCompare(b.name, { numeric: true })
-  })
+  return extractAttributes(sortLayersByName(result), attributes)
 }
