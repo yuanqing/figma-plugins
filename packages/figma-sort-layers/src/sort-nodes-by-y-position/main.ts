@@ -1,7 +1,7 @@
 import { mainFactory } from '../utilities/main-factory'
-import { sortLayersByYPosition } from './utilities/sort-layers-by-y-position'
+import { sortNodesByYPosition } from './utilities/sort-nodes-by-y-position'
 
 export default mainFactory({
-  sortLayers: sortLayersByYPosition,
+  sortNodes: sortNodesByYPosition,
   successMessage: 'Sorted selected layers by Y position'
 })

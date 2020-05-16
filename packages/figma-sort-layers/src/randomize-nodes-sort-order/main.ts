@@ -1,7 +1,7 @@
 import { mainFactory } from '../utilities/main-factory'
-import { randomizeLayerSortOrder } from './utilities/randomize-layer-sort-order'
+import { randomizeNodesSortOrder } from './utilities/randomize-nodes-sort-order'
 
 export default mainFactory({
-  sortLayers: randomizeLayerSortOrder,
+  sortNodes: randomizeNodesSortOrder,
   successMessage: 'Randomized layer sort order'
 })

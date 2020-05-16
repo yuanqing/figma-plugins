@@ -1,7 +1,7 @@
 import { mainFactory } from '../utilities/main-factory'
-import { smartSortLayers } from './utilities/smart-sort-layers'
+import { smartSortNodes } from './utilities/smart-sort-nodes'
 
 export default mainFactory({
-  sortLayers: smartSortLayers,
+  sortNodes: smartSortNodes,
   successMessage: 'Smart sorted selected layers'
 })

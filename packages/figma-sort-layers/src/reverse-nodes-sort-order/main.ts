@@ -1,7 +1,7 @@
 import { mainFactory } from '../utilities/main-factory'
-import { reverseLayerSortOrder } from './utilities/reverse-layer-sort-order'
+import { reverseNodesSortOrder } from './utilities/reverse-nodes-sort-order'
 
 export default mainFactory({
-  sortLayers: reverseLayerSortOrder,
+  sortNodes: reverseNodesSortOrder,
   successMessage: 'Reversed layer sort order'
 })

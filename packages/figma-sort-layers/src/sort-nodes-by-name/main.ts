@@ -1,7 +1,7 @@
-import { sortLayersByName } from '@create-figma-plugin/utilities'
+import { sortNodesByName } from '@create-figma-plugin/utilities'
 import { mainFactory } from '../utilities/main-factory'
 
 export default mainFactory({
-  sortLayers: sortLayersByName,
+  sortNodes: sortNodesByName,
   successMessage: 'Sorted selected layers by name'
 })
