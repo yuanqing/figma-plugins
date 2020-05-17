@@ -6,8 +6,8 @@ import {
   Container,
   Text,
   TextboxNumeric,
-  VerticalSpace,
-  useForm
+  useForm,
+  VerticalSpace
 } from '@create-figma-plugin/ui'
 import {
   emit,
@@ -16,6 +16,7 @@ import {
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
+
 import { MIXED } from '../utilities/constants'
 
 export function SetLayerSize (props: any) {

@@ -4,7 +4,7 @@
     "build": "yarn run clean && lerna run build",
     "bump": "node scripts/bump-dependencies.js",
     "clean": "lerna run clean && rimraf '*.log'",
-    "fix": "lerna run fix && prettier-standard 'scripts/**/*.js' && prettier --write '*.json'",
+    "fix": "lerna run fix && standard --fix 'scripts/**/*.js' && prettier-standard 'scripts/**/*.js' && prettier --write '*.json'",
     "lint": "lerna run lint && standardx 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "lerna publish from-package",
@@ -21,6 +21,7 @@
     "@typescript-eslint/parser": "^2.31.0",
     "ava": "^3.8.1",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
     "esm": "^3.2.25",
     "globby": "^11.0.0",
     "husky": "^4.2.5",
@@ -34,6 +35,29 @@
     "stylelint": "^13.3.3",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-prettier": "^1.1.2"
+  },
+  "eslintConfig": {
+    "globals": {
+      "figma": true
+    },
+    "plugins": [
+      "react-hooks",
+      "simple-import-sort"
+    ],
+    "rules": {
+      "simple-import-sort/sort": "error",
+      "indent": "off",
+      "no-console": "error",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ],
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "husky": {
     "hooks": {
@@ -49,22 +73,6 @@
       "stylelint",
       "prettier"
     ]
-  },
-  "eslintConfig": {
-    "globals": {
-      "figma": true
-    },
-    "plugins": [
-      "react-hooks"
-    ],
-    "rules": {
-      "indent": "off",
-      "no-console": "error",
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": "error",
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
-    }
   },
   "standardx": {
     "parser": "@typescript-eslint/parser",

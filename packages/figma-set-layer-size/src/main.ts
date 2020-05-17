@@ -7,6 +7,7 @@ import {
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
+
 import { computeDimensions } from './utilities/compute-dimensions'
 import { defaultSettings } from './utilities/default-settings'
 import { getSelectedNodesAttributes } from './utilities/get-selected-nodes-attributes'
