@@ -21,8 +21,8 @@
   "scripts": {
     "build": "yarn run clean && build-figma-plugin",
     "clean": "rimraf '*.log' build manifest.json",
-    "fix": "standardx --fix 'src/**/*.{ts,tsx}' && prettier-standard 'src/**/*.ts' && prettier --write package.json tsconfig.json",
-    "lint": "standardx 'src/**/*.ts'",
+    "fix": "standardx --fix 'src/**/*.{ts,tsx}' && prettier-standard 'src/**/*.{ts,tsx}' && prettier --write package.json tsconfig.json",
+    "lint": "standardx 'src/**/*.{ts,tsx}'",
     "watch": "build-figma-plugin --watch"
   },
   "dependencies": {
