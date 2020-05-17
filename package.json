@@ -4,7 +4,7 @@
     "build": "yarn run clean && lerna run build",
     "bump": "node scripts/bump-dependencies.js",
     "clean": "lerna run clean && rimraf '*.log'",
-    "fix": "lerna run fix && standard --fix 'scripts/**/*.js' && prettier-standard 'scripts/**/*.js' && prettier --write '*.json'",
+    "fix": "lerna run fix && standardx --fix 'scripts/**/*.js' && prettier-standard 'scripts/**/*.js' && prettier --write '*.json'",
     "lint": "lerna run lint && standardx 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "lerna publish from-package",
