@@ -1,4 +1,4 @@
-import { traverseLayer } from '@create-figma-plugin/utilities'
+import { traverseNode } from '@create-figma-plugin/utilities'
 
 export function getTextLayers () {
   const selection = figma.currentPage.selection
@@ -17,7 +17,7 @@ export function getTextLayers () {
 function filterLayers (layers, filter) {
   const result = []
   for (const layer of layers) {
-    traverseLayer(layer, async function (layer) {
+    traverseNode(layer, async function (layer) {
       if (filter(layer) === true) {
         result.push(layer)
       }

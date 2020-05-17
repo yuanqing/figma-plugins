@@ -2,7 +2,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   pluralize,
-  removeDuplicateLayers
+  deduplicateNodes
 } from '@create-figma-plugin/utilities'
 
 export function mainFactory (label, getLayersCallback) {
@@ -13,7 +13,7 @@ export function mainFactory (label, getLayersCallback) {
     }
     const scope =
       figma.currentPage.selection.length > 0 ? 'within selection' : 'on page'
-    const layers = removeDuplicateLayers(
+    const layers = deduplicateNodes(
       getLayersCallback(figma.currentPage.selection)
     )
     if (layers.length === 0) {

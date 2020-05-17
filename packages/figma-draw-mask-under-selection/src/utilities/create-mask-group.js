@@ -1,6 +1,6 @@
 import {
   computeMaximumBounds,
-  insertAfterLayer,
+  insertAfterNode,
   setAbsolutePosition,
   sortSiblingLayersByLayerListOrder
 } from '@create-figma-plugin/utilities'
@@ -22,7 +22,7 @@ function insertMaskLayer (layers) {
   const bottomMostLayer = sortSiblingLayersByLayerListOrder(layers)[
     layers.length - 1
   ]
-  insertAfterLayer(mask, bottomMostLayer)
+  insertAfterNode(mask, bottomMostLayer)
   mask.name = 'Mask'
   const maximumBounds = computeMaximumBounds(layers)
   setAbsolutePosition(mask, {

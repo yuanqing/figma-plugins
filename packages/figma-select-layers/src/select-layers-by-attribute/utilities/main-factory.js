@@ -1,9 +1,9 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
-  getSelectedLayersOrAllLayers,
+  getSelectedNodesOrAllNodes,
   pluralize,
-  traverseLayer
+  traverseNode
 } from '@create-figma-plugin/utilities'
 
 export function mainFactory (label, filterCallback, stopTraversalCallback) {
@@ -32,10 +32,10 @@ export function mainFactory (label, filterCallback, stopTraversalCallback) {
 }
 
 function getLayers (filterCallback, stopTraversalCallback) {
-  const layers = getSelectedLayersOrAllLayers()
+  const layers = getSelectedNodesOrAllNodes()
   const result = []
   for (const layer of layers) {
-    traverseLayer(
+    traverseNode(
       layer,
       function (layer) {
         if (filterCallback(layer) === true) {

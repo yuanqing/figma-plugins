@@ -1,4 +1,4 @@
-import { cloneObject, insertBeforeLayer } from '@create-figma-plugin/utilities'
+import { cloneObject, insertBeforeNode } from '@create-figma-plugin/utilities'
 import { copyAttributes } from './copy-attributes'
 import { getReferenceLayer } from './get-reference-layer'
 
@@ -31,6 +31,6 @@ export function createComponent (layer) {
     }
   }
   const referenceLayer = getReferenceLayer(layer)
-  insertBeforeLayer(component, referenceLayer)
+  insertBeforeNode(component, referenceLayer)
   return component
 }

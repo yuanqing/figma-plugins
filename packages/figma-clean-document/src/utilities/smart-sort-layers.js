@@ -1,7 +1,7 @@
 import {
   compareObjects,
   isLayerWithinInstance,
-  traverseLayer,
+  traverseNode,
   updateLayersSortOrder
 } from '@create-figma-plugin/utilities'
 import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-layers/utilities/smart-sort-child-layers'
@@ -26,7 +26,7 @@ export function smartSortLayers (layers, skipLockedLayers) {
     didChange = true
   }
   for (const layer of layers) {
-    traverseLayer(
+    traverseNode(
       layer,
       function (parentLayer) {
         if (hasAutoLayout(parentLayer) === true) {

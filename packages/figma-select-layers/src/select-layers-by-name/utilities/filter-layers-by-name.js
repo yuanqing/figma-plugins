@@ -1,4 +1,4 @@
-import { traverseLayer } from '@create-figma-plugin/utilities'
+import { traverseNode } from '@create-figma-plugin/utilities'
 
 export function filterLayersByName (layers, layerName, exactMatch) {
   if (layerName === '') {
@@ -7,7 +7,7 @@ export function filterLayersByName (layers, layerName, exactMatch) {
   const result = []
   if (exactMatch === true) {
     for (const layer of layers) {
-      traverseLayer(layer, function (layer) {
+      traverseNode(layer, function (layer) {
         if (layer.name === layerName) {
           result.push(layer)
         }
@@ -16,7 +16,7 @@ export function filterLayersByName (layers, layerName, exactMatch) {
   } else {
     const regex = new RegExp(layerName, 'i')
     for (const layer of layers) {
-      traverseLayer(layer, function (layer) {
+      traverseNode(layer, function (layer) {
         if (regex.test(layer.name) === true) {
           result.push(layer)
         }

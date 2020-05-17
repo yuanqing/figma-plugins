@@ -1,4 +1,4 @@
-import { computeSiblingLayers } from '@create-figma-plugin/utilities'
+import { computeSiblingNodes } from '@create-figma-plugin/utilities'
 
 // Returns an array of array of sibling layers.
 export function getSiblingLayerGroups () {
@@ -7,7 +7,7 @@ export function getSiblingLayerGroups () {
     return [figma.currentPage.children.slice().reverse()]
   }
   if (selection.length === 1 && typeof selection[0].children !== 'undefined') {
-    return computeSiblingLayers([selection[0], ...selection[0].children])
+    return computeSiblingNodes([selection[0], ...selection[0].children])
   }
-  return computeSiblingLayers(selection)
+  return computeSiblingNodes(selection)
 }

@@ -1,7 +1,7 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
-  insertBeforeLayer,
+  insertBeforeNode,
   isLayerWithinInstance,
   pluralize
 } from '@create-figma-plugin/utilities'
@@ -22,7 +22,7 @@ export default async function () {
       const instance = component.createInstance()
       instance.x = layer.x
       instance.y = layer.y
-      insertBeforeLayer(instance, layer)
+      insertBeforeNode(instance, layer)
       if (layer.type !== 'COMPONENT') {
         layer.remove()
       }

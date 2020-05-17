@@ -1,7 +1,7 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
-  computeSiblingLayers,
+  computeSiblingNodes,
   isLayerWithinInstance,
   pluralize
 } from '@create-figma-plugin/utilities'
@@ -13,7 +13,7 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const groups = computeSiblingLayers(selection)
+  const groups = computeSiblingNodes(selection)
   if (groups.length > 1) {
     figma.closePlugin(
       formatErrorMessage('Select sibling layers at the same hierarchy')

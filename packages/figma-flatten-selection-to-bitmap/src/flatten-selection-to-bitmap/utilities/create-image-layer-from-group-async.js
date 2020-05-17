@@ -1,7 +1,7 @@
 import {
   createImagePaint,
   emit,
-  insertBeforeLayer,
+  insertBeforeNode,
   once,
   showUI
 } from '@create-figma-plugin/utilities'
@@ -18,7 +18,7 @@ export async function createImageLayerFromGroupAsync (group, resolution) {
   const dimensions = await computeImageDimensions(imageBytes)
   const imagePaint = createImagePaint(imageBytes)
   const layer = figma.createRectangle()
-  insertBeforeLayer(layer, group)
+  insertBeforeNode(layer, group)
   const width = dimensions.width / resolution
   const height = dimensions.height / resolution
   layer.resize(width, height)
