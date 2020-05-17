@@ -5,17 +5,18 @@ import {
   FileUploadButton,
   FileUploadDropzone,
   Text,
-  VerticalSpace,
-  useForm
+  useForm,
+  VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
-import { Loading } from './loading/loading'
+
 import { computeDimensions } from '../utilities/compute-dimensions'
 import { createImageFromFileAsync } from '../utilities/create-image-from-file-async'
 import { splitImageAsync } from '../utilities/split-image-async'
 import { trimExtension } from '../utilities/trim-extension'
+import { Loading } from './loading/loading'
 
 export function InsertBigImage (initialState) {
   const { state, handleChange } = useForm(

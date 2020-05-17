@@ -34,7 +34,13 @@ async function encodeImage (imageData, x, y, width, height, parentElement) {
     canvasElement.toBlob(function (blob) {
       const reader = new FileReader()
       reader.onload = function () {
-        resolve([new Uint8Array(reader.result), x, y, width, height])
+        resolve([
+          new Uint8Array(reader.result as ArrayBuffer),
+          x,
+          y,
+          width,
+          height
+        ])
       }
       reader.onerror = reject
       reader.readAsArrayBuffer(blob)

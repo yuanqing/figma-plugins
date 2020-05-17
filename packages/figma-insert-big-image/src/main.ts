@@ -1,13 +1,14 @@
 import {
   formatSuccessMessage,
   loadSettingsAsync,
-  saveSettingsAsync,
   on,
   once,
   pluralize,
+  saveSettingsAsync,
   showUI,
-  updateLayersSortOrder
+  updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
+
 import { createImageLayer } from './utilities/create-image-layer'
 import { defaultSettings } from './utilities/default-settings'
 
@@ -34,7 +35,7 @@ export default async function () {
       imageLayers[0].name = name
       result.push(imageLayers[0])
     } else {
-      updateLayersSortOrder(imageLayers)
+      updateNodesSortOrder(imageLayers)
       const group = figma.group(imageLayers, figma.currentPage)
       group.name = name
       result.push(group)
@@ -42,7 +43,7 @@ export default async function () {
     if (isDone === false) {
       return
     }
-    updateLayersSortOrder(result)
+    updateNodesSortOrder(result)
     figma.currentPage.selection = result
     figma.viewport.scrollAndZoomIntoView(result)
     figma.closePlugin(
