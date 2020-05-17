@@ -2,7 +2,7 @@ import {
   emit,
   formatErrorMessage,
   formatSuccessMessage,
-  getSelectedLayersOrAllLayers,
+  getSelectedNodesOrAllNodes,
   loadSettingsAsync,
   once,
   pluralize,
@@ -26,7 +26,7 @@ export default async function () {
     })
     const scope =
       figma.currentPage.selection.length === 0 ? 'on page' : 'within selection'
-    const layers = getSelectedLayersOrAllLayers()
+    const layers = getSelectedNodesOrAllNodes()
     const result = filterLayersByName(layers, layerName, exactMatch)
     if (result.length === 0) {
       figma.closePlugin(

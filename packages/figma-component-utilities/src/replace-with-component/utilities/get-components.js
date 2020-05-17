@@ -1,9 +1,9 @@
-import { sortLayersByName, traverseLayer } from '@create-figma-plugin/utilities'
+import { sortLayersByName, traverseNode } from '@create-figma-plugin/utilities'
 
 export function getComponents () {
   const result = []
   for (const page of figma.root.children) {
-    traverseLayer(
+    traverseNode(
       page,
       function ({ id, name, type, x, y }) {
         if (type === 'COMPONENT') {

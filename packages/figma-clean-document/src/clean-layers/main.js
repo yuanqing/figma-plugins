@@ -3,7 +3,7 @@ import {
   collapseLayer,
   formatErrorMessage,
   formatSuccessMessage,
-  getSelectedLayersOrAllLayers,
+  getSelectedNodesOrAllNodes,
   loadSettingsAsync,
   once,
   saveSettingsAsync,
@@ -47,7 +47,7 @@ export default async function () {
       `Cleaning layers ${scope}…`
     )
     let didChange = false
-    for (const layer of getSelectedLayersOrAllLayers()) {
+    for (const layer of getSelectedNodesOrAllNodes()) {
       didChange =
         cleanLayer(layer, {
           deleteHiddenLayers,

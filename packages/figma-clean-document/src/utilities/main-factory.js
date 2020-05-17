@@ -1,8 +1,8 @@
 import {
   formatErrorMessage,
   formatSuccessMessage,
-  getSelectedLayersOrAllLayers,
-  traverseLayer
+  getSelectedNodesOrAllNodes,
+  traverseNode
 } from '@create-figma-plugin/utilities'
 import { getScope } from '../utilities/get-scope'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
@@ -19,14 +19,14 @@ export function mainFactory ({
       figma.closePlugin(formatErrorMessage('No layers on page'))
       return
     }
-    const layers = getSelectedLayersOrAllLayers()
+    const layers = getSelectedNodesOrAllNodes()
     const scope = getScope()
     const hideLoadingNotification = showLoadingNotification(
       createLoadingMessage(scope)
     )
     let count = 0
     for (const layer of layers) {
-      traverseLayer(
+      traverseNode(
         layer,
         function (layer) {
           if (processLayer(layer) === true) {

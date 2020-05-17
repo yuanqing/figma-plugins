@@ -1,10 +1,10 @@
 import {
-  areSiblingLayers,
+  areSiblingNodes,
   sortSiblingLayersByLayerListOrder
 } from '@create-figma-plugin/utilities'
 
 export function createGroup (layers) {
-  if (areSiblingLayers(layers) === false) {
+  if (areSiblingNodes(layers) === false) {
     return figma.group(layers, figma.currentPage)
   }
   const parent = layers[0].parent

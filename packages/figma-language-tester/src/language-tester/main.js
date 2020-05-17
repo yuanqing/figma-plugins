@@ -7,7 +7,7 @@ import {
   on,
   once,
   showUI,
-  traverseLayer
+  traverseNode
 } from '@create-figma-plugin/utilities'
 import { defaultSettings } from '../default-settings'
 import { getTextLayers } from '../get-text-layers'
@@ -94,7 +94,7 @@ function resetLanguage (originalStrings) {
 function filterLayers (layers, filter) {
   const result = []
   for (const layer of layers) {
-    traverseLayer(layer, async function (layer) {
+    traverseNode(layer, async function (layer) {
       if (filter(layer) === true) {
         result.push(layer)
       }
