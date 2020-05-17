@@ -2,7 +2,7 @@ import {
   emit,
   formatErrorMessage,
   formatSuccessMessage,
-  isLayerWithinInstance,
+  isWithinInstance,
   loadSettingsAsync,
   once,
   pluralize,
@@ -49,7 +49,7 @@ export default async function () {
     const newSelection = []
     let count = 0
     for (const layer of selectedLayers) {
-      if (isLayerWithinInstance(layer) === true) {
+      if (isWithinInstance(layer) === true) {
         continue
       }
       if (layer.id === componentId) {

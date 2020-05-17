@@ -1,7 +1,7 @@
-import { isLayerWithinInstance } from '@create-figma-plugin/utilities'
+import { isWithinInstance } from '@create-figma-plugin/utilities'
 
 export function deleteHiddenLayer (layer) {
-  if (layer.visible === true || isLayerWithinInstance(layer) === true) {
+  if (layer.visible === true || isWithinInstance(layer) === true) {
     return false
   }
   layer.remove()

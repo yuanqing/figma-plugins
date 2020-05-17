@@ -1,6 +1,6 @@
 import {
   areSiblingNodes,
-  sortSiblingLayersByLayerListOrder
+  sortNodesByCanonicalOrder
 } from '@create-figma-plugin/utilities'
 
 export function createGroup (layers) {
@@ -8,7 +8,7 @@ export function createGroup (layers) {
     return figma.group(layers, figma.currentPage)
   }
   const parent = layers[0].parent
-  const topMostLayer = sortSiblingLayersByLayerListOrder(layers)[0]
+  const topMostLayer = sortNodesByCanonicalOrder(layers)[0]
   const index = parent.children.indexOf(topMostLayer)
   return figma.group(layers, parent, index)
 }

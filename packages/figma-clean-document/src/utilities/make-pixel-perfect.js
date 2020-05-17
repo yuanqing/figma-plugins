@@ -1,11 +1,11 @@
-import { isLayerWithinInstance } from '@create-figma-plugin/utilities'
+import { isWithinInstance } from '@create-figma-plugin/utilities'
 
 export function makePixelPerfect (layer) {
   if (
     layer.type === 'GROUP' ||
     layer.type === 'VECTOR' ||
     layer.type === 'BOOLEAN_OPERATION' ||
-    isLayerWithinInstance(layer) === true
+    isWithinInstance(layer) === true
   ) {
     return false
   }

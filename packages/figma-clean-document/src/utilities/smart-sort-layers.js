@@ -1,6 +1,6 @@
 import {
   compareObjects,
-  isLayerWithinInstance,
+  isWithinInstance,
   traverseNode,
   updateLayersSortOrder
 } from '@create-figma-plugin/utilities'
@@ -8,7 +8,7 @@ import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-layers/ut
 import { isLayerAnIllustration } from './is-layer-an-illustration'
 
 export function smartSortLayers (layers, skipLockedLayers) {
-  if (layers.length < 2 || isLayerWithinInstance(layers[0]) === true) {
+  if (layers.length < 2 || isWithinInstance(layers[0]) === true) {
     return false
   }
   const parentLayer = layers[0].parent

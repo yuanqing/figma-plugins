@@ -2,7 +2,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   insertBeforeNode,
-  isLayerWithinInstance,
+  isWithinInstance,
   pluralize
 } from '@create-figma-plugin/utilities'
 import { createComponent } from './utilities/create-component'
@@ -18,7 +18,7 @@ export default async function () {
   for (const layer of layers) {
     const component =
       layer.type === 'COMPONENT' ? layer : createComponent(layer)
-    if (isLayerWithinInstance(layer) === false) {
+    if (isWithinInstance(layer) === false) {
       const instance = component.createInstance()
       instance.x = layer.x
       instance.y = layer.y

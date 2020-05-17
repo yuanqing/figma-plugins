@@ -1,9 +1,9 @@
-import { isLayerWithinInstance } from '@create-figma-plugin/utilities'
+import { isWithinInstance } from '@create-figma-plugin/utilities'
 
 export function ungroupSingleLayerGroup (layer) {
   if (
     isSingleLayerGroup(layer) === false ||
-    isLayerWithinInstance(layer) === true
+    isWithinInstance(layer) === true
   ) {
     return false
   }
