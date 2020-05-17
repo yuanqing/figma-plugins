@@ -2,7 +2,7 @@ import {
   compareObjects,
   isWithinInstance,
   traverseNode,
-  updateLayersSortOrder
+  updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
 import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-layers/utilities/smart-sort-child-layers'
 import { isLayerAnIllustration } from './is-layer-an-illustration'
@@ -22,7 +22,7 @@ export function smartSortLayers (layers, skipLockedLayers) {
     result !== null &&
     compareObjects(layerIds, collectLayerIds(result)) === false
   ) {
-    updateLayersSortOrder(result)
+    updateNodesSortOrder(result)
     didChange = true
   }
   for (const layer of layers) {
@@ -45,7 +45,7 @@ export function smartSortLayers (layers, skipLockedLayers) {
           result !== null &&
           compareObjects(layerIds, collectLayerIds(result)) === false
         ) {
-          updateLayersSortOrder(result)
+          updateNodesSortOrder(result)
           didChange = true
         }
       },
