@@ -9,13 +9,13 @@ import {
 } from '@create-figma-plugin/utilities'
 import { computeDimensions } from './utilities/compute-dimensions'
 import { defaultSettings } from './utilities/default-settings'
-import { getSelectedLayers } from './utilities/get-selected-layers'
-import { setLayerSize } from './utilities/set-layer-size'
-import { updateSelectedLayers } from './utilities/update-selected-layers'
+import { getSelectedNodesAttributes } from './utilities/get-selected-nodes-attributes'
+import { setSize } from './utilities/set-size'
+import { updateSelection } from './utilities/update-selection'
 
 export default async function () {
-  const selectedLayers = getSelectedLayers()
-  if (selectedLayers.length === 0) {
+  const nodes = getSelectedNodesAttributes()
+  if (nodes.length === 0) {
     if (figma.currentPage.selection.length > 0) {
       figma.closePlugin(formatErrorMessage('Select layers outside instances'))
       return
@@ -25,17 +25,17 @@ export default async function () {
   }
   const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
-    const selectedLayers = getSelectedLayers()
+    const nodes = getSelectedNodesAttributes()
     emit('SELECTION_CHANGED', {
-      selectedLayers,
-      ...computeDimensions(selectedLayers)
+      nodes,
+      ...computeDimensions(nodes)
     })
   })
   once('SUBMIT', async function (settings) {
-    const { selectedLayers, width, height, resizeWithConstraints } = settings
+    const { nodes, width, height, resizeWithConstraints } = settings
     await saveSettingsAsync({ resizeWithConstraints })
-    setLayerSize(selectedLayers, width, height, resizeWithConstraints)
-    updateSelectedLayers(selectedLayers)
+    setSize(nodes, width, height, resizeWithConstraints)
+    updateSelection(nodes)
     figma.closePlugin(formatSuccessMessage('Set layer size'))
   })
   once('CLOSE_UI', function () {
@@ -43,6 +43,6 @@ export default async function () {
   })
   showUI(
     { width: 240, height: 140 },
-    { ...settings, selectedLayers, ...computeDimensions(selectedLayers) }
+    { ...settings, nodes, ...computeDimensions(nodes) }
   )
 }

@@ -19,7 +19,10 @@
     "src"
   ],
   "scripts": {
-    "build": "build-figma-plugin",
+    "build": "yarn run clean && build-figma-plugin",
+    "clean": "rimraf '*.log' build manifest.json",
+    "fix": "prettier-standard 'src/**/*.{ts,tsx}' && prettier --write package.json tsconfig.json",
+    "lint": "standardx 'src/**/*.{ts,tsx}'",
     "watch": "build-figma-plugin --watch"
   },
   "dependencies": {
@@ -32,5 +35,11 @@
     "name": "Set Layer Size",
     "main": "main",
     "ui": "ui"
+  },
+  "standardx": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ]
   }
 }

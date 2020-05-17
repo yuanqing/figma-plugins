@@ -18,10 +18,10 @@ import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { MIXED } from '../utilities/constants'
 
-export function SetLayerSize (initialState) {
-  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ selectedLayers, width, height }) {
-      if (selectedLayers.length === 0) {
+export function SetLayerSize (props: any) {
+  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
+    validate: function ({ nodes, width, height }) {
+      if (nodes.length === 0) {
         return false
       }
       const evaluatedWidth = evaluateNumericExpression(width)
@@ -31,14 +31,9 @@ export function SetLayerSize (initialState) {
         (evaluatedHeight !== null && evaluatedHeight !== 0)
       )
     },
-    onSubmit: function ({
-      selectedLayers,
-      width,
-      height,
-      resizeWithConstraints
-    }) {
+    onSubmit: function ({ nodes, width, height, resizeWithConstraints }) {
       emit('SUBMIT', {
-        selectedLayers,
+        nodes,
         width: evaluateNumericExpression(width),
         height: evaluateNumericExpression(height),
         resizeWithConstraints
@@ -50,18 +45,14 @@ export function SetLayerSize (initialState) {
   })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({
-        selectedLayers,
-        width,
-        height
-      }) {
-        handleChange({ selectedLayers, width, height })
+      return on('SELECTION_CHANGED', function ({ nodes, width, height }) {
+        handleChange({ nodes, width, height })
       })
     },
     [handleChange]
   )
-  const { width, height, resizeWithConstraints, selectedLayers } = state
-  const hasSelection = selectedLayers.length > 0
+  const { nodes, width, height, resizeWithConstraints } = state
+  const hasSelection = nodes.length > 0
   return (
     <Container space='medium'>
       <VerticalSpace space='large' />

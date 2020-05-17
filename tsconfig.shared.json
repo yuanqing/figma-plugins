@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "jsxFactory": "h",
     "strict": true,
     "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
   }
