@@ -1,14 +1,15 @@
 import {
+  computeSiblingNodes,
   formatErrorMessage,
   formatSuccessMessage,
-  computeSiblingNodes,
-  isLayerWithinInstance,
+  isWithinInstance,
   pluralize
 } from '@create-figma-plugin/utilities'
+
 import { createMaskGroup } from './utilities/create-mask-group'
 
 export default async function () {
-  const selection = figma.currentPage.selection
+  const selection = figma.currentPage.selection.slice()
   if (selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
@@ -21,7 +22,7 @@ export default async function () {
     return
   }
   const layers = groups[0]
-  if (isLayerWithinInstance(layers[0]) === true) {
+  if (isWithinInstance(layers[0]) === true) {
     figma.closePlugin(
       formatErrorMessage('Select layers outside instance layers')
     )

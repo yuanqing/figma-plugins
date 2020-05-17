@@ -2,7 +2,7 @@ import {
   computeMaximumBounds,
   insertAfterNode,
   setAbsolutePosition,
-  sortSiblingLayersByLayerListOrder
+  sortNodesByCanonicalOrder
 } from '@create-figma-plugin/utilities'
 
 export function createMaskGroup (layers) {
@@ -19,9 +19,7 @@ export function createMaskGroup (layers) {
 
 function insertMaskLayer (layers) {
   const mask = figma.createRectangle()
-  const bottomMostLayer = sortSiblingLayersByLayerListOrder(layers)[
-    layers.length - 1
-  ]
+  const bottomMostLayer = sortNodesByCanonicalOrder(layers)[0]
   insertAfterNode(mask, bottomMostLayer)
   mask.name = 'Mask'
   const maximumBounds = computeMaximumBounds(layers)
