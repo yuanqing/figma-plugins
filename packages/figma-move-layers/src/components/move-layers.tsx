@@ -3,11 +3,11 @@ import {
   Button,
   Columns,
   Container,
-  TextboxNumeric,
-  VerticalSpace,
   moveDownIcon,
   moveRightIcon,
-  useForm
+  TextboxNumeric,
+  useForm,
+  VerticalSpace
 } from '@create-figma-plugin/ui'
 import {
   emit,

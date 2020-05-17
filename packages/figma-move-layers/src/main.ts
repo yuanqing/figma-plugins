@@ -8,6 +8,7 @@ import {
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
+
 import { defaultSettings } from './utilities/default-settings'
 
 export default async function () {
