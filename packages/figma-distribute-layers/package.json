@@ -19,7 +19,10 @@
     "src"
   ],
   "scripts": {
-    "build": "build-figma-plugin",
+    "build": "yarn run clean && build-figma-plugin",
+    "clean": "rimraf '*.log' build manifest.json",
+    "fix": "standardx --fix 'src/**/*.{ts,tsx}' && prettier-standard 'src/**/*.ts' && prettier --write package.json tsconfig.json",
+    "lint": "standardx 'src/**/*.ts'",
     "watch": "build-figma-plugin --watch"
   },
   "dependencies": {
@@ -51,6 +54,12 @@
         "main": "distribute-layers-down/main",
         "ui": "distribute-layers-down/ui"
       }
+    ]
+  },
+  "standardx": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
     ]
   }
 }

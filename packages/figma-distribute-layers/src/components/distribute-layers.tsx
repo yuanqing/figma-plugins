@@ -4,8 +4,8 @@ import {
   Container,
   Text,
   TextboxNumeric,
-  VerticalSpace,
-  useForm
+  useForm,
+  VerticalSpace
 } from '@create-figma-plugin/ui'
 import {
   emit,

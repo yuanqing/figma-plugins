@@ -7,6 +7,7 @@ import {
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
+
 import { defaultSettings } from './default-settings'
 
 export function mainFactory (direction, distributeLayers) {
