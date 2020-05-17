@@ -28,7 +28,9 @@ export async function createImageLayerFromGroupAsync (group, resolution) {
   return layer
 }
 
-async function computeImageDimensions (imageBytes) {
+async function computeImageDimensions (
+  imageBytes
+): Promise<{ width: number; height: number }> {
   return new Promise(function (resolve) {
     once('COMPUTE_IMAGE_WIDTH_RESULT', function (dimensions) {
       figma.ui.close()

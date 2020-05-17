@@ -4,9 +4,10 @@ import {
   formatWarningMessage,
   loadSettingsAsync
 } from '@create-figma-plugin/utilities'
+
+import { defaultSettings } from '../utilities/default-settings'
 import { createGroup } from './utilities/create-group'
 import { createImageLayerFromGroupAsync } from './utilities/create-image-layer-from-group-async'
-import { defaultSettings } from '../utilities/default-settings'
 import { replaceLayersWithinInstancesWithClones } from './utilities/replace-layers-within-instances-with-clones'
 
 export default async function () {

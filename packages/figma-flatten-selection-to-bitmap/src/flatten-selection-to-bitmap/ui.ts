@@ -5,7 +5,7 @@ import { emit, once } from '@create-figma-plugin/utilities'
 export default async function () {
   once('COMPUTE_IMAGE_WIDTH_REQUEST', async function ({ imageBytes }) {
     const url = URL.createObjectURL(new Blob([imageBytes]))
-    const image = await new Promise(function (resolve) {
+    const image: HTMLImageElement = await new Promise(function (resolve) {
       const image = new Image()
       image.onload = function () {
         resolve(image)
