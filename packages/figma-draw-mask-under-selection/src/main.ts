@@ -8,7 +8,7 @@ import {
 
 import { createMaskGroup } from './utilities/create-mask-group'
 
-export default async function () {
+export default async function() {
   const selection = figma.currentPage.selection.slice()
   if (selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))

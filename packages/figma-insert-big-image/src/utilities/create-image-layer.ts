@@ -1,6 +1,6 @@
 import { createImagePaint } from '@create-figma-plugin/utilities'
 
-export function createImageLayer (
+export function createImageLayer(
   [bytes, x, y, width, height],
   xOffset,
   yOffset,

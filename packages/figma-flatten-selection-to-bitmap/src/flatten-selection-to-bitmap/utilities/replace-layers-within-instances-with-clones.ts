@@ -3,8 +3,8 @@ import {
   isWithinInstance
 } from '@create-figma-plugin/utilities'
 
-export function replaceLayersWithinInstancesWithClones (layers) {
-  return layers.map(function (layer) {
+export function replaceLayersWithinInstancesWithClones(layers) {
+  return layers.map(function(layer) {
     if (isWithinInstance(layer) === true) {
       const clone = layer.clone()
       const { x, y } = getAbsolutePosition(layer)

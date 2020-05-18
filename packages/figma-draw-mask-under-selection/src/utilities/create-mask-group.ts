@@ -5,7 +5,7 @@ import {
   sortNodesByCanonicalOrder
 } from '@create-figma-plugin/utilities'
 
-export function createMaskGroup (layers) {
+export function createMaskGroup(layers) {
   const mask = insertMaskLayer(layers)
   const parent = mask.parent
   const group = figma.group(
@@ -17,7 +17,7 @@ export function createMaskGroup (layers) {
   return mask
 }
 
-function insertMaskLayer (layers) {
+function insertMaskLayer(layers) {
   const mask = figma.createRectangle()
   const bottomMostLayer = sortNodesByCanonicalOrder(layers)[0]
   insertAfterNode(mask, bottomMostLayer)

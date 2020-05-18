@@ -17,9 +17,9 @@ import {
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function MoveLayers (initialState) {
+export function MoveLayers(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
+    validate: function({ hasSelection, horizontalOffset, verticalOffset }) {
       const evaluatedHorizontalOffset = evaluateNumericExpression(
         horizontalOffset
       )
@@ -31,19 +31,19 @@ export function MoveLayers (initialState) {
           (evaluatedVerticalOffset !== null && evaluatedVerticalOffset !== 0))
       )
     },
-    onSubmit: function ({ horizontalOffset, verticalOffset }) {
+    onSubmit: function({ horizontalOffset, verticalOffset }) {
       emit('SUBMIT', {
         horizontalOffset: evaluateNumericExpression(horizontalOffset),
         verticalOffset: evaluateNumericExpression(verticalOffset)
       })
     },
-    onClose: function () {
+    onClose: function() {
       emit('CLOSE_UI')
     }
   })
   useEffect(
-    function () {
-      return on('SELECTION_CHANGED', function ({ hasSelection }) {
+    function() {
+      return on('SELECTION_CHANGED', function({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },
@@ -51,27 +51,27 @@ export function MoveLayers (initialState) {
   )
   const { horizontalOffset, verticalOffset } = state
   return (
-    <Container space='medium'>
-      <VerticalSpace space='large' />
-      <Columns space='extraSmall'>
+    <Container space="medium">
+      <VerticalSpace space="large" />
+      <Columns space="extraSmall">
         <TextboxNumeric
-          name='horizontalOffset'
+          name="horizontalOffset"
           icon={moveRightIcon}
           value={horizontalOffset === null ? '' : horizontalOffset}
           onChange={handleChange}
         />
         <TextboxNumeric
-          name='verticalOffset'
+          name="verticalOffset"
           icon={moveDownIcon}
           value={verticalOffset === null ? '' : verticalOffset}
           onChange={handleChange}
         />
       </Columns>
-      <VerticalSpace space='large' />
+      <VerticalSpace space="large" />
       <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Move Layers
       </Button>
-      <VerticalSpace space='small' />
+      <VerticalSpace space="small" />
     </Container>
   )
 }

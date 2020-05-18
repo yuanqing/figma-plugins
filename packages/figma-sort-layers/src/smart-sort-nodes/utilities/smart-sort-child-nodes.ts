@@ -1,6 +1,6 @@
 import { memoizedComputeBoundingBox } from './memoized-compute-bounding-box'
 
-export function smartSortChildNodes (
+export function smartSortChildNodes(
   node: PageNode | SceneNode,
   ids: Array<string>
 ) {
@@ -11,7 +11,7 @@ export function smartSortChildNodes (
     }
     const nodes = children
       .slice()
-      .filter(function (layer: PageNode | SceneNode) {
+      .filter(function(layer: PageNode | SceneNode) {
         return ids.indexOf(layer.id) !== -1
       })
     const [firstNode, ...rest] = nodes
@@ -40,7 +40,7 @@ export function smartSortChildNodes (
   throw new Error('Node has no parent')
 }
 
-function checkIfLayersOverlap (a: SceneNode, b: SceneNode): boolean {
+function checkIfLayersOverlap(a: SceneNode, b: SceneNode): boolean {
   const aa = memoizedComputeBoundingBox(a)
   const bb = memoizedComputeBoundingBox(b)
   return !(
@@ -51,7 +51,7 @@ function checkIfLayersOverlap (a: SceneNode, b: SceneNode): boolean {
   )
 }
 
-function compareLayerPosition (a: SceneNode, b: SceneNode): boolean {
+function compareLayerPosition(a: SceneNode, b: SceneNode): boolean {
   // Returns `true` if `a` should be moved before `b` in the list
   const aa = memoizedComputeBoundingBox(a)
   const bb = memoizedComputeBoundingBox(b)

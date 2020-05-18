@@ -10,25 +10,25 @@ import {
 import { emit } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 
-export function Settings (initialState) {
+export function Settings(initialState) {
   const { state, handleChange, handleSubmit } = useForm(initialState, {
-    onSubmit: function ({ resolution }) {
+    onSubmit: function({ resolution }) {
       emit('SUBMIT', {
         resolution
       })
     },
-    onClose: function () {
+    onClose: function() {
       emit('CLOSE_UI')
     }
   })
   const { resolution } = state
   return (
-    <Container space='medium'>
-      <VerticalSpace space='large' />
+    <Container space="medium">
+      <VerticalSpace space="large" />
       <Text muted>Bitmap resolution</Text>
-      <VerticalSpace space='small' />
+      <VerticalSpace space="small" />
       <SegmentedControl
-        name='resolution'
+        name="resolution"
         value={resolution}
         options={[
           { text: '2x', value: 2 },
@@ -39,11 +39,11 @@ export function Settings (initialState) {
         ]}
         onChange={handleChange}
       />
-      <VerticalSpace space='large' />
+      <VerticalSpace space="large" />
       <Button fullWidth onClick={handleSubmit}>
         Save Settings
       </Button>
-      <VerticalSpace space='small' />
+      <VerticalSpace space="small" />
     </Container>
   )
 }

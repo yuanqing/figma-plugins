@@ -1,6 +1,6 @@
 const MAX_DIMENSION = 4096
 
-export function computeDimensions (dimension) {
+export function computeDimensions(dimension) {
   if (dimension <= MAX_DIMENSION) {
     return [dimension]
   }

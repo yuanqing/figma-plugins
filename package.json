@@ -4,8 +4,8 @@
     "build": "yarn run clean && lerna run build",
     "bump": "node scripts/bump-dependencies.js",
     "clean": "lerna run clean && rimraf '*.log'",
-    "fix": "lerna run fix && standardx --fix 'scripts/**/*.js' && prettier-standard 'scripts/**/*.js' && prettier --write '*.json'",
-    "lint": "lerna run lint && standardx 'scripts/**/*.js'",
+    "fix": "lerna run fix && eslint --fix 'scripts/**/*.js' && prettier --write '*.json'",
+    "lint": "lerna run lint && eslint 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules 'packages/*/node_modules' yarn.lock && yarn install",
@@ -17,46 +17,29 @@
     "@create-figma-plugin/build": "*",
     "@figma/plugin-typings": "^1.15.0",
     "@types/natural-compare-lite": "^1.4.0",
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.31.0",
     "ava": "^3.8.1",
-    "eslint-plugin-react-hooks": "^4.0.0",
-    "eslint-plugin-simple-import-sort": "^5.0.3",
     "esm": "^3.2.25",
+    "eslint": "^7.0.0",
+    "eslint-config-yuanqing": "0.0.1",
     "globby": "^11.0.0",
     "husky": "^4.2.5",
     "lerna": "^3.20.2",
     "lint-staged": "^10.2.2",
     "npm-check-updates": "^4.1.2",
-    "prettier": "^2.0.5",
-    "prettier-standard": "^16.3.0",
     "rimraf": "^3.0.2",
-    "standardx": "^5.0.0",
     "stylelint": "^13.3.3",
     "stylelint-config-prettier": "^8.0.1",
-    "stylelint-prettier": "^1.1.2"
+    "stylelint-prettier": "^1.1.2",
+    "typescript-plugin-css-modules": "^2.3.0"
   },
   "eslintConfig": {
-    "globals": {
-      "figma": true
-    },
-    "plugins": [
-      "react-hooks",
-      "simple-import-sort"
+    "extends": "yuanqing",
+    "ignorePatterns": [
+      "packages/create-figma-plugin/plugin-templates",
+      "*.scss.d.ts"
     ],
     "rules": {
-      "simple-import-sort/sort": "error",
-      "indent": "off",
-      "no-console": "error",
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          "argsIgnorePattern": "^_"
-        }
-      ],
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
+      "react/prop-types": ["off"]
     }
   },
   "husky": {
@@ -66,20 +49,14 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "standardx",
-      "prettier-standard"
+      "eslint"
     ],
     "*.scss": [
       "stylelint",
       "prettier"
     ]
   },
-  "standardx": {
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint/eslint-plugin"
-    ]
-  },
+  "prettier": "eslint-config-yuanqing/prettier",
   "stylelint": {
     "extends": [
       "stylelint-prettier/recommended"

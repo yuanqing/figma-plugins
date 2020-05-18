@@ -4,12 +4,12 @@ import { h } from 'preact'
 
 import style from './loading.scss'
 
-export function Loading ({ children }) {
+export function Loading({ children }) {
   return (
-    <div class={style.loading}>
+    <div className={style.loading}>
       <LoadingIndicator />
-      <VerticalSpace space='small' />
-      <Text align='center' numeric>
+      <VerticalSpace space="small" />
+      <Text align="center" numeric>
         {children}
       </Text>
     </div>

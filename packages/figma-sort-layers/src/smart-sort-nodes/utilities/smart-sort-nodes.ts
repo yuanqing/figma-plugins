@@ -1,6 +1,6 @@
 import { smartSortChildNodes } from './smart-sort-child-nodes'
 
-export function smartSortNodes (
+export function smartSortNodes(
   nodes: Array<SceneNode>
 ): null | Array<SceneNode> {
   const parent = nodes[0].parent
@@ -13,7 +13,7 @@ export function smartSortNodes (
   ) {
     return null
   }
-  const ids = nodes.map(function ({ id }) {
+  const ids = nodes.map(function({ id }) {
     return id
   })
   return smartSortChildNodes(parent as PageNode | SceneNode, ids)

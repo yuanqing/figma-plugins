@@ -3,7 +3,7 @@ import {
   setAbsolutePosition
 } from '@create-figma-plugin/utilities'
 
-export function distributeLayersLeft (layers, space) {
+export function distributeLayersLeft(layers, space) {
   const sortedLayers = layers.slice().sort(sortComparator)
   let x = null
   for (const layer of sortedLayers) {
@@ -16,7 +16,7 @@ export function distributeLayersLeft (layers, space) {
   }
 }
 
-function sortComparator (a, b) {
+function sortComparator(a, b) {
   const aAbsolute = getAbsolutePosition(a)
   const bAbsolute = getAbsolutePosition(b)
   const difference = aAbsolute.x - bAbsolute.x

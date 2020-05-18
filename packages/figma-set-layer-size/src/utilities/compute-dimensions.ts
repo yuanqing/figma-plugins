@@ -5,7 +5,7 @@ type Dimensions = {
   height: number | string
 }
 
-export function computeDimensions (
+export function computeDimensions(
   nodes: Array<{ [key: string]: any }>
 ): Dimensions {
   if (nodes.length === 0) {

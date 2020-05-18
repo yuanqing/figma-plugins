@@ -1,6 +1,6 @@
 import { computeMaximumBounds } from '@create-figma-plugin/utilities'
 
-export function drawSliceOverSelection (padding) {
+export function drawSliceOverSelection(padding) {
   const maximumBounds = computeMaximumBounds(
     figma.currentPage.selection.slice()
   )

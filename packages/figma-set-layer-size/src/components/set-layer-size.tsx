@@ -19,9 +19,9 @@ import { useEffect } from 'preact/hooks'
 
 import { MIXED } from '../utilities/constants'
 
-export function SetLayerSize (props: any) {
+export function SetLayerSize(props: any) {
   const { state, handleChange, handleSubmit, isValid } = useForm(props, {
-    validate: function ({ nodes, width, height }) {
+    validate: function({ nodes, width, height }) {
       if (nodes.length === 0) {
         return false
       }
@@ -32,7 +32,7 @@ export function SetLayerSize (props: any) {
         (evaluatedHeight !== null && evaluatedHeight !== 0)
       )
     },
-    onSubmit: function ({ nodes, width, height, resizeWithConstraints }) {
+    onSubmit: function({ nodes, width, height, resizeWithConstraints }) {
       emit('SUBMIT', {
         nodes,
         width: evaluateNumericExpression(width),
@@ -40,13 +40,13 @@ export function SetLayerSize (props: any) {
         resizeWithConstraints
       })
     },
-    onClose: function () {
+    onClose: function() {
       emit('CLOSE_UI')
     }
   })
   useEffect(
-    function () {
-      return on('SELECTION_CHANGED', function ({ nodes, width, height }) {
+    function() {
+      return on('SELECTION_CHANGED', function({ nodes, width, height }) {
         handleChange({ nodes, width, height })
       })
     },
@@ -55,40 +55,40 @@ export function SetLayerSize (props: any) {
   const { nodes, width, height, resizeWithConstraints } = state
   const hasSelection = nodes.length > 0
   return (
-    <Container space='medium'>
-      <VerticalSpace space='large' />
-      <Columns space='extraSmall'>
+    <Container space="medium">
+      <VerticalSpace space="large" />
+      <Columns space="extraSmall">
         <TextboxNumeric
-          name='width'
-          icon='W'
+          name="width"
+          icon="W"
           value={width === MIXED ? null : width}
           minimum={0}
           onChange={handleChange}
           disabled={hasSelection === false}
         />
         <TextboxNumeric
-          name='height'
-          icon='H'
+          name="height"
+          icon="H"
           value={height === MIXED ? null : height}
           minimum={0}
           onChange={handleChange}
           disabled={hasSelection === false}
         />
       </Columns>
-      <VerticalSpace space='medium' />
+      <VerticalSpace space="medium" />
       <Checkbox
-        name='resizeWithConstraints'
+        name="resizeWithConstraints"
         value={resizeWithConstraints}
         onChange={handleChange}
         disabled={hasSelection === false}
       >
         <Text>Resize with constraints</Text>
       </Checkbox>
-      <VerticalSpace space='medium' />
+      <VerticalSpace space="medium" />
       <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Set Layer Size
       </Button>
-      <VerticalSpace space='small' />
+      <VerticalSpace space="small" />
     </Container>
   )
 }

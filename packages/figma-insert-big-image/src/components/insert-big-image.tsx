@@ -18,7 +18,7 @@ import { splitImageAsync } from '../utilities/split-image-async'
 import { trimExtension } from '../utilities/trim-extension'
 import { Loading } from './loading/loading'
 
-export function InsertBigImage (initialState) {
+export function InsertBigImage(initialState) {
   const { state, handleChange } = useForm(
     {
       ...initialState,
@@ -26,21 +26,21 @@ export function InsertBigImage (initialState) {
       total: 0
     },
     {
-      transform: function (state) {
+      transform: function(state) {
         const { total } = state
         return {
           ...state,
           isLoading: total > 0
         }
       },
-      onClose: function () {
+      onClose: function() {
         emit('CLOSE_UI')
       }
     }
   )
   const { currentIndex, total, insertAs2x, isLoading } = state
   const handleSelectedFiles = useCallback(
-    async function (files) {
+    async function(files) {
       const total = files.length
       handleChange({ total })
       let currentIndex = 0
@@ -74,21 +74,21 @@ export function InsertBigImage (initialState) {
   }
   const acceptedFileTypes = ['image/png', 'image/jpeg']
   return (
-    <Container space='medium'>
-      <VerticalSpace space='medium' />
+    <Container space="medium">
+      <VerticalSpace space="medium" />
       <FileUploadDropzone
         acceptedFileTypes={acceptedFileTypes}
         multiple
         onSelectedFiles={handleSelectedFiles}
       >
-        <Text align='center' bold>
+        <Text align="center" bold>
           Drop image files here
         </Text>
-        <VerticalSpace space='small' />
-        <Text align='center' muted>
+        <VerticalSpace space="small" />
+        <Text align="center" muted>
           or
         </Text>
-        <VerticalSpace space='small' />
+        <VerticalSpace space="small" />
         <FileUploadButton
           acceptedFileTypes={acceptedFileTypes}
           multiple
@@ -99,14 +99,14 @@ export function InsertBigImage (initialState) {
         >
           Choose Image Files
         </FileUploadButton>
-        <VerticalSpace space='medium' />
-        <Text align='center' muted>
+        <VerticalSpace space="medium" />
+        <Text align="center" muted>
           Supported formats: JPEG, PNG
         </Text>
       </FileUploadDropzone>
-      <VerticalSpace space='medium' />
+      <VerticalSpace space="medium" />
       <Checkbox
-        name='insertAs2x'
+        name="insertAs2x"
         value={insertAs2x === true}
         onChange={handleChange}
         disabled={isLoading === true}

@@ -7,12 +7,12 @@ import {
 
 const errorMessage = formatErrorMessage('Select two or more layers')
 
-export function mainFactory (options: {
+export function mainFactory(options: {
   sortNodes: (nodes: Array<SceneNode>) => null | Array<SceneNode>
   successMessage: string
 }): () => void {
   const { sortNodes, successMessage } = options
-  return function () {
+  return function() {
     if (figma.currentPage.selection.length === 0) {
       figma.closePlugin(errorMessage)
       return
@@ -37,7 +37,7 @@ export function mainFactory (options: {
   }
 }
 
-function computeGroups (): null | Array<Array<SceneNode>> {
+function computeGroups(): null | Array<Array<SceneNode>> {
   const selection = figma.currentPage.selection
   if (selection.length === 1) {
     if ('children' in selection[0] && selection[0].children.length > 1) {

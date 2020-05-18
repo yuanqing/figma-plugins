@@ -15,23 +15,23 @@ import {
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function DistributeLayers ({ direction, icon, ...initialState }) {
+export function DistributeLayers({ direction, icon, ...initialState }) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ hasSelection, space }) {
+    validate: function({ hasSelection, space }) {
       return hasSelection === true && evaluateNumericExpression(space) !== null
     },
-    onSubmit: function ({ space }) {
+    onSubmit: function({ space }) {
       emit('SUBMIT', {
         space: evaluateNumericExpression(space)
       })
     },
-    onClose: function () {
+    onClose: function() {
       emit('CLOSE_UI')
     }
   })
   useEffect(
-    function () {
-      return on('SELECTION_CHANGED', function ({ hasSelection }) {
+    function() {
+      return on('SELECTION_CHANGED', function({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },
@@ -39,21 +39,21 @@ export function DistributeLayers ({ direction, icon, ...initialState }) {
   )
   const { space } = state
   return (
-    <Container space='medium'>
-      <VerticalSpace space='large' />
+    <Container space="medium">
+      <VerticalSpace space="large" />
       <Text muted>Space</Text>
-      <VerticalSpace space='small' />
+      <VerticalSpace space="small" />
       <TextboxNumeric
-        name='space'
+        name="space"
         icon={icon}
         value={space}
         onChange={handleChange}
       />
-      <VerticalSpace space='extraLarge' />
+      <VerticalSpace space="extraLarge" />
       <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Distribute Layers {direction}
       </Button>
-      <VerticalSpace space='small' />
+      <VerticalSpace space="small" />
     </Container>
   )
 }

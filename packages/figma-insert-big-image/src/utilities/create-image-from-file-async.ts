@@ -1,11 +1,11 @@
 /* global Image */
 
-export async function createImageFromFileAsync (
+export async function createImageFromFileAsync(
   file
 ): Promise<HTMLImageElement> {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function(resolve, reject) {
     const imageElement = new Image()
-    imageElement.onload = function () {
+    imageElement.onload = function() {
       resolve(imageElement)
     }
     imageElement.onerror = reject

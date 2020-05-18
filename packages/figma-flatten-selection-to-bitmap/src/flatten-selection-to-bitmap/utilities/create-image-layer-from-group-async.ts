@@ -6,7 +6,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-export async function createImageLayerFromGroupAsync (group, resolution) {
+export async function createImageLayerFromGroupAsync(group, resolution) {
   const exportSettings = {
     format: 'PNG',
     constraint: {
@@ -28,11 +28,11 @@ export async function createImageLayerFromGroupAsync (group, resolution) {
   return layer
 }
 
-async function computeImageDimensions (
+async function computeImageDimensions(
   imageBytes
 ): Promise<{ width: number; height: number }> {
-  return new Promise(function (resolve) {
-    once('COMPUTE_IMAGE_WIDTH_RESULT', function (dimensions) {
+  return new Promise(function(resolve) {
+    once('COMPUTE_IMAGE_WIDTH_RESULT', function(dimensions) {
       figma.ui.close()
       resolve(dimensions)
     })

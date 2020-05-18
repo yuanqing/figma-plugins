@@ -1,6 +1,6 @@
 import naturalCompare from 'natural-compare-lite'
 
-export function sortNodesByXPosition (
+export function sortNodesByXPosition(
   nodes: Array<SceneNode>
 ): null | Array<SceneNode> {
   const parent = nodes[0].parent
@@ -10,7 +10,7 @@ export function sortNodesByXPosition (
   if ('layoutMode' in parent && parent.layoutMode === 'HORIZONTAL') {
     return null
   }
-  const result = nodes.slice().sort(function (a, b) {
+  const result = nodes.slice().sort(function(a, b) {
     if (a.x !== b.x) {
       return b.x - a.x
     }

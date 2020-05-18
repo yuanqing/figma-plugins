@@ -1,6 +1,6 @@
 /* global FileReader */
 
-export async function splitImageAsync (image, widths, heights) {
+export async function splitImageAsync(image, widths, heights) {
   const parentElement = document.createElement('div')
   document.body.appendChild(parentElement)
   parentElement.style.cssText =
@@ -27,13 +27,13 @@ export async function splitImageAsync (image, widths, heights) {
   return Promise.all(promises)
 }
 
-async function encodeImage (imageData, x, y, width, height, parentElement) {
+async function encodeImage(imageData, x, y, width, height, parentElement) {
   const canvasElement = createCanvasElement(width, height, parentElement)
   canvasElement.getContext('2d').putImageData(imageData, 0, 0)
-  const result = await new Promise(function (resolve, reject) {
-    canvasElement.toBlob(function (blob) {
+  const result = await new Promise(function(resolve, reject) {
+    canvasElement.toBlob(function(blob) {
       const reader = new FileReader()
-      reader.onload = function () {
+      reader.onload = function() {
         resolve([
           new Uint8Array(reader.result as ArrayBuffer),
           x,
@@ -50,7 +50,7 @@ async function encodeImage (imageData, x, y, width, height, parentElement) {
   return result
 }
 
-function createCanvasElement (width, height, parentElement) {
+function createCanvasElement(width, height, parentElement) {
   const canvasElement = document.createElement('canvas')
   parentElement.appendChild(canvasElement)
   canvasElement.width = width

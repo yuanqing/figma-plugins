@@ -1,7 +1,7 @@
 import { compareArrays } from '@create-figma-plugin/utilities'
 const arrayShuffle = require('array-shuffle')
 
-export function randomizeNodesSortOrder (
+export function randomizeNodesSortOrder(
   nodes: Array<SceneNode>
 ): null | Array<SceneNode> {
   let result

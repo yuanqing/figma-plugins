@@ -1,4 +1,4 @@
-export function setSize (
+export function setSize(
   nodes: Array<{ id: string }>,
   width: null | number,
   height: null | number,
