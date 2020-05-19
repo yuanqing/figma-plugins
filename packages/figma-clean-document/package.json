@@ -19,7 +19,10 @@
     "src"
   ],
   "scripts": {
-    "build": "build-figma-plugin",
+    "build": "yarn run clean && build-figma-plugin",
+    "clean": "rimraf '*.log' build manifest.json",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write package.json tsconfig.json",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
     "watch": "build-figma-plugin --watch"
   },
   "dependencies": {
@@ -29,8 +32,8 @@
     "preact": "^10.4.1"
   },
   "figma-plugin": {
-    "id": "767379019764649932",
     "name": "Clean Document",
+    "id": "767379019764649932",
     "menu": [
       {
         "name": "Clean Layers",

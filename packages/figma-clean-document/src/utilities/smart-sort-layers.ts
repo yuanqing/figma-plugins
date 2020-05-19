@@ -4,10 +4,11 @@ import {
   traverseNode,
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
-import { smartSortChildLayers } from 'figma-sort-layers/src/smart-sort-layers/utilities/smart-sort-child-layers'
+import { smartSortChildNodes } from 'figma-sort-layers/src/smart-sort-nodes/utilities/smart-sort-child-nodes'
+
 import { isLayerAnIllustration } from './is-layer-an-illustration'
 
-export function smartSortLayers (layers, skipLockedLayers) {
+export function smartSortLayers(layers, skipLockedLayers) {
   if (layers.length < 2 || isWithinInstance(layers[0]) === true) {
     return false
   }
@@ -17,7 +18,7 @@ export function smartSortLayers (layers, skipLockedLayers) {
   }
   let didChange = false
   const layerIds = collectLayerIds(layers)
-  const result = smartSortChildLayers(parentLayer, layerIds)
+  const result = smartSortChildNodes(parentLayer, layerIds)
   if (
     result !== null &&
     compareObjects(layerIds, collectLayerIds(result)) === false
@@ -35,18 +36,17 @@ export function smartSortLayers (layers, skipLockedLayers) {
         if (skipLockedLayers === true && parentLayer.locked === true) {
           return
         }
-        const layers = parentLayer.children
-        if (typeof layers === 'undefined') {
-          return
-        }
-        const layerIds = collectLayerIds(layers.slice().reverse())
-        const result = smartSortChildLayers(parentLayer, layerIds)
-        if (
-          result !== null &&
-          compareObjects(layerIds, collectLayerIds(result)) === false
-        ) {
-          updateNodesSortOrder(result)
-          didChange = true
+        if ('children' in parentLayer) {
+          const layers = parentLayer.children
+          const layerIds = collectLayerIds(layers.slice().reverse())
+          const result = smartSortChildNodes(parentLayer, layerIds)
+          if (
+            result !== null &&
+            compareObjects(layerIds, collectLayerIds(result)) === false
+          ) {
+            updateNodesSortOrder(result)
+            didChange = true
+          }
         }
       },
       function (layer) {
@@ -59,7 +59,7 @@ export function smartSortLayers (layers, skipLockedLayers) {
   return didChange
 }
 
-function collectLayerIds (layers) {
+function collectLayerIds(layers) {
   const result = []
   for (const layer of layers) {
     result.push(layer.id)
@@ -67,6 +67,6 @@ function collectLayerIds (layers) {
   return result
 }
 
-function hasAutoLayout (layer) {
+function hasAutoLayout(layer) {
   return layer.layoutMode === 'HORIZONTAL' || layer.layoutMode === 'VERTICAL'
 }

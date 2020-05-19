@@ -1,4 +1,4 @@
-export function smartRenameLayer (layer, whitelistRegex) {
+export function smartRenameLayer(layer, whitelistRegex) {
   if (layer.exportSettings.length !== 0) {
     return false
   }

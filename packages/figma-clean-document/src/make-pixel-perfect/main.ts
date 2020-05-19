@@ -1,4 +1,5 @@
 import { pluralize } from '@create-figma-plugin/utilities'
+
 import { mainFactory } from '../utilities/main-factory'
 import { makePixelPerfect } from '../utilities/make-pixel-perfect'
 

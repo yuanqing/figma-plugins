@@ -2,8 +2,9 @@ import {
   formatErrorMessage,
   formatSuccessMessage
 } from '@create-figma-plugin/utilities'
-import { getSiblingLayerGroups } from '../utilities/get-sibling-layer-groups'
+
 import { getScope } from '../utilities/get-scope'
+import { getSiblingLayerGroups } from '../utilities/get-sibling-layer-groups'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
 import { smartSortLayers } from '../utilities/smart-sort-layers'
 

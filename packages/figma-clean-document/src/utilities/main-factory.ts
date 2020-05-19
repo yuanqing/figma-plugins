@@ -4,10 +4,11 @@ import {
   getSelectedNodesOrAllNodes,
   traverseNode
 } from '@create-figma-plugin/utilities'
+
 import { getScope } from '../utilities/get-scope'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
 
-export function mainFactory ({
+export function mainFactory({
   processLayer,
   stopTraversal,
   createLoadingMessage,

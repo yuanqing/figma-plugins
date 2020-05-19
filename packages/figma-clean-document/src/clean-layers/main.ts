@@ -1,6 +1,6 @@
 import {
-  emit,
   collapseLayer,
+  emit,
   formatErrorMessage,
   formatSuccessMessage,
   getSelectedNodesOrAllNodes,
@@ -10,10 +10,11 @@ import {
   setRelaunchButton,
   showUI
 } from '@create-figma-plugin/utilities'
+
 import { cleanLayer } from '../utilities/clean-layer'
 import { defaultSettings } from '../utilities/default-settings'
-import { getSiblingLayerGroups } from '../utilities/get-sibling-layer-groups'
 import { getScope } from '../utilities/get-scope'
+import { getSiblingLayerGroups } from '../utilities/get-sibling-layer-groups'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
 import { smartSortLayers } from '../utilities/smart-sort-layers'
 

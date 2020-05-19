@@ -1,6 +1,6 @@
 import { isWithinInstance } from '@create-figma-plugin/utilities'
 
-export function makePixelPerfect (layer) {
+export function makePixelPerfect(layer) {
   if (
     layer.type === 'GROUP' ||
     layer.type === 'VECTOR' ||

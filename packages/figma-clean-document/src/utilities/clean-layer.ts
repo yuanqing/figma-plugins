@@ -3,7 +3,7 @@ import { makePixelPerfect } from './make-pixel-perfect'
 import { smartRenameLayer } from './smart-rename-layer'
 import { ungroupSingleLayerGroup } from './ungroup-single-layer-group'
 
-export function cleanLayer (layer, settings) {
+export function cleanLayer(layer, settings) {
   const {
     deleteHiddenLayers,
     pixelPerfect,

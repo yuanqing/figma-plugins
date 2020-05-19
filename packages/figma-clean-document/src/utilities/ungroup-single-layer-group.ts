@@ -1,10 +1,7 @@
 import { isWithinInstance } from '@create-figma-plugin/utilities'
 
-export function ungroupSingleLayerGroup (layer) {
-  if (
-    isSingleLayerGroup(layer) === false ||
-    isWithinInstance(layer) === true
-  ) {
+export function ungroupSingleLayerGroup(layer) {
+  if (isSingleLayerGroup(layer) === false || isWithinInstance(layer) === true) {
     return false
   }
   const parentLayer = layer.parent
@@ -23,7 +20,7 @@ export function ungroupSingleLayerGroup (layer) {
   return true
 }
 
-function isSingleLayerGroup (layer) {
+function isSingleLayerGroup(layer) {
   return (
     layer.type === 'GROUP' &&
     layer.children.length === 1 &&

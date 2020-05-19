@@ -1,22 +1,20 @@
 import { pluralize } from '@create-figma-plugin/utilities'
+
+import { deleteHiddenLayer } from '../utilities/delete-hidden-layer'
 import { mainFactory } from '../utilities/main-factory'
-import { ungroupSingleLayerGroup } from '../utilities/ungroup-single-layer-group'
 
 export default mainFactory({
-  processLayer: ungroupSingleLayerGroup,
+  processLayer: deleteHiddenLayer,
   stopTraversal: function (layer) {
     return layer.type === 'INSTANCE'
   },
   createLoadingMessage: function (scope) {
-    return `Ungrouping single-layer groups ${scope}…`
+    return `Deleting hidden layers ${scope}…`
   },
   createSuccessMessage: function (scope, count) {
-    return `Ungrouped ${count} single-layer ${pluralize(
-      count,
-      'group'
-    )} ${scope}`
+    return `Deleted ${count} hidden ${pluralize(count, 'layer')} ${scope}`
   },
   createFailureMessage: function (scope) {
-    return `No single-layer groups ${scope}`
+    return `No hidden layers ${scope}`
   }
 })

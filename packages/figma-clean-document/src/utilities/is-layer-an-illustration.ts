@@ -1,6 +1,6 @@
 const CONSECUTIVE_LAYER_COUNT = 50
 
-export function isLayerAnIllustration (layer) {
+export function isLayerAnIllustration(layer) {
   if (
     layer.type !== 'FRAME' ||
     layer.type !== 'GROUP' ||
