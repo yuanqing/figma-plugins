@@ -8,7 +8,7 @@
     "lint": "lerna run lint && eslint 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rimraf node_modules 'packages/*/node_modules' yarn.lock && yarn install",
+    "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
     "test": "lerna run test",
     "watch": "yarn run clean && lerna run watch"
   },
@@ -17,8 +17,6 @@
     "@create-figma-plugin/build": "*",
     "@figma/plugin-typings": "^1.15.0",
     "@types/natural-compare-lite": "^1.4.0",
-    "ava": "^3.8.1",
-    "esm": "^3.2.25",
     "eslint": "^7.0.0",
     "eslint-config-yuanqing": "0.0.1",
     "globby": "^11.0.0",
@@ -26,16 +24,19 @@
     "lerna": "^3.20.2",
     "lint-staged": "^10.2.2",
     "npm-check-updates": "^4.1.2",
+    "preact": "^10.4.1",
+    "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "stylelint": "^13.3.3",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-prettier": "^1.1.2",
+    "tap": "^14.10.7",
+    "typescript": "^3.8.3",
     "typescript-plugin-css-modules": "^2.3.0"
   },
   "eslintConfig": {
     "extends": "yuanqing",
     "ignorePatterns": [
-      "packages/create-figma-plugin/plugin-templates",
       "*.scss.d.ts"
     ],
     "rules": {
