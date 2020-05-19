@@ -1,4 +1,5 @@
 import { emit, once } from '@create-figma-plugin/utilities'
+
 import { translateAsync } from './translate-async'
 
 export default function () {

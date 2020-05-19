@@ -7,19 +7,19 @@ import {
   once,
   showUI
 } from '@create-figma-plugin/utilities'
+
 import { defaultSettings } from '../default-settings'
 import { getTextLayers } from '../get-text-layers'
-import languages from './languages'
+import languages from './languages.json'
 
-export function mainFactory (languageKey) {
+export function mainFactory(languageKey) {
   return async function () {
     const { apiKey } = await loadSettingsAsync(defaultSettings)
     if (typeof apiKey === 'undefined' || apiKey === '') {
       figma.closePlugin(
         formatErrorMessage(
           'Add an API key via Plugins › Language Tester › Set API Key'
-        ),
-        { timeout: 10000 }
+        )
       )
       return
     }
@@ -33,7 +33,7 @@ export function mainFactory (languageKey) {
     once('TRANSLATE_RESULT', function ({ layers }) {
       notificationHandler.cancel()
       for (const { id, characters } of layers) {
-        const layer = figma.getNodeById(id)
+        const layer = figma.getNodeById(id) as TextNode
         layer.characters = characters
       }
       figma.closePlugin(

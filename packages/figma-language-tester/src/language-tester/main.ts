@@ -9,9 +9,10 @@ import {
   showUI,
   traverseNode
 } from '@create-figma-plugin/utilities'
+
 import { defaultSettings } from '../default-settings'
 import { getTextLayers } from '../get-text-layers'
-import languages from '../translate/languages'
+import languages from '../translate/languages.json'
 
 export default async function () {
   const { apiKey } = await loadSettingsAsync(defaultSettings)
@@ -19,8 +20,7 @@ export default async function () {
     figma.closePlugin(
       formatErrorMessage(
         'Add an API key via Plugins › Language Tester › Set API Key'
-      ),
-      { timeout: 10000 }
+      )
     )
     return
   }
@@ -56,7 +56,7 @@ export default async function () {
   on('TRANSLATE_RESULT', async function ({ languageKey, layers, scope }) {
     notificationHandler.cancel()
     for (const { id, characters } of layers) {
-      const layer = figma.getNodeById(id)
+      const layer = figma.getNodeById(id) as TextNode
       layer.characters = characters
     }
     figma.notify(
@@ -73,25 +73,25 @@ export default async function () {
   })
 }
 
-function resetLanguage (originalStrings) {
+function resetLanguage(originalStrings) {
   const layers = filterLayers([figma.currentPage], function (layer) {
     return (
       layer.type === 'TEXT' && typeof originalStrings[layer.id] !== 'undefined'
     )
   })
   let didChange = false
-  layers.forEach(function (layer) {
+  for (const layer of layers) {
     if (layer.characters !== originalStrings[layer.id]) {
       didChange = true
       layer.characters = originalStrings[layer.id]
     }
-  })
+  }
   if (didChange === true) {
     figma.notify('Reset')
   }
 }
 
-function filterLayers (layers, filter) {
+function filterLayers(layers, filter) {
   const result = []
   for (const layer of layers) {
     traverseNode(layer, async function (layer) {

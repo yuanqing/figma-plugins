@@ -15,6 +15,6 @@ export const translateAsync = pMemoize(async function (
 
 const newlineRegex = /\n/
 
-function encode (text) {
+function encode(text) {
   return encodeURI(text).replace(newlineRegex, '%0A')
 }

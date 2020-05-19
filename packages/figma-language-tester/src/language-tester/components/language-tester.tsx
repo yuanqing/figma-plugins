@@ -1,33 +1,34 @@
 /** @jsx h */
 import {
-  Container,
   Button,
+  Container,
   Divider,
-  VerticalSpace,
-  ESCAPE_KEY_CODE
+  ESCAPE_KEY_CODE,
+  VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
-import { LanguageItem } from './language-item'
-import { translateAsync } from '../../translate/translate-async'
+
 import languages from '../../translate/languages'
+import { translateAsync } from '../../translate/translate-async'
+import { LanguageItem } from './language-item'
 import styles from './language-tester.scss'
 
 const DEFAULT_LANGUAGE = 'DEFAULT_LANGUAGE'
 
-export function LanguageTester () {
+export function LanguageTester() {
   const [activeLanguageKey, setLanguageKey] = useState(DEFAULT_LANGUAGE)
   const [isLoading, setIsLoading] = useState(false)
-  function handleLanguageClick (languageKey) {
+  function handleLanguageClick(languageKey) {
     setLanguageKey(languageKey)
     emit('SET_LANGUAGE', { languageKey })
   }
-  function handleResetClick () {
+  function handleResetClick() {
     setLanguageKey(DEFAULT_LANGUAGE)
     emit('RESET_LANGUAGE')
   }
-  function handleKeyDown (event) {
+  function handleKeyDown(event) {
     if (event.keyCode === ESCAPE_KEY_CODE) {
       emit('CLOSE_UI')
     }
@@ -65,7 +66,7 @@ export function LanguageTester () {
   }, [])
   return (
     <Fragment>
-      <div class={styles.languages}>
+      <div className={styles.languages}>
         {Object.keys(languages).map(function (languageKey, index) {
           const isActive = activeLanguageKey === languageKey
           return (
@@ -85,8 +86,8 @@ export function LanguageTester () {
         })}
       </div>
       <Divider />
-      <VerticalSpace space='small' />
-      <Container space='medium'>
+      <VerticalSpace space="small" />
+      <Container space="medium">
         <Button
           disabled={activeLanguageKey === DEFAULT_LANGUAGE}
           fullWidth
@@ -95,7 +96,7 @@ export function LanguageTester () {
           Reset
         </Button>
       </Container>
-      <VerticalSpace space='small' />
+      <VerticalSpace space="small" />
     </Fragment>
   )
 }
