@@ -21,7 +21,7 @@ import { MIXED } from '../utilities/constants'
 
 export function SetLayerSize(props: any) {
   const { state, handleChange, handleSubmit, isValid } = useForm(props, {
-    validate: function({ nodes, width, height }) {
+    validate: function ({ nodes, width, height }) {
       if (nodes.length === 0) {
         return false
       }
@@ -32,7 +32,7 @@ export function SetLayerSize(props: any) {
         (evaluatedHeight !== null && evaluatedHeight !== 0)
       )
     },
-    onSubmit: function({ nodes, width, height, resizeWithConstraints }) {
+    onSubmit: function ({ nodes, width, height, resizeWithConstraints }) {
       emit('SUBMIT', {
         nodes,
         width: evaluateNumericExpression(width),
@@ -40,13 +40,13 @@ export function SetLayerSize(props: any) {
         resizeWithConstraints
       })
     },
-    onClose: function() {
+    onClose: function () {
       emit('CLOSE_UI')
     }
   })
   useEffect(
-    function() {
-      return on('SELECTION_CHANGED', function({ nodes, width, height }) {
+    function () {
+      return on('SELECTION_CHANGED', function ({ nodes, width, height }) {
         handleChange({ nodes, width, height })
       })
     },

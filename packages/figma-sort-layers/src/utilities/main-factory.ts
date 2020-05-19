@@ -12,7 +12,7 @@ export function mainFactory(options: {
   successMessage: string
 }): () => void {
   const { sortNodes, successMessage } = options
-  return function() {
+  return function () {
     if (figma.currentPage.selection.length === 0) {
       figma.closePlugin(errorMessage)
       return

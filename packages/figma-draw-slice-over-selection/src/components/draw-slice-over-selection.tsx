@@ -17,23 +17,23 @@ import { useEffect } from 'preact/hooks'
 
 export function DrawSliceOverSelection(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
-    validate: function({ hasSelection, padding }) {
+    validate: function ({ hasSelection, padding }) {
       return (
         hasSelection === true && evaluateNumericExpression(padding) !== null
       )
     },
-    onSubmit: function({ padding }) {
+    onSubmit: function ({ padding }) {
       emit('SUBMIT', {
         padding: evaluateNumericExpression(padding)
       })
     },
-    onClose: function() {
+    onClose: function () {
       emit('CLOSE_UI')
     }
   })
   useEffect(
-    function() {
-      return on('SELECTION_CHANGED', function({ hasSelection }) {
+    function () {
+      return on('SELECTION_CHANGED', function ({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },

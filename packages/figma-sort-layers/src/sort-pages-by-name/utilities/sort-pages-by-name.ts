@@ -1,7 +1,7 @@
 import naturalCompare from 'natural-compare-lite'
 
 export function sortPagesByName(): Array<PageNode> {
-  return figma.root.children.slice().sort(function(a, b) {
+  return figma.root.children.slice().sort(function (a, b) {
     const aName = a.name.toLowerCase()
     const bName = b.name.toLowerCase()
     if (aName !== bName) {

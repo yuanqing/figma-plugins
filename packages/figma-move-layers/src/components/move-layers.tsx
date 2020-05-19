@@ -19,7 +19,7 @@ import { useEffect } from 'preact/hooks'
 
 export function MoveLayers(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
-    validate: function({ hasSelection, horizontalOffset, verticalOffset }) {
+    validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
       const evaluatedHorizontalOffset = evaluateNumericExpression(
         horizontalOffset
       )
@@ -31,19 +31,19 @@ export function MoveLayers(initialState) {
           (evaluatedVerticalOffset !== null && evaluatedVerticalOffset !== 0))
       )
     },
-    onSubmit: function({ horizontalOffset, verticalOffset }) {
+    onSubmit: function ({ horizontalOffset, verticalOffset }) {
       emit('SUBMIT', {
         horizontalOffset: evaluateNumericExpression(horizontalOffset),
         verticalOffset: evaluateNumericExpression(verticalOffset)
       })
     },
-    onClose: function() {
+    onClose: function () {
       emit('CLOSE_UI')
     }
   })
   useEffect(
-    function() {
-      return on('SELECTION_CHANGED', function({ hasSelection }) {
+    function () {
+      return on('SELECTION_CHANGED', function ({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },

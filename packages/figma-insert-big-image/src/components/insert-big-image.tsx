@@ -26,21 +26,21 @@ export function InsertBigImage(initialState) {
       total: 0
     },
     {
-      transform: function(state) {
+      transform: function (state) {
         const { total } = state
         return {
           ...state,
           isLoading: total > 0
         }
       },
-      onClose: function() {
+      onClose: function () {
         emit('CLOSE_UI')
       }
     }
   )
   const { currentIndex, total, insertAs2x, isLoading } = state
   const handleSelectedFiles = useCallback(
-    async function(files) {
+    async function (files) {
       const total = files.length
       handleChange({ total })
       let currentIndex = 0

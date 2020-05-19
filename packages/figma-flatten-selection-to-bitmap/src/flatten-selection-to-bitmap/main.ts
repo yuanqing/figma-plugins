@@ -10,7 +10,7 @@ import { createGroup } from './utilities/create-group'
 import { createImageLayerFromGroupAsync } from './utilities/create-image-layer-from-group-async'
 import { replaceLayersWithinInstancesWithClones } from './utilities/replace-layers-within-instances-with-clones'
 
-export default async function() {
+export default async function () {
   const selectedLayers = figma.currentPage.selection.slice()
   if (selectedLayers.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))

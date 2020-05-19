@@ -14,7 +14,7 @@ import { getSelectedNodesAttributes } from './utilities/get-selected-nodes-attri
 import { setSize } from './utilities/set-size'
 import { updateSelection } from './utilities/update-selection'
 
-export default async function() {
+export default async function () {
   const nodes = getSelectedNodesAttributes()
   if (nodes.length === 0) {
     if (figma.currentPage.selection.length > 0) {
@@ -25,21 +25,21 @@ export default async function() {
     return
   }
   const settings = await loadSettingsAsync(defaultSettings)
-  figma.on('selectionchange', function() {
+  figma.on('selectionchange', function () {
     const nodes = getSelectedNodesAttributes()
     emit('SELECTION_CHANGED', {
       nodes,
       ...computeDimensions(nodes)
     })
   })
-  once('SUBMIT', async function(settings) {
+  once('SUBMIT', async function (settings) {
     const { nodes, width, height, resizeWithConstraints } = settings
     await saveSettingsAsync({ resizeWithConstraints })
     setSize(nodes, width, height, resizeWithConstraints)
     updateSelection(nodes)
     figma.closePlugin(formatSuccessMessage('Set layer size'))
   })
-  once('CLOSE_UI', function() {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI(

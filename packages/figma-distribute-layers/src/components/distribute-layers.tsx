@@ -17,21 +17,21 @@ import { useEffect } from 'preact/hooks'
 
 export function DistributeLayers({ direction, icon, ...initialState }) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
-    validate: function({ hasSelection, space }) {
+    validate: function ({ hasSelection, space }) {
       return hasSelection === true && evaluateNumericExpression(space) !== null
     },
-    onSubmit: function({ space }) {
+    onSubmit: function ({ space }) {
       emit('SUBMIT', {
         space: evaluateNumericExpression(space)
       })
     },
-    onClose: function() {
+    onClose: function () {
       emit('CLOSE_UI')
     }
   })
   useEffect(
-    function() {
-      return on('SELECTION_CHANGED', function({ hasSelection }) {
+    function () {
+      return on('SELECTION_CHANGED', function ({ hasSelection }) {
         handleChange({ hasSelection })
       })
     },

@@ -11,7 +11,7 @@ export function smartSortChildNodes(
     }
     const nodes = children
       .slice()
-      .filter(function(layer: PageNode | SceneNode) {
+      .filter(function (layer: PageNode | SceneNode) {
         return ids.indexOf(layer.id) !== -1
       })
     const [firstNode, ...rest] = nodes

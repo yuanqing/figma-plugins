@@ -12,12 +12,12 @@ import { h } from 'preact'
 
 export function Settings(initialState) {
   const { state, handleChange, handleSubmit } = useForm(initialState, {
-    onSubmit: function({ resolution }) {
+    onSubmit: function ({ resolution }) {
       emit('SUBMIT', {
         resolution
       })
     },
-    onClose: function() {
+    onClose: function () {
       emit('CLOSE_UI')
     }
   })

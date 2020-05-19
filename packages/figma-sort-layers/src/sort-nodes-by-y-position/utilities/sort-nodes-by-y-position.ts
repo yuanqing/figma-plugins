@@ -10,7 +10,7 @@ export function sortNodesByYPosition(
   if ('layoutMode' in parent && parent.layoutMode === 'VERTICAL') {
     return null
   }
-  const result = nodes.slice().sort(function(a, b) {
+  const result = nodes.slice().sort(function (a, b) {
     if (a.y !== b.y) {
       return b.y - a.y
     }

@@ -30,10 +30,10 @@ export async function splitImageAsync(image, widths, heights) {
 async function encodeImage(imageData, x, y, width, height, parentElement) {
   const canvasElement = createCanvasElement(width, height, parentElement)
   canvasElement.getContext('2d').putImageData(imageData, 0, 0)
-  const result = await new Promise(function(resolve, reject) {
-    canvasElement.toBlob(function(blob) {
+  const result = await new Promise(function (resolve, reject) {
+    canvasElement.toBlob(function (blob) {
       const reader = new FileReader()
-      reader.onload = function() {
+      reader.onload = function () {
         resolve([
           new Uint8Array(reader.result as ArrayBuffer),
           x,

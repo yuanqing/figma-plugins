@@ -12,13 +12,13 @@ import {
 import { createImageLayer } from './utilities/create-image-layer'
 import { defaultSettings } from './utilities/default-settings'
 
-export default async function() {
+export default async function () {
   const center = figma.viewport.center
   let x = Math.round(center.x)
   const y = Math.round(center.y)
   const result = []
   const settings = await loadSettingsAsync(defaultSettings)
-  on('INSERT_BIG_IMAGE', async function({
+  on('INSERT_BIG_IMAGE', async function ({
     name,
     images,
     insertAs2x,
@@ -52,7 +52,7 @@ export default async function() {
       )
     )
   })
-  once('CLOSE_UI', function() {
+  once('CLOSE_UI', function () {
     figma.closePlugin()
   })
   showUI({ width: 240, height: 224 }, settings)
