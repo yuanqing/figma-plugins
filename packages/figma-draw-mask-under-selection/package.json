@@ -32,14 +32,5 @@
     "id": "806532458729477508",
     "name": "Draw Mask Under Selection",
     "main": "main"
-  },
-  "standardx": {
-    "ignore": [
-      "src/**/*.scss.d.ts"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint/eslint-plugin"
-    ]
   }
 }
