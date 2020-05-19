@@ -1,4 +1,4 @@
-export function isImage (layer) {
+export function isImage(layer) {
   return (
     layer.type === 'RECTANGLE' &&
     layer.fills.length === 1 &&

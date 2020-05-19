@@ -1,4 +1,4 @@
-export function extractKeysByReferenceLayerType (
+export function extractKeysByReferenceLayerType(
   attributes,
   referenceLayerType
 ) {

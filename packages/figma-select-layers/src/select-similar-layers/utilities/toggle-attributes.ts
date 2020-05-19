@@ -1,4 +1,4 @@
-export function toggleAttributes (
+export function toggleAttributes(
   attributes,
   keysByReferenceLayerType,
   newValue

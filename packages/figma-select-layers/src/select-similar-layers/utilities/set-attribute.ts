@@ -1,4 +1,4 @@
-export function setAttribute (attributes, targetKey, newValue) {
+export function setAttribute(attributes, targetKey, newValue) {
   const result = {}
   for (const key in attributes) {
     const object = attributes[key]
@@ -18,7 +18,7 @@ export function setAttribute (attributes, targetKey, newValue) {
   return result
 }
 
-function setAllAttributes (attributes, newValue) {
+function setAllAttributes(attributes, newValue) {
   const result = {}
   for (const key in attributes) {
     const value = attributes[key]

@@ -6,7 +6,7 @@ import {
   traverseNode
 } from '@create-figma-plugin/utilities'
 
-export function mainFactory (label, filterCallback, stopTraversalCallback) {
+export function mainFactory(label, filterCallback, stopTraversalCallback?) {
   const [labelSingular, labelPlural] =
     typeof label === 'string' ? [label, `${label}s`] : label
   return function () {
@@ -31,7 +31,7 @@ export function mainFactory (label, filterCallback, stopTraversalCallback) {
   }
 }
 
-function getLayers (filterCallback, stopTraversalCallback) {
+function getLayers(filterCallback, stopTraversalCallback) {
   const layers = getSelectedNodesOrAllNodes()
   const result = []
   for (const layer of layers) {

@@ -8,6 +8,7 @@ import {
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
+
 import { defaultSettings } from '../utilities/default-settings'
 import { getSimilarLayers } from './utilities/get-similar-layers'
 
@@ -19,7 +20,7 @@ export default async function () {
     return
   }
   const settings = await loadSettingsAsync(defaultSettings)
-  function onSelectionChange () {
+  function onSelectionChange() {
     const selectedLayers = figma.currentPage.selection
     const length = selectedLayers.length
     if (length !== 1) {
@@ -63,7 +64,7 @@ export default async function () {
   )
 }
 
-function createErrorMessage (length) {
+function createErrorMessage(length) {
   return formatErrorMessage(
     length === 0
       ? 'Select a reference layer'
@@ -71,7 +72,7 @@ function createErrorMessage (length) {
   )
 }
 
-function extractTrueKeys (attributes) {
+function extractTrueKeys(attributes) {
   let result = []
   for (const key in attributes) {
     const value = attributes[key]

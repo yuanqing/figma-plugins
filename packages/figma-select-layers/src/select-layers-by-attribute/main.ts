@@ -33,7 +33,7 @@ const vectorLayerTypes = [
 ]
 export const selectVectorLayers = mainFactory(
   'vector layer',
-  function isVector (layer) {
+  function isVector(layer) {
     return vectorLayerTypes.includes(layer.type) && isImage(layer) === false
   },
   function (layer) {

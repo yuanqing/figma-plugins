@@ -1,6 +1,6 @@
 // Returns `true` if every value in `attributes` corresponding to
 // all the keys in `keys` is equal to `targetValue`
-export function everyAttribute (attributes, keys, targetValue) {
+export function everyAttribute(attributes, keys, targetValue) {
   for (const key in attributes) {
     if (keys.includes(key) === false) {
       continue

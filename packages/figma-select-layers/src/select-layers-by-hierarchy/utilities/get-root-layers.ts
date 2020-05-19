@@ -1,4 +1,4 @@
-export function getRootLayers (layers) {
+export function getRootLayers(layers) {
   if (layers.length === 0) {
     return figma.currentPage.children
   }
@@ -9,7 +9,7 @@ export function getRootLayers (layers) {
   return result
 }
 
-function resolveRootLayer (layer) {
+function resolveRootLayer(layer) {
   if (layer.parent.type === 'PAGE') {
     return layer
   }

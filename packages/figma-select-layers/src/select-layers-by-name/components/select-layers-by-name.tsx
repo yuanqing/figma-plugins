@@ -5,14 +5,14 @@ import {
   Container,
   Text,
   Textbox,
-  VerticalSpace,
-  useForm
+  useForm,
+  VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function SelectLayersByName (initialState) {
+export function SelectLayersByName(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
     validate: function ({ layerName }) {
       return layerName !== ''
@@ -37,33 +37,33 @@ export function SelectLayersByName (initialState) {
   )
   const { exactMatch, layerName, hasSelection } = state
   return (
-    <Container space='medium'>
-      <VerticalSpace space='large' />
+    <Container space="medium">
+      <VerticalSpace space="large" />
       <Textbox
-        name='layerName'
-        placeholder='Layer name'
+        name="layerName"
+        placeholder="Layer name"
         value={layerName}
         onChange={handleChange}
       />
-      <VerticalSpace space='small' />
+      <VerticalSpace space="small" />
       <Checkbox
-        name='exactMatch'
+        name="exactMatch"
         value={exactMatch === true}
         onChange={handleChange}
       >
         <Text>Exact match</Text>
       </Checkbox>
-      <VerticalSpace space='medium' />
+      <VerticalSpace space="medium" />
       <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
         Select Layers by Name
       </Button>
-      <VerticalSpace space='small' />
-      <Text muted align='center'>
+      <VerticalSpace space="small" />
+      <Text muted align="center">
         {hasSelection === true
           ? 'Matching layers within selection'
           : 'Matching layers on page'}
       </Text>
-      <VerticalSpace space='extraLarge' />
+      <VerticalSpace space="extraLarge" />
     </Container>
   )
 }

@@ -1,6 +1,6 @@
 import { traverseNode } from '@create-figma-plugin/utilities'
 
-export function filterLayersByName (layers, layerName, exactMatch) {
+export function filterLayersByName(layers, layerName, exactMatch) {
   if (layerName === '') {
     return []
   }

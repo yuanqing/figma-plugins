@@ -1,14 +1,15 @@
 /** @jsx h */
 import { SelectableItem, Text } from '@create-figma-plugin/ui'
 import { h } from 'preact'
+
 import { labels } from '../utilities/labels'
 import styles from './attributes.scss'
 
-export function Attributes ({
+export function Attributes({
   attributes,
   keysByReferenceLayerType,
   keysBySearchTerm,
-  onClick
+  onAttributeClick
 }) {
   const result = []
   for (const key in attributes) {
@@ -34,7 +35,7 @@ export function Attributes ({
                 }) === true
           } // at least one `true`
           disabled={isDisabled === true}
-          onClick={onClick}
+          onChange={onAttributeClick}
           bold
         >
           {labels[key]}
@@ -53,7 +54,7 @@ export function Attributes ({
             name={key}
             value={isDisabled === true ? false : object[key]}
             disabled={isDisabled === true}
-            onClick={onClick}
+            onChange={onAttributeClick}
             indent
           >
             {labels[key]}
@@ -71,7 +72,7 @@ export function Attributes ({
         name={key}
         value={isDisabled === true ? false : object}
         disabled={isDisabled === true}
-        onClick={onClick}
+        onChange={onAttributeClick}
         bold
       >
         {labels[key]}
@@ -80,12 +81,12 @@ export function Attributes ({
   }
   if (result.length === 0) {
     return (
-      <div class={styles.emptyState}>
-        <Text muted align='center'>
+      <div className={styles.emptyState}>
+        <Text muted align="center">
           No matches
         </Text>
       </div>
     )
   }
-  return <div class={styles.attributes}>{result}</div>
+  return <div className={styles.attributes}>{result}</div>
 }

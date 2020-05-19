@@ -1,11 +1,11 @@
 import {
+  deduplicateNodes,
   formatErrorMessage,
   formatSuccessMessage,
-  pluralize,
-  deduplicateNodes
+  pluralize
 } from '@create-figma-plugin/utilities'
 
-export function mainFactory (label, getLayersCallback) {
+export function mainFactory(label, getLayersCallback) {
   return function () {
     if (figma.currentPage.children.length === 0) {
       figma.closePlugin(formatErrorMessage('No layers on page'))

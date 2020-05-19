@@ -1,7 +1,7 @@
-export function getParentLayers (layers) {
+export function getParentLayers(layers) {
   if (layers.length === 0) {
     return figma.currentPage.children.filter(function (layer) {
-      return typeof layer.children !== 'undefined'
+      return 'children' in layer
     })
   }
   const result = []

@@ -1,6 +1,6 @@
 import { labels } from './labels'
 
-export function extractKeysBySearchTerm (attributes, searchTerm) {
+export function extractKeysBySearchTerm(attributes, searchTerm) {
   let result = []
   for (const key in attributes) {
     const object = attributes[key]
@@ -25,6 +25,6 @@ export function extractKeysBySearchTerm (attributes, searchTerm) {
   return result
 }
 
-function containsSearchTerm (string, searchTerm) {
+function containsSearchTerm(string, searchTerm) {
   return string.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
 }
