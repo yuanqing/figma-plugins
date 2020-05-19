@@ -29,8 +29,8 @@
     "watch": "yarn run clean-build && build-figma-plugin --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "*",
-    "@create-figma-plugin/utilities": "*",
+    "@create-figma-plugin/ui": "0.0.74-alpha.0",
+    "@create-figma-plugin/utilities": "0.0.74-alpha.0",
     "preact": "^10.4.1"
   },
   "figma-plugin": {
