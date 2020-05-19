@@ -23,7 +23,7 @@
     "clean": "rimraf '*.log' build manifest.json",
     "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write package.json tsconfig.json",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "watch": "build-figma-plugin --watch"
+    "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "*"

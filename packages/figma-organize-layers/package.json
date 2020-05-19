@@ -26,7 +26,7 @@
     "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
     "lint": "eslint '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
     "test": "yarn run clean-test && tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse",
-    "watch": "build-figma-plugin --watch"
+    "watch": "yarn run clean-build && build-figma-plugin --watch"
   },
   "dependencies": {
     "@create-figma-plugin/ui": "*",
