@@ -1,6 +1,6 @@
 const slashRegex = /\//g
 
-export function computeMaximumGroupDefinition (layers) {
+export function computeMaximumGroupDefinition(layers) {
   let maximum = 1
   layers.forEach(function ({ name }) {
     const matches = name.match(slashRegex)

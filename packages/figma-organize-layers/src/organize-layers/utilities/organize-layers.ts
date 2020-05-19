@@ -2,10 +2,11 @@ import {
   collapseLayer,
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
+
 import { arrangeGroups } from './arrange-groups'
 import { groupLayers } from './group-layers'
 
-export function organizeLayers (
+export function organizeLayers(
   layers,
   combineSingleLayerGroups,
   groupDefinition,
@@ -18,7 +19,7 @@ export function organizeLayers (
   collapseLayers(layers)
 }
 
-function updateSortOrder (groups) {
+function updateSortOrder(groups) {
   const layers = []
   for (const group of groups) {
     for (const layer of group.layers) {
@@ -28,7 +29,7 @@ function updateSortOrder (groups) {
   updateNodesSortOrder(layers)
 }
 
-function collapseLayers (layers) {
+function collapseLayers(layers) {
   for (const layer of layers) {
     collapseLayer(layer)
   }

@@ -5,12 +5,12 @@ import {
   Columns,
   Container,
   SegmentedControl,
-  Text,
-  TextboxNumeric,
-  VerticalSpace,
   spaceHorizontalIcon,
   spaceVerticalIcon,
-  useForm
+  Text,
+  TextboxNumeric,
+  useForm,
+  VerticalSpace
 } from '@create-figma-plugin/ui'
 import {
   emit,
@@ -19,10 +19,11 @@ import {
 } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect } from 'preact/hooks'
-import { Preview } from './preview/preview'
-import { groupDefinitions } from '../utilities/group-definitions'
 
-export function OrganizeLayers (initialState) {
+import { groupDefinitions } from '../utilities/group-definitions'
+import { Preview } from './preview/preview'
+
+export function OrganizeLayers(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
     validate: function ({ layers }) {
       return layers.length > 0
@@ -59,50 +60,55 @@ export function OrganizeLayers (initialState) {
     combineSingleLayerGroups,
     groupDefinition,
     horizontalSpace,
+    layers,
     maximumGroupDefinition,
     verticalSpace
   } = state
   return (
     <Fragment>
-      <Preview {...state} />
-      <Container space='medium'>
-        <VerticalSpace space='large' />
+      <Preview
+        combineSingleLayerGroups={combineSingleLayerGroups}
+        groupDefinition={groupDefinition}
+        layers={layers}
+      />
+      <Container space="medium">
+        <VerticalSpace space="large" />
         <Text muted>Group by text before</Text>
-        <VerticalSpace space='small' />
+        <VerticalSpace space="small" />
         <SegmentedControl
-          name='groupDefinition'
+          name="groupDefinition"
           value={Math.min(groupDefinition, maximumGroupDefinition)}
           options={groupDefinitions.slice(0, maximumGroupDefinition)}
           onChange={handleChange}
         />
-        <VerticalSpace space='large' />
+        <VerticalSpace space="large" />
         <Text muted>Space between layers</Text>
-        <VerticalSpace space='small' />
-        <Columns space='extraSmall'>
+        <VerticalSpace space="small" />
+        <Columns space="extraSmall">
           <TextboxNumeric
-            name='horizontalSpace'
+            name="horizontalSpace"
             icon={spaceHorizontalIcon}
             value={horizontalSpace}
             minimum={0}
             onChange={handleChange}
           />
           <TextboxNumeric
-            name='verticalSpace'
+            name="verticalSpace"
             icon={spaceVerticalIcon}
             value={verticalSpace}
             minimum={0}
             onChange={handleChange}
           />
         </Columns>
-        <VerticalSpace space='large' />
+        <VerticalSpace space="large" />
         <Checkbox
-          name='combineSingleLayerGroups'
+          name="combineSingleLayerGroups"
           onChange={handleChange}
           value={combineSingleLayerGroups}
         >
           <Text>Combine single-layer groups</Text>
         </Checkbox>
-        <VerticalSpace space='large' />
+        <VerticalSpace space="large" />
         <Button
           fullWidth
           disabled={isValid() === false}
@@ -111,7 +117,7 @@ export function OrganizeLayers (initialState) {
         >
           Organize Layers
         </Button>
-        <VerticalSpace space='small' />
+        <VerticalSpace space="small" />
       </Container>
     </Fragment>
   )

@@ -10,8 +10,9 @@ import {
   setRelaunchButton,
   showUI
 } from '@create-figma-plugin/utilities'
-import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
+
 import { defaultSettings } from '../utilities/default-settings'
+import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
 import { organizeLayers } from './utilities/organize-layers'
 
 export default async function () {
@@ -68,6 +69,9 @@ export default async function () {
   )
 }
 
-function getLayers () {
-  return extractAttributes(figma.currentPage.children, ['id', 'name'])
+function getLayers() {
+  return extractAttributes(figma.currentPage.children as Array<any>, [
+    'id',
+    'name'
+  ])
 }
