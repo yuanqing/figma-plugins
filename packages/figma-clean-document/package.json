@@ -64,8 +64,8 @@
       },
       "-",
       {
-        "name": "Sort Pages",
-        "main": "sort-pages/main"
+        "name": "Sort Pages by Name",
+        "main": "sort-pages-by-name/main"
       },
       "-",
       {
