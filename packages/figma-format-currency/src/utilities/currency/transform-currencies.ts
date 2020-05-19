@@ -1,14 +1,14 @@
 import { isValidIsoCode } from './is-valid-iso-code'
 import { isValidSymbol } from './is-valid-symbol'
-import { mapSymbolToIsoCode } from './map-symbol-to-iso-code'
 import { mapIsoCodeToDecimalPlaces } from './map-iso-code-to-decimal-places'
+import { mapSymbolToIsoCode } from './map-symbol-to-iso-code'
 import { moneyRegex } from './money-regex'
 import { MINUS } from './special-characters'
 
 const digitRegex = /\d/
 const nonDigitRegex = /([^\d])/g
 
-export function transformCurrencies (string, locale, transform) {
+export function transformCurrencies(string, locale, transform) {
   if (digitRegex.test(string) === false) {
     return string
   }
@@ -96,7 +96,7 @@ const separatorRegexes = {
   '.': /\./g
 }
 
-function parseValue (value, isoCode) {
+function parseValue(value, isoCode) {
   const matches = value.match(nonDigitRegex)
   if (matches === null) {
     return value

@@ -19,13 +19,15 @@
     "src"
   ],
   "scripts": {
-    "build": "build-figma-plugin",
+    "build": "yarn run clean-build && yarn run build-iso-codes && build-figma-plugin",
     "build-iso-codes": "node scripts/build-iso-codes",
-    "prebuild": "yarn run build-iso-codes",
-    "pretest": "yarn run build-iso-codes",
-    "prewatch": "yarn run build-iso-codes",
-    "test": "ava",
-    "watch": "build-figma-plugin --watch"
+    "clean": "yarn run clean-build && yarn run clean-test",
+    "clean-build": "rimraf '*.log' build manifest.json",
+    "clean-test": "rimraf '*.log' .nyc_output coverage",
+    "fix": "eslint --fix 'scripts/**/*.js' '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
+    "lint": "eslint 'scripts/**/*.js' '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
+    "test": "yarn run clean-test && yarn run build-iso-codes && tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse",
+    "watch": "yarn run clean-build && yarn run build-iso-codes && build-figma-plugin --watch"
   },
   "dependencies": {
     "@create-figma-plugin/ui": "*",
@@ -33,18 +35,9 @@
     "@sindresorhus/class-names": "^1.1.0",
     "preact": "^10.4.1"
   },
-  "ava": {
-    "files": [
-      "test/**/*"
-    ],
-    "verbose": true,
-    "require": [
-      "esm"
-    ]
-  },
   "figma-plugin": {
-    "id": "780785006732555859",
     "name": "Format Currency",
+    "id": "780785006732555859",
     "menu": [
       {
         "name": "Format Currency",

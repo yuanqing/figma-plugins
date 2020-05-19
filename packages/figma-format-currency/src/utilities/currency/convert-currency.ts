@@ -1,10 +1,10 @@
 import { addIsoCodeSuffix } from './add-iso-code-suffix'
 import { computeExchangeRate } from './compute-exchange-rate'
 import { formatCurrencyByLocale } from './format-currency-by-locale'
-import { transformCurrencies } from './transform-currencies'
 import { mapIsoCodeToDecimalPlaces } from './map-iso-code-to-decimal-places'
+import { transformCurrencies } from './transform-currencies'
 
-export function convertCurrency ({
+export function convertCurrency({
   string,
   targetCurrency,
   roundNumbers,
@@ -28,7 +28,7 @@ export function convertCurrency ({
   })
 }
 
-function roundValue (value, isoCode) {
+function roundValue(value, isoCode) {
   const decimalPlaces = mapIsoCodeToDecimalPlaces(isoCode)
   if (decimalPlaces === 0) {
     if (value > 1000) {

@@ -4,7 +4,7 @@ import { isValidIsoCode } from './is-valid-iso-code'
 
 const dashRegex = /-/
 
-export function mapSymbolToIsoCode (symbol, locale) {
+export function mapSymbolToIsoCode(symbol, locale) {
   const isoCodes = collectIsoCodes(symbol)
   if (isoCodes.length === 0) {
     if (isValidIsoCode(symbol)) {
@@ -34,7 +34,7 @@ export function mapSymbolToIsoCode (symbol, locale) {
   return isoCodes[0]
 }
 
-function collectIsoCodes (symbol) {
+function collectIsoCodes(symbol) {
   const result = []
   for (const isoCode of Object.keys(isoCodes)) {
     if (isoCodes[isoCode][SYMBOL_INDEX] === symbol) {

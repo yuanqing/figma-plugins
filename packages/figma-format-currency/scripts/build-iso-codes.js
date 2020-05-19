@@ -2,7 +2,7 @@ const { join } = require('path')
 const { outputJson } = require('fs-extra')
 const exchangeRates = require('./data/exchange-rates')
 
-async function main () {
+async function main() {
   const isoCodes = sortObjectByKey(parse(exchangeRates))
   const filePath = join(
     __dirname,
@@ -17,7 +17,7 @@ async function main () {
 }
 main()
 
-function parse (exchangeRates) {
+function parse(exchangeRates) {
   const result = {}
   for (const isoCode of Object.keys(exchangeRates)) {
     const locale = isoCode.substring(0, 2).toLowerCase()
@@ -29,7 +29,7 @@ function parse (exchangeRates) {
   return result
 }
 
-function parseSymbol (isoCode, locale) {
+function parseSymbol(isoCode, locale) {
   const string = new Intl.NumberFormat(`en-${locale}`, {
     style: 'currency',
     currency: isoCode,
@@ -51,7 +51,7 @@ function parseSymbol (isoCode, locale) {
   return symbol
 }
 
-function parseSignificantFigures (isoCode, locale) {
+function parseSignificantFigures(isoCode, locale) {
   const string = new Intl.NumberFormat(`en-${locale}`, {
     style: 'currency',
     currency: isoCode,
@@ -70,7 +70,7 @@ function parseSignificantFigures (isoCode, locale) {
   return value.length - decimalIndex - 1
 }
 
-function sortObjectByKey (object) {
+function sortObjectByKey(object) {
   const sortedKeys = Object.keys(object).sort()
   const result = {}
   for (const key of sortedKeys) {

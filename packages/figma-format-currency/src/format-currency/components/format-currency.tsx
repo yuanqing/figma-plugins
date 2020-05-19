@@ -1,45 +1,49 @@
 /** @jsx h */
 import {
   Button,
-  Checkbox,
   Container,
+  SegmentedControl,
   Text,
   TextboxAutocomplete,
-  VerticalSpace,
-  useForm
+  useForm,
+  VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect } from 'preact/hooks'
+
 import {
-  Preview,
   INVALID_SETTINGS,
-  NO_TEXT_LAYERS
-} from '../../preview/preview'
-import { convertCurrency } from '../../utilities/currency/convert-currency'
+  NO_TEXT_LAYERS,
+  Preview
+} from '../../components/preview/preview'
+import localesJson from '../../utilities/currency/data/locales'
+import { formatExplicit } from '../../utilities/currency/format-explicit'
+import { formatRetain } from '../../utilities/currency/format-retain'
+import { formatShort } from '../../utilities/currency/format-short'
 import { isValidLocale } from '../../utilities/currency/is-valid-locale'
 import { moneyRegex } from '../../utilities/currency/money-regex'
-import localesJson from '../../utilities/currency/data/locales'
-import isoCodes from '../../utilities/currency/data/iso-codes'
+import { EXPLICIT, RETAIN, SHORT } from '../formats'
 
-const currencies = Object.keys(isoCodes).map(function (isoCode) {
-  return { value: isoCode }
-})
+const formatters = {
+  [EXPLICIT]: formatExplicit,
+  [RETAIN]: formatRetain,
+  [SHORT]: formatShort
+}
 
 const locales = localesJson.map(function (locale) {
   return { value: locale }
 })
 
-export function ConvertCurrency (initialState) {
+export function FormatCurrency(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
     transform: function (state) {
-      const { layers, targetCurrency, roundNumbers, locale } = state
+      const { layers, format, locale } = state
       return {
         ...state,
         previewItems: computePreview({
           layers,
-          targetCurrency,
-          roundNumbers,
+          format,
           locale
         })
       }
@@ -51,22 +55,17 @@ export function ConvertCurrency (initialState) {
         previewItems.length > 0
       )
     },
-    onSubmit: function ({ layers, targetCurrency, roundNumbers, locale }) {
+    onSubmit: function ({ layers, format, locale }) {
+      const formatter = formatters[format]
       const result = layers.map(function ({ id, characters }) {
         return {
           id,
-          characters: convertCurrency({
-            string: characters,
-            targetCurrency,
-            roundNumbers,
-            locale
-          })
+          characters: formatter(characters, locale)
         }
       })
       emit('SUBMIT', {
         layers: result,
-        targetCurrency,
-        roundNumbers,
+        format,
         locale
       })
     },
@@ -82,61 +81,47 @@ export function ConvertCurrency (initialState) {
     },
     [handleChange]
   )
-  const { locale, previewItems, roundNumbers, targetCurrency } = state
+  const { format, locale, previewItems } = state
   return (
     <Fragment>
       <Preview items={previewItems} />
-      <Container space='medium'>
-        <VerticalSpace space='large' />
-        <Text muted>Currency</Text>
-        <VerticalSpace space='small' />
-        <TextboxAutocomplete
-          name='targetCurrency'
-          value={targetCurrency}
-          options={currencies}
+      <Container space="medium">
+        <VerticalSpace space="large" />
+        <Text muted>Format</Text>
+        <VerticalSpace space="small" />
+        <SegmentedControl
+          name="format"
+          value={format}
+          options={[{ value: EXPLICIT }, { value: SHORT }, { value: RETAIN }]}
           onChange={handleChange}
-          filter
-          strict
         />
-        <VerticalSpace space='small' />
-        <Checkbox
-          name='roundNumbers'
-          value={roundNumbers === true}
-          onChange={handleChange}
-        >
-          <Text>Round numbers</Text>
-        </Checkbox>
-        <VerticalSpace space='large' />
+        <VerticalSpace space="large" />
         <Text muted>Locale</Text>
-        <VerticalSpace space='small' />
+        <VerticalSpace space="small" />
         <TextboxAutocomplete
-          name='locale'
+          name="locale"
           value={locale}
           options={locales}
           onChange={handleChange}
-          filter
           top
         />
-        <VerticalSpace space='extraLarge' />
+        <VerticalSpace space="extraLarge" />
         <Button
           fullWidth
           disabled={isValid() === false}
           focused
           onClick={handleSubmit}
         >
-          Convert Currency
+          Format Currency
         </Button>
-        <VerticalSpace space='small' />
+        <VerticalSpace space="small" />
       </Container>
     </Fragment>
   )
 }
 
-function computePreview ({ layers, targetCurrency, roundNumbers, locale }) {
-  if (
-    typeof isoCodes[targetCurrency] === 'undefined' ||
-    isValidLocale(locale) === false
-  ) {
+function computePreview({ layers, format, locale }) {
+  if (isValidLocale(locale) === false) {
     return INVALID_SETTINGS
   }
   if (layers.length === 0) {
@@ -150,14 +135,10 @@ function computePreview ({ layers, targetCurrency, roundNumbers, locale }) {
         return
       }
       originalStrings[original] = true
+      const formatter = formatters[format]
       result.push({
         original,
-        result: convertCurrency({
-          string: original,
-          targetCurrency,
-          roundNumbers,
-          locale
-        })
+        result: formatter(original, locale)
       })
     })
   })

@@ -1,12 +1,12 @@
 import {
   extractAttributes,
-  sortLayersByName,
+  sortNodesByName,
   traverseNode
 } from '@create-figma-plugin/utilities'
 
 const attributes = ['id', 'characters']
 
-export function getTextLayers () {
+export function getTextLayers() {
   const result = []
   for (const layer of figma.currentPage.selection) {
     traverseNode(layer, async function (layer) {
@@ -15,5 +15,5 @@ export function getTextLayers () {
       }
     })
   }
-  return extractAttributes(sortLayersByName(result), attributes)
+  return extractAttributes(sortNodesByName(result), attributes)
 }

@@ -1,5 +1,5 @@
-@import "@create-figma-plugin/ui/lib/scss/constants";
-@import "@create-figma-plugin/ui/lib/scss/text";
+@import '@create-figma-plugin/ui/lib/scss/constants';
+@import '@create-figma-plugin/ui/lib/scss/text';
 
 .preview {
   @include text-11-regular;
@@ -13,7 +13,7 @@
   border-bottom: 1px solid $color-silver;
 
   &:before {
-    content: "";
+    content: '';
     display: inline-block;
     height: 100%;
     width: 16px;

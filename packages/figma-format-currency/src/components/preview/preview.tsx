@@ -1,40 +1,41 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import { h } from 'preact'
+import { Fragment, h } from 'preact'
+
 import style from './preview.scss'
 
 export const INVALID_SETTINGS = 'INVALID_SETTINGS'
 export const NO_TEXT_LAYERS = 'NO_TEXT_LAYERS'
 
-export function Preview ({ items }) {
+export function Preview({ items }) {
   if (items === INVALID_SETTINGS) {
-    return <div class={style.preview} />
+    return <div className={style.preview} />
   }
   return (
-    <div class={style.preview}>
-      <div class={style.inner}>
+    <div className={style.preview}>
+      <div className={style.inner}>
         {items === NO_TEXT_LAYERS ? (
-          <div class={style.empty}>Select one or more text layers</div>
+          <div className={style.empty}>Select one or more text layers</div>
         ) : items.length === 0 ? (
-          <div class={style.empty}>No currencies in selection</div>
+          <div className={style.empty}>No currencies in selection</div>
         ) : (
-          <div class={style.table}>
+          <Fragment>
             {items.map(function ({ original, result }, index) {
               return (
                 <div key={index}>
                   <div
-                    class={classnames(
+                    className={classnames(
                       style.original,
                       original !== result ? style.strikethrough : null
                     )}
                   >
                     {original}
                   </div>
-                  <div class={style.result}>{result}</div>
+                  <div className={style.result}>{result}</div>
                 </div>
               )
             })}
-          </div>
+          </Fragment>
         )}
       </div>
     </div>
