@@ -3,39 +3,46 @@
   "scripts": {
     "build": "yarn run clean && lerna run build",
     "bump": "node scripts/bump-dependencies.js",
-    "clean": "rimraf '*.log' 'packages/*/{*.log,build,manifest.json}'",
-    "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
-    "fix-css": "prettier --write 'packages/*/src/**/*.scss'",
-    "fix-js": "prettier-standard '*.js' 'packages/*/{scripts,src,test}/**/*.js' 'scripts/*.js'",
-    "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
-    "lint-css": "stylelint 'packages/*/src/**/*.scss'",
-    "lint-js": "standardx '*.js' 'packages/*/{scripts,src,test}/**/*.js' 'scripts/*.js'",
+    "clean": "lerna run clean && rimraf '*.log'",
+    "fix": "lerna run fix && eslint --fix 'scripts/**/*.js' && prettier --loglevel error --write '*.json'",
+    "lint": "lerna run lint && eslint 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rimraf node_modules 'packages/*/node_modules' yarn.lock && yarn install",
-    "test": "lerna run test",
-    "watch": "yarn run clean && lerna run watch"
+    "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
+    "test": "lerna run test"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.9.4",
-    "@create-figma-plugin/build": "*",
+    "@create-figma-plugin/build": "0.0.74-alpha.0",
     "@figma/plugin-typings": "^1.15.0",
-    "ava": "^3.8.1",
-    "concurrently": "^5.2.0",
-    "eslint-plugin-react-hooks": "^4.0.0",
-    "esm": "^3.2.25",
+    "@types/natural-compare-lite": "^1.4.0",
+    "eslint": "^7.0.0",
+    "eslint-config-yuanqing": "0.0.1",
     "globby": "^11.0.0",
     "husky": "^4.2.5",
     "lerna": "^3.20.2",
     "lint-staged": "^10.2.2",
     "npm-check-updates": "^4.1.2",
+    "preact": "^10.4.1",
     "prettier": "^2.0.5",
-    "prettier-standard": "^16.3.0",
     "rimraf": "^3.0.2",
-    "standardx": "^5.0.0",
     "stylelint": "^13.3.3",
     "stylelint-config-prettier": "^8.0.1",
-    "stylelint-prettier": "^1.1.2"
+    "stylelint-prettier": "^1.1.2",
+    "tap": "^14.10.7",
+    "typescript": "^3.8.3",
+    "typescript-plugin-css-modules": "^2.3.0"
+  },
+  "eslintConfig": {
+    "extends": "yuanqing",
+    "ignorePatterns": [
+      "*.scss.d.ts"
+    ],
+    "rules": {
+      "react/prop-types": [
+        "off"
+      ]
+    }
   },
   "husky": {
     "hooks": {
@@ -43,29 +50,15 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "standardx",
-      "prettier-standard"
+    "*.{js,ts,tsx}": [
+      "eslint"
     ],
     "*.scss": [
       "stylelint",
       "prettier"
     ]
   },
-  "eslintConfig": {
-    "globals": {
-      "figma": true
-    },
-    "plugins": [
-      "react-hooks"
-    ],
-    "rules": {
-      "indent": "off",
-      "no-console": "error",
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
-    }
-  },
+  "prettier": "eslint-config-yuanqing/prettier",
   "stylelint": {
     "extends": [
       "stylelint-prettier/recommended"

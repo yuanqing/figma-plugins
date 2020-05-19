@@ -19,27 +19,23 @@
     "src"
   ],
   "scripts": {
-    "build": "build-figma-plugin",
-    "test": "ava",
-    "watch": "build-figma-plugin --watch"
+    "build": "yarn run clean-build && build-figma-plugin",
+    "clean": "yarn run clean-build && yarn run clean-test",
+    "clean-build": "rimraf '*.log' build manifest.json",
+    "clean-test": "rimraf '*.log' .nyc_output coverage",
+    "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
+    "lint": "eslint '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
+    "test": "yarn run clean-test && tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse",
+    "watch": "yarn run clean-build && build-figma-plugin --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "*",
-    "@create-figma-plugin/utilities": "*",
+    "@create-figma-plugin/ui": "0.0.74-alpha.0",
+    "@create-figma-plugin/utilities": "0.0.74-alpha.0",
     "preact": "^10.4.1"
   },
-  "ava": {
-    "files": [
-      "test/**/*"
-    ],
-    "verbose": true,
-    "require": [
-      "esm"
-    ]
-  },
   "figma-plugin": {
-    "id": "786286754606650597",
     "name": "Organize Layers",
+    "id": "786286754606650597",
     "menu": [
       {
         "name": "Organize Layers",

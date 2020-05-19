@@ -19,47 +19,50 @@
     "src"
   ],
   "scripts": {
-    "build": "build-figma-plugin",
-    "watch": "build-figma-plugin --watch"
+    "build": "yarn run clean && build-figma-plugin",
+    "clean": "rimraf '*.log' build manifest.json",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write package.json tsconfig.json",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "*",
+    "@create-figma-plugin/utilities": "0.0.74-alpha.0",
     "array-shuffle": "^1.0.1",
     "mem": "^6.1.0",
     "natural-compare-lite": "^1.4.0"
   },
   "figma-plugin": {
-    "id": "767379414704079825",
     "name": "Sort Layers",
+    "id": "767379414704079825",
     "menu": [
       {
         "name": "Sort Layers by Name",
-        "main": "sort-layers-by-name/main"
+        "main": "sort-nodes-by-name/main"
       },
       {
         "name": "Sort Layers by X Position",
-        "main": "sort-layers-by-x-position/main"
+        "main": "sort-nodes-by-x-position/main"
       },
       {
         "name": "Sort Layers by Y Position",
-        "main": "sort-layers-by-y-position/main"
+        "main": "sort-nodes-by-y-position/main"
       },
       {
         "name": "Smart Sort Layers",
-        "main": "smart-sort-layers/main"
+        "main": "smart-sort-nodes/main"
       },
       {
-        "name": "Reverse Layer Sort Order",
-        "main": "reverse-layer-sort-order/main"
+        "name": "Reverse Layers Sort Order",
+        "main": "reverse-nodes-sort-order/main"
       },
       {
-        "name": "Randomize Layer Sort Order",
-        "main": "randomize-layer-sort-order/main"
+        "name": "Randomize Layers Sort Order",
+        "main": "randomize-nodes-sort-order/main"
       },
       "-",
       {
-        "name": "Sort Pages",
-        "main": "sort-pages/main"
+        "name": "Sort Pages by Name",
+        "main": "sort-pages-by-name/main"
       }
     ]
   }

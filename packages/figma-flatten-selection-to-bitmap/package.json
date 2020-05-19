@@ -19,15 +19,18 @@
     "src"
   ],
   "scripts": {
-    "build": "build-figma-plugin",
-    "watch": "build-figma-plugin --watch"
+    "build": "yarn run clean && build-figma-plugin",
+    "clean": "rimraf '*.log' build manifest.json",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write package.json tsconfig.json",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "*"
+    "@create-figma-plugin/utilities": "0.0.74-alpha.0"
   },
   "figma-plugin": {
-    "id": "837846252158418235",
     "name": "Flatten Selection to Bitmap",
+    "id": "837846252158418235",
     "menu": [
       {
         "name": "Flatten Selection to Bitmap",

@@ -19,19 +19,22 @@
     "src"
   ],
   "scripts": {
-    "build": "build-figma-plugin",
-    "watch": "build-figma-plugin --watch"
+    "build": "yarn run clean && build-figma-plugin",
+    "clean": "rimraf '*.log' build manifest.json",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
+    "lint": "eslint 'src/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
+    "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "*",
-    "@create-figma-plugin/utilities": "*",
+    "@create-figma-plugin/ui": "0.0.74-alpha.0",
+    "@create-figma-plugin/utilities": "0.0.74-alpha.0",
     "@sindresorhus/class-names": "^1.1.0",
     "p-memoize": "^4.0.0",
     "preact": "^10.4.1"
   },
   "figma-plugin": {
-    "id": "767379122107077581",
     "name": "Language Tester",
+    "id": "767379122107077581",
     "menu": [
       {
         "name": "Language Tester",
