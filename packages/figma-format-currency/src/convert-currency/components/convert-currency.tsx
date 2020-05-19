@@ -18,10 +18,11 @@ import {
   Preview
 } from '../../components/preview/preview'
 import { convertCurrency } from '../../utilities/currency/convert-currency'
-import isoCodes from '../../utilities/currency/data/iso-codes.json'
-import localesJson from '../../utilities/currency/data/locales.json'
 import { isValidLocale } from '../../utilities/currency/is-valid-locale'
 import { moneyRegex } from '../../utilities/currency/money-regex'
+
+const isoCodes = require('../../utilities/currency/data/iso-codes.json')
+const localesJson = require('../../utilities/currency/data/locales.json')
 
 const currencies = Object.keys(isoCodes).map(function (isoCode) {
   return { value: isoCode }

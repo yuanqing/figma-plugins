@@ -1,7 +1,9 @@
-import test from 'ava'
+import { test } from 'tap'
+
 import { formatShort } from '../../src/utilities/currency/format-short'
 
 test('no matches', function (t) {
+  t.plan(12)
   t.is(formatShort('', 'en-US'), '')
   t.is(formatShort(' ', 'en-US'), ' ')
   t.is(formatShort('foo', 'en-US'), 'foo')

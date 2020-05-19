@@ -1,5 +1,5 @@
 import { SYMBOL_INDEX } from './data/constants'
-import isoCodes from './data/iso-codes'
+const isoCodes = require('./data/iso-codes.json')
 import { isValidIsoCode } from './is-valid-iso-code'
 
 const dashRegex = /-/

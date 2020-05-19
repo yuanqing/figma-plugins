@@ -1,7 +1,9 @@
-import test from 'ava'
+import { test } from 'tap'
+
 import { formatRetain } from '../../src/utilities/currency/format-retain'
 
 test('$1', function (t) {
+  t.plan(7)
   t.is(formatRetain('$1', 'en-US'), '$1.00')
   t.is(formatRetain('$1,', 'en-US'), '$1.00,')
   t.is(formatRetain('X $1', 'en-US'), 'X $1.00')
@@ -12,6 +14,7 @@ test('$1', function (t) {
 })
 
 test('$1 USD', function (t) {
+  t.plan(7)
   t.is(formatRetain('$1 USD', 'en-US'), '$1.00 USD')
   t.is(formatRetain('$1 USD,', 'en-US'), '$1.00 USD,')
   t.is(formatRetain('X $1 USD', 'en-US'), 'X $1.00 USD')
@@ -22,6 +25,7 @@ test('$1 USD', function (t) {
 })
 
 test('1 $', function (t) {
+  t.plan(7)
   t.is(formatRetain('1 $', 'en-US'), '$1.00')
   t.is(formatRetain('1 $,', 'en-US'), '$1.00,')
   t.is(formatRetain('X 1 $', 'en-US'), 'X $1.00')
@@ -32,6 +36,7 @@ test('1 $', function (t) {
 })
 
 test('1 $ USD', function (t) {
+  t.plan(7)
   t.is(formatRetain('1 $ USD', 'en-US'), '$1.00 USD')
   t.is(formatRetain('1 $ USD,', 'en-US'), '$1.00 USD,')
   t.is(formatRetain('X 1 $ USD', 'en-US'), 'X $1.00 USD')
@@ -42,6 +47,7 @@ test('1 $ USD', function (t) {
 })
 
 test('$3.14', function (t) {
+  t.plan(7)
   t.is(formatRetain('$3.14', 'en-US'), '$3.14')
   t.is(formatRetain('$3.14,', 'en-US'), '$3.14,')
   t.is(formatRetain('X $3.14', 'en-US'), 'X $3.14')
@@ -52,6 +58,7 @@ test('$3.14', function (t) {
 })
 
 test('$3.14 USD', function (t) {
+  t.plan(7)
   t.is(formatRetain('$3.14 USD', 'en-US'), '$3.14 USD')
   t.is(formatRetain('$3.14 USD,', 'en-US'), '$3.14 USD,')
   t.is(formatRetain('X $3.14 USD', 'en-US'), 'X $3.14 USD')
@@ -62,6 +69,7 @@ test('$3.14 USD', function (t) {
 })
 
 test('3,14 $', function (t) {
+  t.plan(7)
   t.is(formatRetain('3,14 $', 'en-US'), '$3.14')
   t.is(formatRetain('3,14 $,', 'en-US'), '$3.14,')
   t.is(formatRetain('X 3,14 $', 'en-US'), 'X $3.14')
@@ -72,6 +80,7 @@ test('3,14 $', function (t) {
 })
 
 test('3,14 $ USD', function (t) {
+  t.plan(7)
   t.is(formatRetain('3,14 $ USD', 'en-US'), '$3.14 USD')
   t.is(formatRetain('3,14 $ USD,', 'en-US'), '$3.14 USD,')
   t.is(formatRetain('X 3,14 $ USD', 'en-US'), 'X $3.14 USD')
@@ -82,6 +91,7 @@ test('3,14 $ USD', function (t) {
 })
 
 test('$123,456.78', function (t) {
+  t.plan(7)
   t.is(formatRetain('$123,456.78', 'en-US'), '$123,456.78')
   t.is(formatRetain('$123,456.78,', 'en-US'), '$123,456.78,')
   t.is(formatRetain('X $123,456.78', 'en-US'), 'X $123,456.78')
@@ -92,6 +102,7 @@ test('$123,456.78', function (t) {
 })
 
 test('$123,456.78 USD', function (t) {
+  t.plan(7)
   t.is(formatRetain('$123,456.78 USD', 'en-US'), '$123,456.78 USD')
   t.is(formatRetain('$123,456.78 USD,', 'en-US'), '$123,456.78 USD,')
   t.is(formatRetain('X $123,456.78 USD', 'en-US'), 'X $123,456.78 USD')
@@ -108,6 +119,7 @@ test('$123,456.78 USD', function (t) {
 })
 
 test('123.456,78 $', function (t) {
+  t.plan(7)
   t.is(formatRetain('123.456,78 $', 'en-US'), '$123,456.78')
   t.is(formatRetain('123.456,78 $,', 'en-US'), '$123,456.78,')
   t.is(formatRetain('X 123.456,78 $', 'en-US'), 'X $123,456.78')
@@ -118,6 +130,7 @@ test('123.456,78 $', function (t) {
 })
 
 test('123.456,78 $ USD', function (t) {
+  t.plan(7)
   t.is(formatRetain('123.456,78 $ USD', 'en-US'), '$123,456.78 USD')
   t.is(formatRetain('123.456,78 $ USD,', 'en-US'), '$123,456.78 USD,')
   t.is(formatRetain('X 123.456,78 $ USD', 'en-US'), 'X $123,456.78 USD')
@@ -134,6 +147,7 @@ test('123.456,78 $ USD', function (t) {
 })
 
 test('$12,345,678.90', function (t) {
+  t.plan(7)
   t.is(formatRetain('$12,345,678.90', 'en-US'), '$12,345,678.90')
   t.is(formatRetain('$12,345,678.90,', 'en-US'), '$12,345,678.90,')
   t.is(formatRetain('X $12,345,678.90', 'en-US'), 'X $12,345,678.90')
@@ -150,6 +164,7 @@ test('$12,345,678.90', function (t) {
 })
 
 test('$12,345,678.90 USD', function (t) {
+  t.plan(7)
   t.is(formatRetain('$12,345,678.90 USD', 'en-US'), '$12,345,678.90 USD')
   t.is(formatRetain('$12,345,678.90 USD,', 'en-US'), '$12,345,678.90 USD,')
   t.is(formatRetain('X $12,345,678.90 USD', 'en-US'), 'X $12,345,678.90 USD')
@@ -172,6 +187,7 @@ test('$12,345,678.90 USD', function (t) {
 })
 
 test('12.345.678,90 $', function (t) {
+  t.plan(7)
   t.is(formatRetain('12.345.678,90 $', 'en-US'), '$12,345,678.90')
   t.is(formatRetain('12.345.678,90 $,', 'en-US'), '$12,345,678.90,')
   t.is(formatRetain('X 12.345.678,90 $', 'en-US'), 'X $12,345,678.90')
@@ -188,6 +204,7 @@ test('12.345.678,90 $', function (t) {
 })
 
 test('12.345.678,90 $ USD', function (t) {
+  t.plan(7)
   t.is(formatRetain('12.345.678,90 $ USD', 'en-US'), '$12,345,678.90 USD')
   t.is(formatRetain('12.345.678,90 $ USD,', 'en-US'), '$12,345,678.90 USD,')
   t.is(formatRetain('X 12.345.678,90 $ USD', 'en-US'), 'X $12,345,678.90 USD')

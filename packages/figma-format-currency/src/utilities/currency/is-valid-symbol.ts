@@ -1,5 +1,5 @@
 import { SYMBOL_INDEX } from './data/constants'
-import isoCodes from './data/iso-codes'
+const isoCodes = require('./data/iso-codes.json')
 
 export function isValidSymbol(symbol) {
   for (const isoCode of Object.keys(isoCodes)) {

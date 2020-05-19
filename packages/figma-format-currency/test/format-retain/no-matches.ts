@@ -1,7 +1,9 @@
-import test from 'ava'
+import { test } from 'tap'
+
 import { formatRetain } from '../../src/utilities/currency/format-retain'
 
 test('no matches', function (t) {
+  t.plan(12)
   t.is(formatRetain('', 'en-US'), '')
   t.is(formatRetain(' ', 'en-US'), ' ')
   t.is(formatRetain('foo', 'en-US'), 'foo')

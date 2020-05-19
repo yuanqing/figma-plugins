@@ -1,7 +1,9 @@
-import test from 'ava'
+import { test } from 'tap'
+
 import { formatShort } from '../../src/utilities/currency/format-short'
 
 test('$1', function (t) {
+  t.plan(7)
   t.is(formatShort('$1', 'en-US'), '$1.00')
   t.is(formatShort('$1,', 'en-US'), '$1.00,')
   t.is(formatShort('X $1', 'en-US'), 'X $1.00')
@@ -12,6 +14,7 @@ test('$1', function (t) {
 })
 
 test('$1 USD', function (t) {
+  t.plan(7)
   t.is(formatShort('$1 USD', 'en-US'), '$1.00')
   t.is(formatShort('$1 USD,', 'en-US'), '$1.00,')
   t.is(formatShort('X $1 USD', 'en-US'), 'X $1.00')
@@ -21,17 +24,19 @@ test('$1 USD', function (t) {
   t.is(formatShort('$1 USD ABC DEF', 'en-US'), '$1.00 ABC DEF')
 })
 
-test.only('1 $', function (t) {
-  // t.is(formatShort('1 $', 'en-US'), '$1.00')
-  // t.is(formatShort('1 $,', 'en-US'), '$1.00,')
-  // t.is(formatShort('X 1 $', 'en-US'), 'X $1.00')
+test('1 $', function (t) {
+  t.plan(7)
+  t.is(formatShort('1 $', 'en-US'), '$1.00')
+  t.is(formatShort('1 $,', 'en-US'), '$1.00,')
+  t.is(formatShort('X 1 $', 'en-US'), 'X $1.00')
   t.is(formatShort('X 1 $ ABC', 'en-US'), 'X $1.00 ABC')
-  // t.is(formatShort('X 1 $ ABC DEF', 'en-US'), 'X $1.00 ABC DEF')
-  // t.is(formatShort('1 $ ABC', 'en-US'), '$1.00 ABC')
-  // t.is(formatShort('1 $ ABC DEF', 'en-US'), '$1.00 ABC DEF')
+  t.is(formatShort('X 1 $ ABC DEF', 'en-US'), 'X $1.00 ABC DEF')
+  t.is(formatShort('1 $ ABC', 'en-US'), '$1.00 ABC')
+  t.is(formatShort('1 $ ABC DEF', 'en-US'), '$1.00 ABC DEF')
 })
 
 test('1 $ USD', function (t) {
+  t.plan(7)
   t.is(formatShort('1 $ USD', 'en-US'), '$1.00')
   t.is(formatShort('1 $ USD,', 'en-US'), '$1.00,')
   t.is(formatShort('X 1 $ USD', 'en-US'), 'X $1.00')
@@ -42,6 +47,7 @@ test('1 $ USD', function (t) {
 })
 
 test('$3.14', function (t) {
+  t.plan(7)
   t.is(formatShort('$3.14', 'en-US'), '$3.14')
   t.is(formatShort('$3.14,', 'en-US'), '$3.14,')
   t.is(formatShort('X $3.14', 'en-US'), 'X $3.14')
@@ -52,6 +58,7 @@ test('$3.14', function (t) {
 })
 
 test('$3.14 USD', function (t) {
+  t.plan(7)
   t.is(formatShort('$3.14 USD', 'en-US'), '$3.14')
   t.is(formatShort('$3.14 USD,', 'en-US'), '$3.14,')
   t.is(formatShort('X $3.14 USD', 'en-US'), 'X $3.14')
@@ -62,6 +69,7 @@ test('$3.14 USD', function (t) {
 })
 
 test('3,14 $', function (t) {
+  t.plan(7)
   t.is(formatShort('3,14 $', 'en-US'), '$3.14')
   t.is(formatShort('3,14 $,', 'en-US'), '$3.14,')
   t.is(formatShort('X 3,14 $', 'en-US'), 'X $3.14')
@@ -72,6 +80,7 @@ test('3,14 $', function (t) {
 })
 
 test('3,14 $ USD', function (t) {
+  t.plan(7)
   t.is(formatShort('3,14 $ USD', 'en-US'), '$3.14')
   t.is(formatShort('3,14 $ USD,', 'en-US'), '$3.14,')
   t.is(formatShort('X 3,14 $ USD', 'en-US'), 'X $3.14')
@@ -82,6 +91,7 @@ test('3,14 $ USD', function (t) {
 })
 
 test('$123,456.78', function (t) {
+  t.plan(7)
   t.is(formatShort('$123,456.78', 'en-US'), '$123,456.78')
   t.is(formatShort('$123,456.78,', 'en-US'), '$123,456.78,')
   t.is(formatShort('X $123,456.78', 'en-US'), 'X $123,456.78')
@@ -92,6 +102,7 @@ test('$123,456.78', function (t) {
 })
 
 test('$123,456.78 USD', function (t) {
+  t.plan(7)
   t.is(formatShort('$123,456.78 USD', 'en-US'), '$123,456.78')
   t.is(formatShort('$123,456.78 USD,', 'en-US'), '$123,456.78,')
   t.is(formatShort('X $123,456.78 USD', 'en-US'), 'X $123,456.78')
@@ -105,6 +116,7 @@ test('$123,456.78 USD', function (t) {
 })
 
 test('123.456,78 $', function (t) {
+  t.plan(7)
   t.is(formatShort('123.456,78 $', 'en-US'), '$123,456.78')
   t.is(formatShort('123.456,78 $,', 'en-US'), '$123,456.78,')
   t.is(formatShort('X 123.456,78 $', 'en-US'), 'X $123,456.78')
@@ -115,6 +127,7 @@ test('123.456,78 $', function (t) {
 })
 
 test('123.456,78 $ USD', function (t) {
+  t.plan(7)
   t.is(formatShort('123.456,78 $ USD', 'en-US'), '$123,456.78')
   t.is(formatShort('123.456,78 $ USD,', 'en-US'), '$123,456.78,')
   t.is(formatShort('X 123.456,78 $ USD', 'en-US'), 'X $123,456.78')
@@ -128,6 +141,7 @@ test('123.456,78 $ USD', function (t) {
 })
 
 test('$12,345,678.90', function (t) {
+  t.plan(7)
   t.is(formatShort('$12,345,678.90', 'en-US'), '$12,345,678.90')
   t.is(formatShort('$12,345,678.90,', 'en-US'), '$12,345,678.90,')
   t.is(formatShort('X $12,345,678.90', 'en-US'), 'X $12,345,678.90')
@@ -141,6 +155,7 @@ test('$12,345,678.90', function (t) {
 })
 
 test('$12,345,678.90 USD', function (t) {
+  t.plan(7)
   t.is(formatShort('$12,345,678.90 USD', 'en-US'), '$12,345,678.90')
   t.is(formatShort('$12,345,678.90 USD,', 'en-US'), '$12,345,678.90,')
   t.is(formatShort('X $12,345,678.90 USD', 'en-US'), 'X $12,345,678.90')
@@ -157,6 +172,7 @@ test('$12,345,678.90 USD', function (t) {
 })
 
 test('12.345.678,90 $', function (t) {
+  t.plan(7)
   t.is(formatShort('12.345.678,90 $', 'en-US'), '$12,345,678.90')
   t.is(formatShort('12.345.678,90 $,', 'en-US'), '$12,345,678.90,')
   t.is(formatShort('X 12.345.678,90 $', 'en-US'), 'X $12,345,678.90')
@@ -173,6 +189,7 @@ test('12.345.678,90 $', function (t) {
 })
 
 test('12.345.678,90 $ USD', function (t) {
+  t.plan(7)
   t.is(formatShort('12.345.678,90 $ USD', 'en-US'), '$12,345,678.90')
   t.is(formatShort('12.345.678,90 $ USD,', 'en-US'), '$12,345,678.90,')
   t.is(formatShort('X 12.345.678,90 $ USD', 'en-US'), 'X $12,345,678.90')

@@ -17,13 +17,14 @@ import {
   NO_TEXT_LAYERS,
   Preview
 } from '../../components/preview/preview'
-import localesJson from '../../utilities/currency/data/locales'
 import { formatExplicit } from '../../utilities/currency/format-explicit'
 import { formatRetain } from '../../utilities/currency/format-retain'
 import { formatShort } from '../../utilities/currency/format-short'
 import { isValidLocale } from '../../utilities/currency/is-valid-locale'
 import { moneyRegex } from '../../utilities/currency/money-regex'
 import { EXPLICIT, RETAIN, SHORT } from '../formats'
+
+const localesJson = require('../../utilities/currency/data/locales.json')
 
 const formatters = {
   [EXPLICIT]: formatExplicit,

@@ -1,7 +1,9 @@
-import test from 'ava'
+import { test } from 'tap'
+
 import { formatExplicit } from '../../src/utilities/currency/format-explicit'
 
 test('no matches', function (t) {
+  t.plan(12)
   t.is(formatExplicit('', 'en-US'), '')
   t.is(formatExplicit(' ', 'en-US'), ' ')
   t.is(formatExplicit('foo', 'en-US'), 'foo')

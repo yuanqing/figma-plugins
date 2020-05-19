@@ -1,5 +1,5 @@
 import { EXCHANGE_RATE_INDEX } from './data/constants'
-import isoCodes from './data/iso-codes'
+const isoCodes = require('./data/iso-codes.json')
 
 export function computeExchangeRate(sourceIsoCode, targetIsoCode) {
   const sourceToUSD = isoCodes[sourceIsoCode][EXCHANGE_RATE_INDEX]

@@ -1,7 +1,9 @@
-import test from 'ava'
+import { test } from 'tap'
+
 import { formatShort } from '../../src/utilities/currency/format-short'
 
 test('KWD 1', function (t) {
+  t.plan(7)
   t.is(formatShort('KWD 1', 'en-US'), 'KWD 1.000')
   t.is(formatShort('KWD 1,', 'en-US'), 'KWD 1.000,')
   t.is(formatShort('X KWD 1', 'en-US'), 'X KWD 1.000')
@@ -12,6 +14,7 @@ test('KWD 1', function (t) {
 })
 
 test('1 KWD', function (t) {
+  t.plan(7)
   t.is(formatShort('1 KWD', 'en-US'), 'KWD 1.000')
   t.is(formatShort('1 KWD,', 'en-US'), 'KWD 1.000,')
   t.is(formatShort('X 1 KWD', 'en-US'), 'X KWD 1.000')
@@ -22,6 +25,7 @@ test('1 KWD', function (t) {
 })
 
 test('KWD 3.141', function (t) {
+  t.plan(7)
   t.is(formatShort('KWD 3.141', 'en-US'), 'KWD 3.141')
   t.is(formatShort('KWD 3.141,', 'en-US'), 'KWD 3.141,')
   t.is(formatShort('X KWD 3.141', 'en-US'), 'X KWD 3.141')
@@ -32,6 +36,7 @@ test('KWD 3.141', function (t) {
 })
 
 test('3,141 KWD', function (t) {
+  t.plan(7)
   t.is(formatShort('3,141 KWD', 'en-US'), 'KWD 3.141')
   t.is(formatShort('3,141 KWD,', 'en-US'), 'KWD 3.141,')
   t.is(formatShort('X 3,141 KWD', 'en-US'), 'X KWD 3.141')
@@ -42,6 +47,7 @@ test('3,141 KWD', function (t) {
 })
 
 test('KWD 123,456.789', function (t) {
+  t.plan(7)
   t.is(formatShort('KWD 123,456.789', 'en-US'), 'KWD 123,456.789')
   t.is(formatShort('KWD 123,456.789,', 'en-US'), 'KWD 123,456.789,')
   t.is(formatShort('X KWD 123,456.789', 'en-US'), 'X KWD 123,456.789')
@@ -58,6 +64,7 @@ test('KWD 123,456.789', function (t) {
 })
 
 test('123.456,789 KWD', function (t) {
+  t.plan(7)
   t.is(formatShort('123.456,789 KWD', 'en-US'), 'KWD 123,456.789')
   t.is(formatShort('123.456,789 KWD,', 'en-US'), 'KWD 123,456.789,')
   t.is(formatShort('X 123.456,789 KWD', 'en-US'), 'X KWD 123,456.789')
@@ -74,6 +81,7 @@ test('123.456,789 KWD', function (t) {
 })
 
 test('KWD 123,456,789.000', function (t) {
+  t.plan(7)
   t.is(formatShort('KWD 123,456,789.000', 'en-US'), 'KWD 123,456,789.000')
   t.is(formatShort('KWD 123,456,789.000,', 'en-US'), 'KWD 123,456,789.000,')
   t.is(formatShort('X KWD 123,456,789.000', 'en-US'), 'X KWD 123,456,789.000')
@@ -96,6 +104,7 @@ test('KWD 123,456,789.000', function (t) {
 })
 
 test('123.456.789,000 KWD', function (t) {
+  t.plan(7)
   t.is(formatShort('123.456.789,000 KWD', 'en-US'), 'KWD 123,456,789.000')
   t.is(formatShort('123.456.789,000 KWD,', 'en-US'), 'KWD 123,456,789.000,')
   t.is(formatShort('X 123.456.789,000 KWD', 'en-US'), 'X KWD 123,456,789.000')

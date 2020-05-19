@@ -1,7 +1,9 @@
-import test from 'ava'
+import { test } from 'tap'
+
 import { formatShort } from '../../src/utilities/currency/format-short'
 
 test('¥1', function (t) {
+  t.plan(7)
   t.is(formatShort('¥1', 'en-US'), '¥1')
   t.is(formatShort('¥1,', 'en-US'), '¥1,')
   t.is(formatShort('X ¥1', 'en-US'), 'X ¥1')
@@ -12,6 +14,7 @@ test('¥1', function (t) {
 })
 
 test('¥1 JPY', function (t) {
+  t.plan(7)
   t.is(formatShort('¥1 JPY', 'en-US'), '¥1')
   t.is(formatShort('¥1 JPY,', 'en-US'), '¥1,')
   t.is(formatShort('X ¥1 JPY', 'en-US'), 'X ¥1')
@@ -22,6 +25,7 @@ test('¥1 JPY', function (t) {
 })
 
 test('1 ¥', function (t) {
+  t.plan(7)
   t.is(formatShort('1 ¥', 'en-US'), '¥1')
   t.is(formatShort('1 ¥,', 'en-US'), '¥1,')
   t.is(formatShort('X 1 ¥', 'en-US'), 'X ¥1')
@@ -32,6 +36,7 @@ test('1 ¥', function (t) {
 })
 
 test('1 ¥ JPY', function (t) {
+  t.plan(7)
   t.is(formatShort('1 ¥ JPY', 'en-US'), '¥1')
   t.is(formatShort('1 ¥ JPY,', 'en-US'), '¥1,')
   t.is(formatShort('X 1 ¥ JPY', 'en-US'), 'X ¥1')
@@ -42,6 +47,7 @@ test('1 ¥ JPY', function (t) {
 })
 
 test('¥123,456', function (t) {
+  t.plan(7)
   t.is(formatShort('¥123,456', 'en-US'), '¥123,456')
   t.is(formatShort('¥123,456,', 'en-US'), '¥123,456,')
   t.is(formatShort('X ¥123,456', 'en-US'), 'X ¥123,456')
@@ -52,6 +58,7 @@ test('¥123,456', function (t) {
 })
 
 test('¥123,456 JPY', function (t) {
+  t.plan(7)
   t.is(formatShort('¥123,456 JPY', 'en-US'), '¥123,456')
   t.is(formatShort('¥123,456 JPY,', 'en-US'), '¥123,456,')
   t.is(formatShort('X ¥123,456 JPY', 'en-US'), 'X ¥123,456')
@@ -62,6 +69,7 @@ test('¥123,456 JPY', function (t) {
 })
 
 test('123.456 ¥', function (t) {
+  t.plan(7)
   t.is(formatShort('123.456 ¥', 'en-US'), '¥123,456')
   t.is(formatShort('123.456 ¥,', 'en-US'), '¥123,456,')
   t.is(formatShort('X 123.456 ¥', 'en-US'), 'X ¥123,456')
@@ -72,6 +80,7 @@ test('123.456 ¥', function (t) {
 })
 
 test('123.456 ¥ JPY', function (t) {
+  t.plan(7)
   t.is(formatShort('123.456 ¥ JPY', 'en-US'), '¥123,456')
   t.is(formatShort('123.456 ¥ JPY,', 'en-US'), '¥123,456,')
   t.is(formatShort('X 123.456 ¥ JPY', 'en-US'), 'X ¥123,456')
@@ -82,6 +91,7 @@ test('123.456 ¥ JPY', function (t) {
 })
 
 test('¥123,456,789', function (t) {
+  t.plan(7)
   t.is(formatShort('¥123,456,789', 'en-US'), '¥123,456,789')
   t.is(formatShort('¥123,456,789,', 'en-US'), '¥123,456,789,')
   t.is(formatShort('X ¥123,456,789', 'en-US'), 'X ¥123,456,789')
@@ -92,6 +102,7 @@ test('¥123,456,789', function (t) {
 })
 
 test('¥123,456,789 JPY', function (t) {
+  t.plan(7)
   t.is(formatShort('¥123,456,789 JPY', 'en-US'), '¥123,456,789')
   t.is(formatShort('¥123,456,789 JPY,', 'en-US'), '¥123,456,789,')
   t.is(formatShort('X ¥123,456,789 JPY', 'en-US'), 'X ¥123,456,789')
@@ -105,6 +116,7 @@ test('¥123,456,789 JPY', function (t) {
 })
 
 test('123.456.789 ¥', function (t) {
+  t.plan(7)
   t.is(formatShort('123.456.789 ¥', 'en-US'), '¥123,456,789')
   t.is(formatShort('123.456.789 ¥,', 'en-US'), '¥123,456,789,')
   t.is(formatShort('X 123.456.789 ¥', 'en-US'), 'X ¥123,456,789')
@@ -118,6 +130,7 @@ test('123.456.789 ¥', function (t) {
 })
 
 test('123.456.789 ¥ JPY', function (t) {
+  t.plan(7)
   t.is(formatShort('123.456.789 ¥ JPY', 'en-US'), '¥123,456,789')
   t.is(formatShort('123.456.789 ¥ JPY,', 'en-US'), '¥123,456,789,')
   t.is(formatShort('X 123.456.789 ¥ JPY', 'en-US'), 'X ¥123,456,789')
