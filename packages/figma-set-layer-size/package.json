@@ -31,8 +31,8 @@
     "preact": "^10.4.1"
   },
   "figma-plugin": {
-    "id": "817982008781589678",
     "name": "Set Layer Size",
+    "id": "817982008781589678",
     "main": "main",
     "ui": "ui"
   }

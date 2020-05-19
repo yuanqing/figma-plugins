@@ -29,8 +29,8 @@
     "@create-figma-plugin/utilities": "*"
   },
   "figma-plugin": {
-    "id": "806532458729477508",
     "name": "Draw Mask Under Selection",
+    "id": "806532458729477508",
     "main": "main"
   }
 }

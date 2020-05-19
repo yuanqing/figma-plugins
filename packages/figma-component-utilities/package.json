@@ -31,8 +31,8 @@
     "preact": "^10.4.1"
   },
   "figma-plugin": {
-    "id": "785894722513806497",
     "name": "Component Utilities",
+    "id": "785894722513806497",
     "menu": [
       {
         "name": "Create Component from Layer",

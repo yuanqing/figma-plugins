@@ -31,8 +31,8 @@
     "preact": "^10.4.1"
   },
   "figma-plugin": {
-    "id": "767379204511357902",
     "name": "Move Layers",
+    "id": "767379204511357902",
     "main": "main",
     "ui": "ui"
   }

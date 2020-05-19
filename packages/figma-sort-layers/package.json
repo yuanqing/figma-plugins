@@ -32,8 +32,8 @@
     "natural-compare-lite": "^1.4.0"
   },
   "figma-plugin": {
-    "id": "767379414704079825",
     "name": "Sort Layers",
+    "id": "767379414704079825",
     "menu": [
       {
         "name": "Sort Layers by Name",

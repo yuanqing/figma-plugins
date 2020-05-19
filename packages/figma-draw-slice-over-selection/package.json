@@ -31,8 +31,8 @@
     "preact": "^10.4.1"
   },
   "figma-plugin": {
-    "id": "767379335945775056",
     "name": "Draw Slice Over Selection",
+    "id": "767379335945775056",
     "main": "main",
     "ui": "ui"
   }

@@ -29,8 +29,8 @@
     "@create-figma-plugin/utilities": "*"
   },
   "figma-plugin": {
-    "id": "837846252158418235",
     "name": "Flatten Selection to Bitmap",
+    "id": "837846252158418235",
     "menu": [
       {
         "name": "Flatten Selection to Bitmap",

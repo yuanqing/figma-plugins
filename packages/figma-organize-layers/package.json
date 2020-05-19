@@ -34,8 +34,8 @@
     "preact": "^10.4.1"
   },
   "figma-plugin": {
-    "id": "786286754606650597",
     "name": "Organize Layers",
+    "id": "786286754606650597",
     "menu": [
       {
         "name": "Organize Layers",

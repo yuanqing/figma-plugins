@@ -31,8 +31,8 @@
     "preact": "^10.4.1"
   },
   "figma-plugin": {
-    "id": "799646392992487942",
     "name": "Insert Big Image",
+    "id": "799646392992487942",
     "main": "main",
     "ui": "ui"
   }

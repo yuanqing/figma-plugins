@@ -31,8 +31,8 @@
     "preact": "^10.4.1"
   },
   "figma-plugin": {
-    "id": "767379264700569551",
     "name": "Distribute Layers",
+    "id": "767379264700569551",
     "menu": [
       {
         "name": "Distribute Layers Left",
