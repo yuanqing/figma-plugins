@@ -1,6 +1,8 @@
 .DS_Store
 *.log
 *.scss.d.ts
+.nyc_output/
 build/
+coverage/
 node_modules/
 manifest.json
