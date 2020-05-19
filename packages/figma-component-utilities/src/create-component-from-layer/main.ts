@@ -5,8 +5,9 @@ import {
   isWithinInstance,
   pluralize
 } from '@create-figma-plugin/utilities'
-import { createComponent } from './utilities/create-component'
+
 import { OFFSET } from '../utilities/constants'
+import { createComponent } from './utilities/create-component'
 
 export default async function () {
   const layers = figma.currentPage.selection

@@ -1,4 +1,4 @@
-export function getReferenceLayer (layer) {
+export function getReferenceLayer(layer) {
   const parentType = layer.parent.type
   if (parentType === 'PAGE') {
     return layer

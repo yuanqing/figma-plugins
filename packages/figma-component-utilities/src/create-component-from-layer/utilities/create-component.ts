@@ -1,8 +1,9 @@
 import { cloneObject, insertBeforeNode } from '@create-figma-plugin/utilities'
+
 import { copyAttributes } from './copy-attributes'
 import { getReferenceLayer } from './get-reference-layer'
 
-export function createComponent (layer) {
+export function createComponent(layer) {
   const component = figma.createComponent()
   component.name = layer.name
   component.resizeWithoutConstraints(layer.width, layer.height)

@@ -7,18 +7,19 @@ import {
   Layer,
   SearchTextbox,
   Text,
-  VerticalSpace,
   useForm,
-  useScrollableMenu
+  useScrollableMenu,
+  VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
+
 import styles from './replace-with-component.scss'
 
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-scrollable-menu-id'
 
-export function ReplaceWithComponent (initialState) {
+export function ReplaceWithComponent(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(
     {
       ...initialState,
@@ -103,25 +104,28 @@ export function ReplaceWithComponent (initialState) {
   return (
     <Fragment>
       <SearchTextbox
-        name='searchTerm'
+        name="searchTerm"
         onChange={handleChange}
-        placeholder='Search'
+        placeholder="Search"
         value={searchTerm}
       />
       <Divider />
       {filteredComponents.length === 0 ? (
-        <div class={styles.emptyState}>
-          <Text muted align='center'>
+        <div className={styles.emptyState}>
+          <Text muted align="center">
             No results for “{searchTerm}”
           </Text>
         </div>
       ) : (
-        <div class={styles.layers} ref={menuElementRef}>
+        <div
+          className={styles.layers}
+          ref={menuElementRef as preact.RefObject<HTMLDivElement>}
+        >
           {filteredComponents.map(function ({ id, name, pageName }, index) {
             return (
               <Layer
                 key={index}
-                type='component'
+                type="component"
                 pageName={pageName}
                 selected={id === componentId}
                 onClick={handleLayerClick}
@@ -134,26 +138,26 @@ export function ReplaceWithComponent (initialState) {
         </div>
       )}
       <Divider />
-      <Container space='medium'>
-        <VerticalSpace space='medium' />
+      <Container space="medium">
+        <VerticalSpace space="medium" />
         <Checkbox
-          name='shouldResizeToFitLayer'
+          name="shouldResizeToFitLayer"
           value={shouldResizeToFitLayer === true}
           onChange={handleChange}
         >
           <Text>Resize component to fit layer</Text>
         </Checkbox>
-        <VerticalSpace space='medium' />
+        <VerticalSpace space="medium" />
         <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
           Replace With Component
         </Button>
-        <VerticalSpace space='small' />
+        <VerticalSpace space="small" />
       </Container>
     </Fragment>
   )
 }
 
-function filterLayersByName (layers, searchTerm) {
+function filterLayersByName(layers, searchTerm) {
   if (searchTerm === '') {
     return layers
   }

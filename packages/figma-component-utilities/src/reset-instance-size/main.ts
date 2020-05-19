@@ -3,6 +3,7 @@ import {
   formatSuccessMessage,
   pluralize
 } from '@create-figma-plugin/utilities'
+
 import { resetInstanceSize } from './utilities/reset-instance-size'
 
 export default async function () {

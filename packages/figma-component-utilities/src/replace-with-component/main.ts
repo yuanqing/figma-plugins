@@ -9,6 +9,7 @@ import {
   saveSettingsAsync,
   showUI
 } from '@create-figma-plugin/utilities'
+
 import { defaultSettings } from '../utilities/default-settings'
 import { getComponents } from './utilities/get-components'
 import { getSelectedLayers } from './utilities/get-selected-layers'
@@ -45,7 +46,7 @@ export default async function () {
       shouldResizeToFitLayer
     })
     const selectedLayers = figma.currentPage.selection
-    const component = figma.getNodeById(componentId)
+    const component = figma.getNodeById(componentId) as ComponentNode
     const newSelection = []
     let count = 0
     for (const layer of selectedLayers) {
