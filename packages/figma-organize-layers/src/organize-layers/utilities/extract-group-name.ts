@@ -1,4 +1,7 @@
-export function extractGroupName(layerName, groupDefinition) {
+export function extractGroupName(
+  layerName: string,
+  groupDefinition: number
+): string {
   if (layerName === '/') {
     return '/'
   }
@@ -14,7 +17,7 @@ export function extractGroupName(layerName, groupDefinition) {
 
 const slashRegex = /\//
 
-function splitBySlash(string) {
+function splitBySlash(string: string): Array<string> {
   const trimmed =
     string[string.length - 1] === '/'
       ? string.substring(0, string.length - 1)

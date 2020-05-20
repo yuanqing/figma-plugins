@@ -1,9 +1,14 @@
 import { sortNodesByName } from '@create-figma-plugin/utilities'
 
+import { Group } from '../../types'
 import { extractGroupName } from './extract-group-name'
 
-export function groupLayers(layers, combineSingleLayerGroups, groupDefinition) {
-  const groups = {}
+export function groupLayers(
+  layers: Array<SceneNode>,
+  combineSingleLayerGroups: boolean,
+  groupDefinition: number
+): Array<Group> {
+  const groups: { [key: string]: Group } = {}
   for (const layer of sortNodesByName(layers)) {
     const groupName = extractGroupName(layer.name, groupDefinition)
     if (typeof groups[groupName] === 'undefined') {
@@ -18,7 +23,7 @@ export function groupLayers(layers, combineSingleLayerGroups, groupDefinition) {
     return Object.values(groups)
   }
   const result = []
-  const singleLayers = { groupName: null, layers: [] }
+  const singleLayers: Group = { groupName: null, layers: [] }
   for (const groupName in groups) {
     const group = groups[groupName]
     if (group.layers.length === 1) {
@@ -30,7 +35,7 @@ export function groupLayers(layers, combineSingleLayerGroups, groupDefinition) {
   return [singleLayers, ...result]
 }
 
-function countSingleLayerGroups(groups) {
+function countSingleLayerGroups(groups: { [key: string]: Group }): number {
   let count = 0
   for (const groupName in groups) {
     const group = groups[groupName]

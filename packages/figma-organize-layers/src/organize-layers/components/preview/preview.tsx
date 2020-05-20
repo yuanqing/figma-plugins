@@ -5,7 +5,12 @@ import { h } from 'preact'
 import { groupLayers } from '../../utilities/group-layers'
 import style from './preview.scss'
 
-export function Preview({ combineSingleLayerGroups, groupDefinition, layers }) {
+export function Preview(props: {
+  combineSingleLayerGroups: boolean
+  groupDefinition: number
+  layers: Array<SceneNode>
+}): h.JSX.Element {
+  const { combineSingleLayerGroups, groupDefinition, layers } = props
   if (layers.length === 0) {
     return (
       <PreviewContainer>

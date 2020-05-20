@@ -11,11 +11,12 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
+import { Layer } from '../types'
 import { defaultSettings } from '../utilities/default-settings'
 import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
 import { organizeLayers } from './utilities/organize-layers'
 
-export default async function () {
+export default async function (): Promise<void> {
   const layers = getLayers()
   if (layers.length === 0) {
     figma.closePlugin(formatErrorMessage('No layers on page'))
@@ -37,7 +38,7 @@ export default async function () {
       horizontalSpace,
       verticalSpace
     } = settings
-    const layers = figma.currentPage.children
+    const layers = figma.currentPage.children.slice()
     organizeLayers(
       layers,
       combineSingleLayerGroups,
@@ -69,9 +70,9 @@ export default async function () {
   )
 }
 
-function getLayers() {
-  return extractAttributes(figma.currentPage.children as Array<any>, [
+function getLayers(): Array<Layer> {
+  return extractAttributes(figma.currentPage.children.slice(), [
     'id',
     'name'
-  ])
+  ]) as Array<Layer>
 }

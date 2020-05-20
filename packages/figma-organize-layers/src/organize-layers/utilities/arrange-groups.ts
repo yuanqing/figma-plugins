@@ -1,4 +1,10 @@
-export function arrangeGroups(groups, horizontalSpace, verticalSpace) {
+import { Group } from '../../types'
+
+export function arrangeGroups(
+  groups: Array<Group>,
+  horizontalSpace: number,
+  verticalSpace: number
+): void {
   let x = 0
   for (const group of groups) {
     let y = 0

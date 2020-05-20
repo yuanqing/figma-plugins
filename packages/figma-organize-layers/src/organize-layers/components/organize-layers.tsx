@@ -23,8 +23,8 @@ import { useEffect } from 'preact/hooks'
 import { groupDefinitions } from '../utilities/group-definitions'
 import { Preview } from './preview/preview'
 
-export function OrganizeLayers(initialState) {
-  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+export function OrganizeLayers(props: { [key: string]: any }): h.JSX.Element {
+  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
     validate: function ({ layers }) {
       return layers.length > 0
     },
