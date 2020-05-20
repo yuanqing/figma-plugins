@@ -4,7 +4,9 @@ import { h } from 'preact'
 
 import style from './loading.scss'
 
-export function Loading({ children }) {
+type LoadingProps = { children: preact.ComponentChildren }
+
+export function Loading({ children }: LoadingProps): h.JSX.Element {
   return (
     <div className={style.loading}>
       <LoadingIndicator />

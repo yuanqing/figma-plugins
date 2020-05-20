@@ -1,11 +1,14 @@
 import { createImagePaint } from '@create-figma-plugin/utilities'
 
-export function createImageLayer(
-  [bytes, x, y, width, height],
-  xOffset,
-  yOffset,
-  insertAs2x
-) {
+import { ImageAttributes } from '../types'
+
+export function createImageNode(
+  data: ImageAttributes,
+  xOffset: number,
+  yOffset: number,
+  insertAs2x: boolean
+): RectangleNode {
+  const { bytes, x, y, width, height } = data
   const rectangle = figma.createRectangle()
   rectangle.name = 'Image'
   rectangle.x = (insertAs2x === true ? x / 2 : x) + xOffset

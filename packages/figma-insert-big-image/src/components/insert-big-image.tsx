@@ -13,15 +13,15 @@ import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { computeDimensions } from '../utilities/compute-dimensions'
-import { createImageFromFileAsync } from '../utilities/create-image-from-file-async'
-import { splitImageAsync } from '../utilities/split-image-async'
+import { createImageElementFromFileAsync } from '../utilities/create-image-element-from-file-async'
+import { splitImageElementAsync } from '../utilities/split-image-element-async'
 import { trimExtension } from '../utilities/trim-extension'
 import { Loading } from './loading/loading'
 
-export function InsertBigImage(initialState) {
+export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange } = useForm(
     {
-      ...initialState,
+      ...props,
       currentIndex: -1,
       total: 0
     },
@@ -40,17 +40,17 @@ export function InsertBigImage(initialState) {
   )
   const { currentIndex, total, insertAs2x, isLoading } = state
   const handleSelectedFiles = useCallback(
-    async function (files) {
+    async function (files: Array<File>) {
       const total = files.length
       handleChange({ total })
       let currentIndex = 0
       for (const file of files) {
         currentIndex++
         handleChange({ currentIndex })
-        const image = await createImageFromFileAsync(file)
+        const image = await createImageElementFromFileAsync(file)
         const widths = computeDimensions(image.width)
         const heights = computeDimensions(image.height)
-        const images = await splitImageAsync(image, widths, heights)
+        const images = await splitImageElementAsync(image, widths, heights)
         const name = trimExtension(file.name)
         emit('INSERT_BIG_IMAGE', {
           name,
@@ -79,7 +79,7 @@ export function InsertBigImage(initialState) {
       <FileUploadDropzone
         acceptedFileTypes={acceptedFileTypes}
         multiple
-        onSelectedFiles={handleSelectedFiles}
+        onSelectedFiles={handleSelectedFiles as any} // FIXME
       >
         <Text align="center" bold>
           Drop image files here
@@ -92,7 +92,7 @@ export function InsertBigImage(initialState) {
         <FileUploadButton
           acceptedFileTypes={acceptedFileTypes}
           multiple
-          onSelectedFiles={handleSelectedFiles}
+          onSelectedFiles={handleSelectedFiles as any} // FIXME
           loading={isLoading === true}
           disabled={isLoading === true}
           focused

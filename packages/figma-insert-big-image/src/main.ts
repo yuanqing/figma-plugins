@@ -9,14 +9,14 @@ import {
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
 
-import { createImageLayer } from './utilities/create-image-layer'
+import { createImageNode } from './utilities/create-image-node'
 import { defaultSettings } from './utilities/default-settings'
 
-export default async function () {
+export default async function (): Promise<void> {
   const center = figma.viewport.center
-  let x = Math.round(center.x)
-  const y = Math.round(center.y)
-  const result = []
+  let xOffset = Math.round(center.x)
+  const yOffset = Math.round(center.y)
+  const result: Array<SceneNode> = []
   const settings = await loadSettingsAsync(defaultSettings)
   on('INSERT_BIG_IMAGE', async function ({
     name,
@@ -26,17 +26,17 @@ export default async function () {
     isDone
   }) {
     saveSettingsAsync({ ...settings, insertAs2x })
-    const imageLayers = []
+    const imageNodes = []
     for (const image of images) {
-      imageLayers.push(createImageLayer(image, x, y, insertAs2x))
+      imageNodes.push(createImageNode(image, xOffset, yOffset, insertAs2x))
     }
-    x += insertAs2x === true ? width / 2 : width
-    if (imageLayers.length === 1) {
-      imageLayers[0].name = name
-      result.push(imageLayers[0])
+    xOffset += insertAs2x === true ? width / 2 : width
+    if (imageNodes.length === 1) {
+      imageNodes[0].name = name
+      result.push(imageNodes[0])
     } else {
-      updateNodesSortOrder(imageLayers)
-      const group = figma.group(imageLayers, figma.currentPage)
+      updateNodesSortOrder(imageNodes)
+      const group = figma.group(imageNodes, figma.currentPage)
       group.name = name
       result.push(group)
     }
