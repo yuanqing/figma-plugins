@@ -3,7 +3,7 @@ import { memoizedComputeBoundingBox } from './memoized-compute-bounding-box'
 export function smartSortChildNodes(
   node: PageNode | SceneNode,
   ids: Array<string>
-) {
+): null | Array<SceneNode> {
   if ('children' in node) {
     const children = node.children
     if (children.length < 2 || node.type === 'INSTANCE') {
