@@ -36,23 +36,23 @@
     "menu": [
       {
         "name": "Distribute Layers Left",
-        "main": "distribute-layers-left/main",
-        "ui": "distribute-layers-left/ui"
+        "main": "distribute-nodes-left/main",
+        "ui": "distribute-nodes-left/ui"
       },
       {
         "name": "Distribute Layers Right",
-        "main": "distribute-layers-right/main",
-        "ui": "distribute-layers-right/ui"
+        "main": "distribute-nodes-right/main",
+        "ui": "distribute-nodes-right/ui"
       },
       {
         "name": "Distribute Layers Up",
-        "main": "distribute-layers-up/main",
-        "ui": "distribute-layers-up/ui"
+        "main": "distribute-nodes-up/main",
+        "ui": "distribute-nodes-up/ui"
       },
       {
         "name": "Distribute Layers Down",
-        "main": "distribute-layers-down/main",
-        "ui": "distribute-layers-down/ui"
+        "main": "distribute-nodes-down/main",
+        "ui": "distribute-nodes-down/ui"
       }
     ]
   }

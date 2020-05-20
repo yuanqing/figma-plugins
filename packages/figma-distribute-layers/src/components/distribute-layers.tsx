@@ -15,8 +15,9 @@ import {
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function DistributeLayers({ direction, icon, ...initialState }) {
-  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+export function DistributeLayers(props: { [key: string]: any }): h.JSX.Element {
+  const { direction, icon, ...rest } = props
+  const { state, handleChange, handleSubmit, isValid } = useForm(rest, {
     validate: function ({ hasSelection, space }) {
       return hasSelection === true && evaluateNumericExpression(space) !== null
     },

@@ -10,8 +10,11 @@ import {
 
 import { defaultSettings } from './default-settings'
 
-export function mainFactory(direction, distributeLayers) {
-  return async function () {
+export function mainFactory(
+  direction: string,
+  distributeNodes: (layers: Array<SceneNode>, space: number) => void
+): () => void {
+  return async function (): Promise<void> {
     if (figma.currentPage.selection.length < 2) {
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
@@ -25,7 +28,7 @@ export function mainFactory(direction, distributeLayers) {
     once('SUBMIT', async function (settings) {
       await saveSettingsAsync(settings)
       const { space } = settings
-      distributeLayers(figma.currentPage.selection, space)
+      distributeNodes(figma.currentPage.selection.slice(), space)
       figma.closePlugin(formatSuccessMessage(`Distributed layers ${direction}`))
     })
     once('CLOSE_UI', function () {
