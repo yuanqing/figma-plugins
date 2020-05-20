@@ -6,14 +6,14 @@ import {
 
 import { resetInstanceSize } from './utilities/reset-instance-size'
 
-export default async function () {
+export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select an instance'))
     return
   }
-  const instances = figma.currentPage.selection.filter(function (layer) {
-    return layer.type === 'INSTANCE'
-  })
+  const instances = figma.currentPage.selection.filter(function (node) {
+    return node.type === 'INSTANCE'
+  }) as Array<InstanceNode>
   if (instances.length === 0) {
     figma.closePlugin(formatErrorMessage('No instances in selection'))
     return

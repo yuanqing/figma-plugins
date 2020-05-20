@@ -15,22 +15,25 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 
+import { Component } from '../types'
 import styles from './replace-with-component.scss'
 
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-scrollable-menu-id'
 
-export function ReplaceWithComponent(initialState) {
+export function ReplaceWithComponent(props: {
+  [key: string]: any
+}): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(
     {
-      ...initialState,
+      ...props,
       componentId: null,
-      filteredComponents: initialState.components,
+      filteredComponents: props.components,
       searchTerm: ''
     },
     {
       transform: function (state) {
         const { componentId, components, searchTerm } = state
-        const filteredComponents = filterLayersByName(components, searchTerm)
+        const filteredComponents = filterNodesByName(components, searchTerm)
         return {
           ...state,
           componentId:
@@ -40,22 +43,22 @@ export function ReplaceWithComponent(initialState) {
           filteredComponents
         }
       },
-      validate: function ({ componentId, filteredComponents, selectedLayers }) {
+      validate: function ({ componentId, filteredComponents, selection }) {
         return (
           componentId !== null &&
-          selectedLayers.length > 0 &&
-          selectedLayers.filter(function ({ id }) {
+          selection.length > 0 &&
+          selection.filter(function ({ id }: { id: string }) {
             return id !== componentId
           }).length > 0 &&
-          filteredComponents.findIndex(function ({ id }) {
+          filteredComponents.findIndex(function ({ id }: { id: string }) {
             return id === componentId
           }) !== -1
         )
       },
-      onSubmit: function ({ componentId, shouldResizeToFitLayer }) {
+      onSubmit: function ({ componentId, shouldResizeToFitNode }) {
         emit('SUBMIT', {
           componentId,
-          shouldResizeToFitLayer
+          shouldResizeToFitNode
         })
       },
       onClose: function () {
@@ -67,11 +70,13 @@ export function ReplaceWithComponent(initialState) {
     componentId,
     filteredComponents,
     searchTerm,
-    shouldResizeToFitLayer
+    shouldResizeToFitNode
   } = state
   const handleLayerClick = useCallback(
-    function (event) {
-      const componentId = event.target.getAttribute(ITEM_ELEMENT_ATTRIBUTE_NAME)
+    function (event: Event) {
+      const componentId = (event.target as HTMLElement).getAttribute(
+        ITEM_ELEMENT_ATTRIBUTE_NAME
+      )
       handleChange({ componentId })
     },
     [handleChange]
@@ -86,8 +91,8 @@ export function ReplaceWithComponent(initialState) {
   })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ components, selectedLayers }) {
-        handleChange({ components, selectedLayers })
+      return on('SELECTION_CHANGED', function ({ components, selection }) {
+        handleChange({ components, selection })
       })
     },
     [handleChange]
@@ -95,7 +100,7 @@ export function ReplaceWithComponent(initialState) {
   useEffect(
     function () {
       window.addEventListener('keydown', handleKeyDown)
-      return function () {
+      return function (): void {
         window.removeEventListener('keydown', handleKeyDown)
       }
     },
@@ -118,10 +123,14 @@ export function ReplaceWithComponent(initialState) {
         </div>
       ) : (
         <div
-          className={styles.layers}
+          className={styles.nodes}
           ref={menuElementRef as preact.RefObject<HTMLDivElement>}
         >
-          {filteredComponents.map(function ({ id, name, pageName }, index) {
+          {filteredComponents.map(function (
+            component: Component,
+            index: number
+          ) {
+            const { id, name, pageName } = component
             return (
               <Layer
                 key={index}
@@ -141,8 +150,8 @@ export function ReplaceWithComponent(initialState) {
       <Container space="medium">
         <VerticalSpace space="medium" />
         <Checkbox
-          name="shouldResizeToFitLayer"
-          value={shouldResizeToFitLayer === true}
+          name="shouldResizeToFitNode"
+          value={shouldResizeToFitNode === true}
           onChange={handleChange}
         >
           <Text>Resize component to fit layer</Text>
@@ -157,11 +166,14 @@ export function ReplaceWithComponent(initialState) {
   )
 }
 
-function filterLayersByName(layers, searchTerm) {
+function filterNodesByName(
+  nodes: Array<SceneNode>,
+  searchTerm: string
+): Array<SceneNode> {
   if (searchTerm === '') {
-    return layers
+    return nodes
   }
-  return layers.filter(function ({ name }) {
+  return nodes.filter(function ({ name }) {
     return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
   })
 }

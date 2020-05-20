@@ -13,10 +13,15 @@ const attributes = [
   'strokes',
   'strokeStyleId'
 ]
-export function copyAttributes(sourceLayer, destinationLayer) {
+
+export function copyAttributes(
+  sourceNode: SceneNode,
+  destinationNode: SceneNode
+): void {
   for (const attribute of attributes) {
-    if (typeof sourceLayer[attribute] !== 'undefined') {
-      destinationLayer[attribute] = sourceLayer[attribute]
+    const value = (sourceNode as any)[attribute]
+    if (typeof value !== 'undefined') {
+      ;(destinationNode as any)[attribute] = value
     }
   }
 }

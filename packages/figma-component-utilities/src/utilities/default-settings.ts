@@ -1,3 +1,3 @@
 export const defaultSettings = {
-  shouldResizeToFitLayer: true
+  shouldResizeToFitNode: true
 }

@@ -9,23 +9,22 @@ import {
 import { OFFSET } from '../utilities/constants'
 import { createComponent } from './utilities/create-component'
 
-export default async function () {
-  const layers = figma.currentPage.selection
-  if (layers.length === 0) {
+export default async function (): Promise<void> {
+  const nodes = figma.currentPage.selection
+  if (nodes.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
   const newSelection = []
-  for (const layer of layers) {
-    const component =
-      layer.type === 'COMPONENT' ? layer : createComponent(layer)
-    if (isWithinInstance(layer) === false) {
+  for (const node of nodes) {
+    const component = node.type === 'COMPONENT' ? node : createComponent(node)
+    if (isWithinInstance(node) === false) {
       const instance = component.createInstance()
-      instance.x = layer.x
-      instance.y = layer.y
-      insertBeforeNode(instance, layer)
-      if (layer.type !== 'COMPONENT') {
-        layer.remove()
+      instance.x = node.x
+      instance.y = node.y
+      insertBeforeNode(instance, node)
+      if (node.type !== 'COMPONENT') {
+        node.remove()
       }
     }
     component.x += OFFSET
@@ -36,9 +35,9 @@ export default async function () {
   figma.closePlugin(
     formatSuccessMessage(
       `Created ${pluralize(
-        layers.length,
+        nodes.length,
         'component from layer',
-        `components from ${layers.length} layers`
+        `components from ${nodes.length} layers`
       )}`
     )
   )

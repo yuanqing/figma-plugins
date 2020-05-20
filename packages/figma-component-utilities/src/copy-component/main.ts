@@ -7,13 +7,13 @@ import {
 
 import { OFFSET } from '../utilities/constants'
 
-export default async function () {
+export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select a component'))
     return
   }
-  const components = figma.currentPage.selection.filter(function (layer) {
-    return layer.type === 'COMPONENT'
+  const components = figma.currentPage.selection.filter(function (node) {
+    return node.type === 'COMPONENT'
   })
   if (components.length === 0) {
     figma.closePlugin(formatErrorMessage('No components in selection'))

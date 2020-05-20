@@ -1,4 +1,4 @@
-export function resetInstanceSize(instance) {
+export function resetInstanceSize(instance: InstanceNode): boolean {
   const component = instance.masterComponent
   if (
     component.width === instance.width &&

@@ -12,15 +12,15 @@ import {
 
 import { defaultSettings } from '../utilities/default-settings'
 import { getComponents } from './utilities/get-components'
-import { getSelectedLayers } from './utilities/get-selected-layers'
+import { getSelection } from './utilities/get-selection'
 
-export default async function () {
+export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const selectedLayers = getSelectedLayers()
-  if (selectedLayers.length === 0) {
+  const selection = getSelection()
+  if (selection.length === 0) {
     figma.closePlugin(
       formatErrorMessage('Can only replace layers not within an instance')
     )
@@ -31,43 +31,46 @@ export default async function () {
     figma.closePlugin(formatErrorMessage('No components in document'))
     return
   }
-  const { shouldResizeToFitLayer, ...settings } = await loadSettingsAsync(
+  const { shouldResizeToFitNode, ...settings } = await loadSettingsAsync(
     defaultSettings
   )
   figma.on('selectionchange', function () {
     emit('SELECTION_CHANGED', {
       components: getComponents(),
-      selectedLayers: getSelectedLayers()
+      selection: getSelection()
     })
   })
-  once('SUBMIT', async function ({ componentId, shouldResizeToFitLayer }) {
+  once('SUBMIT', async function ({ componentId, shouldResizeToFitNode }) {
     await saveSettingsAsync({
       ...settings,
-      shouldResizeToFitLayer
+      shouldResizeToFitNode
     })
-    const selectedLayers = figma.currentPage.selection
+    const selection = figma.currentPage.selection
     const component = figma.getNodeById(componentId) as ComponentNode
     const newSelection = []
     let count = 0
-    for (const layer of selectedLayers) {
-      if (isWithinInstance(layer) === true) {
+    for (const node of selection) {
+      if (isWithinInstance(node) === true) {
         continue
       }
-      if (layer.id === componentId) {
-        newSelection.push(layer)
+      if (node.id === componentId) {
+        newSelection.push(node)
         continue
       }
       count++
-      const parent = layer.parent
-      const index = parent.children.indexOf(layer)
+      const parent = node.parent
+      if (parent === null) {
+        throw new Error('Node has no parent')
+      }
+      const index = parent.children.indexOf(node)
       const instance = component.createInstance()
       parent.insertChild(index, instance)
-      instance.x = layer.x
-      instance.y = layer.y
-      if (shouldResizeToFitLayer === true) {
-        instance.resize(layer.width, layer.height)
+      instance.x = node.x
+      instance.y = node.y
+      if (shouldResizeToFitNode === true) {
+        instance.resize(node.width, node.height)
       }
-      layer.remove()
+      node.remove()
       newSelection.push(instance)
     }
     figma.currentPage.selection = newSelection
@@ -92,8 +95,8 @@ export default async function () {
     { width: 360, height: 402 },
     {
       components,
-      selectedLayers,
-      shouldResizeToFitLayer
+      selection,
+      shouldResizeToFitNode
     }
   )
 }
