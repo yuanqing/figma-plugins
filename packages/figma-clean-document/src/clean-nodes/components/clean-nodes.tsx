@@ -13,9 +13,9 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function CleanLayers(initialState) {
+export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(
-    { ...initialState, isLoading: false },
+    { ...props, isLoading: false },
     {
       validate: function ({
         deleteHiddenLayers,

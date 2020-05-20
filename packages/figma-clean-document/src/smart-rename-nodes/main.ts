@@ -9,9 +9,9 @@ import {
 
 import { defaultSettings } from '../utilities/default-settings'
 import { mainFactory } from '../utilities/main-factory'
-import { smartRenameLayer } from '../utilities/smart-rename-layer'
+import { smartRenameNode } from '../utilities/smart-rename-node'
 
-export default async function () {
+export default async function (): Promise<void> {
   const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
     emit('SELECTION_CHANGED', {
@@ -21,27 +21,27 @@ export default async function () {
   once('SUBMIT', async function (settings) {
     await saveSettingsAsync(settings)
     const { smartRenameLayersWhitelist } = settings
-    const smartRenameLayersWhitelistRegex =
+    const smartRenameNodesWhitelistRegex =
       smartRenameLayersWhitelist === ''
         ? null
         : new RegExp(smartRenameLayersWhitelist)
     mainFactory({
-      processLayer: function (layer) {
-        return smartRenameLayer(layer, smartRenameLayersWhitelistRegex)
+      processNode: function (node: SceneNode) {
+        return smartRenameNode(node, smartRenameNodesWhitelistRegex)
       },
-      stopTraversal: function (layer) {
+      stopTraversal: function (node: SceneNode) {
         return (
-          smartRenameLayersWhitelistRegex !== null &&
-          smartRenameLayersWhitelistRegex.test(layer.name) === true
+          smartRenameNodesWhitelistRegex !== null &&
+          smartRenameNodesWhitelistRegex.test(node.name) === true
         )
       },
-      createLoadingMessage: function (scope) {
+      createLoadingMessage: function (scope: string) {
         return `Renaming layers ${scope}…`
       },
-      createSuccessMessage: function (scope, count) {
+      createSuccessMessage: function (scope: string, count: number) {
         return `Renamed ${count} ${pluralize(count, 'layer')} ${scope}`
       },
-      createFailureMessage: function (scope) {
+      createFailureMessage: function (scope: string) {
         return `No layers renamed ${scope}`
       }
     })()

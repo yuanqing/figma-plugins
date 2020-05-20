@@ -37,17 +37,17 @@
     "menu": [
       {
         "name": "Clean Layers",
-        "main": "clean-layers/main",
-        "ui": "clean-layers/ui"
+        "main": "clean-nodes/main",
+        "ui": "clean-nodes/ui"
       },
       "-",
       {
         "name": "Delete Hidden Layers",
-        "main": "delete-hidden-layers/main"
+        "main": "delete-hidden-nodes/main"
       },
       {
         "name": "Ungroup Single-Layer Groups",
-        "main": "ungroup-single-layer-groups/main"
+        "main": "ungroup-single-node-groups/main"
       },
       {
         "name": "Make Pixel-Perfect",
@@ -55,12 +55,12 @@
       },
       {
         "name": "Smart Rename Layers",
-        "main": "smart-rename-layers/main",
-        "ui": "smart-rename-layers/ui"
+        "main": "smart-rename-nodes/main",
+        "ui": "smart-rename-nodes/ui"
       },
       {
         "name": "Smart Sort Layers",
-        "main": "smart-sort-layers/main"
+        "main": "smart-sort-nodes/main"
       },
       "-",
       {
@@ -76,8 +76,8 @@
     "relaunchButtons": {
       "cleanLayers": {
         "name": "Clean Layers",
-        "main": "clean-layers/main",
-        "ui": "clean-layers/ui"
+        "main": "clean-nodes/main",
+        "ui": "clean-nodes/ui"
       }
     }
   }

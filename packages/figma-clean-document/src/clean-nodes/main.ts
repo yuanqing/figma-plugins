@@ -11,14 +11,14 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { cleanLayer } from '../utilities/clean-layer'
+import { cleanNodes } from '../utilities/clean-nodes'
 import { defaultSettings } from '../utilities/default-settings'
 import { getScope } from '../utilities/get-scope'
-import { getSiblingLayerGroups } from '../utilities/get-sibling-layer-groups'
+import { getSiblingNodes } from '../utilities/get-sibling-nodes'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
-import { smartSortLayers } from '../utilities/smart-sort-layers'
+import { smartSortNodes } from '../utilities/smart-sort-nodes'
 
-export default async function () {
+export default async function (): Promise<void> {
   if (figma.currentPage.children.length === 0) {
     figma.closePlugin(formatErrorMessage('No layers on page'))
     return
@@ -48,9 +48,9 @@ export default async function () {
       `Cleaning layers ${scope}…`
     )
     let didChange = false
-    for (const layer of getSelectedNodesOrAllNodes()) {
+    for (const node of getSelectedNodesOrAllNodes()) {
       didChange =
-        cleanLayer(layer, {
+        cleanNodes(node, {
           deleteHiddenLayers,
           pixelPerfect,
           skipLockedLayers,
@@ -58,11 +58,11 @@ export default async function () {
           smartRenameLayersWhitelistRegex,
           ungroupSingleLayerGroups
         }) || didChange
-      collapseLayer(layer)
+      collapseLayer(node)
     }
     if (settings.smartSortLayers === true) {
-      for (const layers of getSiblingLayerGroups()) {
-        didChange = smartSortLayers(layers, skipLockedLayers) || didChange
+      for (const nodes of getSiblingNodes()) {
+        didChange = smartSortNodes(nodes, skipLockedLayers) || didChange
       }
     }
     hideLoadingNotification()

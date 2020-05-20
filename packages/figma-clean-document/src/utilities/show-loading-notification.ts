@@ -1,8 +1,8 @@
-export function showLoadingNotification(message) {
+export function showLoadingNotification(message: string): () => void {
   const notificationHandler = figma.notify(message, {
     timeout: 60000
   })
-  return function () {
+  return function (): void {
     notificationHandler.cancel()
   }
 }

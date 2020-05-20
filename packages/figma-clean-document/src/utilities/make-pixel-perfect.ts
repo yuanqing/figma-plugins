@@ -1,37 +1,37 @@
 import { isWithinInstance } from '@create-figma-plugin/utilities'
 
-export function makePixelPerfect(layer) {
+export function makePixelPerfect(node: SceneNode): boolean {
   if (
-    layer.type === 'GROUP' ||
-    layer.type === 'VECTOR' ||
-    layer.type === 'BOOLEAN_OPERATION' ||
-    isWithinInstance(layer) === true
+    node.type === 'GROUP' ||
+    node.type === 'VECTOR' ||
+    node.type === 'BOOLEAN_OPERATION' ||
+    isWithinInstance(node) === true
   ) {
     return false
   }
   let didChange = false
-  if (Number.isInteger(layer.x) === false) {
+  if (Number.isInteger(node.x) === false) {
     didChange = true
-    layer.x = Math.round(layer.x)
+    node.x = Math.round(node.x)
   }
-  if (Number.isInteger(layer.y) === false) {
+  if (Number.isInteger(node.y) === false) {
     didChange = true
-    layer.y = Math.round(layer.y)
+    node.y = Math.round(node.y)
   }
   if (
-    Number.isInteger(layer.width) === false ||
-    Number.isInteger(layer.height) === false
+    Number.isInteger(node.width) === false ||
+    Number.isInteger(node.height) === false
   ) {
     didChange = true
-    if (layer.type === 'LINE') {
-      if (layer.width === 0) {
-        layer.resize(0, Math.round(layer.height))
+    if (node.type === 'LINE') {
+      if (node.width === 0) {
+        node.resize(0, Math.round(node.height))
       }
-      if (layer.height === 0) {
-        layer.resize(Math.round(layer.width), 0)
+      if (node.height === 0) {
+        node.resize(Math.round(node.width), 0)
       }
     } else {
-      layer.resize(Math.round(layer.width), Math.round(layer.height))
+      node.resize(Math.round(node.width), Math.round(node.height))
     }
   }
   return didChange

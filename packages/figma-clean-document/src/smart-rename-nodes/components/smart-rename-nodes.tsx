@@ -11,9 +11,9 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function SmartRenameLayers(initialState) {
+export function SmartRenameNodes(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit } = useForm(
-    { ...initialState, isLoading: false },
+    { ...props, isLoading: false },
     {
       onSubmit: function ({ smartRenameLayersWhitelist }) {
         emit('SUBMIT', { smartRenameLayersWhitelist })

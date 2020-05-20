@@ -8,29 +8,36 @@ import {
 import { getScope } from '../utilities/get-scope'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
 
-export function mainFactory({
-  processLayer,
-  stopTraversal,
-  createLoadingMessage,
-  createSuccessMessage,
-  createFailureMessage
-}) {
-  return function () {
+export function mainFactory(options: {
+  processNode: (node: SceneNode) => boolean
+  stopTraversal: (node: SceneNode) => boolean
+  createLoadingMessage: (scope: string) => string
+  createSuccessMessage: (scope: string, count: number) => string
+  createFailureMessage: (scope: string) => string
+}): () => void {
+  const {
+    processNode,
+    stopTraversal,
+    createLoadingMessage,
+    createSuccessMessage,
+    createFailureMessage
+  } = options
+  return function (): void {
     if (figma.currentPage.children.length === 0) {
       figma.closePlugin(formatErrorMessage('No layers on page'))
       return
     }
-    const layers = getSelectedNodesOrAllNodes()
+    const nodes = getSelectedNodesOrAllNodes()
     const scope = getScope()
     const hideLoadingNotification = showLoadingNotification(
       createLoadingMessage(scope)
     )
     let count = 0
-    for (const layer of layers) {
+    for (const node of nodes) {
       traverseNode(
-        layer,
-        function (layer) {
-          if (processLayer(layer) === true) {
+        node,
+        function (node) {
+          if (processNode(node) === true) {
             count++
           }
         },

@@ -1,20 +1,20 @@
 import { pluralize } from '@create-figma-plugin/utilities'
 
+import { deleteHiddenNodes } from '../utilities/delete-hidden-nodes'
 import { mainFactory } from '../utilities/main-factory'
-import { makePixelPerfect } from '../utilities/make-pixel-perfect'
 
 export default mainFactory({
-  processNode: makePixelPerfect,
+  processNode: deleteHiddenNodes,
   stopTraversal: function (node: SceneNode) {
-    return node.type === 'INSTANCE' || node.type === 'BOOLEAN_OPERATION'
+    return node.type === 'INSTANCE'
   },
   createLoadingMessage: function (scope: string) {
-    return `Making layers ${scope} pixel-perfect…`
+    return `Deleting hidden layers ${scope}…`
   },
   createSuccessMessage: function (scope: string, count: number) {
-    return `Made ${count} ${pluralize(count, 'layer')} ${scope} pixel-perfect`
+    return `Deleted ${count} hidden ${pluralize(count, 'layer')} ${scope}`
   },
   createFailureMessage: function (scope: string) {
-    return `No change to layers ${scope}`
+    return `No hidden layers ${scope}`
   }
 })

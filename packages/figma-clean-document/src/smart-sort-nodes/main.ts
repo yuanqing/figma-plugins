@@ -4,23 +4,23 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { getScope } from '../utilities/get-scope'
-import { getSiblingLayerGroups } from '../utilities/get-sibling-layer-groups'
+import { getSiblingNodes } from '../utilities/get-sibling-nodes'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
-import { smartSortLayers } from '../utilities/smart-sort-layers'
+import { smartSortNodes } from '../utilities/smart-sort-nodes'
 
-export default function () {
+export default function (): void {
   if (figma.currentPage.children.length === 0) {
     figma.closePlugin(formatErrorMessage('No layers on page'))
     return
   }
-  const groups = getSiblingLayerGroups()
+  const groups = getSiblingNodes()
   const scope = getScope()
   const hideLoadingNotification = showLoadingNotification(
     `Sorting layers ${scope}…`
   )
   let didChange = false
-  for (const layers of groups) {
-    didChange = smartSortLayers(layers, false) || didChange
+  for (const nodes of groups) {
+    didChange = smartSortNodes(nodes, false) || didChange
   }
   hideLoadingNotification()
   figma.closePlugin(

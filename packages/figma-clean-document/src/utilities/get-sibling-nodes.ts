@@ -1,7 +1,6 @@
 import { computeSiblingNodes } from '@create-figma-plugin/utilities'
 
-// Returns an array of array of sibling layers.
-export function getSiblingLayerGroups() {
+export function getSiblingNodes(): Array<Array<SceneNode>> {
   const selection = figma.currentPage.selection
   if (selection.length === 0) {
     return [figma.currentPage.children.slice().reverse()]
