@@ -1,3 +1,4 @@
+import { Layer } from '../types'
 import { MIXED } from './constants'
 
 type Dimensions = {
@@ -5,9 +6,7 @@ type Dimensions = {
   height: number | string
 }
 
-export function computeDimensions(
-  nodes: Array<{ [key: string]: any }>
-): Dimensions {
+export function computeDimensions(nodes: Array<Layer>): Dimensions {
   if (nodes.length === 0) {
     return { width: '', height: '' }
   }

@@ -14,7 +14,7 @@ import { getSelectedNodesAttributes } from './utilities/get-selected-nodes-attri
 import { setSize } from './utilities/set-size'
 import { updateSelection } from './utilities/update-selection'
 
-export default async function (): void {
+export default async function (): Promise<void> {
   const nodes = getSelectedNodesAttributes()
   if (nodes.length === 0) {
     if (figma.currentPage.selection.length > 0) {

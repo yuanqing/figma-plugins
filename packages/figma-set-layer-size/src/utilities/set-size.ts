@@ -1,5 +1,7 @@
+import { Layer } from '../types'
+
 export function setSize(
-  nodes: Array<{ id: string }>,
+  nodes: Array<Layer>,
   width: null | number,
   height: null | number,
   resizeWithConstraints: boolean
