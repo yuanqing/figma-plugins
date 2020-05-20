@@ -16,6 +16,7 @@
     "@create-figma-plugin/build": "0.0.74-alpha.0",
     "@figma/plugin-typings": "^1.15.0",
     "@types/natural-compare-lite": "^1.4.0",
+    "@types/tap": "^14.10.0",
     "eslint": "^7.0.0",
     "eslint-config-yuanqing": "0.0.1",
     "globby": "^11.0.0",
