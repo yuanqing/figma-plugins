@@ -19,7 +19,7 @@ import { useEffect } from 'preact/hooks'
 
 import { MIXED } from '../utilities/constants'
 
-export function SetLayerSize(props: any) {
+export function SetLayerSize(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(props, {
     validate: function ({ nodes, width, height }) {
       if (nodes.length === 0) {
