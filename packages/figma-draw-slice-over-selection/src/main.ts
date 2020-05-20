@@ -11,7 +11,7 @@ import {
 import { defaultSettings } from './utilities/default-settings'
 import { drawSliceOverSelection } from './utilities/draw-slice-over-selection'
 
-export default async function () {
+export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return

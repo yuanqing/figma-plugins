@@ -15,8 +15,10 @@ import {
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function DrawSliceOverSelection(initialState) {
-  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+export function DrawSliceOverSelection(props: {
+  [key: string]: any
+}): h.JSX.Element {
+  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
     validate: function ({ hasSelection, padding }) {
       return (
         hasSelection === true && evaluateNumericExpression(padding) !== null
