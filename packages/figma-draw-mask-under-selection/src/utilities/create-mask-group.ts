@@ -5,24 +5,32 @@ import {
   sortNodesByCanonicalOrder
 } from '@create-figma-plugin/utilities'
 
-export function createMaskGroup(layers) {
-  const mask = insertMaskLayer(layers)
+export function createMaskGroup(nodes: Array<SceneNode>): RectangleNode {
+  const nodesInCanonicalOrder = sortNodesByCanonicalOrder(nodes)
+  const bottomMostNode = nodesInCanonicalOrder[0]
+  const topMostNode = nodesInCanonicalOrder[nodes.length - 1]
+  const mask = createMask(nodes, bottomMostNode)
   const parent = mask.parent
+  if (parent === null) {
+    throw new Error('Node has no parent')
+  }
   const group = figma.group(
-    [...layers, mask],
+    [...nodes, mask],
     parent,
-    parent.children.indexOf(mask)
+    parent.children.indexOf(topMostNode)
   )
   group.name = 'Mask Group'
   return mask
 }
 
-function insertMaskLayer(layers) {
+function createMask(
+  nodes: Array<SceneNode>,
+  bottomMostNode: SceneNode
+): RectangleNode {
   const mask = figma.createRectangle()
-  const bottomMostLayer = sortNodesByCanonicalOrder(layers)[0]
-  insertAfterNode(mask, bottomMostLayer)
+  insertAfterNode(mask, bottomMostNode)
   mask.name = 'Mask'
-  const maximumBounds = computeMaximumBounds(layers)
+  const maximumBounds = computeMaximumBounds(nodes)
   setAbsolutePosition(mask, {
     x: maximumBounds[0].x,
     y: maximumBounds[0].y
