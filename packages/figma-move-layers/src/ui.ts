@@ -1,5 +1,5 @@
 import { render } from '@create-figma-plugin/ui'
 
-import { MoveLayers } from './components/move-layers'
+import { MoveNodes } from './components/move-nodes'
 
-export default render(MoveLayers)
+export default render(MoveNodes)

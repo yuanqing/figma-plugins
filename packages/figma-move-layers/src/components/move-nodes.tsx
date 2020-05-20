@@ -17,8 +17,8 @@ import {
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function MoveLayers(initialState) {
-  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+export function MoveNodes(props: { [key: string]: any }): h.JSX.Element {
+  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
     validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
       const evaluatedHorizontalOffset = evaluateNumericExpression(
         horizontalOffset
