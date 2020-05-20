@@ -10,8 +10,8 @@ import {
 import { emit } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 
-export function Settings(initialState) {
-  const { state, handleChange, handleSubmit } = useForm(initialState, {
+export function Settings(props: { [key: string]: any }): h.JSX.Element {
+  const { state, handleChange, handleSubmit } = useForm(props, {
     onSubmit: function ({ resolution }) {
       emit('SUBMIT', {
         resolution

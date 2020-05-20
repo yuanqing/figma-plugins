@@ -3,12 +3,15 @@ import {
   sortNodesByCanonicalOrder
 } from '@create-figma-plugin/utilities'
 
-export function createGroup(layers) {
-  if (areSiblingNodes(layers) === false) {
-    return figma.group(layers, figma.currentPage)
+export function createGroup(nodes: Array<SceneNode>): GroupNode {
+  if (areSiblingNodes(nodes) === false) {
+    return figma.group(nodes, figma.currentPage)
   }
-  const parent = layers[0].parent
-  const topMostLayer = sortNodesByCanonicalOrder(layers)[0]
-  const index = parent.children.indexOf(topMostLayer)
-  return figma.group(layers, parent, index)
+  const parent = nodes[0].parent
+  if (parent === null) {
+    throw new Error('Node has no parent')
+  }
+  const topMostNode = sortNodesByCanonicalOrder(nodes)[0]
+  const index = parent.children.indexOf(topMostNode)
+  return figma.group(nodes, parent, index)
 }

@@ -6,8 +6,11 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-export async function createImageLayerFromGroupAsync(group, resolution) {
-  const exportSettings = {
+export async function createImageFromGroupAsync(
+  group: GroupNode,
+  resolution: number
+): Promise<RectangleNode> {
+  const exportSettings: ExportSettingsImage = {
     format: 'PNG',
     constraint: {
       type: 'SCALE',
@@ -17,19 +20,19 @@ export async function createImageLayerFromGroupAsync(group, resolution) {
   const imageBytes = await group.exportAsync(exportSettings)
   const dimensions = await computeImageDimensions(imageBytes)
   const imagePaint = createImagePaint(imageBytes)
-  const layer = figma.createRectangle()
-  insertBeforeNode(layer, group)
+  const node = figma.createRectangle()
+  insertBeforeNode(node, group)
   const width = dimensions.width / resolution
   const height = dimensions.height / resolution
-  layer.resize(width, height)
-  layer.x = group.x - (width - group.width) / 2
-  layer.y = group.y - (height - group.height) / 2
-  layer.fills = [imagePaint]
-  return layer
+  node.resize(width, height)
+  node.x = group.x - (width - group.width) / 2
+  node.y = group.y - (height - group.height) / 2
+  node.fills = [imagePaint]
+  return node
 }
 
 async function computeImageDimensions(
-  imageBytes
+  imageBytes: Uint8Array
 ): Promise<{ width: number; height: number }> {
   return new Promise(function (resolve) {
     once('COMPUTE_IMAGE_WIDTH_RESULT', function (dimensions) {

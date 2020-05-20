@@ -8,7 +8,7 @@ import {
 
 import { defaultSettings } from '../utilities/default-settings'
 
-export default async function () {
+export default async function (): Promise<void> {
   const settings = await loadSettingsAsync(defaultSettings)
   once('SUBMIT', async function (settings) {
     await saveSettingsAsync(settings)

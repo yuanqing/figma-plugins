@@ -7,23 +7,24 @@ import {
 
 import { defaultSettings } from '../utilities/default-settings'
 import { createGroup } from './utilities/create-group'
-import { createImageLayerFromGroupAsync } from './utilities/create-image-layer-from-group-async'
-import { replaceLayersWithinInstancesWithClones } from './utilities/replace-layers-within-instances-with-clones'
+import { createImageFromGroupAsync } from './utilities/create-image-from-group-async'
+import { replaceNodesWithinInstancesWithClones } from './utilities/replace-nodes-within-instances-with-clones'
 
-export default async function () {
-  const selectedLayers = figma.currentPage.selection.slice()
-  if (selectedLayers.length === 0) {
+export default async function (): Promise<void> {
+  if (figma.currentPage.selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const layers = replaceLayersWithinInstancesWithClones(selectedLayers)
-  const group = createGroup(layers)
+  const nodes = replaceNodesWithinInstancesWithClones(
+    figma.currentPage.selection.slice()
+  )
+  const group = createGroup(nodes)
   const { resolution } = await loadSettingsAsync(defaultSettings)
-  const imageLayer = await createImageLayerFromGroupAsync(group, resolution)
+  const image = await createImageFromGroupAsync(group, resolution)
   const didPositionChange =
-    imageLayer.width !== group.width || imageLayer.height !== group.height
+    image.width !== group.width || image.height !== group.height
   group.remove()
-  figma.currentPage.selection = [imageLayer]
+  figma.currentPage.selection = [image]
   figma.closePlugin(
     didPositionChange === true
       ? formatWarningMessage(

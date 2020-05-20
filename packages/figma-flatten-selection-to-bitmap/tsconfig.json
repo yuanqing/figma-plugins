@@ -1,6 +1,3 @@
 {
-  "extends": "../../tsconfig.shared.json",
-  "compilerOptions": {
-    "strict": false
-  }
+  "extends": "../../tsconfig.shared.json"
 }
