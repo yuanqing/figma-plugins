@@ -40,9 +40,6 @@
       "*.scss.d.ts"
     ],
     "rules": {
-      "@typescript-eslint/explicit-function-return-type": [
-        "error"
-      ],
       "react/prop-types": [
         "off"
       ]
