@@ -1,4 +1,4 @@
-export function isValidLocale(locale) {
+export function isValidLocale(locale: string): boolean {
   try {
     // FIXME
     ;(Intl as any).getCanonicalLocales(locale)

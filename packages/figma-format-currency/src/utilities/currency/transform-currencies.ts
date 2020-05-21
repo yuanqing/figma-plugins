@@ -8,7 +8,16 @@ import { MINUS } from './special-characters'
 const digitRegex = /\d/
 const nonDigitRegex = /([^\d])/g
 
-export function transformCurrencies(string, locale, transform) {
+export function transformCurrencies(
+  string: string,
+  locale: string,
+  transform: (options: {
+    value: number
+    isoCode: string
+    locale: string
+    isExplicitFormat: boolean
+  }) => string
+): string {
   if (digitRegex.test(string) === false) {
     return string
   }
@@ -82,7 +91,7 @@ export function transformCurrencies(string, locale, transform) {
     const parsedValue = parseValue(value, parsedIsoCode)
     const minus = m1 !== '' || m2 !== '' ? MINUS : ''
     return `${before}${minus}${transform({
-      value: parsedValue,
+      value: parseFloat(parsedValue),
       isoCode: parsedIsoCode,
       locale,
       isExplicitFormat
@@ -90,13 +99,13 @@ export function transformCurrencies(string, locale, transform) {
   })
 }
 
-const separatorRegexes = {
+const separatorRegexes: { [key: string]: any } = {
   ' ': /\s/g,
   ',': /,/g,
   '.': /\./g
 }
 
-function parseValue(value, isoCode) {
+function parseValue(value: string, isoCode: string): string {
   const matches = value.match(nonDigitRegex)
   if (matches === null) {
     return value

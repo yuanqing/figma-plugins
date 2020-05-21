@@ -14,9 +14,12 @@ import { useEffect } from 'preact/hooks'
 
 import {
   INVALID_SETTINGS,
-  NO_TEXT_LAYERS,
-  Preview
+  NO_TEXT_NODES,
+  Preview,
+  PreviewItem,
+  PreviewProps
 } from '../../components/preview/preview'
+import { TextNodeAttributes } from '../../types'
 import { formatExplicit } from '../../utilities/currency/format-explicit'
 import { formatRetain } from '../../utilities/currency/format-retain'
 import { formatShort } from '../../utilities/currency/format-short'
@@ -26,46 +29,49 @@ import { EXPLICIT, RETAIN, SHORT } from '../formats'
 
 const localesJson = require('../../utilities/currency/data/locales.json')
 
-const formatters = {
+const formatters: { [key: string]: any } = {
   [EXPLICIT]: formatExplicit,
   [RETAIN]: formatRetain,
   [SHORT]: formatShort
 }
 
-const locales = localesJson.map(function (locale) {
+const locales = localesJson.map(function (locale: string) {
   return { value: locale }
 })
 
-export function FormatCurrency(initialState) {
-  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+export function FormatCurrency(props: { [key: string]: any }): h.JSX.Element {
+  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
     transform: function (state) {
-      const { layers, format, locale } = state
+      const { nodes, format, locale } = state
       return {
         ...state,
-        previewItems: computePreview({
-          layers,
+        preview: computePreview({
+          nodes,
           format,
           locale
         })
       }
     },
-    validate: function ({ previewItems }) {
+    validate: function ({ preview }) {
       return (
-        previewItems !== INVALID_SETTINGS &&
-        previewItems !== NO_TEXT_LAYERS &&
-        previewItems.length > 0
+        preview !== INVALID_SETTINGS &&
+        preview !== NO_TEXT_NODES &&
+        preview.items.length > 0
       )
     },
-    onSubmit: function ({ layers, format, locale }) {
+    onSubmit: function ({ nodes, format, locale }) {
       const formatter = formatters[format]
-      const result = layers.map(function ({ id, characters }) {
+      const result = nodes.map(function ({
+        id,
+        characters
+      }: TextNodeAttributes) {
         return {
           id,
           characters: formatter(characters, locale)
         }
       })
       emit('SUBMIT', {
-        layers: result,
+        nodes: result,
         format,
         locale
       })
@@ -76,16 +82,16 @@ export function FormatCurrency(initialState) {
   })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ layers }) {
-        handleChange({ layers })
+      return on('SELECTION_CHANGED', function ({ nodes }) {
+        handleChange({ nodes })
       })
     },
     [handleChange]
   )
-  const { format, locale, previewItems } = state
+  const { format, locale, preview } = state
   return (
     <Fragment>
-      <Preview items={previewItems} />
+      <Preview {...preview} />
       <Container space="medium">
         <VerticalSpace space="large" />
         <Text muted>Format</Text>
@@ -121,27 +127,33 @@ export function FormatCurrency(initialState) {
   )
 }
 
-function computePreview({ layers, format, locale }) {
+function computePreview(options: {
+  nodes: Array<TextNodeAttributes>
+  format: string
+  locale: string
+}): PreviewProps {
+  const { nodes, format, locale } = options
   if (isValidLocale(locale) === false) {
-    return INVALID_SETTINGS
+    return { error: INVALID_SETTINGS }
   }
-  if (layers.length === 0) {
-    return NO_TEXT_LAYERS
+  if (nodes.length === 0) {
+    return { error: NO_TEXT_NODES }
   }
-  const result = []
-  const originalStrings = {}
-  layers.forEach(function ({ characters }) {
+  const items: Array<PreviewItem> = []
+  const originalStrings: { [key: string]: any } = {}
+  nodes.forEach(function ({ characters }) {
     characters.replace(moneyRegex, function (original) {
       if (originalStrings[original] === true) {
-        return
+        return '' // FIXME
       }
       originalStrings[original] = true
       const formatter = formatters[format]
-      result.push({
+      items.push({
         original,
         result: formatter(original, locale)
       })
+      return '' // FIXME
     })
   })
-  return result
+  return { items }
 }

@@ -2,7 +2,7 @@ import { addIsoCodeSuffix } from './add-iso-code-suffix'
 import { formatCurrencyByLocale } from './format-currency-by-locale'
 import { transformCurrencies } from './transform-currencies'
 
-export function formatRetain(characters, locale) {
+export function formatRetain(characters: string, locale: string): string {
   return transformCurrencies(characters, locale, function ({
     value,
     isoCode,

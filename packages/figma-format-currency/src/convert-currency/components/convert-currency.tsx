@@ -14,9 +14,12 @@ import { useEffect } from 'preact/hooks'
 
 import {
   INVALID_SETTINGS,
-  NO_TEXT_LAYERS,
-  Preview
+  NO_TEXT_NODES,
+  Preview,
+  PreviewItem,
+  PreviewProps
 } from '../../components/preview/preview'
+import { TextNodeAttributes } from '../../types'
 import { convertCurrency } from '../../utilities/currency/convert-currency'
 import { isValidLocale } from '../../utilities/currency/is-valid-locale'
 import { moneyRegex } from '../../utilities/currency/money-regex'
@@ -28,33 +31,36 @@ const currencies = Object.keys(isoCodes).map(function (isoCode) {
   return { value: isoCode }
 })
 
-const locales = localesJson.map(function (locale) {
+const locales = localesJson.map(function (locale: string) {
   return { value: locale }
 })
 
-export function ConvertCurrency(initialState) {
-  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+export function ConvertCurrency(props: { [key: string]: any }): h.JSX.Element {
+  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
     transform: function (state) {
-      const { layers, targetCurrency, roundNumbers, locale } = state
+      const { nodes, targetCurrency, roundNumbers, locale } = state
       return {
         ...state,
-        previewItems: computePreview({
-          layers,
+        preview: computePreview({
+          nodes,
           targetCurrency,
           roundNumbers,
           locale
         })
       }
     },
-    validate: function ({ previewItems }) {
+    validate: function ({ preview }) {
       return (
-        previewItems !== INVALID_SETTINGS &&
-        previewItems !== NO_TEXT_LAYERS &&
-        previewItems.length > 0
+        preview !== INVALID_SETTINGS &&
+        preview !== NO_TEXT_NODES &&
+        preview.items.length > 0
       )
     },
-    onSubmit: function ({ layers, targetCurrency, roundNumbers, locale }) {
-      const result = layers.map(function ({ id, characters }) {
+    onSubmit: function ({ nodes, targetCurrency, roundNumbers, locale }) {
+      const result = nodes.map(function ({
+        id,
+        characters
+      }: TextNodeAttributes) {
         return {
           id,
           characters: convertCurrency({
@@ -66,7 +72,7 @@ export function ConvertCurrency(initialState) {
         }
       })
       emit('SUBMIT', {
-        layers: result,
+        nodes: result,
         targetCurrency,
         roundNumbers,
         locale
@@ -78,16 +84,16 @@ export function ConvertCurrency(initialState) {
   })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ layers }) {
-        handleChange({ layers })
+      return on('SELECTION_CHANGED', function ({ nodes }) {
+        handleChange({ nodes })
       })
     },
     [handleChange]
   )
-  const { locale, previewItems, roundNumbers, targetCurrency } = state
+  const { locale, preview, roundNumbers, targetCurrency } = state
   return (
     <Fragment>
-      <Preview items={previewItems} />
+      <Preview {...preview} />
       <Container space="medium">
         <VerticalSpace space="large" />
         <Text muted>Currency</Text>
@@ -134,25 +140,31 @@ export function ConvertCurrency(initialState) {
   )
 }
 
-function computePreview({ layers, targetCurrency, roundNumbers, locale }) {
+function computePreview(options: {
+  nodes: Array<TextNodeAttributes>
+  targetCurrency: string
+  roundNumbers: boolean
+  locale: string
+}): PreviewProps {
+  const { nodes, targetCurrency, roundNumbers, locale } = options
   if (
     typeof isoCodes[targetCurrency] === 'undefined' ||
     isValidLocale(locale) === false
   ) {
-    return INVALID_SETTINGS
+    return { error: INVALID_SETTINGS }
   }
-  if (layers.length === 0) {
-    return NO_TEXT_LAYERS
+  if (nodes.length === 0) {
+    return { error: NO_TEXT_NODES }
   }
-  const result = []
-  const originalStrings = {}
-  layers.forEach(function ({ characters }) {
+  const items: Array<PreviewItem> = []
+  const originalStrings: { [key: string]: any } = {}
+  nodes.forEach(function ({ characters }) {
     characters.replace(moneyRegex, function (original) {
       if (originalStrings[original] === true) {
-        return
+        return '' // FIXME
       }
       originalStrings[original] = true
-      result.push({
+      items.push({
         original,
         result: convertCurrency({
           string: original,
@@ -161,7 +173,8 @@ function computePreview({ layers, targetCurrency, roundNumbers, locale }) {
           locale
         })
       })
+      return '' // FIXME
     })
   })
-  return result
+  return { items }
 }

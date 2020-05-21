@@ -1,10 +1,11 @@
 import { SYMBOL_INDEX } from './data/constants'
-const isoCodes = require('./data/iso-codes.json')
 import { isValidIsoCode } from './is-valid-iso-code'
+
+const isoCodes = require('./data/iso-codes.json')
 
 const dashRegex = /-/
 
-export function mapSymbolToIsoCode(symbol, locale) {
+export function mapSymbolToIsoCode(symbol: string, locale: string): string {
   const isoCodes = collectIsoCodes(symbol)
   if (isoCodes.length === 0) {
     if (isValidIsoCode(symbol)) {
@@ -34,7 +35,7 @@ export function mapSymbolToIsoCode(symbol, locale) {
   return isoCodes[0]
 }
 
-function collectIsoCodes(symbol) {
+function collectIsoCodes(symbol: string): Array<string> {
   const result = []
   for (const isoCode of Object.keys(isoCodes)) {
     if (isoCodes[isoCode][SYMBOL_INDEX] === symbol) {

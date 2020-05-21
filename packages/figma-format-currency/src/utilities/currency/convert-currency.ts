@@ -4,12 +4,19 @@ import { formatCurrencyByLocale } from './format-currency-by-locale'
 import { mapIsoCodeToDecimalPlaces } from './map-iso-code-to-decimal-places'
 import { transformCurrencies } from './transform-currencies'
 
+type ConvertCurrencyOptions = {
+  string: string
+  targetCurrency: string
+  roundNumbers: boolean
+  locale: string
+}
+
 export function convertCurrency({
   string,
   targetCurrency,
   roundNumbers,
   locale
-}) {
+}: ConvertCurrencyOptions): string {
   return transformCurrencies(string, locale, function ({
     value,
     isoCode,
@@ -28,7 +35,7 @@ export function convertCurrency({
   })
 }
 
-function roundValue(value, isoCode) {
+function roundValue(value: number, isoCode: string): number {
   const decimalPlaces = mapIsoCodeToDecimalPlaces(isoCode)
   if (decimalPlaces === 0) {
     if (value > 1000) {

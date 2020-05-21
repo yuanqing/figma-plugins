@@ -9,38 +9,38 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { defaultSettings } from '../utilities/default-settings'
-import { getTextLayers } from '../utilities/get-text-layers'
+import { getTextNodes } from '../utilities/get-text-nodes'
 
-export default async function () {
+export default async function (): Promise<void> {
   const { format, locale, ...settings } = await loadSettingsAsync(
     defaultSettings
   )
   figma.on('selectionchange', function () {
     emit('SELECTION_CHANGED', {
-      layers: getTextLayers()
+      nodes: getTextNodes()
     })
   })
-  once('SUBMIT', async function ({ layers, format, locale }) {
+  once('SUBMIT', async function ({ nodes, format, locale }) {
     await saveSettingsAsync({
       ...settings,
       format,
       locale
     })
-    for (const { id, characters } of layers) {
-      const layer = figma.getNodeById(id) as TextNode
-      await loadFontsAsync([layer])
-      layer.characters = characters
+    for (const { id, characters } of nodes) {
+      const node = figma.getNodeById(id) as TextNode
+      await loadFontsAsync([node])
+      node.characters = characters
     }
     figma.closePlugin(formatSuccessMessage('Formatted currencies in selection'))
   })
   once('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  const layers = getTextLayers()
+  const nodes = getTextNodes()
   showUI(
     { width: 240, height: 333 },
     {
-      layers,
+      nodes,
       format,
       locale
     }

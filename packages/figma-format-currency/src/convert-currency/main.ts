@@ -9,9 +9,9 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { defaultSettings } from '../utilities/default-settings'
-import { getTextLayers } from '../utilities/get-text-layers'
+import { getTextNodes } from '../utilities/get-text-nodes'
 
-export default async function () {
+export default async function (): Promise<void> {
   const {
     targetCurrency,
     roundNumbers,
@@ -20,11 +20,11 @@ export default async function () {
   } = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
     emit('SELECTION_CHANGED', {
-      layers: getTextLayers()
+      nodes: getTextNodes()
     })
   })
   once('SUBMIT', async function ({
-    layers,
+    nodes,
     targetCurrency,
     roundNumbers,
     locale
@@ -35,10 +35,10 @@ export default async function () {
       roundNumbers,
       locale
     })
-    for (const { id, characters } of layers) {
-      const layer = figma.getNodeById(id) as TextNode
-      await loadFontsAsync([layer])
-      layer.characters = characters
+    for (const { id, characters } of nodes) {
+      const node = figma.getNodeById(id) as TextNode
+      await loadFontsAsync([node])
+      node.characters = characters
     }
     figma.closePlugin(
       formatSuccessMessage(
@@ -49,11 +49,11 @@ export default async function () {
   once('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  const layers = getTextLayers()
+  const nodes = getTextNodes()
   showUI(
     { width: 240, height: 357 },
     {
-      layers,
+      nodes,
       targetCurrency,
       roundNumbers,
       locale
