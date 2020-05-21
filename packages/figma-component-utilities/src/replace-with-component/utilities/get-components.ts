@@ -4,9 +4,11 @@ import {
   sortNodesByName
 } from '@create-figma-plugin/utilities'
 
-import { Component } from '../types'
+import { ComponentNodeAttributes } from '../types'
 
-export function getComponents(): Array<Component> {
+export function getComponents(): Array<ComponentNodeAttributes> {
   const components = sortNodesByName(getDocumentComponents())
-  return extractAttributes(components, ['id', 'name']) as Array<Component>
+  return extractAttributes(components, ['id', 'name']) as Array<
+    ComponentNodeAttributes
+  >
 }

@@ -1,10 +1,10 @@
-export type Component = {
+export type ComponentNodeAttributes = {
   id: string
   name: string
   pageName: string
 }
 
-export type Layer = {
+export type NodeAttributes = {
   id: string
   name: string
 }

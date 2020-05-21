@@ -3,7 +3,7 @@ export type Group = {
   layers: Array<SceneNode>
 }
 
-export type Layer = {
+export type NodeAttributes = {
   id: string
   name: string
 }

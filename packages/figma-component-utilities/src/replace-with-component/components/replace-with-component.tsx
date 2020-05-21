@@ -15,7 +15,7 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 
-import { Component } from '../types'
+import { ComponentNodeAttributes } from '../types'
 import styles from './replace-with-component.scss'
 
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-scrollable-menu-id'
@@ -127,7 +127,7 @@ export function ReplaceWithComponent(props: {
           ref={menuElementRef as preact.RefObject<HTMLDivElement>}
         >
           {filteredComponents.map(function (
-            component: Component,
+            component: ComponentNodeAttributes,
             index: number
           ) {
             const { id, name, pageName } = component

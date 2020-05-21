@@ -11,7 +11,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { Layer } from '../types'
+import { NodeAttributes } from '../types'
 import { defaultSettings } from '../utilities/default-settings'
 import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
 import { organizeLayers } from './utilities/organize-layers'
@@ -70,9 +70,9 @@ export default async function (): Promise<void> {
   )
 }
 
-function getLayers(): Array<Layer> {
+function getLayers(): Array<NodeAttributes> {
   return extractAttributes(figma.currentPage.children.slice(), [
     'id',
     'name'
-  ]) as Array<Layer>
+  ]) as Array<NodeAttributes>
 }
