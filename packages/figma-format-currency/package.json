@@ -24,8 +24,8 @@
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rimraf '*.log' build manifest.json",
     "clean-test": "rimraf '*.log' .nyc_output coverage",
-    "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
-    "lint": "eslint '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
+    "fix": "eslint --fix 'scripts/**/*.js' '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
+    "lint": "eslint 'scripts/**/*.js' '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
     "test": "yarn run clean-test && yarn run build-iso-codes && tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse",
     "watch": "yarn run clean-build && yarn run build-iso-codes && build-figma-plugin --watch"
   },
