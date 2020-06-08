@@ -26,7 +26,7 @@
     "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "0.0.74-alpha.0",
+    "@create-figma-plugin/utilities": "0.0.74-alpha.1",
     "array-shuffle": "^1.0.1",
     "mem": "^6.1.0",
     "natural-compare-lite": "^1.4.0"

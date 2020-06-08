@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.9.4",
-    "@create-figma-plugin/build": "0.0.74-alpha.0",
+    "@create-figma-plugin/build": "0.0.74-alpha.1",
     "@figma/plugin-typings": "^1.15.0",
     "@types/natural-compare-lite": "^1.4.0",
     "@types/tap": "^14.10.0",
