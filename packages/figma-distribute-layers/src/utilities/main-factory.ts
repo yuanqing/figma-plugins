@@ -34,6 +34,6 @@ export function mainFactory(
     once('CLOSE_UI', function () {
       figma.closePlugin()
     })
-    showUI({ width: 240, height: 140 }, { ...settings, hasSelection: true })
+    showUI({ height: 140, width: 240 }, { ...settings, hasSelection: true })
   }
 }

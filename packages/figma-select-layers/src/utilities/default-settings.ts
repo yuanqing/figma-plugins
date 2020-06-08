@@ -17,25 +17,23 @@ export const defaultSettings = {
     },
     effectsStyleId: true,
     fill: {
-      fillsStyleId: true,
-      fills: true
+      fills: true,
+      fillsStyleId: true
     },
-    type: true,
-    locked: true,
     isMask: true,
+    locked: true,
     opacity: true,
     rotation: true,
     stroke: {
       dashPattern: true,
       strokeAlign: true,
       strokeCap: true,
-      strokesStyleId: true,
       strokeJoin: true,
       strokeWeight: true,
-      strokes: true
+      strokes: true,
+      strokesStyleId: true
     },
     text: {
-      textCase: true,
       fontName: true,
       fontSize: true,
       letterSpacing: true,
@@ -44,9 +42,11 @@ export const defaultSettings = {
       paragraphSpacing: true,
       textAlignHorizontal: true,
       textAlignVertical: true,
+      textCase: true,
       textDecoration: true,
       textStyleId: true
     },
+    type: true,
     visible: true
   }
 }

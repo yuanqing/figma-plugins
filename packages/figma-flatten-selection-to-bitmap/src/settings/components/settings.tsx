@@ -12,13 +12,13 @@ import { h } from 'preact'
 
 export function Settings(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit } = useForm(props, {
+    onClose: function () {
+      emit('CLOSE_UI')
+    },
     onSubmit: function ({ resolution }) {
       emit('SUBMIT', {
         resolution
       })
-    },
-    onClose: function () {
-      emit('CLOSE_UI')
     }
   })
   const { resolution } = state
@@ -29,7 +29,7 @@ export function Settings(props: { [key: string]: any }): h.JSX.Element {
       <VerticalSpace space="small" />
       <SegmentedControl
         name="resolution"
-        value={resolution}
+        onChange={handleChange}
         options={[
           { text: '2x', value: 2 },
           { text: '3x', value: 3 },
@@ -37,7 +37,7 @@ export function Settings(props: { [key: string]: any }): h.JSX.Element {
           { text: '8x', value: 8 },
           { text: '10x', value: 10 }
         ]}
-        onChange={handleChange}
+        value={resolution}
       />
       <VerticalSpace space="large" />
       <Button fullWidth onClick={handleSubmit}>

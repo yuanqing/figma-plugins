@@ -21,6 +21,17 @@ import { MIXED } from '../utilities/constants'
 
 export function SetLayerSize(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(props, {
+    onClose: function () {
+      emit('CLOSE_UI')
+    },
+    onSubmit: function ({ nodes, width, height, resizeWithConstraints }) {
+      emit('SUBMIT', {
+        height: evaluateNumericExpression(height),
+        nodes,
+        resizeWithConstraints,
+        width: evaluateNumericExpression(width)
+      })
+    },
     validate: function ({ nodes, width, height }) {
       if (nodes.length === 0) {
         return false
@@ -31,23 +42,12 @@ export function SetLayerSize(props: { [key: string]: any }): h.JSX.Element {
         (evaluatedWidth !== null && evaluatedWidth !== 0) ||
         (evaluatedHeight !== null && evaluatedHeight !== 0)
       )
-    },
-    onSubmit: function ({ nodes, width, height, resizeWithConstraints }) {
-      emit('SUBMIT', {
-        nodes,
-        width: evaluateNumericExpression(width),
-        height: evaluateNumericExpression(height),
-        resizeWithConstraints
-      })
-    },
-    onClose: function () {
-      emit('CLOSE_UI')
     }
   })
   useEffect(
     function () {
       return on('SELECTION_CHANGED', function ({ nodes, width, height }) {
-        handleChange({ nodes, width, height })
+        handleChange({ height, nodes, width })
       })
     },
     [handleChange]
@@ -59,33 +59,33 @@ export function SetLayerSize(props: { [key: string]: any }): h.JSX.Element {
       <VerticalSpace space="large" />
       <Columns space="extraSmall">
         <TextboxNumeric
-          name="width"
-          icon="W"
-          value={width === MIXED ? null : width}
-          minimum={0}
-          onChange={handleChange}
           disabled={hasSelection === false}
+          icon="W"
+          minimum={0}
+          name="width"
+          onChange={handleChange}
+          value={width === MIXED ? null : width}
         />
         <TextboxNumeric
-          name="height"
-          icon="H"
-          value={height === MIXED ? null : height}
-          minimum={0}
-          onChange={handleChange}
           disabled={hasSelection === false}
+          icon="H"
+          minimum={0}
+          name="height"
+          onChange={handleChange}
+          value={height === MIXED ? null : height}
         />
       </Columns>
       <VerticalSpace space="medium" />
       <Checkbox
-        name="resizeWithConstraints"
-        value={resizeWithConstraints}
-        onChange={handleChange}
         disabled={hasSelection === false}
+        name="resizeWithConstraints"
+        onChange={handleChange}
+        value={resizeWithConstraints}
       >
         <Text>Resize with constraints</Text>
       </Checkbox>
       <VerticalSpace space="medium" />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
         Set Layer Size
       </Button>
       <VerticalSpace space="small" />

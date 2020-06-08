@@ -4,9 +4,8 @@ import { mainFactory } from '../utilities/main-factory'
 import { ungroupSingleNodeGroup } from '../utilities/ungroup-single-node-group'
 
 export default mainFactory({
-  processNode: ungroupSingleNodeGroup,
-  stopTraversal: function (node: SceneNode) {
-    return node.type === 'INSTANCE'
+  createFailureMessage: function (scope: string) {
+    return `No single-layer groups ${scope}`
   },
   createLoadingMessage: function (scope: string) {
     return `Ungrouping single-layer groups ${scope}…`
@@ -17,7 +16,8 @@ export default mainFactory({
       'group'
     )} ${scope}`
   },
-  createFailureMessage: function (scope: string) {
-    return `No single-layer groups ${scope}`
+  processNode: ungroupSingleNodeGroup,
+  stopTraversal: function (node: SceneNode) {
+    return node.type === 'INSTANCE'
   }
 })

@@ -15,11 +15,11 @@ export function SmartRenameNodes(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit } = useForm(
     { ...props, isLoading: false },
     {
-      onSubmit: function ({ smartRenameLayersWhitelist }) {
-        emit('SUBMIT', { smartRenameLayersWhitelist })
-      },
       onClose: function () {
         emit('CLOSE_UI')
+      },
+      onSubmit: function ({ smartRenameLayersWhitelist }) {
+        emit('SUBMIT', { smartRenameLayersWhitelist })
       }
     }
   )
@@ -38,23 +38,23 @@ export function SmartRenameNodes(props: { [key: string]: any }): h.JSX.Element {
       <Text muted>Ignore layers named</Text>
       <VerticalSpace space="small" />
       <Textbox
-        name="smartRenameLayersWhitelist"
-        value={smartRenameLayersWhitelist}
-        onChange={handleChange}
         disabled={isLoading === true}
+        name="smartRenameLayersWhitelist"
+        onChange={handleChange}
+        value={smartRenameLayersWhitelist}
       />
       <VerticalSpace space="extraLarge" />
       <Button
-        fullWidth
-        onClick={handleSubmit}
         disabled={isLoading === true}
-        loading={isLoading === true}
         focused
+        fullWidth
+        loading={isLoading === true}
+        onClick={handleSubmit}
       >
         Smart Rename Layers
       </Button>
       <VerticalSpace space="small" />
-      <Text muted align="center">
+      <Text align="center" muted>
         {hasSelection === true
           ? 'Renaming layers in selection'
           : 'Renaming all layers on page'}

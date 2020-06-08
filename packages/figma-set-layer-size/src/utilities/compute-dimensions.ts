@@ -8,16 +8,16 @@ type Dimensions = {
 
 export function computeDimensions(nodes: Array<Layer>): Dimensions {
   if (nodes.length === 0) {
-    return { width: '', height: '' }
+    return { height: '', width: '' }
   }
   if (nodes.length === 1) {
     const { width, height } = nodes[0]
-    return { width, height }
+    return { height, width }
   }
   const [firstNode, ...rest] = nodes
   const result: Dimensions = {
-    width: firstNode.width,
-    height: firstNode.height
+    height: firstNode.height,
+    width: firstNode.width
   }
   for (const { width, height } of rest) {
     if (result.width !== MIXED && result.width !== width) {

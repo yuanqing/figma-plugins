@@ -24,7 +24,7 @@ export function Preview(props: {
       <div className={style.preview}>
         {groups.map(function ({ groupName, layers }, index) {
           return (
-            <div className={style.group} key={index}>
+            <div key={index} className={style.group}>
               {layers.map(function ({ name }, index) {
                 if (groupName === null || layers.length === 1) {
                   return <div key={index}>{name}</div>

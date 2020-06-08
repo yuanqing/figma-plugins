@@ -11,11 +11,11 @@ export async function createImageFromGroupAsync(
   resolution: number
 ): Promise<RectangleNode> {
   const exportSettings: ExportSettingsImage = {
-    format: 'PNG',
     constraint: {
       type: 'SCALE',
       value: resolution
-    }
+    },
+    format: 'PNG'
   }
   const imageBytes = await group.exportAsync(exportSettings)
   const dimensions = await computeImageDimensions(imageBytes)

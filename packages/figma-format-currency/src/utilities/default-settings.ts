@@ -1,8 +1,8 @@
 import { RETAIN } from '../format-currency/formats'
 
 export const defaultSettings = {
-  locale: 'en',
   format: RETAIN,
+  locale: 'en',
   roundNumbers: true,
   targetCurrency: 'USD'
 }

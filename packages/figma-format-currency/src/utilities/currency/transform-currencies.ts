@@ -91,10 +91,10 @@ export function transformCurrencies(
     const parsedValue = parseValue(value, parsedIsoCode)
     const minus = m1 !== '' || m2 !== '' ? MINUS : ''
     return `${before}${minus}${transform({
-      value: parseFloat(parsedValue),
+      isExplicitFormat,
       isoCode: parsedIsoCode,
       locale,
-      isExplicitFormat
+      value: parseFloat(parsedValue)
     })}${after}`
   })
 }

@@ -7,8 +7,8 @@ export function formatCurrencyByLocale(
   locale: string
 ): string {
   const result = new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: isoCode
+    currency: isoCode,
+    style: 'currency'
   }).format(value)
   return result
     .replace(spaceRegex, ' ') // normalise spaces

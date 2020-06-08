@@ -19,6 +19,15 @@ import { useEffect } from 'preact/hooks'
 
 export function MoveNodes(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(props, {
+    onClose: function () {
+      emit('CLOSE_UI')
+    },
+    onSubmit: function ({ horizontalOffset, verticalOffset }) {
+      emit('SUBMIT', {
+        horizontalOffset: evaluateNumericExpression(horizontalOffset),
+        verticalOffset: evaluateNumericExpression(verticalOffset)
+      })
+    },
     validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
       const evaluatedHorizontalOffset = evaluateNumericExpression(
         horizontalOffset
@@ -30,15 +39,6 @@ export function MoveNodes(props: { [key: string]: any }): h.JSX.Element {
           evaluatedHorizontalOffset !== 0) ||
           (evaluatedVerticalOffset !== null && evaluatedVerticalOffset !== 0))
       )
-    },
-    onSubmit: function ({ horizontalOffset, verticalOffset }) {
-      emit('SUBMIT', {
-        horizontalOffset: evaluateNumericExpression(horizontalOffset),
-        verticalOffset: evaluateNumericExpression(verticalOffset)
-      })
-    },
-    onClose: function () {
-      emit('CLOSE_UI')
     }
   })
   useEffect(
@@ -55,20 +55,20 @@ export function MoveNodes(props: { [key: string]: any }): h.JSX.Element {
       <VerticalSpace space="large" />
       <Columns space="extraSmall">
         <TextboxNumeric
-          name="horizontalOffset"
           icon={moveRightIcon}
-          value={horizontalOffset === null ? '' : horizontalOffset}
+          name="horizontalOffset"
           onChange={handleChange}
+          value={horizontalOffset === null ? '' : horizontalOffset}
         />
         <TextboxNumeric
-          name="verticalOffset"
           icon={moveDownIcon}
-          value={verticalOffset === null ? '' : verticalOffset}
+          name="verticalOffset"
           onChange={handleChange}
+          value={verticalOffset === null ? '' : verticalOffset}
         />
       </Columns>
       <VerticalSpace space="large" />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
         Move Layers
       </Button>
       <VerticalSpace space="small" />

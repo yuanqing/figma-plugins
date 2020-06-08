@@ -41,14 +41,34 @@ const locales = localesJson.map(function (locale: string) {
 
 export function FormatCurrency(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(props, {
+    onClose: function () {
+      emit('CLOSE_UI')
+    },
+    onSubmit: function ({ nodes, format, locale }) {
+      const formatter = formatters[format]
+      const result = nodes.map(function ({
+        id,
+        characters
+      }: TextNodeAttributes) {
+        return {
+          characters: formatter(characters, locale),
+          id
+        }
+      })
+      emit('SUBMIT', {
+        format,
+        locale,
+        nodes: result
+      })
+    },
     transform: function (state) {
       const { nodes, format, locale } = state
       return {
         ...state,
         preview: computePreview({
-          nodes,
           format,
-          locale
+          locale,
+          nodes
         })
       }
     },
@@ -58,26 +78,6 @@ export function FormatCurrency(props: { [key: string]: any }): h.JSX.Element {
         preview !== NO_TEXT_NODES &&
         preview.items.length > 0
       )
-    },
-    onSubmit: function ({ nodes, format, locale }) {
-      const formatter = formatters[format]
-      const result = nodes.map(function ({
-        id,
-        characters
-      }: TextNodeAttributes) {
-        return {
-          id,
-          characters: formatter(characters, locale)
-        }
-      })
-      emit('SUBMIT', {
-        nodes: result,
-        format,
-        locale
-      })
-    },
-    onClose: function () {
-      emit('CLOSE_UI')
     }
   })
   useEffect(
@@ -98,25 +98,25 @@ export function FormatCurrency(props: { [key: string]: any }): h.JSX.Element {
         <VerticalSpace space="small" />
         <SegmentedControl
           name="format"
-          value={format}
-          options={[{ value: EXPLICIT }, { value: SHORT }, { value: RETAIN }]}
           onChange={handleChange}
+          options={[{ value: EXPLICIT }, { value: SHORT }, { value: RETAIN }]}
+          value={format}
         />
         <VerticalSpace space="large" />
         <Text muted>Locale</Text>
         <VerticalSpace space="small" />
         <TextboxAutocomplete
           name="locale"
-          value={locale}
-          options={locales}
           onChange={handleChange}
+          options={locales}
           top
+          value={locale}
         />
         <VerticalSpace space="extraLarge" />
         <Button
-          fullWidth
           disabled={isValid() === false}
           focused
+          fullWidth
           onClick={handleSubmit}
         >
           Format Currency

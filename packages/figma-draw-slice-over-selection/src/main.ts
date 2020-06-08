@@ -34,8 +34,8 @@ export default async function (): Promise<void> {
   })
   showUI(
     {
-      width: 240,
-      height: 140
+      height: 140,
+      width: 240
     },
     { ...settings, hasSelection: true }
   )

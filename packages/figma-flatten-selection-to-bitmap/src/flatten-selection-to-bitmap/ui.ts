@@ -13,8 +13,8 @@ export default async function (): Promise<void> {
       image.src = url
     })
     const dimensions = {
-      width: image.width,
-      height: image.height
+      height: image.height,
+      width: image.width
     }
     emit('COMPUTE_IMAGE_WIDTH_RESULT', dimensions)
   })

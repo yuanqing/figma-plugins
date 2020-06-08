@@ -51,11 +51,11 @@ export default async function () {
   })
   const { layerName, exactMatch } = settings.selectLayersByName
   showUI(
-    { width: 240, height: 168 },
+    { height: 168, width: 240 },
     {
-      layerName,
       exactMatch,
-      hasSelection: figma.currentPage.selection.length > 0
+      hasSelection: figma.currentPage.selection.length > 0,
+      layerName
     }
   )
 }

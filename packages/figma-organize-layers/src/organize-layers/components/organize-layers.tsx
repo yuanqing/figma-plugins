@@ -25,8 +25,8 @@ import { Preview } from './preview/preview'
 
 export function OrganizeLayers(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(props, {
-    validate: function ({ layers }) {
-      return layers.length > 0
+    onClose: function () {
+      emit('CLOSE_UI')
     },
     onSubmit: function ({
       combineSingleLayerGroups,
@@ -41,8 +41,8 @@ export function OrganizeLayers(props: { [key: string]: any }): h.JSX.Element {
         verticalSpace: evaluateNumericExpression(verticalSpace) || 0
       })
     },
-    onClose: function () {
-      emit('CLOSE_UI')
+    validate: function ({ layers }) {
+      return layers.length > 0
     }
   })
   useEffect(
@@ -77,27 +77,27 @@ export function OrganizeLayers(props: { [key: string]: any }): h.JSX.Element {
         <VerticalSpace space="small" />
         <SegmentedControl
           name="groupDefinition"
-          value={Math.min(groupDefinition, maximumGroupDefinition)}
-          options={groupDefinitions.slice(0, maximumGroupDefinition)}
           onChange={handleChange}
+          options={groupDefinitions.slice(0, maximumGroupDefinition)}
+          value={Math.min(groupDefinition, maximumGroupDefinition)}
         />
         <VerticalSpace space="large" />
         <Text muted>Space between layers</Text>
         <VerticalSpace space="small" />
         <Columns space="extraSmall">
           <TextboxNumeric
-            name="horizontalSpace"
             icon={spaceHorizontalIcon}
-            value={horizontalSpace}
             minimum={0}
+            name="horizontalSpace"
             onChange={handleChange}
+            value={horizontalSpace}
           />
           <TextboxNumeric
-            name="verticalSpace"
             icon={spaceVerticalIcon}
-            value={verticalSpace}
             minimum={0}
+            name="verticalSpace"
             onChange={handleChange}
+            value={verticalSpace}
           />
         </Columns>
         <VerticalSpace space="large" />
@@ -110,9 +110,9 @@ export function OrganizeLayers(props: { [key: string]: any }): h.JSX.Element {
         </Checkbox>
         <VerticalSpace space="large" />
         <Button
-          fullWidth
           disabled={isValid() === false}
           focused
+          fullWidth
           onClick={handleSubmit}
         >
           Organize Layers

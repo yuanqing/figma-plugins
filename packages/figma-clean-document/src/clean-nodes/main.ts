@@ -77,7 +77,7 @@ export default async function (): Promise<void> {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 416 },
+    { height: 416, width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )
 }

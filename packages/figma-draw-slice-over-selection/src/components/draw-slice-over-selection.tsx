@@ -19,18 +19,18 @@ export function DrawSliceOverSelection(props: {
   [key: string]: any
 }): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(props, {
-    validate: function ({ hasSelection, padding }) {
-      return (
-        hasSelection === true && evaluateNumericExpression(padding) !== null
-      )
+    onClose: function () {
+      emit('CLOSE_UI')
     },
     onSubmit: function ({ padding }) {
       emit('SUBMIT', {
         padding: evaluateNumericExpression(padding)
       })
     },
-    onClose: function () {
-      emit('CLOSE_UI')
+    validate: function ({ hasSelection, padding }) {
+      return (
+        hasSelection === true && evaluateNumericExpression(padding) !== null
+      )
     }
   })
   useEffect(
@@ -48,13 +48,13 @@ export function DrawSliceOverSelection(props: {
       <Text muted>Padding</Text>
       <VerticalSpace space="small" />
       <TextboxNumeric
-        name="padding"
-        value={padding}
         minimum={0}
+        name="padding"
         onChange={handleChange}
+        value={padding}
       />
       <VerticalSpace space="extraLarge" />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
         Draw Slice Over Selection
       </Button>
       <VerticalSpace space="small" />

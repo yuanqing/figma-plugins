@@ -31,9 +31,9 @@ export default async function (): Promise<void> {
   }) {
     await saveSettingsAsync({
       ...settings,
-      targetCurrency,
+      locale,
       roundNumbers,
-      locale
+      targetCurrency
     })
     for (const { id, characters } of nodes) {
       const node = figma.getNodeById(id) as TextNode
@@ -51,12 +51,12 @@ export default async function (): Promise<void> {
   })
   const nodes = getTextNodes()
   showUI(
-    { width: 240, height: 357 },
+    { height: 357, width: 240 },
     {
+      locale,
       nodes,
-      targetCurrency,
       roundNumbers,
-      locale
+      targetCurrency
     }
   )
 }

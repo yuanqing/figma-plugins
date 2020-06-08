@@ -26,15 +26,15 @@ export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
       total: 0
     },
     {
+      onClose: function () {
+        emit('CLOSE_UI')
+      },
       transform: function (state) {
         const { total } = state
         return {
           ...state,
           isLoading: total > 0
         }
-      },
-      onClose: function () {
-        emit('CLOSE_UI')
       }
     }
   )
@@ -53,11 +53,11 @@ export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
         const images = await splitImageElementAsync(image, widths, heights)
         const name = trimExtension(file.name)
         emit('INSERT_BIG_IMAGE', {
-          name,
           images,
           insertAs2x,
-          width: image.width,
-          isDone: currentIndex === total
+          isDone: currentIndex === total,
+          name,
+          width: image.width
         })
       }
     },
@@ -91,11 +91,11 @@ export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
         <VerticalSpace space="small" />
         <FileUploadButton
           acceptedFileTypes={acceptedFileTypes}
-          multiple
-          onSelectedFiles={handleSelectedFiles as any} // FIXME
-          loading={isLoading === true}
           disabled={isLoading === true}
-          focused
+          focused // FIXME
+          loading={isLoading === true}
+          multiple
+          onSelectedFiles={handleSelectedFiles as any}
         >
           Choose Image Files
         </FileUploadButton>
@@ -106,10 +106,10 @@ export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
       </FileUploadDropzone>
       <VerticalSpace space="medium" />
       <Checkbox
-        name="insertAs2x"
-        value={insertAs2x === true}
-        onChange={handleChange}
         disabled={isLoading === true}
+        name="insertAs2x"
+        onChange={handleChange}
+        value={insertAs2x === true}
       >
         <Text>Insert as a @2x image</Text>
       </Checkbox>

@@ -23,6 +23,14 @@ export function SelectSimilarLayers(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(
     { ...initialState, searchTerm: '' },
     {
+      onClose: function () {
+        emit('CLOSE_UI')
+      },
+      onSubmit: function ({ attributes }) {
+        emit('SUBMIT', {
+          attributes
+        })
+      },
       transform: function (state) {
         const { attributes, referenceLayerType, searchTerm } = state
         const keysByReferenceLayerType = extractKeysByReferenceLayerType(
@@ -47,14 +55,6 @@ export function SelectSimilarLayers(initialState) {
           referenceLayerType !== null &&
           everyAttribute(attributes, keysByReferenceLayerType, false) === false
         )
-      },
-      onSubmit: function ({ attributes }) {
-        emit('SUBMIT', {
-          attributes
-        })
-      },
-      onClose: function () {
-        emit('CLOSE_UI')
       }
     }
   )
@@ -66,7 +66,7 @@ export function SelectSimilarLayers(initialState) {
     searchTerm
   } = state
   const handleAttributeClick = useCallback(
-    function (object, newValue, targetKey) {
+    function (_: any, newValue: string, targetKey: string) {
       const { attributes } = state
       handleChange({
         ...state,
@@ -109,17 +109,17 @@ export function SelectSimilarLayers(initialState) {
         <div className={styles.search}>
           <SearchTextbox
             name="searchTerm"
+            onChange={handleChange}
             placeholder="Search"
             value={searchTerm}
-            onChange={handleChange}
           />
         </div>
         {searchTerm === '' ? (
           <label className={styles.checkToggle}>
             <input
-              type="checkbox"
               checked={areAllAttributesChecked === true}
               onChange={handleCheckAllToggleChange}
+              type="checkbox"
             />{' '}
             {areAllAttributesChecked === true ? 'Uncheck all' : 'Check all'}
           </label>
@@ -135,7 +135,7 @@ export function SelectSimilarLayers(initialState) {
       <Divider />
       <Container space="medium">
         <VerticalSpace space="small" />
-        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+        <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
           Select Similar Layers
         </Button>
         <VerticalSpace space="small" />

@@ -55,5 +55,5 @@ export default async function (): Promise<void> {
   once('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 224 }, settings)
+  showUI({ height: 224, width: 240 }, settings)
 }

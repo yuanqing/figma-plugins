@@ -31,10 +31,10 @@ function parse(exchangeRates) {
 
 function parseSymbol(isoCode, locale) {
   const string = new Intl.NumberFormat(`en-${locale}`, {
-    style: 'currency',
     currency: isoCode,
     currencyDisplay: 'symbol',
-    maximumSignificantDigits: 1
+    maximumSignificantDigits: 1,
+    style: 'currency'
   }).format(0)
   const symbolRegex = /([^0\s]*)\s?0\s?([^0\s]*)/
   const result = string.match(symbolRegex)
@@ -53,9 +53,9 @@ function parseSymbol(isoCode, locale) {
 
 function parseSignificantFigures(isoCode, locale) {
   const string = new Intl.NumberFormat(`en-${locale}`, {
-    style: 'currency',
     currency: isoCode,
-    currencyDisplay: 'code'
+    currencyDisplay: 'code',
+    style: 'currency'
   }).format(123456789.123456789)
   const isoCodeRegex = /\s?[A-Z]{3}\s?/
   const value = string.replace(isoCodeRegex, '')

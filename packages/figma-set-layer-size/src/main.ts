@@ -43,7 +43,7 @@ export default async function (): Promise<void> {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 140 },
+    { height: 140, width: 240 },
     { ...settings, nodes, ...computeDimensions(nodes) }
   )
 }

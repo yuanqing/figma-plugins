@@ -38,11 +38,11 @@ export default async function (): Promise<void> {
   })
   const nodes = getTextNodes()
   showUI(
-    { width: 240, height: 333 },
+    { height: 333, width: 240 },
     {
-      nodes,
       format,
-      locale
+      locale,
+      nodes
     }
   )
 }

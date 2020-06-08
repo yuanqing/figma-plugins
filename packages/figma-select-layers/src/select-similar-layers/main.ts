@@ -56,7 +56,7 @@ export default async function () {
   })
   const { selectSimilarLayers } = settings
   showUI(
-    { width: 240, height: 436 },
+    { height: 436, width: 240 },
     {
       attributes: selectSimilarLayers,
       referenceLayerType: selectedLayers[0].type

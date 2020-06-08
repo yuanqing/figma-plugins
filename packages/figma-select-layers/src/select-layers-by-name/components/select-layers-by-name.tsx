@@ -14,8 +14,8 @@ import { useEffect } from 'preact/hooks'
 
 export function SelectLayersByName(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ layerName }) {
-      return layerName !== ''
+    onClose: function () {
+      emit('CLOSE_UI')
     },
     onSubmit: function ({ exactMatch, layerName }) {
       emit('SUBMIT', {
@@ -23,8 +23,8 @@ export function SelectLayersByName(initialState) {
         layerName
       })
     },
-    onClose: function () {
-      emit('CLOSE_UI')
+    validate: function ({ layerName }) {
+      return layerName !== ''
     }
   })
   useEffect(
@@ -41,24 +41,24 @@ export function SelectLayersByName(initialState) {
       <VerticalSpace space="large" />
       <Textbox
         name="layerName"
+        onChange={handleChange}
         placeholder="Layer name"
         value={layerName}
-        onChange={handleChange}
       />
       <VerticalSpace space="small" />
       <Checkbox
         name="exactMatch"
-        value={exactMatch === true}
         onChange={handleChange}
+        value={exactMatch === true}
       >
         <Text>Exact match</Text>
       </Checkbox>
       <VerticalSpace space="medium" />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
         Select Layers by Name
       </Button>
       <VerticalSpace space="small" />
-      <Text muted align="center">
+      <Text align="center" muted>
         {hasSelection === true
           ? 'Matching layers within selection'
           : 'Matching layers on page'}

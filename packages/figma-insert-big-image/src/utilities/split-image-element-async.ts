@@ -54,10 +54,10 @@ async function encodeImageAsync(
       reader.onload = function (): void {
         resolve({
           bytes: new Uint8Array(reader.result as ArrayBuffer),
-          x,
-          y,
+          height,
           width,
-          height
+          x,
+          y
         })
       }
       reader.onerror = reject

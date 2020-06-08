@@ -39,6 +39,6 @@ function createMask(
   const height = maximumBounds[1].y - maximumBounds[0].y
   mask.resize(width, height)
   mask.isMask = true
-  mask.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }]
+  mask.fills = [{ color: { b: 1, g: 1, r: 1 }, type: 'SOLID' }]
   return mask
 }

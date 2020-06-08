@@ -12,16 +12,16 @@ import { h } from 'preact'
 
 export function SetApiKey(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
-    validate: function ({ apiKey }) {
-      return apiKey !== ''
+    onClose: function () {
+      emit('CLOSE_UI')
     },
     onSubmit: function ({ apiKey }) {
       emit('SUBMIT', {
         apiKey
       })
     },
-    onClose: function () {
-      emit('CLOSE_UI')
+    validate: function ({ apiKey }) {
+      return apiKey !== ''
     }
   })
   const { apiKey } = state
@@ -30,19 +30,19 @@ export function SetApiKey(initialState) {
       <VerticalSpace space="large" />
       <Text muted>API Key</Text>
       <VerticalSpace space="small" />
-      <Textbox name="apiKey" value={apiKey} onChange={handleChange} />
+      <Textbox name="apiKey" onChange={handleChange} value={apiKey} />
       <VerticalSpace space="small" />
       <Text>
         <a
           href="https://translate.yandex.com/developers/keys"
-          target="_blank"
           rel="noopener noreferrer"
+          target="_blank"
         >
           Get a Yandex Translate API key
         </a>
       </Text>
       <VerticalSpace space="extraLarge" />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
         Set API Key
       </Button>
       <VerticalSpace space="small" />

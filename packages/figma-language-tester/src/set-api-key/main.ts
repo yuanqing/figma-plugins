@@ -17,5 +17,5 @@ export default async function () {
   once('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI({ width: 240, height: 160 }, settings)
+  showUI({ height: 160, width: 240 }, settings)
 }

@@ -26,6 +26,15 @@ export default async function (): Promise<void> {
         ? null
         : new RegExp(smartRenameLayersWhitelist)
     mainFactory({
+      createFailureMessage: function (scope: string) {
+        return `No layers renamed ${scope}`
+      },
+      createLoadingMessage: function (scope: string) {
+        return `Renaming layers ${scope}…`
+      },
+      createSuccessMessage: function (scope: string, count: number) {
+        return `Renamed ${count} ${pluralize(count, 'layer')} ${scope}`
+      },
       processNode: function (node: SceneNode) {
         return smartRenameNode(node, smartRenameNodesWhitelistRegex)
       },
@@ -34,15 +43,6 @@ export default async function (): Promise<void> {
           smartRenameNodesWhitelistRegex !== null &&
           smartRenameNodesWhitelistRegex.test(node.name) === true
         )
-      },
-      createLoadingMessage: function (scope: string) {
-        return `Renaming layers ${scope}…`
-      },
-      createSuccessMessage: function (scope: string, count: number) {
-        return `Renamed ${count} ${pluralize(count, 'layer')} ${scope}`
-      },
-      createFailureMessage: function (scope: string) {
-        return `No layers renamed ${scope}`
       }
     })()
   })
@@ -50,7 +50,7 @@ export default async function (): Promise<void> {
     figma.closePlugin()
   })
   showUI(
-    { width: 240, height: 172 },
+    { height: 172, width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )
 }

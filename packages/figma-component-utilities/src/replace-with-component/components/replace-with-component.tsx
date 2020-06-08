@@ -31,6 +31,15 @@ export function ReplaceWithComponent(props: {
       searchTerm: ''
     },
     {
+      onClose: function () {
+        emit('CLOSE_UI')
+      },
+      onSubmit: function ({ componentId, shouldResizeToFitNode }) {
+        emit('SUBMIT', {
+          componentId,
+          shouldResizeToFitNode
+        })
+      },
       transform: function (state) {
         const { componentId, components, searchTerm } = state
         const filteredComponents = filterNodesByName(components, searchTerm)
@@ -54,15 +63,6 @@ export function ReplaceWithComponent(props: {
             return id === componentId
           }) !== -1
         )
-      },
-      onSubmit: function ({ componentId, shouldResizeToFitNode }) {
-        emit('SUBMIT', {
-          componentId,
-          shouldResizeToFitNode
-        })
-      },
-      onClose: function () {
-        emit('CLOSE_UI')
       }
     }
   )
@@ -82,12 +82,12 @@ export function ReplaceWithComponent(props: {
     [handleChange]
   )
   const { handleKeyDown, menuElementRef } = useScrollableMenu({
+    changeOnMouseOver: false,
     itemElementAttributeName: ITEM_ELEMENT_ATTRIBUTE_NAME,
-    selectedItemId: componentId,
     onChange: function (componentId) {
       handleChange({ componentId })
     },
-    changeOnMouseOver: false
+    selectedItemId: componentId
   })
   useEffect(
     function () {
@@ -117,14 +117,14 @@ export function ReplaceWithComponent(props: {
       <Divider />
       {filteredComponents.length === 0 ? (
         <div className={styles.emptyState}>
-          <Text muted align="center">
+          <Text align="center" muted>
             No results for “{searchTerm}”
           </Text>
         </div>
       ) : (
         <div
-          className={styles.nodes}
           ref={menuElementRef as preact.RefObject<HTMLDivElement>}
+          className={styles.nodes}
         >
           {filteredComponents.map(function (
             component: ComponentNodeAttributes,
@@ -134,10 +134,10 @@ export function ReplaceWithComponent(props: {
             return (
               <Layer
                 key={index}
-                type="component"
+                onClick={handleLayerClick}
                 pageName={pageName}
                 selected={id === componentId}
-                onClick={handleLayerClick}
+                type="component"
                 {...{ [ITEM_ELEMENT_ATTRIBUTE_NAME]: id }}
               >
                 {name}
@@ -151,13 +151,13 @@ export function ReplaceWithComponent(props: {
         <VerticalSpace space="medium" />
         <Checkbox
           name="shouldResizeToFitNode"
-          value={shouldResizeToFitNode === true}
           onChange={handleChange}
+          value={shouldResizeToFitNode === true}
         >
           <Text>Resize component to fit layer</Text>
         </Checkbox>
         <VerticalSpace space="medium" />
-        <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+        <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
           Replace With Component
         </Button>
         <VerticalSpace space="small" />

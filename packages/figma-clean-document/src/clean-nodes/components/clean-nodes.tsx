@@ -17,20 +17,8 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(
     { ...props, isLoading: false },
     {
-      validate: function ({
-        deleteHiddenLayers,
-        pixelPerfect,
-        smartRenameLayers,
-        smartSortLayers,
-        ungroupSingleLayerGroups
-      }) {
-        return (
-          deleteHiddenLayers === true ||
-          pixelPerfect === true ||
-          smartRenameLayers === true ||
-          smartSortLayers === true ||
-          ungroupSingleLayerGroups === true
-        )
+      onClose: function () {
+        emit('CLOSE_UI')
       },
       onSubmit: function ({
         deleteHiddenLayers,
@@ -50,8 +38,20 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
           ungroupSingleLayerGroups
         })
       },
-      onClose: function () {
-        emit('CLOSE_UI')
+      validate: function ({
+        deleteHiddenLayers,
+        pixelPerfect,
+        smartRenameLayers,
+        smartSortLayers,
+        ungroupSingleLayerGroups
+      }) {
+        return (
+          deleteHiddenLayers === true ||
+          pixelPerfect === true ||
+          smartRenameLayers === true ||
+          smartSortLayers === true ||
+          ungroupSingleLayerGroups === true
+        )
       }
     }
   )
@@ -79,34 +79,34 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
       <VerticalSpace space="extraLarge" />
       <Stack space="large">
         <Checkbox
-          name="deleteHiddenLayers"
-          value={deleteHiddenLayers}
-          onChange={handleChange}
           disabled={isLoading === true}
+          name="deleteHiddenLayers"
+          onChange={handleChange}
+          value={deleteHiddenLayers}
         >
           <Text>Delete hidden layers</Text>
         </Checkbox>
         <Checkbox
-          name="ungroupSingleLayerGroups"
-          value={ungroupSingleLayerGroups}
-          onChange={handleChange}
           disabled={isLoading === true}
+          name="ungroupSingleLayerGroups"
+          onChange={handleChange}
+          value={ungroupSingleLayerGroups}
         >
           <Text>Ungroup single-layer groups</Text>
         </Checkbox>
         <Checkbox
-          name="pixelPerfect"
-          value={pixelPerfect}
-          onChange={handleChange}
           disabled={isLoading === true}
+          name="pixelPerfect"
+          onChange={handleChange}
+          value={pixelPerfect}
         >
           <Text>Make pixel-perfect</Text>
         </Checkbox>
         <Checkbox
-          name="smartRenameLayers"
-          value={smartRenameLayers}
-          onChange={handleChange}
           disabled={isLoading === true}
+          name="smartRenameLayers"
+          onChange={handleChange}
+          value={smartRenameLayers}
         >
           <Text>Smart rename layers</Text>
           <VerticalSpace space="medium" />
@@ -115,15 +115,15 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
           <Textbox
             disabled={smartRenameLayers === false || isLoading === true}
             name="smartRenameLayersWhitelist"
-            value={smartRenameLayersWhitelist}
             onChange={handleChange}
+            value={smartRenameLayersWhitelist}
           />
         </Checkbox>
         <Checkbox
+          disabled={isLoading === true}
           name="smartSortLayers"
           onChange={handleChange}
           value={smartSortLayers}
-          disabled={isLoading === true}
         >
           <Text>Smart sort layers</Text>
           <VerticalSpace space="medium" />
@@ -133,26 +133,26 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
           </Text>
         </Checkbox>
         <Checkbox
-          name="skipLockedLayers"
-          value={skipLockedLayers}
-          onChange={handleChange}
           disabled={isLoading === true}
+          name="skipLockedLayers"
+          onChange={handleChange}
+          value={skipLockedLayers}
         >
           <Text>Skip locked layers</Text>
         </Checkbox>
       </Stack>
       <VerticalSpace space="extraLarge" />
       <Button
-        fullWidth
         disabled={isValid() === false || isLoading === true}
-        loading={isLoading === true}
         focused
+        fullWidth
+        loading={isLoading === true}
         onClick={handleSubmit}
       >
         Clean Layers
       </Button>
       <VerticalSpace space="small" />
-      <Text muted align="center">
+      <Text align="center" muted>
         {hasSelection === true
           ? 'Cleaning layers in selection'
           : 'Cleaning all layers on page'}

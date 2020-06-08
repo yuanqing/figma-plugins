@@ -10,7 +10,7 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import languages from '../../translate/languages'
+import languages from '../../translate/languages.json'
 import { translateAsync } from '../../translate/translate-async'
 import { LanguageItem } from './language-item'
 import styles from './language-tester.scss'
@@ -19,7 +19,7 @@ const DEFAULT_LANGUAGE = 'DEFAULT_LANGUAGE'
 
 export function LanguageTester() {
   const [activeLanguageKey, setLanguageKey] = useState(DEFAULT_LANGUAGE)
-  const [isLoading, setIsLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   function handleLanguageClick(languageKey) {
     setLanguageKey(languageKey)
     emit('SET_LANGUAGE', { languageKey })
@@ -40,18 +40,18 @@ export function LanguageTester() {
       layers,
       scope
     }) {
-      setIsLoading(true)
+      setLoading(true)
       const promises = layers.map(function ({ characters }) {
         return translateAsync(characters, languageKey, apiKey)
       })
       const translated = await Promise.all(promises)
-      setIsLoading(false)
+      setLoading(false)
       emit('TRANSLATE_RESULT', {
         languageKey,
         layers: layers.map(function ({ id }, index) {
           return {
-            id,
-            characters: translated[index]
+            characters: translated[index],
+            id
           }
         }),
         scope
@@ -68,14 +68,14 @@ export function LanguageTester() {
     <Fragment>
       <div className={styles.languages}>
         {Object.keys(languages).map(function (languageKey, index) {
-          const isActive = activeLanguageKey === languageKey
+          const active = activeLanguageKey === languageKey
           return (
             <LanguageItem
               key={index}
-              isActive={isActive}
-              isLoading={isActive === true ? isLoading : false}
+              active={active}
+              loading={active === true ? loading : false}
               onClick={
-                isActive === false
+                active === false
                   ? handleLanguageClick.bind(null, languageKey)
                   : null
               }

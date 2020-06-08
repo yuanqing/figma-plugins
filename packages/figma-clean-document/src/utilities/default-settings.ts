@@ -2,8 +2,8 @@ export const defaultSettings = {
   deleteHiddenLayers: true,
   pixelPerfect: true,
   skipLockedLayers: false,
-  smartSortLayers: true,
   smartRenameLayers: true,
   smartRenameLayersWhitelist: '^@',
+  smartSortLayers: true,
   ungroupSingleLayerGroups: true
 }

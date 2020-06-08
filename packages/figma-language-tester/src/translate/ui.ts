@@ -17,8 +17,8 @@ export default function () {
       languageKey,
       layers: layers.map(function ({ id }, index) {
         return {
-          id,
-          characters: translated[index]
+          characters: translated[index],
+          id
         }
       }),
       scope

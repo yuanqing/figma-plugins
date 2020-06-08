@@ -48,7 +48,7 @@ export function mainFactory(languageKey) {
       apiKey,
       languageKey,
       layers: layers.map(function ({ id, characters }) {
-        return { id, characters }
+        return { characters, id }
       }),
       scope
     })

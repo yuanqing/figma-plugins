@@ -5,12 +5,19 @@ import { h } from 'preact'
 import { labels } from '../utilities/labels'
 import styles from './attributes.scss'
 
+export interface AttributesProps {
+  attributes: { [key: string]: any }
+  keysByReferenceLayerType: Array<string>
+  keysBySearchTerm: Array<string>
+  onAttributeClick: (_: any, newValue: string, targetKey: string) => void
+}
+
 export function Attributes({
   attributes,
   keysByReferenceLayerType,
   keysBySearchTerm,
   onAttributeClick
-}) {
+}: AttributesProps) {
   const result = []
   for (const key in attributes) {
     if (keysBySearchTerm.includes(key) === false) {
@@ -24,19 +31,19 @@ export function Attributes({
       })
       result.push(
         <SelectableItem
-          data-id={key}
           key={key}
+          bold
+          data-id={key}
+          disabled={isDisabled === true} // at least one `true`
           name={key}
+          onChange={onAttributeClick}
           value={
             isDisabled === true
               ? false
               : Object.values(object).every(function (value) {
                   return value === true
                 }) === true
-          } // at least one `true`
-          disabled={isDisabled === true}
-          onChange={onAttributeClick}
-          bold
+          }
         >
           {labels[key]}
         </SelectableItem>
@@ -49,13 +56,13 @@ export function Attributes({
         const isDisabled = keysByReferenceLayerType.includes(key) === false
         result.push(
           <SelectableItem
-            data-id={key}
             key={key}
-            name={key}
-            value={isDisabled === true ? false : object[key]}
+            data-id={key}
             disabled={isDisabled === true}
-            onChange={onAttributeClick}
             indent
+            name={key}
+            onChange={onAttributeClick}
+            value={isDisabled === true ? false : object[key]}
           >
             {labels[key]}
           </SelectableItem>
@@ -67,13 +74,13 @@ export function Attributes({
     const isDisabled = keysByReferenceLayerType.includes(key) === false
     result.push(
       <SelectableItem
-        data-id={key}
         key={key}
-        name={key}
-        value={isDisabled === true ? false : object}
-        disabled={isDisabled === true}
-        onChange={onAttributeClick}
         bold
+        data-id={key}
+        disabled={isDisabled === true}
+        name={key}
+        onChange={onAttributeClick}
+        value={isDisabled === true ? false : object}
       >
         {labels[key]}
       </SelectableItem>
@@ -82,7 +89,7 @@ export function Attributes({
   if (result.length === 0) {
     return (
       <div className={styles.emptyState}>
-        <Text muted align="center">
+        <Text align="center" muted>
           No matches
         </Text>
       </div>

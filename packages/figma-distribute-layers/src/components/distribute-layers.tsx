@@ -18,16 +18,16 @@ import { useEffect } from 'preact/hooks'
 export function DistributeLayers(props: { [key: string]: any }): h.JSX.Element {
   const { direction, icon, ...rest } = props
   const { state, handleChange, handleSubmit, isValid } = useForm(rest, {
-    validate: function ({ hasSelection, space }) {
-      return hasSelection === true && evaluateNumericExpression(space) !== null
+    onClose: function () {
+      emit('CLOSE_UI')
     },
     onSubmit: function ({ space }) {
       emit('SUBMIT', {
         space: evaluateNumericExpression(space)
       })
     },
-    onClose: function () {
-      emit('CLOSE_UI')
+    validate: function ({ hasSelection, space }) {
+      return hasSelection === true && evaluateNumericExpression(space) !== null
     }
   })
   useEffect(
@@ -45,13 +45,13 @@ export function DistributeLayers(props: { [key: string]: any }): h.JSX.Element {
       <Text muted>Space</Text>
       <VerticalSpace space="small" />
       <TextboxNumeric
-        name="space"
         icon={icon}
-        value={space}
+        name="space"
         onChange={handleChange}
+        value={space}
       />
       <VerticalSpace space="extraLarge" />
-      <Button fullWidth disabled={isValid() === false} onClick={handleSubmit}>
+      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
         Distribute Layers {direction}
       </Button>
       <VerticalSpace space="small" />
