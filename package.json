@@ -3,9 +3,9 @@
   "scripts": {
     "build": "yarn run clean && lerna run build",
     "bump": "node scripts/bump-dependencies.js",
-    "clean": "lerna run clean && rimraf '*.log'",
-    "fix": "lerna run fix && eslint --fix 'scripts/**/*.js' && prettier --loglevel error --write '*.json'",
-    "lint": "lerna run lint && eslint 'scripts/**/*.js'",
+    "clean": "lerna run --parallel clean && rimraf '*.log'",
+    "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.js' && prettier --loglevel error --write '*.json'",
+    "lint": "lerna run --parallel lint && eslint 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
