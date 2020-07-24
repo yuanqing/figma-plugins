@@ -2,10 +2,10 @@
   "private": true,
   "scripts": {
     "build": "yarn run clean && lerna run build",
-    "bump": "node scripts/bump-dependencies.js",
+    "bump": "ts-node scripts/bump-dependencies.ts",
     "clean": "lerna run --parallel clean && rimraf '*.log'",
-    "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.js' && prettier --loglevel error --write '*.json'",
-    "lint": "lerna run --parallel lint && eslint 'scripts/**/*.js'",
+    "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write '*.json'",
+    "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
     "postinstall": "yarn run build",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
@@ -39,7 +39,12 @@
     "extends": "yuanqing",
     "ignorePatterns": [
       "*.scss.d.ts"
-    ]
+    ],
+    "rules": {
+      "react/prop-types": [
+        "off"
+      ]
+    }
   },
   "husky": {
     "hooks": {
