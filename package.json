@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "yarn run clean && lerna run build",
-    "bump": "ts-node scripts/bump-dependencies.ts",
+    "bump-dependencies": "ts-node scripts/bump-dependencies.ts",
     "clean": "lerna run --parallel clean && rimraf '*.log'",
     "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write '*.json'",
     "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
