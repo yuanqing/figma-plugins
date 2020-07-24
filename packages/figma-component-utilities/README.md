@@ -10,11 +10,11 @@
 
 ### Create Component from Layer
 
-Creates a Master Component from the selected layer. The selected layer then becomes an Instance of the new Master Component.
+Creates a Main Component from the selected layer. The selected layer then becomes an Instance of the new Main Component.
 
 ### Copy Component
 
-Creates a copy of the selected Master Component.
+Creates a copy of the selected Main Component.
 
 ### Replace with Component
 
@@ -22,7 +22,7 @@ Opens a modal with a list of components in the document. Choose a component in t
 
 ### Reset Instance Size
 
-Sets the size of the selected Instances to the size of their respective Master Components.
+Sets the size of the selected Instances to the size of their respective Main Components.
 
 ## License
 
