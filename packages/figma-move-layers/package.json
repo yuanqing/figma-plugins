@@ -28,7 +28,7 @@
   "dependencies": {
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
-    "preact": "^10.4.1"
+    "preact": "^10.4.6"
   },
   "figma-plugin": {
     "name": "Move Layers",
