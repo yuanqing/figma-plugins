@@ -50,7 +50,7 @@ export function smartRenameNode(
       break
     }
     case 'INSTANCE': {
-      node.name = node.masterComponent.name
+      node.name = node.mainComponent.name
       break
     }
     case 'LINE': {
