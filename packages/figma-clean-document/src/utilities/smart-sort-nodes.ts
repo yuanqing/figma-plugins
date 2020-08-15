@@ -41,7 +41,7 @@ export function smartSortNodes(
         }
         if ('children' in parent) {
           const nodes = parent.children
-          const ids = collectNodeIds(nodes.slice().reverse())
+          const ids = collectNodeIds(nodes.slice())
           const result = smartSortChildNodes(parent, ids)
           if (
             result !== null &&
