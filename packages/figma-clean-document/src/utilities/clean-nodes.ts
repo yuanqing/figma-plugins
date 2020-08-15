@@ -24,11 +24,17 @@ export function cleanNodes(
   if (deleteHiddenLayers === true && deleteHiddenNodes(node) === true) {
     return true
   }
+  const parent = node.parent
+  if (parent === null) {
+    return false
+  }
+  const index = parent.children.indexOf(node)
   if (
     ungroupSingleLayerGroups === true &&
     ungroupSingleNodeGroup(node) === true
   ) {
-    return true
+    // Recurse into the single child of `node`
+    return cleanNodes(parent.children[index], settings)
   }
   let didChange = false
   if ('children' in node) {
