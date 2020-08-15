@@ -9,7 +9,7 @@ export function groupLayers(
   groupDefinition: number
 ): Array<Group> {
   const groups: { [key: string]: Group } = {}
-  for (const layer of sortNodesByName(layers)) {
+  for (const layer of sortNodesByName(layers).reverse()) {
     const groupName = extractGroupName(layer.name, groupDefinition)
     if (typeof groups[groupName] === 'undefined') {
       groups[groupName] = { groupName, layers: [] }

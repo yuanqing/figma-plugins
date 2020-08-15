@@ -22,8 +22,8 @@ export function organizeLayers(
 
 function updateSortOrder(groups: Array<Group>): void {
   const layers = []
-  for (const group of groups) {
-    for (const layer of group.layers) {
+  for (const group of groups.slice().reverse()) {
+    for (const layer of group.layers.slice().reverse()) {
       layers.push(layer)
     }
   }
