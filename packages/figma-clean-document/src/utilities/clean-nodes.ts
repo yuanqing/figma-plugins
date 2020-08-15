@@ -51,6 +51,13 @@ export function cleanNodes(
       }
     }
   }
+  if (
+    didChange === true &&
+    ungroupSingleLayerGroups === true &&
+    ungroupSingleNodeGroup(node)
+  ) {
+    node = parent.children[index]
+  }
   if (pixelPerfect === true) {
     didChange = makePixelPerfect(node) || didChange
   }
