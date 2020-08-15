@@ -26,6 +26,7 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
         skipLockedLayers,
         smartRenameLayers,
         smartRenameLayersWhitelist,
+        smartSortLayers,
         ungroupSingleLayerGroups
       }) {
         handleChange({ isLoading: true })
@@ -35,6 +36,7 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
           skipLockedLayers,
           smartRenameLayers,
           smartRenameLayersWhitelist,
+          smartSortLayers,
           ungroupSingleLayerGroups
         })
       },
