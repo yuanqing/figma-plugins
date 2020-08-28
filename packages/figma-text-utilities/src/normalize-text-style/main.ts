@@ -5,7 +5,7 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { getTextNodes } from '../utilities/get-text-nodes'
-import { bulkCopyText } from './utilities/bulk-copy-text'
+import { normalizeTextStyle } from './utilities/normalize-text-style'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
@@ -17,10 +17,13 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('No text layers in selection'))
     return
   }
-  await bulkCopyText(nodes.reverse())
+  await normalizeTextStyle(nodes)
   figma.closePlugin(
     formatSuccessMessage(
-      `Copied ${nodes.length} ${pluralize(nodes.length, 'text layer')}`
+      `Normalized text style of ${nodes.length} ${pluralize(
+        nodes.length,
+        'layer'
+      )}`
     )
   )
 }
