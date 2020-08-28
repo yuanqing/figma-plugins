@@ -1,0 +1,46 @@
+{
+  "name": "figma-text-utilities",
+  "version": "0.0.0",
+  "description": "A Figma plugin to split and bulk copy text layers",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins"
+  ],
+  "license": "MIT",
+  "author": "Yuan Qing Lim",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/figma-plugins.git",
+    "directory": "packages/figma-text-utilities"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "yarn run clean && build-figma-plugin",
+    "clean": "rimraf '*.log' build manifest.json 'src/**/*.scss.d.ts'",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write package.json tsconfig.json",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "watch": "yarn run clean && build-figma-plugin --watch"
+  },
+  "dependencies": {
+    "@create-figma-plugin/utilities": "*"
+  },
+  "figma-plugin": {
+    "name": "Text Utilities",
+    "id": "figma-text-utilities",
+    "menu": [
+      {
+        "name": "Split Text Layers by Line",
+        "main": "split-text-layers-by-line/main"
+      },
+      {
+        "name": "Bulk Copy Text",
+        "main": "bulk-copy-text/main",
+        "ui": "bulk-copy-text/ui"
+      }
+    ]
+  }
+}
