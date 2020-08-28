@@ -36,6 +36,7 @@
         "name": "Split Text Layers by Line",
         "main": "split-text-layers-by-line/main"
       },
+      "-",
       {
         "name": "Bulk Copy Text",
         "main": "bulk-copy-text/main",
