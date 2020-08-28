@@ -9,7 +9,7 @@ import { TextNodeAttributes } from '../types'
 export function getTextNodes(): Array<TextNodeAttributes> {
   const result: Array<SceneNode> = []
   for (const node of figma.currentPage.selection) {
-    traverseNode(node, async function (node) {
+    traverseNode(node, function (node) {
       if (node.type === 'TEXT') {
         result.push(node)
       }
