@@ -4,7 +4,7 @@
     "build": "yarn run clean && lerna run build",
     "bump-dependencies": "ts-node scripts/bump-dependencies.ts",
     "clean": "lerna run --parallel clean && rimraf '*.log'",
-    "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write '*.json'",
+    "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
     "postinstall": "yarn run build",
     "publish": "lerna publish from-package",
