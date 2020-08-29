@@ -18,7 +18,7 @@ Name | Description
 [**Select Layers**](/packages/figma-select-layers) | Select layers based on name, type, or similarity
 [**Set Layer Size**](/packages/figma-set-layer-size) | Precisely set the size of layers, while ignoring constraints
 [**Sort Layers**](/packages/figma-sort-layers) | Sort layers by name or position
-[**Text Utilities**](/packages/figma-text-utilities) | Split and bulk copy text layers
+[**Text Utilities**](/packages/figma-text-utilities) | Split, normalize, and bulk copy and paste text layers
 
 ## See also
 

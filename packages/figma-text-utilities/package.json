@@ -1,7 +1,7 @@
 {
   "name": "figma-text-utilities",
   "version": "0.0.0",
-  "description": "A Figma plugin to split and bulk copy text layers",
+  "description": "A Figma plugin to split, normalize, and bulk copy and paste text layers",
   "keywords": [
     "create-figma-plugin",
     "figma",
