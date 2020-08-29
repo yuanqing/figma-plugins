@@ -6,7 +6,7 @@ export function readClipboardContents(): Promise<string> {
       figma.ui.close()
       resolve(text)
     })
-    showUI({ height: 200, width: 200 })
+    showUI({ height: 0, width: 0 })
     emit('READ_CLIPBOARD_CONTENTS_REQUEST')
   })
 }

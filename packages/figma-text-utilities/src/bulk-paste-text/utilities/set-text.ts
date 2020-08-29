@@ -1,6 +1,6 @@
 import { loadFontsAsync } from '@create-figma-plugin/utilities'
 
-export async function bulkPasteText(
+export async function setText(
   nodes: Array<TextNode>,
   text: string
 ): Promise<void> {
