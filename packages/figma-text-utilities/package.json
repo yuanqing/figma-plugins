@@ -37,11 +37,17 @@
         "main": "bulk-copy-text/main",
         "ui": "bulk-copy-text/ui"
       },
+      {
+        "name": "Bulk Paste Text",
+        "main": "bulk-paste-text/main",
+        "ui": "bulk-paste-text/ui"
+      },
       "-",
       {
         "name": "Normalize Text Style",
         "main": "normalize-text-style/main"
       },
+      "-",
       {
         "name": "Split Text Layers by Line",
         "main": "split-text-layers-by-line/main"

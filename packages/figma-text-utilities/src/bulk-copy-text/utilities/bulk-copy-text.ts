@@ -13,6 +13,6 @@ export function bulkCopyText(nodes: Array<TextNode>): Promise<void> {
       resolve()
     })
     showUI({ height: 0, width: 0 })
-    emit('COPY_TEXT', { text })
+    emit('COPY_TEXT_REQUEST', { text })
   })
 }
