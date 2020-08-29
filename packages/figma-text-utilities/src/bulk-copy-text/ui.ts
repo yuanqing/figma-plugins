@@ -1,7 +1,7 @@
 import { emit, once } from '@create-figma-plugin/utilities'
 
 export default function (): void {
-  once('COPY_TEXT_REQUEST', async function ({ string }) {
+  once('COPY_TEXT_REQUEST', function ({ string }) {
     copyStringToClipboard(string)
     emit('COPY_TEXT_SUCCESS')
   })
