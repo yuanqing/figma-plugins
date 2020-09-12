@@ -28,7 +28,7 @@
   "dependencies": {
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
-    "preact": "^10.4.7"
+    "preact": "^10.4.8"
   },
   "figma-plugin": {
     "name": "Insert Big Image",
