@@ -1,8 +1,8 @@
-# Select Layers [![Figma Plugin](https://img.shields.io/badge/figma-Select%20Layers-yellow?cacheSeconds=1800)](https://figma.com/c/plugin/799648692768237063/Select-Layers) [![npm Version](https://img.shields.io/npm/v/figma-select-layers?cacheSeconds=1800)](https://npmjs.com/package/figma-select-layers)
+# Select Layers [![Figma Plugin](https://img.shields.io/badge/figma-Select%20Layers-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/799648692768237063/Select-Layers) [![installs](https://img.shields.io/endpoint?cacheSeconds=1800&url=https://yuanqing.github.io/figma-plugins-stats/plugin/799648692768237063/installs.json)](https://figma.com/community/plugin/799648692768237063/Select-Layers) [![npm Version](https://img.shields.io/npm/v/figma-select-layers?cacheSeconds=1800)](https://npmjs.com/package/figma-select-layers)
 
 > A Figma plugin to select layers based on name, type, or similarity
 
-[![Select Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-select-layers/media/cover.png)](https://figma.com/c/plugin/799648692768237063/Select-Layers)
+[![Select Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-select-layers/media/cover.png)](https://figma.com/community/plugin/799648692768237063/Select-Layers)
 
 `attributes` `hidden` `layers` `locked` `select` `selector` `similar` `similarity` `style` `styles` `type`
 

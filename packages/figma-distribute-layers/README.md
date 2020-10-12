@@ -1,8 +1,8 @@
-# Distribute Layers [![Figma Plugin](https://img.shields.io/badge/figma-Distribute%20Layers-yellow?cacheSeconds=1800)](https://figma.com/c/plugin/767379264700569551/Distribute-Layers) [![npm Version](https://img.shields.io/npm/v/figma-distribute-layers?cacheSeconds=1800)](https://npmjs.com/package/figma-distribute-layers)
+# Distribute Layers [![Figma Plugin](https://img.shields.io/badge/figma-Distribute%20Layers-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/767379264700569551/Distribute-Layers) [![installs](https://img.shields.io/endpoint?cacheSeconds=1800&url=https://yuanqing.github.io/figma-plugins-stats/plugin/767379264700569551/installs.json)](https://figma.com/community/plugin/767379264700569551/Distribute-Layers) [![npm Version](https://img.shields.io/npm/v/figma-distribute-layers?cacheSeconds=1800)](https://npmjs.com/package/figma-distribute-layers)
 
 > A Figma plugin to distribute layers in a given direction and offset
 
-[![Distribute Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-distribute-layers/media/cover.png)](https://figma.com/c/plugin/767379264700569551/Distribute-Layers)
+[![Distribute Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-distribute-layers/media/cover.png)](https://figma.com/community/plugin/767379264700569551/Distribute-Layers)
 
 `arrange` `butter` `distribute` `layers` `move` `space` `sort` `tidy`
 

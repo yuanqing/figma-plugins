@@ -1,8 +1,8 @@
-# Sort Layers [![Figma Plugin](https://img.shields.io/badge/figma-Sort%20Layers-yellow?cacheSeconds=1800)](https://figma.com/c/plugin/767379414704079825/Sort-Layers) [![npm Version](https://img.shields.io/npm/v/figma-sort-layers?cacheSeconds=1800)](https://npmjs.com/package/figma-sort-layers)
+# Sort Layers [![Figma Plugin](https://img.shields.io/badge/figma-Sort%20Layers-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/767379414704079825/Sort-Layers) [![installs](https://img.shields.io/endpoint?cacheSeconds=1800&url=https://yuanqing.github.io/figma-plugins-stats/plugin/767379414704079825/installs.json)](https://figma.com/community/plugin/767379414704079825/Sort-Layers) [![npm Version](https://img.shields.io/npm/v/figma-sort-layers?cacheSeconds=1800)](https://npmjs.com/package/figma-sort-layers)
 
 > A Figma plugin to sort layers by name or position
 
-[![Sort Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-sort-layers/media/cover.png)](https://figma.com/c/plugin/767379414704079825/Sort-Layers)
+[![Sort Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-sort-layers/media/cover.png)](https://figma.com/community/plugin/767379414704079825/Sort-Layers)
 
 `arrange` `clean` `layers` `organize` `organizer` `random` `randomize` `reverse` `sort` `tidy`
 
