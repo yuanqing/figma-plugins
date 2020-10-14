@@ -5,7 +5,6 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { getTextNodes } from '../utilities/get-text-nodes'
-import { removeConsecutiveNewlines } from '../utilities/remove-consecutive-newlines'
 import { copyStringToClipboard } from './utilities/copy-string-to-clipboard'
 
 export default async function (): Promise<void> {
@@ -18,13 +17,11 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('No text layers in selection'))
     return
   }
-  const string = removeConsecutiveNewlines(
-    nodes
-      .map(function (node: TextNode) {
-        return node.characters
-      })
-      .join('\n')
-  )
+  const string = nodes
+    .map(function (node: TextNode) {
+      return node.characters
+    })
+    .join('\n')
   if (string === '\n') {
     figma.closePlugin(formatErrorMessage('Nothing to copy'))
     return

@@ -5,7 +5,7 @@ import {
 
 export function getTextNodes(): Array<TextNode> {
   const result: Array<TextNode> = []
-  const nodes = sortNodesByCanonicalOrder(figma.currentPage.selection.slice())
+  const nodes = figma.currentPage.selection.slice()
   for (const node of nodes) {
     traverseNode(node, function (node: SceneNode) {
       if (node.type === 'TEXT') {
@@ -13,5 +13,5 @@ export function getTextNodes(): Array<TextNode> {
       }
     })
   }
-  return result as Array<TextNode>
+  return sortNodesByCanonicalOrder(result).reverse() as Array<TextNode>
 }
