@@ -45,7 +45,7 @@
       "-",
       {
         "name": "Split Text Layers by Line",
-        "main": "split-text-layers-by-line/main"
+        "main": "split-text-nodes-by-line/main"
       },
       "-",
       {
@@ -54,7 +54,7 @@
       },
       {
         "name": "Reset Text Layer Names",
-        "main": "reset-text-layer-names/main"
+        "main": "reset-text-node-names/main"
       }
     ]
   }
