@@ -44,13 +44,17 @@
       },
       "-",
       {
-        "name": "Normalize Text Style",
-        "main": "normalize-text-style/main"
+        "name": "Split Text Layers by Line",
+        "main": "split-text-layers-by-line/main"
       },
       "-",
       {
-        "name": "Split Text Layers by Line",
-        "main": "split-text-layers-by-line/main"
+        "name": "Normalize Text Style",
+        "main": "normalize-text-style/main"
+      },
+      {
+        "name": "Reset Text Layer Names",
+        "main": "reset-text-layer-names/main"
       }
     ]
   }
