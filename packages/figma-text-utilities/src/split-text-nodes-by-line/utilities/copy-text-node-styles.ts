@@ -2,7 +2,7 @@ export function copyTextNodeStyles(
   targetNode: TextNode,
   sourceNode: TextNode,
   offset: number
-) {
+): void {
   let index = 0
   const length = targetNode.characters.length
   while (index < length) {
