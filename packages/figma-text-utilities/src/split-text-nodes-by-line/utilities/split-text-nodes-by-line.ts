@@ -41,9 +41,6 @@ async function splitTextNodeByLine(node: TextNode): Promise<Array<TextNode>> {
     const characters = line === '' ? ' ' : line
     newNode.characters = characters
     copyTextNodeStyles(newNode, node, offset)
-    if (node.textAutoResize !== 'WIDTH_AND_HEIGHT') {
-      newNode.resize(node.width, newNode.height)
-    }
     y += newNode.height + node.paragraphSpacing
     offset += line.length + 1 // +1 for newline
     result.push(newNode)

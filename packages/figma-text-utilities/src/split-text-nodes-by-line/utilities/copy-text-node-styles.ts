@@ -75,7 +75,12 @@ export function copyTextNodeStyles(
     }
     index += 1
   }
-  targetNode.textAutoResize = sourceNode.textAutoResize
+  if (sourceNode.textAutoResize === 'WIDTH_AND_HEIGHT') {
+    targetNode.textAutoResize = 'WIDTH_AND_HEIGHT'
+  } else {
+    targetNode.resize(sourceNode.width, targetNode.height)
+    targetNode.textAutoResize = 'HEIGHT'
+  }
   targetNode.paragraphSpacing = sourceNode.paragraphSpacing
   targetNode.paragraphIndent = sourceNode.paragraphIndent
 }
