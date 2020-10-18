@@ -2,7 +2,7 @@
 
 > A Figma plugin to split, normalize, and bulk copy and paste text layers
 
-`copy` `normalize` `paste` `reset` `style` `text`
+`clean` `copy` `format` `paste` `reset` `split` `style` `text`
 
 ## Commands
 
