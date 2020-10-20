@@ -45,9 +45,9 @@ function checkIfLayersOverlap(a: SceneNode, b: SceneNode): boolean {
   const bb = memoizedComputeBoundingBox(b)
   return !(
     aa.x + aa.width <= bb.x ||
-    bb.x + bb.width <= aa.x ||
+    aa.x >= bb.x + bb.width ||
     aa.y + aa.height <= bb.y ||
-    bb.y + bb.height <= aa.y
+    aa.y >= bb.y + bb.height
   )
 }
 
