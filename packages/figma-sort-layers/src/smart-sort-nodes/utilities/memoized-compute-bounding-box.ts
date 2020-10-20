@@ -6,8 +6,5 @@ const memoized = mem(function (_: string, node: SceneNode) {
 })
 
 export function memoizedComputeBoundingBox(node: SceneNode): Rect {
-  if (node.rotation === 0) {
-    return node
-  }
   return memoized(node.id, node)
 }
