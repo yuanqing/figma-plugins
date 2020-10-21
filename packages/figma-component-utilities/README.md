@@ -16,6 +16,10 @@ Creates a Main Component from the selected layer. The selected layer then become
 
 Creates a copy of the selected Main Component.
 
+### Convert Component to Frame
+
+Convert the selected Main Component or Instance to a Frame.
+
 ### Replace with Component
 
 Opens a modal with a list of components in the document. Choose a component in the list to replace the selected layers.

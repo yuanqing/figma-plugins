@@ -43,6 +43,10 @@
         "main": "copy-component/main"
       },
       {
+        "name": "Convert Component to Frame",
+        "main": "convert-component-to-frame/main"
+      },
+      {
         "name": "Replace with Component",
         "main": "replace-with-component/main",
         "ui": "replace-with-component/ui"
