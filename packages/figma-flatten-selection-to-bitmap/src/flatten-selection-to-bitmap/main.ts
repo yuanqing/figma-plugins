@@ -11,10 +11,12 @@ import { createImageFromGroupAsync } from './utilities/create-image-from-group-a
 import { replaceNodesWithinInstancesWithClones } from './utilities/replace-nodes-within-instances-with-clones'
 
 export default async function (): Promise<void> {
-  if (figma.currentPage.selection.length === 0) {
+  const length = figma.currentPage.selection.length
+  if (length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
+  const layerName = length === 1 ? figma.currentPage.selection[0].name : 'Image'
   const nodes = replaceNodesWithinInstancesWithClones(
     figma.currentPage.selection.slice()
   )
@@ -24,6 +26,7 @@ export default async function (): Promise<void> {
   const didPositionChange =
     image.width !== group.width || image.height !== group.height
   group.remove()
+  image.name = layerName
   figma.currentPage.selection = [image]
   figma.closePlugin(
     didPositionChange === true
