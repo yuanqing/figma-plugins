@@ -19,7 +19,7 @@
     "@types/natural-compare-lite": "^1.4.0",
     "@types/tap": "^14.10.1",
     "eslint": "^7.13.0",
-    "eslint-config-yuanqing": "0.0.3",
+    "eslint-config-yuanqing": "^0.0.4",
     "globby": "^11.0.1",
     "husky": "^4.3.0",
     "lerna": "^3.22.1",
