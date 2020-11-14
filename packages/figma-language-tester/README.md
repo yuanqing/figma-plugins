@@ -4,13 +4,9 @@
 
 [![Language Tester](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-language-tester/media/cover.png)](https://figma.com/community/plugin/767379122107077581/Language-Tester)
 
-`convert` `i18n` `internationalization` `language` `translate` `translation` `translator` `yandex`
+`convert` `i18n` `internationalization` `language` `translate` `translation` `translator`
 
 ## Commands
-
-### Set API Key
-
-Add a [Yandex Translate API key](https://translate.yandex.com/developers/keys).
 
 ### Language Tester
 
@@ -19,10 +15,6 @@ Opens a modal with a list of languages. Select a language in the list to transla
 ### Translate
 
 Translate the text layers within the selection or on the current page to the selected language.
-
-### Reset Plugin
-
-Resets all settings to their defaults.
 
 ## License
 
