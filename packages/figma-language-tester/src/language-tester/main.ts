@@ -3,34 +3,23 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadFontsAsync,
-  loadSettingsAsync,
   on,
   once,
   showUI,
   traverseNode
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from '../default-settings'
-import { getTextLayers } from '../get-text-layers'
-import languages from '../translate/languages.json'
+import { getTextLayers } from '../utilities/get-text-layers'
+import languages from '../utilities/languages.json'
 
 export default async function () {
-  const { apiKey } = await loadSettingsAsync(defaultSettings)
-  if (typeof apiKey === 'undefined' || apiKey === '') {
-    figma.closePlugin(
-      formatErrorMessage(
-        'Add an API key via Plugins › Language Tester › Set API Key'
-      )
-    )
-    return
-  }
   const { layers, scope } = getTextLayers()
   if (layers.length === 0) {
     figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
     return
   }
   showUI({ height: 267, width: 240 })
-  const originalStrings = {} // maps `layer.id` to the original strings
+  const originalStrings: { [key: string]: string } = {} // maps `layer.id` to the original strings
   figma.on('close', function () {
     resetLanguage(originalStrings)
   })
@@ -45,7 +34,6 @@ export default async function () {
     })
     await loadFontsAsync(layers)
     emit('TRANSLATE_REQUEST', {
-      apiKey,
       languageKey,
       layers: layers.map(function ({ id, characters }) {
         return { characters, id }
@@ -73,8 +61,10 @@ export default async function () {
   })
 }
 
-function resetLanguage(originalStrings) {
-  const layers = filterLayers([figma.currentPage], function (layer) {
+function resetLanguage(originalStrings: { [key: string]: string }) {
+  const layers = filterLayers(figma.currentPage.children.slice(), function (
+    layer: SceneNode
+  ) {
     return (
       layer.type === 'TEXT' && typeof originalStrings[layer.id] !== 'undefined'
     )
@@ -91,7 +81,10 @@ function resetLanguage(originalStrings) {
   }
 }
 
-function filterLayers(layers, filter) {
+function filterLayers(
+  layers: Array<SceneNode>,
+  filter: (layer: SceneNode) => boolean
+) {
   const result = []
   for (const layer of layers) {
     traverseNode(layer, async function (layer) {

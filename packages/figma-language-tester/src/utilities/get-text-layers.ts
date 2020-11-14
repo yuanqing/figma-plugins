@@ -5,8 +5,8 @@ export function getTextLayers() {
   const hasSelection = selection.length > 0
   return {
     layers: filterLayers(
-      hasSelection ? selection : [figma.currentPage],
-      function (layer) {
+      hasSelection ? selection.slice() : figma.currentPage.children.slice(),
+      function (layer: SceneNode) {
         return layer.type === 'TEXT'
       }
     ),
@@ -14,7 +14,10 @@ export function getTextLayers() {
   }
 }
 
-function filterLayers(layers, filter) {
+function filterLayers(
+  layers: Array<SceneNode>,
+  filter: (layer: SceneNode) => boolean
+) {
   const result = []
   for (const layer of layers) {
     traverseNode(layer, async function (layer) {

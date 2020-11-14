@@ -10,8 +10,8 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import languages from '../../translate/languages.json'
-import { translateAsync } from '../../translate/translate-async'
+import languages from '../../utilities/languages.json'
+import { translateAsync } from '../../utilities/translate-async'
 import { LanguageItem } from './language-item'
 import styles from './language-tester.scss'
 
@@ -20,7 +20,7 @@ const DEFAULT_LANGUAGE = 'DEFAULT_LANGUAGE'
 export function LanguageTester() {
   const [activeLanguageKey, setLanguageKey] = useState(DEFAULT_LANGUAGE)
   const [loading, setLoading] = useState(false)
-  function handleLanguageClick(languageKey) {
+  function handleLanguageClick(languageKey: string) {
     setLanguageKey(languageKey)
     emit('SET_LANGUAGE', { languageKey })
   }
@@ -28,27 +28,30 @@ export function LanguageTester() {
     setLanguageKey(DEFAULT_LANGUAGE)
     emit('RESET_LANGUAGE')
   }
-  function handleKeyDown(event) {
+  function handleKeyDown(event: KeyboardEvent) {
     if (event.keyCode === ESCAPE_KEY_CODE) {
       emit('CLOSE_UI')
     }
   }
   useEffect(function () {
     return on('TRANSLATE_REQUEST', async function ({
-      apiKey,
       languageKey,
       layers,
       scope
+    }: {
+      languageKey: string
+      layers: Array<{ id: string; characters: string }>
+      scope: string
     }) {
       setLoading(true)
       const promises = layers.map(function ({ characters }) {
-        return translateAsync(characters, languageKey, apiKey)
+        return translateAsync(characters, languageKey)
       })
       const translated = await Promise.all(promises)
       setLoading(false)
       emit('TRANSLATE_RESULT', {
         languageKey,
-        layers: layers.map(function ({ id }, index) {
+        layers: layers.map(function ({ id }, index: number) {
           return {
             characters: translated[index],
             id

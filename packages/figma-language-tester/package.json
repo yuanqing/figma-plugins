@@ -21,16 +21,18 @@
   "scripts": {
     "build": "yarn run clean && build-figma-plugin",
     "clean": "rimraf '*.log' build manifest.json 'src/**/*.scss.d.ts'",
-    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
-    "lint": "eslint 'src/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
+    "generate-menu-config": "node scripts/generate-translate-menu-config.js",
+    "generate-translate-main-ts": "node scripts/generate-translate-main-ts.js > src/translate/main.ts",
+    "fix": "eslint --fix '{scripts,src}/**/*.{js,ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
+    "lint": "eslint '{scripts,src}/**/*.{js,ts,tsx}' && stylelint 'src/**/*.scss'",
     "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
     "@sindresorhus/class-names": "^1.1.0",
-    "p-memoize": "^4.0.0",
-    "preact": "^10.4.8"
+    "p-memoize": "^4.0.1",
+    "preact": "^10.5.7"
   },
   "figma-plugin": {
     "name": "Language Tester",
@@ -45,10 +47,146 @@
         "name": "Translate",
         "menu": [
           {
-            "name": "Chinese",
+            "name": "Afrikaans",
             "main": {
               "src": "translate/main",
-              "handler": "zh"
+              "handler": "af"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Albanian",
+            "main": {
+              "src": "translate/main",
+              "handler": "sq"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Amharic",
+            "main": {
+              "src": "translate/main",
+              "handler": "am"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Arabic",
+            "main": {
+              "src": "translate/main",
+              "handler": "ar"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Armenian",
+            "main": {
+              "src": "translate/main",
+              "handler": "hy"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Azerbaijani",
+            "main": {
+              "src": "translate/main",
+              "handler": "az"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Basque",
+            "main": {
+              "src": "translate/main",
+              "handler": "eu"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Belarusian",
+            "main": {
+              "src": "translate/main",
+              "handler": "be"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Bengali",
+            "main": {
+              "src": "translate/main",
+              "handler": "bn"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Bosnian",
+            "main": {
+              "src": "translate/main",
+              "handler": "bs"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Bulgarian",
+            "main": {
+              "src": "translate/main",
+              "handler": "bg"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Catalan",
+            "main": {
+              "src": "translate/main",
+              "handler": "ca"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Cebuano",
+            "main": {
+              "src": "translate/main",
+              "handler": "ceb"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Chichewa",
+            "main": {
+              "src": "translate/main",
+              "handler": "ny"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Chinese (Simplified)",
+            "main": {
+              "src": "translate/main",
+              "handler": "zhCN"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Chinese (Traditional)",
+            "main": {
+              "src": "translate/main",
+              "handler": "zhTW"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Corsican",
+            "main": {
+              "src": "translate/main",
+              "handler": "co"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Croatian",
+            "main": {
+              "src": "translate/main",
+              "handler": "hr"
             },
             "ui": "translate/ui"
           },
@@ -85,6 +223,30 @@
             "ui": "translate/ui"
           },
           {
+            "name": "Esperanto",
+            "main": {
+              "src": "translate/main",
+              "handler": "eo"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Estonian",
+            "main": {
+              "src": "translate/main",
+              "handler": "et"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Filipino",
+            "main": {
+              "src": "translate/main",
+              "handler": "tl"
+            },
+            "ui": "translate/ui"
+          },
+          {
             "name": "Finnish",
             "main": {
               "src": "translate/main",
@@ -101,6 +263,30 @@
             "ui": "translate/ui"
           },
           {
+            "name": "Frisian",
+            "main": {
+              "src": "translate/main",
+              "handler": "fy"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Galician",
+            "main": {
+              "src": "translate/main",
+              "handler": "gl"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Georgian",
+            "main": {
+              "src": "translate/main",
+              "handler": "ka"
+            },
+            "ui": "translate/ui"
+          },
+          {
             "name": "German",
             "main": {
               "src": "translate/main",
@@ -109,10 +295,106 @@
             "ui": "translate/ui"
           },
           {
+            "name": "Greek",
+            "main": {
+              "src": "translate/main",
+              "handler": "el"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Gujarati",
+            "main": {
+              "src": "translate/main",
+              "handler": "gu"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Haitian Creole",
+            "main": {
+              "src": "translate/main",
+              "handler": "ht"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Hausa",
+            "main": {
+              "src": "translate/main",
+              "handler": "ha"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Hawaiian",
+            "main": {
+              "src": "translate/main",
+              "handler": "haw"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Hebrew",
+            "main": {
+              "src": "translate/main",
+              "handler": "iw"
+            },
+            "ui": "translate/ui"
+          },
+          {
             "name": "Hindi",
             "main": {
               "src": "translate/main",
               "handler": "hi"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Hmong",
+            "main": {
+              "src": "translate/main",
+              "handler": "hmn"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Hungarian",
+            "main": {
+              "src": "translate/main",
+              "handler": "hu"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Icelandic",
+            "main": {
+              "src": "translate/main",
+              "handler": "is"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Igbo",
+            "main": {
+              "src": "translate/main",
+              "handler": "ig"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Indonesian",
+            "main": {
+              "src": "translate/main",
+              "handler": "id"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Irish",
+            "main": {
+              "src": "translate/main",
+              "handler": "ga"
             },
             "ui": "translate/ui"
           },
@@ -133,10 +415,122 @@
             "ui": "translate/ui"
           },
           {
+            "name": "Javanese",
+            "main": {
+              "src": "translate/main",
+              "handler": "jw"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Kannada",
+            "main": {
+              "src": "translate/main",
+              "handler": "kn"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Kazakh",
+            "main": {
+              "src": "translate/main",
+              "handler": "kk"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Khmer",
+            "main": {
+              "src": "translate/main",
+              "handler": "km"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Kinyarwanda",
+            "main": {
+              "src": "translate/main",
+              "handler": "rw"
+            },
+            "ui": "translate/ui"
+          },
+          {
             "name": "Korean",
             "main": {
               "src": "translate/main",
               "handler": "ko"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Kurdish (Kurmanji)",
+            "main": {
+              "src": "translate/main",
+              "handler": "ku"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Kyrgyz",
+            "main": {
+              "src": "translate/main",
+              "handler": "ky"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Lao",
+            "main": {
+              "src": "translate/main",
+              "handler": "lo"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Latin",
+            "main": {
+              "src": "translate/main",
+              "handler": "la"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Latvian",
+            "main": {
+              "src": "translate/main",
+              "handler": "lv"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Lithuanian",
+            "main": {
+              "src": "translate/main",
+              "handler": "lt"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Luxembourgish",
+            "main": {
+              "src": "translate/main",
+              "handler": "lb"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Macedonian",
+            "main": {
+              "src": "translate/main",
+              "handler": "mk"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Malagasy",
+            "main": {
+              "src": "translate/main",
+              "handler": "mg"
             },
             "ui": "translate/ui"
           },
@@ -149,10 +543,90 @@
             "ui": "translate/ui"
           },
           {
+            "name": "Malayalam",
+            "main": {
+              "src": "translate/main",
+              "handler": "ml"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Maltese",
+            "main": {
+              "src": "translate/main",
+              "handler": "mt"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Maori",
+            "main": {
+              "src": "translate/main",
+              "handler": "mi"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Marathi",
+            "main": {
+              "src": "translate/main",
+              "handler": "mr"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Mongolian",
+            "main": {
+              "src": "translate/main",
+              "handler": "mn"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Myanmar (Burmese)",
+            "main": {
+              "src": "translate/main",
+              "handler": "my"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Nepali",
+            "main": {
+              "src": "translate/main",
+              "handler": "ne"
+            },
+            "ui": "translate/ui"
+          },
+          {
             "name": "Norwegian",
             "main": {
               "src": "translate/main",
               "handler": "no"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Odia (Oriya)",
+            "main": {
+              "src": "translate/main",
+              "handler": "or"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Pashto",
+            "main": {
+              "src": "translate/main",
+              "handler": "ps"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Persian",
+            "main": {
+              "src": "translate/main",
+              "handler": "fa"
             },
             "ui": "translate/ui"
           },
@@ -173,6 +647,110 @@
             "ui": "translate/ui"
           },
           {
+            "name": "Punjabi",
+            "main": {
+              "src": "translate/main",
+              "handler": "pa"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Romanian",
+            "main": {
+              "src": "translate/main",
+              "handler": "ro"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Russian",
+            "main": {
+              "src": "translate/main",
+              "handler": "ru"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Samoan",
+            "main": {
+              "src": "translate/main",
+              "handler": "sm"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Scots Gaelic",
+            "main": {
+              "src": "translate/main",
+              "handler": "gd"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Serbian",
+            "main": {
+              "src": "translate/main",
+              "handler": "sr"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Sesotho",
+            "main": {
+              "src": "translate/main",
+              "handler": "st"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Shona",
+            "main": {
+              "src": "translate/main",
+              "handler": "sn"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Sindhi",
+            "main": {
+              "src": "translate/main",
+              "handler": "sd"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Sinhala",
+            "main": {
+              "src": "translate/main",
+              "handler": "si"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Slovak",
+            "main": {
+              "src": "translate/main",
+              "handler": "sk"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Slovenian",
+            "main": {
+              "src": "translate/main",
+              "handler": "sl"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Somali",
+            "main": {
+              "src": "translate/main",
+              "handler": "so"
+            },
+            "ui": "translate/ui"
+          },
+          {
             "name": "Spanish",
             "main": {
               "src": "translate/main",
@@ -181,10 +759,58 @@
             "ui": "translate/ui"
           },
           {
+            "name": "Sundanese",
+            "main": {
+              "src": "translate/main",
+              "handler": "su"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Swahili",
+            "main": {
+              "src": "translate/main",
+              "handler": "sw"
+            },
+            "ui": "translate/ui"
+          },
+          {
             "name": "Swedish",
             "main": {
               "src": "translate/main",
               "handler": "sv"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Tajik",
+            "main": {
+              "src": "translate/main",
+              "handler": "tg"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Tamil",
+            "main": {
+              "src": "translate/main",
+              "handler": "ta"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Tatar",
+            "main": {
+              "src": "translate/main",
+              "handler": "tt"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Telugu",
+            "main": {
+              "src": "translate/main",
+              "handler": "te"
             },
             "ui": "translate/ui"
           },
@@ -203,19 +829,96 @@
               "handler": "tr"
             },
             "ui": "translate/ui"
+          },
+          {
+            "name": "Turkmen",
+            "main": {
+              "src": "translate/main",
+              "handler": "tk"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Ukrainian",
+            "main": {
+              "src": "translate/main",
+              "handler": "uk"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Urdu",
+            "main": {
+              "src": "translate/main",
+              "handler": "ur"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Uyghur",
+            "main": {
+              "src": "translate/main",
+              "handler": "ug"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Uzbek",
+            "main": {
+              "src": "translate/main",
+              "handler": "uz"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Vietnamese",
+            "main": {
+              "src": "translate/main",
+              "handler": "vi"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Welsh",
+            "main": {
+              "src": "translate/main",
+              "handler": "cy"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Xhosa",
+            "main": {
+              "src": "translate/main",
+              "handler": "xh"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Yiddish",
+            "main": {
+              "src": "translate/main",
+              "handler": "yi"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Yoruba",
+            "main": {
+              "src": "translate/main",
+              "handler": "yo"
+            },
+            "ui": "translate/ui"
+          },
+          {
+            "name": "Zulu",
+            "main": {
+              "src": "translate/main",
+              "handler": "zu"
+            },
+            "ui": "translate/ui"
           }
         ]
-      },
-      "-",
-      {
-        "name": "Set API Key",
-        "main": "set-api-key/main",
-        "ui": "set-api-key/ui"
-      },
-      "-",
-      {
-        "name": "Reset Plugin",
-        "main": "reset-plugin/main"
       }
     ]
   }
