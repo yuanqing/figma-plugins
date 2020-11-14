@@ -23,7 +23,7 @@ export default async function () {
   figma.on('close', function () {
     resetLanguage(originalStrings)
   })
-  let notificationHandler
+  let notificationHandler: NotificationHandler
   on('SET_LANGUAGE', async function ({ languageKey }) {
     notificationHandler = figma.notify('Translating…', { timeout: 60000 })
     const { layers, scope } = getTextLayers()
