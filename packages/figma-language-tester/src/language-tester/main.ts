@@ -18,7 +18,6 @@ export default async function () {
     figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
     return
   }
-  showUI({ height: 267, width: 240 })
   const originalStrings: { [key: string]: string } = {} // maps `layer.id` to the original strings
   figma.on('close', function () {
     resetLanguage(originalStrings)
@@ -59,6 +58,7 @@ export default async function () {
   once('CLOSE_UI', function () {
     figma.closePlugin()
   })
+  showUI({ height: 363, width: 240 })
 }
 
 function resetLanguage(originalStrings: { [key: string]: string }) {
