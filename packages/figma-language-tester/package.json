@@ -43,6 +43,7 @@
         "main": "language-tester/main",
         "ui": "language-tester/ui"
       },
+      "-",
       {
         "name": "Translate",
         "menu": [
