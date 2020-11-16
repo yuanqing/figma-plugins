@@ -8,7 +8,12 @@ import {
 const errorMessage = formatErrorMessage('Select two or more layers')
 
 export function mainFactory(options: {
-  sortNodes: (nodes: Array<SceneNode>) => null | Array<SceneNode>
+  sortNodes: (
+    nodes: Array<SceneNode>
+  ) =>
+    | null
+    | Array<SceneNode>
+    | { fixedNodes: Array<SceneNode>; scrollingNodes: Array<SceneNode> }
   successMessage: string
 }): () => void {
   const { sortNodes, successMessage } = options
@@ -25,9 +30,18 @@ export function mainFactory(options: {
     let didChange = false
     for (const nodes of groups) {
       const result = sortNodes(nodes)
-      if (result !== null) {
-        didChange = updateNodesSortOrder(result) || didChange
+      if (result === null) {
+        continue
       }
+      if (Array.isArray(result)) {
+        didChange = updateNodesSortOrder(result) || didChange
+        continue
+      }
+      const sortFixedNodesResult = updateNodesSortOrder(result.fixedNodes)
+      const sortScrollingNodesResult = updateNodesSortOrder(
+        result.scrollingNodes
+      )
+      didChange = sortFixedNodesResult || sortScrollingNodesResult
     }
     figma.closePlugin(
       didChange === true

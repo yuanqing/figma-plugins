@@ -2,7 +2,10 @@ import { smartSortChildNodes } from './smart-sort-child-nodes'
 
 export function smartSortNodes(
   nodes: Array<SceneNode>
-): null | Array<SceneNode> {
+):
+  | null
+  | Array<SceneNode>
+  | { fixedNodes: Array<SceneNode>; scrollingNodes: Array<SceneNode> } {
   const parent = nodes[0].parent
   if (parent === null) {
     throw new Error('Node has no parent')

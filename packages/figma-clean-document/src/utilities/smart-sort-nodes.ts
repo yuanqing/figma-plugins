@@ -1,5 +1,4 @@
 import {
-  compareObjects,
   isWithinInstance,
   traverseNode,
   updateNodesSortOrder
@@ -20,15 +19,7 @@ export function smartSortNodes(
     return false
   }
   let didChange = false
-  const ids = collectNodeIds(nodes)
-  const result = smartSortChildNodes(parent, ids)
-  if (
-    result !== null &&
-    compareObjects(ids, collectNodeIds(result)) === false
-  ) {
-    updateNodesSortOrder(result)
-    didChange = true
-  }
+  didChange = smartSortNodesHelper(parent, nodes) || didChange
   for (const node of nodes) {
     traverseNode(
       node,
@@ -40,16 +31,8 @@ export function smartSortNodes(
           return
         }
         if ('children' in parent) {
-          const nodes = parent.children
-          const ids = collectNodeIds(nodes.slice())
-          const result = smartSortChildNodes(parent, ids)
-          if (
-            result !== null &&
-            compareObjects(ids, collectNodeIds(result)) === false
-          ) {
-            updateNodesSortOrder(result)
-            didChange = true
-          }
+          didChange =
+            smartSortNodesHelper(parent, parent.children.slice()) || didChange
         }
       },
       function (node) {
@@ -58,6 +41,23 @@ export function smartSortNodes(
     )
   }
   return didChange
+}
+
+function smartSortNodesHelper(
+  node: PageNode | SceneNode,
+  nodes: Array<SceneNode>
+): boolean {
+  const ids = collectNodeIds(nodes)
+  const result = smartSortChildNodes(node, ids)
+  if (result === null) {
+    return false
+  }
+  if (Array.isArray(result)) {
+    return updateNodesSortOrder(result)
+  }
+  const sortFixedNodesResult = updateNodesSortOrder(result.fixedNodes)
+  const sortScrollingNodesResult = updateNodesSortOrder(result.scrollingNodes)
+  return sortFixedNodesResult || sortScrollingNodesResult
 }
 
 function collectNodeIds(nodes: Array<SceneNode>): Array<string> {
