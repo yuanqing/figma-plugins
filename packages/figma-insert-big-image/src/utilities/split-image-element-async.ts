@@ -30,8 +30,7 @@ export async function splitImageElementAsync(
     }
     y += height
   }
-  document.body.removeChild(parentElement)
-  return Promise.all(promises)
+  return Promise.all(promises.reverse())
 }
 
 async function encodeImageAsync(
