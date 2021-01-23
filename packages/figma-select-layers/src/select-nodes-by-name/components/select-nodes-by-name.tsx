@@ -12,7 +12,7 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function SelectLayersByName(initialState) {
+export function SelectNodesByName(initialState) {
   const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
     onClose: function () {
       emit('CLOSE_UI')

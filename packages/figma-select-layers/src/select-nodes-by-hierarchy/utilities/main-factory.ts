@@ -5,7 +5,10 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-export function mainFactory(label, getLayersCallback) {
+export function mainFactory(
+  label: string,
+  getNodesCallback: (nodes: Array<SceneNode>) => Array<SceneNode>
+) {
   return function () {
     if (figma.currentPage.children.length === 0) {
       figma.closePlugin(formatErrorMessage('No layers on page'))
@@ -13,18 +16,18 @@ export function mainFactory(label, getLayersCallback) {
     }
     const scope =
       figma.currentPage.selection.length > 0 ? 'within selection' : 'on page'
-    const layers = deduplicateNodes(
-      getLayersCallback(figma.currentPage.selection)
+    const nodes = deduplicateNodes(
+      getNodesCallback(figma.currentPage.selection.slice())
     )
-    if (layers.length === 0) {
+    if (nodes.length === 0) {
       figma.closePlugin(formatErrorMessage(`No ${label}s ${scope}`))
       return
     }
-    figma.currentPage.selection = layers
-    figma.viewport.scrollAndZoomIntoView(layers)
+    figma.currentPage.selection = nodes
+    figma.viewport.scrollAndZoomIntoView(nodes)
     figma.closePlugin(
       formatSuccessMessage(
-        `Selected ${layers.length} ${pluralize(layers.length, label)}`
+        `Selected ${nodes.length} ${pluralize(nodes.length, label)}`
       )
     )
   }
