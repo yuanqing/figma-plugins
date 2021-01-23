@@ -200,8 +200,8 @@
       "-",
       {
         "name": "Select Similar Layers",
-        "main": "select-similar-nodes/main",
-        "ui": "select-similar-nodes/ui"
+        "main": "select-similar-layers/main",
+        "ui": "select-similar-layers/ui"
       },
       "-",
       {
