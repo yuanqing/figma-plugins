@@ -54,7 +54,7 @@
       },
       {
         "name": "Reset Text Layer Names",
-        "main": "reset-text-node-names/main"
+        "main": "reset-text-layer-names/main"
       }
     ]
   }
