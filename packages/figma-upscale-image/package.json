@@ -1,0 +1,41 @@
+{
+  "name": "figma-upscale-image",
+  "version": "0.0.0",
+  "description": "A Figma plugin to upscale images using TensorFlow",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins"
+  ],
+  "license": "MIT",
+  "author": "Yuan Qing Lim",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/figma-plugins.git",
+    "directory": "packages/figma-upscale-image"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "yarn run clean && build-figma-plugin",
+    "clean": "rimraf '*.log' build manifest.json 'src/**/*.scss.d.ts'",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write package.json tsconfig.json",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "watch": "yarn run clean && build-figma-plugin --watch"
+  },
+  "dependencies": {
+    "@create-figma-plugin/ui": "*",
+    "@create-figma-plugin/utilities": "*",
+    "@tensorflow/tfjs": "2.1.0",
+    "preact": "^10.5.7",
+    "upscaler": "^0.7.5"
+  },
+  "figma-plugin": {
+    "name": "Upscale Image",
+    "id": "figma-upscale-image",
+    "main": "main",
+    "ui": "ui"
+  }
+}
