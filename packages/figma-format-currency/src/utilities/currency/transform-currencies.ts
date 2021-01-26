@@ -21,82 +21,77 @@ export function transformCurrencies(
   if (digitRegex.test(string) === false) {
     return string
   }
-  return string.replace(moneyRegex, function (
-    match,
-    m1,
-    prefix,
-    m2,
-    value,
-    suffix,
-    isoCode
-  ) {
-    let before = ''
-    let after = ''
-    if (
-      isValidIsoCode(isoCode.trim()) === false &&
-      isValidIsoCode(suffix.trim()) === true
-    ) {
-      // `isoCode` is an invalid match, so put it in `after`
-      after = `${isoCode}${after}`
-      isoCode = suffix
-      suffix = ''
-    }
-    const trimmedPrefix = prefix.trim()
-    const trimmedSuffix = suffix.trim()
-    let parsedIsoCode = isoCode.trim()
-    let isExplicitFormat = false
-    // try to parse `isoCode`
-    if (isValidIsoCode(parsedIsoCode) === true) {
-      isExplicitFormat = true
-    } else {
-      after = `${isoCode}${after}`
-      parsedIsoCode = ''
-    }
-    if (trimmedPrefix !== '') {
-      if (parsedIsoCode === '') {
-        // try to parse an ISO code from `trimmedPrefix`
-        parsedIsoCode = mapSymbolToIsoCode(trimmedPrefix, locale)
-        if (parsedIsoCode !== '') {
-          // `trimmedPrefix` is consumed
-          prefix = ''
-        }
-      } else {
-        if (isValidSymbol(trimmedPrefix)) {
-          // `trimmedPrefix` is valid and is consumed
-          prefix = ''
-        }
+  return string.replace(
+    moneyRegex,
+    function (match, m1, prefix, m2, value, suffix, isoCode) {
+      let before = ''
+      let after = ''
+      if (
+        isValidIsoCode(isoCode.trim()) === false &&
+        isValidIsoCode(suffix.trim()) === true
+      ) {
+        // `isoCode` is an invalid match, so put it in `after`
+        after = `${isoCode}${after}`
+        isoCode = suffix
+        suffix = ''
       }
-      before = `${before}${prefix}`
-    }
-    if (trimmedSuffix !== '') {
-      if (parsedIsoCode === '') {
-        // try to parse an ISO code from `trimmedSuffix`
-        parsedIsoCode = mapSymbolToIsoCode(trimmedSuffix, locale)
-        if (parsedIsoCode !== '') {
-          // `trimmedSuffix` is consumed
-          suffix = ''
-        }
+      const trimmedPrefix = prefix.trim()
+      const trimmedSuffix = suffix.trim()
+      let parsedIsoCode = isoCode.trim()
+      let isExplicitFormat = false
+      // try to parse `isoCode`
+      if (isValidIsoCode(parsedIsoCode) === true) {
+        isExplicitFormat = true
       } else {
-        if (isValidSymbol(trimmedSuffix)) {
-          // `trimmedSuffix` is valid and is consumed
-          suffix = ''
-        }
+        after = `${isoCode}${after}`
+        parsedIsoCode = ''
       }
-      after = `${suffix}${after}`
+      if (trimmedPrefix !== '') {
+        if (parsedIsoCode === '') {
+          // try to parse an ISO code from `trimmedPrefix`
+          parsedIsoCode = mapSymbolToIsoCode(trimmedPrefix, locale)
+          if (parsedIsoCode !== '') {
+            // `trimmedPrefix` is consumed
+            prefix = ''
+          }
+        } else {
+          if (isValidSymbol(trimmedPrefix)) {
+            // `trimmedPrefix` is valid and is consumed
+            prefix = ''
+          }
+        }
+        before = `${before}${prefix}`
+      }
+      if (trimmedSuffix !== '') {
+        if (parsedIsoCode === '') {
+          // try to parse an ISO code from `trimmedSuffix`
+          parsedIsoCode = mapSymbolToIsoCode(trimmedSuffix, locale)
+          if (parsedIsoCode !== '') {
+            // `trimmedSuffix` is consumed
+            suffix = ''
+          }
+        } else {
+          if (isValidSymbol(trimmedSuffix)) {
+            // `trimmedSuffix` is valid and is consumed
+            suffix = ''
+          }
+        }
+        after = `${suffix}${after}`
+      }
+      if (parsedIsoCode === '') {
+        // bail because we cannot resolve an ISO code
+        return match
+      }
+      const parsedValue = parseValue(value, parsedIsoCode)
+      const minus = m1 !== '' || m2 !== '' ? MINUS : ''
+      return `${before}${minus}${transform({
+        isExplicitFormat,
+        isoCode: parsedIsoCode,
+        locale,
+        value: parseFloat(parsedValue)
+      })}${after}`
     }
-    if (parsedIsoCode === '') {
-      // bail because we cannot resolve an ISO code
-      return match
-    }
-    const parsedValue = parseValue(value, parsedIsoCode)
-    const minus = m1 !== '' || m2 !== '' ? MINUS : ''
-    return `${before}${minus}${transform({
-      isExplicitFormat,
-      isoCode: parsedIsoCode,
-      locale,
-      value: parseFloat(parsedValue)
-    })}${after}`
-  })
+  )
 }
 
 const separatorRegexes: { [key: string]: any } = {

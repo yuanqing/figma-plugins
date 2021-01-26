@@ -47,12 +47,12 @@ export function OrganizeLayers(props: { [key: string]: any }): h.JSX.Element {
   })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({
-        layers,
-        maximumGroupDefinition
-      }) {
-        handleChange({ layers, maximumGroupDefinition })
-      })
+      return on(
+        'SELECTION_CHANGED',
+        function ({ layers, maximumGroupDefinition }) {
+          handleChange({ layers, maximumGroupDefinition })
+        }
+      )
     },
     [handleChange]
   )

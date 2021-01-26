@@ -23,29 +23,27 @@ export default async function (): Promise<void> {
       nodes: getTextNodes()
     })
   })
-  once('SUBMIT', async function ({
-    nodes,
-    targetCurrency,
-    roundNumbers,
-    locale
-  }) {
-    await saveSettingsAsync({
-      ...settings,
-      locale,
-      roundNumbers,
-      targetCurrency
-    })
-    for (const { id, characters } of nodes) {
-      const node = figma.getNodeById(id) as TextNode
-      await loadFontsAsync([node])
-      node.characters = characters
-    }
-    figma.closePlugin(
-      formatSuccessMessage(
-        `Converted currencies in selection to ${targetCurrency}`
+  once(
+    'SUBMIT',
+    async function ({ nodes, targetCurrency, roundNumbers, locale }) {
+      await saveSettingsAsync({
+        ...settings,
+        locale,
+        roundNumbers,
+        targetCurrency
+      })
+      for (const { id, characters } of nodes) {
+        const node = figma.getNodeById(id) as TextNode
+        await loadFontsAsync([node])
+        node.characters = characters
+      }
+      figma.closePlugin(
+        formatSuccessMessage(
+          `Converted currencies in selection to ${targetCurrency}`
+        )
       )
-    )
-  })
+    }
+  )
   once('CLOSE_UI', function () {
     figma.closePlugin()
   })

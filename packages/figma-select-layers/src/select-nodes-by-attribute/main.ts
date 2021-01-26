@@ -55,11 +55,12 @@ export const selectVectorLayers = mainFactory(
   }
 )
 
-export const selectRectangles = mainFactory('rectangle', function (
-  node: SceneNode
-) {
-  return node.type === 'RECTANGLE' && isImage(node) === false
-})
+export const selectRectangles = mainFactory(
+  'rectangle',
+  function (node: SceneNode) {
+    return node.type === 'RECTANGLE' && isImage(node) === false
+  }
+)
 
 export const selectLines = mainFactory('line', function (node: SceneNode) {
   if (node.type === 'LINE') {
@@ -104,23 +105,26 @@ export const selectTextLayers = mainFactory(
   isNodeTypeFactory('TEXT')
 )
 
-export const selectMaskLayers = mainFactory('mask layer', function (
-  node: SceneNode
-) {
-  return node.type !== 'SLICE' && node.isMask === true
-})
+export const selectMaskLayers = mainFactory(
+  'mask layer',
+  function (node: SceneNode) {
+    return node.type !== 'SLICE' && node.isMask === true
+  }
+)
 
-export const selectHiddenLayers = mainFactory('hidden layer', function (
-  node: SceneNode
-) {
-  return node.visible === false
-})
+export const selectHiddenLayers = mainFactory(
+  'hidden layer',
+  function (node: SceneNode) {
+    return node.visible === false
+  }
+)
 
-export const selectLockedLayers = mainFactory('locked layer', function (
-  node: SceneNode
-) {
-  return node.locked === true
-})
+export const selectLockedLayers = mainFactory(
+  'locked layer',
+  function (node: SceneNode) {
+    return node.locked === true
+  }
+)
 
 export const selectLayersWithExports = mainFactory(
   ['layer with export settings', 'layers with export settings'],

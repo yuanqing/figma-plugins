@@ -62,13 +62,15 @@ export default async function () {
 }
 
 function resetLanguage(originalStrings: { [key: string]: string }) {
-  const layers = filterLayers(figma.currentPage.children.slice(), function (
-    layer: SceneNode
-  ) {
-    return (
-      layer.type === 'TEXT' && typeof originalStrings[layer.id] !== 'undefined'
-    )
-  })
+  const layers = filterLayers(
+    figma.currentPage.children.slice(),
+    function (layer: SceneNode) {
+      return (
+        layer.type === 'TEXT' &&
+        typeof originalStrings[layer.id] !== 'undefined'
+      )
+    }
+  )
   let didChange = false
   for (const layer of layers) {
     if (layer.characters !== originalStrings[layer.id]) {

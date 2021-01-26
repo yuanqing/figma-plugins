@@ -17,22 +17,22 @@ export function convertCurrency({
   roundNumbers,
   locale
 }: ConvertCurrencyOptions): string {
-  return transformCurrencies(string, locale, function ({
-    value,
-    isoCode,
-    isExplicitFormat
-  }) {
-    const exchangeRate = computeExchangeRate(isoCode, targetCurrency)
-    let targetValue = value * exchangeRate
-    if (roundNumbers === true) {
-      targetValue = roundValue(targetValue, targetCurrency)
+  return transformCurrencies(
+    string,
+    locale,
+    function ({ value, isoCode, isExplicitFormat }) {
+      const exchangeRate = computeExchangeRate(isoCode, targetCurrency)
+      let targetValue = value * exchangeRate
+      if (roundNumbers === true) {
+        targetValue = roundValue(targetValue, targetCurrency)
+      }
+      const result = formatCurrencyByLocale(targetValue, targetCurrency, locale)
+      if (isExplicitFormat === true) {
+        return addIsoCodeSuffix(result, targetCurrency)
+      }
+      return result
     }
-    const result = formatCurrencyByLocale(targetValue, targetCurrency, locale)
-    if (isExplicitFormat === true) {
-      return addIsoCodeSuffix(result, targetCurrency)
-    }
-    return result
-  })
+  )
 }
 
 function roundValue(value: number, isoCode: string): number {

@@ -3,12 +3,12 @@ import { formatCurrencyByLocale } from './format-currency-by-locale'
 import { transformCurrencies } from './transform-currencies'
 
 export function formatExplicit(characters: string, locale: string): string {
-  return transformCurrencies(characters, locale, function ({
-    value,
-    isoCode,
-    locale
-  }) {
-    const result = formatCurrencyByLocale(value, isoCode, locale)
-    return addIsoCodeSuffix(result, isoCode)
-  })
+  return transformCurrencies(
+    characters,
+    locale,
+    function ({ value, isoCode, locale }) {
+      const result = formatCurrencyByLocale(value, isoCode, locale)
+      return addIsoCodeSuffix(result, isoCode)
+    }
+  )
 }

@@ -34,32 +34,35 @@ export function LanguageTester() {
     }
   }
   useEffect(function () {
-    return on('TRANSLATE_REQUEST', async function ({
-      languageKey,
-      layers,
-      scope
-    }: {
-      languageKey: string
-      layers: Array<{ id: string; characters: string }>
-      scope: string
-    }) {
-      setLoading(true)
-      const promises = layers.map(function ({ characters }) {
-        return translateAsync(characters, languageKey)
-      })
-      const translated = await Promise.all(promises)
-      setLoading(false)
-      emit('TRANSLATE_RESULT', {
+    return on(
+      'TRANSLATE_REQUEST',
+      async function ({
         languageKey,
-        layers: layers.map(function ({ id }, index: number) {
-          return {
-            characters: translated[index],
-            id
-          }
-        }),
+        layers,
         scope
-      })
-    })
+      }: {
+        languageKey: string
+        layers: Array<{ id: string; characters: string }>
+        scope: string
+      }) {
+        setLoading(true)
+        const promises = layers.map(function ({ characters }) {
+          return translateAsync(characters, languageKey)
+        })
+        const translated = await Promise.all(promises)
+        setLoading(false)
+        emit('TRANSLATE_RESULT', {
+          languageKey,
+          layers: layers.map(function ({ id }, index: number) {
+            return {
+              characters: translated[index],
+              id
+            }
+          }),
+          scope
+        })
+      }
+    )
   }, [])
   useEffect(function () {
     window.addEventListener('keydown', handleKeyDown)
