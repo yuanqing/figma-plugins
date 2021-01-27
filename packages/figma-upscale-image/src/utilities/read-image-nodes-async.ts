@@ -1,6 +1,6 @@
 import { Image } from '../types'
 
-export async function readImagesAsync(
+export async function readImageNodesAsync(
   nodes: Array<SceneNode>
 ): Promise<Array<Image>> {
   const result = []

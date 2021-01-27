@@ -57,7 +57,7 @@ export function UpscaleImage(props: { [key: string]: any }): h.JSX.Element {
         )
         emit('UPSCALE_IMAGE_RESULT', result)
       }
-      emit('CLOSE_UI')
+      emit('UPSCALE_IMAGES_SUCCESS', { count: images.length })
     })
   }, [])
   const { isLoading, scale } = state
