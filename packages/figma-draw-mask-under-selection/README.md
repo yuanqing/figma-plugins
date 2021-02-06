@@ -2,7 +2,7 @@
 
 > A Figma plugin to draw a mask under the selection
 
-[![Draw Mask Under Selection](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-draw-mask-under-selection/media/cover.png)](https://figma.com/community/plugin/806532458729477508/Draw-Mask-Under-Selection)
+[![Draw Mask Under Selection](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-draw-mask-under-selection/media/cover.png)](https://figma.com/community/plugin/806532458729477508/Draw-Mask-Under-Selection)
 
 `crop` `layers` `mask`
 

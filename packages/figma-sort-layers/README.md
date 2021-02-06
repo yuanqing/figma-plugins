@@ -2,7 +2,7 @@
 
 > A Figma plugin to sort layers by name or position
 
-[![Sort Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-sort-layers/media/cover.png)](https://figma.com/community/plugin/767379414704079825/Sort-Layers)
+[![Sort Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-sort-layers/media/cover.png)](https://figma.com/community/plugin/767379414704079825/Sort-Layers)
 
 `arrange` `clean` `layers` `organize` `organizer` `random` `randomize` `reverse` `sort` `tidy`
 

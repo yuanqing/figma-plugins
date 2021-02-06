@@ -2,7 +2,7 @@
 
 > A Figma plugin to insert and retain the original resolution of big images
 
-[![Insert Big Image](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-insert-big-image/media/cover.png)](https://figma.com/community/plugin/799646392992487942/Insert-Big-Image)
+[![Insert Big Image](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-insert-big-image/media/cover.png)](https://figma.com/community/plugin/799646392992487942/Insert-Big-Image)
 
 `big` `image` `images` `large` `photo` `photos` `photography` `pictures` `pixels` `resolution` `upload`
 

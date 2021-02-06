@@ -2,7 +2,7 @@
 
 > A Figma plugin to rasterize layers at a high resolution
 
-[![Flatten Selection to Bitmap](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-flatten-selection-to-bitmap/media/cover.png)](https://figma.com/community/plugin/837846252158418235/Flatten-Selection-to-Bitmap)
+[![Flatten Selection to Bitmap](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-flatten-selection-to-bitmap/media/cover.png)](https://figma.com/community/plugin/837846252158418235/Flatten-Selection-to-Bitmap)
 
 `asset` `bitmap` `export` `flatten` `image` `images` `resolution`
 

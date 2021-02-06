@@ -2,7 +2,7 @@
 
 > A Figma plugin to format and convert between currencies
 
-[![Format Currency](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-format-currency/media/cover.png)](https://figma.com/community/plugin/780785006732555859)
+[![Format Currency](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-format-currency/media/cover.png)](https://figma.com/community/plugin/780785006732555859)
 
 `convert` `converter` `currency` `format` `i18n` `internationalization` `language` `money` `price` `translate` `translation` `translator`
 

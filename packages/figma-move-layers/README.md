@@ -2,7 +2,7 @@
 
 > A Figma plugin to precisely move layers
 
-[![Move Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-move-layers/media/cover.png)](https://figma.com/community/plugin/767379204511357902/Move-Layers)
+[![Move Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-move-layers/media/cover.png)](https://figma.com/community/plugin/767379204511357902/Move-Layers)
 
 `arrange` `layers` `move` `nudge` `offset` `space`
 

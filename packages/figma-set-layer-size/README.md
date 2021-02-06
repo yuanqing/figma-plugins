@@ -2,7 +2,7 @@
 
 > A Figma plugin to precisely set the size of layers, while ignoring constraints
 
-[![Set Layer Size](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-set-layer-size/media/cover.png)](https://figma.com/community/plugin/817982008781589678/Set-Layer-Size)
+[![Set Layer Size](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-set-layer-size/media/cover.png)](https://figma.com/community/plugin/817982008781589678/Set-Layer-Size)
 
 `constraints` `dimension` `layers` `resize` `size`
 

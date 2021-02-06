@@ -2,7 +2,7 @@
 
 > A Figma plugin to create and copy components, and replace layers with components
 
-[![Component Utilities](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-component-utilities/media/cover.png)](https://figma.com/community/plugin/785894722513806497/Component-Utilities)
+[![Component Utilities](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-component-utilities/media/cover.png)](https://figma.com/community/plugin/785894722513806497/Component-Utilities)
 
 `clone` `component` `components` `copy` `duplicate` `instance` `layers` `master` `replace` `reset` `size`
 

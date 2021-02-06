@@ -2,7 +2,7 @@
 
 > A Figma plugin to organize layers on the page
 
-[![Organize Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-organize-layers/media/cover.png)](https://figma.com/community/plugin/786286754606650597/Organize-Layers)
+[![Organize Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-organize-layers/media/cover.png)](https://figma.com/community/plugin/786286754606650597/Organize-Layers)
 
 `arrange` `clean` `component` `components` `format` `layers` `master` `organize` `organizer` `sort` `tidy`
 

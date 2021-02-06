@@ -2,7 +2,7 @@
 
 > A Figma plugin to select layers based on name, type, or similarity
 
-[![Select Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-select-layers/media/cover.png)](https://figma.com/community/plugin/799648692768237063/Select-Layers)
+[![Select Layers](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-select-layers/media/cover.png)](https://figma.com/community/plugin/799648692768237063/Select-Layers)
 
 `attributes` `hidden` `layers` `locked` `select` `selector` `similar` `similarity` `style` `styles` `type`
 

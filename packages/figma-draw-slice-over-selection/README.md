@@ -2,7 +2,7 @@
 
 > A Figma plugin to draw a slice over the selection
 
-[![Draw Slice Over Selection](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-draw-slice-over-selection/media/cover.png)](https://figma.com/community/plugin/767379335945775056/Draw-Slice-Over-Selection)
+[![Draw Slice Over Selection](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-draw-slice-over-selection/media/cover.png)](https://figma.com/community/plugin/767379335945775056/Draw-Slice-Over-Selection)
 
 `layers` `padding` `slice`
 

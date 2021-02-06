@@ -2,7 +2,7 @@
 
 > A Figma plugin to test your UI in different languages
 
-[![Language Tester](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-language-tester/media/cover.png)](https://figma.com/community/plugin/767379122107077581/Language-Tester)
+[![Language Tester](https://raw.githubusercontent.com/yuanqing/figma-plugins/main/packages/figma-language-tester/media/cover.png)](https://figma.com/community/plugin/767379122107077581/Language-Tester)
 
 `convert` `i18n` `internationalization` `language` `translate` `translation` `translator`
 
