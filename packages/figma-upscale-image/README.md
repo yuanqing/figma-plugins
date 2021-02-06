@@ -2,6 +2,8 @@
 
 > A Figma plugin to upscale low resolution images using machine learning
 
+[![Upscale Image](https://raw.githubusercontent.com/yuanqing/figma-plugins/master/packages/figma-upscale-images/media/cover.png)](https://figma.com/community/plugin/939832535166467194/Upscale-Image)
+
 `enhance` `image` `images` `photos` `photography` `resolution` `resize` `scale` `super` `upscale`
 
 ## Commands
