@@ -1,7 +1,7 @@
 {
   "name": "figma-upscale-image",
   "version": "0.0.0",
-  "description": "A Figma plugin to increase the resolution of images using a neural network",
+  "description": "A Figma plugin to upscale low resolution images using machine learning",
   "keywords": [
     "create-figma-plugin",
     "figma",
@@ -34,7 +34,7 @@
   },
   "figma-plugin": {
     "name": "Upscale Image",
-    "id": "figma-upscale-image",
+    "id": "939832535166467194",
     "main": "main",
     "ui": "ui"
   }

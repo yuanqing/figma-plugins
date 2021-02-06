@@ -1,6 +1,6 @@
-# Upscale Image
+# Upscale Image [![Figma Plugin](https://img.shields.io/badge/figma-Upscale%20Image-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/939832535166467194/Upscale-Image) [![installs](https://img.shields.io/endpoint?cacheSeconds=1800&url=https://yuanqing.github.io/figma-plugins-stats/plugin/939832535166467194/installs.json)](https://figma.com/community/plugin/939832535166467194/Upscale-Image) [![npm Version](https://img.shields.io/npm/v/figma-upscale-image?cacheSeconds=1800)](https://npmjs.com/package/figma-upscale-image)
 
-> A Figma plugin to increase the resolution of images using a neural network
+> A Figma plugin to upscale low resolution images using machine learning
 
 `enhance` `image` `images` `photos` `photography` `resolution` `resize` `scale` `super` `upscale`
 
@@ -8,7 +8,7 @@
 
 ### Upscale Image
 
-Upscales the selected image layers by either `2x`, `3x` or `4x`.
+Upscales the selected image layers by `2x`, `3x` or `4x`.
 
 ## Credits
 
