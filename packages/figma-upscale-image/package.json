@@ -1,6 +1,6 @@
 {
   "name": "figma-upscale-image",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Figma plugin to upscale low resolution images using machine learning",
   "keywords": [
     "create-figma-plugin",
