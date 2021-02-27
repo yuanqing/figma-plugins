@@ -17,6 +17,7 @@ Selects layers that partially or exactly match the given name.
 Selects layers of a particular type:
 
 - Component
+- Variant
 - Instance Layer
 - Frame
 - Group
