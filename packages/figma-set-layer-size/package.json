@@ -28,7 +28,7 @@
   "dependencies": {
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
-    "preact": "^10.5.7"
+    "preact": "^10.5.12"
   },
   "figma-plugin": {
     "name": "Set Layer Size",

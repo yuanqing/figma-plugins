@@ -6,35 +6,35 @@
     "clean": "lerna run --parallel clean && rimraf '*.log'",
     "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
-    "postinstall": "yarn run build",
+    "postinstall": "husky install && yarn run build",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
     "test": "lerna run test"
   },
   "devDependencies": {
-    "@babel/plugin-transform-react-jsx": "^7.12.5",
+    "@babel/plugin-transform-react-jsx": "^7.12.17",
     "@create-figma-plugin/build": "*",
     "@create-figma-plugin/tsconfig": "*",
-    "@figma/plugin-typings": "^1.18.2",
+    "@figma/plugin-typings": "^1.19.1",
     "@types/natural-compare-lite": "^1.4.0",
-    "@types/tap": "^14.10.1",
-    "eslint": "^7.13.0",
+    "@types/tap": "^14.10.2",
+    "eslint": "^7.20.0",
     "eslint-config-yuanqing": "^0.0.4",
-    "globby": "^11.0.1",
-    "husky": "^4.3.0",
+    "globby": "^11.0.2",
+    "husky": "^5.1.1",
     "lerna": "^3.22.1",
-    "lint-staged": "^10.5.1",
-    "npm-check-updates": "^10.0.0",
-    "preact": "^10.5.7",
-    "prettier": "^2.1.2",
+    "lint-staged": "^10.5.4",
+    "npm-check-updates": "^11.1.9",
+    "preact": "^10.5.12",
+    "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "stylelint": "^13.7.2",
+    "stylelint": "^13.11.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-prettier": "^1.1.2",
-    "tap": "^14.10.8",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.5",
-    "typescript-plugin-css-modules": "^2.8.0"
+    "tap": "^14.11.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2",
+    "typescript-plugin-css-modules": "^3.2.0"
   },
   "eslintConfig": {
     "extends": "yuanqing",
@@ -48,11 +48,6 @@
       "react/prop-types": [
         "off"
       ]
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
