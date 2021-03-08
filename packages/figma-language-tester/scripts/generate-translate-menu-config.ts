@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 
-const languages = require('../src/utilities/languages.json')
+const languages = require('../src/utilities/languages.json') as {
+  [key: string]: string
+}
 
 const result = []
 for (const languageKey in languages) {

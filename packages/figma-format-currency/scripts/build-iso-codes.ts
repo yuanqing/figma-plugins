@@ -1,24 +1,19 @@
-const { join } = require('path')
-const { outputJson } = require('fs-extra')
-const exchangeRates = require('./data/exchange-rates')
+/* eslint-disable no-console */
 
-async function main() {
+const exchangeRates = require('./data/exchange-rates') as {
+  [key: string]: number
+}
+
+type Result = { [key: string]: [string, number, number] }
+
+function main() {
   const isoCodes = sortObjectByKey(parse(exchangeRates))
-  const filePath = join(
-    __dirname,
-    '..',
-    'src',
-    'utilities',
-    'currency',
-    'data',
-    'iso-codes.json'
-  )
-  await outputJson(filePath, isoCodes, { spaces: 2 })
+  console.log(JSON.stringify(isoCodes, null, 2))
 }
 main()
 
-function parse(exchangeRates) {
-  const result = {}
+function parse(exchangeRates: { [key: string]: number }) {
+  const result: Result = {}
   for (const isoCode of Object.keys(exchangeRates)) {
     const locale = isoCode.substring(0, 2).toLowerCase()
     const symbol = parseSymbol(isoCode, locale)
@@ -29,7 +24,7 @@ function parse(exchangeRates) {
   return result
 }
 
-function parseSymbol(isoCode, locale) {
+function parseSymbol(isoCode: string, locale: string) {
   const string = new Intl.NumberFormat(`en-${locale}`, {
     currency: isoCode,
     currencyDisplay: 'symbol',
@@ -51,7 +46,7 @@ function parseSymbol(isoCode, locale) {
   return symbol
 }
 
-function parseSignificantFigures(isoCode, locale) {
+function parseSignificantFigures(isoCode: string, locale: string) {
   const string = new Intl.NumberFormat(`en-${locale}`, {
     currency: isoCode,
     currencyDisplay: 'code',
@@ -61,6 +56,9 @@ function parseSignificantFigures(isoCode, locale) {
   const value = string.replace(isoCodeRegex, '')
   const nonDigitRegex = /([^\d])/g
   const matches = value.match(nonDigitRegex)
+  if (matches === null) {
+    throw new Error('`matches` is null')
+  }
   const thousandsSeparator = matches[0]
   const decimalSeparator = matches[matches.length - 1]
   if (thousandsSeparator === decimalSeparator) {
@@ -70,9 +68,9 @@ function parseSignificantFigures(isoCode, locale) {
   return value.length - decimalIndex - 1
 }
 
-function sortObjectByKey(object) {
+function sortObjectByKey(object: Result) {
   const sortedKeys = Object.keys(object).sort()
-  const result = {}
+  const result: Result = {}
   for (const key of sortedKeys) {
     result[key] = object[key]
   }
