@@ -4,7 +4,7 @@
 
 Name | Description
 :--|:--
-[**Clean Document**](/packages/figma-clean-document) | Automagically organise and clean up your Figma document
+[**Clean Document**](/packages/figma-clean-document) | Automagically organize and clean up your Figma document
 [**Component Utilities**](/packages/figma-component-utilities) | Copy and create components, and replace layers with components
 [**Distribute Layers**](/packages/figma-distribute-layers) | Distribute layers in a given direction and offset
 [**Draw Mask Under Selection**](/packages/figma-draw-mask-under-selection) | Draw a mask under the selection
