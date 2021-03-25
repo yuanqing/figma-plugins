@@ -33,18 +33,18 @@ export default async function (): Promise<void> {
       figma.closePlugin()
       return
     }
-    const selectedLayers = figma.currentPage.selection
-    for (const layer of selectedLayers) {
+    const selection = figma.currentPage.selection
+    for (const node of selection) {
       if (isHorizontalOffsetValid === true) {
-        layer.x += horizontalOffset
+        node.x += horizontalOffset
       }
       if (isVerticalOffsetValid === true) {
-        layer.y += verticalOffset
+        node.y += verticalOffset
       }
     }
     figma.closePlugin(
       formatSuccessMessage(
-        `Moved selected ${pluralize(selectedLayers.length, 'layer')}`
+        `Moved selected ${pluralize(selection.length, 'layer')}`
       )
     )
   })
