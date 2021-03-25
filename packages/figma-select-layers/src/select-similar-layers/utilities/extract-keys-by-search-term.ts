@@ -1,3 +1,4 @@
+// TODO: Add types
 import { labels } from './labels'
 
 export function extractKeysBySearchTerm(attributes, searchTerm) {

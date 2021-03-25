@@ -1,3 +1,4 @@
+// TODO: Add types
 export function toggleAttributes(
   attributes,
   keysByReferenceLayerType,

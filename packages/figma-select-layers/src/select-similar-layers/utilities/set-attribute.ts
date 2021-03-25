@@ -1,3 +1,4 @@
+// TODO: Add types
 export function setAttribute(attributes, targetKey, newValue) {
   const result = {}
   for (const key in attributes) {

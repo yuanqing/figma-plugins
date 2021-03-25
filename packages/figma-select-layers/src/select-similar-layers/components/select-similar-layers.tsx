@@ -19,9 +19,11 @@ import { toggleAttributes } from '../utilities/toggle-attributes'
 import { Attributes } from './attributes'
 import styles from './select-similar-layers.scss'
 
-export function SelectSimilarLayers(initialState) {
+export function SelectSimilarLayers(props: {
+  [key: string]: any
+}): h.JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(
-    { ...initialState, searchTerm: '' },
+    { ...props, searchTerm: '' },
     {
       onClose: function () {
         emit('CLOSE_UI')

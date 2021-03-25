@@ -10,24 +10,24 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { defaultSettings } from '../utilities/default-settings'
-import { getSimilarLayers } from './utilities/get-similar-layers'
+import { getSimilarNodes } from './utilities/get-similar-nodes'
 
-export default async function () {
-  const selectedLayers = figma.currentPage.selection
-  const length = selectedLayers.length
+export default async function (): Promise<void> {
+  const selection = figma.currentPage.selection
+  const length = selection.length
   if (length !== 1) {
     figma.closePlugin(createErrorMessage(length))
     return
   }
   const settings = await loadSettingsAsync(defaultSettings)
   function onSelectionChange() {
-    const selectedLayers = figma.currentPage.selection
-    const length = selectedLayers.length
+    const selection = figma.currentPage.selection
+    const length = selection.length
     if (length !== 1) {
       figma.notify(createErrorMessage(length))
     }
     emit('SELECTION_CHANGED', {
-      referenceLayerType: length === 1 ? selectedLayers[0].type : null
+      referenceLayerType: length === 1 ? selection[0].type : null
     })
   }
   figma.on('selectionchange', onSelectionChange)
@@ -37,8 +37,8 @@ export default async function () {
       ...settings,
       selectSimilarLayers: attributes
     })
-    const referenceLayer = figma.currentPage.selection[0]
-    const result = getSimilarLayers(referenceLayer, extractTrueKeys(attributes))
+    const referenceNode = figma.currentPage.selection[0]
+    const result = getSimilarNodes(referenceNode, extractTrueKeys(attributes))
     if (result.length === 1) {
       figma.closePlugin(formatErrorMessage('No similar layers on page'))
       return
@@ -59,12 +59,12 @@ export default async function () {
     { height: 436, width: 240 },
     {
       attributes: selectSimilarLayers,
-      referenceLayerType: selectedLayers[0].type
+      referenceLayerType: selection[0].type
     }
   )
 }
 
-function createErrorMessage(length) {
+function createErrorMessage(length: number): string {
   return formatErrorMessage(
     length === 0
       ? 'Select a reference layer'
@@ -72,7 +72,7 @@ function createErrorMessage(length) {
   )
 }
 
-function extractTrueKeys(attributes) {
+function extractTrueKeys(attributes: { [key: string]: any }): Array<string> {
   let result = []
   for (const key in attributes) {
     const value = attributes[key]

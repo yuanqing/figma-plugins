@@ -17,7 +17,7 @@ export function Attributes({
   keysByReferenceLayerType,
   keysBySearchTerm,
   onAttributeClick
-}: AttributesProps) {
+}: AttributesProps): h.JSX.Element {
   const result = []
   for (const key in attributes) {
     if (keysBySearchTerm.includes(key) === false) {
