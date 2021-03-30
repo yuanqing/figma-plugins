@@ -16,3 +16,5 @@ for (const languageKey in languages) {
   })
 }
 console.log(JSON.stringify(result, null, 2))
+
+export {}

@@ -13,3 +13,5 @@ for (const languageKey in languages) {
     )} = mainFactory('${languageKey}')`
   )
 }
+
+export {}
