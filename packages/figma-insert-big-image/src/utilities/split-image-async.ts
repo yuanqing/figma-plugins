@@ -1,7 +1,49 @@
 /* global FileReader */
 import { ImageAttributes } from '../types'
 
-export async function splitImageElementAsync(
+// This function uses the DOM and must be called from the UI context
+export async function splitImageAsync(
+  object: Blob | File
+): Promise<Array<ImageAttributes>> {
+  const imageElement = await createImageElementFromFileAsync(object)
+  const widths = computeDimensions(imageElement.width)
+  const heights = computeDimensions(imageElement.height)
+  return splitImageElementAsync(imageElement, widths, heights)
+}
+
+async function createImageElementFromFileAsync(
+  object: Blob | File
+): Promise<HTMLImageElement> {
+  return new Promise(function (resolve, reject) {
+    const imageElement = new Image()
+    imageElement.onload = function (): void {
+      resolve(imageElement)
+    }
+    imageElement.onerror = reject
+    imageElement.src = URL.createObjectURL(object)
+  })
+}
+
+const MAX_DIMENSION = 4096
+
+// Splits `dimensions` into an array of numbers that are each smaller than `MAX_DIMENSION`
+function computeDimensions(dimension: number): Array<number> {
+  if (dimension <= MAX_DIMENSION) {
+    return [dimension]
+  }
+  let pieces = 1
+  let currentDimension
+  do {
+    pieces++
+    currentDimension = Math.floor(dimension / pieces)
+  } while (currentDimension >= MAX_DIMENSION)
+  const remainder = dimension % currentDimension
+  const result = Array(pieces - 1).fill(currentDimension)
+  result.push(currentDimension + remainder)
+  return result
+}
+
+async function splitImageElementAsync(
   image: HTMLImageElement,
   widths: Array<number>,
   heights: Array<number>

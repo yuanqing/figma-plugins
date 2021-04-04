@@ -12,10 +12,7 @@ import { emit } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { computeDimensions } from '../utilities/compute-dimensions'
-import { createImageElementFromFileAsync } from '../utilities/create-image-element-from-file-async'
-import { splitImageElementAsync } from '../utilities/split-image-element-async'
-import { trimExtension } from '../utilities/trim-extension'
+import { splitImageAsync } from '../utilities/split-image-async'
 import { Loading } from './loading/loading'
 
 export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
@@ -47,17 +44,13 @@ export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
       for (const file of files) {
         currentIndex++
         handleChange({ currentIndex })
-        const image = await createImageElementFromFileAsync(file)
-        const widths = computeDimensions(image.width)
-        const heights = computeDimensions(image.height)
-        const images = await splitImageElementAsync(image, widths, heights)
+        const images = await splitImageAsync(file)
         const name = trimExtension(file.name)
         emit('INSERT_BIG_IMAGE', {
           images,
           insertAs2x,
           isDone: currentIndex === total,
-          name,
-          width: image.width
+          name
         })
       }
     },
@@ -115,4 +108,8 @@ export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
       </Checkbox>
     </Container>
   )
+}
+
+function trimExtension(fileName: string): string {
+  return fileName.substr(0, fileName.lastIndexOf('.'))
 }

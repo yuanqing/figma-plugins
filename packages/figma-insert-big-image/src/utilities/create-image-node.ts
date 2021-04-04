@@ -3,20 +3,20 @@ import { createImagePaint } from '@create-figma-plugin/utilities'
 import { ImageAttributes } from '../types'
 
 export function createImageNode(
-  data: ImageAttributes,
-  xOffset: number,
-  yOffset: number,
-  insertAs2x: boolean
+  image: ImageAttributes,
+  options: {
+    resolution: number
+    xOffset: number
+    yOffset: number
+  }
 ): RectangleNode {
-  const { bytes, x, y, width, height } = data
+  const { bytes, x, y, width, height } = image
+  const { resolution, xOffset, yOffset } = options
   const rectangle = figma.createRectangle()
   rectangle.name = 'Image'
-  rectangle.x = (insertAs2x === true ? x / 2 : x) + xOffset
-  rectangle.y = (insertAs2x === true ? y / 2 : y) + yOffset
-  rectangle.resize(
-    insertAs2x === true ? width / 2 : width,
-    insertAs2x === true ? height / 2 : height
-  )
+  rectangle.x = x / resolution + xOffset
+  rectangle.y = y / resolution + yOffset
+  rectangle.resize(width / resolution, height / resolution)
   rectangle.fills = [createImagePaint(bytes)]
   return rectangle
 }
