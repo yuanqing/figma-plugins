@@ -3,7 +3,7 @@ import {
   sortNodesByCanonicalOrder
 } from '@create-figma-plugin/utilities'
 
-export function createGroup(nodes: Array<SceneNode>): GroupNode {
+export function createGroupNode(nodes: Array<SceneNode>): GroupNode {
   if (areSiblingNodes(nodes) === false) {
     return figma.group(nodes, figma.currentPage)
   }

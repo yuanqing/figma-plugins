@@ -6,8 +6,8 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { defaultSettings } from '../utilities/default-settings'
-import { createGroup } from './utilities/create-group'
-import { createImageFromGroupAsync } from './utilities/create-image-from-group-async'
+import { createGroupNode } from './utilities/create-group'
+import { flattenGroupNodeAsync } from './utilities/flatten-group-node-async'
 import { replaceNodesWithinInstancesWithClones } from './utilities/replace-nodes-within-instances-with-clones'
 
 export default async function (): Promise<void> {
@@ -20,14 +20,14 @@ export default async function (): Promise<void> {
   const nodes = replaceNodesWithinInstancesWithClones(
     figma.currentPage.selection.slice()
   )
-  const group = createGroup(nodes)
+  const group = createGroupNode(nodes)
   const { resolution } = await loadSettingsAsync(defaultSettings)
-  const image = await createImageFromGroupAsync(group, resolution)
+  const node = await flattenGroupNodeAsync(group, resolution)
   const didPositionChange =
-    image.width !== group.width || image.height !== group.height
+    node.width !== group.width || node.height !== group.height
   group.remove()
-  image.name = layerName
-  figma.currentPage.selection = [image]
+  node.name = layerName
+  figma.currentPage.selection = [node]
   figma.closePlugin(
     didPositionChange === true
       ? formatWarningMessage(
