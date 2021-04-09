@@ -28,12 +28,12 @@
   "dependencies": {
     "@create-figma-plugin/ui": "*",
     "@create-figma-plugin/utilities": "*",
-    "preact": "^10.5.12"
+    "preact": "^10.5.13"
   },
   "figma-plugin": {
     "name": "Move Layers",
     "id": "767379204511357902",
-    "main": "main",
-    "ui": "ui"
+    "main": "src/main.ts",
+    "ui": "src/ui.ts"
   }
 }
