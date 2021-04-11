@@ -1,8 +1,6 @@
 {
   "extends": "@create-figma-plugin/tsconfig",
   "compilerOptions": {
-    "resolveJsonModule": true,
-    "strict": true,
     "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
   }
 }
