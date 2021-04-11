@@ -33,7 +33,7 @@
   "figma-plugin": {
     "name": "Move Layers",
     "id": "767379204511357902",
-    "main": "src/main.ts",
-    "ui": "src/ui.ts"
+    "main": "main",
+    "ui": "ui"
   }
 }
