@@ -19,10 +19,10 @@
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean && build-figma-plugin",
-    "clean": "rimraf '*.log' build manifest.json 'src/**/*.scss.d.ts'",
-    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
-    "lint": "eslint 'src/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
+    "build": "yarn run clean && build-figma-plugin --minify --typecheck",
+    "clean": "rimraf '*.log' build manifest.json 'src/**/*.css.d.ts'",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.css' package.json tsconfig.json",
+    "lint": "eslint 'src/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
     "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {

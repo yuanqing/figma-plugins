@@ -12,7 +12,6 @@
     "test": "lerna run test"
   },
   "devDependencies": {
-    "@babel/plugin-transform-react-jsx": "^7.13.12",
     "@create-figma-plugin/build": "latest",
     "@create-figma-plugin/tsconfig": "latest",
     "@figma/plugin-typings": "^1.19.3",
@@ -29,17 +28,15 @@
     "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.2.0",
     "stylelint": "^13.12.0",
-    "stylelint-config-prettier": "^8.0.2",
-    "stylelint-prettier": "^1.2.0",
+    "stylelint-config-yuanqing": "^0.0.1",
     "tap": "^14.11.0",
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.3",
-    "typescript-plugin-css-modules": "^3.2.0"
+    "typescript": "^4.2.3"
   },
   "eslintConfig": {
     "extends": "yuanqing",
     "ignorePatterns": [
-      "*.scss.d.ts"
+      "*.css.d.ts"
     ],
     "rules": {
       "@typescript-eslint/explicit-module-boundary-types": [
@@ -54,7 +51,7 @@
     "*.{ts,tsx}": [
       "eslint"
     ],
-    "*.scss": [
+    "*.css": [
       "stylelint",
       "prettier"
     ]
@@ -64,9 +61,7 @@
     "pre-commit": "yarn run lint-staged"
   },
   "stylelint": {
-    "extends": [
-      "stylelint-prettier/recommended"
-    ]
+    "extends": "stylelint-config-yuanqing"
   },
   "workspaces": [
     "packages/*"

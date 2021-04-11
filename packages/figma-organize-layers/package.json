@@ -19,12 +19,12 @@
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean-build && build-figma-plugin",
+    "build": "yarn run clean-build && build-figma-plugin --minify --typecheck",
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rimraf '*.log' build manifest.json",
     "clean-test": "rimraf '*.log' .nyc_output coverage",
-    "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
-    "lint": "eslint '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
+    "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.css' package.json tsconfig.json",
+    "lint": "eslint '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
     "test": "yarn run clean-test && TS_NODE_PROJECT='test/tsconfig.json' tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse",
     "watch": "yarn run clean-build && build-figma-plugin --watch"
   },

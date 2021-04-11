@@ -13,7 +13,7 @@ import { useEffect, useState } from 'preact/hooks'
 import languages from '../../utilities/languages.json'
 import { translateAsync } from '../../utilities/translate-async'
 import { LanguageItem } from './language-item'
-import styles from './language-tester.scss'
+import styles from './language-tester.css'
 
 const DEFAULT_LANGUAGE = 'DEFAULT_LANGUAGE'
 

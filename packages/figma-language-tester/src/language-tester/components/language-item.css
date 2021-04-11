@@ -1,0 +1,36 @@
+.languageItem {
+  user-select: none;
+  cursor: default;
+  position: relative;
+  padding: var(--space-extra-small) var(--space-medium);
+}
+.languageItem:hover {
+  background-color: var(--color-selection-b);
+}
+
+.isActive {
+  background-color: var(--color-selection-b);
+}
+
+.spinner {
+  animation: rotating 0.5s linear infinite;
+}
+
+.icon,
+.spinner {
+  position: absolute;
+  right: var(--space-small);
+  top: var(--space-extra-small);
+  width: 16px;
+  height: 16px;
+  fill: var(--color-blue);
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

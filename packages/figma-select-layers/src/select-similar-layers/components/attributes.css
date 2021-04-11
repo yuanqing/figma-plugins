@@ -1,6 +1,3 @@
-@import "@create-figma-plugin/ui/lib/scss/constants";
-@import "@create-figma-plugin/ui/lib/scss/text";
-
 .attributes,
 .emptyState {
   height: 338px;
@@ -13,7 +10,7 @@
 .emptyState {
   display: flex;
   flex-direction: column;
-  padding: 0 $space-medium;
+  padding: 0 var(--space-medium);
   justify-content: center;
   overflow-wrap: break-word;
 }

@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 
-import styles from './language-item.scss'
+import styles from './language-item.css'
 
 export interface LanguageItemProps {
   children: preact.ComponentChildren

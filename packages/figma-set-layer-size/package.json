@@ -19,8 +19,8 @@
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean && build-figma-plugin",
-    "clean": "rimraf '*.log' build manifest.json 'src/**/*.scss.d.ts'",
+    "build": "yarn run clean && build-figma-plugin --minify --typecheck",
+    "clean": "rimraf '*.log' build manifest.json 'src/**/*.css.d.ts'",
     "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write package.json tsconfig.json",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "watch": "yarn run clean && build-figma-plugin --watch"

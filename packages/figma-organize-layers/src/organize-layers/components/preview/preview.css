@@ -1,0 +1,23 @@
+.empty {
+  padding: 0 var(--space-medium);
+  color: var(--color-black-30);
+}
+
+.preview {
+  display: flex;
+  color: var(--color-black-30);
+}
+
+.group {
+  flex-grow: 1;
+  padding-left: var(--space-medium);
+  white-space: nowrap;
+}
+.group:last-child {
+  padding-right: var(--space-medium);
+}
+
+.groupName {
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black-80);
+}

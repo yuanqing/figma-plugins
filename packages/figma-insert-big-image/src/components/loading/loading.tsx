@@ -2,7 +2,7 @@
 import { LoadingIndicator, Text, VerticalSpace } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 
-import style from './loading.scss'
+import style from './loading.css'
 
 type LoadingProps = { children: preact.ComponentChildren }
 

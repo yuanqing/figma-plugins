@@ -3,7 +3,7 @@ import { SelectableItem, Text } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 
 import { labels } from '../utilities/labels'
-import styles from './attributes.scss'
+import styles from './attributes.css'
 
 export interface AttributesProps {
   attributes: { [key: string]: any }

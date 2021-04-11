@@ -19,13 +19,13 @@
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean-build && yarn run build-iso-codes && build-figma-plugin",
+    "build": "yarn run clean-build && yarn run build-iso-codes && build-figma-plugin --minify --typecheck",
     "build-iso-codes": "ts-node scripts/build-iso-codes.ts > src/utilities/currency/data/iso-codes.json",
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rimraf '*.log' build manifest.json",
     "clean-test": "rimraf '*.log' .nyc_output coverage",
-    "fix": "eslint --fix '{scripts,src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.scss' package.json tsconfig.json",
-    "lint": "eslint '{scripts,src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
+    "fix": "eslint --fix '{scripts,src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write 'src/**/*.css' package.json tsconfig.json",
+    "lint": "eslint '{scripts,src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
     "test": "yarn run clean-test && yarn run build-iso-codes && TS_NODE_PROJECT='test/tsconfig.json' tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse",
     "watch": "yarn run clean-build && yarn run build-iso-codes && build-figma-plugin --watch"
   },

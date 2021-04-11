@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { Fragment, h } from 'preact'
 
-import style from './preview.scss'
+import style from './preview.css'
 
 export const INVALID_SETTINGS = 'INVALID_SETTINGS'
 export const NO_TEXT_NODES = 'NO_TEXT_NODES'

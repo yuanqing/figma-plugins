@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  flex-grow: 1;
+}
+
+.checkToggle {
+  flex: 0 0 auto;
+  padding: var(--space-small) var(--space-medium);
+  color: var(--color-black-30);
+}
+.checkToggle:hover {
+  color: var(--color-black-80);
+}
+
+.checkToggle input {
+  display: none;
+}

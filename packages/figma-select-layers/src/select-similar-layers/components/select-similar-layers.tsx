@@ -17,7 +17,7 @@ import { extractKeysBySearchTerm } from '../utilities/extract-keys-by-search-ter
 import { setAttribute } from '../utilities/set-attribute'
 import { toggleAttributes } from '../utilities/toggle-attributes'
 import { Attributes } from './attributes'
-import styles from './select-similar-layers.scss'
+import styles from './select-similar-layers.css'
 
 export function SelectSimilarLayers(props: {
   [key: string]: any

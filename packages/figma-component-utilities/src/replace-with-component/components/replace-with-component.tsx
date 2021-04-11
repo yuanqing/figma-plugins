@@ -16,7 +16,7 @@ import { Fragment, h } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 
 import { ComponentNodeAttributes } from '../types'
-import styles from './replace-with-component.scss'
+import styles from './replace-with-component.css'
 
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-scrollable-menu-id'
 
