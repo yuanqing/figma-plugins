@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "latest",
-    "figma-insert-big-image": "latest"
+    "figma-insert-big-image": "*"
   },
   "figma-plugin": {
     "name": "Flatten Selection to Bitmap",
