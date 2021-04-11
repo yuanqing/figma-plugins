@@ -26,7 +26,7 @@
     "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "*",
+    "@create-figma-plugin/utilities": "latest",
     "figma-insert-big-image": "*"
   },
   "figma-plugin": {

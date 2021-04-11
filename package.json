@@ -13,8 +13,8 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.13.12",
-    "@create-figma-plugin/build": "*",
-    "@create-figma-plugin/tsconfig": "*",
+    "@create-figma-plugin/build": "latest",
+    "@create-figma-plugin/tsconfig": "latest",
     "@figma/plugin-typings": "^1.19.3",
     "@types/natural-compare-lite": "^1.4.0",
     "@types/tap": "^14.10.3",

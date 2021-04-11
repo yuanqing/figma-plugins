@@ -28,8 +28,8 @@
     "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "*",
-    "@create-figma-plugin/utilities": "*",
+    "@create-figma-plugin/ui": "latest",
+    "@create-figma-plugin/utilities": "latest",
     "@sindresorhus/class-names": "^1.1.0",
     "p-memoize": "^4.0.1",
     "preact": "^10.5.13"

@@ -26,8 +26,8 @@
     "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "*",
-    "@create-figma-plugin/utilities": "*",
+    "@create-figma-plugin/ui": "latest",
+    "@create-figma-plugin/utilities": "latest",
     "figma-sort-layers": "*",
     "preact": "^10.5.13"
   },
