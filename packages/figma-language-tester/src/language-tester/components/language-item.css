@@ -1,8 +1,8 @@
 .languageItem {
-  user-select: none;
-  cursor: default;
   position: relative;
   padding: var(--space-extra-small) var(--space-medium);
+  cursor: default;
+  user-select: none;
 }
 .languageItem:hover {
   background-color: var(--color-selection-b);
@@ -19,8 +19,8 @@
 .icon,
 .spinner {
   position: absolute;
-  right: var(--space-small);
   top: var(--space-extra-small);
+  right: var(--space-small);
   width: 16px;
   height: 16px;
   fill: var(--color-blue);

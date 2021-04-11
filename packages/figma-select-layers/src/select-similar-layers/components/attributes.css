@@ -10,7 +10,7 @@
 .emptyState {
   display: flex;
   flex-direction: column;
-  padding: 0 var(--space-medium);
   justify-content: center;
+  padding: 0 var(--space-medium);
   overflow-wrap: break-word;
 }

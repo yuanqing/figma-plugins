@@ -4,6 +4,6 @@
 }
 
 .button {
-  border-top: 1px solid var(--color-black-10);
   padding: var(--space-small) var(--space-medium);
+  border-top: 1px solid var(--color-black-10);
 }

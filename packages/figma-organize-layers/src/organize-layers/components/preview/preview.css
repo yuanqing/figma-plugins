@@ -18,6 +18,6 @@
 }
 
 .groupName {
-  font-weight: var(--font-weight-regular);
   color: var(--color-black-80);
+  font-weight: var(--font-weight-regular);
 }
