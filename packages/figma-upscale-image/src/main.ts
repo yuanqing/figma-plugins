@@ -11,7 +11,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { Image } from './types'
+import { ImageData } from './types'
 import { defaultSettings } from './utilities/default-settings'
 import { getImageNodes } from './utilities/get-image-nodes'
 import { readImageNodesAsync } from './utilities/read-image-nodes-async'
@@ -33,7 +33,7 @@ export default async function (): Promise<void> {
     const images = await readImageNodesAsync(getImageNodes())
     emit('UPSCALE_IMAGES', { images, scale })
   })
-  on('UPSCALE_IMAGE_RESULT', function (image: Image) {
+  on('UPSCALE_IMAGE_RESULT', function (image: ImageData) {
     const node = figma.getNodeById(image.id) as RectangleNode
     node.resize(image.width, image.height)
     node.fills = [createImagePaint(image.bytes)]
