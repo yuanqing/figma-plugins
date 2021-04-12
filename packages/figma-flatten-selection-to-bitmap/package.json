@@ -35,14 +35,14 @@
     "menu": [
       {
         "name": "Flatten Selection to Bitmap",
-        "main": "flatten-selection-to-bitmap/main",
-        "ui": "flatten-selection-to-bitmap/ui"
+        "main": "src/flatten-selection-to-bitmap/main.ts",
+        "ui": "src/flatten-selection-to-bitmap/ui.ts"
       },
       "-",
       {
         "name": "Settings",
-        "main": "settings/main",
-        "ui": "settings/ui"
+        "main": "src/settings/main.ts",
+        "ui": "src/settings/ui.ts"
       }
     ]
   }

@@ -37,47 +37,47 @@
     "menu": [
       {
         "name": "Clean Layers",
-        "main": "clean-nodes/main",
-        "ui": "clean-nodes/ui"
+        "main": "src/clean-nodes/main.ts",
+        "ui": "src/clean-nodes/ui.ts"
       },
       "-",
       {
         "name": "Delete Hidden Layers",
-        "main": "delete-hidden-nodes/main"
+        "main": "src/delete-hidden-nodes/main.ts"
       },
       {
         "name": "Ungroup Single-Layer Groups",
-        "main": "ungroup-single-node-groups/main"
+        "main": "src/ungroup-single-node-groups/main.ts"
       },
       {
         "name": "Make Pixel-Perfect",
-        "main": "make-pixel-perfect/main"
+        "main": "src/make-pixel-perfect/main.ts"
       },
       {
         "name": "Smart Rename Layers",
-        "main": "smart-rename-nodes/main",
-        "ui": "smart-rename-nodes/ui"
+        "main": "src/smart-rename-nodes/main.ts",
+        "ui": "src/smart-rename-nodes/ui.ts"
       },
       {
         "name": "Smart Sort Layers",
-        "main": "smart-sort-nodes/main"
+        "main": "src/smart-sort-nodes/main.ts"
       },
       "-",
       {
         "name": "Sort Pages by Name",
-        "main": "sort-pages-by-name/main"
+        "main": "src/sort-pages-by-name/main.ts"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "main": "reset-plugin/main"
+        "main": "src/reset-plugin/main.ts"
       }
     ],
     "relaunchButtons": {
       "cleanLayers": {
         "name": "Clean Layers",
-        "main": "clean-nodes/main",
-        "ui": "clean-nodes/ui"
+        "main": "src/clean-nodes/main.ts",
+        "ui": "src/clean-nodes/ui.ts"
       }
     }
   }

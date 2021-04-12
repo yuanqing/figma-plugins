@@ -40,8 +40,8 @@
     "menu": [
       {
         "name": "Language Tester",
-        "main": "language-tester/main",
-        "ui": "language-tester/ui"
+        "main": "src/language-tester/main.ts",
+        "ui": "src/language-tester/ui.ts"
       },
       "-",
       {
@@ -53,7 +53,7 @@
               "src": "translate/main",
               "handler": "af"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Albanian",
@@ -61,7 +61,7 @@
               "src": "translate/main",
               "handler": "sq"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Amharic",
@@ -69,7 +69,7 @@
               "src": "translate/main",
               "handler": "am"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Arabic",
@@ -77,7 +77,7 @@
               "src": "translate/main",
               "handler": "ar"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Armenian",
@@ -85,7 +85,7 @@
               "src": "translate/main",
               "handler": "hy"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Azerbaijani",
@@ -93,7 +93,7 @@
               "src": "translate/main",
               "handler": "az"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Basque",
@@ -101,7 +101,7 @@
               "src": "translate/main",
               "handler": "eu"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Belarusian",
@@ -109,7 +109,7 @@
               "src": "translate/main",
               "handler": "be"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Bengali",
@@ -117,7 +117,7 @@
               "src": "translate/main",
               "handler": "bn"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Bosnian",
@@ -125,7 +125,7 @@
               "src": "translate/main",
               "handler": "bs"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Bulgarian",
@@ -133,7 +133,7 @@
               "src": "translate/main",
               "handler": "bg"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Catalan",
@@ -141,7 +141,7 @@
               "src": "translate/main",
               "handler": "ca"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Cebuano",
@@ -149,7 +149,7 @@
               "src": "translate/main",
               "handler": "ceb"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Chichewa",
@@ -157,7 +157,7 @@
               "src": "translate/main",
               "handler": "ny"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Chinese (Simplified)",
@@ -165,7 +165,7 @@
               "src": "translate/main",
               "handler": "zhCN"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Chinese (Traditional)",
@@ -173,7 +173,7 @@
               "src": "translate/main",
               "handler": "zhTW"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Corsican",
@@ -181,7 +181,7 @@
               "src": "translate/main",
               "handler": "co"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Croatian",
@@ -189,7 +189,7 @@
               "src": "translate/main",
               "handler": "hr"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Czech",
@@ -197,7 +197,7 @@
               "src": "translate/main",
               "handler": "cs"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Danish",
@@ -205,7 +205,7 @@
               "src": "translate/main",
               "handler": "da"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Dutch",
@@ -213,7 +213,7 @@
               "src": "translate/main",
               "handler": "nl"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "English",
@@ -221,7 +221,7 @@
               "src": "translate/main",
               "handler": "en"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Esperanto",
@@ -229,7 +229,7 @@
               "src": "translate/main",
               "handler": "eo"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Estonian",
@@ -237,7 +237,7 @@
               "src": "translate/main",
               "handler": "et"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Filipino",
@@ -245,7 +245,7 @@
               "src": "translate/main",
               "handler": "tl"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Finnish",
@@ -253,7 +253,7 @@
               "src": "translate/main",
               "handler": "fi"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "French",
@@ -261,7 +261,7 @@
               "src": "translate/main",
               "handler": "fr"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Frisian",
@@ -269,7 +269,7 @@
               "src": "translate/main",
               "handler": "fy"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Galician",
@@ -277,7 +277,7 @@
               "src": "translate/main",
               "handler": "gl"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Georgian",
@@ -285,7 +285,7 @@
               "src": "translate/main",
               "handler": "ka"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "German",
@@ -293,7 +293,7 @@
               "src": "translate/main",
               "handler": "de"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Greek",
@@ -301,7 +301,7 @@
               "src": "translate/main",
               "handler": "el"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Gujarati",
@@ -309,7 +309,7 @@
               "src": "translate/main",
               "handler": "gu"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Haitian Creole",
@@ -317,7 +317,7 @@
               "src": "translate/main",
               "handler": "ht"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Hausa",
@@ -325,7 +325,7 @@
               "src": "translate/main",
               "handler": "ha"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Hawaiian",
@@ -333,7 +333,7 @@
               "src": "translate/main",
               "handler": "haw"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Hebrew",
@@ -341,7 +341,7 @@
               "src": "translate/main",
               "handler": "iw"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Hindi",
@@ -349,7 +349,7 @@
               "src": "translate/main",
               "handler": "hi"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Hmong",
@@ -357,7 +357,7 @@
               "src": "translate/main",
               "handler": "hmn"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Hungarian",
@@ -365,7 +365,7 @@
               "src": "translate/main",
               "handler": "hu"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Icelandic",
@@ -373,7 +373,7 @@
               "src": "translate/main",
               "handler": "is"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Igbo",
@@ -381,7 +381,7 @@
               "src": "translate/main",
               "handler": "ig"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Indonesian",
@@ -389,7 +389,7 @@
               "src": "translate/main",
               "handler": "id"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Irish",
@@ -397,7 +397,7 @@
               "src": "translate/main",
               "handler": "ga"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Italian",
@@ -405,7 +405,7 @@
               "src": "translate/main",
               "handler": "it"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Japanese",
@@ -413,7 +413,7 @@
               "src": "translate/main",
               "handler": "ja"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Javanese",
@@ -421,7 +421,7 @@
               "src": "translate/main",
               "handler": "jw"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Kannada",
@@ -429,7 +429,7 @@
               "src": "translate/main",
               "handler": "kn"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Kazakh",
@@ -437,7 +437,7 @@
               "src": "translate/main",
               "handler": "kk"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Khmer",
@@ -445,7 +445,7 @@
               "src": "translate/main",
               "handler": "km"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Kinyarwanda",
@@ -453,7 +453,7 @@
               "src": "translate/main",
               "handler": "rw"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Korean",
@@ -461,7 +461,7 @@
               "src": "translate/main",
               "handler": "ko"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Kurdish (Kurmanji)",
@@ -469,7 +469,7 @@
               "src": "translate/main",
               "handler": "ku"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Kyrgyz",
@@ -477,7 +477,7 @@
               "src": "translate/main",
               "handler": "ky"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Lao",
@@ -485,7 +485,7 @@
               "src": "translate/main",
               "handler": "lo"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Latin",
@@ -493,7 +493,7 @@
               "src": "translate/main",
               "handler": "la"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Latvian",
@@ -501,7 +501,7 @@
               "src": "translate/main",
               "handler": "lv"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Lithuanian",
@@ -509,7 +509,7 @@
               "src": "translate/main",
               "handler": "lt"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Luxembourgish",
@@ -517,7 +517,7 @@
               "src": "translate/main",
               "handler": "lb"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Macedonian",
@@ -525,7 +525,7 @@
               "src": "translate/main",
               "handler": "mk"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Malagasy",
@@ -533,7 +533,7 @@
               "src": "translate/main",
               "handler": "mg"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Malay",
@@ -541,7 +541,7 @@
               "src": "translate/main",
               "handler": "ms"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Malayalam",
@@ -549,7 +549,7 @@
               "src": "translate/main",
               "handler": "ml"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Maltese",
@@ -557,7 +557,7 @@
               "src": "translate/main",
               "handler": "mt"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Maori",
@@ -565,7 +565,7 @@
               "src": "translate/main",
               "handler": "mi"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Marathi",
@@ -573,7 +573,7 @@
               "src": "translate/main",
               "handler": "mr"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Mongolian",
@@ -581,7 +581,7 @@
               "src": "translate/main",
               "handler": "mn"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Myanmar (Burmese)",
@@ -589,7 +589,7 @@
               "src": "translate/main",
               "handler": "my"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Nepali",
@@ -597,7 +597,7 @@
               "src": "translate/main",
               "handler": "ne"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Norwegian",
@@ -605,7 +605,7 @@
               "src": "translate/main",
               "handler": "no"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Odia (Oriya)",
@@ -613,7 +613,7 @@
               "src": "translate/main",
               "handler": "or"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Pashto",
@@ -621,7 +621,7 @@
               "src": "translate/main",
               "handler": "ps"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Persian",
@@ -629,7 +629,7 @@
               "src": "translate/main",
               "handler": "fa"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Polish",
@@ -637,7 +637,7 @@
               "src": "translate/main",
               "handler": "pl"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Portuguese",
@@ -645,7 +645,7 @@
               "src": "translate/main",
               "handler": "pt"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Punjabi",
@@ -653,7 +653,7 @@
               "src": "translate/main",
               "handler": "pa"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Romanian",
@@ -661,7 +661,7 @@
               "src": "translate/main",
               "handler": "ro"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Russian",
@@ -669,7 +669,7 @@
               "src": "translate/main",
               "handler": "ru"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Samoan",
@@ -677,7 +677,7 @@
               "src": "translate/main",
               "handler": "sm"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Scots Gaelic",
@@ -685,7 +685,7 @@
               "src": "translate/main",
               "handler": "gd"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Serbian",
@@ -693,7 +693,7 @@
               "src": "translate/main",
               "handler": "sr"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Sesotho",
@@ -701,7 +701,7 @@
               "src": "translate/main",
               "handler": "st"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Shona",
@@ -709,7 +709,7 @@
               "src": "translate/main",
               "handler": "sn"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Sindhi",
@@ -717,7 +717,7 @@
               "src": "translate/main",
               "handler": "sd"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Sinhala",
@@ -725,7 +725,7 @@
               "src": "translate/main",
               "handler": "si"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Slovak",
@@ -733,7 +733,7 @@
               "src": "translate/main",
               "handler": "sk"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Slovenian",
@@ -741,7 +741,7 @@
               "src": "translate/main",
               "handler": "sl"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Somali",
@@ -749,7 +749,7 @@
               "src": "translate/main",
               "handler": "so"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Spanish",
@@ -757,7 +757,7 @@
               "src": "translate/main",
               "handler": "es"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Sundanese",
@@ -765,7 +765,7 @@
               "src": "translate/main",
               "handler": "su"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Swahili",
@@ -773,7 +773,7 @@
               "src": "translate/main",
               "handler": "sw"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Swedish",
@@ -781,7 +781,7 @@
               "src": "translate/main",
               "handler": "sv"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Tajik",
@@ -789,7 +789,7 @@
               "src": "translate/main",
               "handler": "tg"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Tamil",
@@ -797,7 +797,7 @@
               "src": "translate/main",
               "handler": "ta"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Tatar",
@@ -805,7 +805,7 @@
               "src": "translate/main",
               "handler": "tt"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Telugu",
@@ -813,7 +813,7 @@
               "src": "translate/main",
               "handler": "te"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Thai",
@@ -821,7 +821,7 @@
               "src": "translate/main",
               "handler": "th"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Turkish",
@@ -829,7 +829,7 @@
               "src": "translate/main",
               "handler": "tr"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Turkmen",
@@ -837,7 +837,7 @@
               "src": "translate/main",
               "handler": "tk"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Ukrainian",
@@ -845,7 +845,7 @@
               "src": "translate/main",
               "handler": "uk"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Urdu",
@@ -853,7 +853,7 @@
               "src": "translate/main",
               "handler": "ur"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Uyghur",
@@ -861,7 +861,7 @@
               "src": "translate/main",
               "handler": "ug"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Uzbek",
@@ -869,7 +869,7 @@
               "src": "translate/main",
               "handler": "uz"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Vietnamese",
@@ -877,7 +877,7 @@
               "src": "translate/main",
               "handler": "vi"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Welsh",
@@ -885,7 +885,7 @@
               "src": "translate/main",
               "handler": "cy"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Xhosa",
@@ -893,7 +893,7 @@
               "src": "translate/main",
               "handler": "xh"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Yiddish",
@@ -901,7 +901,7 @@
               "src": "translate/main",
               "handler": "yi"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Yoruba",
@@ -909,7 +909,7 @@
               "src": "translate/main",
               "handler": "yo"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           },
           {
             "name": "Zulu",
@@ -917,7 +917,7 @@
               "src": "translate/main",
               "handler": "zu"
             },
-            "ui": "translate/ui"
+            "ui": "src/translate/ui.ts"
           }
         ]
       }

@@ -41,18 +41,18 @@
     "menu": [
       {
         "name": "Format Currency",
-        "main": "format-currency/main",
-        "ui": "format-currency/ui"
+        "main": "src/format-currency/main.ts",
+        "ui": "src/format-currency/ui.ts"
       },
       {
         "name": "Convert Currency",
-        "main": "convert-currency/main",
-        "ui": "convert-currency/ui"
+        "main": "src/convert-currency/main.ts",
+        "ui": "src/convert-currency/ui.ts"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "main": "reset-plugin/main"
+        "main": "src/reset-plugin/main.ts"
       }
     ]
   }

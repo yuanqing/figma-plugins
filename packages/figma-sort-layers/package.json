@@ -37,32 +37,32 @@
     "menu": [
       {
         "name": "Sort Layers by Name",
-        "main": "sort-nodes-by-name/main"
+        "main": "src/sort-nodes-by-name/main.ts"
       },
       {
         "name": "Sort Layers by X Position",
-        "main": "sort-nodes-by-x-position/main"
+        "main": "src/sort-nodes-by-x-position/main.ts"
       },
       {
         "name": "Sort Layers by Y Position",
-        "main": "sort-nodes-by-y-position/main"
+        "main": "src/sort-nodes-by-y-position/main.ts"
       },
       {
         "name": "Smart Sort Layers",
-        "main": "smart-sort-nodes/main"
+        "main": "src/smart-sort-nodes/main.ts"
       },
       {
         "name": "Reverse Layers Sort Order",
-        "main": "reverse-nodes-sort-order/main"
+        "main": "src/reverse-nodes-sort-order/main.ts"
       },
       {
         "name": "Randomize Layers Sort Order",
-        "main": "randomize-nodes-sort-order/main"
+        "main": "src/randomize-nodes-sort-order/main.ts"
       },
       "-",
       {
         "name": "Sort Pages by Name",
-        "main": "sort-pages-by-name/main"
+        "main": "src/sort-pages-by-name/main.ts"
       }
     ]
   }

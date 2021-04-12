@@ -34,27 +34,27 @@
     "menu": [
       {
         "name": "Bulk Copy Text",
-        "main": "bulk-copy-text/main",
-        "ui": "bulk-copy-text/ui"
+        "main": "src/bulk-copy-text/main.ts",
+        "ui": "src/bulk-copy-text/ui.ts"
       },
       {
         "name": "Bulk Paste Text",
-        "main": "bulk-paste-text/main",
-        "ui": "bulk-paste-text/ui"
+        "main": "src/bulk-paste-text/main.ts",
+        "ui": "src/bulk-paste-text/ui.ts"
       },
       "-",
       {
         "name": "Split Text Layers by Line",
-        "main": "split-text-nodes-by-line/main"
+        "main": "src/split-text-nodes-by-line/main.ts"
       },
       "-",
       {
         "name": "Normalize Text Style",
-        "main": "normalize-text-style/main"
+        "main": "src/normalize-text-style/main.ts"
       },
       {
         "name": "Reset Text Layer Names",
-        "main": "reset-text-layer-names/main"
+        "main": "src/reset-text-layer-names/main.ts"
       }
     ]
   }

@@ -9,10 +9,10 @@ for (const languageKey in languages) {
   result.push({
     main: {
       handler: languageKey.replace('-', ''),
-      src: 'translate/main'
+      src: 'src/translate/main.ts'
     },
     name: languages[languageKey],
-    ui: 'translate/ui'
+    ui: 'src/translate/ui.ts'
   })
 }
 console.log(JSON.stringify(result, null, 2))

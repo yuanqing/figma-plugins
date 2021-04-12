@@ -39,20 +39,20 @@
     "menu": [
       {
         "name": "Organize Layers",
-        "main": "organize-layers/main",
-        "ui": "organize-layers/ui"
+        "main": "src/organize-layers/main.ts",
+        "ui": "src/organize-layers/ui.ts"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "main": "reset-plugin/main"
+        "main": "src/reset-plugin/main.ts"
       }
     ],
     "relaunchButtons": {
       "organizeLayers": {
         "name": "Organize Layers",
-        "main": "organize-layers/main",
-        "ui": "organize-layers/ui"
+        "main": "src/organize-layers/main.ts",
+        "ui": "src/organize-layers/ui.ts"
       }
     }
   }

@@ -36,25 +36,25 @@
     "menu": [
       {
         "name": "Create Component from Layer",
-        "main": "create-component-from-node/main"
+        "main": "src/create-component-from-node/main.ts"
       },
       {
         "name": "Copy Component",
-        "main": "copy-component/main"
+        "main": "src/copy-component/main.ts"
       },
       {
         "name": "Convert Component to Frame",
-        "main": "convert-component-to-frame/main"
+        "main": "src/convert-component-to-frame/main.ts"
       },
       {
         "name": "Replace with Component",
-        "main": "replace-with-component/main",
-        "ui": "replace-with-component/ui"
+        "main": "src/replace-with-component/main.ts",
+        "ui": "src/replace-with-component/ui.ts"
       },
       "-",
       {
         "name": "Reset Instance Size",
-        "main": "reset-instance-size/main"
+        "main": "src/reset-instance-size/main.ts"
       }
     ]
   }

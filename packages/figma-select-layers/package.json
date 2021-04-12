@@ -36,8 +36,8 @@
     "menu": [
       {
         "name": "Select Layers by Name",
-        "main": "select-nodes-by-name/main",
-        "ui": "select-nodes-by-name/ui"
+        "main": "src/select-nodes-by-name/main.ts",
+        "ui": "src/select-nodes-by-name/ui.ts"
       },
       {
         "name": "Select Layers by Type",
@@ -200,13 +200,13 @@
       "-",
       {
         "name": "Select Similar Layers",
-        "main": "select-similar-layers/main",
-        "ui": "select-similar-layers/ui"
+        "main": "src/select-similar-layers/main.ts",
+        "ui": "src/select-similar-layers/ui.ts"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "main": "reset-plugin/main"
+        "main": "src/reset-plugin/main.ts"
       }
     ]
   }
