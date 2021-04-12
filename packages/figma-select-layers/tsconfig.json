@@ -1,4 +1,7 @@
 {
   "extends": "../../tsconfig.shared.json",
+  "compilerOptions": {
+    "strict": false
+  },
   "include": ["src/**/*"]
 }
