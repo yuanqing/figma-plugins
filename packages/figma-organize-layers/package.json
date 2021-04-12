@@ -21,7 +21,7 @@
   "scripts": {
     "build": "yarn run clean-build && build-figma-plugin --minify --typecheck",
     "clean": "yarn run clean-build && yarn run clean-test",
-    "clean-build": "rm -rf '*.log' build manifest.json",
+    "clean-build": "rm -rf '*.log' build",
     "clean-test": "rm -rf '*.log' .nyc_output coverage",
     "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' package.json tsconfig.json",
     "lint": "eslint '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",

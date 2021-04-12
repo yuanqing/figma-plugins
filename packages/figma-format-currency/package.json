@@ -22,7 +22,7 @@
     "build": "yarn run clean-build && yarn run build-iso-codes && build-figma-plugin --minify --typecheck",
     "build-iso-codes": "ts-node scripts/build-iso-codes.ts > src/utilities/currency/data/iso-codes.json",
     "clean": "yarn run clean-build && yarn run clean-test",
-    "clean-build": "rm -rf '*.log' build manifest.json",
+    "clean-build": "rm -rf '*.log' build",
     "clean-test": "rm -rf '*.log' .nyc_output coverage",
     "fix": "eslint --fix '{scripts,src,test}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' package.json tsconfig.json",
     "lint": "eslint '{scripts,src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",

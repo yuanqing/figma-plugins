@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "yarn run clean && build-figma-plugin --minify --typecheck",
-    "clean": "rm -rf '*.log' build manifest.json 'src/**/*.css.d.ts'",
+    "clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'",
     "generate-menu-config": "ts-node scripts/generate-translate-menu-config.ts",
     "generate-translate-main-ts": "ts-node scripts/generate-translate-main-ts.ts > src/translate/main.ts",
     "fix": "eslint --fix '{scripts,src}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' package.json tsconfig.json",
