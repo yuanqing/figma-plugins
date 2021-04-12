@@ -1,4 +1,4 @@
-export type ImageData = {
+export type Image = {
   width: number
   height: number
   id: string
