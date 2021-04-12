@@ -23,3 +23,5 @@ async function main(): Promise<void> {
   await Promise.all(promises)
 }
 main()
+
+export {}

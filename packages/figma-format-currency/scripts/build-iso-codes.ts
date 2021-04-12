@@ -76,3 +76,5 @@ function sortObjectByKey(object: Result) {
   }
   return result
 }
+
+export {}
