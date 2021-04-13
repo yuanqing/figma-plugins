@@ -45,21 +45,21 @@
           {
             "name": "Select Components",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectComponents"
             }
           },
           {
             "name": "Select Variants",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectVariants"
             }
           },
           {
             "name": "Select Instance Layers",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectInstanceLayers"
             }
           },
@@ -67,21 +67,21 @@
           {
             "name": "Select Frames",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectFrames"
             }
           },
           {
             "name": "Select Groups",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectGroups"
             }
           },
           {
             "name": "Select Slices",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectSlices"
             }
           },
@@ -89,49 +89,49 @@
           {
             "name": "Select Vector Layers",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectVectorLayers"
             }
           },
           {
             "name": "Select Rectangles",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectRectangles"
             }
           },
           {
             "name": "Select Lines",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectLines"
             }
           },
           {
             "name": "Select Ellipses",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectEllipses"
             }
           },
           {
             "name": "Select Polygons",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectPolygons"
             }
           },
           {
             "name": "Select Stars",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectStars"
             }
           },
           {
             "name": "Select Boolean Groups",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectBooleanGroups"
             }
           },
@@ -139,7 +139,7 @@
           {
             "name": "Select Images",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectImages"
             }
           },
@@ -147,7 +147,7 @@
           {
             "name": "Select Text Layers",
             "main": {
-              "src": "select-nodes-by-attribute/main",
+              "src": "src/select-nodes-by-attribute/main.ts",
               "handler": "selectTextLayers"
             }
           }
@@ -157,28 +157,28 @@
       {
         "name": "Select Mask Layers",
         "main": {
-          "src": "select-nodes-by-attribute/main",
+          "src": "src/select-nodes-by-attribute/main.ts",
           "handler": "selectMaskLayers"
         }
       },
       {
         "name": "Select Hidden Layers",
         "main": {
-          "src": "select-nodes-by-attribute/main",
+          "src": "src/select-nodes-by-attribute/main.ts",
           "handler": "selectHiddenLayers"
         }
       },
       {
         "name": "Select Locked Layers",
         "main": {
-          "src": "select-nodes-by-attribute/main",
+          "src": "src/select-nodes-by-attribute/main.ts",
           "handler": "selectLockedLayers"
         }
       },
       {
         "name": "Select Layers With Exports",
         "main": {
-          "src": "select-nodes-by-attribute/main",
+          "src": "src/select-nodes-by-attribute/main.ts",
           "handler": "selectLayersWithExports"
         }
       },
@@ -186,14 +186,14 @@
       {
         "name": "Select Parent Layers",
         "main": {
-          "src": "select-nodes-by-hierarchy/main",
+          "src": "src/select-nodes-by-hierarchy/main.ts",
           "handler": "selectParentLayers"
         }
       },
       {
         "name": "Select Root Layers",
         "main": {
-          "src": "select-nodes-by-hierarchy/main",
+          "src": "src/select-nodes-by-hierarchy/main.ts",
           "handler": "selectRootLayers"
         }
       },
