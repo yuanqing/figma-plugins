@@ -12,8 +12,10 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function SelectNodesByName(initialState) {
-  const { state, handleChange, handleSubmit, isValid } = useForm(initialState, {
+export function SelectNodesByName(props: {
+  [key: string]: any
+}): h.JSX.Element {
+  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
     onClose: function () {
       emit('CLOSE_UI')
     },

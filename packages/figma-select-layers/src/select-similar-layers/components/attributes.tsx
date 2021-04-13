@@ -6,7 +6,7 @@ import { labels } from '../utilities/labels'
 import styles from './attributes.css'
 
 export interface AttributesProps {
-  attributes: { [key: string]: any }
+  attributes: { [key: string]: boolean | { [key: string]: boolean } }
   keysByReferenceLayerType: Array<string>
   keysBySearchTerm: Array<string>
   onAttributeClick: (_: any, newValue: string, targetKey: string) => void
