@@ -14,7 +14,7 @@ export function copyPropertiesToFrame(
   // Frame properties
   frame.clipsContent = cloneObject(node.clipsContent)
   frame.guides = cloneObject(node.guides)
-  frame.layoutGrids = cloneObject(node.guides)
+  frame.layoutGrids = cloneObject(node.layoutGrids)
   frame.gridStyleId = node.gridStyleId
   frame.layoutMode = node.layoutMode
   if (frame.layoutMode !== 'NONE') {
