@@ -71,8 +71,8 @@ export default async function (): Promise<void> {
 }
 
 function getLayers(): Array<NodeAttributes> {
-  return extractAttributes(figma.currentPage.children.slice(), [
+  return extractAttributes<NodeAttributes>(figma.currentPage.children.slice(), [
     'id',
     'name'
-  ]) as Array<NodeAttributes>
+  ])
 }

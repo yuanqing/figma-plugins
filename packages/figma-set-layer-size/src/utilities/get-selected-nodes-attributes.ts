@@ -9,5 +9,5 @@ export function getSelectedNodesAttributes(): Array<Layer> {
   const nodes = figma.currentPage.selection.filter(function (node) {
     return isWithinInstance(node) === false
   })
-  return extractAttributes(nodes, ['id', 'width', 'height']) as Array<Layer>
+  return extractAttributes<Layer>(nodes, ['id', 'width', 'height'])
 }

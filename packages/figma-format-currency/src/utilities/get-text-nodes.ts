@@ -15,8 +15,8 @@ export function getTextNodes(): Array<TextNodeAttributes> {
       }
     })
   }
-  return extractAttributes(sortNodesByName(result), [
+  return extractAttributes<TextNodeAttributes>(sortNodesByName(result), [
     'id',
     'characters'
-  ]) as Array<TextNodeAttributes>
+  ])
 }
