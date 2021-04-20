@@ -23,7 +23,7 @@
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rm -rf '*.log' build",
     "clean-test": "rm -rf '*.log' .nyc_output coverage",
-    "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' package.json tsconfig.json",
+    "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' '*.json'",
     "lint": "eslint '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
     "test": "yarn run clean-test && TS_NODE_PROJECT='test/tsconfig.json' tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --no-check-coverage --reporter terse --timeout 120 --ts",
     "watch": "yarn run clean-build && build-figma-plugin --watch"
