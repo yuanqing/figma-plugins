@@ -3,68 +3,79 @@ import {
   Button,
   Columns,
   Container,
-  moveDownIcon,
-  moveRightIcon,
+  IconMoveDown,
+  IconMoveRight,
   TextboxNumeric,
   useForm,
   VerticalSpace
 } from '@create-figma-plugin/ui'
-import {
-  emit,
-  evaluateNumericExpression,
-  on
-} from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 
-export function MoveNodes(props: { [key: string]: any }): h.JSX.Element {
-  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
+import type {
+  CloseUIHandler,
+  MoveNodesProps,
+  MoveNodesSettings,
+  SelectionChangedHandler,
+  SubmitHandler
+} from '../utilities/types'
+
+export function MoveNodes(props: MoveNodesProps): h.JSX.Element {
+  const { handleChange, handleSubmit, initialFocus, isValid } = useForm(props, {
     onClose: function () {
-      emit('CLOSE_UI')
+      emit<CloseUIHandler>('CLOSE_UI')
     },
-    onSubmit: function ({ horizontalOffset, verticalOffset }) {
-      emit('SUBMIT', {
-        horizontalOffset: evaluateNumericExpression(horizontalOffset),
-        verticalOffset: evaluateNumericExpression(verticalOffset)
-      })
+    onSubmit: function (settings: MoveNodesSettings) {
+      emit<SubmitHandler>('SUBMIT', settings)
     },
-    validate: function ({ hasSelection, horizontalOffset, verticalOffset }) {
-      const evaluatedHorizontalOffset = evaluateNumericExpression(
-        horizontalOffset
-      )
-      const evaluatedVerticalOffset = evaluateNumericExpression(verticalOffset)
+    validate: function ({
+      hasSelection,
+      horizontalOffset,
+      verticalOffset
+    }: MoveNodesProps) {
       return (
         hasSelection === true &&
-        ((evaluatedHorizontalOffset !== null &&
-          evaluatedHorizontalOffset !== 0) ||
-          (evaluatedVerticalOffset !== null && evaluatedVerticalOffset !== 0))
+        horizontalOffset !== null &&
+        verticalOffset !== null
       )
     }
   })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleChange({ hasSelection })
-      })
+      return on<SelectionChangedHandler>(
+        'SELECTION_CHANGED',
+        function (hasSelection: boolean) {
+          handleChange(hasSelection, 'hasSelection')
+        }
+      )
     },
     [handleChange]
   )
-  const { horizontalOffset, verticalOffset } = state
+  const [horizontalOffset, setHorizontalOffset] = useState<null | string>(
+    `${props.horizontalOffset}`
+  )
+  const [verticalOffset, setVerticalOffset] = useState<null | string>(
+    `${props.verticalOffset}`
+  )
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
       <Columns space="extraSmall">
         <TextboxNumeric
-          icon={moveRightIcon}
+          {...initialFocus}
+          icon={<IconMoveDown />}
           name="horizontalOffset"
-          onChange={handleChange}
-          value={horizontalOffset === null ? '' : horizontalOffset}
+          onChange={setHorizontalOffset}
+          onNumberChange={handleChange}
+          value={horizontalOffset}
         />
         <TextboxNumeric
-          icon={moveDownIcon}
+          icon={<IconMoveRight />}
           name="verticalOffset"
-          onChange={handleChange}
-          value={verticalOffset === null ? '' : verticalOffset}
+          onChange={setVerticalOffset}
+          onNumberChange={handleChange}
+          value={verticalOffset}
         />
       </Columns>
       <VerticalSpace space="large" />

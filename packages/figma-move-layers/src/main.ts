@@ -10,6 +10,13 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { defaultSettings } from './utilities/default-settings'
+import type {
+  CloseUIHandler,
+  MoveNodesProps,
+  MoveNodesSettings,
+  SelectionChangedHandler,
+  SubmitHandler
+} from './utilities/types'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
@@ -18,27 +25,27 @@ export default async function (): Promise<void> {
   }
   const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
-    emit('SELECTION_CHANGED', {
-      hasSelection: figma.currentPage.selection.length > 0
-    })
+    emit<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      figma.currentPage.selection.length > 0
+    )
   })
-  once('SUBMIT', async function (settings) {
+  once<SubmitHandler>('SUBMIT', async function (settings: MoveNodesSettings) {
     await saveSettingsAsync(settings)
     const { horizontalOffset, verticalOffset } = settings
-    const isHorizontalOffsetValid =
-      horizontalOffset !== 0 && horizontalOffset !== null
-    const isVerticalOffsetValid =
-      verticalOffset !== 0 && verticalOffset !== null
-    if (isHorizontalOffsetValid === false && isVerticalOffsetValid === false) {
+    if (
+      (horizontalOffset === 0 || horizontalOffset === null) &&
+      (verticalOffset === 0 || verticalOffset === null)
+    ) {
       figma.closePlugin()
       return
     }
     const selection = figma.currentPage.selection
     for (const node of selection) {
-      if (isHorizontalOffsetValid === true) {
+      if (horizontalOffset !== 0 && horizontalOffset !== null) {
         node.x += horizontalOffset
       }
-      if (isVerticalOffsetValid === true) {
+      if (verticalOffset !== 0 && verticalOffset !== null) {
         node.y += verticalOffset
       }
     }
@@ -48,8 +55,11 @@ export default async function (): Promise<void> {
       )
     )
   })
-  once('CLOSE_UI', function () {
+  once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI({ height: 116, width: 240 }, { ...settings, hasSelection: true })
+  showUI<MoveNodesProps>(
+    { height: 116, width: 240 },
+    { ...settings, hasSelection: true }
+  )
 }
