@@ -1,6 +1,6 @@
-import type { MoveNodesSettings } from './types'
+import type { Settings } from './types'
 
-export const defaultSettings: MoveNodesSettings = {
+export const defaultSettings: Settings = {
   horizontalOffset: 0,
   verticalOffset: 0
 }

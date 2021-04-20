@@ -13,8 +13,8 @@ import { defaultSettings } from './utilities/default-settings'
 import type {
   CloseUIHandler,
   MoveNodesProps,
-  MoveNodesSettings,
   SelectionChangedHandler,
+  Settings,
   SubmitHandler
 } from './utilities/types'
 
@@ -30,7 +30,7 @@ export default async function (): Promise<void> {
       figma.currentPage.selection.length > 0
     )
   })
-  once<SubmitHandler>('SUBMIT', async function (settings: MoveNodesSettings) {
+  once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings)
     const { horizontalOffset, verticalOffset } = settings
     if (

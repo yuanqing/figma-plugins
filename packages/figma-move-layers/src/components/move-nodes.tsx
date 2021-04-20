@@ -16,8 +16,8 @@ import { useEffect, useState } from 'preact/hooks'
 import type {
   CloseUIHandler,
   MoveNodesProps,
-  MoveNodesSettings,
   SelectionChangedHandler,
+  Settings,
   SubmitHandler
 } from '../utilities/types'
 
@@ -26,7 +26,7 @@ export function MoveNodes(props: MoveNodesProps): h.JSX.Element {
     onClose: function () {
       emit<CloseUIHandler>('CLOSE_UI')
     },
-    onSubmit: function (settings: MoveNodesSettings) {
+    onSubmit: function (settings: Settings) {
       emit<SubmitHandler>('SUBMIT', settings)
     },
     validate: function ({

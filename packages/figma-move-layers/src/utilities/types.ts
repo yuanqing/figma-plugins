@@ -1,10 +1,10 @@
 import type { EventHandler } from '@create-figma-plugin/utilities'
 
-export type MoveNodesSettings = {
+export type Settings = {
   horizontalOffset: null | number
   verticalOffset: null | number
 }
-export type MoveNodesProps = MoveNodesSettings & {
+export type MoveNodesProps = Settings & {
   hasSelection: boolean
 }
 
@@ -18,5 +18,5 @@ export interface SelectionChangedHandler extends EventHandler {
 }
 export interface SubmitHandler extends EventHandler {
   name: 'SUBMIT'
-  handler: (settings: MoveNodesSettings) => void
+  handler: (settings: Settings) => void
 }
