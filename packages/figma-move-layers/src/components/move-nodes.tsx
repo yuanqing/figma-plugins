@@ -1,4 +1,3 @@
-/** @jsx h */
 import {
   Button,
   Columns,
@@ -10,6 +9,7 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
+import type { JSX } from 'preact'
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
@@ -21,7 +21,7 @@ import type {
   SubmitHandler
 } from '../utilities/types'
 
-export function MoveNodes(props: MoveNodesProps): h.JSX.Element {
+export function MoveNodes(props: MoveNodesProps): JSX.Element {
   const { handleChange, handleSubmit, initialFocus, isValid } = useForm(props, {
     onClose: function () {
       emit<CloseUIHandler>('CLOSE_UI')
