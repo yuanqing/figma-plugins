@@ -12,8 +12,10 @@ import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
 import type {
+  CloseUIHandler,
   DistributeLayersProps,
-  Settings,
+  SelectionChangedHandler,
+  SubmitHandler,
   UiFactoryOptions
 } from '../utilities/types'
 
@@ -22,10 +24,10 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
   return function DistributeLayers(props: DistributeLayersProps): JSX.Element {
     const { handleChange, handleSubmit, isValid } = useForm(props, {
       onClose: function () {
-        emit('CLOSE_UI')
+        emit<CloseUIHandler>('CLOSE_UI')
       },
-      onSubmit: function (settings: Settings) {
-        emit('SUBMIT', settings)
+      onSubmit: function ({ space }: DistributeLayersProps) {
+        emit<SubmitHandler>('SUBMIT', { space })
       },
       validate: function ({ hasSelection, space }: DistributeLayersProps) {
         return hasSelection === true && space !== null
@@ -33,9 +35,12 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
     })
     useEffect(
       function () {
-        return on('SELECTION_CHANGED', function (hasSelection: boolean) {
-          handleChange(hasSelection, 'hasSelection')
-        })
+        return on<SelectionChangedHandler>(
+          'SELECTION_CHANGED',
+          function (hasSelection: boolean) {
+            handleChange(hasSelection, 'hasSelection')
+          }
+        )
       },
       [handleChange]
     )
