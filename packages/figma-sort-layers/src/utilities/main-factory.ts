@@ -5,18 +5,13 @@ import {
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
 
-const errorMessage = formatErrorMessage('Select two or more layers')
+import { MainFactoryOptions } from './types'
 
-export function mainFactory(options: {
-  sortNodes: (
-    nodes: Array<SceneNode>
-  ) =>
-    | null
-    | Array<SceneNode>
-    | { fixedNodes: Array<SceneNode>; scrollingNodes: Array<SceneNode> }
-  successMessage: string
-}): () => void {
-  const { sortNodes, successMessage } = options
+export function mainFactory({
+  sortNodes,
+  successMessage
+}: MainFactoryOptions): () => void {
+  const errorMessage = formatErrorMessage('Select two or more layers')
   return function (): void {
     if (figma.currentPage.selection.length === 0) {
       figma.closePlugin(errorMessage)

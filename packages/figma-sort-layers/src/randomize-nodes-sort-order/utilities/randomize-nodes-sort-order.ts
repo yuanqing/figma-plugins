@@ -1,5 +1,7 @@
-import { compareArrays } from '@create-figma-plugin/utilities'
-const arrayShuffle = require('array-shuffle')
+import { compareStringArrays } from '@create-figma-plugin/utilities'
+import arrayShuffle from 'array-shuffle'
+
+import { extractNodeIds } from '../../utilities/extract-node-ids'
 
 export function randomizeNodesSortOrder(
   nodes: Array<SceneNode>
@@ -7,6 +9,8 @@ export function randomizeNodesSortOrder(
   let result
   do {
     result = arrayShuffle(nodes)
-  } while (compareArrays(result, nodes) === true)
+  } while (
+    compareStringArrays(extractNodeIds(result), extractNodeIds(nodes)) === true
+  )
   return result
 }
