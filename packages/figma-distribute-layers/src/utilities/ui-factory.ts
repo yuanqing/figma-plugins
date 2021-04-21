@@ -1,9 +1,8 @@
 import { render } from '@create-figma-plugin/ui'
 
-import { DistributeLayers } from '../components/distribute-layers'
+import { distributeLayersFactory } from '../components/distribute-layers-factory'
+import { DistributeLayersProps, UiFactoryOptions } from './types'
 
-export function uiFactory(props: {
-  [key: string]: any
-}): (rootNode: HTMLElement, data: { [key: string]: any }) => void {
-  return render(DistributeLayers, props)
+export function uiFactory(options: UiFactoryOptions) {
+  return render<DistributeLayersProps>(distributeLayersFactory(options))
 }

@@ -1,4 +1,7 @@
 import { mainFactory } from '../utilities/main-factory'
 import { distributeNodesDown } from './utilities/distribute-nodes-down'
 
-export default mainFactory('down', distributeNodesDown)
+export default mainFactory({
+  direction: 'down',
+  distributeNodes: distributeNodesDown
+})

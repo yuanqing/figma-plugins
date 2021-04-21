@@ -37,22 +37,22 @@
       {
         "name": "Distribute Layers Left",
         "main": "src/distribute-nodes-left/main.ts",
-        "ui": "src/distribute-nodes-left/ui.ts"
+        "ui": "src/distribute-nodes-left/ui.tsx"
       },
       {
         "name": "Distribute Layers Right",
         "main": "src/distribute-nodes-right/main.ts",
-        "ui": "src/distribute-nodes-right/ui.ts"
+        "ui": "src/distribute-nodes-right/ui.tsx"
       },
       {
         "name": "Distribute Layers Up",
         "main": "src/distribute-nodes-up/main.ts",
-        "ui": "src/distribute-nodes-up/ui.ts"
+        "ui": "src/distribute-nodes-up/ui.tsx"
       },
       {
         "name": "Distribute Layers Down",
         "main": "src/distribute-nodes-down/main.ts",
-        "ui": "src/distribute-nodes-down/ui.ts"
+        "ui": "src/distribute-nodes-down/ui.tsx"
       }
     ]
   }
