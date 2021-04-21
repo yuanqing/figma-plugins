@@ -5,3 +5,4 @@
 build/
 coverage/
 node_modules/
+manifest.json
