@@ -1,4 +1,3 @@
-/** @jsx h */
 import {
   Button,
   Container,
@@ -7,41 +6,47 @@ import {
   useForm,
   VerticalSpace
 } from '@create-figma-plugin/ui'
-import {
-  emit,
-  evaluateNumericExpression,
-  on
-} from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
+import type { JSX } from 'preact'
 import { h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 
-export function DrawSliceOverSelection(props: {
-  [key: string]: any
-}): h.JSX.Element {
-  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
+import {
+  CloseUIHandler,
+  DrawSliceOverSelectionProps,
+  SelectionChangedHandler,
+  SubmitHandler
+} from '../utilities/types'
+
+export function DrawSliceOverSelection(
+  props: DrawSliceOverSelectionProps
+): JSX.Element {
+  const { handleChange, handleSubmit, isValid } = useForm(props, {
     onClose: function () {
-      emit('CLOSE_UI')
+      emit<CloseUIHandler>('CLOSE_UI')
     },
-    onSubmit: function ({ padding }) {
-      emit('SUBMIT', {
-        padding: evaluateNumericExpression(padding)
-      })
+    onSubmit: function ({ padding }: DrawSliceOverSelectionProps) {
+      emit<SubmitHandler>('SUBMIT', { padding })
     },
-    validate: function ({ hasSelection, padding }) {
-      return (
-        hasSelection === true && evaluateNumericExpression(padding) !== null
-      )
+    validate: function ({
+      hasSelection,
+      padding
+    }: DrawSliceOverSelectionProps) {
+      return hasSelection === true && padding !== null
     }
   })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleChange({ hasSelection })
-      })
+      return on<SelectionChangedHandler>(
+        'SELECTION_CHANGED',
+        function (hasSelection: boolean) {
+          handleChange(hasSelection, 'hasSelection')
+        }
+      )
     },
     [handleChange]
   )
-  const { padding } = state
+  const [padding, setPadding] = useState<null | string>(`${props.padding}`)
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
@@ -50,7 +55,8 @@ export function DrawSliceOverSelection(props: {
       <TextboxNumeric
         minimum={0}
         name="padding"
-        onChange={handleChange}
+        onChange={setPadding}
+        onNumberChange={handleChange}
         value={padding}
       />
       <VerticalSpace space="extraLarge" />

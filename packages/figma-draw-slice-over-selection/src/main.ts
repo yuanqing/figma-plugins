@@ -10,6 +10,12 @@ import {
 
 import { defaultSettings } from './utilities/default-settings'
 import { drawSliceOverSelection } from './utilities/draw-slice-over-selection'
+import {
+  CloseUIHandler,
+  DrawSliceOverSelectionProps,
+  SelectionChangedHandler,
+  SubmitHandler
+} from './utilities/types'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
@@ -18,21 +24,26 @@ export default async function (): Promise<void> {
   }
   const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
-    emit('SELECTION_CHANGED', {
-      hasSelection: figma.currentPage.selection.length > 0
-    })
+    emit<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      figma.currentPage.selection.length > 0
+    )
   })
-  once('SUBMIT', async function (settings) {
+  once<SubmitHandler>('SUBMIT', async function (settings) {
     await saveSettingsAsync(settings)
     const { padding } = settings
+    if (padding === null) {
+      figma.closePlugin()
+      return
+    }
     const slice = drawSliceOverSelection(padding)
     figma.currentPage.selection = [slice]
     figma.closePlugin(formatSuccessMessage('Drew slice over selection'))
   })
-  once('CLOSE_UI', function () {
+  once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI(
+  showUI<DrawSliceOverSelectionProps>(
     {
       height: 140,
       width: 240
