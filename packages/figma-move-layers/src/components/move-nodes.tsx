@@ -17,7 +17,6 @@ import type {
   CloseUIHandler,
   MoveNodesProps,
   SelectionChangedHandler,
-  Settings,
   SubmitHandler
 } from '../utilities/types'
 
@@ -26,8 +25,8 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
     onClose: function () {
       emit<CloseUIHandler>('CLOSE_UI')
     },
-    onSubmit: function (settings: Settings) {
-      emit<SubmitHandler>('SUBMIT', settings)
+    onSubmit: function ({ horizontalOffset, verticalOffset }: MoveNodesProps) {
+      emit<SubmitHandler>('SUBMIT', { horizontalOffset, verticalOffset })
     },
     validate: function ({
       hasSelection,
