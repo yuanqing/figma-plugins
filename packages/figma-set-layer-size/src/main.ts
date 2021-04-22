@@ -3,6 +3,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
+  MIXED_NUMBER,
   once,
   saveSettingsAsync,
   showUI
@@ -10,12 +11,17 @@ import {
 
 import { computeDimensions } from './utilities/compute-dimensions'
 import { defaultSettings } from './utilities/default-settings'
-import { getSelectedNodesAttributes } from './utilities/get-selected-nodes-attributes'
-import { setSize } from './utilities/set-size'
-import { updateSelection } from './utilities/update-selection'
+import { getValidSelectedNodes } from './utilities/get-valid-selected-nodes'
+import { setNodesSize } from './utilities/set-nodes-size'
+import {
+  CloseUIHandler,
+  SelectionChangedHandler,
+  SetLayerSizeProps,
+  SubmitHandler
+} from './utilities/types'
 
 export default async function (): Promise<void> {
-  const nodes = getSelectedNodesAttributes()
+  const nodes = getValidSelectedNodes()
   if (nodes.length === 0) {
     if (figma.currentPage.selection.length > 0) {
       figma.closePlugin(formatErrorMessage('Select layers outside instances'))
@@ -26,24 +32,38 @@ export default async function (): Promise<void> {
   }
   const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
-    const nodes = getSelectedNodesAttributes()
-    emit('SELECTION_CHANGED', {
-      nodes,
-      ...computeDimensions(nodes)
-    })
+    const nodes = getValidSelectedNodes()
+    emit<SelectionChangedHandler>('SELECTION_CHANGED', computeDimensions(nodes))
   })
-  once('SUBMIT', async function (settings) {
-    const { nodes, width, height, resizeWithConstraints } = settings
-    await saveSettingsAsync({ resizeWithConstraints })
-    setSize(nodes, width, height, resizeWithConstraints)
-    updateSelection(nodes)
-    figma.closePlugin(formatSuccessMessage('Set layer size'))
-  })
-  once('CLOSE_UI', function () {
+  once<SubmitHandler>(
+    'SUBMIT',
+    async function ({
+      width,
+      height,
+      resizeWithConstraints
+    }: SetLayerSizeProps) {
+      await saveSettingsAsync({ resizeWithConstraints })
+      if (
+        width === null ||
+        width === MIXED_NUMBER ||
+        height === null ||
+        height === MIXED_NUMBER
+      ) {
+        figma.closePlugin()
+        return
+      }
+      const nodes = getValidSelectedNodes()
+      for (const node of nodes) {
+        setNodesSize(node, { height, resizeWithConstraints, width })
+      }
+      figma.closePlugin(formatSuccessMessage('Set layer size'))
+    }
+  )
+  once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI(
+  showUI<SetLayerSizeProps>(
     { height: 140, width: 240 },
-    { ...settings, nodes, ...computeDimensions(nodes) }
+    { ...settings, ...computeDimensions(nodes) }
   )
 }

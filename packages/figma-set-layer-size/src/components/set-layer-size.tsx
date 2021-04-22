@@ -1,4 +1,3 @@
-/** @jsx h */
 import {
   Button,
   Checkbox,
@@ -11,76 +10,84 @@ import {
 } from '@create-figma-plugin/ui'
 import {
   emit,
-  evaluateNumericExpression,
+  mapTextboxNumberToString,
+  MIXED_NUMBER,
   on
 } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { h, JSX } from 'preact'
+import { useEffect, useState } from 'preact/hooks'
 
-import { MIXED } from '../utilities/constants'
+import {
+  CloseUIHandler,
+  Dimensions,
+  SelectionChangedHandler,
+  SetLayerSizeProps,
+  SubmitHandler
+} from '../utilities/types'
 
-export function SetLayerSize(props: { [key: string]: any }): h.JSX.Element {
+export function SetLayerSize(props: SetLayerSizeProps): JSX.Element {
   const { state, handleChange, handleSubmit, isValid } = useForm(props, {
     onClose: function () {
-      emit('CLOSE_UI')
+      emit<CloseUIHandler>('CLOSE_UI')
     },
-    onSubmit: function ({ nodes, width, height, resizeWithConstraints }) {
-      emit('SUBMIT', {
-        height: evaluateNumericExpression(height),
-        nodes,
-        resizeWithConstraints,
-        width: evaluateNumericExpression(width)
-      })
+    onSubmit: function ({
+      width,
+      height,
+      resizeWithConstraints
+    }: SetLayerSizeProps) {
+      emit<SubmitHandler>('SUBMIT', { height, resizeWithConstraints, width })
     },
-    validate: function ({ nodes, width, height }) {
-      if (nodes.length === 0) {
-        return false
-      }
-      const evaluatedWidth = evaluateNumericExpression(width)
-      const evaluatedHeight = evaluateNumericExpression(height)
+    validate: function ({ width, height }: SetLayerSizeProps) {
       return (
-        (evaluatedWidth !== null && evaluatedWidth !== 0) ||
-        (evaluatedHeight !== null && evaluatedHeight !== 0)
+        (width !== null && width !== MIXED_NUMBER && width !== 0) ||
+        (height !== null && height !== MIXED_NUMBER && height !== 0)
       )
     }
   })
+  const [width, setWidth] = useState(mapTextboxNumberToString(state.width))
+  const [height, setHeight] = useState(mapTextboxNumberToString(state.height))
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ nodes, width, height }) {
-        handleChange({ height, nodes, width })
-      })
+      return on<SelectionChangedHandler>(
+        'SELECTION_CHANGED',
+        function ({ width, height }: Dimensions) {
+          setWidth(mapTextboxNumberToString(width))
+          setHeight(mapTextboxNumberToString(height))
+        }
+      )
     },
-    [handleChange]
+    [setWidth, setHeight]
   )
-  const { nodes, width, height, resizeWithConstraints } = state
-  const hasSelection = nodes.length > 0
+  const disabled = state.width === null && state.height === null
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
       <Columns space="extraSmall">
         <TextboxNumeric
-          disabled={hasSelection === false}
+          disabled={disabled === true}
           icon="W"
           minimum={0}
           name="width"
-          onChange={handleChange}
-          value={width === MIXED ? null : width}
+          onChange={setWidth}
+          onNumberChange={handleChange}
+          value={width}
         />
         <TextboxNumeric
-          disabled={hasSelection === false}
+          disabled={disabled === true}
           icon="H"
           minimum={0}
           name="height"
-          onChange={handleChange}
-          value={height === MIXED ? null : height}
+          onChange={setHeight}
+          onNumberChange={handleChange}
+          value={height}
         />
       </Columns>
       <VerticalSpace space="medium" />
       <Checkbox
-        disabled={hasSelection === false}
+        disabled={disabled === true}
         name="resizeWithConstraints"
         onChange={handleChange}
-        value={resizeWithConstraints}
+        value={state.resizeWithConstraints === true}
       >
         <Text>Resize with constraints</Text>
       </Checkbox>
