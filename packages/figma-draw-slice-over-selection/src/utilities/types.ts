@@ -1,4 +1,4 @@
-import type { EventHandler } from '@create-figma-plugin/utilities'
+import { EventHandler } from '@create-figma-plugin/utilities'
 
 export type Settings = {
   padding: null | number

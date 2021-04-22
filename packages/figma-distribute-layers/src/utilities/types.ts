@@ -1,5 +1,5 @@
-import type { EventHandler } from '@create-figma-plugin/utilities'
-import type { ComponentChildren } from 'preact'
+import { EventHandler } from '@create-figma-plugin/utilities'
+import { ComponentChildren } from 'preact'
 
 export type Direction = 'up' | 'down' | 'left' | 'right'
 export type MainFactoryOptions = {

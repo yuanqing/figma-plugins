@@ -1,4 +1,4 @@
-import type { Settings } from './types'
+import { Settings } from './types'
 
 export const defaultSettings: Settings = {
   horizontalOffset: 0,

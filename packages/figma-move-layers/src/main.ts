@@ -10,7 +10,7 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { defaultSettings } from './utilities/default-settings'
-import type {
+import {
   CloseUIHandler,
   MoveNodesProps,
   SelectionChangedHandler,

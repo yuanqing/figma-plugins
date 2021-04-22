@@ -9,11 +9,10 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
-import type { JSX } from 'preact'
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import type {
+import {
   CloseUIHandler,
   MoveNodesProps,
   SelectionChangedHandler,
@@ -51,26 +50,26 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
     },
     [handleChange]
   )
-  const [horizontalOffset, setHorizontalOffset] = useState<null | string>(
+  const [horizontalOffset, setHorizontalOffset] = useState(
     `${props.horizontalOffset}`
   )
-  const [verticalOffset, setVerticalOffset] = useState<null | string>(
+  const [verticalOffset, setVerticalOffset] = useState(
     `${props.verticalOffset}`
   )
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
       <Columns space="extraSmall">
-        <TextboxNumeric
+        <TextboxNumeric<'horizontalOffset'>
           {...initialFocus}
-          icon={<IconMoveDown />}
+          icon={<IconMoveRight />}
           name="horizontalOffset"
           onChange={setHorizontalOffset}
           onNumberChange={handleChange}
           value={horizontalOffset}
         />
         <TextboxNumeric
-          icon={<IconMoveRight />}
+          icon={<IconMoveDown />}
           name="verticalOffset"
           onChange={setVerticalOffset}
           onNumberChange={handleChange}
