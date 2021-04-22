@@ -1,13 +1,21 @@
 import { emit, once } from '@create-figma-plugin/utilities'
 
+import {
+  CopyStringToClipboardRequest,
+  CopyStringToClipboardResult
+} from './utilities/types'
+
 export default function (): void {
-  once('COPY_TEXT_REQUEST', function ({ string }) {
-    copyStringToClipboard(string)
-    emit('COPY_TEXT_SUCCESS')
-  })
+  once<CopyStringToClipboardRequest>(
+    'COPY_STRING_TO_CLIPBOARD_REQUEST',
+    function (string) {
+      copyTextToClipboard(string)
+      emit<CopyStringToClipboardResult>('COPY_STRING_TO_CLIPBOARD_RESULT')
+    }
+  )
 }
 
-function copyStringToClipboard(string: string): void {
+function copyTextToClipboard(string: string): void {
   const textareaElement = document.createElement('textarea')
   document.body.appendChild(textareaElement)
   textareaElement.value = string

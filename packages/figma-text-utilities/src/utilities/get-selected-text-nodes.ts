@@ -3,7 +3,7 @@ import {
   traverseNode
 } from '@create-figma-plugin/utilities'
 
-export function getTextNodes(): Array<TextNode> {
+export function getSelectedTextNodes(): Array<TextNode> {
   const result: Array<TextNode> = []
   const nodes = figma.currentPage.selection.slice()
   for (const node of nodes) {
@@ -13,5 +13,5 @@ export function getTextNodes(): Array<TextNode> {
       }
     })
   }
-  return sortNodesByCanonicalOrder(result).reverse() as Array<TextNode>
+  return sortNodesByCanonicalOrder(result).reverse()
 }

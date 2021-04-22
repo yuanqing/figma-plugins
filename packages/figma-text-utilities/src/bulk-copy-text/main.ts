@@ -4,7 +4,7 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-import { getTextNodes } from '../utilities/get-text-nodes'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
 import { copyStringToClipboard } from './utilities/copy-string-to-clipboard'
 
 export default async function (): Promise<void> {
@@ -12,7 +12,7 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more text layers'))
     return
   }
-  const nodes = getTextNodes()
+  const nodes = getSelectedTextNodes()
   if (nodes.length === 0) {
     figma.closePlugin(formatErrorMessage('No text layers in selection'))
     return

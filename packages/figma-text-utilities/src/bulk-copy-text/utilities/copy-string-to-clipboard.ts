@@ -1,12 +1,23 @@
 import { emit, once, showUI } from '@create-figma-plugin/utilities'
 
-export function copyStringToClipboard(string: string): Promise<void> {
+import {
+  CopyStringToClipboardRequest,
+  CopyStringToClipboardResult
+} from './types'
+
+export async function copyStringToClipboard(string: string): Promise<void> {
   return new Promise(function (resolve) {
-    once('COPY_TEXT_SUCCESS', function () {
-      figma.ui.close()
-      resolve()
-    })
+    once<CopyStringToClipboardResult>(
+      'COPY_STRING_TO_CLIPBOARD_RESULT',
+      function () {
+        figma.ui.close()
+        resolve()
+      }
+    )
     showUI({ height: 0, width: 0 })
-    emit('COPY_TEXT_REQUEST', { string })
+    emit<CopyStringToClipboardRequest>(
+      'COPY_STRING_TO_CLIPBOARD_REQUEST',
+      string
+    )
   })
 }
