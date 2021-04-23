@@ -1,4 +1,3 @@
-/** @jsx h */
 import {
   Checkbox,
   Container,
@@ -9,70 +8,66 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
-import { useCallback } from 'preact/hooks'
+import { h, JSX } from 'preact'
+import { useCallback, useState } from 'preact/hooks'
 
 import { splitImageAsync } from '../utilities/split-image-async'
+import {
+  CloseUIHandler,
+  InsertBigImageHandler,
+  Settings
+} from '../utilities/types'
 import { Loading } from './loading/loading'
 
-export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
-  const { state, handleChange } = useForm(
-    {
-      ...props,
-      currentIndex: -1,
-      total: 0
-    },
-    {
-      onClose: function () {
-        emit('CLOSE_UI')
-      },
-      transform: function (state) {
-        const { total } = state
-        return {
-          ...state,
-          isLoading: total > 0
-        }
+export function InsertBigImage(props: Settings): JSX.Element {
+  const [index, setIndex] = useState(0)
+  const [total, setTotal] = useState(0)
+  const loading = total > 0
+  const { state, handleChange, initialFocus } = useForm(props, {
+    onClose: function () {
+      if (loading === true) {
+        return
       }
+      emit<CloseUIHandler>('CLOSE_UI')
     }
-  )
-  const { currentIndex, total, insertAs2x, isLoading } = state
+  })
+  const { insertAs2x } = state
   const handleSelectedFiles = useCallback(
     async function (files: Array<File>) {
       const total = files.length
-      handleChange({ total })
-      let currentIndex = 0
+      setTotal(total)
+      let index = 0
       for (const file of files) {
-        currentIndex++
-        handleChange({ currentIndex })
         const images = await splitImageAsync(file)
         const name = trimExtension(file.name)
-        emit('INSERT_BIG_IMAGE', {
-          images,
+        emit<InsertBigImageHandler>('INSERT_BIG_IMAGE', images, {
+          done: index === total - 1,
           insertAs2x,
-          isDone: currentIndex === total,
           name
         })
+        index += 1
+        setIndex(index)
       }
     },
-    [handleChange, insertAs2x]
+    [insertAs2x, setIndex, setTotal]
   )
-  if (isLoading === true) {
+  if (loading === true) {
     return (
       <Loading>
         {total === 1
           ? 'Uploading image…'
-          : `Uploading image ${currentIndex} of ${total}…`}
+          : `Uploading image ${index + 1} of ${total}…`}
       </Loading>
     )
   }
-  const acceptedFileTypes = ['image/png', 'image/jpeg']
+  const acceptedFileTypes = ['image/jpeg', 'image/png']
   return (
     <Container space="medium">
       <VerticalSpace space="medium" />
       <FileUploadDropzone
         acceptedFileTypes={acceptedFileTypes}
         multiple
-        onSelectedFiles={handleSelectedFiles as any} // FIXME
+        onSelectedFiles={handleSelectedFiles}
       >
         <Text align="center" bold>
           Drop image files here
@@ -83,12 +78,10 @@ export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
         </Text>
         <VerticalSpace space="small" />
         <FileUploadButton
+          {...initialFocus}
           acceptedFileTypes={acceptedFileTypes}
-          disabled={isLoading === true}
-          focused // FIXME
-          loading={isLoading === true}
           multiple
-          onSelectedFiles={handleSelectedFiles as any}
+          onSelectedFiles={handleSelectedFiles}
         >
           Choose Image Files
         </FileUploadButton>
@@ -99,7 +92,6 @@ export function InsertBigImage(props: { [key: string]: any }): h.JSX.Element {
       </FileUploadDropzone>
       <VerticalSpace space="medium" />
       <Checkbox
-        disabled={isLoading === true}
         name="insertAs2x"
         onChange={handleChange}
         value={insertAs2x === true}

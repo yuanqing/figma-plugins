@@ -1,6 +1,6 @@
 import { createImagePaint } from '@create-figma-plugin/utilities'
 
-import { ImageAttributes } from '../types'
+import { ImageAttributes } from './types'
 
 export function createImageNode(
   image: ImageAttributes,

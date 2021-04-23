@@ -1,12 +1,10 @@
-/** @jsx h */
 import { LoadingIndicator, Text, VerticalSpace } from '@create-figma-plugin/ui'
-import { h } from 'preact'
+import { ComponentChildren, h } from 'preact'
 
 import style from './loading.css'
 
-type LoadingProps = { children: preact.ComponentChildren }
-
-export function Loading({ children }: LoadingProps): h.JSX.Element {
+export function Loading(props: { children: ComponentChildren }): h.JSX.Element {
+  const { children } = props
   return (
     <div className={style.loading}>
       <LoadingIndicator />

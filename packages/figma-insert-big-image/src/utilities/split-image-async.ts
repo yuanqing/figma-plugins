@@ -1,5 +1,5 @@
 /* global FileReader */
-import { ImageAttributes } from '../types'
+import { ImageAttributes } from './types'
 
 // This function uses the DOM and must be called from the UI context
 export async function splitImageAsync(
