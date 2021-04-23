@@ -22,10 +22,10 @@ import { Loading } from './loading/loading'
 export function InsertBigImage(props: Settings): JSX.Element {
   const [index, setIndex] = useState(0)
   const [total, setTotal] = useState(0)
-  const loading = total > 0
+  const isLoading = total > 0
   const { state, handleChange, initialFocus } = useForm(props, {
     onClose: function () {
-      if (loading === true) {
+      if (isLoading === true) {
         return
       }
       emit<CloseUIHandler>('CLOSE_UI')
@@ -51,7 +51,7 @@ export function InsertBigImage(props: Settings): JSX.Element {
     },
     [insertAs2x, setIndex, setTotal]
   )
-  if (loading === true) {
+  if (isLoading === true) {
     return (
       <Loading>
         {total === 1
