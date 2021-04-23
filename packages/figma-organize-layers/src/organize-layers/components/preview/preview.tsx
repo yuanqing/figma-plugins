@@ -1,27 +1,24 @@
 import { Preview as PreviewContainer } from '@create-figma-plugin/ui'
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 
-import { groupLayers } from '../../utilities/group-layers'
+import { Group, NodeAttributes } from '../../utilities/types'
 import style from './preview.css'
 
 export function Preview(props: {
-  combineSingleLayerGroups: boolean
-  groupDefinition: number
-  layers: Array<SceneNode>
-}): h.JSX.Element {
-  const { combineSingleLayerGroups, groupDefinition, layers } = props
-  if (layers.length === 0) {
+  groups: Array<Group<NodeAttributes>>
+}): JSX.Element {
+  const { groups } = props
+  if (groups.length === 0) {
     return (
       <PreviewContainer>
         <div className={style.empty}>No layers on page</div>
       </PreviewContainer>
     )
   }
-  const groups = groupLayers(layers, combineSingleLayerGroups, groupDefinition)
   return (
     <PreviewContainer>
       <div className={style.preview}>
-        {groups.map(function ({ groupName, layers }, index) {
+        {groups.map(function ({ name: groupName, nodes: layers }, index) {
           return (
             <div key={index} className={style.group}>
               {layers.map(function ({ name }, index) {

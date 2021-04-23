@@ -1,15 +1,16 @@
-import { NodeAttributes } from '../../types'
+import { GroupDefinition } from '../../utilities/types'
+import { NodeAttributes } from './types'
 const slashRegex = /\//g
 
 export function computeMaximumGroupDefinition(
-  layers: Array<NodeAttributes>
-): number {
-  let maximum = 1
-  layers.forEach(function ({ name }) {
+  nodes: Array<NodeAttributes>
+): GroupDefinition {
+  const groupDefinitions = nodes.map(function ({ name }: NodeAttributes) {
     const matches = name.match(slashRegex)
-    if (matches !== null) {
-      maximum = Math.max(maximum, matches.length)
+    if (matches === null) {
+      return 1
     }
+    return matches.length
   })
-  return maximum
+  return Math.min(5, Math.max(...groupDefinitions)) as GroupDefinition
 }

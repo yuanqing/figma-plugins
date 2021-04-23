@@ -1,5 +1,5 @@
 import { render } from '@create-figma-plugin/ui'
 
-import { OrganizeLayers } from './components/organize-layers'
+import { OrganizeNodes } from './components/organize-nodes'
 
-export default render(OrganizeLayers)
+export default render(OrganizeNodes)

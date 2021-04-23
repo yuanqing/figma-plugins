@@ -4,6 +4,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
+  on,
   once,
   pluralize,
   saveSettingsAsync,
@@ -11,26 +12,51 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { NodeAttributes } from '../types'
 import { defaultSettings } from '../utilities/default-settings'
+import { GroupDefinition, PreviewSettings, Settings } from '../utilities/types'
+import { computeGroups } from './utilities/compute-groups'
 import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
-import { organizeLayers } from './utilities/organize-layers'
+import { organizeNodes } from './utilities/organize-nodes'
+import {
+  CloseUIHandler,
+  Group,
+  NodeAttributes,
+  OrganizeNodesProps,
+  SetPreviewSettingsHandler,
+  UpdateUIStateHandler
+} from './utilities/types'
 
 export default async function (): Promise<void> {
-  const layers = getLayers()
-  if (layers.length === 0) {
+  const nodes = figma.currentPage.children.slice()
+  if (nodes.length === 0) {
     figma.closePlugin(formatErrorMessage('No layers on page'))
     return
   }
   const settings = await loadSettingsAsync(defaultSettings)
-  figma.on('selectionchange', function () {
-    const layers = getLayers()
-    emit('SELECTION_CHANGED', {
-      layers,
-      maximumGroupDefinition: computeMaximumGroupDefinition(layers)
+  function updateUIState() {
+    const nodes = figma.currentPage.children.slice()
+    const { combineSingleLayerGroups, groupDefinition } = settings
+    const groups = getGroups(nodes, {
+      combineSingleLayerGroups,
+      groupDefinition
     })
-  })
-  once('SUBMIT', async function (settings) {
+    const maximumGroupDefinition = computeMaximumGroupDefinition(nodes)
+    emit<UpdateUIStateHandler>(
+      'UPDATE_UI_STATE',
+      groups,
+      maximumGroupDefinition
+    )
+  }
+  figma.on('selectionchange', updateUIState)
+  on<SetPreviewSettingsHandler>(
+    'SET_PREVIEW_SETTINGS',
+    function ({ groupDefinition, combineSingleLayerGroups }: PreviewSettings) {
+      settings.groupDefinition = groupDefinition
+      settings.combineSingleLayerGroups = combineSingleLayerGroups
+      updateUIState()
+    }
+  )
+  once('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings)
     const {
       combineSingleLayerGroups,
@@ -38,41 +64,48 @@ export default async function (): Promise<void> {
       horizontalSpace,
       verticalSpace
     } = settings
-    const layers = figma.currentPage.children.slice()
-    organizeLayers(
-      layers,
+    if (horizontalSpace === null || verticalSpace === null) {
+      figma.closePlugin()
+      return
+    }
+    const nodes = figma.currentPage.children.slice()
+    organizeNodes(nodes, {
       combineSingleLayerGroups,
       groupDefinition,
       horizontalSpace,
       verticalSpace
-    )
-    figma.viewport.scrollAndZoomIntoView(layers)
+    })
+    figma.viewport.scrollAndZoomIntoView(nodes)
     setRelaunchButton(figma.currentPage, 'organizeLayers')
     figma.closePlugin(
       formatSuccessMessage(
-        `Organized ${layers.length} ${pluralize(
-          layers.length,
-          'layer'
-        )} on page`
+        `Organized ${nodes.length} ${pluralize(nodes.length, 'layer')}`
       )
     )
   })
-  once('CLOSE_UI', function () {
+  once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI(
+  const { combineSingleLayerGroups, groupDefinition } = settings
+  const groups = getGroups(nodes, { combineSingleLayerGroups, groupDefinition })
+  const maximumGroupDefinition = computeMaximumGroupDefinition(nodes)
+  showUI<OrganizeNodesProps>(
     { height: 361, width: 240 },
-    {
-      ...settings,
-      layers,
-      maximumGroupDefinition: computeMaximumGroupDefinition(layers)
-    }
+    { ...settings, groups, maximumGroupDefinition }
   )
 }
 
-function getLayers(): Array<NodeAttributes> {
-  return extractAttributes<NodeAttributes>(figma.currentPage.children.slice(), [
-    'id',
-    'name'
-  ])
+function getGroups(
+  nodes: Array<SceneNode>,
+  options: {
+    combineSingleLayerGroups: boolean
+    groupDefinition: GroupDefinition
+  }
+): Array<Group<NodeAttributes>> {
+  return computeGroups(nodes, options).map(function (group: Group<SceneNode>) {
+    return {
+      ...group,
+      nodes: extractAttributes(group.nodes, ['id', 'name'])
+    }
+  })
 }

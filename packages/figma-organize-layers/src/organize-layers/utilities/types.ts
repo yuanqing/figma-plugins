@@ -1,0 +1,45 @@
+import { EventHandler } from '@create-figma-plugin/utilities'
+
+import {
+  GroupDefinition,
+  PreviewSettings,
+  Settings
+} from '../../utilities/types'
+
+export type Group<T> = {
+  name: null | string
+  nodes: Array<T>
+}
+export type NodeAttributes = {
+  id: string
+  name: string
+}
+
+export type OrganizeNodesProps = Settings & {
+  groups: Array<Group<NodeAttributes>>
+  maximumGroupDefinition: GroupDefinition
+}
+export type PreviewProps = Pick<
+  OrganizeNodesProps,
+  'combineSingleLayerGroups' | 'groupDefinition' | 'groups'
+>
+
+export interface CloseUIHandler extends EventHandler {
+  name: 'CLOSE_UI'
+  handler: () => void
+}
+export interface SetPreviewSettingsHandler extends EventHandler {
+  name: 'SET_PREVIEW_SETTINGS'
+  handler: (previewSettings: PreviewSettings) => void
+}
+export interface UpdateUIStateHandler extends EventHandler {
+  name: 'UPDATE_UI_STATE'
+  handler: (
+    groups: Array<Group<NodeAttributes>>,
+    maximumGroupDefinition: GroupDefinition
+  ) => void
+}
+export interface SubmitHandler extends EventHandler {
+  name: 'SUBMIT'
+  handler: (settings: Settings) => void
+}

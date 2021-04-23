@@ -1,15 +1,15 @@
-import { Group } from '../../types'
+import { Group } from './types'
 
 export function arrangeGroups(
-  groups: Array<Group>,
-  horizontalSpace: number,
-  verticalSpace: number
+  groups: Array<Group<SceneNode>>,
+  options: { horizontalSpace: number; verticalSpace: number }
 ): void {
+  const { horizontalSpace, verticalSpace } = options
   let x = 0
   for (const group of groups) {
     let y = 0
     let maxWidth = 0
-    for (const { id } of group.layers) {
+    for (const { id } of group.nodes) {
       const layer = figma.getNodeById(id) as SceneNode
       layer.x = x
       layer.y = y

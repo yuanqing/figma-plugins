@@ -1,6 +1,8 @@
+import { GroupDefinition } from '../../utilities/types'
+
 export function extractGroupName(
   layerName: string,
-  groupDefinition: number
+  groupDefinition: GroupDefinition
 ): string {
   if (layerName === '/') {
     return '/'
