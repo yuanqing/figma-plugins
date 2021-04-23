@@ -1,6 +1,6 @@
 import { test } from 'tap'
 
-import { extractGroupName } from '../src/organize-layers/utilities/extract-group-name'
+import { extractGroupName } from '../src/organize-nodes/utilities/extract-group-name'
 
 test('empty string', function (t) {
   t.plan(4)
