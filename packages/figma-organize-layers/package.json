@@ -39,8 +39,8 @@
     "menu": [
       {
         "name": "Organize Layers",
-        "main": "src/organize-layers/main.ts",
-        "ui": "src/organize-layers/ui.ts"
+        "main": "src/organize-nodes/main.ts",
+        "ui": "src/organize-nodes/ui.ts"
       },
       "-",
       {
@@ -51,8 +51,8 @@
     "relaunchButtons": {
       "organizeLayers": {
         "name": "Organize Layers",
-        "main": "src/organize-layers/main.ts",
-        "ui": "src/organize-layers/ui.ts"
+        "main": "src/organize-nodes/main.ts",
+        "ui": "src/organize-nodes/ui.ts"
       }
     }
   }
