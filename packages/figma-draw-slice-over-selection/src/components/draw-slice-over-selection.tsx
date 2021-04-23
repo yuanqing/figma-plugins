@@ -20,7 +20,7 @@ import {
 export function DrawSliceOverSelection(
   props: DrawSliceOverSelectionProps
 ): JSX.Element {
-  const { handleChange, handleSubmit, isValid } = useForm(props, {
+  const { handleChange, handleSubmit, initialFocus, isValid } = useForm(props, {
     onClose: function () {
       emit<CloseUIHandler>('CLOSE_UI')
     },
@@ -52,6 +52,7 @@ export function DrawSliceOverSelection(
       <Text muted>Padding</Text>
       <VerticalSpace space="small" />
       <TextboxNumeric
+        {...initialFocus}
         minimum={0}
         name="padding"
         onChange={setPadding}

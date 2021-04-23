@@ -21,17 +21,20 @@ import {
 export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
   const directionLabel = `${direction[0].toUpperCase()}${direction.slice(1)}`
   return function DistributeLayers(props: DistributeLayersProps): JSX.Element {
-    const { handleChange, handleSubmit, isValid } = useForm(props, {
-      onClose: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      onSubmit: function ({ space }: DistributeLayersProps) {
-        emit<SubmitHandler>('SUBMIT', { space })
-      },
-      validate: function ({ hasSelection, space }: DistributeLayersProps) {
-        return hasSelection === true && space !== null
+    const { handleChange, handleSubmit, initialFocus, isValid } = useForm(
+      props,
+      {
+        onClose: function () {
+          emit<CloseUIHandler>('CLOSE_UI')
+        },
+        onSubmit: function ({ space }: DistributeLayersProps) {
+          emit<SubmitHandler>('SUBMIT', { space })
+        },
+        validate: function ({ hasSelection, space }: DistributeLayersProps) {
+          return hasSelection === true && space !== null
+        }
       }
-    })
+    )
     useEffect(
       function () {
         return on<SelectionChangedHandler>(
@@ -50,6 +53,7 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
         <Text muted>Space</Text>
         <VerticalSpace space="small" />
         <TextboxNumeric
+          {...initialFocus}
           icon={icon}
           name="space"
           onChange={setSpace}

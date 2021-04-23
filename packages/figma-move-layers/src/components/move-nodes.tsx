@@ -60,7 +60,7 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
     <Container space="medium">
       <VerticalSpace space="large" />
       <Columns space="extraSmall">
-        <TextboxNumeric<'horizontalOffset'>
+        <TextboxNumeric
           {...initialFocus}
           icon={<IconMoveRight />}
           name="horizontalOffset"

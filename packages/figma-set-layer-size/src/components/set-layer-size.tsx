@@ -26,24 +26,27 @@ import {
 } from '../utilities/types'
 
 export function SetLayerSize(props: SetLayerSizeProps): JSX.Element {
-  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
-    onClose: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    onSubmit: function ({
-      width,
-      height,
-      resizeWithConstraints
-    }: SetLayerSizeProps) {
-      emit<SubmitHandler>('SUBMIT', { height, resizeWithConstraints, width })
-    },
-    validate: function ({ width, height }: SetLayerSizeProps) {
-      return (
-        (width !== null && width !== MIXED_NUMBER && width !== 0) ||
-        (height !== null && height !== MIXED_NUMBER && height !== 0)
-      )
+  const { state, handleChange, handleSubmit, initialFocus, isValid } = useForm(
+    props,
+    {
+      onClose: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      onSubmit: function ({
+        width,
+        height,
+        resizeWithConstraints
+      }: SetLayerSizeProps) {
+        emit<SubmitHandler>('SUBMIT', { height, resizeWithConstraints, width })
+      },
+      validate: function ({ width, height }: SetLayerSizeProps) {
+        return (
+          (width !== null && width !== MIXED_NUMBER && width !== 0) ||
+          (height !== null && height !== MIXED_NUMBER && height !== 0)
+        )
+      }
     }
-  })
+  )
   const [width, setWidth] = useState(mapTextboxNumberToString(state.width))
   const [height, setHeight] = useState(mapTextboxNumberToString(state.height))
   useEffect(
@@ -64,6 +67,7 @@ export function SetLayerSize(props: SetLayerSizeProps): JSX.Element {
       <VerticalSpace space="large" />
       <Columns space="extraSmall">
         <TextboxNumeric
+          {...initialFocus}
           disabled={disabled === true}
           icon="W"
           minimum={0}
