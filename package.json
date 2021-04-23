@@ -6,7 +6,7 @@
     "clean": "lerna run --parallel clean && rm -rf '*.log'",
     "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
-    "postinstall": "simple-git-hooks && yarn run build",
+    "postinstall": "simple-git-hooks",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rm -rf node_modules yarn.lock && yarn install",
     "test": "lerna run test"
