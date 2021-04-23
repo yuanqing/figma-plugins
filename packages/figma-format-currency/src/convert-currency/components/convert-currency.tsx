@@ -1,4 +1,3 @@
-/** @jsx h */
 import {
   Button,
   Checkbox,

@@ -1,4 +1,3 @@
-/** @jsx h */
 import { Preview as PreviewContainer } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 

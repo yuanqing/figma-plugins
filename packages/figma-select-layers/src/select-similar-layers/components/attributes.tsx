@@ -1,4 +1,3 @@
-/** @jsx h */
 import { SelectableItem, Text } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 

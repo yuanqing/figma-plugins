@@ -1,4 +1,3 @@
-/** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 
