@@ -9,15 +9,23 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { h, JSX } from 'preact'
+import { useEffect, useState } from 'preact/hooks'
 
-export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
-  const { state, handleChange, handleSubmit, isValid } = useForm(
-    { ...props, isLoading: false },
+import {
+  CleanNodesProps,
+  CloseUIHandler,
+  SelectionChangedHandler,
+  SubmitHandler
+} from '../utilities/types'
+
+export function CleanNodes(props: CleanNodesProps): JSX.Element {
+  const [isLoading, setIsLoading] = useState(false)
+  const { state, handleChange, handleSubmit, initialFocus, isValid } = useForm(
+    props,
     {
       onClose: function () {
-        emit('CLOSE_UI')
+        emit<CloseUIHandler>('CLOSE_UI')
       },
       onSubmit: function ({
         deleteHiddenLayers,
@@ -27,9 +35,9 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
         smartRenameLayersWhitelist,
         smartSortLayers,
         ungroupSingleLayerGroups
-      }) {
-        handleChange({ isLoading: true })
-        emit('SUBMIT', {
+      }: CleanNodesProps) {
+        setIsLoading(true)
+        emit<SubmitHandler>('SUBMIT', {
           deleteHiddenLayers,
           pixelPerfect,
           skipLockedLayers,
@@ -45,7 +53,7 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
         smartRenameLayers,
         smartSortLayers,
         ungroupSingleLayerGroups
-      }) {
+      }: CleanNodesProps) {
         return (
           deleteHiddenLayers === true ||
           pixelPerfect === true ||
@@ -58,16 +66,18 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
   )
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleChange({ hasSelection })
-      })
+      return on<SelectionChangedHandler>(
+        'SELECTION_CHANGED',
+        function (hasSelection) {
+          handleChange(hasSelection, 'hasSelection')
+        }
+      )
     },
     [handleChange]
   )
   const {
     deleteHiddenLayers,
     hasSelection,
-    isLoading,
     pixelPerfect,
     skipLockedLayers,
     smartRenameLayers,
@@ -144,8 +154,8 @@ export function CleanNodes(props: { [key: string]: any }): h.JSX.Element {
       </Stack>
       <VerticalSpace space="extraLarge" />
       <Button
+        {...initialFocus}
         disabled={isValid() === false || isLoading === true}
-        focused
         fullWidth
         loading={isLoading === true}
         onClick={handleSubmit}

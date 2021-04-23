@@ -17,6 +17,13 @@ import { getScope } from '../utilities/get-scope'
 import { getSiblingNodes } from '../utilities/get-sibling-nodes'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
 import { smartSortNodes } from '../utilities/smart-sort-nodes'
+import { Settings } from '../utilities/types'
+import {
+  CleanNodesProps,
+  CloseUIHandler,
+  SelectionChangedHandler,
+  SubmitHandler
+} from './utilities/types'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.children.length === 0) {
@@ -25,11 +32,12 @@ export default async function (): Promise<void> {
   }
   const settings = await loadSettingsAsync(defaultSettings)
   figma.on('selectionchange', function () {
-    emit('SELECTION_CHANGED', {
-      hasSelection: figma.currentPage.selection.length > 0
-    })
+    emit<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      figma.currentPage.selection.length > 0
+    )
   })
-  once('SUBMIT', async function (settings) {
+  once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings)
     const {
       deleteHiddenLayers,
@@ -73,10 +81,10 @@ export default async function (): Promise<void> {
         : `No change to layers ${scope}`
     )
   })
-  once('CLOSE_UI', function () {
+  once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI(
+  showUI<CleanNodesProps>(
     { height: 416, width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )

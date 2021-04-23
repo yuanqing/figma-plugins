@@ -8,35 +8,41 @@ import {
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 
-export function SmartRenameNodes(props: { [key: string]: any }): h.JSX.Element {
-  const { state, handleChange, handleSubmit } = useForm(
-    { ...props, isLoading: false },
-    {
-      onClose: function () {
-        emit('CLOSE_UI')
-      },
-      onSubmit: function ({ smartRenameLayersWhitelist }) {
-        emit('SUBMIT', { smartRenameLayersWhitelist })
-      }
+import {
+  CloseUIHandler,
+  SmartRenameNodesProps,
+  SubmitHandler
+} from '../utilities/types'
+
+export function SmartRenameNodes(props: SmartRenameNodesProps): h.JSX.Element {
+  const [isLoading, setIsLoading] = useState(false)
+  const { state, handleChange, handleSubmit, initialFocus } = useForm(props, {
+    onClose: function () {
+      emit<CloseUIHandler>('CLOSE_UI')
+    },
+    onSubmit: function ({ smartRenameLayersWhitelist }: SmartRenameNodesProps) {
+      setIsLoading(true)
+      emit<SubmitHandler>('SUBMIT', smartRenameLayersWhitelist)
     }
-  )
+  })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleChange({ hasSelection })
+      return on('SELECTION_CHANGED', function (hasSelection: boolean) {
+        handleChange(hasSelection, 'hasSelection')
       })
     },
     [handleChange]
   )
-  const { hasSelection, isLoading, smartRenameLayersWhitelist } = state
+  const { hasSelection, smartRenameLayersWhitelist } = state
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
       <Text muted>Ignore layers named</Text>
       <VerticalSpace space="small" />
       <Textbox
+        {...initialFocus}
         disabled={isLoading === true}
         name="smartRenameLayersWhitelist"
         onChange={handleChange}
@@ -45,7 +51,6 @@ export function SmartRenameNodes(props: { [key: string]: any }): h.JSX.Element {
       <VerticalSpace space="extraLarge" />
       <Button
         disabled={isLoading === true}
-        focused
         fullWidth
         loading={isLoading === true}
         onClick={handleSubmit}
