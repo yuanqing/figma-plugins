@@ -1,4 +1,3 @@
-/** @jsx h */
 import {
   Button,
   Container,
@@ -8,15 +7,18 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 
-export function Settings(props: { [key: string]: any }): h.JSX.Element {
+import type { Settings } from '../../utilities/types'
+import { CloseUIHandler, SubmitHandler } from '../utilities/types'
+
+export function Settings(props: Settings): JSX.Element {
   const { state, handleChange, handleSubmit } = useForm(props, {
     onClose: function () {
-      emit('CLOSE_UI')
+      emit<CloseUIHandler>('CLOSE_UI')
     },
-    onSubmit: function ({ resolution }) {
-      emit('SUBMIT', {
+    onSubmit: function ({ resolution }: Settings) {
+      emit<SubmitHandler>('SUBMIT', {
         resolution
       })
     }
@@ -31,11 +33,11 @@ export function Settings(props: { [key: string]: any }): h.JSX.Element {
         name="resolution"
         onChange={handleChange}
         options={[
-          { text: '2x', value: 2 },
-          { text: '3x', value: 3 },
-          { text: '4x', value: 4 },
-          { text: '8x', value: 8 },
-          { text: '10x', value: 10 }
+          { children: '2x', value: 2 },
+          { children: '3x', value: 3 },
+          { children: '4x', value: 4 },
+          { children: '8x', value: 8 },
+          { children: '10x', value: 10 }
         ]}
         value={resolution}
       />

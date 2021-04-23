@@ -16,12 +16,15 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
+  const { resolution } = await loadSettingsAsync(defaultSettings)
+  if (resolution === null) {
+    throw new Error('`resolution` is `null`')
+  }
   const layerName = length === 1 ? figma.currentPage.selection[0].name : 'Image'
   const nodes = replaceNodesWithinInstancesWithClones(
     figma.currentPage.selection.slice()
   )
   const group = createGroupNode(nodes)
-  const { resolution } = await loadSettingsAsync(defaultSettings)
   const node = await flattenGroupNodeAsync(group, resolution)
   const didPositionChange =
     node.width !== group.width || node.height !== group.height

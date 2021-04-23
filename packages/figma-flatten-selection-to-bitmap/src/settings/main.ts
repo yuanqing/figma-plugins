@@ -7,17 +7,19 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { defaultSettings } from '../utilities/default-settings'
+import { Settings } from '../utilities/types'
+import { CloseUIHandler, SubmitHandler } from './utilities/types'
 
 export default async function (): Promise<void> {
   const settings = await loadSettingsAsync(defaultSettings)
-  once('SUBMIT', async function (settings) {
+  once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings)
     figma.closePlugin(formatSuccessMessage('Saved settings'))
   })
-  once('CLOSE_UI', function () {
+  once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI(
+  showUI<Settings>(
     {
       height: 136,
       width: 240

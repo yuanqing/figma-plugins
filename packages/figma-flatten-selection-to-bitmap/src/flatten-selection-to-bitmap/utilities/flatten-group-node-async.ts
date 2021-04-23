@@ -4,12 +4,15 @@ import {
   showUI,
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
-import { ImageAttributes } from 'figma-insert-big-image/src/types'
 import { createImageNode } from 'figma-insert-big-image/src/utilities/create-image-node'
+import { ImageAttributes } from 'figma-insert-big-image/src/utilities/types'
+
+import { Settings } from '../../utilities/types'
+import { SplitImageRequestHandler, SplitImageResultHandler } from './types'
 
 export async function flattenGroupNodeAsync(
   group: GroupNode,
-  resolution: number
+  resolution: Exclude<Settings['resolution'], null>
 ): Promise<RectangleNode | GroupNode> {
   const exportSettings: ExportSettingsImage = {
     constraint: {
@@ -37,11 +40,14 @@ async function splitImageAsync(
   bytes: Uint8Array
 ): Promise<Array<ImageAttributes>> {
   return new Promise(function (resolve) {
-    once('SPLIT_IMAGE_RESULT', function ({ images }) {
-      figma.ui.close()
-      resolve(images)
-    })
+    once<SplitImageResultHandler>(
+      'SPLIT_IMAGE_RESULT',
+      function (images: Array<ImageAttributes>) {
+        figma.ui.close()
+        resolve(images)
+      }
+    )
     showUI({ visible: false })
-    emit('SPLIT_IMAGE_REQUEST', { bytes })
+    emit<SplitImageRequestHandler>('SPLIT_IMAGE_REQUEST', bytes)
   })
 }
