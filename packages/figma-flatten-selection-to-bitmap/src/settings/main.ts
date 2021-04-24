@@ -8,7 +8,7 @@ import {
 
 import { defaultSettings } from '../utilities/default-settings'
 import { Settings } from '../utilities/types'
-import { CloseUIHandler, SubmitHandler } from './utilities/types'
+import { CloseUIHandler, SettingsProps, SubmitHandler } from './utilities/types'
 
 export default async function (): Promise<void> {
   const settings = await loadSettingsAsync(defaultSettings)
@@ -19,7 +19,7 @@ export default async function (): Promise<void> {
     await saveSettingsAsync(settings)
     figma.closePlugin(formatSuccessMessage('Saved settings'))
   })
-  showUI<Settings>(
+  showUI<SettingsProps>(
     {
       height: 136,
       width: 240

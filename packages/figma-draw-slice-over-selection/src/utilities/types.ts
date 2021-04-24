@@ -6,6 +6,7 @@ export type Settings = {
 export type FormState = Settings & {
   hasSelection: boolean
 }
+export type DrawSliceOverSelectionProps = FormState
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'

@@ -8,7 +8,8 @@ export type Dimensions = {
 export type Settings = {
   resizeWithConstraints: boolean
 }
-export type FormState = Settings & Dimensions
+export type SetNodeSizeProps = Settings & Dimensions
+export type FormState = SetNodeSizeProps
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'

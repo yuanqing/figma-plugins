@@ -6,16 +6,16 @@ export type Group<T> = {
   name: null | string
   nodes: Array<T>
 }
-
 export type NodeAttributes = {
   id: string
   name: string
 }
 
-export type FormState = Settings & {
+export type OrganizeNodesProps = Settings & {
   groups: Array<Group<NodeAttributes>>
   maximumGroupDefinition: GroupDefinition
 }
+export type FormState = OrganizeNodesProps
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'

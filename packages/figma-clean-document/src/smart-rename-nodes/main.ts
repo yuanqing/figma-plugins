@@ -13,8 +13,8 @@ import { smartRenameNode } from '../utilities/smart-rename-node'
 import { Settings } from '../utilities/types'
 import {
   CloseUIHandler,
-  FormState,
   SelectionChangedHandler,
+  SmartRenameNodesProps,
   SubmitHandler
 } from './utilities/types'
 
@@ -64,8 +64,12 @@ export default async function (): Promise<void> {
       figma.currentPage.selection.length > 0
     )
   })
-  showUI<FormState>(
+  const { smartRenameLayersWhitelist } = settings
+  showUI<SmartRenameNodesProps>(
     { height: 172, width: 240 },
-    { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
+    {
+      hasSelection: figma.currentPage.selection.length > 0,
+      smartRenameLayersWhitelist
+    }
   )
 }

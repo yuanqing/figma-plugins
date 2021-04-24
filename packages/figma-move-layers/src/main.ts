@@ -12,7 +12,7 @@ import {
 import { defaultSettings } from './utilities/default-settings'
 import {
   CloseUIHandler,
-  FormState,
+  MoveNodesProps,
   SelectionChangedHandler,
   Settings,
   SubmitHandler
@@ -58,7 +58,7 @@ export default async function (): Promise<void> {
       figma.currentPage.selection.length > 0
     )
   })
-  showUI<FormState>(
+  showUI<MoveNodesProps>(
     { height: 116, width: 240 },
     { ...settings, hasSelection: true }
   )

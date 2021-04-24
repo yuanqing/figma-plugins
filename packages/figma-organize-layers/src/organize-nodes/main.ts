@@ -19,9 +19,9 @@ import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group
 import { organizeNodes } from './utilities/organize-nodes'
 import {
   CloseUIHandler,
-  FormState,
   Group,
   NodeAttributes,
+  OrganizeNodesProps,
   UpdateMainStateHandler,
   UpdateUIStateHandler
 } from './utilities/types'
@@ -92,7 +92,7 @@ export default async function (): Promise<void> {
   const { combineSingleLayerGroups, groupDefinition } = settings
   const groups = getGroups(nodes, { combineSingleLayerGroups, groupDefinition })
   const maximumGroupDefinition = computeMaximumGroupDefinition(nodes)
-  showUI<FormState>(
+  showUI<OrganizeNodesProps>(
     { height: 361, width: 240 },
     { ...settings, groups, maximumGroupDefinition }
   )

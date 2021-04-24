@@ -15,7 +15,7 @@ import {
   CloseUIHandler,
   ImageNodeAttributes,
   InsertBigImageHandler,
-  Settings
+  InsertBigImageProps
 } from './utilities/types'
 
 export default async function (): Promise<void> {
@@ -67,5 +67,5 @@ export default async function (): Promise<void> {
       )
     }
   )
-  showUI<Settings>({ height: 224, width: 240 }, settings)
+  showUI<InsertBigImageProps>({ height: 224, width: 240 }, settings)
 }

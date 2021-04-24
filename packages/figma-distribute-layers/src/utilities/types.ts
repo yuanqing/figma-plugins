@@ -15,9 +15,10 @@ export type UiFactoryOptions = {
 export type Settings = {
   space: null | number
 }
-export type FormState = Settings & {
+export type DistributeLayersProps = Settings & {
   hasSelection: boolean
 }
+export type FormState = DistributeLayersProps
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'

@@ -12,9 +12,10 @@ export type ImageNodeAttributes = {
 export type Settings = {
   scale: Scale
 }
-export type FormState = Settings & {
+export type UpscaleImageProps = Settings & {
   hasSelection: boolean
 }
+export type FormState = UpscaleImageProps
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'

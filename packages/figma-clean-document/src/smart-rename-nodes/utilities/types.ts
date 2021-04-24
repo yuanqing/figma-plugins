@@ -2,8 +2,14 @@ import { EventHandler } from '@create-figma-plugin/utilities'
 
 import { Settings } from '../../utilities/types'
 
-export type FormState = Pick<Settings, 'smartRenameLayersWhitelist'> & {
+export type SmartRenameNodesProps = Pick<
+  Settings,
+  'smartRenameLayersWhitelist'
+> & {
   hasSelection: boolean
+}
+export type FormState = SmartRenameNodesProps & {
+  loading: boolean
 }
 
 export interface CloseUIHandler extends EventHandler {

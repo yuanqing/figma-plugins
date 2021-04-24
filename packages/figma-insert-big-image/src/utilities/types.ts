@@ -11,6 +11,7 @@ export type ImageNodeAttributes = {
 export type Settings = {
   insertAs2x: boolean
 }
+export type InsertBigImageProps = Settings
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'
@@ -21,8 +22,9 @@ export interface InsertBigImageHandler extends EventHandler {
   name: 'INSERT_BIG_IMAGE'
   handler: (
     images: Array<ImageNodeAttributes>,
-    options: Settings & {
+    options: {
       name: string
+      insertAs2x: boolean
       done: boolean
     }
   ) => void

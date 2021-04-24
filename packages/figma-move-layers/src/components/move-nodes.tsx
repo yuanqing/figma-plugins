@@ -15,32 +15,35 @@ import { useEffect, useState } from 'preact/hooks'
 import {
   CloseUIHandler,
   FormState,
+  MoveNodesProps,
   SelectionChangedHandler,
   SubmitHandler
 } from '../utilities/types'
 
-export function MoveNodes(props: FormState): JSX.Element {
-  const { disabled, setFormState, handleSubmit, initialFocus } = useForm(
-    props,
-    {
-      close: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      submit: function ({ horizontalOffset, verticalOffset }: FormState) {
-        emit<SubmitHandler>('SUBMIT', { horizontalOffset, verticalOffset })
-      },
-      validate: function ({
-        hasSelection,
-        horizontalOffset,
-        verticalOffset
-      }: FormState) {
-        return (
-          hasSelection === true &&
-          (horizontalOffset !== null || verticalOffset !== null)
-        )
-      }
+export function MoveNodes(props: MoveNodesProps): JSX.Element {
+  const {
+    disabled,
+    handleSubmit,
+    initialFocus,
+    setFormState
+  } = useForm<FormState>(props, {
+    close: function () {
+      emit<CloseUIHandler>('CLOSE_UI')
+    },
+    submit: function ({ horizontalOffset, verticalOffset }: FormState) {
+      emit<SubmitHandler>('SUBMIT', { horizontalOffset, verticalOffset })
+    },
+    validate: function ({
+      hasSelection,
+      horizontalOffset,
+      verticalOffset
+    }: FormState) {
+      return (
+        hasSelection === true &&
+        (horizontalOffset !== null || verticalOffset !== null)
+      )
     }
-  )
+  })
   useEffect(
     function () {
       return on<SelectionChangedHandler>(

@@ -16,11 +16,11 @@ import { getImageNodes } from './utilities/get-image-nodes'
 import { readImageNodesAsync } from './utilities/read-image-nodes-async'
 import {
   CloseUIHandler,
-  FormState,
   ImageNodeAttributes,
   SelectionChangedHandler,
   Settings,
   SubmitHandler,
+  UpscaleImageProps,
   UpscaleImagesRequestHandler,
   UpscaleImagesResultHandler
 } from './utilities/types'
@@ -62,5 +62,8 @@ export default async function (): Promise<void> {
     )
   })
   const settings = await loadSettingsAsync(defaultSettings)
-  showUI<FormState>({ height: 136, width: 240 }, { ...settings, hasSelection })
+  showUI<UpscaleImageProps>(
+    { height: 136, width: 240 },
+    { ...settings, hasSelection }
+  )
 }

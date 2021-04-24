@@ -12,7 +12,7 @@ import { defaultSettings } from './utilities/default-settings'
 import { drawSliceOverSelection } from './utilities/draw-slice-over-selection'
 import {
   CloseUIHandler,
-  FormState,
+  DrawSliceOverSelectionProps,
   SelectionChangedHandler,
   SubmitHandler
 } from './utilities/types'
@@ -43,7 +43,7 @@ export default async function (): Promise<void> {
       figma.currentPage.selection.length > 0
     )
   })
-  showUI<FormState>(
+  showUI<DrawSliceOverSelectionProps>(
     {
       height: 140,
       width: 240

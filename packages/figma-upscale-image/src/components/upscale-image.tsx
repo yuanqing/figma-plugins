@@ -20,20 +20,21 @@ import {
   Scale,
   SelectionChangedHandler,
   SubmitHandler,
+  UpscaleImageProps,
   UpscaleImagesRequestHandler,
   UpscaleImagesResultHandler
 } from '../utilities/types'
 import { upscaleImageAsync } from '../utilities/upscale-image-async'
 
-export function UpscaleImage(props: FormState): h.JSX.Element {
+export function UpscaleImage(props: UpscaleImageProps): h.JSX.Element {
   const [loading, setLoading] = useState(false)
   const {
+    disabled,
     formState,
-    setFormState,
     initialFocus,
     handleSubmit,
-    disabled
-  } = useForm(props, {
+    setFormState
+  } = useForm<FormState>(props, {
     close: function () {
       emit<CloseUIHandler>('CLOSE_UI')
     },

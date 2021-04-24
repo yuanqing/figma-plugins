@@ -17,10 +17,10 @@ import { splitImageAsync } from '../utilities/split-image-async'
 import {
   CloseUIHandler,
   InsertBigImageHandler,
-  Settings
+  InsertBigImageProps
 } from '../utilities/types'
 
-export function InsertBigImage(props: Settings): JSX.Element {
+export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
   const [insertAs2x, setInsertAs2x] = useState(props.insertAs2x)
   const [index, setIndex] = useState(0)
   const [total, setTotal] = useState(0)

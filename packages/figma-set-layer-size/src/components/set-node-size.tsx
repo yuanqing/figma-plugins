@@ -22,17 +22,18 @@ import {
   Dimensions,
   FormState,
   SelectionChangedHandler,
+  SetNodeSizeProps,
   SubmitHandler
 } from '../utilities/types'
 
-export function SetLayerSize(props: FormState): JSX.Element {
+export function SetNodeSize(props: SetNodeSizeProps): JSX.Element {
   const {
+    disabled,
     formState,
-    setFormState,
     handleSubmit,
     initialFocus,
-    disabled
-  } = useForm(props, {
+    setFormState
+  } = useForm<FormState>(props, {
     close: function () {
       emit<CloseUIHandler>('CLOSE_UI')
     },
@@ -46,10 +47,10 @@ export function SetLayerSize(props: FormState): JSX.Element {
       )
     }
   })
-  const [width, setWidth] = useState(
+  const [widthString, setWidthString] = useState(
     mapTextboxNumericValueToString(formState.width)
   )
-  const [height, setHeight] = useState(
+  const [heightString, setHeightString] = useState(
     mapTextboxNumericValueToString(formState.height)
   )
   useEffect(
@@ -57,14 +58,15 @@ export function SetLayerSize(props: FormState): JSX.Element {
       return on<SelectionChangedHandler>(
         'SELECTION_CHANGED',
         function ({ width, height }: Dimensions) {
-          setWidth(mapTextboxNumericValueToString(width))
-          setHeight(mapTextboxNumericValueToString(height))
+          setWidthString(mapTextboxNumericValueToString(width))
+          setHeightString(mapTextboxNumericValueToString(height))
         }
       )
     },
-    [setWidth, setHeight]
+    [setWidthString, setHeightString]
   )
-  const hasSelection = formState.width !== null && formState.height !== null
+  const { width, height } = formState
+  const hasSelection = width !== null && height !== null
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
@@ -76,8 +78,8 @@ export function SetLayerSize(props: FormState): JSX.Element {
           minimum={0}
           name="width"
           onNumericValueChange={setFormState}
-          onValueChange={setWidth}
-          value={width}
+          onValueChange={setWidthString}
+          value={widthString}
         />
         <TextboxNumeric
           disabled={hasSelection === false}
@@ -85,8 +87,8 @@ export function SetLayerSize(props: FormState): JSX.Element {
           minimum={0}
           name="height"
           onNumericValueChange={setFormState}
-          onValueChange={setHeight}
-          value={height}
+          onValueChange={setHeightString}
+          value={heightString}
         />
       </Columns>
       <VerticalSpace space="medium" />

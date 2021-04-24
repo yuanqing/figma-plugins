@@ -2,8 +2,11 @@ import { EventHandler } from '@create-figma-plugin/utilities'
 
 import { Settings } from '../../utilities/types'
 
-export type FormState = Settings & {
+export type CleanNodesProps = Settings & {
   hasSelection: boolean
+}
+export type FormState = CleanNodesProps & {
+  loading: boolean
 }
 
 export interface CloseUIHandler extends EventHandler {

@@ -9,15 +9,19 @@ import {
 import { emit } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 
-import type { Settings } from '../../utilities/types'
-import { CloseUIHandler, SubmitHandler } from '../utilities/types'
+import {
+  CloseUIHandler,
+  FormState,
+  SettingsProps,
+  SubmitHandler
+} from '../utilities/types'
 
-export function Settings(props: Settings): JSX.Element {
-  const { formState, setFormState, handleSubmit } = useForm(props, {
+export function Settings(props: SettingsProps): JSX.Element {
+  const { formState, handleSubmit, setFormState } = useForm<FormState>(props, {
     close: function () {
       emit<CloseUIHandler>('CLOSE_UI')
     },
-    submit: function ({ resolution }: Settings) {
+    submit: function ({ resolution }: FormState) {
       emit<SubmitHandler>('SUBMIT', {
         resolution
       })

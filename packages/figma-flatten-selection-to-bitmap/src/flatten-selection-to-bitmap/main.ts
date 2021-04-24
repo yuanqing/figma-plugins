@@ -26,14 +26,11 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-
   const { resolution } = await loadSettingsAsync(defaultSettings)
-
   const nodes = replaceNodesWithinInstancesWithClones(
     figma.currentPage.selection.slice()
   )
   const temporaryGroupNode = createGroupNode(nodes)
-
   once<SplitImageResultHandler>(
     'SPLIT_IMAGE_RESULT',
     function (images: Array<ImageNodeAttributes>) {
@@ -69,12 +66,10 @@ export default async function (): Promise<void> {
       )
     }
   )
-
   showUI({
     height: 136,
     width: 240
   })
-
   const bytes = await exportNodeAsync(temporaryGroupNode, resolution)
   emit<SplitImageRequestHandler>('SPLIT_IMAGE_REQUEST', bytes)
 }

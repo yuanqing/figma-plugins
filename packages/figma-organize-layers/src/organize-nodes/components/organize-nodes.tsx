@@ -22,6 +22,7 @@ import {
   FormState,
   Group,
   NodeAttributes,
+  OrganizeNodesProps,
   UpdateMainStateHandler,
   UpdateUIStateHandler
 } from '../utilities/types'
@@ -35,14 +36,14 @@ const groupDefinitions: Array<SegmentedControlOption<GroupDefinition>> = [
   { children: '5th /', value: 5 }
 ]
 
-export function OrganizeNodes(props: FormState): JSX.Element {
+export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
   const {
+    disabled,
     formState,
-    setFormState,
     handleSubmit,
     initialFocus,
-    disabled
-  } = useForm(props, {
+    setFormState
+  } = useForm<FormState>(props, {
     close: function () {
       emit<CloseUIHandler>('CLOSE_UI')
     },

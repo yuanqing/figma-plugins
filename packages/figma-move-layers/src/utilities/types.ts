@@ -4,9 +4,10 @@ export type Settings = {
   horizontalOffset: null | number
   verticalOffset: null | number
 }
-export type FormState = Settings & {
+export type MoveNodesProps = Settings & {
   hasSelection: boolean
 }
+export type FormState = MoveNodesProps
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'
