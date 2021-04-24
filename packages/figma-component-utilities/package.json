@@ -47,9 +47,9 @@
         "main": "src/convert-component-to-frame/main.ts"
       },
       {
-        "name": "Replace with Component",
-        "main": "src/replace-with-component/main.ts",
-        "ui": "src/replace-with-component/ui.ts"
+        "name": "Replace With Component Instance",
+        "main": "src/replace-with-component-instance/main.ts",
+        "ui": "src/replace-with-component-instance/ui.ts"
       },
       "-",
       {

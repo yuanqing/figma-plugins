@@ -3,11 +3,11 @@ import {
   isWithinInstance
 } from '@create-figma-plugin/utilities'
 
-import { NodeAttributes } from '../types'
+import { NodeAttributes } from './types'
 
-export function getSelection(): Array<NodeAttributes> {
+export function getValidSelectedNodes(): Array<NodeAttributes> {
   const nodes = figma.currentPage.selection.filter(function (node) {
     return isWithinInstance(node) === false
   })
-  return extractAttributes<NodeAttributes>(nodes, ['id', 'name'])
+  return extractAttributes(nodes, ['id', 'name'])
 }
