@@ -10,7 +10,7 @@ import {
 } from '@create-figma-plugin/ui'
 import {
   emit,
-  mapTextboxNumberToString,
+  mapTextboxNumericValueToString,
   MIXED_NUMBER,
   on
 } from '@create-figma-plugin/utilities'
@@ -20,83 +20,86 @@ import { useEffect, useState } from 'preact/hooks'
 import {
   CloseUIHandler,
   Dimensions,
+  FormState,
   SelectionChangedHandler,
-  SetLayerSizeProps,
   SubmitHandler
 } from '../utilities/types'
 
-export function SetLayerSize(props: SetLayerSizeProps): JSX.Element {
-  const { state, handleChange, handleSubmit, initialFocus, isValid } = useForm(
-    props,
-    {
-      onClose: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      onSubmit: function ({
-        width,
-        height,
-        resizeWithConstraints
-      }: SetLayerSizeProps) {
-        emit<SubmitHandler>('SUBMIT', { height, resizeWithConstraints, width })
-      },
-      validate: function ({ width, height }: SetLayerSizeProps) {
-        return (
-          (width !== null && width !== MIXED_NUMBER && width !== 0) ||
-          (height !== null && height !== MIXED_NUMBER && height !== 0)
-        )
-      }
+export function SetLayerSize(props: FormState): JSX.Element {
+  const {
+    formState,
+    setFormState,
+    handleSubmit,
+    initialFocus,
+    disabled
+  } = useForm(props, {
+    close: function () {
+      emit<CloseUIHandler>('CLOSE_UI')
+    },
+    submit: function ({ width, height, resizeWithConstraints }: FormState) {
+      emit<SubmitHandler>('SUBMIT', { height, resizeWithConstraints, width })
+    },
+    validate: function ({ width, height }: FormState) {
+      return (
+        (width !== null && width !== MIXED_NUMBER && width !== 0) ||
+        (height !== null && height !== MIXED_NUMBER && height !== 0)
+      )
     }
+  })
+  const [width, setWidth] = useState(
+    mapTextboxNumericValueToString(formState.width)
   )
-  const [width, setWidth] = useState(mapTextboxNumberToString(state.width))
-  const [height, setHeight] = useState(mapTextboxNumberToString(state.height))
+  const [height, setHeight] = useState(
+    mapTextboxNumericValueToString(formState.height)
+  )
   useEffect(
     function () {
       return on<SelectionChangedHandler>(
         'SELECTION_CHANGED',
         function ({ width, height }: Dimensions) {
-          setWidth(mapTextboxNumberToString(width))
-          setHeight(mapTextboxNumberToString(height))
+          setWidth(mapTextboxNumericValueToString(width))
+          setHeight(mapTextboxNumericValueToString(height))
         }
       )
     },
     [setWidth, setHeight]
   )
-  const disabled = state.width === null && state.height === null
+  const hasSelection = formState.width !== null && formState.height !== null
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
       <Columns space="extraSmall">
         <TextboxNumeric
           {...initialFocus}
-          disabled={disabled === true}
+          disabled={hasSelection === false}
           icon="W"
           minimum={0}
           name="width"
-          onChange={setWidth}
-          onNumberChange={handleChange}
+          onNumericValueChange={setFormState}
+          onValueChange={setWidth}
           value={width}
         />
         <TextboxNumeric
-          disabled={disabled === true}
+          disabled={hasSelection === false}
           icon="H"
           minimum={0}
           name="height"
-          onChange={setHeight}
-          onNumberChange={handleChange}
+          onNumericValueChange={setFormState}
+          onValueChange={setHeight}
           value={height}
         />
       </Columns>
       <VerticalSpace space="medium" />
       <Checkbox
-        disabled={disabled === true}
+        disabled={hasSelection === false}
         name="resizeWithConstraints"
-        onChange={handleChange}
-        value={state.resizeWithConstraints === true}
+        onValueChange={setFormState}
+        value={formState.resizeWithConstraints === true}
       >
         <Text>Resize with constraints</Text>
       </Checkbox>
       <VerticalSpace space="medium" />
-      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
+      <Button disabled={disabled} fullWidth onClick={handleSubmit}>
         Set Layer Size
       </Button>
       <VerticalSpace space="small" />

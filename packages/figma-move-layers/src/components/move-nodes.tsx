@@ -14,47 +14,49 @@ import { useEffect, useState } from 'preact/hooks'
 
 import {
   CloseUIHandler,
-  MoveNodesProps,
+  FormState,
   SelectionChangedHandler,
   SubmitHandler
 } from '../utilities/types'
 
-export function MoveNodes(props: MoveNodesProps): JSX.Element {
-  const { handleChange, handleSubmit, initialFocus, isValid } = useForm(props, {
-    onClose: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    onSubmit: function ({ horizontalOffset, verticalOffset }: MoveNodesProps) {
-      emit<SubmitHandler>('SUBMIT', { horizontalOffset, verticalOffset })
-    },
-    validate: function ({
-      hasSelection,
-      horizontalOffset,
-      verticalOffset
-    }: MoveNodesProps) {
-      return (
-        hasSelection === true &&
-        horizontalOffset !== null &&
-        verticalOffset !== null
-      )
+export function MoveNodes(props: FormState): JSX.Element {
+  const { disabled, setFormState, handleSubmit, initialFocus } = useForm(
+    props,
+    {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({ horizontalOffset, verticalOffset }: FormState) {
+        emit<SubmitHandler>('SUBMIT', { horizontalOffset, verticalOffset })
+      },
+      validate: function ({
+        hasSelection,
+        horizontalOffset,
+        verticalOffset
+      }: FormState) {
+        return (
+          hasSelection === true &&
+          (horizontalOffset !== null || verticalOffset !== null)
+        )
+      }
     }
-  })
+  )
   useEffect(
     function () {
       return on<SelectionChangedHandler>(
         'SELECTION_CHANGED',
         function (hasSelection: boolean) {
-          handleChange(hasSelection, 'hasSelection')
+          setFormState(hasSelection, 'hasSelection')
         }
       )
     },
-    [handleChange]
+    [setFormState]
   )
-  const [horizontalOffset, setHorizontalOffset] = useState(
-    `${props.horizontalOffset}`
-  )
-  const [verticalOffset, setVerticalOffset] = useState(
+  const [verticalOffsetString, setVerticalOffsetString] = useState(
     `${props.verticalOffset}`
+  )
+  const [horizontalOffsetString, setHorizontalOffsetString] = useState(
+    `${props.horizontalOffset}`
   )
   return (
     <Container space="medium">
@@ -64,20 +66,20 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
           {...initialFocus}
           icon={<IconMoveRight />}
           name="horizontalOffset"
-          onChange={setHorizontalOffset}
-          onNumberChange={handleChange}
-          value={horizontalOffset}
+          onNumericValueChange={setFormState}
+          onValueChange={setHorizontalOffsetString}
+          value={horizontalOffsetString}
         />
         <TextboxNumeric
           icon={<IconMoveDown />}
           name="verticalOffset"
-          onChange={setVerticalOffset}
-          onNumberChange={handleChange}
-          value={verticalOffset}
+          onNumericValueChange={setFormState}
+          onValueChange={setVerticalOffsetString}
+          value={verticalOffsetString}
         />
       </Columns>
       <VerticalSpace space="large" />
-      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
+      <Button disabled={disabled} fullWidth onClick={handleSubmit}>
         Move Layers
       </Button>
       <VerticalSpace space="small" />

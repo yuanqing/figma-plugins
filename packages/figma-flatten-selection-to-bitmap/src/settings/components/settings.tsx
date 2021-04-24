@@ -13,17 +13,17 @@ import type { Settings } from '../../utilities/types'
 import { CloseUIHandler, SubmitHandler } from '../utilities/types'
 
 export function Settings(props: Settings): JSX.Element {
-  const { state, handleChange, handleSubmit } = useForm(props, {
-    onClose: function () {
+  const { formState, setFormState, handleSubmit } = useForm(props, {
+    close: function () {
       emit<CloseUIHandler>('CLOSE_UI')
     },
-    onSubmit: function ({ resolution }: Settings) {
+    submit: function ({ resolution }: Settings) {
       emit<SubmitHandler>('SUBMIT', {
         resolution
       })
     }
   })
-  const { resolution } = state
+  const { resolution } = formState
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
@@ -31,7 +31,7 @@ export function Settings(props: Settings): JSX.Element {
       <VerticalSpace space="small" />
       <SegmentedControl
         name="resolution"
-        onChange={handleChange}
+        onValueChange={setFormState}
         options={[
           { children: '2x', value: 2 },
           { children: '3x', value: 3 },

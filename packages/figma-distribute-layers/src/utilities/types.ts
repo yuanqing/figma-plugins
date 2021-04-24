@@ -14,7 +14,7 @@ export type UiFactoryOptions = {
 export type Settings = {
   space: null | number
 }
-export type DistributeLayersProps = Settings & {
+export type FormState = Settings & {
   hasSelection: boolean
 }
 

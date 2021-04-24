@@ -19,13 +19,13 @@ import { useEffect, useState } from 'preact/hooks'
 import { GroupDefinition } from '../../utilities/types'
 import {
   CloseUIHandler,
+  FormState,
   Group,
   NodeAttributes,
-  OrganizeNodesProps,
-  SetPreviewSettingsHandler,
+  UpdateMainStateHandler,
   UpdateUIStateHandler
 } from '../utilities/types'
-import { Preview } from './preview/preview'
+import { OrganizeNodesPreview } from './organize-nodes-preview/organize-nodes-preview'
 
 const groupDefinitions: Array<SegmentedControlOption<GroupDefinition>> = [
   { children: '1st /', value: 1 },
@@ -35,39 +35,42 @@ const groupDefinitions: Array<SegmentedControlOption<GroupDefinition>> = [
   { children: '5th /', value: 5 }
 ]
 
-export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
-  const { state, handleChange, handleSubmit, initialFocus, isValid } = useForm(
-    props,
-    {
-      onClose: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      onSubmit: function ({
+export function OrganizeNodes(props: FormState): JSX.Element {
+  const {
+    formState,
+    setFormState,
+    handleSubmit,
+    initialFocus,
+    disabled
+  } = useForm(props, {
+    close: function () {
+      emit<CloseUIHandler>('CLOSE_UI')
+    },
+    submit: function ({
+      combineSingleLayerGroups,
+      groupDefinition,
+      horizontalSpace,
+      verticalSpace
+    }: FormState) {
+      emit('SUBMIT', {
         combineSingleLayerGroups,
         groupDefinition,
         horizontalSpace,
         verticalSpace
-      }: OrganizeNodesProps) {
-        emit('SUBMIT', {
-          combineSingleLayerGroups,
-          groupDefinition,
-          horizontalSpace,
-          verticalSpace
-        })
-      },
-      validate: function ({ groups }: OrganizeNodesProps) {
-        return groups.length > 0
-      }
-    }
-  )
-  useEffect(
-    function () {
-      emit<SetPreviewSettingsHandler>('SET_PREVIEW_SETTINGS', {
-        combineSingleLayerGroups: state.combineSingleLayerGroups,
-        groupDefinition: state.groupDefinition
       })
     },
-    [state.combineSingleLayerGroups, state.groupDefinition]
+    validate: function ({ groups }: FormState) {
+      return groups.length > 0
+    }
+  })
+  useEffect(
+    function () {
+      emit<UpdateMainStateHandler>('UPDATE_MAIN_STATE', {
+        combineSingleLayerGroups: formState.combineSingleLayerGroups,
+        groupDefinition: formState.groupDefinition
+      })
+    },
+    [formState.combineSingleLayerGroups, formState.groupDefinition]
   )
   useEffect(
     function () {
@@ -77,33 +80,35 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
           groups: Array<Group<NodeAttributes>>,
           maximumGroupDefinition: GroupDefinition
         ) {
-          handleChange(groups, 'groups')
-          handleChange(maximumGroupDefinition, 'maximumGroupDefinition')
+          setFormState(groups, 'groups')
+          setFormState(maximumGroupDefinition, 'maximumGroupDefinition')
         }
       )
     },
-    [handleChange]
+    [setFormState]
   )
-  const [horizontalSpace, setHorizontalSpace] = useState(
+  const [horizontalSpaceString, setHorizontalSpaceString] = useState(
     `${props.horizontalSpace}`
   )
-  const [verticalSpace, setVerticalSpace] = useState(`${props.verticalSpace}`)
+  const [verticalSpaceString, setVerticalSpaceString] = useState(
+    `${props.verticalSpace}`
+  )
   const {
     combineSingleLayerGroups,
     groupDefinition,
     groups,
     maximumGroupDefinition
-  } = state
+  } = formState
   return (
     <Fragment>
-      <Preview groups={groups} />
+      <OrganizeNodesPreview groups={groups} />
       <Container space="medium">
         <VerticalSpace space="large" />
         <Text muted>Group by text before</Text>
         <VerticalSpace space="small" />
         <SegmentedControl
           name="groupDefinition"
-          onChange={handleChange}
+          onValueChange={setFormState}
           options={groupDefinitions.slice(0, maximumGroupDefinition)}
           value={
             Math.min(groupDefinition, maximumGroupDefinition) as GroupDefinition
@@ -117,23 +122,23 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
             icon={<IconSpaceHorizontal />}
             minimum={0}
             name="horizontalSpace"
-            onChange={setHorizontalSpace}
-            onNumberChange={handleChange}
-            value={horizontalSpace}
+            onNumericValueChange={setFormState}
+            onValueChange={setHorizontalSpaceString}
+            value={horizontalSpaceString}
           />
           <TextboxNumeric
             icon={<IconSpaceVertical />}
             minimum={0}
             name="verticalSpace"
-            onChange={setVerticalSpace}
-            onNumberChange={handleChange}
-            value={verticalSpace}
+            onNumericValueChange={setFormState}
+            onValueChange={setVerticalSpaceString}
+            value={verticalSpaceString}
           />
         </Columns>
         <VerticalSpace space="large" />
         <Checkbox
           name="combineSingleLayerGroups"
-          onChange={handleChange}
+          onValueChange={setFormState}
           value={combineSingleLayerGroups}
         >
           <Text>Combine single-layer groups</Text>
@@ -141,7 +146,7 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
         <VerticalSpace space="large" />
         <Button
           {...initialFocus}
-          disabled={isValid() === false}
+          disabled={disabled}
           fullWidth
           onClick={handleSubmit}
         >

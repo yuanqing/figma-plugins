@@ -5,8 +5,8 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
-import { readClipboardContents } from './utilities/read-clipboard-contents'
-import { setText } from './utilities/set-text'
+import { readClipboardContentsAsync } from './utilities/read-clipboard-contents-async'
+import { setTextAsync } from './utilities/set-text-async'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
@@ -18,12 +18,12 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('No text layers in selection'))
     return
   }
-  const string = await readClipboardContents()
+  const string = await readClipboardContentsAsync()
   if (string === '\n') {
     figma.closePlugin(formatErrorMessage('Nothing to paste'))
     return
   }
-  await setText(nodes, string)
+  await setTextAsync(nodes, string)
   figma.closePlugin(
     formatSuccessMessage(
       `Pasted text in ${nodes.length} ${pluralize(nodes.length, 'text layer')}`

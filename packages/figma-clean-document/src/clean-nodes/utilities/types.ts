@@ -2,7 +2,7 @@ import { EventHandler } from '@create-figma-plugin/utilities'
 
 import { Settings } from '../../utilities/types'
 
-export type CleanNodesProps = Settings & {
+export type FormState = Settings & {
   hasSelection: boolean
 }
 

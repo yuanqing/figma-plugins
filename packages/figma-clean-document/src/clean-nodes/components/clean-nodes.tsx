@@ -13,21 +13,35 @@ import { h, JSX } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
 import {
-  CleanNodesProps,
   CloseUIHandler,
+  FormState,
   SelectionChangedHandler,
   SubmitHandler
 } from '../utilities/types'
 
-export function CleanNodes(props: CleanNodesProps): JSX.Element {
-  const [isLoading, setIsLoading] = useState(false)
-  const { state, handleChange, handleSubmit, initialFocus, isValid } = useForm(
-    props,
-    {
-      onClose: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      onSubmit: function ({
+export function CleanNodes(props: FormState): JSX.Element {
+  const [loading, setLoading] = useState(false)
+  const {
+    formState,
+    setFormState,
+    handleSubmit,
+    initialFocus,
+    disabled
+  } = useForm(props, {
+    close: function () {
+      emit<CloseUIHandler>('CLOSE_UI')
+    },
+    submit: function ({
+      deleteHiddenLayers,
+      pixelPerfect,
+      skipLockedLayers,
+      smartRenameLayers,
+      smartRenameLayersWhitelist,
+      smartSortLayers,
+      ungroupSingleLayerGroups
+    }: FormState) {
+      setLoading(true)
+      emit<SubmitHandler>('SUBMIT', {
         deleteHiddenLayers,
         pixelPerfect,
         skipLockedLayers,
@@ -35,45 +49,34 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
         smartRenameLayersWhitelist,
         smartSortLayers,
         ungroupSingleLayerGroups
-      }: CleanNodesProps) {
-        setIsLoading(true)
-        emit<SubmitHandler>('SUBMIT', {
-          deleteHiddenLayers,
-          pixelPerfect,
-          skipLockedLayers,
-          smartRenameLayers,
-          smartRenameLayersWhitelist,
-          smartSortLayers,
-          ungroupSingleLayerGroups
-        })
-      },
-      validate: function ({
-        deleteHiddenLayers,
-        pixelPerfect,
-        smartRenameLayers,
-        smartSortLayers,
-        ungroupSingleLayerGroups
-      }: CleanNodesProps) {
-        return (
-          deleteHiddenLayers === true ||
-          pixelPerfect === true ||
-          smartRenameLayers === true ||
-          smartSortLayers === true ||
-          ungroupSingleLayerGroups === true
-        )
-      }
+      })
+    },
+    validate: function ({
+      deleteHiddenLayers,
+      pixelPerfect,
+      smartRenameLayers,
+      smartSortLayers,
+      ungroupSingleLayerGroups
+    }: FormState) {
+      return (
+        deleteHiddenLayers === true ||
+        pixelPerfect === true ||
+        smartRenameLayers === true ||
+        smartSortLayers === true ||
+        ungroupSingleLayerGroups === true
+      )
     }
-  )
+  })
   useEffect(
     function () {
       return on<SelectionChangedHandler>(
         'SELECTION_CHANGED',
         function (hasSelection) {
-          handleChange(hasSelection, 'hasSelection')
+          setFormState(hasSelection, 'hasSelection')
         }
       )
     },
-    [handleChange]
+    [setFormState]
   )
   const {
     deleteHiddenLayers,
@@ -84,39 +87,39 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
     smartRenameLayersWhitelist,
     smartSortLayers,
     ungroupSingleLayerGroups
-  } = state
+  } = formState
   return (
     <Container space="medium">
       <VerticalSpace space="extraLarge" />
       <Stack space="large">
         <Checkbox
-          disabled={isLoading === true}
+          disabled={loading === true}
           name="deleteHiddenLayers"
-          onChange={handleChange}
+          onValueChange={setFormState}
           value={deleteHiddenLayers}
         >
           <Text>Delete hidden layers</Text>
         </Checkbox>
         <Checkbox
-          disabled={isLoading === true}
+          disabled={loading === true}
           name="ungroupSingleLayerGroups"
-          onChange={handleChange}
+          onValueChange={setFormState}
           value={ungroupSingleLayerGroups}
         >
           <Text>Ungroup single-layer groups</Text>
         </Checkbox>
         <Checkbox
-          disabled={isLoading === true}
+          disabled={loading === true}
           name="pixelPerfect"
-          onChange={handleChange}
+          onValueChange={setFormState}
           value={pixelPerfect}
         >
           <Text>Make pixel-perfect</Text>
         </Checkbox>
         <Checkbox
-          disabled={isLoading === true}
+          disabled={loading === true}
           name="smartRenameLayers"
-          onChange={handleChange}
+          onValueChange={setFormState}
           value={smartRenameLayers}
         >
           <Text>Smart rename layers</Text>
@@ -124,16 +127,16 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
           <Text muted>Ignore layers named</Text>
           <VerticalSpace space="small" />
           <Textbox
-            disabled={smartRenameLayers === false || isLoading === true}
+            disabled={smartRenameLayers === false || loading === true}
             name="smartRenameLayersWhitelist"
-            onChange={handleChange}
+            onValueChange={setFormState}
             value={smartRenameLayersWhitelist}
           />
         </Checkbox>
         <Checkbox
-          disabled={isLoading === true}
+          disabled={loading === true}
           name="smartSortLayers"
-          onChange={handleChange}
+          onValueChange={setFormState}
           value={smartSortLayers}
         >
           <Text>Smart sort layers</Text>
@@ -144,9 +147,9 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
           </Text>
         </Checkbox>
         <Checkbox
-          disabled={isLoading === true}
+          disabled={loading === true}
           name="skipLockedLayers"
-          onChange={handleChange}
+          onValueChange={setFormState}
           value={skipLockedLayers}
         >
           <Text>Skip locked layers</Text>
@@ -155,9 +158,9 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
       <VerticalSpace space="extraLarge" />
       <Button
         {...initialFocus}
-        disabled={isValid() === false || isLoading === true}
+        disabled={disabled || loading === true}
         fullWidth
-        loading={isLoading === true}
+        loading={loading === true}
         onClick={handleSubmit}
       >
         Clean Layers

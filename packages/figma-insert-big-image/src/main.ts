@@ -14,8 +14,7 @@ import { defaultSettings } from './utilities/default-settings'
 import {
   CloseUIHandler,
   ImageAttributes,
-  InsertBigImageHandler,
-  Settings
+  InsertBigImageHandler
 } from './utilities/types'
 
 export default async function (): Promise<void> {
@@ -67,5 +66,5 @@ export default async function (): Promise<void> {
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI<Settings>({ height: 224, width: 240 }, settings)
+  showUI({ height: 224, width: 240 }, settings)
 }

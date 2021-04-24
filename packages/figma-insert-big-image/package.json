@@ -21,7 +21,7 @@
   "scripts": {
     "build": "yarn run clean && build-figma-plugin --minify --typecheck",
     "clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'",
-    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' '*.json'",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json'",
     "lint": "eslint 'src/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
     "watch": "yarn run clean && build-figma-plugin --watch"
   },

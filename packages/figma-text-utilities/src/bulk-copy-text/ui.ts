@@ -8,7 +8,7 @@ import {
 export default function (): void {
   once<CopyStringToClipboardRequest>(
     'COPY_STRING_TO_CLIPBOARD_REQUEST',
-    function (string) {
+    function (string: string) {
       copyTextToClipboard(string)
       emit<CopyStringToClipboardResult>('COPY_STRING_TO_CLIPBOARD_RESULT')
     }

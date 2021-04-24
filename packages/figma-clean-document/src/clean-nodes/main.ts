@@ -19,7 +19,6 @@ import { showLoadingNotification } from '../utilities/show-loading-notification'
 import { smartSortNodes } from '../utilities/smart-sort-nodes'
 import { Settings } from '../utilities/types'
 import {
-  CleanNodesProps,
   CloseUIHandler,
   SelectionChangedHandler,
   SubmitHandler
@@ -84,7 +83,7 @@ export default async function (): Promise<void> {
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI<CleanNodesProps>(
+  showUI(
     { height: 416, width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )

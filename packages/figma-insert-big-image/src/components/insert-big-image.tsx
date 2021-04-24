@@ -3,8 +3,10 @@ import {
   Container,
   FileUploadButton,
   FileUploadDropzone,
+  Loading,
   Text,
-  useForm,
+  useInitialFocus,
+  useKeyDownHandler,
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit } from '@create-figma-plugin/utilities'
@@ -17,21 +19,17 @@ import {
   InsertBigImageHandler,
   Settings
 } from '../utilities/types'
-import { Loading } from './loading/loading'
 
 export function InsertBigImage(props: Settings): JSX.Element {
+  const [insertAs2x, setInsertAs2x] = useState(props.insertAs2x)
   const [index, setIndex] = useState(0)
   const [total, setTotal] = useState(0)
-  const isLoading = total > 0
-  const { state, handleChange, initialFocus } = useForm(props, {
-    onClose: function () {
-      if (isLoading === true) {
-        return
-      }
-      emit<CloseUIHandler>('CLOSE_UI')
+  useKeyDownHandler('Escape', function () {
+    if (total > 0) {
+      return
     }
+    emit<CloseUIHandler>('CLOSE_UI')
   })
-  const { insertAs2x } = state
   const handleSelectedFiles = useCallback(
     async function (files: Array<File>) {
       const total = files.length
@@ -45,18 +43,22 @@ export function InsertBigImage(props: Settings): JSX.Element {
           insertAs2x,
           name
         })
-        index += 1
         setIndex(index)
+        index += 1
       }
     },
     [insertAs2x, setIndex, setTotal]
   )
-  if (isLoading === true) {
+  const initialFocus = useInitialFocus()
+  if (total > 0) {
     return (
       <Loading>
-        {total === 1
-          ? 'Uploading image…'
-          : `Uploading image ${index + 1} of ${total}…`}
+        <Text align="center" numeric>
+          {total === 1
+            ? 'Inserting image…'
+            : `Inserting image ${index + 1} of ${total}…`}
+        </Text>
+        <VerticalSpace space="extraLarge" />
       </Loading>
     )
   }
@@ -93,8 +95,8 @@ export function InsertBigImage(props: Settings): JSX.Element {
       <VerticalSpace space="medium" />
       <Checkbox
         name="insertAs2x"
-        onChange={handleChange}
-        value={insertAs2x === true}
+        onValueChange={setInsertAs2x}
+        value={insertAs2x}
       >
         <Text>Insert as a @2x image</Text>
       </Checkbox>

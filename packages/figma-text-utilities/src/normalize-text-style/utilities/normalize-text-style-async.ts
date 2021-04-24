@@ -1,6 +1,6 @@
 import { loadFontsAsync } from '@create-figma-plugin/utilities'
 
-export async function normalizeTextStyle(
+export async function normalizeTextStyleAsync(
   nodes: Array<TextNode>
 ): Promise<void> {
   await loadFontsAsync(nodes)

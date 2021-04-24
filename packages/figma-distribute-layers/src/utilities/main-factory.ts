@@ -11,7 +11,6 @@ import {
 import { defaultSettings } from './default-settings'
 import {
   CloseUIHandler,
-  DistributeLayersProps,
   MainFactoryOptions,
   SelectionChangedHandler,
   Settings,
@@ -47,9 +46,6 @@ export function mainFactory({
     once<CloseUIHandler>('CLOSE_UI', function () {
       figma.closePlugin()
     })
-    showUI<DistributeLayersProps>(
-      { height: 140, width: 240 },
-      { ...settings, hasSelection: true }
-    )
+    showUI({ height: 140, width: 240 }, { ...settings, hasSelection: true })
   }
 }

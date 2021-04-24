@@ -1,33 +1,33 @@
-import { Preview as PreviewContainer } from '@create-figma-plugin/ui'
+import { Preview } from '@create-figma-plugin/ui'
 import { h, JSX } from 'preact'
 
 import { Group, NodeAttributes } from '../../utilities/types'
-import style from './preview.css'
+import styles from './organize-nodes-preview.css'
 
-export function Preview(props: {
+export function OrganizeNodesPreview(props: {
   groups: Array<Group<NodeAttributes>>
 }): JSX.Element {
   const { groups } = props
   if (groups.length === 0) {
     return (
-      <PreviewContainer>
-        <div className={style.empty}>No layers on page</div>
-      </PreviewContainer>
+      <Preview>
+        <div className={styles.empty}>No layers on page</div>
+      </Preview>
     )
   }
   return (
-    <PreviewContainer>
-      <div className={style.preview}>
+    <Preview>
+      <div className={styles.preview}>
         {groups.map(function ({ name: groupName, nodes: layers }, index) {
           return (
-            <div key={index} className={style.group}>
+            <div key={index} className={styles.group}>
               {layers.map(function ({ name }, index) {
                 if (groupName === null || layers.length === 1) {
                   return <div key={index}>{name}</div>
                 }
                 return (
                   <div key={index}>
-                    <strong className={style.groupName}>{groupName}</strong>
+                    <strong className={styles.groupName}>{groupName}</strong>
                     {name.substring(groupName.length)}
                   </div>
                 )
@@ -36,6 +36,6 @@ export function Preview(props: {
           )
         })}
       </div>
-    </PreviewContainer>
+    </Preview>
   )
 }

@@ -3,7 +3,7 @@ import { EventHandler } from '@create-figma-plugin/utilities'
 export type Settings = {
   padding: null | number
 }
-export type DrawSliceOverSelectionProps = Settings & {
+export type FormState = Settings & {
   hasSelection: boolean
 }
 

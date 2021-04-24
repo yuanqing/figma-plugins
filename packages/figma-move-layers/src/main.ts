@@ -12,7 +12,6 @@ import {
 import { defaultSettings } from './utilities/default-settings'
 import {
   CloseUIHandler,
-  MoveNodesProps,
   SelectionChangedHandler,
   Settings,
   SubmitHandler
@@ -58,8 +57,5 @@ export default async function (): Promise<void> {
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI<MoveNodesProps>(
-    { height: 116, width: 240 },
-    { ...settings, hasSelection: true }
-  )
+  showUI({ height: 116, width: 240 }, { ...settings, hasSelection: true })
 }

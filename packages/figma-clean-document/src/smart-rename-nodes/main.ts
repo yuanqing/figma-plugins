@@ -14,7 +14,6 @@ import { Settings } from '../utilities/types'
 import {
   CloseUIHandler,
   SelectionChangedHandler,
-  SmartRenameNodesProps,
   SubmitHandler
 } from './utilities/types'
 
@@ -64,7 +63,7 @@ export default async function (): Promise<void> {
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI<SmartRenameNodesProps>(
+  showUI(
     { height: 172, width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )

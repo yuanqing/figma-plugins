@@ -8,7 +8,7 @@ export type Dimensions = {
 export type Settings = {
   resizeWithConstraints: boolean
 }
-export type SetLayerSizeProps = Settings & Dimensions
+export type FormState = Settings & Dimensions
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'
@@ -20,5 +20,5 @@ export interface SelectionChangedHandler extends EventHandler {
 }
 export interface SubmitHandler extends EventHandler {
   name: 'SUBMIT'
-  handler: (props: SetLayerSizeProps) => void
+  handler: (props: FormState) => void
 }

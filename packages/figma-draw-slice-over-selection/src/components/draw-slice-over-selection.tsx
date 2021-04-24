@@ -12,40 +12,38 @@ import { useEffect, useState } from 'preact/hooks'
 
 import {
   CloseUIHandler,
-  DrawSliceOverSelectionProps,
+  FormState,
   SelectionChangedHandler,
   SubmitHandler
 } from '../utilities/types'
 
-export function DrawSliceOverSelection(
-  props: DrawSliceOverSelectionProps
-): JSX.Element {
-  const { handleChange, handleSubmit, initialFocus, isValid } = useForm(props, {
-    onClose: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    onSubmit: function ({ padding }: DrawSliceOverSelectionProps) {
-      emit<SubmitHandler>('SUBMIT', { padding })
-    },
-    validate: function ({
-      hasSelection,
-      padding
-    }: DrawSliceOverSelectionProps) {
-      return hasSelection === true && padding !== null
+export function DrawSliceOverSelection(props: FormState): JSX.Element {
+  const { setFormState, handleSubmit, initialFocus, disabled } = useForm(
+    props,
+    {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({ padding }: FormState) {
+        emit<SubmitHandler>('SUBMIT', { padding })
+      },
+      validate: function ({ hasSelection, padding }: FormState) {
+        return hasSelection === true && padding !== null
+      }
     }
-  })
+  )
   useEffect(
     function () {
       return on<SelectionChangedHandler>(
         'SELECTION_CHANGED',
         function (hasSelection: boolean) {
-          handleChange(hasSelection, 'hasSelection')
+          setFormState(hasSelection, 'hasSelection')
         }
       )
     },
-    [handleChange]
+    [setFormState]
   )
-  const [padding, setPadding] = useState(`${props.padding}`)
+  const [paddingString, setPaddingString] = useState(`${props.padding}`)
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
@@ -55,12 +53,12 @@ export function DrawSliceOverSelection(
         {...initialFocus}
         minimum={0}
         name="padding"
-        onChange={setPadding}
-        onNumberChange={handleChange}
-        value={padding}
+        onNumericValueChange={setFormState}
+        onValueChange={setPaddingString}
+        value={paddingString}
       />
       <VerticalSpace space="extraLarge" />
-      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
+      <Button disabled={disabled} fullWidth onClick={handleSubmit}>
         Draw Slice Over Selection
       </Button>
       <VerticalSpace space="small" />

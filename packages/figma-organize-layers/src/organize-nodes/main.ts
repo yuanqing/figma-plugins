@@ -13,7 +13,7 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { defaultSettings } from '../utilities/default-settings'
-import { GroupDefinition, PreviewSettings, Settings } from '../utilities/types'
+import { GroupDefinition, Settings } from '../utilities/types'
 import { computeGroups } from './utilities/compute-groups'
 import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
 import { organizeNodes } from './utilities/organize-nodes'
@@ -21,8 +21,7 @@ import {
   CloseUIHandler,
   Group,
   NodeAttributes,
-  OrganizeNodesProps,
-  SetPreviewSettingsHandler,
+  UpdateMainStateHandler,
   UpdateUIStateHandler
 } from './utilities/types'
 
@@ -48,11 +47,14 @@ export default async function (): Promise<void> {
     )
   }
   figma.on('selectionchange', updateUIState)
-  on<SetPreviewSettingsHandler>(
-    'SET_PREVIEW_SETTINGS',
-    function ({ groupDefinition, combineSingleLayerGroups }: PreviewSettings) {
-      settings.groupDefinition = groupDefinition
-      settings.combineSingleLayerGroups = combineSingleLayerGroups
+  on<UpdateMainStateHandler>(
+    'UPDATE_MAIN_STATE',
+    function (options: {
+      combineSingleLayerGroups: boolean
+      groupDefinition: GroupDefinition
+    }) {
+      settings.groupDefinition = options.groupDefinition
+      settings.combineSingleLayerGroups = options.combineSingleLayerGroups
       updateUIState()
     }
   )
@@ -89,7 +91,7 @@ export default async function (): Promise<void> {
   const { combineSingleLayerGroups, groupDefinition } = settings
   const groups = getGroups(nodes, { combineSingleLayerGroups, groupDefinition })
   const maximumGroupDefinition = computeMaximumGroupDefinition(nodes)
-  showUI<OrganizeNodesProps>(
+  showUI(
     { height: 361, width: 240 },
     { ...settings, groups, maximumGroupDefinition }
   )

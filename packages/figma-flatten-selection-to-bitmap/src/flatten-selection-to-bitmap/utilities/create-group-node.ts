@@ -11,7 +11,10 @@ export function createGroupNode(nodes: Array<SceneNode>): GroupNode {
   if (parent === null) {
     throw new Error('Node has no parent')
   }
-  const topMostNode = sortNodesByCanonicalOrder(nodes)[0]
+  const sortedNodes = sortNodesByCanonicalOrder(nodes)
+  const topMostNode = sortedNodes[sortedNodes.length - 1]
   const index = parent.children.indexOf(topMostNode)
-  return figma.group(nodes, parent, index)
+  const groupNode = figma.group(nodes, parent, index)
+  groupNode.name = nodes.length === 1 ? topMostNode.name : 'Group'
+  return groupNode
 }

@@ -2,10 +2,7 @@ import { EventHandler } from '@create-figma-plugin/utilities'
 
 import { Settings } from '../../utilities/types'
 
-export type SmartRenameNodesProps = Pick<
-  Settings,
-  'smartRenameLayersWhitelist'
-> & {
+export type FormState = Pick<Settings, 'smartRenameLayersWhitelist'> & {
   hasSelection: boolean
 }
 

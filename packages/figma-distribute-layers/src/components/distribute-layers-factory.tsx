@@ -12,7 +12,7 @@ import { useEffect, useState } from 'preact/hooks'
 
 import {
   CloseUIHandler,
-  DistributeLayersProps,
+  FormState,
   SelectionChangedHandler,
   SubmitHandler,
   UiFactoryOptions
@@ -20,17 +20,17 @@ import {
 
 export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
   const directionLabel = `${direction[0].toUpperCase()}${direction.slice(1)}`
-  return function DistributeLayers(props: DistributeLayersProps): JSX.Element {
-    const { handleChange, handleSubmit, initialFocus, isValid } = useForm(
+  return function DistributeLayers(props: FormState): JSX.Element {
+    const { disabled, setFormState, handleSubmit, initialFocus } = useForm(
       props,
       {
-        onClose: function () {
+        close: function () {
           emit<CloseUIHandler>('CLOSE_UI')
         },
-        onSubmit: function ({ space }: DistributeLayersProps) {
+        submit: function ({ space }: FormState) {
           emit<SubmitHandler>('SUBMIT', { space })
         },
-        validate: function ({ hasSelection, space }: DistributeLayersProps) {
+        validate: function ({ hasSelection, space }: FormState) {
           return hasSelection === true && space !== null
         }
       }
@@ -40,13 +40,13 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
         return on<SelectionChangedHandler>(
           'SELECTION_CHANGED',
           function (hasSelection: boolean) {
-            handleChange(hasSelection, 'hasSelection')
+            setFormState(hasSelection, 'hasSelection')
           }
         )
       },
-      [handleChange]
+      [setFormState]
     )
-    const [space, setSpace] = useState(`${props.space}`)
+    const [spaceString, setSpaceString] = useState(`${props.space}`)
     return (
       <Container space="medium">
         <VerticalSpace space="large" />
@@ -56,12 +56,12 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
           {...initialFocus}
           icon={icon}
           name="space"
-          onChange={setSpace}
-          onNumberChange={handleChange}
-          value={space}
+          onNumericValueChange={setFormState}
+          onValueChange={setSpaceString}
+          value={spaceString}
         />
         <VerticalSpace space="extraLarge" />
-        <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
+        <Button disabled={disabled} fullWidth onClick={handleSubmit}>
           Distribute Layers {directionLabel}
         </Button>
         <VerticalSpace space="small" />

@@ -5,7 +5,9 @@ import {
   CopyStringToClipboardResult
 } from './types'
 
-export async function copyStringToClipboard(string: string): Promise<void> {
+export async function copyStringToClipboardAsync(
+  string: string
+): Promise<void> {
   return new Promise(function (resolve) {
     once<CopyStringToClipboardResult>(
       'COPY_STRING_TO_CLIPBOARD_RESULT',

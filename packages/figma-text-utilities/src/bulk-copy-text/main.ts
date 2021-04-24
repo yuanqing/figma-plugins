@@ -5,7 +5,7 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
-import { copyStringToClipboard } from './utilities/copy-string-to-clipboard'
+import { copyStringToClipboardAsync } from './utilities/copy-string-to-clipboard-async'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
@@ -26,7 +26,7 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Nothing to copy'))
     return
   }
-  await copyStringToClipboard(string)
+  await copyStringToClipboardAsync(string)
   figma.closePlugin(
     formatSuccessMessage(
       `Copied ${nodes.length} ${pluralize(nodes.length, 'text layer')}`

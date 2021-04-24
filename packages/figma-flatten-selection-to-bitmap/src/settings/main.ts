@@ -19,7 +19,7 @@ export default async function (): Promise<void> {
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI<Settings>(
+  showUI(
     {
       height: 136,
       width: 240

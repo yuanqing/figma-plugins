@@ -15,8 +15,8 @@ import { getValidSelectedNodes } from './utilities/get-valid-selected-nodes'
 import { setNodesSize } from './utilities/set-nodes-size'
 import {
   CloseUIHandler,
+  FormState,
   SelectionChangedHandler,
-  SetLayerSizeProps,
   SubmitHandler
 } from './utilities/types'
 
@@ -37,11 +37,7 @@ export default async function (): Promise<void> {
   })
   once<SubmitHandler>(
     'SUBMIT',
-    async function ({
-      width,
-      height,
-      resizeWithConstraints
-    }: SetLayerSizeProps) {
+    async function ({ width, height, resizeWithConstraints }: FormState) {
       await saveSettingsAsync({ resizeWithConstraints })
       if (
         width === null ||
@@ -62,7 +58,7 @@ export default async function (): Promise<void> {
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI<SetLayerSizeProps>(
+  showUI(
     { height: 140, width: 240 },
     { ...settings, ...computeDimensions(nodes) }
   )

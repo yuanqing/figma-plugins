@@ -12,7 +12,6 @@ import { defaultSettings } from './utilities/default-settings'
 import { drawSliceOverSelection } from './utilities/draw-slice-over-selection'
 import {
   CloseUIHandler,
-  DrawSliceOverSelectionProps,
   SelectionChangedHandler,
   SubmitHandler
 } from './utilities/types'
@@ -43,7 +42,7 @@ export default async function (): Promise<void> {
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  showUI<DrawSliceOverSelectionProps>(
+  showUI(
     {
       height: 140,
       width: 240

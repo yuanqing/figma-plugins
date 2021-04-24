@@ -5,7 +5,7 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
-import { normalizeTextStyle } from './utilities/normalize-text-style'
+import { normalizeTextStyleAsync } from './utilities/normalize-text-style-async'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
@@ -17,7 +17,7 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('No text layers in selection'))
     return
   }
-  await normalizeTextStyle(nodes)
+  await normalizeTextStyleAsync(nodes)
   figma.closePlugin(
     formatSuccessMessage(
       `Normalized text style of ${nodes.length} ${pluralize(

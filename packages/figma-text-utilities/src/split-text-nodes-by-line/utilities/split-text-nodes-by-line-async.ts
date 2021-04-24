@@ -5,18 +5,20 @@ import {
 
 import { copyTextNodeStyles } from './copy-text-node-styles'
 
-export async function splitTextNodesByLine(
+export async function splitTextNodesByLineAsync(
   nodes: Array<TextNode>
 ): Promise<Array<TextNode>> {
   await loadFontsAsync(nodes)
   let result: Array<TextNode> = []
   for (const node of nodes) {
-    result = result.concat(await splitTextNodeByLine(node))
+    result = result.concat(await splitTextNodeByLineAsync(node))
   }
   return result
 }
 
-async function splitTextNodeByLine(node: TextNode): Promise<Array<TextNode>> {
+async function splitTextNodeByLineAsync(
+  node: TextNode
+): Promise<Array<TextNode>> {
   const parent = node.parent
   if (parent === null) {
     throw new Error('Node has no parent')

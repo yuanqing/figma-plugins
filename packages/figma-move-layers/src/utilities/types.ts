@@ -4,7 +4,7 @@ export type Settings = {
   horizontalOffset: null | number
   verticalOffset: null | number
 }
-export type MoveNodesProps = Settings & {
+export type FormState = Settings & {
   hasSelection: boolean
 }
 

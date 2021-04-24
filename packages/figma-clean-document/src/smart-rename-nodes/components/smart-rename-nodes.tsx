@@ -7,35 +7,34 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import {
-  CloseUIHandler,
-  SmartRenameNodesProps,
-  SubmitHandler
-} from '../utilities/types'
+import { CloseUIHandler, FormState, SubmitHandler } from '../utilities/types'
 
-export function SmartRenameNodes(props: SmartRenameNodesProps): h.JSX.Element {
-  const [isLoading, setIsLoading] = useState(false)
-  const { state, handleChange, handleSubmit, initialFocus } = useForm(props, {
-    onClose: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    onSubmit: function ({ smartRenameLayersWhitelist }: SmartRenameNodesProps) {
-      setIsLoading(true)
-      emit<SubmitHandler>('SUBMIT', smartRenameLayersWhitelist)
+export function SmartRenameNodes(props: FormState): JSX.Element {
+  const [loading, setLoading] = useState(false)
+  const { formState, setFormState, handleSubmit, initialFocus } = useForm(
+    props,
+    {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({ smartRenameLayersWhitelist }: FormState) {
+        setLoading(true)
+        emit<SubmitHandler>('SUBMIT', smartRenameLayersWhitelist)
+      }
     }
-  })
+  )
   useEffect(
     function () {
       return on('SELECTION_CHANGED', function (hasSelection: boolean) {
-        handleChange(hasSelection, 'hasSelection')
+        setFormState(hasSelection, 'hasSelection')
       })
     },
-    [handleChange]
+    [setFormState]
   )
-  const { hasSelection, smartRenameLayersWhitelist } = state
+  const { hasSelection, smartRenameLayersWhitelist } = formState
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
@@ -43,16 +42,16 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): h.JSX.Element {
       <VerticalSpace space="small" />
       <Textbox
         {...initialFocus}
-        disabled={isLoading === true}
+        disabled={loading === true}
         name="smartRenameLayersWhitelist"
-        onChange={handleChange}
+        onValueChange={setFormState}
         value={smartRenameLayersWhitelist}
       />
       <VerticalSpace space="extraLarge" />
       <Button
-        disabled={isLoading === true}
+        disabled={loading === true}
         fullWidth
-        loading={isLoading === true}
+        loading={loading === true}
         onClick={handleSubmit}
       >
         Smart Rename Layers
