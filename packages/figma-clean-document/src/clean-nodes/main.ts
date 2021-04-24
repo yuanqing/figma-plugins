@@ -30,11 +30,8 @@ export default async function (): Promise<void> {
     return
   }
   const settings = await loadSettingsAsync(defaultSettings)
-  figma.on('selectionchange', function () {
-    emit<SelectionChangedHandler>(
-      'SELECTION_CHANGED',
-      figma.currentPage.selection.length > 0
-    )
+  once<CloseUIHandler>('CLOSE_UI', function () {
+    figma.closePlugin()
   })
   once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings)
@@ -80,8 +77,11 @@ export default async function (): Promise<void> {
         : `No change to layers ${scope}`
     )
   })
-  once<CloseUIHandler>('CLOSE_UI', function () {
-    figma.closePlugin()
+  figma.on('selectionchange', function () {
+    emit<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      figma.currentPage.selection.length > 0
+    )
   })
   showUI(
     { height: 416, width: 240 },

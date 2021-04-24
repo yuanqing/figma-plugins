@@ -1,13 +1,13 @@
 import Upscaler from 'upscaler'
 
-import type { Image } from '../types'
+import { ImageAttributes } from './types'
 
 export async function upscaleImageAsync(
-  image: Image,
+  image: ImageAttributes,
   scale: number,
   parentElement: HTMLElement,
   upscaler: Upscaler
-): Promise<Image> {
+): Promise<ImageAttributes> {
   const imageElement = await createImageElementAsync(
     URL.createObjectURL(new Blob([image.bytes])),
     image.width,

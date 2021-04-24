@@ -31,9 +31,8 @@ export default async function (): Promise<void> {
     return
   }
   const settings = await loadSettingsAsync(defaultSettings)
-  figma.on('selectionchange', function () {
-    const nodes = getValidSelectedNodes()
-    emit<SelectionChangedHandler>('SELECTION_CHANGED', computeDimensions(nodes))
+  once<CloseUIHandler>('CLOSE_UI', function () {
+    figma.closePlugin()
   })
   once<SubmitHandler>(
     'SUBMIT',
@@ -55,8 +54,9 @@ export default async function (): Promise<void> {
       figma.closePlugin(formatSuccessMessage('Set layer size'))
     }
   )
-  once<CloseUIHandler>('CLOSE_UI', function () {
-    figma.closePlugin()
+  figma.on('selectionchange', function () {
+    const nodes = getValidSelectedNodes()
+    emit<SelectionChangedHandler>('SELECTION_CHANGED', computeDimensions(nodes))
   })
   showUI(
     { height: 140, width: 240 },

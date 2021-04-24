@@ -47,17 +47,9 @@ export default async function (): Promise<void> {
     )
   }
   figma.on('selectionchange', updateUIState)
-  on<UpdateMainStateHandler>(
-    'UPDATE_MAIN_STATE',
-    function (options: {
-      combineSingleLayerGroups: boolean
-      groupDefinition: GroupDefinition
-    }) {
-      settings.groupDefinition = options.groupDefinition
-      settings.combineSingleLayerGroups = options.combineSingleLayerGroups
-      updateUIState()
-    }
-  )
+  once<CloseUIHandler>('CLOSE_UI', function () {
+    figma.closePlugin()
+  })
   once('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings)
     const {
@@ -85,9 +77,17 @@ export default async function (): Promise<void> {
       )
     )
   })
-  once<CloseUIHandler>('CLOSE_UI', function () {
-    figma.closePlugin()
-  })
+  on<UpdateMainStateHandler>(
+    'UPDATE_MAIN_STATE',
+    function (options: {
+      combineSingleLayerGroups: boolean
+      groupDefinition: GroupDefinition
+    }) {
+      settings.groupDefinition = options.groupDefinition
+      settings.combineSingleLayerGroups = options.combineSingleLayerGroups
+      updateUIState()
+    }
+  )
   const { combineSingleLayerGroups, groupDefinition } = settings
   const groups = getGroups(nodes, { combineSingleLayerGroups, groupDefinition })
   const maximumGroupDefinition = computeMaximumGroupDefinition(nodes)

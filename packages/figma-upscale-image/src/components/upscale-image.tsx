@@ -1,6 +1,7 @@
 import {
   Button,
   Container,
+  Loading,
   SegmentedControl,
   Text,
   useForm,
@@ -8,58 +9,83 @@ import {
 } from '@create-figma-plugin/ui'
 import { emit, on, once } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import Upscaler from 'upscaler'
 
 import { models } from '../utilities/models'
+import {
+  CloseUIHandler,
+  FormState,
+  ImageAttributes,
+  Scale,
+  SelectionChangedHandler,
+  SubmitHandler,
+  UpscaleImagesRequestHandler,
+  UpscaleImagesResultHandler
+} from '../utilities/types'
 import { upscaleImageAsync } from '../utilities/upscale-image-async'
 
-export function UpscaleImage(props: { [key: string]: any }): h.JSX.Element {
-  const { state, handleChange, handleSubmit, isValid } = useForm(
-    { ...props, isLoading: false },
-    {
-      onClose: function () {
-        emit('CLOSE_UI')
-      },
-      onSubmit: function ({ scale }) {
-        handleChange({ isLoading: true })
-        emit('SUBMIT', { scale })
-      },
-      validate: function ({ hasSelection }) {
-        return hasSelection === true
-      }
+export function UpscaleImage(props: FormState): h.JSX.Element {
+  const [loading, setLoading] = useState(false)
+  const {
+    formState,
+    setFormState,
+    initialFocus,
+    handleSubmit,
+    disabled
+  } = useForm(props, {
+    close: function () {
+      emit<CloseUIHandler>('CLOSE_UI')
+    },
+    submit: function ({ scale }: FormState) {
+      setLoading(true)
+      emit<SubmitHandler>('SUBMIT', { scale })
+    },
+    validate: function ({ hasSelection }: FormState) {
+      return hasSelection === true
     }
-  )
+  })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleChange({ hasSelection })
-      })
+      return on<SelectionChangedHandler>(
+        'SELECTION_CHANGED',
+        function (hasSelection: boolean) {
+          setFormState(hasSelection, 'hasSelection')
+        }
+      )
     },
-    [handleChange]
+    [setFormState]
   )
   useEffect(function () {
-    once('UPSCALE_IMAGES', async function ({ scale, images }) {
-      const parentElement = document.createElement('div')
-      document.body.appendChild(parentElement)
-      parentElement.style.cssText =
-        'position: absolute; pointer-events: none; visibility: hidden; overflow: hidden;'
-      const upscaler = new Upscaler({
-        model: models[`${scale}` as '2' | '3' | '4']
-      })
-      for (const image of images) {
-        const result = await upscaleImageAsync(
-          image,
-          scale,
-          parentElement,
-          upscaler
-        )
-        emit('UPSCALE_IMAGE_RESULT', result)
+    once<UpscaleImagesRequestHandler>(
+      'UPSCALE_IMAGES_REQUEST',
+      async function (images: Array<ImageAttributes>, scale: Scale) {
+        const parentElement = document.createElement('div')
+        document.body.appendChild(parentElement)
+        parentElement.style.cssText =
+          'position: absolute; pointer-events: none; visibility: hidden; overflow: hidden;'
+        const upscaler = new Upscaler({
+          model: models[`${scale}` as '2' | '3' | '4']
+        })
+        const result: Array<ImageAttributes> = []
+        for (const image of images) {
+          result.push(
+            await upscaleImageAsync(image, scale, parentElement, upscaler)
+          )
+        }
+        emit<UpscaleImagesResultHandler>('UPSCALE_IMAGES_RESULT', result)
       }
-      emit('UPSCALE_IMAGES_SUCCESS', { count: images.length })
-    })
+    )
   }, [])
-  const { isLoading, scale } = state
+  if (loading === true) {
+    return (
+      <Loading>
+        <Text align="center">Upscaling image…</Text>
+        <VerticalSpace space="extraLarge" />
+      </Loading>
+    )
+  }
+  const { scale } = formState
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
@@ -67,19 +93,19 @@ export function UpscaleImage(props: { [key: string]: any }): h.JSX.Element {
       <VerticalSpace space="small" />
       <SegmentedControl
         name="scale"
-        onChange={handleChange}
+        onValueChange={setFormState}
         options={[
-          { text: '2x', value: 2 },
-          { text: '3x', value: 3 },
-          { text: '4x', value: 4 }
+          { children: '2x', value: 2 },
+          { children: '3x', value: 3 },
+          { children: '4x', value: 4 }
         ]}
         value={scale}
       />
       <VerticalSpace space="large" />
       <Button
-        disabled={isValid() === false}
+        {...initialFocus}
+        disabled={disabled}
         fullWidth
-        loading={isLoading === true}
         onClick={handleSubmit}
       >
         Upscale Image

@@ -11,10 +11,18 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import type { Image } from './types'
 import { defaultSettings } from './utilities/default-settings'
 import { getImageNodes } from './utilities/get-image-nodes'
 import { readImageNodesAsync } from './utilities/read-image-nodes-async'
+import {
+  CloseUIHandler,
+  ImageAttributes,
+  SelectionChangedHandler,
+  Settings,
+  SubmitHandler,
+  UpscaleImagesRequestHandler,
+  UpscaleImagesResultHandler
+} from './utilities/types'
 
 export default async function (): Promise<void> {
   const hasSelection = getImageNodes().length > 0
@@ -22,29 +30,35 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more image layers'))
     return
   }
-  figma.on('selectionchange', function () {
-    emit('SELECTION_CHANGED', {
-      hasSelection: getImageNodes().length > 0
-    })
+  once<CloseUIHandler>('CLOSE_UI', function () {
+    figma.closePlugin()
   })
-  once('SUBMIT', async function (settings) {
+  once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings)
     const { scale } = settings
     const images = await readImageNodesAsync(getImageNodes())
-    emit('UPSCALE_IMAGES', { images, scale })
+    emit<UpscaleImagesRequestHandler>('UPSCALE_IMAGES_REQUEST', images, scale)
   })
-  on('UPSCALE_IMAGE_RESULT', function (image: Image) {
-    const node = figma.getNodeById(image.id) as RectangleNode
-    node.resize(image.width, image.height)
-    node.fills = [createImagePaint(image.bytes)]
-  })
-  once('UPSCALE_IMAGES_SUCCESS', function ({ count }: { count: number }) {
-    figma.closePlugin(
-      formatSuccessMessage(`Upscaled ${count} ${pluralize(count, 'image')}`)
+  on<UpscaleImagesResultHandler>(
+    'UPSCALE_IMAGES_RESULT',
+    function (images: Array<ImageAttributes>) {
+      for (const image of images) {
+        const node = figma.getNodeById(image.id) as RectangleNode
+        node.resize(image.width, image.height)
+        node.fills = [createImagePaint(image.bytes)]
+      }
+      figma.closePlugin(
+        formatSuccessMessage(
+          `Upscaled ${images.length} ${pluralize(images.length, 'image')}`
+        )
+      )
+    }
+  )
+  figma.on('selectionchange', function () {
+    emit<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      getImageNodes().length > 0
     )
-  })
-  once('CLOSE_UI', function () {
-    figma.closePlugin()
   })
   const settings = await loadSettingsAsync(defaultSettings)
   showUI({ height: 136, width: 240 }, { ...settings, hasSelection })

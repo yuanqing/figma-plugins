@@ -16,6 +16,7 @@ export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'
   handler: () => void
 }
+
 export interface InsertBigImageHandler extends EventHandler {
   name: 'INSERT_BIG_IMAGE'
   handler: (

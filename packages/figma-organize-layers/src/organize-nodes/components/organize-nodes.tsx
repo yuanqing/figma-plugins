@@ -119,6 +119,7 @@ export function OrganizeNodes(props: FormState): JSX.Element {
         <VerticalSpace space="small" />
         <Columns space="extraSmall">
           <TextboxNumeric
+            {...initialFocus}
             icon={<IconSpaceHorizontal />}
             minimum={0}
             name="horizontalSpace"
@@ -144,12 +145,7 @@ export function OrganizeNodes(props: FormState): JSX.Element {
           <Text>Combine single-layer groups</Text>
         </Checkbox>
         <VerticalSpace space="large" />
-        <Button
-          {...initialFocus}
-          disabled={disabled}
-          fullWidth
-          onClick={handleSubmit}
-        >
+        <Button disabled={disabled} fullWidth onClick={handleSubmit}>
           Organize Layers
         </Button>
         <VerticalSpace space="small" />

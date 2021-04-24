@@ -12,12 +12,12 @@ import { CloseUIHandler, SubmitHandler } from './utilities/types'
 
 export default async function (): Promise<void> {
   const settings = await loadSettingsAsync(defaultSettings)
+  once<CloseUIHandler>('CLOSE_UI', function () {
+    figma.closePlugin()
+  })
   once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings)
     figma.closePlugin(formatSuccessMessage('Saved settings'))
-  })
-  once<CloseUIHandler>('CLOSE_UI', function () {
-    figma.closePlugin()
   })
   showUI(
     {

@@ -27,11 +27,8 @@ export function mainFactory({
       return
     }
     const settings = await loadSettingsAsync(defaultSettings)
-    figma.on('selectionchange', function () {
-      emit<SelectionChangedHandler>(
-        'SELECTION_CHANGED',
-        figma.currentPage.selection.length > 1
-      )
+    once<CloseUIHandler>('CLOSE_UI', function () {
+      figma.closePlugin()
     })
     once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
       await saveSettingsAsync(settings)
@@ -43,8 +40,11 @@ export function mainFactory({
       distributeNodes(figma.currentPage.selection.slice(), space)
       figma.closePlugin(formatSuccessMessage(`Distributed layers ${direction}`))
     })
-    once<CloseUIHandler>('CLOSE_UI', function () {
-      figma.closePlugin()
+    figma.on('selectionchange', function () {
+      emit<SelectionChangedHandler>(
+        'SELECTION_CHANGED',
+        figma.currentPage.selection.length > 1
+      )
     })
     showUI({ height: 140, width: 240 }, { ...settings, hasSelection: true })
   }

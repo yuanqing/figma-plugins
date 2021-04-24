@@ -22,6 +22,9 @@ export default async function (): Promise<void> {
   const yOffset = Math.round(figma.viewport.center.y)
   const result: Array<SceneNode> = []
   const settings = await loadSettingsAsync(defaultSettings)
+  once<CloseUIHandler>('CLOSE_UI', function () {
+    figma.closePlugin()
+  })
   on<InsertBigImageHandler>(
     'INSERT_BIG_IMAGE',
     async function (
@@ -63,8 +66,5 @@ export default async function (): Promise<void> {
       )
     }
   )
-  once<CloseUIHandler>('CLOSE_UI', function () {
-    figma.closePlugin()
-  })
   showUI({ height: 224, width: 240 }, settings)
 }

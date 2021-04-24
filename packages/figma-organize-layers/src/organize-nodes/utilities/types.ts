@@ -6,6 +6,7 @@ export type Group<T> = {
   name: null | string
   nodes: Array<T>
 }
+
 export type NodeAttributes = {
   id: string
   name: string
@@ -20,6 +21,11 @@ export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'
   handler: () => void
 }
+export interface SubmitHandler extends EventHandler {
+  name: 'SUBMIT'
+  handler: (settings: Settings) => void
+}
+
 export interface UpdateMainStateHandler extends EventHandler {
   name: 'UPDATE_MAIN_STATE'
   handler: (options: {
@@ -33,8 +39,4 @@ export interface UpdateUIStateHandler extends EventHandler {
     groups: Array<Group<NodeAttributes>>,
     maximumGroupDefinition: GroupDefinition
   ) => void
-}
-export interface SubmitHandler extends EventHandler {
-  name: 'SUBMIT'
-  handler: (settings: Settings) => void
 }

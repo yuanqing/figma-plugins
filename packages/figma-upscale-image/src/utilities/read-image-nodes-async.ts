@@ -1,8 +1,8 @@
-import type { Image } from '../types'
+import { ImageAttributes } from './types'
 
 export async function readImageNodesAsync(
   nodes: Array<SceneNode>
-): Promise<Array<Image>> {
+): Promise<Array<ImageAttributes>> {
   const result = []
   for (const node of nodes) {
     if (node.type !== 'RECTANGLE') {
