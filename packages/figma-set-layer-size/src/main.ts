@@ -58,7 +58,7 @@ export default async function (): Promise<void> {
     const nodes = getValidSelectedNodes()
     emit<SelectionChangedHandler>('SELECTION_CHANGED', computeDimensions(nodes))
   })
-  showUI(
+  showUI<FormState>(
     { height: 140, width: 240 },
     { ...settings, ...computeDimensions(nodes) }
   )

@@ -16,7 +16,7 @@ import { models } from '../utilities/models'
 import {
   CloseUIHandler,
   FormState,
-  ImageAttributes,
+  ImageNodeAttributes,
   Scale,
   SelectionChangedHandler,
   SubmitHandler,
@@ -59,7 +59,7 @@ export function UpscaleImage(props: FormState): h.JSX.Element {
   useEffect(function () {
     once<UpscaleImagesRequestHandler>(
       'UPSCALE_IMAGES_REQUEST',
-      async function (images: Array<ImageAttributes>, scale: Scale) {
+      async function (images: Array<ImageNodeAttributes>, scale: Scale) {
         const parentElement = document.createElement('div')
         document.body.appendChild(parentElement)
         parentElement.style.cssText =
@@ -67,7 +67,7 @@ export function UpscaleImage(props: FormState): h.JSX.Element {
         const upscaler = new Upscaler({
           model: models[`${scale}` as '2' | '3' | '4']
         })
-        const result: Array<ImageAttributes> = []
+        const result: Array<ImageNodeAttributes> = []
         for (const image of images) {
           result.push(
             await upscaleImageAsync(image, scale, parentElement, upscaler)

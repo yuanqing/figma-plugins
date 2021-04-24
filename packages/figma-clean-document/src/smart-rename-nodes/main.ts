@@ -13,6 +13,7 @@ import { smartRenameNode } from '../utilities/smart-rename-node'
 import { Settings } from '../utilities/types'
 import {
   CloseUIHandler,
+  FormState,
   SelectionChangedHandler,
   SubmitHandler
 } from './utilities/types'
@@ -63,7 +64,7 @@ export default async function (): Promise<void> {
       figma.currentPage.selection.length > 0
     )
   })
-  showUI(
+  showUI<FormState>(
     { height: 172, width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )

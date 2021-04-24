@@ -20,6 +20,7 @@ import { smartSortNodes } from '../utilities/smart-sort-nodes'
 import { Settings } from '../utilities/types'
 import {
   CloseUIHandler,
+  FormState,
   SelectionChangedHandler,
   SubmitHandler
 } from './utilities/types'
@@ -83,7 +84,7 @@ export default async function (): Promise<void> {
       figma.currentPage.selection.length > 0
     )
   })
-  showUI(
+  showUI<FormState>(
     { height: 416, width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )

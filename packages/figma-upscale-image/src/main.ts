@@ -16,7 +16,8 @@ import { getImageNodes } from './utilities/get-image-nodes'
 import { readImageNodesAsync } from './utilities/read-image-nodes-async'
 import {
   CloseUIHandler,
-  ImageAttributes,
+  FormState,
+  ImageNodeAttributes,
   SelectionChangedHandler,
   Settings,
   SubmitHandler,
@@ -41,7 +42,7 @@ export default async function (): Promise<void> {
   })
   on<UpscaleImagesResultHandler>(
     'UPSCALE_IMAGES_RESULT',
-    function (images: Array<ImageAttributes>) {
+    function (images: Array<ImageNodeAttributes>) {
       for (const image of images) {
         const node = figma.getNodeById(image.id) as RectangleNode
         node.resize(image.width, image.height)
@@ -61,5 +62,5 @@ export default async function (): Promise<void> {
     )
   })
   const settings = await loadSettingsAsync(defaultSettings)
-  showUI({ height: 136, width: 240 }, { ...settings, hasSelection })
+  showUI<FormState>({ height: 136, width: 240 }, { ...settings, hasSelection })
 }

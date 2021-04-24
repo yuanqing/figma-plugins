@@ -16,6 +16,7 @@ export async function copyStringToClipboardAsync(
         resolve()
       }
     )
+    // can't use `visible: false` because the UI must be visible for copying to work
     showUI({ height: 0, width: 0 })
     emit<CopyStringToClipboardRequest>(
       'COPY_STRING_TO_CLIPBOARD_REQUEST',

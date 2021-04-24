@@ -1,6 +1,6 @@
 import { EventHandler } from '@create-figma-plugin/utilities'
 
-export type ImageAttributes = {
+export type ImageNodeAttributes = {
   bytes: Uint8Array
   x: number
   y: number
@@ -20,7 +20,7 @@ export interface CloseUIHandler extends EventHandler {
 export interface InsertBigImageHandler extends EventHandler {
   name: 'INSERT_BIG_IMAGE'
   handler: (
-    images: Array<ImageAttributes>,
+    images: Array<ImageNodeAttributes>,
     options: Settings & {
       name: string
       done: boolean

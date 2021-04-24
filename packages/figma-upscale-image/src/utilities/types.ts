@@ -2,7 +2,7 @@ import { EventHandler } from '@create-figma-plugin/utilities'
 
 export type Scale = 2 | 3 | 4
 
-export type ImageAttributes = {
+export type ImageNodeAttributes = {
   width: number
   height: number
   id: string
@@ -31,9 +31,9 @@ export interface SelectionChangedHandler extends EventHandler {
 
 export interface UpscaleImagesRequestHandler extends EventHandler {
   name: 'UPSCALE_IMAGES_REQUEST'
-  handler: (images: Array<ImageAttributes>, scale: Scale) => void
+  handler: (images: Array<ImageNodeAttributes>, scale: Scale) => void
 }
 export interface UpscaleImagesResultHandler extends EventHandler {
   name: 'UPSCALE_IMAGES_RESULT'
-  handler: (image: Array<ImageAttributes>) => void
+  handler: (image: Array<ImageNodeAttributes>) => void
 }

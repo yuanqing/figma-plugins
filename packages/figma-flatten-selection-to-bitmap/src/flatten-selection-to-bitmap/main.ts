@@ -10,7 +10,7 @@ import {
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
 import { createImageNode } from 'figma-insert-big-image/src/utilities/create-image-node'
-import { ImageAttributes } from 'figma-insert-big-image/src/utilities/types'
+import { ImageNodeAttributes } from 'figma-insert-big-image/src/utilities/types'
 
 import { defaultSettings } from '../utilities/default-settings'
 import { createGroupNode } from './utilities/create-group-node'
@@ -36,7 +36,7 @@ export default async function (): Promise<void> {
 
   once<SplitImageResultHandler>(
     'SPLIT_IMAGE_RESULT',
-    function (images: Array<ImageAttributes>) {
+    function (images: Array<ImageNodeAttributes>) {
       const result: Array<RectangleNode> = []
       for (const image of images) {
         const node = createImageNode(image, {

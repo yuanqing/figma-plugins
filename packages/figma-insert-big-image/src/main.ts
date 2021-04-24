@@ -13,8 +13,9 @@ import { createImageNode } from './utilities/create-image-node'
 import { defaultSettings } from './utilities/default-settings'
 import {
   CloseUIHandler,
-  ImageAttributes,
-  InsertBigImageHandler
+  ImageNodeAttributes,
+  InsertBigImageHandler,
+  Settings
 } from './utilities/types'
 
 export default async function (): Promise<void> {
@@ -28,7 +29,7 @@ export default async function (): Promise<void> {
   on<InsertBigImageHandler>(
     'INSERT_BIG_IMAGE',
     async function (
-      images: Array<ImageAttributes>,
+      images: Array<ImageNodeAttributes>,
       options: { name: string; insertAs2x: boolean; done: boolean }
     ) {
       const { name, insertAs2x, done } = options
@@ -66,5 +67,5 @@ export default async function (): Promise<void> {
       )
     }
   )
-  showUI({ height: 224, width: 240 }, settings)
+  showUI<Settings>({ height: 224, width: 240 }, settings)
 }

@@ -1,5 +1,5 @@
 import { EventHandler } from '@create-figma-plugin/utilities'
-import { ImageAttributes } from 'figma-insert-big-image/src/utilities/types'
+import { ImageNodeAttributes } from 'figma-insert-big-image/src/utilities/types'
 
 export interface SplitImageRequestHandler extends EventHandler {
   name: 'SPLIT_IMAGE_REQUEST'
@@ -7,5 +7,5 @@ export interface SplitImageRequestHandler extends EventHandler {
 }
 export interface SplitImageResultHandler extends EventHandler {
   name: 'SPLIT_IMAGE_RESULT'
-  handler: (images: Array<ImageAttributes>) => void
+  handler: (images: Array<ImageNodeAttributes>) => void
 }

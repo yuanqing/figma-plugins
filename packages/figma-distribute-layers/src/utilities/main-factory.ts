@@ -11,6 +11,7 @@ import {
 import { defaultSettings } from './default-settings'
 import {
   CloseUIHandler,
+  FormState,
   MainFactoryOptions,
   SelectionChangedHandler,
   Settings,
@@ -46,6 +47,9 @@ export function mainFactory({
         figma.currentPage.selection.length > 1
       )
     })
-    showUI({ height: 140, width: 240 }, { ...settings, hasSelection: true })
+    showUI<FormState>(
+      { height: 140, width: 240 },
+      { ...settings, hasSelection: true }
+    )
   }
 }

@@ -1,9 +1,9 @@
 import { createImagePaint } from '@create-figma-plugin/utilities'
 
-import { ImageAttributes } from './types'
+import { ImageNodeAttributes } from './types'
 
 export function createImageNode(
-  image: ImageAttributes,
+  image: ImageNodeAttributes,
   options: {
     resolution: number
     xOffset: number

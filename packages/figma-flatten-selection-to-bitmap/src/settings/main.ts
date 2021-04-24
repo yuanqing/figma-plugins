@@ -19,7 +19,7 @@ export default async function (): Promise<void> {
     await saveSettingsAsync(settings)
     figma.closePlugin(formatSuccessMessage('Saved settings'))
   })
-  showUI(
+  showUI<Settings>(
     {
       height: 136,
       width: 240
