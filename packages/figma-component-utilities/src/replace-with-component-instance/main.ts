@@ -11,8 +11,8 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { defaultSettings } from './utilities/default-settings'
-import { getComponentNodes } from './utilities/get-component-nodes'
-import { getValidSelectedNodes } from './utilities/get-valid-selected-nodes'
+import { getComponentNodePlainObjects } from './utilities/get-component-nodes'
+import { getSelectedNodePlainObjects } from './utilities/get-valid-selected-nodes'
 import {
   CloseUIHandler,
   ReplaceWithComponentProps,
@@ -25,15 +25,15 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const selectedNodes = getValidSelectedNodes()
-  if (selectedNodes.length === 0) {
+  const selectedNodePlainObjects = getSelectedNodePlainObjects()
+  if (selectedNodePlainObjects.length === 0) {
     figma.closePlugin(
       formatErrorMessage('Can only replace layers not within an instance')
     )
     return
   }
-  const componentNodes = getComponentNodes()
-  if (componentNodes.length === 0) {
+  const componentNodePlainObjects = getComponentNodePlainObjects()
+  if (componentNodePlainObjects.length === 0) {
     figma.closePlugin(formatErrorMessage('No components in document'))
     return
   }
@@ -50,7 +50,7 @@ export default async function (): Promise<void> {
       const { componentId, shouldResizeToFitNode } = options
       await saveSettingsAsync({ shouldResizeToFitNode })
       const selection = figma.currentPage.selection
-      const component = figma.getNodeById(componentId) as ComponentNode
+      const componentNode = figma.getNodeById(componentId) as ComponentNode
       const newSelection = []
       let count = 0
       for (const node of selection) {
@@ -62,13 +62,13 @@ export default async function (): Promise<void> {
           continue
         }
         count++
-        const parent = node.parent
-        if (parent === null) {
+        const parentNode = node.parent
+        if (parentNode === null) {
           throw new Error('Node has no parent')
         }
-        const index = parent.children.indexOf(node)
-        const instance = component.createInstance()
-        parent.insertChild(index, instance)
+        const index = parentNode.children.indexOf(node)
+        const instance = componentNode.createInstance()
+        parentNode.insertChild(index, instance)
         instance.x = node.x
         instance.y = node.y
         if (shouldResizeToFitNode === true) {
@@ -95,16 +95,16 @@ export default async function (): Promise<void> {
   )
   figma.on('selectionchange', function () {
     emit<SelectionChangedHandler>('SELECTION_CHANGED', {
-      componentNodes: getComponentNodes(),
-      selectedNodes: getValidSelectedNodes()
+      componentNodePlainObjects: getComponentNodePlainObjects(),
+      selectedNodePlainObjects: getSelectedNodePlainObjects()
     })
   })
   showUI<ReplaceWithComponentProps>(
     { height: 402, width: 360 },
     {
       ...settings,
-      componentNodes,
-      selectedNodes
+      componentNodePlainObjects,
+      selectedNodePlainObjects
     }
   )
 }

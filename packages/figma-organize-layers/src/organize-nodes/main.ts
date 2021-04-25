@@ -20,7 +20,7 @@ import { organizeNodes } from './utilities/organize-nodes'
 import {
   CloseUIHandler,
   Group,
-  NodeAttributes,
+  NodePlainObject,
   OrganizeNodesProps,
   UpdateMainStateHandler,
   UpdateUIStateHandler
@@ -104,7 +104,7 @@ function getGroups(
     combineSingleLayerGroups: boolean
     groupDefinition: GroupDefinition
   }
-): Array<Group<NodeAttributes>> {
+): Array<Group<NodePlainObject>> {
   return computeGroups(nodes, options).map(function (group: Group<SceneNode>) {
     return {
       ...group,

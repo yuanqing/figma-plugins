@@ -21,7 +21,7 @@ import {
   CloseUIHandler,
   FormState,
   Group,
-  NodeAttributes,
+  NodePlainObject,
   OrganizeNodesProps,
   UpdateMainStateHandler,
   UpdateUIStateHandler
@@ -78,7 +78,7 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
       return on<UpdateUIStateHandler>(
         'UPDATE_UI_STATE',
         function (
-          groups: Array<Group<NodeAttributes>>,
+          groups: Array<Group<NodePlainObject>>,
           maximumGroupDefinition: GroupDefinition
         ) {
           setFormState(groups, 'groups')

@@ -1,16 +1,16 @@
 import { createImagePaint } from '@create-figma-plugin/utilities'
 
-import { ImageNodeAttributes } from './types'
+import { ImageNodePlainObject } from './types'
 
 export function createImageNode(
-  image: ImageNodeAttributes,
+  imageNodePlainObject: ImageNodePlainObject,
   options: {
     resolution: number
     xOffset: number
     yOffset: number
   }
 ): RectangleNode {
-  const { bytes, x, y, width, height } = image
+  const { bytes, x, y, width, height } = imageNodePlainObject
   const { resolution, xOffset, yOffset } = options
   const rectangle = figma.createRectangle()
   rectangle.name = 'Image'

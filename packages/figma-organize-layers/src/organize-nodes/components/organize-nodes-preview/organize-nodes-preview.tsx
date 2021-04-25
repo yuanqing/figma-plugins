@@ -1,11 +1,11 @@
 import { Preview } from '@create-figma-plugin/ui'
 import { h, JSX } from 'preact'
 
-import { Group, NodeAttributes } from '../../utilities/types'
+import { Group, NodePlainObject } from '../../utilities/types'
 import styles from './organize-nodes-preview.css'
 
 export function OrganizeNodesPreview(props: {
-  groups: Array<Group<NodeAttributes>>
+  groups: Array<Group<NodePlainObject>>
 }): JSX.Element {
   const { groups } = props
   if (groups.length === 0) {
@@ -18,11 +18,11 @@ export function OrganizeNodesPreview(props: {
   return (
     <Preview>
       <div className={styles.preview}>
-        {groups.map(function ({ name: groupName, nodes: layers }, index) {
+        {groups.map(function ({ name: groupName, nodes }, index) {
           return (
             <div key={index} className={styles.group}>
-              {layers.map(function ({ name }, index) {
-                if (groupName === null || layers.length === 1) {
+              {nodes.map(function ({ name }, index) {
+                if (groupName === null || nodes.length === 1) {
                   return <div key={index}>{name}</div>
                 }
                 return (

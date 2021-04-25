@@ -13,7 +13,7 @@ import { createImageNode } from './utilities/create-image-node'
 import { defaultSettings } from './utilities/default-settings'
 import {
   CloseUIHandler,
-  ImageNodeAttributes,
+  ImageNodePlainObject,
   InsertBigImageHandler,
   InsertBigImageProps
 } from './utilities/types'
@@ -29,14 +29,14 @@ export default async function (): Promise<void> {
   on<InsertBigImageHandler>(
     'INSERT_BIG_IMAGE',
     async function (
-      images: Array<ImageNodeAttributes>,
+      imageNodePlainObjects: Array<ImageNodePlainObject>,
       options: { name: string; insertAs2x: boolean; done: boolean }
     ) {
       const { name, insertAs2x, done } = options
       await saveSettingsAsync({ insertAs2x })
       const imageNodes: Array<RectangleNode> = []
-      for (const image of images) {
-        const imageNode = createImageNode(image, {
+      for (const imageNodePlainObject of imageNodePlainObjects) {
+        const imageNode = createImageNode(imageNodePlainObject, {
           resolution: insertAs2x === true ? 2 : 1,
           xOffset,
           yOffset

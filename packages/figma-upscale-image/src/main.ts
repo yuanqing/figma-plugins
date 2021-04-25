@@ -16,7 +16,7 @@ import { getImageNodes } from './utilities/get-image-nodes'
 import { readImageNodesAsync } from './utilities/read-image-nodes-async'
 import {
   CloseUIHandler,
-  ImageNodeAttributes,
+  ImageNodePlainObject,
   SelectionChangedHandler,
   Settings,
   SubmitHandler,
@@ -37,20 +37,27 @@ export default async function (): Promise<void> {
   once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings)
     const { scale } = settings
-    const images = await readImageNodesAsync(getImageNodes())
-    emit<UpscaleImagesRequestHandler>('UPSCALE_IMAGES_REQUEST', images, scale)
+    const imageNodePlainObjects = await readImageNodesAsync(getImageNodes())
+    emit<UpscaleImagesRequestHandler>(
+      'UPSCALE_IMAGES_REQUEST',
+      imageNodePlainObjects,
+      scale
+    )
   })
   on<UpscaleImagesResultHandler>(
     'UPSCALE_IMAGES_RESULT',
-    function (images: Array<ImageNodeAttributes>) {
-      for (const image of images) {
-        const node = figma.getNodeById(image.id) as RectangleNode
-        node.resize(image.width, image.height)
-        node.fills = [createImagePaint(image.bytes)]
+    function (imageNodePlainObjects: Array<ImageNodePlainObject>) {
+      for (const imageNodePlainObject of imageNodePlainObjects) {
+        const node = figma.getNodeById(imageNodePlainObject.id) as RectangleNode
+        node.resize(imageNodePlainObject.width, imageNodePlainObject.height)
+        node.fills = [createImagePaint(imageNodePlainObject.bytes)]
       }
       figma.closePlugin(
         formatSuccessMessage(
-          `Upscaled ${images.length} ${pluralize(images.length, 'image')}`
+          `Upscaled ${imageNodePlainObjects.length} ${pluralize(
+            imageNodePlainObjects.length,
+            'image'
+          )}`
         )
       )
     }

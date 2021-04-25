@@ -1,11 +1,11 @@
 import { EventHandler } from '@create-figma-plugin/utilities'
 
-export type ComponentNodeAttributes = {
+export type ComponentNodePlainObject = {
   id: string
   name: string
   pageName: string
 }
-export type NodeAttributes = {
+export type NodePlainObject = {
   id: string
   name: string
 }
@@ -14,8 +14,8 @@ export type Settings = {
   shouldResizeToFitNode: boolean
 }
 export type ReplaceWithComponentProps = Settings & {
-  componentNodes: Array<ComponentNodeAttributes>
-  selectedNodes: Array<NodeAttributes>
+  componentNodePlainObjects: Array<ComponentNodePlainObject>
+  selectedNodePlainObjects: Array<NodePlainObject>
 }
 export type FormState = ReplaceWithComponentProps & {
   componentId: null | string
@@ -36,7 +36,7 @@ export interface SubmitHandler extends EventHandler {
 export interface SelectionChangedHandler extends EventHandler {
   name: 'SELECTION_CHANGED'
   handler: (options: {
-    componentNodes: Array<ComponentNodeAttributes>
-    selectedNodes: Array<NodeAttributes>
+    componentNodePlainObjects: Array<ComponentNodePlainObject>
+    selectedNodePlainObjects: Array<NodePlainObject>
   }) => void
 }

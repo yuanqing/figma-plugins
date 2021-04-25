@@ -3,9 +3,9 @@ import {
   isWithinInstance
 } from '@create-figma-plugin/utilities'
 
-import { NodeAttributes } from './types'
+import { NodePlainObject } from './types'
 
-export function getValidSelectedNodes(): Array<NodeAttributes> {
+export function getSelectedNodePlainObjects(): Array<NodePlainObject> {
   const nodes = figma.currentPage.selection.filter(function (node) {
     return isWithinInstance(node) === false
   })

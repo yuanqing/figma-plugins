@@ -1,10 +1,10 @@
 /* global FileReader */
-import { ImageNodeAttributes } from './types'
+import { ImageNodePlainObject } from './types'
 
 // This function uses the DOM and must be called from the UI context
 export async function splitImageAsync(
   object: Blob | File
-): Promise<Array<ImageNodeAttributes>> {
+): Promise<Array<ImageNodePlainObject>> {
   const imageElement = await createImageElementFromFileAsync(object)
   const widths = computeDimensions(imageElement.width)
   const heights = computeDimensions(imageElement.height)
@@ -47,7 +47,7 @@ async function splitImageElementAsync(
   image: HTMLImageElement,
   widths: Array<number>,
   heights: Array<number>
-): Promise<Array<ImageNodeAttributes>> {
+): Promise<Array<ImageNodePlainObject>> {
   const parentElement = document.createElement('div')
   document.body.appendChild(parentElement)
   parentElement.style.cssText =
@@ -82,14 +82,14 @@ async function encodeImageAsync(
   width: number,
   height: number,
   parentElement: HTMLElement
-): Promise<ImageNodeAttributes> {
+): Promise<ImageNodePlainObject> {
   const canvasElement = createCanvasElement(width, height, parentElement)
   ;(canvasElement.getContext('2d') as CanvasRenderingContext2D).putImageData(
     imageData,
     0,
     0
   )
-  const result: ImageNodeAttributes = await new Promise(function (
+  const result: ImageNodePlainObject = await new Promise(function (
     resolve,
     reject
   ) {

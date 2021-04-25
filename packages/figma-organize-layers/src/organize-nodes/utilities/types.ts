@@ -6,13 +6,13 @@ export type Group<T> = {
   name: null | string
   nodes: Array<T>
 }
-export type NodeAttributes = {
+export type NodePlainObject = {
   id: string
   name: string
 }
 
 export type OrganizeNodesProps = Settings & {
-  groups: Array<Group<NodeAttributes>>
+  groups: Array<Group<NodePlainObject>>
   maximumGroupDefinition: GroupDefinition
 }
 export type FormState = OrganizeNodesProps
@@ -36,7 +36,7 @@ export interface UpdateMainStateHandler extends EventHandler {
 export interface UpdateUIStateHandler extends EventHandler {
   name: 'UPDATE_UI_STATE'
   handler: (
-    groups: Array<Group<NodeAttributes>>,
+    groups: Array<Group<NodePlainObject>>,
     maximumGroupDefinition: GroupDefinition
   ) => void
 }

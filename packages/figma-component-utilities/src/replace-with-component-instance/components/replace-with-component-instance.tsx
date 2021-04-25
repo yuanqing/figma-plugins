@@ -16,9 +16,9 @@ import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import {
   CloseUIHandler,
-  ComponentNodeAttributes,
+  ComponentNodePlainObject,
   FormState,
-  NodeAttributes,
+  NodePlainObject,
   ReplaceWithComponentProps,
   SelectionChangedHandler,
   SubmitHandler
@@ -54,19 +54,20 @@ export function ReplaceWithComponentInstance(
       },
       validate: function ({
         componentId,
-        componentNodes,
+        componentNodePlainObjects,
         searchTerm
       }: FormState) {
         return (
           componentId !== null &&
-          filterComponentNodesByName(componentNodes, searchTerm).length > 0
+          filterComponentNodesByName(componentNodePlainObjects, searchTerm)
+            .length > 0
         )
       }
     }
   )
   const {
     componentId,
-    componentNodes,
+    componentNodePlainObjects,
     shouldResizeToFitNode,
     searchTerm
   } = formState
@@ -81,6 +82,7 @@ export function ReplaceWithComponentInstance(
   )
   const handleLayerMouseDown: JSX.MouseEventHandler<HTMLDivElement> = useCallback(
     function (event: MouseEvent) {
+      // Stop clicking from losing focus on the search textbox
       event.preventDefault()
     },
     []
@@ -100,19 +102,22 @@ export function ReplaceWithComponentInstance(
       return on<SelectionChangedHandler>(
         'SELECTION_CHANGED',
         function (options: {
-          componentNodes: Array<ComponentNodeAttributes>
-          selectedNodes: Array<NodeAttributes>
+          componentNodePlainObjects: Array<ComponentNodePlainObject>
+          selectedNodePlainObjects: Array<NodePlainObject>
         }) {
-          const { componentNodes, selectedNodes } = options
-          setFormState(componentNodes, 'componentNodes')
-          setFormState(selectedNodes, 'selectedNodes')
+          const {
+            componentNodePlainObjects,
+            selectedNodePlainObjects
+          } = options
+          setFormState(componentNodePlainObjects, 'componentNodePlainObjects')
+          setFormState(selectedNodePlainObjects, 'selectedNodePlainObjects')
         }
       )
     },
     [setFormState]
   )
   const filteredComponentNodes = filterComponentNodesByName(
-    componentNodes,
+    componentNodePlainObjects,
     searchTerm
   )
   return (
@@ -135,10 +140,10 @@ export function ReplaceWithComponentInstance(
       ) : (
         <div ref={menuElementRef} className={styles.nodes}>
           {filteredComponentNodes.map(function (
-            component: ComponentNodeAttributes,
+            componentNodePlainObject: ComponentNodePlainObject,
             index: number
           ) {
-            const { id, name, pageName } = component
+            const { id, name, pageName } = componentNodePlainObject
             return (
               <Layer
                 key={index}
@@ -177,13 +182,19 @@ export function ReplaceWithComponentInstance(
 }
 
 function filterComponentNodesByName(
-  nodes: Array<ComponentNodeAttributes>,
+  nodes: Array<ComponentNodePlainObject>,
   name: string
-): Array<ComponentNodeAttributes> {
+): Array<ComponentNodePlainObject> {
   if (name === '') {
     return nodes
   }
-  return nodes.filter(function (componentNode: ComponentNodeAttributes) {
-    return componentNode.name.toLowerCase().indexOf(name.toLowerCase()) !== -1
+  return nodes.filter(function (
+    componentNodePlainObject: ComponentNodePlainObject
+  ) {
+    return (
+      componentNodePlainObject.name
+        .toLowerCase()
+        .indexOf(name.toLowerCase()) !== -1
+    )
   })
 }
