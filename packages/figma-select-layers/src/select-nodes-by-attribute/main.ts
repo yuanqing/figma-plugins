@@ -74,8 +74,10 @@ export const selectLines = mainFactory('line', function (node: SceneNode) {
   }
   const { tangentStart, tangentEnd } = node.vectorNetwork.segments[0]
   return (
+    typeof tangentStart !== 'undefined' &&
     tangentStart.x === 0 &&
     tangentStart.y === 0 &&
+    typeof tangentEnd !== 'undefined' &&
     tangentEnd.x === 0 &&
     tangentEnd.y === 0
   )

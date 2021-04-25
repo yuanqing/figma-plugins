@@ -8,54 +8,64 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-export function SelectNodesByName(props: {
-  [key: string]: any
-}): h.JSX.Element {
-  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
-    onClose: function () {
-      emit('CLOSE_UI')
+import {
+  CloseUIHandler,
+  FormState,
+  SelectNodesByNameProps,
+  SubmitHandler
+} from '../utilities/types'
+
+export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
+  const {
+    disabled,
+    formState,
+    setFormState,
+    handleSubmit
+  } = useForm<FormState>(props, {
+    close: function () {
+      emit<CloseUIHandler>('CLOSE_UI')
     },
-    onSubmit: function ({ exactMatch, layerName }) {
-      emit('SUBMIT', {
+    submit: function ({ exactMatch, layerName }: FormState) {
+      emit<SubmitHandler>('SUBMIT', {
         exactMatch,
         layerName
       })
     },
-    validate: function ({ layerName }) {
+    validate: function ({ layerName }: FormState) {
       return layerName !== ''
     }
   })
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ hasSelection }) {
-        handleChange({ hasSelection })
+      return on('SELECTION_CHANGED', function (hasSelection) {
+        setFormState(hasSelection, 'hasSelection')
       })
     },
-    [handleChange]
+    [setFormState]
   )
-  const { exactMatch, layerName, hasSelection } = state
+  const { exactMatch, layerName, hasSelection } = formState
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
       <Textbox
         name="layerName"
-        onChange={handleChange}
+        onValueChange={setFormState}
         placeholder="Layer name"
         value={layerName}
       />
       <VerticalSpace space="small" />
       <Checkbox
         name="exactMatch"
-        onChange={handleChange}
+        onValueChange={setFormState}
         value={exactMatch === true}
       >
         <Text>Exact match</Text>
       </Checkbox>
       <VerticalSpace space="medium" />
-      <Button disabled={isValid() === false} fullWidth onClick={handleSubmit}>
+      <Button disabled={disabled} fullWidth onClick={handleSubmit}>
         Select Layers by Name
       </Button>
       <VerticalSpace space="small" />

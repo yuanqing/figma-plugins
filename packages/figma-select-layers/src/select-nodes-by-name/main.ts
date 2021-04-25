@@ -12,45 +12,58 @@ import {
 
 import { defaultSettings } from '../utilities/default-settings'
 import { filterNodesByName } from './utilities/filter-nodes-by-name'
+import {
+  CloseUIHandler,
+  SelectionChangedHandler,
+  SelectNodesByNameProps,
+  SelectNodesByNameSettings,
+  SubmitHandler
+} from './utilities/types'
 
-export default async function () {
+export default async function (): Promise<void> {
   const settings = await loadSettingsAsync(defaultSettings)
-  figma.on('selectionchange', function () {
-    emit('SELECTION_CHANGED', {
-      hasSelection: figma.currentPage.selection.length > 0
-    })
-  })
-  once('SUBMIT', async function ({ exactMatch, layerName }) {
-    await saveSettingsAsync({
-      ...settings,
-      selectLayersByName: { exactMatch, layerName }
-    })
-    const scope =
-      figma.currentPage.selection.length === 0 ? 'on page' : 'within selection'
-    const nodes = getSelectedNodesOrAllNodes()
-    const result = filterNodesByName(nodes, layerName, exactMatch)
-    if (result.length === 0) {
-      figma.closePlugin(
-        formatErrorMessage(`No layers match “${layerName}” ${scope}`)
-      )
-      return
-    }
-    figma.currentPage.selection = result
-    figma.viewport.scrollAndZoomIntoView(result)
-    figma.closePlugin(
-      formatSuccessMessage(
-        `Selected ${result.length} ${pluralize(
-          result.length,
-          'layer'
-        )} ${scope}`
-      )
-    )
-  })
-  once('CLOSE_UI', function () {
+  once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
+  once<SubmitHandler>(
+    'SUBMIT',
+    async function ({ exactMatch, layerName }: SelectNodesByNameSettings) {
+      await saveSettingsAsync({
+        ...settings,
+        selectLayersByName: { exactMatch, layerName }
+      })
+      const scope =
+        figma.currentPage.selection.length === 0
+          ? 'on page'
+          : 'within selection'
+      const nodes = getSelectedNodesOrAllNodes()
+      const result = filterNodesByName(nodes, layerName, exactMatch)
+      if (result.length === 0) {
+        figma.closePlugin(
+          formatErrorMessage(`No layers match “${layerName}” ${scope}`)
+        )
+        return
+      }
+      figma.currentPage.selection = result
+      figma.viewport.scrollAndZoomIntoView(result)
+      figma.closePlugin(
+        formatSuccessMessage(
+          `Selected ${result.length} ${pluralize(
+            result.length,
+            'layer'
+          )} ${scope}`
+        )
+      )
+    }
+  )
+  figma.on('selectionchange', function () {
+    emit<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      figma.currentPage.selection.length > 0
+    )
+  })
   const { layerName, exactMatch } = settings.selectLayersByName
-  showUI(
+  showUI<SelectNodesByNameProps>(
     { height: 168, width: 240 },
     {
       exactMatch,

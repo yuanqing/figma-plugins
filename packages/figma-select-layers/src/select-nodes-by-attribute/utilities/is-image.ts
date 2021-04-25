@@ -1,7 +1,9 @@
-export function isImage(layer: BaseNode) {
-  return (
-    layer.type === 'RECTANGLE' &&
-    (layer.fills as ReadonlyArray<Paint>).length === 1 &&
-    layer.fills[0].type === 'IMAGE'
-  )
+export function isImage(node: BaseNode): boolean {
+  if (node.type !== 'RECTANGLE') {
+    return false
+  }
+  if (!Array.isArray(node.fills)) {
+    return false
+  }
+  return node.fills.length === 1 && node.fills[0].type === 'IMAGE'
 }

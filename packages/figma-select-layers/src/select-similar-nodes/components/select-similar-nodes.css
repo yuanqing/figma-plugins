@@ -7,15 +7,15 @@
   flex-grow: 1;
 }
 
-.checkToggle {
+.checkAllToggle {
   flex: 0 0 auto;
   padding: var(--space-small) var(--space-medium);
   color: var(--color-black-30);
 }
-.checkToggle:hover {
+.checkAllToggle:hover {
   color: var(--color-black-80);
 }
 
-.checkToggle input {
+.checkAllToggle input {
   display: none;
 }

@@ -38,9 +38,9 @@ export function mainFactory(
 function getNodes(
   filterCallback: (node: SceneNode) => boolean,
   stopTraversalCallback?: (node: SceneNode) => boolean
-) {
+): Array<SceneNode> {
   const nodes = getSelectedNodesOrAllNodes()
-  const result = []
+  const result: Array<SceneNode> = []
   for (const node of nodes) {
     traverseNode(
       node,

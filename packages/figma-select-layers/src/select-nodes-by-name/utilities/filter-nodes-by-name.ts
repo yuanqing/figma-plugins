@@ -4,11 +4,11 @@ export function filterNodesByName(
   nodes: Array<SceneNode>,
   layerName: string,
   exactMatch: boolean
-) {
+): Array<SceneNode> {
+  const result: Array<SceneNode> = []
   if (layerName === '') {
-    return []
+    return result
   }
-  const result = []
   if (exactMatch === true) {
     for (const node of nodes) {
       traverseNode(node, function (childNode) {
