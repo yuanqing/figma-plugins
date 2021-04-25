@@ -20,9 +20,9 @@
   ],
   "scripts": {
     "build": "yarn run clean && build-figma-plugin --minify --typecheck",
-    "clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'",
+    "clean": "rm -rf '*.log' build",
     "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json'",
-    "lint": "eslint 'src/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
     "watch": "yarn run clean && build-figma-plugin --watch"
   },
   "dependencies": {
