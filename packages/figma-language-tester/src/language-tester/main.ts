@@ -1,99 +1,91 @@
 import {
   emit,
+  extractAttributes,
   formatErrorMessage,
   formatSuccessMessage,
   loadFontsAsync,
   on,
   once,
-  showUI,
-  traverseNode
+  showUI
 } from '@create-figma-plugin/utilities'
 
-import { getTextLayers } from '../utilities/get-text-layers'
-import languages from '../utilities/languages.json'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
+import { languages } from '../utilities/languages'
+import {
+  LanguageKey,
+  TextNodePlainObject,
+  TranslateRequestHandler,
+  TranslateResultHandler
+} from '../utilities/types'
+import { updateTextNodesAsync } from '../utilities/update-text-nodes-async'
+import {
+  CloseUIHandler,
+  ResetLanguageHandler,
+  SelectionChangedHandler,
+  SetLanguageHandler
+} from './utilities/types'
 
-export default async function () {
-  const { layers, scope } = getTextLayers()
-  if (layers.length === 0) {
-    figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
+export default async function (): Promise<void> {
+  const textNodes = getSelectedTextNodes()
+  if (textNodes.length === 0) {
+    figma.closePlugin(formatErrorMessage('Select one or more text layers'))
     return
   }
-  const originalStrings: { [key: string]: string } = {} // maps `layer.id` to the original strings
-  figma.on('close', function () {
-    resetLanguage(originalStrings)
+  const originalText: Record<string, string> = {} // maps `node.id` to the original strings
+  once<CloseUIHandler>('CLOSE_UI', async function () {
+    await resetLanguageAsync(originalText)
+    figma.closePlugin()
   })
-  let notificationHandler: NotificationHandler
-  on('SET_LANGUAGE', async function ({ languageKey }) {
-    notificationHandler = figma.notify('Translating…', { timeout: 60000 })
-    const { layers, scope } = getTextLayers()
-    layers.forEach(function (layer) {
-      if (typeof originalStrings[layer.id] === 'undefined') {
-        originalStrings[layer.id] = layer.characters
-      }
-    })
-    await loadFontsAsync(layers)
-    emit('TRANSLATE_REQUEST', {
-      languageKey,
-      layers: layers.map(function ({ id, characters }) {
-        return { characters, id }
-      }),
-      scope
-    })
+  figma.on('selectionchange', function () {
+    const hasSelection = getSelectedTextNodes().length > 0
+    emit<SelectionChangedHandler>('SELECTION_CHANGED', hasSelection)
   })
-  on('TRANSLATE_RESULT', async function ({ languageKey, layers, scope }) {
-    notificationHandler.cancel()
-    for (const { id, characters } of layers) {
-      const layer = figma.getNodeById(id) as TextNode
-      layer.characters = characters
+  on<SetLanguageHandler>('SET_LANGUAGE', function (languageKey: LanguageKey) {
+    const textNodes = getSelectedTextNodes()
+    const textNodePlainObjects = extractAttributes(textNodes, [
+      'id',
+      'characters'
+    ])
+    for (const { id, characters } of textNodePlainObjects) {
+      originalText[id] = characters
     }
-    figma.notify(
-      formatSuccessMessage(
-        `Translated text ${scope} to ${languages[languageKey]}`
-      )
+    emit<TranslateRequestHandler>(
+      'TRANSLATE_REQUEST',
+      textNodePlainObjects,
+      languageKey
     )
   })
-  on('RESET_LANGUAGE', function () {
-    resetLanguage(originalStrings)
-  })
-  once('CLOSE_UI', function () {
-    figma.closePlugin()
+  on<TranslateResultHandler>(
+    'TRANSLATE_RESULT',
+    async function (
+      textNodePlainObjects: Array<TextNodePlainObject>,
+      languageKey: LanguageKey
+    ) {
+      await updateTextNodesAsync(textNodePlainObjects)
+      figma.notify(
+        formatSuccessMessage(`Translated to ${languages[languageKey]}`)
+      )
+    }
+  )
+  on<ResetLanguageHandler>('RESET_LANGUAGE', async function () {
+    await resetLanguageAsync(originalText)
   })
   showUI({ height: 363, width: 240 })
 }
 
-function resetLanguage(originalStrings: { [key: string]: string }) {
-  const layers = filterLayers(
-    figma.currentPage.children.slice(),
-    function (layer: SceneNode) {
-      return (
-        layer.type === 'TEXT' &&
-        typeof originalStrings[layer.id] !== 'undefined'
-      )
+async function resetLanguageAsync(
+  originalText: Record<string, string>
+): Promise<void> {
+  for (const id in originalText) {
+    const node = figma.getNodeById(id)
+    if (node === null) {
+      continue
     }
-  )
-  let didChange = false
-  for (const layer of layers) {
-    if (layer.characters !== originalStrings[layer.id]) {
-      didChange = true
-      layer.characters = originalStrings[layer.id]
+    const textNode = node as TextNode
+    await loadFontsAsync([textNode])
+    if (textNode.characters === originalText[id]) {
+      continue
     }
+    textNode.characters = originalText[id]
   }
-  if (didChange === true) {
-    figma.notify('Reset')
-  }
-}
-
-function filterLayers(
-  layers: Array<SceneNode>,
-  filter: (layer: SceneNode) => boolean
-) {
-  const result = []
-  for (const layer of layers) {
-    traverseNode(layer, async function (layer) {
-      if (filter(layer) === true) {
-        result.push(layer)
-      }
-    })
-  }
-  return result
 }

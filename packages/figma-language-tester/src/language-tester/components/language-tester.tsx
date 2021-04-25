@@ -2,88 +2,103 @@ import {
   Button,
   Container,
   Divider,
-  ESCAPE_KEY_CODE,
+  useKeyDownHandler,
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
-import { useEffect, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
-import languages from '../../utilities/languages.json'
+import { languages } from '../../utilities/languages'
 import { translateAsync } from '../../utilities/translate-async'
+import {
+  LanguageKey,
+  TextNodePlainObject,
+  TranslateRequestHandler,
+  TranslateResultHandler
+} from '../../utilities/types'
+import {
+  CloseUIHandler,
+  ResetLanguageHandler,
+  SelectionChangedHandler,
+  SetLanguageHandler
+} from '../utilities/types'
 import { LanguageItem } from './language-item'
 import styles from './language-tester.css'
 
-const DEFAULT_LANGUAGE = 'DEFAULT_LANGUAGE'
-
 export function LanguageTester() {
-  const [activeLanguageKey, setLanguageKey] = useState(DEFAULT_LANGUAGE)
+  const [
+    selectedLanguageKey,
+    setSelectedLanguageKey
+  ] = useState<null | LanguageKey>(null)
+  const [hasSelection, setHasSelection] = useState(true)
   const [loading, setLoading] = useState(false)
-  function handleLanguageClick(languageKey: string) {
-    setLanguageKey(languageKey)
-    emit('SET_LANGUAGE', { languageKey })
-  }
-  function handleResetClick() {
-    setLanguageKey(DEFAULT_LANGUAGE)
-    emit('RESET_LANGUAGE')
-  }
-  function handleKeyDown(event: KeyboardEvent) {
-    if (event.keyCode === ESCAPE_KEY_CODE) {
-      emit('CLOSE_UI')
-    }
-  }
-  useEffect(function () {
-    return on(
-      'TRANSLATE_REQUEST',
-      async function ({
-        languageKey,
-        layers,
-        scope
-      }: {
-        languageKey: string
-        layers: Array<{ id: string; characters: string }>
-        scope: string
-      }) {
-        setLoading(true)
-        const promises = layers.map(function ({ characters }) {
-          return translateAsync(characters, languageKey)
-        })
-        const translated = await Promise.all(promises)
-        setLoading(false)
-        emit('TRANSLATE_RESULT', {
-          languageKey,
-          layers: layers.map(function ({ id }, index: number) {
-            return {
-              characters: translated[index],
-              id
-            }
-          }),
-          scope
-        })
-      }
-    )
-  }, [])
-  useEffect(function () {
-    window.addEventListener('keydown', handleKeyDown)
-    return function () {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [])
+  const handleLanguageItemClick = useCallback(
+    function (languageKey: LanguageKey) {
+      setSelectedLanguageKey(languageKey)
+      emit<SetLanguageHandler>('SET_LANGUAGE', languageKey)
+    },
+    [setSelectedLanguageKey]
+  )
+  const handleResetButtonClick = useCallback(
+    function () {
+      setSelectedLanguageKey(null)
+      emit<ResetLanguageHandler>('RESET_LANGUAGE')
+    },
+    [setSelectedLanguageKey]
+  )
+  useKeyDownHandler('Escape', function () {
+    emit<CloseUIHandler>('CLOSE_UI')
+  })
+  useEffect(
+    function () {
+      return on<SelectionChangedHandler>(
+        'SELECTION_CHANGED',
+        function (hasSelection: boolean) {
+          setHasSelection(hasSelection)
+        }
+      )
+    },
+    [setHasSelection]
+  )
+  useEffect(
+    function () {
+      return on<TranslateRequestHandler>(
+        'TRANSLATE_REQUEST',
+        async function (
+          textNodePlainObjects: Array<TextNodePlainObject>,
+          languageKey: LanguageKey
+        ) {
+          setLoading(true)
+          const promises = textNodePlainObjects.map(function (
+            textNodePlainObject: TextNodePlainObject
+          ) {
+            return translateAsync(textNodePlainObject, languageKey)
+          })
+          const result = await Promise.all(promises)
+          setLoading(false)
+          emit<TranslateResultHandler>('TRANSLATE_RESULT', result, languageKey)
+        }
+      )
+    },
+    [setLoading]
+  )
   return (
     <Fragment>
       <div className={styles.languages}>
-        {Object.keys(languages).map(function (languageKey, index) {
-          const active = activeLanguageKey === languageKey
+        {(Object.keys(languages) as Array<LanguageKey>).map(function (
+          languageKey: LanguageKey,
+          index: number
+        ) {
+          const selected = selectedLanguageKey === languageKey
           return (
             <LanguageItem
               key={index}
-              active={active}
-              loading={active === true ? loading : false}
-              onClick={
-                active === false
-                  ? handleLanguageClick.bind(null, languageKey)
-                  : null
-              }
+              disabled={hasSelection === false}
+              languageKey={languageKey}
+              loading={selected === true && loading === true}
+              onClick={handleLanguageItemClick}
+              selected={selected}
             >
               {languages[languageKey]}
             </LanguageItem>
@@ -94,9 +109,9 @@ export function LanguageTester() {
       <VerticalSpace space="small" />
       <Container space="medium">
         <Button
-          disabled={activeLanguageKey === DEFAULT_LANGUAGE}
+          disabled={selectedLanguageKey === null}
           fullWidth
-          onClick={handleResetClick}
+          onClick={handleResetButtonClick}
         >
           Reset
         </Button>

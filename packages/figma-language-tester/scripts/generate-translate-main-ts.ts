@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
 
-const languages = require('../src/utilities/languages.json') as {
-  [key: string]: string
-}
+import { languages } from '../src/utilities/languages'
 
 console.log(`import { mainFactory } from './main-factory'\n`)
 for (const languageKey in languages) {

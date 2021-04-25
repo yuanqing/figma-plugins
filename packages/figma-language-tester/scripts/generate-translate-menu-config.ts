@@ -1,17 +1,17 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, sort-keys, sort-keys-fix/sort-keys-fix */
 
-const languages = require('../src/utilities/languages.json') as {
-  [key: string]: string
-}
+import { languages } from '../src/utilities/languages'
+import { LanguageKey } from '../src/utilities/types'
 
 const result = []
-for (const languageKey in languages) {
+const languageKeys = Object.keys(languages) as Array<LanguageKey>
+for (const languageKey of languageKeys) {
   result.push({
-    main: {
-      handler: languageKey.replace('-', ''),
-      src: 'src/translate/main.ts'
-    },
     name: languages[languageKey],
+    main: {
+      src: 'src/translate/main.ts',
+      handler: languageKey.replace('-', '')
+    },
     ui: 'src/translate/ui.ts'
   })
 }

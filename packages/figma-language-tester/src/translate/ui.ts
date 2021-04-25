@@ -1,22 +1,27 @@
 import { emit, once } from '@create-figma-plugin/utilities'
 
 import { translateAsync } from '../utilities/translate-async'
+import {
+  LanguageKey,
+  TextNodePlainObject,
+  TranslateRequestHandler,
+  TranslateResultHandler
+} from '../utilities/types'
 
-export default function () {
-  once('TRANSLATE_REQUEST', async function ({ languageKey, layers, scope }) {
-    const promises = layers.map(function ({ characters }) {
-      return translateAsync(characters, languageKey)
-    })
-    const translated = await Promise.all(promises)
-    emit('TRANSLATE_RESULT', {
-      languageKey,
-      layers: layers.map(function ({ id }, index) {
-        return {
-          characters: translated[index],
-          id
-        }
-      }),
-      scope
-    })
-  })
+export default function (): void {
+  once<TranslateRequestHandler>(
+    'TRANSLATE_REQUEST',
+    async function (
+      textNodePlainObjects: Array<TextNodePlainObject>,
+      languageKey: LanguageKey
+    ) {
+      const promises = textNodePlainObjects.map(function (
+        textNodePlainObject: TextNodePlainObject
+      ) {
+        return translateAsync(textNodePlainObject, languageKey)
+      })
+      const result = await Promise.all(promises)
+      emit<TranslateResultHandler>('TRANSLATE_RESULT', result, languageKey)
+    }
+  )
 }

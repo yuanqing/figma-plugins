@@ -1,5 +1,6 @@
 import {
   emit,
+  extractAttributes,
   formatErrorMessage,
   formatSuccessMessage,
   loadFontsAsync,
@@ -7,38 +8,45 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { getTextLayers } from '../utilities/get-text-layers'
-import languages from '../utilities/languages.json'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
+import { languages } from '../utilities/languages'
+import {
+  LanguageKey,
+  TextNodePlainObject,
+  TranslateRequestHandler,
+  TranslateResultHandler
+} from '../utilities/types'
+import { updateTextNodesAsync } from '../utilities/update-text-nodes-async'
 
-export function mainFactory(languageKey: string) {
-  return async function () {
-    const { layers, scope } = getTextLayers()
-    if (layers.length === 0) {
-      figma.closePlugin(formatErrorMessage(`No text layers ${scope}`))
+export function mainFactory(languageKey: LanguageKey) {
+  return async function (): Promise<void> {
+    const textNodes = getSelectedTextNodes()
+    if (textNodes.length === 0) {
+      figma.closePlugin(formatErrorMessage('Select one or more text layers'))
       return
     }
-    showUI({ visible: false })
-    const notificationHandler = figma.notify('Translating…', { timeout: 60000 })
-    once('TRANSLATE_RESULT', function ({ layers }) {
-      notificationHandler.cancel()
-      for (const { id, characters } of layers) {
-        const layer = figma.getNodeById(id) as TextNode
-        layer.characters = characters
-      }
-      figma.closePlugin(
-        formatSuccessMessage(
-          `Translated text ${scope} to ${languages[languageKey]}`
+    once<TranslateResultHandler>(
+      'TRANSLATE_RESULT',
+      async function (
+        textNodePlainObjects: Array<TextNodePlainObject>,
+        languageKey: LanguageKey
+      ) {
+        await updateTextNodesAsync(textNodePlainObjects)
+        figma.closePlugin(
+          formatSuccessMessage(`Translated to ${languages[languageKey]}`)
         )
-      )
-    })
+      }
+    )
+    await loadFontsAsync(textNodes)
     showUI({ visible: false })
-    await loadFontsAsync(layers)
-    emit('TRANSLATE_REQUEST', {
-      languageKey,
-      layers: layers.map(function ({ id, characters }) {
-        return { characters, id }
-      }),
-      scope
-    })
+    const textNodePlainObjects = extractAttributes(textNodes, [
+      'id',
+      'characters'
+    ])
+    emit<TranslateRequestHandler>(
+      'TRANSLATE_REQUEST',
+      textNodePlainObjects,
+      languageKey
+    )
   }
 }
