@@ -1,5 +1,5 @@
 import {
-  isWithinInstance,
+  isWithinInstanceNode,
   traverseNode,
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
@@ -11,7 +11,7 @@ export function smartSortNodes(
   nodes: Array<SceneNode>,
   skipLockedLayers: boolean
 ): boolean {
-  if (nodes.length < 2 || isWithinInstance(nodes[0]) === true) {
+  if (nodes.length < 2 || isWithinInstanceNode(nodes[0]) === true) {
     return false
   }
   const parent = nodes[0].parent as PageNode | SceneNode

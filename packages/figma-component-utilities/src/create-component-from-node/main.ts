@@ -2,7 +2,7 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   insertBeforeNode,
-  isWithinInstance,
+  isWithinInstanceNode,
   pluralize
 } from '@create-figma-plugin/utilities'
 
@@ -18,7 +18,7 @@ export default async function (): Promise<void> {
   const newSelection = []
   for (const node of nodes) {
     const component = node.type === 'COMPONENT' ? node : createComponent(node)
-    if (isWithinInstance(node) === false) {
+    if (isWithinInstanceNode(node) === false) {
       const instance = component.createInstance()
       instance.x = node.x
       instance.y = node.y

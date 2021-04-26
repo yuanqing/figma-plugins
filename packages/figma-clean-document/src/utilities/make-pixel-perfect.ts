@@ -1,11 +1,11 @@
-import { isWithinInstance } from '@create-figma-plugin/utilities'
+import { isWithinInstanceNode } from '@create-figma-plugin/utilities'
 
 export function makePixelPerfect(node: SceneNode): boolean {
   if (
     node.type === 'GROUP' ||
     node.type === 'VECTOR' ||
     node.type === 'BOOLEAN_OPERATION' ||
-    isWithinInstance(node) === true
+    isWithinInstanceNode(node) === true
   ) {
     return false
   }

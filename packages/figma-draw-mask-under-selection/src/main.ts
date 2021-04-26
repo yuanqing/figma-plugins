@@ -2,7 +2,7 @@ import {
   computeSiblingNodes,
   formatErrorMessage,
   formatSuccessMessage,
-  isWithinInstance,
+  isWithinInstanceNode,
   pluralize
 } from '@create-figma-plugin/utilities'
 
@@ -21,7 +21,7 @@ export default async function (): Promise<void> {
     return
   }
   const nodes = siblingNodes[0]
-  if (isWithinInstance(nodes[0]) === true) {
+  if (isWithinInstanceNode(nodes[0]) === true) {
     figma.closePlugin(
       formatErrorMessage('Select layers outside instance layers')
     )

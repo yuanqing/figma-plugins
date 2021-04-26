@@ -2,7 +2,7 @@ import {
   emit,
   formatErrorMessage,
   formatSuccessMessage,
-  isWithinInstance,
+  isWithinInstanceNode,
   loadSettingsAsync,
   once,
   pluralize,
@@ -54,7 +54,7 @@ export default async function (): Promise<void> {
       const newSelection = []
       let count = 0
       for (const node of selection) {
-        if (isWithinInstance(node) === true) {
+        if (isWithinInstanceNode(node) === true) {
           continue
         }
         if (node.id === componentId) {

@@ -1,13 +1,13 @@
 import {
   getAbsolutePosition,
-  isWithinInstance
+  isWithinInstanceNode
 } from '@create-figma-plugin/utilities'
 
 export function replaceNodesWithinInstancesWithClones(
   nodes: Array<SceneNode>
 ): Array<SceneNode> {
   return nodes.map(function (node) {
-    if (isWithinInstance(node) === true) {
+    if (isWithinInstanceNode(node) === true) {
       const clone = node.clone()
       const { x, y } = getAbsolutePosition(node)
       clone.x = x

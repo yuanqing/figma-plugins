@@ -1,7 +1,7 @@
-import { isWithinInstance } from '@create-figma-plugin/utilities'
+import { isWithinInstanceNode } from '@create-figma-plugin/utilities'
 
 export function deleteHiddenNodes(node: SceneNode): boolean {
-  if (node.visible === true || isWithinInstance(node) === true) {
+  if (node.visible === true || isWithinInstanceNode(node) === true) {
     return false
   }
   node.remove()

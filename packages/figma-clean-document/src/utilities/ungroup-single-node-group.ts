@@ -1,7 +1,10 @@
-import { isWithinInstance } from '@create-figma-plugin/utilities'
+import { isWithinInstanceNode } from '@create-figma-plugin/utilities'
 
 export function ungroupSingleNodeGroup(node: SceneNode): boolean {
-  if (isSingleLayerGroup(node) === false || isWithinInstance(node) === true) {
+  if (
+    isSingleLayerGroup(node) === false ||
+    isWithinInstanceNode(node) === true
+  ) {
     return false
   }
   const parent = node.parent
