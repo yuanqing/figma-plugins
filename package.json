@@ -1,15 +1,15 @@
 {
   "private": true,
   "scripts": {
-    "build": "yarn run clean && lerna run build",
+    "build": "yarn run clean && lerna run --stream build",
     "bump-dependencies": "ts-node scripts/bump-dependencies.ts",
-    "clean": "lerna run --parallel clean && rm -rf '*.log'",
-    "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
-    "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
-    "postinstall": "simple-git-hooks",
+    "clean": "lerna run --parallel --stream clean && rm -rf '*.log'",
+    "fix": "lerna run --parallel --stream fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
+    "lint": "lerna run --parallel --stream lint && eslint 'scripts/**/*.ts'",
+    "postinstall": "simple-git-hooks && yarn run build",
     "publish": "lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rm -rf node_modules yarn.lock && yarn install",
-    "test": "lerna run test"
+    "test": "lerna run --stream test"
   },
   "devDependencies": {
     "@create-figma-plugin/build": "latest",
