@@ -8,7 +8,7 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on, once } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import Upscaler from 'upscaler'
 
@@ -26,7 +26,7 @@ import {
 } from '../utilities/types'
 import { upscaleImageAsync } from '../utilities/upscale-image-async'
 
-export function UpscaleImage(props: UpscaleImageProps): h.JSX.Element {
+export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
   const [loading, setLoading] = useState(false)
   const {
     disabled,
