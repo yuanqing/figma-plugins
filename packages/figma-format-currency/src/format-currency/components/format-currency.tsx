@@ -8,113 +8,143 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
-import { Fragment, h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { ComponentChildren, Fragment, h, JSX } from 'preact'
+import { useEffect, useState } from 'preact/hooks'
 
+import { Preview } from '../../components/preview/preview'
+import { locales } from '../../utilities/data/locales'
+import { formatCurrency } from '../../utilities/format-currency/format-currency'
+import { moneyRegex } from '../../utilities/money-regex'
 import {
-  INVALID_SETTINGS,
-  NO_TEXT_NODES,
-  Preview,
+  CurrencyFormat,
+  LocaleCode,
   PreviewItem,
-  PreviewProps
-} from '../../components/preview/preview'
-import { TextNodeAttributes } from '../../types'
-import { formatExplicit } from '../../utilities/currency/format-explicit'
-import { formatRetain } from '../../utilities/currency/format-retain'
-import { formatShort } from '../../utilities/currency/format-short'
-import { isValidLocale } from '../../utilities/currency/is-valid-locale'
-import { moneyRegex } from '../../utilities/currency/money-regex'
-import { EXPLICIT, RETAIN, SHORT } from '../formats'
+  Status,
+  TextNodePlainObject
+} from '../../utilities/types'
+import {
+  FormState,
+  SelectionChangedHandler,
+  SubmitHandler
+} from '../utilities/types'
+import { FormatCurrencyProps } from '../utilities/types'
 
-const localesJson = require('../../utilities/currency/data/locales.json')
-
-const formatters: { [key: string]: any } = {
-  [EXPLICIT]: formatExplicit,
-  [RETAIN]: formatRetain,
-  [SHORT]: formatShort
-}
-
-const locales = localesJson.map(function (locale: string) {
-  return { value: locale }
+const currencyFormatOptions: Array<{
+  children: ComponentChildren
+  value: CurrencyFormat
+}> = [
+  { children: 'Explicit', value: 'EXPLICIT' },
+  { children: 'Short', value: 'SHORT' },
+  { children: 'Retain', value: 'RETAIN' }
+]
+const localeCodeOptions = Object.keys(locales).map(function (
+  localeCode: string
+) {
+  return { value: localeCode }
 })
 
-export function FormatCurrency(props: { [key: string]: any }): h.JSX.Element {
-  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
-    onClose: function () {
-      emit('CLOSE_UI')
-    },
-    onSubmit: function ({ nodes, format, locale }) {
-      const formatter = formatters[format]
-      const result = nodes.map(function ({
-        id,
-        characters
-      }: TextNodeAttributes) {
-        return {
-          characters: formatter(characters, locale),
-          id
+export function FormatCurrency(props: FormatCurrencyProps): JSX.Element {
+  const {
+    disabled,
+    formState,
+    handleSubmit,
+    initialFocus,
+    setFormState
+  } = useForm<FormState>(
+    { ...props, previewItems: [], status: 'OK' },
+    {
+      close: function () {
+        emit('CLOSE_UI')
+      },
+      submit: function ({
+        currencyFormat,
+        localeCode,
+        textNodePlainObjects
+      }: FormState) {
+        if (localeCode === null) {
+          throw new Error('`localeCode` is `null`')
         }
-      })
-      emit('SUBMIT', {
-        format,
-        locale,
-        nodes: result
-      })
-    },
-    transform: function (state) {
-      const { nodes, format, locale } = state
-      return {
-        ...state,
-        preview: computePreview({
-          format,
-          locale,
-          nodes
+        const result: Array<TextNodePlainObject> = []
+        for (const { id, characters } of textNodePlainObjects) {
+          result.push({
+            characters: formatCurrency(characters, {
+              currencyFormat,
+              localeCode
+            }),
+            id
+          })
+        }
+        emit<SubmitHandler>('SUBMIT', result, {
+          currencyFormat,
+          localeCode
         })
+      },
+      transform: function ({
+        textNodePlainObjects,
+        currencyFormat,
+        localeCode
+      }: FormState): FormState {
+        const { previewItems, status } = computePreview(textNodePlainObjects, {
+          currencyFormat,
+          localeCode
+        })
+        return { ...formState, previewItems, status }
+      },
+      validate: function ({ previewItems, status }: FormState) {
+        return status === 'OK' && previewItems.length > 0
       }
-    },
-    validate: function ({ preview }) {
-      return (
-        preview !== INVALID_SETTINGS &&
-        preview !== NO_TEXT_NODES &&
-        preview.items.length > 0
-      )
     }
-  })
+  )
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ nodes }) {
-        handleChange({ nodes })
-      })
+      return on<SelectionChangedHandler>(
+        'SELECTION_CHANGED',
+        function (textNodePlainObjects: Array<TextNodePlainObject>) {
+          setFormState(textNodePlainObjects, 'textNodePlainObjects')
+        }
+      )
     },
-    [handleChange]
+    [setFormState]
   )
-  const { format, locale, preview } = state
+  const { localeCode, currencyFormat, previewItems, status } = formState
+  const [localeCodeString, setLocaleCodeString] = useState(`${localeCode}`)
+  useEffect(
+    function () {
+      const locale = localeCodeString as LocaleCode
+      if (typeof locales[locale] !== 'undefined') {
+        setFormState(locale, 'localeCode')
+      }
+    },
+    [setFormState, localeCodeString]
+  )
   return (
     <Fragment>
-      <Preview {...preview} />
+      <Preview previewItems={previewItems} status={status} />
       <Container space="medium">
         <VerticalSpace space="large" />
         <Text muted>Format</Text>
         <VerticalSpace space="small" />
         <SegmentedControl
-          name="format"
-          onChange={handleChange}
-          options={[{ value: EXPLICIT }, { value: SHORT }, { value: RETAIN }]}
-          value={format}
+          name="currencyFormat"
+          onValueChange={setFormState}
+          options={currencyFormatOptions}
+          value={currencyFormat}
         />
         <VerticalSpace space="large" />
         <Text muted>Locale</Text>
         <VerticalSpace space="small" />
         <TextboxAutocomplete
-          name="locale"
-          onChange={handleChange}
-          options={locales}
+          filter
+          onValueChange={setLocaleCodeString}
+          options={localeCodeOptions}
+          strict
           top
-          value={locale}
+          value={localeCodeString}
         />
         <VerticalSpace space="extraLarge" />
         <Button
-          disabled={isValid() === false}
-          focused
+          {...initialFocus}
+          disabled={disabled}
           fullWidth
           onClick={handleSubmit}
         >
@@ -126,33 +156,32 @@ export function FormatCurrency(props: { [key: string]: any }): h.JSX.Element {
   )
 }
 
-function computePreview(options: {
-  nodes: Array<TextNodeAttributes>
-  format: string
-  locale: string
-}): PreviewProps {
-  const { nodes, format, locale } = options
-  if (isValidLocale(locale) === false) {
-    return { error: INVALID_SETTINGS }
+function computePreview(
+  textNodePlainObjects: Array<TextNodePlainObject>,
+  options: {
+    currencyFormat: CurrencyFormat
+    localeCode: null | LocaleCode
   }
-  if (nodes.length === 0) {
-    return { error: NO_TEXT_NODES }
+): { status: Status; previewItems: Array<PreviewItem> } {
+  const { currencyFormat, localeCode } = options
+  if (textNodePlainObjects.length === 0) {
+    return { previewItems: [], status: 'NO_TEXT_NODES' }
   }
-  const items: Array<PreviewItem> = []
-  const originalStrings: { [key: string]: any } = {}
-  nodes.forEach(function ({ characters }) {
-    characters.replace(moneyRegex, function (original) {
+  if (localeCode === null) {
+    return { previewItems: [], status: 'INVALID_SETTINGS' }
+  }
+  const previewItems: Array<PreviewItem> = []
+  const originalStrings: Record<string, true> = {} // track currency values we've already encountered before
+  for (const { characters } of textNodePlainObjects) {
+    characters.replace(moneyRegex, function (original: string) {
       if (originalStrings[original] === true) {
-        return '' // FIXME
+        return ''
       }
       originalStrings[original] = true
-      const formatter = formatters[format]
-      items.push({
-        original,
-        result: formatter(original, locale)
-      })
-      return '' // FIXME
+      const result = formatCurrency(original, { currencyFormat, localeCode })
+      previewItems.push({ original, result })
+      return ''
     })
-  })
-  return { items }
+  }
+  return { previewItems, status: 'OK' }
 }

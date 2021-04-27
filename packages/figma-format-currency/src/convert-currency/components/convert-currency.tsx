@@ -8,108 +8,159 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
-import { Fragment, h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { Fragment, h, JSX } from 'preact'
+import { useEffect, useState } from 'preact/hooks'
 
+import { Preview } from '../../components/preview/preview'
+import { convertCurrency } from '../../utilities/convert-currency/convert-currency'
+import { currencies } from '../../utilities/data/currencies'
+import { locales } from '../../utilities/data/locales'
+import { moneyRegex } from '../../utilities/money-regex'
 import {
-  INVALID_SETTINGS,
-  NO_TEXT_NODES,
-  Preview,
+  CurrencyCode,
+  LocaleCode,
   PreviewItem,
-  PreviewProps
-} from '../../components/preview/preview'
-import { TextNodeAttributes } from '../../types'
-import { convertCurrency } from '../../utilities/currency/convert-currency'
-import { isValidLocale } from '../../utilities/currency/is-valid-locale'
-import { moneyRegex } from '../../utilities/currency/money-regex'
+  Status,
+  TextNodePlainObject
+} from '../../utilities/types'
+import {
+  CloseUIHandler,
+  ConvertCurrencyProps,
+  FormState,
+  SelectionChangedHandler,
+  SubmitHandler
+} from '../utilities/types'
 
-const isoCodes = require('../../utilities/currency/data/iso-codes.json')
-const localesJson = require('../../utilities/currency/data/locales.json')
-
-const currencies = Object.keys(isoCodes).map(function (isoCode) {
-  return { value: isoCode }
+const currencyCodeOptions = Object.keys(currencies).map(function (
+  currencyCode: string
+) {
+  return { value: currencyCode }
+})
+const localeCodeOptions = Object.keys(locales).map(function (
+  localeCode: string
+) {
+  return { value: localeCode }
 })
 
-const locales = localesJson.map(function (locale: string) {
-  return { value: locale }
-})
-
-export function ConvertCurrency(props: { [key: string]: any }): h.JSX.Element {
-  const { state, handleChange, handleSubmit, isValid } = useForm(props, {
-    onClose: function () {
-      emit('CLOSE_UI')
-    },
-    onSubmit: function ({ nodes, targetCurrency, roundNumbers, locale }) {
-      const result = nodes.map(function ({
-        id,
-        characters
-      }: TextNodeAttributes) {
-        return {
-          characters: convertCurrency({
-            locale,
-            roundNumbers,
-            string: characters,
-            targetCurrency
-          }),
-          id
-        }
-      })
-      emit('SUBMIT', {
-        locale,
-        nodes: result,
+export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
+  const {
+    disabled,
+    formState,
+    handleSubmit,
+    initialFocus,
+    setFormState
+  } = useForm<FormState>(
+    { ...props, previewItems: [], status: 'OK' },
+    {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({
+        currencyCode,
         roundNumbers,
-        targetCurrency
-      })
-    },
-    transform: function (state) {
-      const { nodes, targetCurrency, roundNumbers, locale } = state
-      return {
-        ...state,
-        preview: computePreview({
-          locale,
-          nodes,
-          roundNumbers,
-          targetCurrency
+        localeCode,
+        textNodePlainObjects
+      }: FormState) {
+        if (currencyCode === null) {
+          throw new Error('`currencyCode` is `null`')
+        }
+        if (localeCode === null) {
+          throw new Error('`localeCode` is `null`')
+        }
+        const options = {
+          currencyCode,
+          localeCode,
+          roundNumbers
+        }
+        const result: Array<TextNodePlainObject> = []
+        for (const { id, characters } of textNodePlainObjects) {
+          result.push({
+            characters: convertCurrency(characters, options),
+            id
+          })
+        }
+        emit<SubmitHandler>('SUBMIT', result, options)
+      },
+      transform: function ({
+        textNodePlainObjects,
+        currencyCode,
+        localeCode,
+        roundNumbers
+      }: FormState): FormState {
+        const { previewItems, status } = computePreview(textNodePlainObjects, {
+          currencyCode,
+          localeCode,
+          roundNumbers
         })
+        return { ...formState, previewItems, status }
+      },
+      validate: function ({ previewItems, status }: FormState) {
+        return status === 'OK' && previewItems.length > 0
       }
-    },
-    validate: function ({ preview }) {
-      return (
-        preview !== INVALID_SETTINGS &&
-        preview !== NO_TEXT_NODES &&
-        preview.items.length > 0
-      )
     }
-  })
+  )
   useEffect(
     function () {
-      return on('SELECTION_CHANGED', function ({ nodes }) {
-        handleChange({ nodes })
-      })
+      return on<SelectionChangedHandler>(
+        'SELECTION_CHANGED',
+        function (textNodePlainObjects: Array<TextNodePlainObject>) {
+          setFormState(textNodePlainObjects, 'textNodePlainObjects')
+        }
+      )
     },
-    [handleChange]
+    [setFormState]
   )
-  const { locale, preview, roundNumbers, targetCurrency } = state
+  const {
+    localeCode,
+    roundNumbers,
+    previewItems,
+    status,
+    currencyCode
+  } = formState
+  const [currencyCodeString, setCurrencyCodeString] = useState(
+    currencyCode === null ? '' : currencyCode
+  )
+  useEffect(
+    function () {
+      const currencyCode = currencyCodeString as CurrencyCode
+      if (typeof currencies[currencyCode] !== 'undefined') {
+        setFormState(currencyCode, 'currencyCode')
+      }
+    },
+    [setFormState, currencyCodeString]
+  )
+  const [localeCodeString, setLocaleCodeString] = useState(
+    localeCode === null ? '' : localeCode
+  )
+  useEffect(
+    function () {
+      const localeCode = localeCodeString as LocaleCode
+      setFormState(
+        typeof locales[localeCode] === 'undefined' ? null : localeCode,
+        'localeCode'
+      )
+    },
+    [setFormState, localeCodeString]
+  )
   return (
     <Fragment>
-      <Preview {...preview} />
+      <Preview previewItems={previewItems} status={status} />
       <Container space="medium">
         <VerticalSpace space="large" />
         <Text muted>Currency</Text>
         <VerticalSpace space="small" />
         <TextboxAutocomplete
           filter
-          name="targetCurrency"
-          onChange={handleChange}
-          options={currencies}
+          onValueChange={setCurrencyCodeString}
+          options={currencyCodeOptions}
           strict
-          value={targetCurrency}
+          value={currencyCodeString}
         />
         <VerticalSpace space="small" />
         <Checkbox
           name="roundNumbers"
-          onChange={handleChange}
-          value={roundNumbers === true}
+          onValueChange={setFormState}
+          value={roundNumbers}
         >
           <Text>Round numbers</Text>
         </Checkbox>
@@ -118,16 +169,16 @@ export function ConvertCurrency(props: { [key: string]: any }): h.JSX.Element {
         <VerticalSpace space="small" />
         <TextboxAutocomplete
           filter
-          name="locale"
-          onChange={handleChange}
-          options={locales}
+          onValueChange={setLocaleCodeString}
+          options={localeCodeOptions}
+          strict
           top
-          value={locale}
+          value={localeCodeString}
         />
         <VerticalSpace space="extraLarge" />
         <Button
-          disabled={isValid() === false}
-          focused
+          {...initialFocus}
+          disabled={disabled}
           fullWidth
           onClick={handleSubmit}
         >
@@ -139,41 +190,37 @@ export function ConvertCurrency(props: { [key: string]: any }): h.JSX.Element {
   )
 }
 
-function computePreview(options: {
-  nodes: Array<TextNodeAttributes>
-  targetCurrency: string
-  roundNumbers: boolean
-  locale: string
-}): PreviewProps {
-  const { nodes, targetCurrency, roundNumbers, locale } = options
-  if (
-    typeof isoCodes[targetCurrency] === 'undefined' ||
-    isValidLocale(locale) === false
-  ) {
-    return { error: INVALID_SETTINGS }
+function computePreview(
+  textNodePlainObjects: Array<TextNodePlainObject>,
+  options: {
+    currencyCode: null | CurrencyCode
+    roundNumbers: boolean
+    localeCode: null | LocaleCode
   }
-  if (nodes.length === 0) {
-    return { error: NO_TEXT_NODES }
+): { status: Status; previewItems: Array<PreviewItem> } {
+  const { currencyCode, roundNumbers, localeCode } = options
+  if (textNodePlainObjects.length === 0) {
+    return { previewItems: [], status: 'NO_TEXT_NODES' }
   }
-  const items: Array<PreviewItem> = []
-  const originalStrings: { [key: string]: any } = {}
-  nodes.forEach(function ({ characters }) {
-    characters.replace(moneyRegex, function (original) {
+  if (currencyCode === null || localeCode === null) {
+    return { previewItems: [], status: 'INVALID_SETTINGS' }
+  }
+  const previewItems: Array<PreviewItem> = []
+  const originalStrings: Record<string, true> = {} // track currency values we've already encountered before
+  for (const { characters } of textNodePlainObjects) {
+    characters.replace(moneyRegex, function (original: string) {
       if (originalStrings[original] === true) {
-        return '' // FIXME
+        return ''
       }
       originalStrings[original] = true
-      items.push({
-        original,
-        result: convertCurrency({
-          locale,
-          roundNumbers,
-          string: original,
-          targetCurrency
-        })
+      const result = convertCurrency(original, {
+        currencyCode,
+        localeCode,
+        roundNumbers
       })
-      return '' // FIXME
+      previewItems.push({ original, result })
+      return ''
     })
-  })
-  return { items }
+  }
+  return { previewItems, status: 'OK' }
 }

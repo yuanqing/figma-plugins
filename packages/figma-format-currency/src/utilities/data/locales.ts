@@ -1,0 +1,22 @@
+export const locales = {
+  cs: true,
+  da: true,
+  de: true,
+  en: true,
+  es: true,
+  fi: true,
+  fr: true,
+  hi: true,
+  it: true,
+  ja: true,
+  ko: true,
+  ms: true,
+  nl: true,
+  no: true,
+  pl: true,
+  pt: true,
+  sv: true,
+  th: true,
+  tr: true,
+  zh: true
+}

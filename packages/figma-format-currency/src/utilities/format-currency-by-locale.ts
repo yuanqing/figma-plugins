@@ -1,13 +1,18 @@
+import { LocaleCode } from './types'
+
 const spaceRegex = /\s/
 const dollarPrefixRegex = /[A-Z]{2}(?=[$¥])/g
 
 export function formatCurrencyByLocale(
   value: number,
-  isoCode: string,
-  locale: string
+  options: {
+    currencyCode: string
+    localeCode: LocaleCode
+  }
 ): string {
-  const result = new Intl.NumberFormat(locale, {
-    currency: isoCode,
+  const { currencyCode, localeCode } = options
+  const result = new Intl.NumberFormat(localeCode, {
+    currency: currencyCode,
     style: 'currency'
   }).format(value)
   return result

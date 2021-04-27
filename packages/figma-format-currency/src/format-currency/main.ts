@@ -1,6 +1,9 @@
 import {
   emit,
+  extractAttributes,
+  formatErrorMessage,
   formatSuccessMessage,
+  getSceneNodeById,
   loadFontsAsync,
   loadSettingsAsync,
   once,
@@ -8,41 +11,74 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
+import {
+  CloseUIHandler,
+  SelectionChangedHandler
+} from '../convert-currency/utilities/types'
 import { defaultSettings } from '../utilities/default-settings'
-import { getTextNodes } from '../utilities/get-text-nodes'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
+import {
+  CurrencyFormat,
+  LocaleCode,
+  TextNodePlainObject
+} from '../utilities/types'
+import { FormatCurrencyProps, SubmitHandler } from './utilities/types'
 
 export default async function (): Promise<void> {
-  const { format, locale, ...settings } = await loadSettingsAsync(
-    defaultSettings
-  )
-  figma.on('selectionchange', function () {
-    emit('SELECTION_CHANGED', {
-      nodes: getTextNodes()
-    })
-  })
-  once('SUBMIT', async function ({ nodes, format, locale }) {
-    await saveSettingsAsync({
-      ...settings,
-      format,
-      locale
-    })
-    for (const { id, characters } of nodes) {
-      const node = figma.getNodeById(id) as TextNode
-      await loadFontsAsync([node])
-      node.characters = characters
-    }
-    figma.closePlugin(formatSuccessMessage('Formatted currencies in selection'))
-  })
-  once('CLOSE_UI', function () {
+  const textNodes = getSelectedTextNodes()
+  if (textNodes.length === 0) {
+    figma.closePlugin(formatErrorMessage('Select one or more text layers'))
+    return
+  }
+  const settings = await loadSettingsAsync(defaultSettings)
+  once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
-  const nodes = getTextNodes()
-  showUI(
+  once<SubmitHandler>(
+    'SUBMIT',
+    async function (
+      textNodePlainObjects: Array<TextNodePlainObject>,
+      options: {
+        currencyFormat: CurrencyFormat
+        localeCode: LocaleCode
+      }
+    ) {
+      const { currencyFormat, localeCode } = options
+      await saveSettingsAsync({
+        ...settings,
+        formatCurrency: {
+          currencyFormat
+        },
+        localeCode
+      })
+      for (const { id, characters } of textNodePlainObjects) {
+        const node = getSceneNodeById<TextNode>(id)
+        await loadFontsAsync([node])
+        node.characters = characters
+      }
+      figma.closePlugin(
+        formatSuccessMessage('Formatted currencies in selection')
+      )
+    }
+  )
+  figma.on('selectionchange', function () {
+    const textNodes = getSelectedTextNodes()
+    const textNodePlainObjects = extractAttributes(textNodes, [
+      'id',
+      'characters'
+    ])
+    emit<SelectionChangedHandler>('SELECTION_CHANGED', textNodePlainObjects)
+  })
+  const textNodePlainObjects = extractAttributes(textNodes, [
+    'id',
+    'characters'
+  ])
+  showUI<FormatCurrencyProps>(
     { height: 333, width: 240 },
     {
-      format,
-      locale,
-      nodes
+      ...settings.formatCurrency,
+      localeCode: settings.localeCode,
+      textNodePlainObjects
     }
   )
 }

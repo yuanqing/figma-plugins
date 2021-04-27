@@ -1,8 +1,12 @@
-import { RETAIN } from '../format-currency/formats'
+import { Settings } from './types'
 
-export const defaultSettings = {
-  format: RETAIN,
-  locale: 'en',
-  roundNumbers: true,
-  targetCurrency: 'USD'
+export const defaultSettings: Settings = {
+  convertCurrency: {
+    currencyCode: 'USD',
+    roundNumbers: true
+  },
+  formatCurrency: {
+    currencyFormat: 'RETAIN'
+  },
+  localeCode: 'en'
 }
