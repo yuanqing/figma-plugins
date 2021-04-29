@@ -87,4 +87,4 @@ function createRecordKeys(object: Result): string {
   return result.join('|')
 }
 
-export {}
+export {} // needed to make this script compilable under `--isolatedModules`
