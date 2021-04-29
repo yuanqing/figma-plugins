@@ -23,7 +23,7 @@ Name | Description
 
 ## See also
 
-- [Create Figma Plugin](https://github.com/yuanqing/create-figma-plugin)
+- [Create Figma Plugin](https://yuanqing.github.io/create-figma-plugin)
 
 ## License
 
