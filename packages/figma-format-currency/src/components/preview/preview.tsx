@@ -1,4 +1,4 @@
-import classnames from '@sindresorhus/class-names'
+import { createClassName } from '@create-figma-plugin/ui'
 import { Fragment, h, JSX } from 'preact'
 
 import { PreviewItem, Status } from '../../utilities/types'
@@ -35,10 +35,10 @@ export function Preview(props: {
               return (
                 <div key={index}>
                   <div
-                    className={classnames(
+                    className={createClassName([
                       style.original,
                       original !== result ? style.strikethrough : null
-                    )}
+                    ])}
                   >
                     {original}
                   </div>

@@ -101,6 +101,7 @@ export function SelectSimilarNodes(
         <div className={styles.search}>
           <SearchTextbox
             {...initialFocus}
+            clearOnEscapeKeyDown
             name="searchTerm"
             onValueChange={setFormState}
             placeholder="Search"

@@ -87,12 +87,9 @@ export function ReplaceWithComponentInstance(
     },
     []
   )
-  const {
-    scrollableMenuItemIdDataAttributeName,
-    menuElementRef
-  } = useScrollableMenu({
+  const { itemIdDataAttributeName, menuElementRef } = useScrollableMenu({
     changeOnMouseOver: false,
-    onChange: function (id: null | string) {
+    onItemIdChange: function (id: null | string) {
       setFormState(id, 'componentId')
     },
     selectedItemId: componentId
@@ -125,6 +122,7 @@ export function ReplaceWithComponentInstance(
       <SearchTextbox
         {...initialFocus}
         ref={inputElementRef}
+        clearOnEscapeKeyDown
         name="searchTerm"
         onValueChange={setFormState}
         placeholder="Search"
@@ -153,7 +151,7 @@ export function ReplaceWithComponentInstance(
                 selected={id === componentId}
                 type="component"
                 {...{ [`${COMPONENT_NODE_ID_ATTRIBUTE_NAME}`]: id }}
-                {...{ [`${scrollableMenuItemIdDataAttributeName}`]: id }}
+                {...{ [`${itemIdDataAttributeName}`]: id }}
               >
                 {name}
               </Layer>

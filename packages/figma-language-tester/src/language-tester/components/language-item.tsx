@@ -1,5 +1,8 @@
-import { IconCheckCircle, LoadingIndicator } from '@create-figma-plugin/ui'
-import classnames from '@sindresorhus/class-names'
+import {
+  createClassName,
+  IconCheckCircle,
+  LoadingIndicator
+} from '@create-figma-plugin/ui'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
@@ -26,11 +29,11 @@ export function LanguageItem(props: {
   )
   return (
     <div
-      className={classnames(
+      className={createClassName([
         styles.languageItem,
         selected === true ? styles.selected : null,
         disabled === true ? styles.disabled : null
-      )}
+      ])}
       onClick={handleClick}
     >
       {children}

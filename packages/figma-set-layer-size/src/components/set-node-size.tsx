@@ -3,17 +3,14 @@ import {
   Checkbox,
   Columns,
   Container,
+  mapTextboxNumericValueToString,
+  MIXED_NUMBER,
   Text,
   TextboxNumeric,
   useForm,
   VerticalSpace
 } from '@create-figma-plugin/ui'
-import {
-  emit,
-  mapTextboxNumericValueToString,
-  MIXED_NUMBER,
-  on
-} from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 

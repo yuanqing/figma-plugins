@@ -1,9 +1,9 @@
+import { MIXED_NUMBER } from '@create-figma-plugin/ui'
 import {
   emit,
   formatErrorMessage,
   formatSuccessMessage,
   loadSettingsAsync,
-  MIXED_NUMBER,
   once,
   saveSettingsAsync,
   showUI

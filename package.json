@@ -41,8 +41,15 @@
       "@typescript-eslint/explicit-module-boundary-types": [
         "off"
       ],
-      "react/prop-types": [
-        "off"
+      "react/no-unknown-property": [
+        2,
+        {
+          "ignore": [
+            "class",
+            "clip-rule",
+            "fill-rule"
+          ]
+        }
       ]
     }
   },

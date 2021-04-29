@@ -32,7 +32,6 @@
   "dependencies": {
     "@create-figma-plugin/ui": "latest",
     "@create-figma-plugin/utilities": "latest",
-    "@sindresorhus/class-names": "^1.1.0",
     "preact": "^10.5.13"
   },
   "figma-plugin": {
