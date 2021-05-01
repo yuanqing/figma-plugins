@@ -64,7 +64,7 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
           value={spaceString}
         />
         <VerticalSpace space="extraLarge" />
-        <Button disabled={disabled} fullWidth onClick={handleSubmit}>
+        <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
           Distribute Layers {directionLabel}
         </Button>
         <VerticalSpace space="small" />

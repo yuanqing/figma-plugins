@@ -131,7 +131,7 @@ export function SelectSimilarNodes(
       <Divider />
       <Container space="medium">
         <VerticalSpace space="small" />
-        <Button disabled={disabled} fullWidth onClick={handleSubmit}>
+        <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
           Select Similar Layers
         </Button>
         <VerticalSpace space="small" />

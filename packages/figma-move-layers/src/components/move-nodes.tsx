@@ -82,7 +82,7 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
         />
       </Columns>
       <VerticalSpace space="large" />
-      <Button disabled={disabled} fullWidth onClick={handleSubmit}>
+      <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Move Layers
       </Button>
       <VerticalSpace space="small" />

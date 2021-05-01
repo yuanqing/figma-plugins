@@ -111,7 +111,7 @@ export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
       <VerticalSpace space="large" />
       <Button
         {...initialFocus}
-        disabled={disabled}
+        disabled={disabled === true}
         fullWidth
         onClick={handleSubmit}
       >

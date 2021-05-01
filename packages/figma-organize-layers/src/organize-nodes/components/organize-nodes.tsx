@@ -146,7 +146,7 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
           <Text>Combine single-layer groups</Text>
         </Checkbox>
         <VerticalSpace space="large" />
-        <Button disabled={disabled} fullWidth onClick={handleSubmit}>
+        <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
           Organize Layers
         </Button>
         <VerticalSpace space="small" />

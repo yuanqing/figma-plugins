@@ -63,7 +63,7 @@ export function DrawSliceOverSelection(
         value={paddingString}
       />
       <VerticalSpace space="extraLarge" />
-      <Button disabled={disabled} fullWidth onClick={handleSubmit}>
+      <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Draw Slice Over Selection
       </Button>
       <VerticalSpace space="small" />

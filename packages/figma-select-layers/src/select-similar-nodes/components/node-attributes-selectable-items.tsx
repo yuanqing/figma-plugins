@@ -61,7 +61,7 @@ export function NodeAttributesSelectableItems(props: {
         <SelectableItem
           key={nodeAttributeKey}
           bold
-          disabled={disabled}
+          disabled={disabled === true}
           name={`${nodeAttributeKey}`}
           onValueChange={onValueChange}
           value={value}
@@ -113,7 +113,7 @@ export function NodeAttributesSelectableItems(props: {
     children.push(
       <SelectableItem
         key={nodeAttributeKey}
-        disabled={disabled}
+        disabled={disabled === true}
         indent
         name={`${nodeAttributeKey}`}
         onValueChange={onValueChange}

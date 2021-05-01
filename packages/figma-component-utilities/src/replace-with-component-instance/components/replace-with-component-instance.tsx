@@ -170,7 +170,7 @@ export function ReplaceWithComponentInstance(
           <Text>Resize component to fit layer</Text>
         </Checkbox>
         <VerticalSpace space="medium" />
-        <Button disabled={disabled} fullWidth onClick={handleSubmit}>
+        <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
           Replace With Component Instance
         </Button>
         <VerticalSpace space="small" />

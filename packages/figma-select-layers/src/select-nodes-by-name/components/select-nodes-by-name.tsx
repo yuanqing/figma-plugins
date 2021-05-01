@@ -65,7 +65,7 @@ export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
         <Text>Exact match</Text>
       </Checkbox>
       <VerticalSpace space="medium" />
-      <Button disabled={disabled} fullWidth onClick={handleSubmit}>
+      <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Select Layers by Name
       </Button>
       <VerticalSpace space="small" />

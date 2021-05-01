@@ -98,7 +98,7 @@ export function SetNodeSize(props: SetNodeSizeProps): JSX.Element {
         <Text>Resize with constraints</Text>
       </Checkbox>
       <VerticalSpace space="medium" />
-      <Button disabled={disabled} fullWidth onClick={handleSubmit}>
+      <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Set Layer Size
       </Button>
       <VerticalSpace space="small" />

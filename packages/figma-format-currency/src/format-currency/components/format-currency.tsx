@@ -144,7 +144,7 @@ export function FormatCurrency(props: FormatCurrencyProps): JSX.Element {
         <VerticalSpace space="extraLarge" />
         <Button
           {...initialFocus}
-          disabled={disabled}
+          disabled={disabled === true}
           fullWidth
           onClick={handleSubmit}
         >
