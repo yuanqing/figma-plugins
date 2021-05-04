@@ -10,7 +10,7 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { CloseUIHandler } from '../select-nodes-by-name/utilities/types'
-import { defaultSettings } from '../utilities/default-settings'
+import { defaultSettings, settingsKey } from '../utilities/settings'
 import { computeSimilarNodes } from './utilities/compute-similar-nodes'
 import { parseNodeAttributeKey } from './utilities/parse-node-attribute-key'
 import {
@@ -28,17 +28,20 @@ export default async function (): Promise<void> {
     figma.closePlugin(createErrorMessage(length))
     return
   }
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
   once<SubmitHandler>(
     'SUBMIT',
     async function (selectSimilarLayersSettings: SelectSimilarNodesSettings) {
-      await saveSettingsAsync({
-        ...settings,
-        selectSimilarLayers: selectSimilarLayersSettings
-      })
+      await saveSettingsAsync(
+        {
+          ...settings,
+          selectSimilarLayers: selectSimilarLayersSettings
+        },
+        settingsKey
+      )
       const targetNode = figma.currentPage.selection[0]
       const result = computeSimilarNodes(
         targetNode,

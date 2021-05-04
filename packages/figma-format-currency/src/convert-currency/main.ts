@@ -11,8 +11,8 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from '../utilities/default-settings'
 import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
+import { defaultSettings, settingsKey } from '../utilities/settings'
 import {
   CurrencyCode,
   LocaleCode,
@@ -31,7 +31,7 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more text layers'))
     return
   }
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
@@ -46,14 +46,17 @@ export default async function (): Promise<void> {
       }
     ) {
       const { currencyCode, localeCode, roundNumbers } = options
-      await saveSettingsAsync({
-        ...settings,
-        convertCurrency: {
-          currencyCode,
-          roundNumbers
+      await saveSettingsAsync(
+        {
+          ...settings,
+          convertCurrency: {
+            currencyCode,
+            roundNumbers
+          },
+          localeCode
         },
-        localeCode
-      })
+        settingsKey
+      )
       for (const { id, characters } of textNodePlainObjects) {
         const node = getSceneNodeById<TextNode>(id)
         await loadFontsAsync([node])
@@ -79,7 +82,7 @@ export default async function (): Promise<void> {
     'characters'
   ])
   showUI<ConvertCurrencyProps>(
-    { height: 357, width: 240 },
+    { height: 349, width: 240 },
     {
       ...settings.convertCurrency,
       localeCode: settings.localeCode,

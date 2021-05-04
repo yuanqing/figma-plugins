@@ -12,7 +12,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from '../utilities/default-settings'
+import { defaultSettings, settingsKey } from '../utilities/settings'
 import { GroupDefinition, Settings } from '../utilities/types'
 import { computeGroups } from './utilities/compute-groups'
 import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
@@ -32,7 +32,7 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('No layers on page'))
     return
   }
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   function updateUIState() {
     const nodes = figma.currentPage.children.slice()
     const { combineSingleLayerGroups, groupDefinition } = settings
@@ -52,7 +52,7 @@ export default async function (): Promise<void> {
     figma.closePlugin()
   })
   once('SUBMIT', async function (settings: Settings) {
-    await saveSettingsAsync(settings)
+    await saveSettingsAsync(settings, settingsKey)
     const {
       combineSingleLayerGroups,
       groupDefinition,
@@ -93,7 +93,7 @@ export default async function (): Promise<void> {
   const groups = getGroups(nodes, { combineSingleLayerGroups, groupDefinition })
   const maximumGroupDefinition = computeMaximumGroupDefinition(nodes)
   showUI<OrganizeNodesProps>(
-    { height: 361, width: 240 },
+    { height: 353, width: 240 },
     { ...settings, groups, maximumGroupDefinition }
   )
 }

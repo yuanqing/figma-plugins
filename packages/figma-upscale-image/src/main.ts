@@ -11,9 +11,9 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from './utilities/default-settings'
 import { getImageNodes } from './utilities/get-image-nodes'
 import { readImageNodesAsync } from './utilities/read-image-nodes-async'
+import { defaultSettings, settingsKey } from './utilities/settings'
 import {
   CloseUIHandler,
   ImageNodePlainObject,
@@ -35,7 +35,7 @@ export default async function (): Promise<void> {
     figma.closePlugin()
   })
   once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
-    await saveSettingsAsync(settings)
+    await saveSettingsAsync(settings, settingsKey)
     const { scale } = settings
     const imageNodePlainObjects = await readImageNodesAsync(getImageNodes())
     emit<UpscaleImagesRequestHandler>(
@@ -68,9 +68,9 @@ export default async function (): Promise<void> {
       getImageNodes().length > 0
     )
   })
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   showUI<UpscaleImageProps>(
-    { height: 136, width: 240 },
+    { height: 132, width: 240 },
     { ...settings, hasSelection }
   )
 }

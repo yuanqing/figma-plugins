@@ -7,8 +7,8 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from '../utilities/default-settings'
 import { mainFactory } from '../utilities/main-factory'
+import { defaultSettings, settingsKey } from '../utilities/settings'
 import { smartRenameNode } from '../utilities/smart-rename-node'
 import { Settings } from '../utilities/types'
 import {
@@ -19,7 +19,7 @@ import {
 } from './utilities/types'
 
 export default async function (): Promise<void> {
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
@@ -28,10 +28,13 @@ export default async function (): Promise<void> {
     async function (
       smartRenameLayersWhitelist: Settings['smartRenameLayersWhitelist']
     ) {
-      await saveSettingsAsync({
-        ...settings,
-        smartRenameLayersWhitelist
-      })
+      await saveSettingsAsync(
+        {
+          ...settings,
+          smartRenameLayersWhitelist
+        },
+        settingsKey
+      )
       const smartRenameNodesWhitelistRegex =
         smartRenameLayersWhitelist === ''
           ? null
@@ -66,7 +69,7 @@ export default async function (): Promise<void> {
   })
   const { smartRenameLayersWhitelist } = settings
   showUI<SmartRenameNodesProps>(
-    { height: 172, width: 240 },
+    { height: 168, width: 240 },
     {
       hasSelection: figma.currentPage.selection.length > 0,
       smartRenameLayersWhitelist

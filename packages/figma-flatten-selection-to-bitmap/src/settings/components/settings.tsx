@@ -17,7 +17,12 @@ import {
 } from '../utilities/types'
 
 export function Settings(props: SettingsProps): JSX.Element {
-  const { formState, handleSubmit, setFormState } = useForm<FormState>(props, {
+  const {
+    formState,
+    handleSubmit,
+    initialFocus,
+    setFormState
+  } = useForm<FormState>(props, {
     close: function () {
       emit<CloseUIHandler>('CLOSE_UI')
     },
@@ -34,6 +39,7 @@ export function Settings(props: SettingsProps): JSX.Element {
       <Text muted>Bitmap resolution</Text>
       <VerticalSpace space="small" />
       <SegmentedControl
+        {...initialFocus}
         name="resolution"
         onValueChange={setFormState}
         options={[

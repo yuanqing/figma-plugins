@@ -8,7 +8,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from './default-settings'
+import { defaultSettings, settingsKey } from './settings'
 import {
   CloseUIHandler,
   FormState,
@@ -27,12 +27,12 @@ export function mainFactory({
       figma.closePlugin(formatErrorMessage('Select two or more layers'))
       return
     }
-    const settings = await loadSettingsAsync(defaultSettings)
+    const settings = await loadSettingsAsync(defaultSettings, settingsKey)
     once<CloseUIHandler>('CLOSE_UI', function () {
       figma.closePlugin()
     })
     once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
-      await saveSettingsAsync(settings)
+      await saveSettingsAsync(settings, settingsKey)
       const { space } = settings
       if (space === null) {
         figma.closePlugin()
@@ -48,7 +48,7 @@ export function mainFactory({
       )
     })
     showUI<FormState>(
-      { height: 140, width: 240 },
+      { height: 136, width: 240 },
       { ...settings, hasSelection: true }
     )
   }

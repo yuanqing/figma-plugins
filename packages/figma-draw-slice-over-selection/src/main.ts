@@ -8,8 +8,8 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from './utilities/default-settings'
 import { drawSliceOverSelection } from './utilities/draw-slice-over-selection'
+import { defaultSettings, settingsKey } from './utilities/settings'
 import {
   CloseUIHandler,
   DrawSliceOverSelectionProps,
@@ -22,12 +22,12 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
   once<SubmitHandler>('SUBMIT', async function (settings) {
-    await saveSettingsAsync(settings)
+    await saveSettingsAsync(settings, settingsKey)
     const { padding } = settings
     if (padding === null) {
       figma.closePlugin()
@@ -45,7 +45,7 @@ export default async function (): Promise<void> {
   })
   showUI<DrawSliceOverSelectionProps>(
     {
-      height: 140,
+      height: 136,
       width: 240
     },
     { ...settings, hasSelection: true }

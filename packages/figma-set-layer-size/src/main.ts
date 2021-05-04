@@ -10,9 +10,9 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { computeDimensions } from './utilities/compute-dimensions'
-import { defaultSettings } from './utilities/default-settings'
 import { getValidSelectedNodes } from './utilities/get-valid-selected-nodes'
 import { setNodesSize } from './utilities/set-nodes-size'
+import { defaultSettings, settingsKey } from './utilities/settings'
 import {
   CloseUIHandler,
   FormState,
@@ -30,14 +30,14 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
   once<SubmitHandler>(
     'SUBMIT',
     async function ({ width, height, resizeWithConstraints }: FormState) {
-      await saveSettingsAsync({ resizeWithConstraints })
+      await saveSettingsAsync({ resizeWithConstraints }, settingsKey)
       if (
         width === null ||
         width === MIXED_NUMBER ||
@@ -59,7 +59,7 @@ export default async function (): Promise<void> {
     emit<SelectionChangedHandler>('SELECTION_CHANGED', computeDimensions(nodes))
   })
   showUI<FormState>(
-    { height: 140, width: 240 },
+    { height: 136, width: 240 },
     { ...settings, ...computeDimensions(nodes) }
   )
 }

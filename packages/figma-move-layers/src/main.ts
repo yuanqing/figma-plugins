@@ -9,7 +9,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from './utilities/default-settings'
+import { defaultSettings, settingsKey } from './utilities/settings'
 import {
   CloseUIHandler,
   MoveNodesProps,
@@ -23,12 +23,12 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
   once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
-    await saveSettingsAsync(settings)
+    await saveSettingsAsync(settings, settingsKey)
     const { horizontalOffset, verticalOffset } = settings
     if (
       (horizontalOffset === 0 || horizontalOffset === null) &&
@@ -59,7 +59,7 @@ export default async function (): Promise<void> {
     )
   })
   showUI<MoveNodesProps>(
-    { height: 116, width: 240 },
+    { height: 112, width: 240 },
     { ...settings, hasSelection: true }
   )
 }

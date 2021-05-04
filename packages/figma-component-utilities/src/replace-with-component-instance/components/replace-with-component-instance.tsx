@@ -31,6 +31,7 @@ export function ReplaceWithComponentInstance(
   props: ReplaceWithComponentProps
 ): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+  const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
   const {
     formState,
     setFormState,
@@ -71,8 +72,8 @@ export function ReplaceWithComponentInstance(
     shouldResizeToFitNode,
     searchTerm
   } = formState
-  const handleLayerClick: JSX.MouseEventHandler<HTMLDivElement> = useCallback(
-    function (event: MouseEvent) {
+  const handleLayerChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const componentId = (event.target as HTMLElement).getAttribute(
         COMPONENT_NODE_ID_ATTRIBUTE_NAME
       )
@@ -80,19 +81,20 @@ export function ReplaceWithComponentInstance(
     },
     [setFormState]
   )
-  const handleLayerMouseDown: JSX.MouseEventHandler<HTMLDivElement> = useCallback(
-    function (event: MouseEvent) {
-      // Stop clicking from losing focus on the search textbox
-      event.preventDefault()
-    },
-    []
-  )
-  const { itemIdDataAttributeName, menuElementRef } = useScrollableMenu({
-    changeOnMouseOver: false,
-    onItemIdChange: function (id: null | string) {
-      setFormState(id, 'componentId')
-    },
-    selectedItemId: componentId
+  const handleLayerMouseDown = useCallback(function (
+    event: JSX.TargetedMouseEvent<HTMLInputElement>
+  ) {
+    // Stop clicking from losing focus on the search textbox
+    event.preventDefault()
+  },
+  [])
+  const { handleScrollableMenuKeyDown } = useScrollableMenu({
+    itemIdDataAttributeName: COMPONENT_NODE_ID_ATTRIBUTE_NAME,
+    menuElementRef,
+    selectedId: componentId,
+    setSelectedId: function (componentId: null | string) {
+      setFormState(componentId, 'componentId')
+    }
   })
   useEffect(
     function () {
@@ -116,6 +118,18 @@ export function ReplaceWithComponentInstance(
   const filteredComponentNodes = filterComponentNodesByName(
     componentNodePlainObjects,
     searchTerm
+  )
+  useEffect(
+    function () {
+      function handleWindowKeyDown(event: KeyboardEvent) {
+        handleScrollableMenuKeyDown(event)
+      }
+      window.addEventListener('keydown', handleWindowKeyDown)
+      return function (): void {
+        window.removeEventListener('keydown', handleWindowKeyDown)
+      }
+    },
+    [handleScrollableMenuKeyDown]
   )
   return (
     <Fragment>
@@ -145,13 +159,14 @@ export function ReplaceWithComponentInstance(
             return (
               <Layer
                 key={index}
-                onClick={handleLayerClick}
+                name="componentId"
+                onChange={handleLayerChange}
                 onMouseDown={handleLayerMouseDown}
                 pageName={pageName}
-                selected={id === componentId}
                 type="component"
+                value={id === componentId}
+                // onMouseMove={handleScrollableMenuItemMouseMove}
                 {...{ [`${COMPONENT_NODE_ID_ATTRIBUTE_NAME}`]: id }}
-                {...{ [`${itemIdDataAttributeName}`]: id }}
               >
                 {name}
               </Layer>

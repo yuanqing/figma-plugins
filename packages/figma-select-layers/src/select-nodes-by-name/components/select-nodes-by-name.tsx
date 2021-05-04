@@ -22,6 +22,7 @@ export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
   const {
     disabled,
     formState,
+    initialFocus,
     setFormState,
     handleSubmit
   } = useForm<FormState>(props, {
@@ -51,6 +52,7 @@ export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
     <Container space="medium">
       <VerticalSpace space="large" />
       <Textbox
+        {...initialFocus}
         name="layerName"
         onValueChange={setFormState}
         placeholder="Layer name"

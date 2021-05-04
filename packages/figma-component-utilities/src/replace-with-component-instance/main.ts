@@ -10,9 +10,9 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from './utilities/default-settings'
 import { getComponentNodePlainObjects } from './utilities/get-component-nodes'
 import { getSelectedNodePlainObjects } from './utilities/get-valid-selected-nodes'
+import { defaultSettings, settingsKey } from './utilities/settings'
 import {
   CloseUIHandler,
   ReplaceWithComponentProps,
@@ -37,7 +37,7 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('No components in document'))
     return
   }
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
@@ -48,7 +48,7 @@ export default async function (): Promise<void> {
       shouldResizeToFitNode: boolean
     }) {
       const { componentId, shouldResizeToFitNode } = options
-      await saveSettingsAsync({ shouldResizeToFitNode })
+      await saveSettingsAsync({ shouldResizeToFitNode }, settingsKey)
       const selection = figma.currentPage.selection
       const componentNode = figma.getNodeById(componentId) as ComponentNode
       const newSelection = []

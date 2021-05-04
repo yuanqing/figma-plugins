@@ -6,7 +6,7 @@ import {
   Loading,
   Text,
   useInitialFocus,
-  useKeyDownHandler,
+  useWindowKeyDownHandler,
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit } from '@create-figma-plugin/utilities'
@@ -24,7 +24,7 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
   const [insertAs2x, setInsertAs2x] = useState(props.insertAs2x)
   const [index, setIndex] = useState(0)
   const [total, setTotal] = useState(0)
-  useKeyDownHandler('Escape', function () {
+  useWindowKeyDownHandler('Escape', function () {
     if (total > 0) {
       return
     }
@@ -100,6 +100,7 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
       >
         <Text>Insert as a @2x image</Text>
       </Checkbox>
+      <VerticalSpace space="medium" />
     </Container>
   )
 }

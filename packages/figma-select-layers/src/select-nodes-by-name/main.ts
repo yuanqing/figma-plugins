@@ -10,7 +10,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from '../utilities/default-settings'
+import { defaultSettings, settingsKey } from '../utilities/settings'
 import { filterNodesByName } from './utilities/filter-nodes-by-name'
 import {
   CloseUIHandler,
@@ -21,17 +21,20 @@ import {
 } from './utilities/types'
 
 export default async function (): Promise<void> {
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
   once<SubmitHandler>(
     'SUBMIT',
     async function ({ exactMatch, layerName }: SelectNodesByNameSettings) {
-      await saveSettingsAsync({
-        ...settings,
-        selectLayersByName: { exactMatch, layerName }
-      })
+      await saveSettingsAsync(
+        {
+          ...settings,
+          selectLayersByName: { exactMatch, layerName }
+        },
+        settingsKey
+      )
       const scope =
         figma.currentPage.selection.length === 0
           ? 'on page'
@@ -64,7 +67,7 @@ export default async function (): Promise<void> {
   })
   const { layerName, exactMatch } = settings.selectLayersByName
   showUI<SelectNodesByNameProps>(
-    { height: 168, width: 240 },
+    { height: 164, width: 240 },
     {
       exactMatch,
       hasSelection: figma.currentPage.selection.length > 0,

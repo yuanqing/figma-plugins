@@ -12,7 +12,7 @@ import {
 import { createImageNode } from 'figma-insert-big-image/src/utilities/create-image-node'
 import { ImageNodePlainObject } from 'figma-insert-big-image/src/utilities/types'
 
-import { defaultSettings } from '../utilities/default-settings'
+import { defaultSettings, settingsKey } from '../utilities/settings'
 import { createGroupNode } from './utilities/create-group-node'
 import { exportNodeAsync } from './utilities/export-node-async'
 import { replaceNodesWithinInstancesWithClones } from './utilities/replace-nodes-within-instances-with-clones'
@@ -26,7 +26,7 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select one or more layers'))
     return
   }
-  const { resolution } = await loadSettingsAsync(defaultSettings)
+  const { resolution } = await loadSettingsAsync(defaultSettings, settingsKey)
   const nodes = replaceNodesWithinInstancesWithClones(
     figma.currentPage.selection.slice()
   )
@@ -67,7 +67,7 @@ export default async function (): Promise<void> {
     }
   )
   showUI({
-    height: 136,
+    height: 132,
     width: 240
   })
   const bytes = await exportNodeAsync(temporaryGroupNode, resolution)

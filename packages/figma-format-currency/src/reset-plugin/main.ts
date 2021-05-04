@@ -1,8 +1,8 @@
 import { saveSettingsAsync } from '@create-figma-plugin/utilities'
 
-import { defaultSettings } from '../utilities/default-settings'
+import { defaultSettings, settingsKey } from '../utilities/settings'
 
 export default async function (): Promise<void> {
-  await saveSettingsAsync(defaultSettings)
+  await saveSettingsAsync(defaultSettings, settingsKey)
   figma.closePlugin('Reset plugin')
 }

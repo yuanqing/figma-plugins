@@ -99,6 +99,7 @@ export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
       <Text muted>Scale</Text>
       <VerticalSpace space="small" />
       <SegmentedControl
+        {...initialFocus}
         name="scale"
         onValueChange={setFormState}
         options={[
@@ -109,14 +110,10 @@ export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
         value={scale}
       />
       <VerticalSpace space="large" />
-      <Button
-        {...initialFocus}
-        disabled={disabled === true}
-        fullWidth
-        onClick={handleSubmit}
-      >
+      <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Upscale Image
       </Button>
+      <VerticalSpace space="small" />
     </Container>
   )
 }

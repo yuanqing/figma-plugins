@@ -10,7 +10,7 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { createImageNode } from './utilities/create-image-node'
-import { defaultSettings } from './utilities/default-settings'
+import { defaultSettings, settingsKey } from './utilities/settings'
 import {
   CloseUIHandler,
   ImageNodePlainObject,
@@ -22,7 +22,7 @@ export default async function (): Promise<void> {
   let xOffset = Math.round(figma.viewport.center.x)
   const yOffset = Math.round(figma.viewport.center.y)
   const result: Array<SceneNode> = []
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
@@ -33,7 +33,7 @@ export default async function (): Promise<void> {
       options: { name: string; insertAs2x: boolean; done: boolean }
     ) {
       const { name, insertAs2x, done } = options
-      await saveSettingsAsync({ insertAs2x })
+      await saveSettingsAsync({ insertAs2x }, settingsKey)
       const imageNodes: Array<RectangleNode> = []
       for (const imageNodePlainObject of imageNodePlainObjects) {
         const imageNode = createImageNode(imageNodePlainObject, {
@@ -67,5 +67,5 @@ export default async function (): Promise<void> {
       )
     }
   )
-  showUI<InsertBigImageProps>({ height: 224, width: 240 }, settings)
+  showUI<InsertBigImageProps>({ height: 220, width: 240 }, settings)
 }

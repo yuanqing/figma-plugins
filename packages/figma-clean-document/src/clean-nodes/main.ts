@@ -12,9 +12,9 @@ import {
 } from '@create-figma-plugin/utilities'
 
 import { cleanNodes } from '../utilities/clean-nodes'
-import { defaultSettings } from '../utilities/default-settings'
 import { getScope } from '../utilities/get-scope'
 import { getSiblingNodes } from '../utilities/get-sibling-nodes'
+import { defaultSettings, settingsKey } from '../utilities/settings'
 import { showLoadingNotification } from '../utilities/show-loading-notification'
 import { smartSortNodes } from '../utilities/smart-sort-nodes'
 import { Settings } from '../utilities/types'
@@ -30,12 +30,12 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('No layers on page'))
     return
   }
-  const settings = await loadSettingsAsync(defaultSettings)
+  const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
   once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
-    await saveSettingsAsync(settings)
+    await saveSettingsAsync(settings, settingsKey)
     const {
       deleteHiddenLayers,
       pixelPerfect,
@@ -85,7 +85,7 @@ export default async function (): Promise<void> {
     )
   })
   showUI<CleanNodesProps>(
-    { height: 416, width: 240 },
+    { height: 412, width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )
 }
