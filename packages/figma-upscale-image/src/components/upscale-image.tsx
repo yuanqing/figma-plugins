@@ -1,7 +1,8 @@
 import {
   Button,
   Container,
-  Loading,
+  LoadingIndicator,
+  MiddleAlign,
   SegmentedControl,
   Text,
   useForm,
@@ -86,10 +87,12 @@ export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
   }, [])
   if (loading === true) {
     return (
-      <Loading>
+      <MiddleAlign>
+        <LoadingIndicator color="blue" />
+        <VerticalSpace space="small" />
         <Text align="center">Upscaling image…</Text>
-        <VerticalSpace space="extraLarge" />
-      </Loading>
+        <VerticalSpace space="small" /> {/* To optically middle-align things */}
+      </MiddleAlign>
     )
   }
   const { scale } = formState

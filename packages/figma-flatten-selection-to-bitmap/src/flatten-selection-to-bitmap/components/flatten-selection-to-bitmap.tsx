@@ -1,4 +1,9 @@
-import { Loading, Text, VerticalSpace } from '@create-figma-plugin/ui'
+import {
+  LoadingIndicator,
+  MiddleAlign,
+  Text,
+  VerticalSpace
+} from '@create-figma-plugin/ui'
 import { emit, once } from '@create-figma-plugin/utilities'
 import { splitImageAsync } from 'figma-insert-big-image/src/utilities/split-image-async'
 import { h, JSX } from 'preact'
@@ -31,9 +36,11 @@ export function FlattenSelectionToBitmap(): JSX.Element {
     )
   }, [])
   return (
-    <Loading>
+    <MiddleAlign>
+      <LoadingIndicator color="blue" />
+      <VerticalSpace space="small" />
       <Text align="center">Flattening selection…</Text>
-      <VerticalSpace space="medium" />
-    </Loading>
+      <VerticalSpace space="medium" /> {/* To optically middle-align things */}
+    </MiddleAlign>
   )
 }

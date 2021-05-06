@@ -2,8 +2,8 @@ import {
   Button,
   Columns,
   Container,
-  IconMoveDown,
-  IconMoveRight,
+  IconMoveDown16,
+  IconMoveRight16,
   TextboxNumeric,
   useForm,
   VerticalSpace
@@ -67,14 +67,14 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
       <Columns space="extraSmall">
         <TextboxNumeric
           {...initialFocus}
-          icon={<IconMoveRight />}
+          icon={<IconMoveRight16 />}
           name="horizontalOffset"
           onNumericValueChange={setFormState}
           onValueChange={setHorizontalOffsetString}
           value={horizontalOffsetString}
         />
         <TextboxNumeric
-          icon={<IconMoveDown />}
+          icon={<IconMoveDown16 />}
           name="verticalOffset"
           onNumericValueChange={setFormState}
           onValueChange={setVerticalOffsetString}

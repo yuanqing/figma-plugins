@@ -3,8 +3,8 @@ import {
   Checkbox,
   Columns,
   Container,
-  IconSpaceHorizontal,
-  IconSpaceVertical,
+  IconSpaceHorizontal16,
+  IconSpaceVertical16,
   SegmentedControl,
   SegmentedControlOption,
   Text,
@@ -121,7 +121,7 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
         <Columns space="extraSmall">
           <TextboxNumeric
             {...initialFocus}
-            icon={<IconSpaceHorizontal />}
+            icon={<IconSpaceHorizontal16 />}
             minimum={0}
             name="horizontalSpace"
             onNumericValueChange={setFormState}
@@ -129,7 +129,7 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
             value={horizontalSpaceString}
           />
           <TextboxNumeric
-            icon={<IconSpaceVertical />}
+            icon={<IconSpaceVertical16 />}
             minimum={0}
             name="verticalSpace"
             onNumericValueChange={setFormState}

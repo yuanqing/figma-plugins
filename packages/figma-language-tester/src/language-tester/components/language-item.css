@@ -23,9 +23,12 @@
 
 .icon {
   position: absolute;
+  top: 0;
+  right: 4px;
+}
+
+.loadingIndicator {
+  position: absolute;
   top: var(--space-extra-small);
   right: var(--space-small);
-  width: 16px;
-  height: 16px;
-  color: var(--color-blue);
 }

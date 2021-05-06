@@ -3,7 +3,8 @@ import {
   Container,
   FileUploadButton,
   FileUploadDropzone,
-  Loading,
+  LoadingIndicator,
+  MiddleAlign,
   Text,
   useInitialFocus,
   useWindowKeyDownHandler,
@@ -52,14 +53,17 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
   const initialFocus = useInitialFocus()
   if (total > 0) {
     return (
-      <Loading>
+      <MiddleAlign>
+        <LoadingIndicator color="blue" />
+        <VerticalSpace space="small" />
         <Text align="center" numeric>
           {total === 1
             ? 'Inserting image…'
             : `Inserting image ${index + 1} of ${total}…`}
         </Text>
-        <VerticalSpace space="extraLarge" />
-      </Loading>
+        <VerticalSpace space="extraLarge" />{' '}
+        {/* To optically middle-align things */}
+      </MiddleAlign>
     )
   }
   const acceptedFileTypes = ['image/jpeg', 'image/png']

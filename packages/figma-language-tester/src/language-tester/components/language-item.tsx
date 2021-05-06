@@ -1,6 +1,6 @@
 import {
   createClassName,
-  IconCheckCircle,
+  IconCheckCircle32,
   LoadingIndicator
 } from '@create-figma-plugin/ui'
 import { ComponentChildren, h, JSX } from 'preact'
@@ -38,10 +38,12 @@ export function LanguageItem(props: {
     >
       {children}
       <div className={styles.icon}>
-        {loading === false && selected === true ? <IconCheckCircle /> : null}
+        {loading === false && selected === true ? (
+          <IconCheckCircle32 color="blue" />
+        ) : null}
       </div>
-      <div className={styles.icon}>
-        {loading === true ? <LoadingIndicator /> : null}
+      <div className={styles.loadingIndicator}>
+        {loading === true ? <LoadingIndicator color="blue" /> : null}
       </div>
     </div>
   )
