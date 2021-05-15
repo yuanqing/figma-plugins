@@ -134,7 +134,7 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
           <Textbox
             disabled={smartRenameLayers === false || loading === true}
             name="smartRenameLayersWhitelist"
-            onValueChange={setFormState}
+            onValueInput={setFormState}
             value={smartRenameLayersWhitelist}
           />
         </Checkbox>

@@ -151,7 +151,7 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
         <VerticalSpace space="small" />
         <TextboxAutocomplete
           filter
-          onValueChange={setCurrencyCodeString}
+          onValueInput={setCurrencyCodeString}
           options={currencyCodeOptions}
           strict
           value={currencyCodeString}
@@ -169,7 +169,7 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
         <VerticalSpace space="small" />
         <TextboxAutocomplete
           filter
-          onValueChange={setLocaleCodeString}
+          onValueInput={setLocaleCodeString}
           options={localeCodeOptions}
           strict
           top

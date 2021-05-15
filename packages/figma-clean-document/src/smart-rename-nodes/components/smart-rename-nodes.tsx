@@ -53,7 +53,7 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
         {...initialFocus}
         disabled={loading === true}
         name="smartRenameLayersWhitelist"
-        onValueChange={setFormState}
+        onValueInput={setFormState}
         value={smartRenameLayersWhitelist}
       />
       <VerticalSpace space="extraLarge" />

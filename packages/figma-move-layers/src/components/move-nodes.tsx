@@ -69,15 +69,15 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
           {...initialFocus}
           icon={<IconMoveRight16 />}
           name="horizontalOffset"
-          onNumericValueChange={setFormState}
-          onValueChange={setHorizontalOffsetString}
+          onNumericValueInput={setFormState}
+          onValueInput={setHorizontalOffsetString}
           value={horizontalOffsetString}
         />
         <TextboxNumeric
           icon={<IconMoveDown16 />}
           name="verticalOffset"
-          onNumericValueChange={setFormState}
-          onValueChange={setVerticalOffsetString}
+          onNumericValueInput={setFormState}
+          onValueInput={setVerticalOffsetString}
           value={verticalOffsetString}
         />
       </Columns>

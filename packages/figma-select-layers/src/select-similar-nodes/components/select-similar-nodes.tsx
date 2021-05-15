@@ -103,7 +103,7 @@ export function SelectSimilarNodes(
             {...initialFocus}
             clearOnEscapeKeyDown
             name="searchTerm"
-            onValueChange={setFormState}
+            onValueInput={setFormState}
             placeholder="Search"
             value={searchTerm}
           />

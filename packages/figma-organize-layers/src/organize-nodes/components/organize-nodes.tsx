@@ -124,16 +124,16 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
             icon={<IconSpaceHorizontal16 />}
             minimum={0}
             name="horizontalSpace"
-            onNumericValueChange={setFormState}
-            onValueChange={setHorizontalSpaceString}
+            onNumericValueInput={setFormState}
+            onValueInput={setHorizontalSpaceString}
             value={horizontalSpaceString}
           />
           <TextboxNumeric
             icon={<IconSpaceVertical16 />}
             minimum={0}
             name="verticalSpace"
-            onNumericValueChange={setFormState}
-            onValueChange={setVerticalSpaceString}
+            onNumericValueInput={setFormState}
+            onValueInput={setVerticalSpaceString}
             value={verticalSpaceString}
           />
         </Columns>

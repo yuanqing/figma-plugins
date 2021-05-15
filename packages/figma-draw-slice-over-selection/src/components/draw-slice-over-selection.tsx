@@ -58,8 +58,8 @@ export function DrawSliceOverSelection(
         {...initialFocus}
         minimum={0}
         name="padding"
-        onNumericValueChange={setFormState}
-        onValueChange={setPaddingString}
+        onNumericValueInput={setFormState}
+        onValueInput={setPaddingString}
         value={paddingString}
       />
       <VerticalSpace space="extraLarge" />

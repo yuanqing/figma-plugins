@@ -59,8 +59,8 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
           {...initialFocus}
           icon={icon}
           name="space"
-          onNumericValueChange={setFormState}
-          onValueChange={setSpaceString}
+          onNumericValueInput={setFormState}
+          onValueInput={setSpaceString}
           value={spaceString}
         />
         <VerticalSpace space="extraLarge" />

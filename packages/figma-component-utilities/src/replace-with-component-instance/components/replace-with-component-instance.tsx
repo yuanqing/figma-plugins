@@ -138,7 +138,7 @@ export function ReplaceWithComponentInstance(
         ref={inputElementRef}
         clearOnEscapeKeyDown
         name="searchTerm"
-        onValueChange={setFormState}
+        onValueInput={setFormState}
         placeholder="Search"
         value={searchTerm}
       />

@@ -135,7 +135,7 @@ export function FormatCurrency(props: FormatCurrencyProps): JSX.Element {
         <VerticalSpace space="small" />
         <TextboxAutocomplete
           filter
-          onValueChange={setLocaleCodeString}
+          onValueInput={setLocaleCodeString}
           options={localeCodeOptions}
           strict
           top

@@ -74,8 +74,8 @@ export function SetNodeSize(props: SetNodeSizeProps): JSX.Element {
           icon="W"
           minimum={0}
           name="width"
-          onNumericValueChange={setFormState}
-          onValueChange={setWidthString}
+          onNumericValueInput={setFormState}
+          onValueInput={setWidthString}
           value={widthString}
         />
         <TextboxNumeric
@@ -83,8 +83,8 @@ export function SetNodeSize(props: SetNodeSizeProps): JSX.Element {
           icon="H"
           minimum={0}
           name="height"
-          onNumericValueChange={setFormState}
-          onValueChange={setHeightString}
+          onNumericValueInput={setFormState}
+          onValueInput={setHeightString}
           value={heightString}
         />
       </Columns>

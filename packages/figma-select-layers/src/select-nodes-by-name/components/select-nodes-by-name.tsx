@@ -54,7 +54,7 @@ export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
       <Textbox
         {...initialFocus}
         name="layerName"
-        onValueChange={setFormState}
+        onValueInput={setFormState}
         placeholder="Layer name"
         value={layerName}
       />
