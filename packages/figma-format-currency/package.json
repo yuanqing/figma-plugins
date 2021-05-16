@@ -23,7 +23,7 @@
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean-build && yarn run generate-currencies-ts && build-figma-plugin --minify --typecheck",
+    "build": "yarn run clean-build && yarn run generate-currencies-ts && build-figma-plugin --typecheck --minify",
     "generate-currencies-ts": "node --loader ts-node/esm scripts/generate-currencies-ts.ts > src/utilities/data/currencies.ts && eslint --fix src/utilities/data/currencies.ts",
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rm -rf '*.log' build",
@@ -31,7 +31,7 @@
     "fix": "eslint --fix '{scripts,src,test}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' '*.json'",
     "lint": "eslint '{scripts,src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
     "test": "yarn run clean-test && yarn run generate-currencies-ts && ava 'test/**/*.ts'",
-    "watch": "yarn run clean-build && yarn run generate-currencies-ts && build-figma-plugin --watch"
+    "watch": "yarn run clean-build && yarn run generate-currencies-ts && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
     "@create-figma-plugin/ui": "latest",

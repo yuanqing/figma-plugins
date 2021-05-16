@@ -23,11 +23,11 @@
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean && build-figma-plugin --minify --typecheck",
+    "build": "yarn run clean && build-figma-plugin --typecheck --minify",
     "clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'",
     "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json'",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "watch": "yarn run clean && build-figma-plugin --watch"
+    "watch": "yarn run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
     "@create-figma-plugin/ui": "latest",
