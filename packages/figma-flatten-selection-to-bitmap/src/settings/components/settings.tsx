@@ -17,21 +17,17 @@ import {
 } from '../utilities/types.js'
 
 export function Settings(props: SettingsProps): JSX.Element {
-  const {
-    formState,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(props, {
-    close: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    submit: function ({ resolution }: FormState) {
-      emit<SubmitHandler>('SUBMIT', {
-        resolution
-      })
-    }
-  })
+  const { formState, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(props, {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({ resolution }: FormState) {
+        emit<SubmitHandler>('SUBMIT', {
+          resolution
+        })
+      }
+    })
   const { resolution } = formState
   return (
     <Container space="medium">

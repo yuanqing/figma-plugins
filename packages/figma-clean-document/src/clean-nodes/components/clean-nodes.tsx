@@ -21,56 +21,51 @@ import {
 } from '../utilities/types.js'
 
 export function CleanNodes(props: CleanNodesProps): JSX.Element {
-  const {
-    disabled,
-    formState,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(
-    { ...props, loading: false },
-    {
-      close: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      submit: function ({
-        deleteHiddenLayers,
-        loading,
-        pixelPerfect,
-        skipLockedLayers,
-        smartRenameLayers,
-        smartRenameLayersWhitelist,
-        smartSortLayers,
-        ungroupSingleLayerGroups
-      }: FormState) {
-        setFormState(loading, 'loading')
-        emit<SubmitHandler>('SUBMIT', {
+  const { disabled, formState, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(
+      { ...props, loading: false },
+      {
+        close: function () {
+          emit<CloseUIHandler>('CLOSE_UI')
+        },
+        submit: function ({
           deleteHiddenLayers,
+          loading,
           pixelPerfect,
           skipLockedLayers,
           smartRenameLayers,
           smartRenameLayersWhitelist,
           smartSortLayers,
           ungroupSingleLayerGroups
-        })
-      },
-      validate: function ({
-        deleteHiddenLayers,
-        pixelPerfect,
-        smartRenameLayers,
-        smartSortLayers,
-        ungroupSingleLayerGroups
-      }: FormState) {
-        return (
-          deleteHiddenLayers === true ||
-          pixelPerfect === true ||
-          smartRenameLayers === true ||
-          smartSortLayers === true ||
-          ungroupSingleLayerGroups === true
-        )
+        }: FormState) {
+          setFormState(loading, 'loading')
+          emit<SubmitHandler>('SUBMIT', {
+            deleteHiddenLayers,
+            pixelPerfect,
+            skipLockedLayers,
+            smartRenameLayers,
+            smartRenameLayersWhitelist,
+            smartSortLayers,
+            ungroupSingleLayerGroups
+          })
+        },
+        validate: function ({
+          deleteHiddenLayers,
+          pixelPerfect,
+          smartRenameLayers,
+          smartSortLayers,
+          ungroupSingleLayerGroups
+        }: FormState) {
+          return (
+            deleteHiddenLayers === true ||
+            pixelPerfect === true ||
+            smartRenameLayers === true ||
+            smartSortLayers === true ||
+            ungroupSingleLayerGroups === true
+          )
+        }
       }
-    }
-  )
+    )
   useEffect(
     function () {
       return on<SelectionChangedHandler>(

@@ -37,33 +37,28 @@ const groupDefinitions: Array<SegmentedControlOption<GroupDefinition>> = [
 ]
 
 export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
-  const {
-    disabled,
-    formState,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(props, {
-    close: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    submit: function ({
-      combineSingleLayerGroups,
-      groupDefinition,
-      horizontalSpace,
-      verticalSpace
-    }: FormState) {
-      emit('SUBMIT', {
+  const { disabled, formState, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(props, {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({
         combineSingleLayerGroups,
         groupDefinition,
         horizontalSpace,
         verticalSpace
-      })
-    },
-    validate: function ({ groups }: FormState) {
-      return groups.length > 0
-    }
-  })
+      }: FormState) {
+        emit('SUBMIT', {
+          combineSingleLayerGroups,
+          groupDefinition,
+          horizontalSpace,
+          verticalSpace
+        })
+      },
+      validate: function ({ groups }: FormState) {
+        return groups.length > 0
+      }
+    })
   useEffect(
     function () {
       emit<UpdateMainStateHandler>('UPDATE_MAIN_STATE', {

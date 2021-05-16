@@ -29,24 +29,19 @@ import { upscaleImageAsync } from '../utilities/upscale-image-async.js'
 
 export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
   const [loading, setLoading] = useState(false)
-  const {
-    disabled,
-    formState,
-    initialFocus,
-    handleSubmit,
-    setFormState
-  } = useForm<FormState>(props, {
-    close: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    submit: function ({ scale }: FormState) {
-      setLoading(true)
-      emit<SubmitHandler>('SUBMIT', { scale })
-    },
-    validate: function ({ hasSelection }: FormState) {
-      return hasSelection === true
-    }
-  })
+  const { disabled, formState, initialFocus, handleSubmit, setFormState } =
+    useForm<FormState>(props, {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({ scale }: FormState) {
+        setLoading(true)
+        emit<SubmitHandler>('SUBMIT', { scale })
+      },
+      validate: function ({ hasSelection }: FormState) {
+        return hasSelection === true
+      }
+    })
   useEffect(
     function () {
       return on<SelectionChangedHandler>(

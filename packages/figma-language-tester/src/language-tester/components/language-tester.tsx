@@ -27,10 +27,8 @@ import { LanguageItem } from './language-item.js'
 import styles from './language-tester.css'
 
 export function LanguageTester() {
-  const [
-    selectedLanguageKey,
-    setSelectedLanguageKey
-  ] = useState<null | LanguageKey>(null)
+  const [selectedLanguageKey, setSelectedLanguageKey] =
+    useState<null | LanguageKey>(null)
   const [hasSelection, setHasSelection] = useState(true)
   const [loading, setLoading] = useState(false)
   const handleLanguageItemClick = useCallback(

@@ -1,8 +1,9 @@
 import { NodeAttributes } from './types.js'
 
-export function parseNodeAttributeKey(
-  attributeKey: keyof NodeAttributes
-): { categoryKey: null | string; nodeAttributeName: string } {
+export function parseNodeAttributeKey(attributeKey: keyof NodeAttributes): {
+  categoryKey: null | string
+  nodeAttributeName: string
+} {
   const index = attributeKey.indexOf('.')
   if (index === -1) {
     return { categoryKey: null, nodeAttributeName: attributeKey }

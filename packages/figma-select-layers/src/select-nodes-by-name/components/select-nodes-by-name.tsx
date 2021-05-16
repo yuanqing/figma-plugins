@@ -19,26 +19,21 @@ import {
 } from '../utilities/types.js'
 
 export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
-  const {
-    disabled,
-    formState,
-    initialFocus,
-    setFormState,
-    handleSubmit
-  } = useForm<FormState>(props, {
-    close: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    submit: function ({ exactMatch, layerName }: FormState) {
-      emit<SubmitHandler>('SUBMIT', {
-        exactMatch,
-        layerName
-      })
-    },
-    validate: function ({ layerName }: FormState) {
-      return layerName !== ''
-    }
-  })
+  const { disabled, formState, initialFocus, setFormState, handleSubmit } =
+    useForm<FormState>(props, {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({ exactMatch, layerName }: FormState) {
+        emit<SubmitHandler>('SUBMIT', {
+          exactMatch,
+          layerName
+        })
+      },
+      validate: function ({ layerName }: FormState) {
+        return layerName !== ''
+      }
+    })
   useEffect(
     function () {
       return on('SELECTION_CHANGED', function (hasSelection) {

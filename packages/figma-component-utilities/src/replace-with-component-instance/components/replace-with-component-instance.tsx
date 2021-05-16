@@ -32,40 +32,35 @@ export function ReplaceWithComponentInstance(
 ): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
-  const {
-    formState,
-    setFormState,
-    handleSubmit,
-    disabled,
-    initialFocus
-  } = useForm<FormState>(
-    { ...props, componentId: null, searchTerm: '' },
-    {
-      close: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      submit: function ({ componentId, shouldResizeToFitNode }: FormState) {
-        if (componentId === null) {
-          return
-        }
-        emit<SubmitHandler>('SUBMIT', {
+  const { formState, setFormState, handleSubmit, disabled, initialFocus } =
+    useForm<FormState>(
+      { ...props, componentId: null, searchTerm: '' },
+      {
+        close: function () {
+          emit<CloseUIHandler>('CLOSE_UI')
+        },
+        submit: function ({ componentId, shouldResizeToFitNode }: FormState) {
+          if (componentId === null) {
+            return
+          }
+          emit<SubmitHandler>('SUBMIT', {
+            componentId,
+            shouldResizeToFitNode
+          })
+        },
+        validate: function ({
           componentId,
-          shouldResizeToFitNode
-        })
-      },
-      validate: function ({
-        componentId,
-        componentNodePlainObjects,
-        searchTerm
-      }: FormState) {
-        return (
-          componentId !== null &&
-          filterComponentNodesByName(componentNodePlainObjects, searchTerm)
-            .length > 0
-        )
+          componentNodePlainObjects,
+          searchTerm
+        }: FormState) {
+          return (
+            componentId !== null &&
+            filterComponentNodesByName(componentNodePlainObjects, searchTerm)
+              .length > 0
+          )
+        }
       }
-    }
-  )
+    )
   const {
     componentId,
     componentNodePlainObjects,
@@ -104,10 +99,8 @@ export function ReplaceWithComponentInstance(
           componentNodePlainObjects: Array<ComponentNodePlainObject>
           selectedNodePlainObjects: Array<NodePlainObject>
         }) {
-          const {
-            componentNodePlainObjects,
-            selectedNodePlainObjects
-          } = options
+          const { componentNodePlainObjects, selectedNodePlainObjects } =
+            options
           setFormState(componentNodePlainObjects, 'componentNodePlainObjects')
           setFormState(selectedNodePlainObjects, 'selectedNodePlainObjects')
         }

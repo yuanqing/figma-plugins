@@ -25,33 +25,28 @@ import styles from './select-similar-nodes.css'
 export function SelectSimilarNodes(
   props: SelectSimilarNodesProps
 ): JSX.Element {
-  const {
-    disabled,
-    formState,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(
-    { ...props, searchTerm: '' },
-    {
-      close: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      submit: function ({ nodeAttributes }: FormState) {
-        emit<SubmitHandler>('SUBMIT', nodeAttributes)
-      },
-      validate: function ({
-        nodeAttributes,
-        validNodeAttributeKeys
-      }: FormState) {
-        return someNodeAttributeEqualsTargetValue(
+  const { disabled, formState, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(
+      { ...props, searchTerm: '' },
+      {
+        close: function () {
+          emit<CloseUIHandler>('CLOSE_UI')
+        },
+        submit: function ({ nodeAttributes }: FormState) {
+          emit<SubmitHandler>('SUBMIT', nodeAttributes)
+        },
+        validate: function ({
           nodeAttributes,
-          validNodeAttributeKeys,
-          true
-        )
+          validNodeAttributeKeys
+        }: FormState) {
+          return someNodeAttributeEqualsTargetValue(
+            nodeAttributes,
+            validNodeAttributeKeys,
+            true
+          )
+        }
       }
-    }
-  )
+    )
   const { nodeAttributes, validNodeAttributeKeys, searchTerm } = formState
   const filteredNodeAttributeKeys = filterNodeAttributesByName(
     nodeAttributes,
@@ -68,22 +63,23 @@ export function SelectSimilarNodes(
     },
     [setFormState]
   )
-  const handleCheckAllToggleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function () {
-      const value = !(areAllValidNodeAttributesSelected === true)
-      const result: NodeAttributes = { ...nodeAttributes }
-      for (const key of validNodeAttributeKeys) {
-        result[key] = value
-      }
-      setFormState(result, 'nodeAttributes')
-    },
-    [
-      areAllValidNodeAttributesSelected,
-      nodeAttributes,
-      validNodeAttributeKeys,
-      setFormState
-    ]
-  )
+  const handleCheckAllToggleChange: JSX.GenericEventHandler<HTMLInputElement> =
+    useCallback(
+      function () {
+        const value = !(areAllValidNodeAttributesSelected === true)
+        const result: NodeAttributes = { ...nodeAttributes }
+        for (const key of validNodeAttributeKeys) {
+          result[key] = value
+        }
+        setFormState(result, 'nodeAttributes')
+      },
+      [
+        areAllValidNodeAttributesSelected,
+        nodeAttributes,
+        validNodeAttributeKeys,
+        setFormState
+      ]
+    )
   useEffect(
     function () {
       return on<SelectionChangedHandler>(

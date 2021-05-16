@@ -21,29 +21,25 @@ import {
 } from '../utilities/types.js'
 
 export function MoveNodes(props: MoveNodesProps): JSX.Element {
-  const {
-    disabled,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(props, {
-    close: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    submit: function ({ horizontalOffset, verticalOffset }: FormState) {
-      emit<SubmitHandler>('SUBMIT', { horizontalOffset, verticalOffset })
-    },
-    validate: function ({
-      hasSelection,
-      horizontalOffset,
-      verticalOffset
-    }: FormState) {
-      return (
-        hasSelection === true &&
-        (horizontalOffset !== null || verticalOffset !== null)
-      )
-    }
-  })
+  const { disabled, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(props, {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({ horizontalOffset, verticalOffset }: FormState) {
+        emit<SubmitHandler>('SUBMIT', { horizontalOffset, verticalOffset })
+      },
+      validate: function ({
+        hasSelection,
+        horizontalOffset,
+        verticalOffset
+      }: FormState) {
+        return (
+          hasSelection === true &&
+          (horizontalOffset !== null || verticalOffset !== null)
+        )
+      }
+    })
   useEffect(
     function () {
       return on<SelectionChangedHandler>(

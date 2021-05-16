@@ -18,23 +18,19 @@ import {
 } from '../utilities/types.js'
 
 export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
-  const {
-    formState,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(
-    { ...props, loading: false },
-    {
-      close: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      submit: function ({ loading, smartRenameLayersWhitelist }: FormState) {
-        setFormState(loading, 'loading')
-        emit<SubmitHandler>('SUBMIT', smartRenameLayersWhitelist)
+  const { formState, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(
+      { ...props, loading: false },
+      {
+        close: function () {
+          emit<CloseUIHandler>('CLOSE_UI')
+        },
+        submit: function ({ loading, smartRenameLayersWhitelist }: FormState) {
+          setFormState(loading, 'loading')
+          emit<SubmitHandler>('SUBMIT', smartRenameLayersWhitelist)
+        }
       }
-    }
-  )
+    )
   useEffect(
     function () {
       return on('SELECTION_CHANGED', function (hasSelection: boolean) {

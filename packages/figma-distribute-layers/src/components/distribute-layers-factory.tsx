@@ -22,22 +22,18 @@ import {
 export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
   const directionLabel = `${direction[0].toUpperCase()}${direction.slice(1)}`
   return function DistributeLayers(props: DistributeLayersProps): JSX.Element {
-    const {
-      disabled,
-      handleSubmit,
-      initialFocus,
-      setFormState
-    } = useForm<FormState>(props, {
-      close: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      submit: function ({ space }: FormState) {
-        emit<SubmitHandler>('SUBMIT', { space })
-      },
-      validate: function ({ hasSelection, space }: FormState) {
-        return hasSelection === true && space !== null
-      }
-    })
+    const { disabled, handleSubmit, initialFocus, setFormState } =
+      useForm<FormState>(props, {
+        close: function () {
+          emit<CloseUIHandler>('CLOSE_UI')
+        },
+        submit: function ({ space }: FormState) {
+          emit<SubmitHandler>('SUBMIT', { space })
+        },
+        validate: function ({ hasSelection, space }: FormState) {
+          return hasSelection === true && space !== null
+        }
+      })
     useEffect(
       function () {
         return on<SelectionChangedHandler>(

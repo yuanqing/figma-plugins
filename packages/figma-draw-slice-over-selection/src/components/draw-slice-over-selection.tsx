@@ -21,22 +21,18 @@ import {
 export function DrawSliceOverSelection(
   props: DrawSliceOverSelectionProps
 ): JSX.Element {
-  const {
-    disabled,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(props, {
-    close: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    submit: function ({ padding }: FormState) {
-      emit<SubmitHandler>('SUBMIT', { padding })
-    },
-    validate: function ({ hasSelection, padding }: FormState) {
-      return hasSelection === true && padding !== null
-    }
-  })
+  const { disabled, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(props, {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({ padding }: FormState) {
+        emit<SubmitHandler>('SUBMIT', { padding })
+      },
+      validate: function ({ hasSelection, padding }: FormState) {
+        return hasSelection === true && padding !== null
+      }
+    })
   useEffect(
     function () {
       return on<SelectionChangedHandler>(

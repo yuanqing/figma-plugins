@@ -24,26 +24,21 @@ import {
 } from '../utilities/types.js'
 
 export function SetNodeSize(props: SetNodeSizeProps): JSX.Element {
-  const {
-    disabled,
-    formState,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(props, {
-    close: function () {
-      emit<CloseUIHandler>('CLOSE_UI')
-    },
-    submit: function ({ width, height, resizeWithConstraints }: FormState) {
-      emit<SubmitHandler>('SUBMIT', { height, resizeWithConstraints, width })
-    },
-    validate: function ({ width, height }: FormState) {
-      return (
-        (width !== null && width !== MIXED_NUMBER && width !== 0) ||
-        (height !== null && height !== MIXED_NUMBER && height !== 0)
-      )
-    }
-  })
+  const { disabled, formState, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(props, {
+      close: function () {
+        emit<CloseUIHandler>('CLOSE_UI')
+      },
+      submit: function ({ width, height, resizeWithConstraints }: FormState) {
+        emit<SubmitHandler>('SUBMIT', { height, resizeWithConstraints, width })
+      },
+      validate: function ({ width, height }: FormState) {
+        return (
+          (width !== null && width !== MIXED_NUMBER && width !== 0) ||
+          (height !== null && height !== MIXED_NUMBER && height !== 0)
+        )
+      }
+    })
   const [widthString, setWidthString] = useState(
     mapTextboxNumericValueToString(formState.width)
   )
