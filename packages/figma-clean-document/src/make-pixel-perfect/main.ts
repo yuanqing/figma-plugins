@@ -1,7 +1,7 @@
 import { pluralize } from '@create-figma-plugin/utilities'
 
-import { mainFactory } from '../utilities/main-factory'
-import { makePixelPerfect } from '../utilities/make-pixel-perfect'
+import { mainFactory } from '../utilities/main-factory.js'
+import { makePixelPerfect } from '../utilities/make-pixel-perfect.js'
 
 export default mainFactory({
   createFailureMessage: function (scope: string) {

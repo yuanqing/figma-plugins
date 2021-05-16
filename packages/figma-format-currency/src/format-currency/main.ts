@@ -14,15 +14,15 @@ import {
 import {
   CloseUIHandler,
   SelectionChangedHandler
-} from '../convert-currency/utilities/types'
-import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
-import { defaultSettings, settingsKey } from '../utilities/settings'
+} from '../convert-currency/utilities/types.js'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes.js'
+import { defaultSettings, settingsKey } from '../utilities/settings.js'
 import {
   CurrencyFormat,
   LocaleCode,
   TextNodePlainObject
-} from '../utilities/types'
-import { FormatCurrencyProps, SubmitHandler } from './utilities/types'
+} from '../utilities/types.js'
+import { FormatCurrencyProps, SubmitHandler } from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const textNodes = getSelectedTextNodes()

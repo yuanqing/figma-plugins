@@ -1,6 +1,6 @@
 import { MIXED_NUMBER } from '@create-figma-plugin/ui'
 
-import { Dimensions } from './types'
+import { Dimensions } from './types.js'
 
 export function computeDimensions(nodes: Array<SceneNode>): Dimensions {
   if (nodes.length === 0) {

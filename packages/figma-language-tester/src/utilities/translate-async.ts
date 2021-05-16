@@ -1,6 +1,6 @@
 import pMemoize from 'p-memoize'
 
-import { LanguageKey, TextNodePlainObject } from './types'
+import { LanguageKey, TextNodePlainObject } from './types.js'
 
 export const translateAsync = pMemoize(async function (
   { characters, id }: TextNodePlainObject,

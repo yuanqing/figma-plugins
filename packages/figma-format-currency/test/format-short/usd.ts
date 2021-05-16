@@ -1,6 +1,6 @@
 import { test } from 'tap'
 
-import { formatShort } from '../../src/utilities/format-currency/format-short'
+import { formatShort } from '../../src/utilities/format-currency/format-short.js'
 
 test('$1', function (t) {
   t.plan(7)

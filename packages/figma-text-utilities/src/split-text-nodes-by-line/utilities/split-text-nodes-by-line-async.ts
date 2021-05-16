@@ -3,7 +3,7 @@ import {
   loadFontsAsync
 } from '@create-figma-plugin/utilities'
 
-import { copyTextNodeStyles } from './copy-text-node-styles'
+import { copyTextNodeStyles } from './copy-text-node-styles.js'
 
 export async function splitTextNodesByLineAsync(
   nodes: Array<TextNode>

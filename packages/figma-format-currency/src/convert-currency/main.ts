@@ -11,19 +11,19 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
-import { defaultSettings, settingsKey } from '../utilities/settings'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes.js'
+import { defaultSettings, settingsKey } from '../utilities/settings.js'
 import {
   CurrencyCode,
   LocaleCode,
   TextNodePlainObject
-} from '../utilities/types'
+} from '../utilities/types.js'
 import {
   CloseUIHandler,
   ConvertCurrencyProps,
   SelectionChangedHandler,
   SubmitHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const textNodes = getSelectedTextNodes()

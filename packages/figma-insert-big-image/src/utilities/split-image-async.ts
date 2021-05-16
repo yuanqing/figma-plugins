@@ -1,5 +1,5 @@
 /* global FileReader */
-import { ImageNodePlainObject } from './types'
+import { ImageNodePlainObject } from './types.js'
 
 // This function uses the DOM and must be called from the UI context
 export async function splitImageAsync(

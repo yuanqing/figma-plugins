@@ -1,7 +1,7 @@
-import { addCurrencyCodeSuffix } from '../add-currency-code-suffix'
-import { formatCurrencyByLocale } from '../format-currency-by-locale'
-import { transformCurrencies } from '../transform-currencies/transform-currencies'
-import { LocaleCode } from '../types'
+import { addCurrencyCodeSuffix } from '../add-currency-code-suffix.js'
+import { formatCurrencyByLocale } from '../format-currency-by-locale.js'
+import { transformCurrencies } from '../transform-currencies/transform-currencies.js'
+import { LocaleCode } from '../types.js'
 
 export function formatExplicit(string: string, localeCode: LocaleCode): string {
   return transformCurrencies(

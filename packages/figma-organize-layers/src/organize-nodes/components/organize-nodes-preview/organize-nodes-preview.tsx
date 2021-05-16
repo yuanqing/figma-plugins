@@ -1,7 +1,7 @@
 import { Preview } from '@create-figma-plugin/ui'
 import { h, JSX } from 'preact'
 
-import { Group, NodePlainObject } from '../../utilities/types'
+import { Group, NodePlainObject } from '../../utilities/types.js'
 import styles from './organize-nodes-preview.css'
 
 export function OrganizeNodesPreview(props: {

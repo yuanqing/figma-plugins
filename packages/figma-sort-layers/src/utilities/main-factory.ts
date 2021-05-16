@@ -5,7 +5,7 @@ import {
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
 
-import { MainFactoryOptions } from './types'
+import { MainFactoryOptions } from './types.js'
 
 export function mainFactory({
   sortNodes,

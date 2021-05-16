@@ -1,4 +1,4 @@
-import { GroupDefinition } from '../../utilities/types'
+import { GroupDefinition } from '../../utilities/types.js'
 
 export function extractGroupName(
   layerName: string,

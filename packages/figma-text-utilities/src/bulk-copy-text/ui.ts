@@ -3,7 +3,7 @@ import { emit, once } from '@create-figma-plugin/utilities'
 import {
   CopyStringToClipboardRequest,
   CopyStringToClipboardResult
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default function (): void {
   once<CopyStringToClipboardRequest>(

@@ -1,6 +1,9 @@
 import { emit, once, showUI } from '@create-figma-plugin/utilities'
 
-import { ReadClipboardStringRequest, ReadClipboardStringResult } from './types'
+import {
+  ReadClipboardStringRequest,
+  ReadClipboardStringResult
+} from './types.js'
 
 export async function readClipboardContentsAsync(): Promise<string> {
   return new Promise(function (resolve) {

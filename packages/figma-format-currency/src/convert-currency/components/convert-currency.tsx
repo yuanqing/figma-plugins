@@ -11,25 +11,25 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h, JSX } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import { Preview } from '../../components/preview/preview'
-import { convertCurrency } from '../../utilities/convert-currency/convert-currency'
-import { currencies } from '../../utilities/data/currencies'
-import { locales } from '../../utilities/data/locales'
-import { moneyRegex } from '../../utilities/money-regex'
+import { Preview } from '../../components/preview/preview.js'
+import { convertCurrency } from '../../utilities/convert-currency/convert-currency.js'
+import { currencies } from '../../utilities/data/currencies.js'
+import { locales } from '../../utilities/data/locales.js'
+import { moneyRegex } from '../../utilities/money-regex.js'
 import {
   CurrencyCode,
   LocaleCode,
   PreviewItem,
   Status,
   TextNodePlainObject
-} from '../../utilities/types'
+} from '../../utilities/types.js'
 import {
   CloseUIHandler,
   ConvertCurrencyProps,
   FormState,
   SelectionChangedHandler,
   SubmitHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 const currencyCodeOptions = Object.keys(currencies).map(function (
   currencyCode: string

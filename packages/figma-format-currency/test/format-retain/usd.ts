@@ -1,6 +1,6 @@
 import { test } from 'tap'
 
-import { formatRetain } from '../../src/utilities/format-currency/format-retain'
+import { formatRetain } from '../../src/utilities/format-currency/format-retain.js'
 
 test('$1', function (t) {
   t.plan(7)

@@ -1,7 +1,7 @@
 import { cloneObject, insertBeforeNode } from '@create-figma-plugin/utilities'
 
-import { copyAttributes } from './copy-attributes'
-import { getReferenceNode } from './get-reference-node'
+import { copyAttributes } from './copy-attributes.js'
+import { getReferenceNode } from './get-reference-node.js'
 
 export function createComponent(node: SceneNode): ComponentNode {
   const component = figma.createComponent()

@@ -1,8 +1,9 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "yarn run clean && lerna run --stream build",
-    "bump-dependencies": "ts-node --project tsconfig.shared.json scripts/bump-dependencies.ts",
+    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts",
     "clean": "lerna run --parallel --stream clean && rm -rf '*.log'",
     "fix": "lerna run --parallel --stream fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel --stream lint && eslint 'scripts/**/*.ts'",
@@ -16,8 +17,8 @@
     "@create-figma-plugin/tsconfig": "latest",
     "@figma/plugin-typings": "^1.19.3",
     "@types/natural-compare-lite": "^1.4.0",
-    "@types/tap": "^14.10.3",
-    "eslint": "^7.24.0",
+    "@types/tap": "^15.0.1",
+    "eslint": "^7.26.0",
     "eslint-config-yuanqing": "^0.0.5",
     "globby": "^11.0.3",
     "lerna": "^4.0.0",

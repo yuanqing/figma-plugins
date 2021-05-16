@@ -22,7 +22,7 @@ import {
   ReplaceWithComponentProps,
   SelectionChangedHandler,
   SubmitHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 import styles from './replace-with-component-instance.css'
 
 const COMPONENT_NODE_ID_ATTRIBUTE_NAME = 'data-component-node-id'

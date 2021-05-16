@@ -1,4 +1,4 @@
-import { copyPropertiesToFrame } from './copy-properties-to-frame'
+import { copyPropertiesToFrame } from './copy-properties-to-frame.js'
 
 export function convertComponentToFrame(
   node: ComponentNode | InstanceNode

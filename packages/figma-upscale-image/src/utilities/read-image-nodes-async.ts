@@ -1,4 +1,4 @@
-import { ImageNodePlainObject } from './types'
+import { ImageNodePlainObject } from './types.js'
 
 export async function readImageNodesAsync(
   nodes: Array<SceneNode>

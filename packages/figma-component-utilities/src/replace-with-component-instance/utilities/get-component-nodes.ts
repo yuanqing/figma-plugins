@@ -3,7 +3,7 @@ import {
   sortNodesByName
 } from '@create-figma-plugin/utilities'
 
-import { ComponentNodePlainObject } from './types'
+import { ComponentNodePlainObject } from './types.js'
 
 export function getComponentNodePlainObjects(): Array<ComponentNodePlainObject> {
   const components = sortNodesByName(getDocumentComponents()).reverse()

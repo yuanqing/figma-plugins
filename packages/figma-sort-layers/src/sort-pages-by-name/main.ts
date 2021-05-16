@@ -1,7 +1,7 @@
 import { formatSuccessMessage } from '@create-figma-plugin/utilities'
 
-import { sortPagesByName } from './utilities/sort-pages-by-name'
-import { updatePagesSortOrder } from './utilities/update-pages-sort-order'
+import { sortPagesByName } from './utilities/sort-pages-by-name.js'
+import { updatePagesSortOrder } from './utilities/update-pages-sort-order.js'
 
 export default function (): void {
   const result = sortPagesByName()

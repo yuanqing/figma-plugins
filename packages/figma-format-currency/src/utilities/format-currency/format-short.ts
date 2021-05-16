@@ -1,6 +1,6 @@
-import { formatCurrencyByLocale } from '../format-currency-by-locale'
-import { transformCurrencies } from '../transform-currencies/transform-currencies'
-import { LocaleCode } from '../types'
+import { formatCurrencyByLocale } from '../format-currency-by-locale.js'
+import { transformCurrencies } from '../transform-currencies/transform-currencies.js'
+import { LocaleCode } from '../types.js'
 
 export function formatShort(string: string, localeCode: LocaleCode): string {
   return transformCurrencies(

@@ -1,6 +1,6 @@
-import { isImage } from './utilities/is-image'
-import { isNodeTypeFactory } from './utilities/is-node-type-factory'
-import { mainFactory } from './utilities/main-factory'
+import { isImage } from './utilities/is-image.js'
+import { isNodeTypeFactory } from './utilities/is-node-type-factory.js'
+import { mainFactory } from './utilities/main-factory.js'
 
 export const selectComponents = mainFactory(
   'component',

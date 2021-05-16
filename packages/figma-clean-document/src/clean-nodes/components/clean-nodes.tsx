@@ -18,7 +18,7 @@ import {
   FormState,
   SelectionChangedHandler,
   SubmitHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export function CleanNodes(props: CleanNodesProps): JSX.Element {
   const {

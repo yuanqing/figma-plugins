@@ -6,7 +6,7 @@ import {
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { LanguageKey } from '../../utilities/types'
+import { LanguageKey } from '../../utilities/types.js'
 import styles from './language-item.css'
 
 export function LanguageItem(props: {

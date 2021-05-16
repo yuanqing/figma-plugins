@@ -1,4 +1,4 @@
-import { CurrencyCode } from './types'
+import { CurrencyCode } from './types.js'
 
 export function addCurrencyCodeSuffix(
   string: string,

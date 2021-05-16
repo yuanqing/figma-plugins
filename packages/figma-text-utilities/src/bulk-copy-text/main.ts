@@ -4,8 +4,8 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
-import { copyStringToClipboardAsync } from './utilities/copy-string-to-clipboard-async'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes.js'
+import { copyStringToClipboardAsync } from './utilities/copy-string-to-clipboard-async.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

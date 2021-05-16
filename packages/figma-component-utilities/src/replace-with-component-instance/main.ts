@@ -10,15 +10,15 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { getComponentNodePlainObjects } from './utilities/get-component-nodes'
-import { getSelectedNodePlainObjects } from './utilities/get-valid-selected-nodes'
-import { defaultSettings, settingsKey } from './utilities/settings'
+import { getComponentNodePlainObjects } from './utilities/get-component-nodes.js'
+import { getSelectedNodePlainObjects } from './utilities/get-valid-selected-nodes.js'
+import { defaultSettings, settingsKey } from './utilities/settings.js'
 import {
   CloseUIHandler,
   ReplaceWithComponentProps,
   SelectionChangedHandler,
   SubmitHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

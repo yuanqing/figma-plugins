@@ -15,6 +15,10 @@
     "url": "git://github.com/yuanqing/figma-plugins.git",
     "directory": "packages/figma-sort-layers"
   },
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
   "files": [
     "src"
   ],
@@ -28,7 +32,7 @@
   "dependencies": {
     "@create-figma-plugin/utilities": "latest",
     "array-shuffle": "^2.0.0",
-    "mem": "^8.1.0",
+    "mem": "^8.1.1",
     "natural-compare-lite": "^1.4.0"
   },
   "figma-plugin": {

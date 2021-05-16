@@ -1,6 +1,6 @@
 import { EventHandler } from '@create-figma-plugin/utilities'
 
-import { LanguageKey } from '../../utilities/types'
+import { LanguageKey } from '../../utilities/types.js'
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'

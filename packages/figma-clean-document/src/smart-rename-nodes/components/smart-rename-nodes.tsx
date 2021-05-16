@@ -15,7 +15,7 @@ import {
   FormState,
   SmartRenameNodesProps,
   SubmitHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
   const {

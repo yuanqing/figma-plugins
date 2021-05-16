@@ -11,23 +11,23 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { ComponentChildren, Fragment, h, JSX } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import { Preview } from '../../components/preview/preview'
-import { locales } from '../../utilities/data/locales'
-import { formatCurrency } from '../../utilities/format-currency/format-currency'
-import { moneyRegex } from '../../utilities/money-regex'
+import { Preview } from '../../components/preview/preview.js'
+import { locales } from '../../utilities/data/locales.js'
+import { formatCurrency } from '../../utilities/format-currency/format-currency.js'
+import { moneyRegex } from '../../utilities/money-regex.js'
 import {
   CurrencyFormat,
   LocaleCode,
   PreviewItem,
   Status,
   TextNodePlainObject
-} from '../../utilities/types'
+} from '../../utilities/types.js'
 import {
   FormState,
   SelectionChangedHandler,
   SubmitHandler
-} from '../utilities/types'
-import { FormatCurrencyProps } from '../utilities/types'
+} from '../utilities/types.js'
+import { FormatCurrencyProps } from '../utilities/types.js'
 
 const currencyFormatOptions: Array<{
   children: ComponentChildren

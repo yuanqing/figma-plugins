@@ -1,12 +1,12 @@
 import { emit, once } from '@create-figma-plugin/utilities'
 
-import { translateAsync } from '../utilities/translate-async'
+import { translateAsync } from '../utilities/translate-async.js'
 import {
   LanguageKey,
   TextNodePlainObject,
   TranslateRequestHandler,
   TranslateResultHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export default function (): void {
   once<TranslateRequestHandler>(

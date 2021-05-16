@@ -1,7 +1,7 @@
 /* eslint-disable no-console, sort-keys-fix/sort-keys-fix */
 
-import { languages } from '../src/utilities/languages'
-import { LanguageKey } from '../src/utilities/types'
+import { languages } from '../src/utilities/languages.js'
+import { LanguageKey } from '../src/utilities/types.js'
 
 function main() {
   const result = []

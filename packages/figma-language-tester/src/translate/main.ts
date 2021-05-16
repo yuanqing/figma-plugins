@@ -1,4 +1,4 @@
-import { mainFactory } from './main-factory'
+import { mainFactory } from './main-factory.js'
 
 export const af = mainFactory('af')
 export const sq = mainFactory('sq')

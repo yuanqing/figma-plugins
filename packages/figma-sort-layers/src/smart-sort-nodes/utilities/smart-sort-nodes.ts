@@ -1,5 +1,5 @@
-import { SortNodes } from '../../utilities/types'
-import { smartSortChildNodes } from './smart-sort-child-nodes'
+import { SortNodes } from '../../utilities/types.js'
+import { smartSortChildNodes } from './smart-sort-child-nodes.js'
 
 export function smartSortNodes(nodes: Array<SceneNode>): ReturnType<SortNodes> {
   const parent = nodes[0].parent

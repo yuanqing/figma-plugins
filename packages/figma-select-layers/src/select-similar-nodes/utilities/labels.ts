@@ -1,4 +1,4 @@
-import { NodeAttributes } from './types'
+import { NodeAttributes } from './types.js'
 
 export const labels: Record<keyof NodeAttributes, string> = {
   'blendMode': 'Blend mode',

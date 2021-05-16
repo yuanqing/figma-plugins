@@ -1,7 +1,7 @@
-import { currencies } from '../data/currencies'
-import { SYMBOL_INDEX } from '../data/currencies-index'
-import { CurrencyCode, LocaleCode } from '../types'
-import { isValidCurrencyCode } from './is-valid-currency-key'
+import { currencies } from '../data/currencies.js'
+import { SYMBOL_INDEX } from '../data/currencies-index.js'
+import { CurrencyCode, LocaleCode } from '../types.js'
+import { isValidCurrencyCode } from './is-valid-currency-key.js'
 
 export function mapCurrencySymbolToCurrencyCode(
   currencySymbol: string,

@@ -4,7 +4,7 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-import { resetInstanceSize } from './utilities/reset-instance-size'
+import { resetInstanceSize } from './utilities/reset-instance-size.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

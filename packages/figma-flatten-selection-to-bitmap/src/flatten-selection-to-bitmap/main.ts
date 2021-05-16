@@ -12,14 +12,14 @@ import {
 import { createImageNode } from 'figma-insert-big-image/src/utilities/create-image-node'
 import { ImageNodePlainObject } from 'figma-insert-big-image/src/utilities/types'
 
-import { defaultSettings, settingsKey } from '../utilities/settings'
-import { createGroupNode } from './utilities/create-group-node'
-import { exportNodeAsync } from './utilities/export-node-async'
-import { replaceNodesWithinInstancesWithClones } from './utilities/replace-nodes-within-instances-with-clones'
+import { defaultSettings, settingsKey } from '../utilities/settings.js'
+import { createGroupNode } from './utilities/create-group-node.js'
+import { exportNodeAsync } from './utilities/export-node-async.js'
+import { replaceNodesWithinInstancesWithClones } from './utilities/replace-nodes-within-instances-with-clones.js'
 import {
   SplitImageRequestHandler,
   SplitImageResultHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

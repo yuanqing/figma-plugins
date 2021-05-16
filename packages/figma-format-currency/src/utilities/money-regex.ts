@@ -1,4 +1,4 @@
-import { EN_DASH, HYPHEN, MINUS, SPACE } from './special-characters'
+import { EN_DASH, HYPHEN, MINUS, SPACE } from './special-characters.js'
 
 const CURRENCY_CODE = '[A-Z]{3}'
 const CURRENCY_SYMBOL = '[A-Za-z$₵£¥₦₩₪₫€₱₹.]{1,4}'

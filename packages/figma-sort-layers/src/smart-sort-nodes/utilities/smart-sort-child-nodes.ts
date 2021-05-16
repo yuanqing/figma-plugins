@@ -1,5 +1,5 @@
-import { SortNodes } from '../../utilities/types'
-import { memoizedComputeBoundingBox } from './memoized-compute-bounding-box'
+import { SortNodes } from '../../utilities/types.js'
+import { memoizedComputeBoundingBox } from './memoized-compute-bounding-box.js'
 
 export function smartSortChildNodes(
   node: PageNode | SceneNode,

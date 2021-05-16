@@ -6,8 +6,8 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-import { OFFSET } from '../utilities/constants'
-import { createComponent } from './utilities/create-component'
+import { OFFSET } from '../utilities/constants.js'
+import { createComponent } from './utilities/create-component.js'
 
 export default async function (): Promise<void> {
   const nodes = figma.currentPage.selection

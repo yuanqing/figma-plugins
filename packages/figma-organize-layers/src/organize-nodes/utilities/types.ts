@@ -1,6 +1,6 @@
 import { EventHandler } from '@create-figma-plugin/utilities'
 
-import { GroupDefinition, Settings } from '../../utilities/types'
+import { GroupDefinition, Settings } from '../../utilities/types.js'
 
 export type Group<T> = {
   name: null | string

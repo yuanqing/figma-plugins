@@ -1,7 +1,7 @@
 import { createClassName } from '@create-figma-plugin/ui'
 import { Fragment, h, JSX } from 'preact'
 
-import { PreviewItem, Status } from '../../utilities/types'
+import { PreviewItem, Status } from '../../utilities/types.js'
 import style from './preview.css'
 
 export function Preview(props: {

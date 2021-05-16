@@ -9,16 +9,16 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { computeDimensions } from './utilities/compute-dimensions'
-import { getValidSelectedNodes } from './utilities/get-valid-selected-nodes'
-import { setNodesSize } from './utilities/set-nodes-size'
-import { defaultSettings, settingsKey } from './utilities/settings'
+import { computeDimensions } from './utilities/compute-dimensions.js'
+import { getValidSelectedNodes } from './utilities/get-valid-selected-nodes.js'
+import { setNodesSize } from './utilities/set-nodes-size.js'
+import { defaultSettings, settingsKey } from './utilities/settings.js'
 import {
   CloseUIHandler,
   FormState,
   SelectionChangedHandler,
   SubmitHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const nodes = getValidSelectedNodes()

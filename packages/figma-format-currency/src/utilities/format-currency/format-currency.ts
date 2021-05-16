@@ -1,7 +1,7 @@
-import { CurrencyFormat, LocaleCode } from '../types'
-import { formatExplicit } from './format-explicit'
-import { formatRetain } from './format-retain'
-import { formatShort } from './format-short'
+import { CurrencyFormat, LocaleCode } from '../types.js'
+import { formatExplicit } from './format-explicit.js'
+import { formatRetain } from './format-retain.js'
+import { formatShort } from './format-short.js'
 
 const currencyFormatters: Record<
   CurrencyFormat,

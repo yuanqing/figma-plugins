@@ -1,4 +1,4 @@
-import { Resolution } from '../../utilities/types'
+import { Resolution } from '../../utilities/types.js'
 
 export async function exportNodeAsync(
   node: SceneNode,

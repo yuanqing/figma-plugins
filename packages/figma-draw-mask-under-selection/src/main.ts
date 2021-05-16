@@ -6,7 +6,7 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-import { createMaskGroup } from './utilities/create-mask-group'
+import { createMaskGroup } from './utilities/create-mask-group.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

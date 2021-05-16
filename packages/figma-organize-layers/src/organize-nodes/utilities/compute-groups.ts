@@ -1,8 +1,8 @@
 import { sortNodesByName } from '@create-figma-plugin/utilities'
 
-import { GroupDefinition } from '../../utilities/types'
-import { extractGroupName } from './extract-group-name'
-import { Group } from './types'
+import { GroupDefinition } from '../../utilities/types.js'
+import { extractGroupName } from './extract-group-name.js'
+import { Group } from './types.js'
 
 export function computeGroups(
   nodes: Array<SceneNode>,

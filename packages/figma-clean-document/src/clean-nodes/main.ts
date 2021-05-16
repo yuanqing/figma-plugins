@@ -11,19 +11,19 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { cleanNodes } from '../utilities/clean-nodes'
-import { getScope } from '../utilities/get-scope'
-import { getSiblingNodes } from '../utilities/get-sibling-nodes'
-import { defaultSettings, settingsKey } from '../utilities/settings'
-import { showLoadingNotification } from '../utilities/show-loading-notification'
-import { smartSortNodes } from '../utilities/smart-sort-nodes'
-import { Settings } from '../utilities/types'
+import { cleanNodes } from '../utilities/clean-nodes.js'
+import { getScope } from '../utilities/get-scope.js'
+import { getSiblingNodes } from '../utilities/get-sibling-nodes.js'
+import { defaultSettings, settingsKey } from '../utilities/settings.js'
+import { showLoadingNotification } from '../utilities/show-loading-notification.js'
+import { smartSortNodes } from '../utilities/smart-sort-nodes.js'
+import { Settings } from '../utilities/types.js'
 import {
   CleanNodesProps,
   CloseUIHandler,
   SelectionChangedHandler,
   SubmitHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.children.length === 0) {

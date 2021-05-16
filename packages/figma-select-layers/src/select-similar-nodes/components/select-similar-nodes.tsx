@@ -10,7 +10,7 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h, JSX } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 
-import { filterNodeAttributesByName } from '../utilities/filter-node-attributes-by-name'
+import { filterNodeAttributesByName } from '../utilities/filter-node-attributes-by-name.js'
 import {
   CloseUIHandler,
   FormState,
@@ -18,8 +18,8 @@ import {
   SelectionChangedHandler,
   SelectSimilarNodesProps,
   SubmitHandler
-} from '../utilities/types'
-import { NodeAttributesSelectableItems } from './node-attributes-selectable-items'
+} from '../utilities/types.js'
+import { NodeAttributesSelectableItems } from './node-attributes-selectable-items.js'
 import styles from './select-similar-nodes.css'
 
 export function SelectSimilarNodes(

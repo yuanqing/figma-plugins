@@ -8,7 +8,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings, settingsKey } from './settings'
+import { defaultSettings, settingsKey } from './settings.js'
 import {
   CloseUIHandler,
   FormState,
@@ -16,7 +16,7 @@ import {
   SelectionChangedHandler,
   Settings,
   SubmitHandler
-} from './types'
+} from './types.js'
 
 export function mainFactory({
   direction,

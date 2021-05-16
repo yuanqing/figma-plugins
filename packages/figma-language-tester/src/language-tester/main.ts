@@ -9,21 +9,21 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
-import { languages } from '../utilities/languages'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes.js'
+import { languages } from '../utilities/languages.js'
 import {
   LanguageKey,
   TextNodePlainObject,
   TranslateRequestHandler,
   TranslateResultHandler
-} from '../utilities/types'
-import { updateTextNodesAsync } from '../utilities/update-text-nodes-async'
+} from '../utilities/types.js'
+import { updateTextNodesAsync } from '../utilities/update-text-nodes-async.js'
 import {
   CloseUIHandler,
   ResetLanguageHandler,
   SelectionChangedHandler,
   SetLanguageHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const textNodes = getSelectedTextNodes()

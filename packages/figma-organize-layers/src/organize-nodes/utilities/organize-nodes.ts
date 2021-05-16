@@ -3,10 +3,10 @@ import {
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
 
-import { GroupDefinition } from '../../utilities/types'
-import { arrangeGroups } from './arrange-groups'
-import { computeGroups } from './compute-groups'
-import { Group } from './types'
+import { GroupDefinition } from '../../utilities/types.js'
+import { arrangeGroups } from './arrange-groups.js'
+import { computeGroups } from './compute-groups.js'
+import { Group } from './types.js'
 
 export function organizeNodes(
   nodes: Array<SceneNode>,

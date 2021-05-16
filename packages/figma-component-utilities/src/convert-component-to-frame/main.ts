@@ -4,7 +4,7 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-import { convertComponentToFrame } from './utilities/convert-component-to-frame'
+import { convertComponentToFrame } from './utilities/convert-component-to-frame.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

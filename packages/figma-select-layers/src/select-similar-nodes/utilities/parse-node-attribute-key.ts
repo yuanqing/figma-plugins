@@ -1,4 +1,4 @@
-import { NodeAttributes } from './types'
+import { NodeAttributes } from './types.js'
 
 export function parseNodeAttributeKey(
   attributeKey: keyof NodeAttributes

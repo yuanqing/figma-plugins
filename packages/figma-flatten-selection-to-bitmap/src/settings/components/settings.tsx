@@ -14,7 +14,7 @@ import {
   FormState,
   SettingsProps,
   SubmitHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export function Settings(props: SettingsProps): JSX.Element {
   const {

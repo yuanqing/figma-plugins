@@ -8,15 +8,15 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
-import { languages } from '../utilities/languages'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes.js'
+import { languages } from '../utilities/languages.js'
 import {
   LanguageKey,
   TextNodePlainObject,
   TranslateRequestHandler,
   TranslateResultHandler
-} from '../utilities/types'
-import { updateTextNodesAsync } from '../utilities/update-text-nodes-async'
+} from '../utilities/types.js'
+import { updateTextNodesAsync } from '../utilities/update-text-nodes-async.js'
 
 export function mainFactory(languageKey: LanguageKey) {
   return async function (): Promise<void> {

@@ -16,7 +16,7 @@ import {
   FormState,
   SelectionChangedHandler,
   SubmitHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export function DrawSliceOverSelection(
   props: DrawSliceOverSelectionProps

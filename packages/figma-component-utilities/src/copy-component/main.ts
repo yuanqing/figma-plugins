@@ -5,7 +5,7 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-import { OFFSET } from '../utilities/constants'
+import { OFFSET } from '../utilities/constants.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

@@ -1,9 +1,9 @@
-import { addCurrencyCodeSuffix } from '../add-currency-code-suffix'
-import { formatCurrencyByLocale } from '../format-currency-by-locale'
-import { mapCurrencyCodeToDecimalPlaces } from '../map-currency-code-to-decimal-places'
-import { transformCurrencies } from '../transform-currencies/transform-currencies'
-import { CurrencyCode, LocaleCode } from '../types'
-import { computeExchangeRate } from './compute-exchange-rate'
+import { addCurrencyCodeSuffix } from '../add-currency-code-suffix.js'
+import { formatCurrencyByLocale } from '../format-currency-by-locale.js'
+import { mapCurrencyCodeToDecimalPlaces } from '../map-currency-code-to-decimal-places.js'
+import { transformCurrencies } from '../transform-currencies/transform-currencies.js'
+import { CurrencyCode, LocaleCode } from '../types.js'
+import { computeExchangeRate } from './compute-exchange-rate.js'
 
 export function convertCurrency(
   string: string,

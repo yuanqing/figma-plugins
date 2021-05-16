@@ -9,21 +9,21 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h } from 'preact'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 
-import { languages } from '../../utilities/languages'
-import { translateAsync } from '../../utilities/translate-async'
+import { languages } from '../../utilities/languages.js'
+import { translateAsync } from '../../utilities/translate-async.js'
 import {
   LanguageKey,
   TextNodePlainObject,
   TranslateRequestHandler,
   TranslateResultHandler
-} from '../../utilities/types'
+} from '../../utilities/types.js'
 import {
   CloseUIHandler,
   ResetLanguageHandler,
   SelectionChangedHandler,
   SetLanguageHandler
-} from '../utilities/types'
-import { LanguageItem } from './language-item'
+} from '../utilities/types.js'
+import { LanguageItem } from './language-item.js'
 import styles from './language-tester.css'
 
 export function LanguageTester() {

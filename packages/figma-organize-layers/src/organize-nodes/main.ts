@@ -12,11 +12,11 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings, settingsKey } from '../utilities/settings'
-import { GroupDefinition, Settings } from '../utilities/types'
-import { computeGroups } from './utilities/compute-groups'
-import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition'
-import { organizeNodes } from './utilities/organize-nodes'
+import { defaultSettings, settingsKey } from '../utilities/settings.js'
+import { GroupDefinition, Settings } from '../utilities/types.js'
+import { computeGroups } from './utilities/compute-groups.js'
+import { computeMaximumGroupDefinition } from './utilities/compute-maximum-group-definition.js'
+import { organizeNodes } from './utilities/organize-nodes.js'
 import {
   CloseUIHandler,
   Group,
@@ -24,7 +24,7 @@ import {
   OrganizeNodesProps,
   UpdateMainStateHandler,
   UpdateUIStateHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const nodes = figma.currentPage.children.slice()

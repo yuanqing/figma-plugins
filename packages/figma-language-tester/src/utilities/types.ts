@@ -1,6 +1,6 @@
 import { EventHandler } from '@create-figma-plugin/utilities'
 
-import { languages } from './languages'
+import { languages } from './languages.js'
 
 export type LanguageKey = keyof typeof languages
 

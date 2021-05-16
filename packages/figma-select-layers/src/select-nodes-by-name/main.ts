@@ -10,15 +10,15 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings, settingsKey } from '../utilities/settings'
-import { filterNodesByName } from './utilities/filter-nodes-by-name'
+import { defaultSettings, settingsKey } from '../utilities/settings.js'
+import { filterNodesByName } from './utilities/filter-nodes-by-name.js'
 import {
   CloseUIHandler,
   SelectionChangedHandler,
   SelectNodesByNameProps,
   SelectNodesByNameSettings,
   SubmitHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const settings = await loadSettingsAsync(defaultSettings, settingsKey)

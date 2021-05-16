@@ -11,9 +11,9 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { getImageNodes } from './utilities/get-image-nodes'
-import { readImageNodesAsync } from './utilities/read-image-nodes-async'
-import { defaultSettings, settingsKey } from './utilities/settings'
+import { getImageNodes } from './utilities/get-image-nodes.js'
+import { readImageNodesAsync } from './utilities/read-image-nodes-async.js'
+import { defaultSettings, settingsKey } from './utilities/settings.js'
 import {
   CloseUIHandler,
   ImageNodePlainObject,
@@ -23,7 +23,7 @@ import {
   UpscaleImageProps,
   UpscaleImagesRequestHandler,
   UpscaleImagesResultHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const hasSelection = getImageNodes().length > 0

@@ -6,7 +6,7 @@ import {
   PreviewItem,
   Status,
   TextNodePlainObject
-} from '../../utilities/types'
+} from '../../utilities/types.js'
 
 export type ConvertCurrencyProps = {
   currencyCode: CurrencyCode

@@ -1,4 +1,4 @@
-import { LocaleCode } from './types'
+import { LocaleCode } from './types.js'
 
 const spaceRegex = /\s/
 const dollarPrefixRegex = /[A-Z]{2}(?=[$¥])/g

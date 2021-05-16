@@ -1,7 +1,7 @@
-import { deleteHiddenNodes } from './delete-hidden-nodes'
-import { makePixelPerfect } from './make-pixel-perfect'
-import { smartRenameNode } from './smart-rename-node'
-import { ungroupSingleNodeGroup } from './ungroup-single-node-group'
+import { deleteHiddenNodes } from './delete-hidden-nodes.js'
+import { makePixelPerfect } from './make-pixel-perfect.js'
+import { smartRenameNode } from './smart-rename-node.js'
+import { ungroupSingleNodeGroup } from './ungroup-single-node-group.js'
 
 export function cleanNodes(
   node: SceneNode,

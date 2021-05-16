@@ -16,7 +16,7 @@ import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h, JSX } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import { GroupDefinition } from '../../utilities/types'
+import { GroupDefinition } from '../../utilities/types.js'
 import {
   CloseUIHandler,
   FormState,
@@ -25,8 +25,8 @@ import {
   OrganizeNodesProps,
   UpdateMainStateHandler,
   UpdateUIStateHandler
-} from '../utilities/types'
-import { OrganizeNodesPreview } from './organize-nodes-preview/organize-nodes-preview'
+} from '../utilities/types.js'
+import { OrganizeNodesPreview } from './organize-nodes-preview/organize-nodes-preview.js'
 
 const groupDefinitions: Array<SegmentedControlOption<GroupDefinition>> = [
   { children: '1st /', value: 1 },

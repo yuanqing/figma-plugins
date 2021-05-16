@@ -15,14 +15,18 @@
     "url": "git://github.com/yuanqing/figma-plugins.git",
     "directory": "packages/figma-language-tester"
   },
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
   "files": [
     "src"
   ],
   "scripts": {
     "build": "yarn run clean && build-figma-plugin --minify --typecheck",
     "clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'",
-    "generate-translate-menu-config": "ts-node scripts/generate-translate-menu-config.ts",
-    "generate-translate-main-ts": "ts-node scripts/generate-translate-main-ts.ts > src/translate/main.ts",
+    "generate-translate-menu-config": "node --loader ts-node/esm scripts/generate-translate-menu-config.ts",
+    "generate-translate-main-ts": "node --loader ts-node/esm scripts/generate-translate-main-ts.ts > src/translate/main.ts",
     "fix": "eslint --fix '{scripts,src}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' '*.json'",
     "lint": "eslint '{scripts,src}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
     "watch": "yarn run clean && build-figma-plugin --watch"

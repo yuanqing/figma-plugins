@@ -1,6 +1,6 @@
 import Upscaler from 'upscaler'
 
-import { ImageNodePlainObject } from './types'
+import { ImageNodePlainObject } from './types.js'
 
 export async function upscaleImageAsync(
   imageNodePlainObject: ImageNodePlainObject,

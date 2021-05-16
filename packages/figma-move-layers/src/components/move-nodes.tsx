@@ -18,7 +18,7 @@ import {
   MoveNodesProps,
   SelectionChangedHandler,
   SubmitHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export function MoveNodes(props: MoveNodesProps): JSX.Element {
   const {

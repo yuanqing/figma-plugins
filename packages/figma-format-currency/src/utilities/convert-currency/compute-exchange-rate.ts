@@ -1,6 +1,6 @@
-import { currencies } from '../data/currencies'
-import { EXCHANGE_RATE_INDEX } from '../data/currencies-index'
-import { CurrencyCode } from '../types'
+import { currencies } from '../data/currencies.js'
+import { EXCHANGE_RATE_INDEX } from '../data/currencies-index.js'
+import { CurrencyCode } from '../types.js'
 
 export function computeExchangeRate(
   originalCurrencyCode: CurrencyCode,

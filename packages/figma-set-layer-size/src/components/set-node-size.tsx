@@ -21,7 +21,7 @@ import {
   SelectionChangedHandler,
   SetNodeSizeProps,
   SubmitHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export function SetNodeSize(props: SetNodeSizeProps): JSX.Element {
   const {

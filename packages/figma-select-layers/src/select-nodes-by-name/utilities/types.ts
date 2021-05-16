@@ -1,6 +1,6 @@
 import { EventHandler } from '@create-figma-plugin/utilities'
 
-import { Settings } from '../../utilities/types'
+import { Settings } from '../../utilities/types.js'
 
 export type SelectNodesByNameSettings = Settings['selectLayersByName']
 export type SelectNodesByNameProps = SelectNodesByNameSettings & {

@@ -5,7 +5,7 @@ import {
 } from '@create-figma-plugin/utilities'
 import { smartSortChildNodes } from 'figma-sort-layers/src/smart-sort-nodes/utilities/smart-sort-child-nodes'
 
-import { isNodeAnIllustration } from './is-node-an-illustration'
+import { isNodeAnIllustration } from './is-node-an-illustration.js'
 
 export function smartSortNodes(
   nodes: Array<SceneNode>,

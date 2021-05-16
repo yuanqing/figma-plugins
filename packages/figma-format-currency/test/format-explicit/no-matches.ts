@@ -1,6 +1,6 @@
 import { test } from 'tap'
 
-import { formatExplicit } from '../../src/utilities/format-currency/format-explicit'
+import { formatExplicit } from '../../src/utilities/format-currency/format-explicit.js'
 
 test('no matches', function (t) {
   t.plan(12)

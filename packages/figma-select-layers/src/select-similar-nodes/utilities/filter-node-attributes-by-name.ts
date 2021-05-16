@@ -1,5 +1,5 @@
-import { labels } from './labels'
-import { NodeAttributes } from './types'
+import { labels } from './labels.js'
+import { NodeAttributes } from './types.js'
 
 export function filterNodeAttributesByName(
   nodeAttributes: NodeAttributes,

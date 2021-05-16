@@ -1,7 +1,7 @@
 import { pluralize } from '@create-figma-plugin/utilities'
 
-import { mainFactory } from '../utilities/main-factory'
-import { ungroupSingleNodeGroup } from '../utilities/ungroup-single-node-group'
+import { mainFactory } from '../utilities/main-factory.js'
+import { ungroupSingleNodeGroup } from '../utilities/ungroup-single-node-group.js'
 
 export default mainFactory({
   createFailureMessage: function (scope: string) {

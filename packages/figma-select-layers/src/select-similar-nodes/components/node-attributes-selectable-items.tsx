@@ -2,9 +2,12 @@ import { SelectableItem, Text } from '@create-figma-plugin/ui'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { categoryLabels, labels } from '../utilities/labels'
-import { normalizeNodeAttributes } from '../utilities/normalize-node-attributes'
-import { NodeAttributes, NormalizedNodeAttributeItem } from '../utilities/types'
+import { categoryLabels, labels } from '../utilities/labels.js'
+import { normalizeNodeAttributes } from '../utilities/normalize-node-attributes.js'
+import {
+  NodeAttributes,
+  NormalizedNodeAttributeItem
+} from '../utilities/types.js'
 import styles from './node-attributes-selectable-items.css'
 
 export function NodeAttributesSelectableItems(props: {

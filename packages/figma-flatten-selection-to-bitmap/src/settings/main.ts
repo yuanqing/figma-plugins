@@ -6,9 +6,13 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings, settingsKey } from '../utilities/settings'
-import { Settings } from '../utilities/types'
-import { CloseUIHandler, SettingsProps, SubmitHandler } from './utilities/types'
+import { defaultSettings, settingsKey } from '../utilities/settings.js'
+import { Settings } from '../utilities/types.js'
+import {
+  CloseUIHandler,
+  SettingsProps,
+  SubmitHandler
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const settings = await loadSettingsAsync(defaultSettings, settingsKey)

@@ -1,10 +1,10 @@
-import { mapCurrencyCodeToDecimalPlaces } from '../map-currency-code-to-decimal-places'
-import { moneyRegex } from '../money-regex'
-import { MINUS } from '../special-characters'
-import { CurrencyCode, LocaleCode } from '../types'
-import { isValidCurrencyCode } from './is-valid-currency-key'
-import { isValidCurrencySymbol } from './is-valid-currency-symbol'
-import { mapCurrencySymbolToCurrencyCode } from './map-currency-symbol-to-currency-key'
+import { mapCurrencyCodeToDecimalPlaces } from '../map-currency-code-to-decimal-places.js'
+import { moneyRegex } from '../money-regex.js'
+import { MINUS } from '../special-characters.js'
+import { CurrencyCode, LocaleCode } from '../types.js'
+import { isValidCurrencyCode } from './is-valid-currency-key.js'
+import { isValidCurrencySymbol } from './is-valid-currency-symbol.js'
+import { mapCurrencySymbolToCurrencyCode } from './map-currency-symbol-to-currency-key.js'
 
 const digitRegex = /\d/
 const nonDigitRegex = /([^\d])/g

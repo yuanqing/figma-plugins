@@ -9,17 +9,17 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { CloseUIHandler } from '../select-nodes-by-name/utilities/types'
-import { defaultSettings, settingsKey } from '../utilities/settings'
-import { computeSimilarNodes } from './utilities/compute-similar-nodes'
-import { parseNodeAttributeKey } from './utilities/parse-node-attribute-key'
+import { CloseUIHandler } from '../select-nodes-by-name/utilities/types.js'
+import { defaultSettings, settingsKey } from '../utilities/settings.js'
+import { computeSimilarNodes } from './utilities/compute-similar-nodes.js'
+import { parseNodeAttributeKey } from './utilities/parse-node-attribute-key.js'
 import {
   NodeAttributes,
   SelectionChangedHandler,
   SelectSimilarNodesProps,
   SubmitHandler
-} from './utilities/types'
-import { SelectSimilarNodesSettings } from './utilities/types'
+} from './utilities/types.js'
+import { SelectSimilarNodesSettings } from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const selection = figma.currentPage.selection

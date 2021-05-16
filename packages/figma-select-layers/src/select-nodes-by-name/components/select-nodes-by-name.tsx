@@ -16,7 +16,7 @@ import {
   FormState,
   SelectNodesByNameProps,
   SubmitHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
   const {

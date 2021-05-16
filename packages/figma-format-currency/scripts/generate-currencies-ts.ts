@@ -1,10 +1,15 @@
 /* eslint-disable no-console */
+import fs from 'fs'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
-const exchangeRates = require('./data/exchange-rates')
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 type Result = Record<string, [string, number, number]>
 
 function main() {
+  const filePath = join(__dirname, 'data', 'exchange-rates.json')
+  const exchangeRates = JSON.parse(fs.readFileSync(filePath, 'utf8'))
   const result = sortObjectByKey(parse(exchangeRates))
   console.log(
     `export const currencies: Record<${createRecordKeys(

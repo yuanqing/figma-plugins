@@ -3,7 +3,7 @@ import { emit, once } from '@create-figma-plugin/utilities'
 import {
   ReadClipboardStringRequest,
   ReadClipboardStringResult
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default function (): void {
   once<ReadClipboardStringRequest>(

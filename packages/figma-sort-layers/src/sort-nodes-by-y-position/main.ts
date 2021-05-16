@@ -1,5 +1,5 @@
-import { mainFactory } from '../utilities/main-factory'
-import { sortNodesByYPosition } from './utilities/sort-nodes-by-y-position'
+import { mainFactory } from '../utilities/main-factory.js'
+import { sortNodesByYPosition } from './utilities/sort-nodes-by-y-position.js'
 
 export default mainFactory({
   sortNodes: sortNodesByYPosition,

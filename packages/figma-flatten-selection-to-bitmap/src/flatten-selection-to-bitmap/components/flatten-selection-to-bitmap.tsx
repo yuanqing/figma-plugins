@@ -12,7 +12,7 @@ import { useEffect } from 'preact/hooks'
 import {
   SplitImageRequestHandler,
   SplitImageResultHandler
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 const UI_MINIMUM_VISIBLE_TIME = 800
 

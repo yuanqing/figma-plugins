@@ -1,6 +1,6 @@
 import { compareStringArrays } from '@create-figma-plugin/utilities'
 
-import { extractNodeIds } from '../../utilities/extract-node-ids'
+import { extractNodeIds } from '../../utilities/extract-node-ids.js'
 
 export function updatePagesSortOrder(pages: Array<PageNode>): boolean {
   const document = figma.root

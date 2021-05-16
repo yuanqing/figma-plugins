@@ -1,5 +1,5 @@
-import { parseNodeAttributeKey } from './parse-node-attribute-key'
-import { NodeAttributes, NormalizedNodeAttributeItem } from './types'
+import { parseNodeAttributeKey } from './parse-node-attribute-key.js'
+import { NodeAttributes, NormalizedNodeAttributeItem } from './types.js'
 
 export function normalizeNodeAttributes(
   nodeAttributes: NodeAttributes,

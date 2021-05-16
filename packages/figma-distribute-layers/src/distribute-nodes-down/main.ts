@@ -1,5 +1,5 @@
-import { mainFactory } from '../utilities/main-factory'
-import { distributeNodesDown } from './utilities/distribute-nodes-down'
+import { mainFactory } from '../utilities/main-factory.js'
+import { distributeNodesDown } from './utilities/distribute-nodes-down.js'
 
 export default mainFactory({
   direction: 'down',

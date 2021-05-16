@@ -4,7 +4,7 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-import { splitTextNodesByLineAsync } from './utilities/split-text-nodes-by-line-async'
+import { splitTextNodesByLineAsync } from './utilities/split-text-nodes-by-line-async.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

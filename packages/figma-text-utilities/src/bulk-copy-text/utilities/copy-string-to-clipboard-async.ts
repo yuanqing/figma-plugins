@@ -3,7 +3,7 @@ import { emit, once, showUI } from '@create-figma-plugin/utilities'
 import {
   CopyStringToClipboardRequest,
   CopyStringToClipboardResult
-} from './types'
+} from './types.js'
 
 export async function copyStringToClipboardAsync(
   string: string

@@ -1,7 +1,7 @@
 import { compareStringArrays } from '@create-figma-plugin/utilities'
 import arrayShuffle from 'array-shuffle'
 
-import { extractNodeIds } from '../../utilities/extract-node-ids'
+import { extractNodeIds } from '../../utilities/extract-node-ids.js'
 
 export function randomizeNodesSortOrder(
   nodes: Array<SceneNode>

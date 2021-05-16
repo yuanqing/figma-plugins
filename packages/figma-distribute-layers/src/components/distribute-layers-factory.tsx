@@ -17,7 +17,7 @@ import {
   SelectionChangedHandler,
   SubmitHandler,
   UiFactoryOptions
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
   const directionLabel = `${direction[0].toUpperCase()}${direction.slice(1)}`

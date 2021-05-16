@@ -5,8 +5,8 @@ import {
   traverseNode
 } from '@create-figma-plugin/utilities'
 
-import { getScope } from '../utilities/get-scope'
-import { showLoadingNotification } from '../utilities/show-loading-notification'
+import { getScope } from '../utilities/get-scope.js'
+import { showLoadingNotification } from '../utilities/show-loading-notification.js'
 
 export function mainFactory(options: {
   processNode: (node: SceneNode) => boolean

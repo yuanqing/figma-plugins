@@ -1,4 +1,4 @@
-import { Group } from './types'
+import { Group } from './types.js'
 
 export function arrangeGroups(
   groups: Array<Group<SceneNode>>,

@@ -1,6 +1,6 @@
 import { loadFontsAsync } from '@create-figma-plugin/utilities'
 
-import { TextNodePlainObject } from './types'
+import { TextNodePlainObject } from './types.js'
 
 export async function updateTextNodesAsync(
   textNodePlainObjects: Array<TextNodePlainObject>

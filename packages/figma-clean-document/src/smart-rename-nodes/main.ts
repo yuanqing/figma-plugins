@@ -7,16 +7,16 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { mainFactory } from '../utilities/main-factory'
-import { defaultSettings, settingsKey } from '../utilities/settings'
-import { smartRenameNode } from '../utilities/smart-rename-node'
-import { Settings } from '../utilities/types'
+import { mainFactory } from '../utilities/main-factory.js'
+import { defaultSettings, settingsKey } from '../utilities/settings.js'
+import { smartRenameNode } from '../utilities/smart-rename-node.js'
+import { Settings } from '../utilities/types.js'
 import {
   CloseUIHandler,
   SelectionChangedHandler,
   SmartRenameNodesProps,
   SubmitHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const settings = await loadSettingsAsync(defaultSettings, settingsKey)

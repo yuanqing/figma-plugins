@@ -1,7 +1,7 @@
 import { pluralize } from '@create-figma-plugin/utilities'
 
-import { deleteHiddenNodes } from '../utilities/delete-hidden-nodes'
-import { mainFactory } from '../utilities/main-factory'
+import { deleteHiddenNodes } from '../utilities/delete-hidden-nodes.js'
+import { mainFactory } from '../utilities/main-factory.js'
 
 export default mainFactory({
   createFailureMessage: function (scope: string) {

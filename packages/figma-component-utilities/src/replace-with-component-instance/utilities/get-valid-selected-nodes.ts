@@ -3,7 +3,7 @@ import {
   isWithinInstanceNode
 } from '@create-figma-plugin/utilities'
 
-import { NodePlainObject } from './types'
+import { NodePlainObject } from './types.js'
 
 export function getSelectedNodePlainObjects(): Array<NodePlainObject> {
   const nodes = figma.currentPage.selection.filter(function (node) {

@@ -13,7 +13,7 @@ import { h, JSX } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import Upscaler from 'upscaler'
 
-import { models } from '../utilities/models'
+import { models } from '../utilities/models.js'
 import {
   CloseUIHandler,
   FormState,
@@ -24,8 +24,8 @@ import {
   UpscaleImageProps,
   UpscaleImagesRequestHandler,
   UpscaleImagesResultHandler
-} from '../utilities/types'
-import { upscaleImageAsync } from '../utilities/upscale-image-async'
+} from '../utilities/types.js'
+import { upscaleImageAsync } from '../utilities/upscale-image-async.js'
 
 export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
   const [loading, setLoading] = useState(false)

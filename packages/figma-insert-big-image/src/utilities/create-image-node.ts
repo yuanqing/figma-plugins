@@ -1,6 +1,6 @@
 import { createImagePaint } from '@create-figma-plugin/utilities'
 
-import { ImageNodePlainObject } from './types'
+import { ImageNodePlainObject } from './types.js'
 
 export function createImageNode(
   imageNodePlainObject: ImageNodePlainObject,

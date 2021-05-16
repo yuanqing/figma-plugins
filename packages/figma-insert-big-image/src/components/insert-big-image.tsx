@@ -14,12 +14,12 @@ import { emit } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
-import { splitImageAsync } from '../utilities/split-image-async'
+import { splitImageAsync } from '../utilities/split-image-async.js'
 import {
   CloseUIHandler,
   InsertBigImageHandler,
   InsertBigImageProps
-} from '../utilities/types'
+} from '../utilities/types.js'
 
 export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
   const [insertAs2x, setInsertAs2x] = useState(props.insertAs2x)

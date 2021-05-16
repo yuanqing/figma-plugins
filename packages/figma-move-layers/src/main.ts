@@ -9,14 +9,14 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { defaultSettings, settingsKey } from './utilities/settings'
+import { defaultSettings, settingsKey } from './utilities/settings.js'
 import {
   CloseUIHandler,
   MoveNodesProps,
   SelectionChangedHandler,
   Settings,
   SubmitHandler
-} from './utilities/types'
+} from './utilities/types.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

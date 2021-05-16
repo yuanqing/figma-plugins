@@ -4,8 +4,8 @@ import {
   pluralize
 } from '@create-figma-plugin/utilities'
 
-import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes'
-import { normalizeTextStyleAsync } from './utilities/normalize-text-style-async'
+import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes.js'
+import { normalizeTextStyleAsync } from './utilities/normalize-text-style-async.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {

@@ -15,12 +15,16 @@
     "url": "git://github.com/yuanqing/figma-plugins.git",
     "directory": "packages/figma-format-currency"
   },
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
   "files": [
     "src"
   ],
   "scripts": {
     "build": "yarn run clean-build && yarn run generate-currencies-ts && build-figma-plugin --minify --typecheck",
-    "generate-currencies-ts": "ts-node scripts/generate-currencies-ts.ts > src/utilities/data/currencies.ts && eslint --fix src/utilities/data/currencies.ts",
+    "generate-currencies-ts": "node --loader ts-node/esm scripts/generate-currencies-ts.ts > src/utilities/data/currencies.ts && eslint --fix src/utilities/data/currencies.ts",
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rm -rf '*.log' build",
     "clean-test": "rm -rf '*.log' .nyc_output coverage",

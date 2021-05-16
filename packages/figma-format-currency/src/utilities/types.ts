@@ -1,5 +1,5 @@
-import { currencies } from './data/currencies'
-import { locales } from './data/locales'
+import { currencies } from './data/currencies.js'
+import { locales } from './data/locales.js'
 
 export type CurrencyFormat = 'EXPLICIT' | 'RETAIN' | 'SHORT'
 export type CurrencyCode = keyof typeof currencies
