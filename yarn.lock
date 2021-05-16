@@ -208,51 +208,52 @@
     arrify "^1.0.1"
 
 "@create-figma-plugin/build@latest":
-  version "0.0.85-alpha.8"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.85-alpha.8.tgz#50d0dca5a2cb2de7acbf11c6189b0146b47909db"
-  integrity sha512-cGipTHk1XsXIVRFrNjs+evpw8LbeYwFgHpxipRvZlbp/6rVMPRZF20Gbp6ps/L7o4ULvb4yvDyOEB5skuyq5QQ==
+  version "0.0.85-alpha.9"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/build/-/build-0.0.85-alpha.9.tgz#a95ea2a293e6d6f0e1eb0c3f31eae89e8be50013"
+  integrity sha512-mBSUZ6NWKoGoJE2Tt2zteEBtJ5JDVkRu5z5GTO+PaCTwM96brTrV+a2TAVLSbLqxI7zqOpriIHR1WJ4XUuZBrg==
   dependencies:
-    "@create-figma-plugin/common" "^0.0.85-alpha.8"
+    "@create-figma-plugin/common" "^0.0.85-alpha.9"
     chokidar "^3.5.1"
     cssnano "^5.0.2"
     esbuild "^0.11.20"
-    execa "^5.0.0"
     find-up "^5.0.0"
     fs-extra "^10.0.0"
     globby "^11.0.3"
+    indent-string "^5.0.0"
     kleur "^4.1.4"
     postcss "^8.2.15"
     postcss-modules "^4.0.0"
     rev-hash "^3.0.0"
     sade "^1.7.4"
     temp-write "^5.0.0"
+    tempy "^1.0.1"
     typed-css-modules "^0.6.8"
 
-"@create-figma-plugin/common@^0.0.85-alpha.8":
-  version "0.0.85-alpha.8"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.85-alpha.8.tgz#0f37283bc6a15738cd203c4399cfa591b6cb8d51"
-  integrity sha512-Mezg6DY8vNIVy3eumLii0PkN3w+J2CGas/zuI5w0KiPxoGHmHv5dq8PtOhjVJk8higUOS5WwoCNtv70r7DciSw==
+"@create-figma-plugin/common@^0.0.85-alpha.9":
+  version "0.0.85-alpha.9"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/common/-/common-0.0.85-alpha.9.tgz#951c9f78477b02dd588165c901d7943b0a39f58c"
+  integrity sha512-p001JfJm3/uuyNrlOXmzUlAzcQf3WJyNqIjCJ1FTV4mB4fyCcTmKY1NFfAOpQahNoATUVawBRb1j5Mt+LgYwsA==
   dependencies:
     "@sindresorhus/slugify" "2.1.0"
     fs-extra "^10.0.0"
     kleur "^4.1.4"
 
 "@create-figma-plugin/tsconfig@latest":
-  version "0.0.85-alpha.8"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/tsconfig/-/tsconfig-0.0.85-alpha.8.tgz#3f1624c8a693318d18d8deab0dddf81548d1171b"
-  integrity sha512-X8TUPHD8SRSz+IcreP8yu1MeZFKRCYWIQ3AFYn8OHAEWyO6VLqdu2FaM3ZwcNPCRtTyQfjGbnTSPBNKbG5dVUQ==
+  version "0.0.85-alpha.9"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/tsconfig/-/tsconfig-0.0.85-alpha.9.tgz#5de973ee83fd6a9d1ac3dfe0adf13ecc9b167991"
+  integrity sha512-fc6bd+fgPzDgUz1bMP7kJfIRbYJx3wHrve6vJLSDFHg7wOAiDWLzaoYHmya7z0CQg9Kn4l37lBajmQhFNv4s4g==
 
 "@create-figma-plugin/ui@latest":
-  version "0.0.85-alpha.8"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/ui/-/ui-0.0.85-alpha.8.tgz#f060c5a02d69c79ba002de0b9849fee3e0061534"
-  integrity sha512-LrBKbu0/6w2UOGKb1c9FIR3GXc9VI0jrkcjzccifdq/ftEV+Wac0K+TdTbmeZZPPNA0X+YFHnrtcKjGOXQ/f5Q==
+  version "0.0.85-alpha.9"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/ui/-/ui-0.0.85-alpha.9.tgz#5faf81765e985467c623d66313faeeb87c760986"
+  integrity sha512-KA/st/l8P7J4lH52URr5PYpqTaOk24EzypF+zbSXcgWqURmROa5ZjjA3sdFwSlMbTfQuKvjbP/SW4Of2L3uKXg==
   dependencies:
-    "@create-figma-plugin/utilities" "^0.0.85-alpha.8"
+    "@create-figma-plugin/utilities" "^0.0.85-alpha.9"
 
-"@create-figma-plugin/utilities@^0.0.85-alpha.8", "@create-figma-plugin/utilities@latest":
-  version "0.0.85-alpha.8"
-  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.85-alpha.8.tgz#c595d6f64195454bdb41d4e294ae8c6d4e8ca68c"
-  integrity sha512-2fslUFFgY2tApn4Rs3kkGQUxQiJr8Sx9ckYoN1AaTQCAMa4EseTIuzyhxQxXZ4MoSYLMJ4YGCHZiyXNNNJEDXg==
+"@create-figma-plugin/utilities@^0.0.85-alpha.9", "@create-figma-plugin/utilities@latest":
+  version "0.0.85-alpha.9"
+  resolved "https://registry.yarnpkg.com/@create-figma-plugin/utilities/-/utilities-0.0.85-alpha.9.tgz#07b5c3a7e282ee5ae82d4a69f0b2b16cfe1c621a"
+  integrity sha512-ilZWfLTedBFjpHHxdjQQp/wpMZULPRmWreBj+13LaKyq/6XXKUeesS+JXHSfHjQFoxGPmB51CH2VJoNDdstlMA==
   dependencies:
     natural-compare-lite "1.4.0"
 
@@ -4531,6 +4532,11 @@ indent-string@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-4.0.0.tgz#624f8f4497d619b2d9768531d58f4122854d7251"
   integrity sha512-EdDDZu4A2OyIK7Lr/2zG+w5jmbuk1DVBnEwREQvBzspBJkCEbRa8GxU1lghYcaGJCnRWibjDXlq779X1/y5xwg==
+
+indent-string@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-5.0.0.tgz#4fd2980fccaf8622d14c64d694f4cf33c81951a5"
+  integrity sha512-m6FAo/spmsW2Ab2fU35JTYwtOKa2yAwXSwgjSv1TJzh4Mh7mC3lzAOVLBprb72XsTrgkEIsl7YrFNAiDiRhIGg==
 
 indexes-of@^1.0.1:
   version "1.0.1"
@@ -8961,6 +8967,17 @@ temp-write@^5.0.0:
     temp-dir "^2.0.0"
     uuid "^8.3.2"
 
+tempy@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/tempy/-/tempy-1.0.1.tgz#30fe901fd869cfb36ee2bd999805aa72fbb035de"
+  integrity sha512-biM9brNqxSc04Ee71hzFbryD11nX7VPhQQY32AdDmjFvodsRFz/3ufeoTZ6uYkRFfGo188tENcASNs3vTdsM0w==
+  dependencies:
+    del "^6.0.0"
+    is-stream "^2.0.0"
+    temp-dir "^2.0.0"
+    type-fest "^0.16.0"
+    unique-string "^2.0.0"
+
 tensor-as-base64@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/tensor-as-base64/-/tensor-as-base64-0.1.1.tgz#8ca71e14630f620401c06d492da0a38aadc08024"
@@ -9162,6 +9179,11 @@ type-fest@^0.13.1:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.13.1.tgz#0172cb5bce80b0bd542ea348db50c7e21834d934"
   integrity sha512-34R7HTnG0XIJcBSn5XhDd7nNFPRcXYRZrBB2O2jdKqYODldSzBAqzsWoZYYvduky73toYS/ESqxPvkDf/F0XMg==
+
+type-fest@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.16.0.tgz#3240b891a78b0deae910dbeb86553e552a148860"
+  integrity sha512-eaBzG6MxNzEn9kiwvtre90cXaNLkmadMWa1zQMs3XORCXNbsH/OewwbxC5ia9dCxIxnTAsSxXJaa/p5y8DlvJg==
 
 type-fest@^0.18.0:
   version "0.18.1"
