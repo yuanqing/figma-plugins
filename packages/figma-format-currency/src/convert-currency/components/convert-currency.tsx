@@ -43,62 +43,60 @@ const localeCodeOptions = Object.keys(locales).map(function (
 })
 
 export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
-  const {
-    disabled,
-    formState,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(
-    { ...props, previewItems: [], status: 'OK' },
-    {
-      close: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      submit: function ({
-        currencyCode,
-        roundNumbers,
-        localeCode,
-        textNodePlainObjects
-      }: FormState) {
-        if (currencyCode === null) {
-          throw new Error('`currencyCode` is `null`')
-        }
-        if (localeCode === null) {
-          throw new Error('`localeCode` is `null`')
-        }
-        const options = {
+  const { disabled, formState, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(
+      { ...props, previewItems: [], status: 'OK' },
+      {
+        close: function () {
+          emit<CloseUIHandler>('CLOSE_UI')
+        },
+        submit: function ({
+          currencyCode,
+          roundNumbers,
+          localeCode,
+          textNodePlainObjects
+        }: FormState) {
+          if (currencyCode === null) {
+            throw new Error('`currencyCode` is `null`')
+          }
+          if (localeCode === null) {
+            throw new Error('`localeCode` is `null`')
+          }
+          const options = {
+            currencyCode,
+            localeCode,
+            roundNumbers
+          }
+          const result: Array<TextNodePlainObject> = []
+          for (const { id, characters } of textNodePlainObjects) {
+            result.push({
+              characters: convertCurrency(characters, options),
+              id
+            })
+          }
+          emit<SubmitHandler>('SUBMIT', result, options)
+        },
+        transform: function ({
+          textNodePlainObjects,
           currencyCode,
           localeCode,
           roundNumbers
+        }: FormState): FormState {
+          const { previewItems, status } = computePreview(
+            textNodePlainObjects,
+            {
+              currencyCode,
+              localeCode,
+              roundNumbers
+            }
+          )
+          return { ...formState, previewItems, status }
+        },
+        validate: function ({ previewItems, status }: FormState) {
+          return status === 'OK' && previewItems.length > 0
         }
-        const result: Array<TextNodePlainObject> = []
-        for (const { id, characters } of textNodePlainObjects) {
-          result.push({
-            characters: convertCurrency(characters, options),
-            id
-          })
-        }
-        emit<SubmitHandler>('SUBMIT', result, options)
-      },
-      transform: function ({
-        textNodePlainObjects,
-        currencyCode,
-        localeCode,
-        roundNumbers
-      }: FormState): FormState {
-        const { previewItems, status } = computePreview(textNodePlainObjects, {
-          currencyCode,
-          localeCode,
-          roundNumbers
-        })
-        return { ...formState, previewItems, status }
-      },
-      validate: function ({ previewItems, status }: FormState) {
-        return status === 'OK' && previewItems.length > 0
       }
-    }
-  )
+    )
   useEffect(
     function () {
       return on<SelectionChangedHandler>(
@@ -110,13 +108,8 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
     },
     [setFormState]
   )
-  const {
-    localeCode,
-    roundNumbers,
-    previewItems,
-    status,
-    currencyCode
-  } = formState
+  const { localeCode, roundNumbers, previewItems, status, currencyCode } =
+    formState
   const [currencyCodeString, setCurrencyCodeString] = useState(
     currencyCode === null ? '' : currencyCode
   )

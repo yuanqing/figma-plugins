@@ -44,57 +44,55 @@ const localeCodeOptions = Object.keys(locales).map(function (
 })
 
 export function FormatCurrency(props: FormatCurrencyProps): JSX.Element {
-  const {
-    disabled,
-    formState,
-    handleSubmit,
-    initialFocus,
-    setFormState
-  } = useForm<FormState>(
-    { ...props, previewItems: [], status: 'OK' },
-    {
-      close: function () {
-        emit('CLOSE_UI')
-      },
-      submit: function ({
-        currencyFormat,
-        localeCode,
-        textNodePlainObjects
-      }: FormState) {
-        if (localeCode === null) {
-          throw new Error('`localeCode` is `null`')
-        }
-        const result: Array<TextNodePlainObject> = []
-        for (const { id, characters } of textNodePlainObjects) {
-          result.push({
-            characters: formatCurrency(characters, {
+  const { disabled, formState, handleSubmit, initialFocus, setFormState } =
+    useForm<FormState>(
+      { ...props, previewItems: [], status: 'OK' },
+      {
+        close: function () {
+          emit('CLOSE_UI')
+        },
+        submit: function ({
+          currencyFormat,
+          localeCode,
+          textNodePlainObjects
+        }: FormState) {
+          if (localeCode === null) {
+            throw new Error('`localeCode` is `null`')
+          }
+          const result: Array<TextNodePlainObject> = []
+          for (const { id, characters } of textNodePlainObjects) {
+            result.push({
+              characters: formatCurrency(characters, {
+                currencyFormat,
+                localeCode
+              }),
+              id
+            })
+          }
+          emit<SubmitHandler>('SUBMIT', result, {
+            currencyFormat,
+            localeCode
+          })
+        },
+        transform: function ({
+          textNodePlainObjects,
+          currencyFormat,
+          localeCode
+        }: FormState): FormState {
+          const { previewItems, status } = computePreview(
+            textNodePlainObjects,
+            {
               currencyFormat,
               localeCode
-            }),
-            id
-          })
+            }
+          )
+          return { ...formState, previewItems, status }
+        },
+        validate: function ({ previewItems, status }: FormState) {
+          return status === 'OK' && previewItems.length > 0
         }
-        emit<SubmitHandler>('SUBMIT', result, {
-          currencyFormat,
-          localeCode
-        })
-      },
-      transform: function ({
-        textNodePlainObjects,
-        currencyFormat,
-        localeCode
-      }: FormState): FormState {
-        const { previewItems, status } = computePreview(textNodePlainObjects, {
-          currencyFormat,
-          localeCode
-        })
-        return { ...formState, previewItems, status }
-      },
-      validate: function ({ previewItems, status }: FormState) {
-        return status === 'OK' && previewItems.length > 0
       }
-    }
-  )
+    )
   useEffect(
     function () {
       return on<SelectionChangedHandler>(

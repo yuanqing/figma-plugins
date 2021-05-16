@@ -7,9 +7,8 @@ export function mapCurrencySymbolToCurrencyCode(
   currencySymbol: string,
   localeCode: LocaleCode
 ): '' | CurrencyCode {
-  const currencyCodes: Array<CurrencyCode> = findCurrencyCodesWithSymbol(
-    currencySymbol
-  )
+  const currencyCodes: Array<CurrencyCode> =
+    findCurrencyCodesWithSymbol(currencySymbol)
   if (currencyCodes.length === 0) {
     return isValidCurrencyCode(currencySymbol) === true
       ? (currencySymbol as CurrencyCode)
