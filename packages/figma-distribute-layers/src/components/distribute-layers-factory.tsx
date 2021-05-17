@@ -45,7 +45,9 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
       },
       [setFormState]
     )
-    const [spaceString, setSpaceString] = useState(`${props.space}`)
+    const [spaceString, setSpaceString] = useState(
+      props.space === null ? '' : `${props.space}`
+    )
     return (
       <Container space="medium">
         <VerticalSpace space="large" />

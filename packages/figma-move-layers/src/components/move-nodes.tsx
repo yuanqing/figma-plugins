@@ -52,10 +52,10 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
     [setFormState]
   )
   const [verticalOffsetString, setVerticalOffsetString] = useState(
-    `${props.verticalOffset}`
+    props.verticalOffset === null ? '' : `${props.verticalOffset}`
   )
   const [horizontalOffsetString, setHorizontalOffsetString] = useState(
-    `${props.horizontalOffset}`
+    props.horizontalOffset === null ? '' : `${props.horizontalOffset}`
   )
   return (
     <Container space="medium">

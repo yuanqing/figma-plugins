@@ -84,10 +84,10 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
     [setFormState]
   )
   const [horizontalSpaceString, setHorizontalSpaceString] = useState(
-    `${props.horizontalSpace}`
+    props.horizontalSpace === null ? '' : `${props.horizontalSpace}`
   )
   const [verticalSpaceString, setVerticalSpaceString] = useState(
-    `${props.verticalSpace}`
+    props.verticalSpace === null ? '' : `${props.verticalSpace}`
   )
   const {
     combineSingleLayerGroups,

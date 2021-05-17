@@ -44,7 +44,9 @@ export function DrawSliceOverSelection(
     },
     [setFormState]
   )
-  const [paddingString, setPaddingString] = useState(`${props.padding}`)
+  const [paddingString, setPaddingString] = useState(
+    props.padding === null ? '' : `${props.padding}`
+  )
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
