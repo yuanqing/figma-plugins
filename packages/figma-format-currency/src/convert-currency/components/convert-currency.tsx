@@ -76,12 +76,13 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
           }
           emit<SubmitHandler>('SUBMIT', result, options)
         },
-        transform: function ({
-          textNodePlainObjects,
-          currencyCode,
-          localeCode,
-          roundNumbers
-        }: FormState): FormState {
+        transform: function (formState: FormState): FormState {
+          const {
+            textNodePlainObjects,
+            currencyCode,
+            localeCode,
+            roundNumbers
+          } = formState
           const { previewItems, status } = computePreview(
             textNodePlainObjects,
             {
@@ -124,16 +125,6 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
   )
   const [localeCodeString, setLocaleCodeString] = useState(
     localeCode === null ? '' : localeCode
-  )
-  useEffect(
-    function () {
-      const localeCode = localeCodeString as LocaleCode
-      setFormState(
-        typeof locales[localeCode] === 'undefined' ? null : localeCode,
-        'localeCode'
-      )
-    },
-    [setFormState, localeCodeString]
   )
   return (
     <Fragment>

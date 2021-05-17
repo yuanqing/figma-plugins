@@ -74,11 +74,8 @@ export function FormatCurrency(props: FormatCurrencyProps): JSX.Element {
             localeCode
           })
         },
-        transform: function ({
-          textNodePlainObjects,
-          currencyFormat,
-          localeCode
-        }: FormState): FormState {
+        transform: function (formState: FormState): FormState {
+          const { textNodePlainObjects, currencyFormat, localeCode } = formState
           const { previewItems, status } = computePreview(
             textNodePlainObjects,
             {
@@ -105,15 +102,8 @@ export function FormatCurrency(props: FormatCurrencyProps): JSX.Element {
     [setFormState]
   )
   const { localeCode, currencyFormat, previewItems, status } = formState
-  const [localeCodeString, setLocaleCodeString] = useState(`${localeCode}`)
-  useEffect(
-    function () {
-      const locale = localeCodeString as LocaleCode
-      if (typeof locales[locale] !== 'undefined') {
-        setFormState(locale, 'localeCode')
-      }
-    },
-    [setFormState, localeCodeString]
+  const [localeCodeString, setLocaleCodeString] = useState(
+    localeCode === null ? '' : `${localeCode}`
   )
   return (
     <Fragment>
