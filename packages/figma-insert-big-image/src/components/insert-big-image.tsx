@@ -7,7 +7,7 @@ import {
   MiddleAlign,
   Text,
   useInitialFocus,
-  useWindowKeyDownHandler,
+  useWindowKeyDown,
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit } from '@create-figma-plugin/utilities'
@@ -25,7 +25,7 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
   const [insertAs2x, setInsertAs2x] = useState(props.insertAs2x)
   const [index, setIndex] = useState(0)
   const [total, setTotal] = useState(0)
-  useWindowKeyDownHandler('Escape', function () {
+  useWindowKeyDown('Escape', function () {
     if (total > 0) {
       return
     }

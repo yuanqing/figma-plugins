@@ -2,7 +2,7 @@ import {
   Button,
   Container,
   Divider,
-  useWindowKeyDownHandler,
+  useWindowKeyDown,
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
@@ -45,7 +45,7 @@ export function LanguageTester() {
     },
     [setSelectedLanguageKey]
   )
-  useWindowKeyDownHandler('Escape', function () {
+  useWindowKeyDown('Escape', function () {
     emit<CloseUIHandler>('CLOSE_UI')
   })
   useEffect(
