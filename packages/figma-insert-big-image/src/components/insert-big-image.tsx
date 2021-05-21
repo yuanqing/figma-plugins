@@ -61,7 +61,7 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
             ? 'Inserting image…'
             : `Inserting image ${index + 1} of ${total}…`}
         </Text>
-        <VerticalSpace space="extraLarge" />{' '}
+        <VerticalSpace space="extraLarge" />
         {/* To optically middle-align things */}
       </MiddleAlign>
     )
