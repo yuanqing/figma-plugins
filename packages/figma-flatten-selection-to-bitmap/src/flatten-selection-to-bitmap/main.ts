@@ -15,7 +15,7 @@ import { ImageNodePlainObject } from 'figma-insert-big-image/src/utilities/types
 import { defaultSettings, settingsKey } from '../utilities/settings.js'
 import { createGroupNode } from './utilities/create-group-node.js'
 import { exportNodeAsync } from './utilities/export-node-async.js'
-import { replaceNodesWithinInstancesWithClones } from './utilities/replace-nodes-within-instances-with-clones.js'
+import { replaceNodesWithClones } from './utilities/replace-nodes-with-clones.js'
 import {
   SplitImageRequestHandler,
   SplitImageResultHandler
@@ -27,9 +27,7 @@ export default async function (): Promise<void> {
     return
   }
   const { resolution } = await loadSettingsAsync(defaultSettings, settingsKey)
-  const nodes = replaceNodesWithinInstancesWithClones(
-    figma.currentPage.selection.slice()
-  )
+  const nodes = replaceNodesWithClones(figma.currentPage.selection.slice())
   const temporaryGroupNode = createGroupNode(nodes)
   once<SplitImageResultHandler>(
     'SPLIT_IMAGE_RESULT',
