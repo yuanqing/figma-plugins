@@ -2,8 +2,3 @@
   height: 274px;
   overflow: auto;
 }
-
-.button {
-  padding: var(--space-small) var(--space-medium);
-  border-top: 1px solid var(--color-black-10);
-}
