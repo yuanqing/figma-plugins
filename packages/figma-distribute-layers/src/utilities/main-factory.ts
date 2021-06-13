@@ -48,7 +48,7 @@ export function mainFactory({
       )
     })
     showUI<FormState>(
-      { height: 136, width: 240 },
+      { height: 137, width: 240 },
       { ...settings, hasSelection: true }
     )
   }

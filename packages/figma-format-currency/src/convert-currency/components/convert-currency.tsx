@@ -140,7 +140,7 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
           strict
           value={currencyCodeString}
         />
-        <VerticalSpace space="small" />
+        <VerticalSpace space="medium" />
         <Checkbox
           name="roundNumbers"
           onValueChange={setFormState}

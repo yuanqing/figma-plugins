@@ -59,7 +59,7 @@ export default async function (): Promise<void> {
     )
   })
   showUI<MoveNodesProps>(
-    { height: 112, width: 240 },
+    { height: 113, width: 240 },
     { ...settings, hasSelection: true }
   )
 }

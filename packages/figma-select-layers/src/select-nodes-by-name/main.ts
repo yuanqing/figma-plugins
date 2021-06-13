@@ -67,7 +67,7 @@ export default async function (): Promise<void> {
   })
   const { layerName, exactMatch } = settings.selectLayersByName
   showUI<SelectNodesByNameProps>(
-    { height: 164, width: 240 },
+    { height: 173, width: 240 },
     {
       exactMatch,
       hasSelection: figma.currentPage.selection.length > 0,

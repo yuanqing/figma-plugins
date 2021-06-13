@@ -77,7 +77,7 @@ export default async function (): Promise<void> {
     'characters'
   ])
   showUI<FormatCurrencyProps>(
-    { height: 325, width: 240 },
+    { height: 322, width: 240 },
     {
       ...settings.formatCurrency,
       localeCode: settings.localeCode,

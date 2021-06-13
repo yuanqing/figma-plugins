@@ -1,6 +1,7 @@
 .languageItem {
   position: relative;
   padding: var(--space-extra-small) var(--space-medium);
+  color: var(--color-black-80);
   cursor: default;
   user-select: none;
 }

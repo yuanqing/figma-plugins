@@ -93,7 +93,7 @@ export default async function (): Promise<void> {
   const groups = getGroups(nodes, { combineSingleLayerGroups, groupDefinition })
   const maximumGroupDefinition = computeMaximumGroupDefinition(nodes)
   showUI<OrganizeNodesProps>(
-    { height: 353, width: 240 },
+    { height: 350, width: 240 },
     { ...settings, groups, maximumGroupDefinition }
   )
 }

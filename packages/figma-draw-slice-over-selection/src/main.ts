@@ -45,7 +45,7 @@ export default async function (): Promise<void> {
   })
   showUI<DrawSliceOverSelectionProps>(
     {
-      height: 136,
+      height: 137,
       width: 240
     },
     { ...settings, hasSelection: true }

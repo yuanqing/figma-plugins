@@ -26,6 +26,7 @@ import {
   UpscaleImagesResultHandler
 } from '../utilities/types.js'
 import { upscaleImageAsync } from '../utilities/upscale-image-async.js'
+import styles from './upscale-image.css'
 
 export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
   const [loading, setLoading] = useState(false)
@@ -82,12 +83,13 @@ export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
   }, [])
   if (loading === true) {
     return (
-      <MiddleAlign>
-        <LoadingIndicator color="blue" />
-        <VerticalSpace space="small" />
-        <Text align="center">Upscaling image…</Text>
-        <VerticalSpace space="small" /> {/* To optically middle-align things */}
-      </MiddleAlign>
+      <div class={styles.loading}>
+        <MiddleAlign>
+          <LoadingIndicator color="blue" />
+          <VerticalSpace space="extraSmall" />
+          <Text align="center">Upscaling image…</Text>
+        </MiddleAlign>
+      </div>
     )
   }
   const { scale } = formState

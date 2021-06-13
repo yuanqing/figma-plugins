@@ -59,7 +59,7 @@ export default async function (): Promise<void> {
     emit<SelectionChangedHandler>('SELECTION_CHANGED', computeDimensions(nodes))
   })
   showUI<FormState>(
-    { height: 136, width: 240 },
+    { height: 141, width: 240 },
     { ...settings, ...computeDimensions(nodes) }
   )
 }

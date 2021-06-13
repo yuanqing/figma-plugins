@@ -87,7 +87,7 @@ export default async function (): Promise<void> {
     targetNodeType
   )
   showUI<SelectSimilarNodesProps>(
-    { height: 436, width: 240 },
+    { height: 437, width: 240 },
     {
       nodeAttributes,
       validNodeAttributeKeys

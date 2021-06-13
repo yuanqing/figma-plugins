@@ -3,7 +3,7 @@
   height: 121px;
   padding: 16px 16px 16px 0;
   overflow: auto;
-  background-color: #f7f7f7;
+  background-color: var(--color-black-3);
   border-bottom: 1px solid var(--color-silver);
   cursor: default;
   user-select: none;

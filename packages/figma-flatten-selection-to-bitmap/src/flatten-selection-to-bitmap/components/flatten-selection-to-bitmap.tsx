@@ -13,6 +13,7 @@ import {
   SplitImageRequestHandler,
   SplitImageResultHandler
 } from '../utilities/types.js'
+import styles from './flatten-selection-to-bitmap.css'
 
 const UI_MINIMUM_VISIBLE_TIME = 800
 
@@ -36,11 +37,12 @@ export function FlattenSelectionToBitmap(): JSX.Element {
     )
   }, [])
   return (
-    <MiddleAlign>
-      <LoadingIndicator color="blue" />
-      <VerticalSpace space="small" />
-      <Text align="center">Flattening selection…</Text>
-      <VerticalSpace space="medium" /> {/* To optically middle-align things */}
-    </MiddleAlign>
+    <div class={styles.flattenSelectionToBitmap}>
+      <MiddleAlign>
+        <LoadingIndicator color="blue" />
+        <VerticalSpace space="extraSmall" />
+        <Text align="center">Flattening selection…</Text>
+      </MiddleAlign>
+    </div>
   )
 }

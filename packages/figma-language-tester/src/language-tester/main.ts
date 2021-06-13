@@ -70,7 +70,7 @@ export default async function (): Promise<void> {
   on<ResetLanguageHandler>('RESET_LANGUAGE', async function () {
     await resetLanguageAsync(originalText)
   })
-  showUI({ height: 363, width: 240 })
+  showUI({ height: 332, width: 240 })
 }
 
 async function resetLanguageAsync(
