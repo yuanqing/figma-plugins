@@ -100,7 +100,7 @@ export default async function (): Promise<void> {
     })
   })
   showUI<ReplaceWithComponentProps>(
-    { height: 402, width: 360 },
+    { height: 403, width: 360 },
     {
       ...settings,
       componentNodePlainObjects,

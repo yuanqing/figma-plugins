@@ -3,6 +3,7 @@ import {
   Checkbox,
   Container,
   Divider,
+  IconLayerComponent16,
   Layer,
   SearchTextbox,
   Text,
@@ -152,13 +153,14 @@ export function ReplaceWithComponentInstance(
             return (
               <Layer
                 key={index}
+                bold
+                color="purple"
+                icon={<IconLayerComponent16 />}
                 name="componentId"
                 onChange={handleLayerChange}
                 onMouseDown={handleLayerMouseDown}
                 pageName={pageName}
-                type="component"
                 value={id === componentId}
-                // onMouseMove={handleScrollableMenuItemMouseMove}
                 {...{ [`${COMPONENT_NODE_ID_ATTRIBUTE_NAME}`]: id }}
               >
                 {name}
@@ -175,7 +177,7 @@ export function ReplaceWithComponentInstance(
           onValueChange={setFormState}
           value={shouldResizeToFitNode}
         >
-          <Text>Resize component to fit layer</Text>
+          <Text>Resize instance to fit layer</Text>
         </Checkbox>
         <VerticalSpace space="medium" />
         <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
