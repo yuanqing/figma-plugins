@@ -48,6 +48,12 @@
       },
       "-",
       {
+        "name": "Find and Replace",
+        "main": "src/find-and-replace/main.ts",
+        "ui": "src/find-and-replace/ui.ts"
+      },
+      "-",
+      {
         "name": "Split Text Layers by Line",
         "main": "src/split-text-nodes-by-line/main.ts"
       },
