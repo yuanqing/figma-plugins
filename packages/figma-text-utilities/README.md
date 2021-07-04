@@ -16,6 +16,10 @@ Copy the text within the selected text layers to the clipboard.
 
 Paste the contents of the clipboard into the selected text layers.
 
+### Find and Replace
+
+Find and replace the contents of the text layers within the selection or on the current page.
+
 ### Split Text Layers by Line
 
 Split each selected text layer into separate text layers that each contain a single line.
