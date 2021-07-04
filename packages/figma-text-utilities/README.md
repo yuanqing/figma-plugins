@@ -18,7 +18,7 @@ Paste the contents of the clipboard into the selected text layers.
 
 ### Find and Replace
 
-Find and replace the contents of the text layers within the selection or on the current page.
+Find and replace text in text layers within the selection or on the current page.
 
 ### Split Text Layers by Line
 
