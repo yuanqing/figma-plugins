@@ -37,6 +37,14 @@ export function smartRenameNode(
     }
     case 'FRAME': {
       if (node.parent !== null && node.parent.type !== 'PAGE') {
+        if (node.layoutMode === 'HORIZONTAL') {
+          node.name = 'Auto Layout Horizontal'
+          break
+        }
+        if (node.layoutMode === 'VERTICAL') {
+          node.name = 'Auto Layout Vertical'
+          break
+        }
         node.name = 'Frame'
       }
       break
