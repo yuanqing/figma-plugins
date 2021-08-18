@@ -46,7 +46,13 @@
       {
         "name": "Settings",
         "main": "src/settings/main.ts",
-        "ui": "src/settings/ui.ts"
+        "parameters": [
+          {
+            "key": "resolution",
+            "description": "Enter a bitmap resolution"
+          }
+        ],
+        "parameterOnly": true
       }
     ]
   }
