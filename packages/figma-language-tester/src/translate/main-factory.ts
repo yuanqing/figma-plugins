@@ -1,6 +1,5 @@
 import {
   emit,
-  extractAttributes,
   formatErrorMessage,
   formatSuccessMessage,
   loadFontsAsync,
@@ -8,6 +7,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
+import { extractText } from '../utilities/extract-text.js'
 import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes.js'
 import { languages } from '../utilities/languages.js'
 import {
@@ -39,10 +39,7 @@ export function mainFactory(languageKey: LanguageKey) {
     )
     await loadFontsAsync(textNodes)
     showUI({ visible: false })
-    const textNodePlainObjects = extractAttributes(textNodes, [
-      'id',
-      'characters'
-    ])
+    const textNodePlainObjects = extractText(textNodes)
     emit<TranslateRequestHandler>(
       'TRANSLATE_REQUEST',
       textNodePlainObjects,

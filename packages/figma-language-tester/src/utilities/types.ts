@@ -9,6 +9,12 @@ export type TextNodePlainObject = {
   characters: string
 }
 
+export type TranslatableNode =
+  | TextNode
+  | StickyNode
+  | ShapeWithTextNode
+  | ConnectorNode
+
 export interface TranslateRequestHandler extends EventHandler {
   name: 'TRANSLATE_REQUEST'
   handler: (

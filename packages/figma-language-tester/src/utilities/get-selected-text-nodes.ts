@@ -1,14 +1,19 @@
 import { traverseNode } from '@create-figma-plugin/utilities'
 
-export function getSelectedTextNodes(): Array<TextNode> {
+import { TranslatableNode } from './types'
+
+export function getSelectedTextNodes(): Array<TranslatableNode> {
   const nodes = figma.currentPage.selection
-  const result: Array<TextNode> = []
+  const result: Array<TranslatableNode> = []
   for (const node of nodes) {
     traverseNode(node, function (childNode: SceneNode) {
-      if (childNode.type !== 'TEXT') {
-        return
+      switch (childNode.type) {
+        case 'CONNECTOR':
+        case 'SHAPE_WITH_TEXT':
+        case 'STICKY':
+        case 'TEXT':
+          result.push(childNode)
       }
-      result.push(childNode)
     })
   }
   return result

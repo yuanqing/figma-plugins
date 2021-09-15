@@ -1,6 +1,6 @@
 import { loadFontsAsync } from '@create-figma-plugin/utilities'
 
-import { TextNodePlainObject } from './types.js'
+import { TextNodePlainObject, TranslatableNode } from './types.js'
 
 export async function updateTextNodesAsync(
   textNodePlainObjects: Array<TextNodePlainObject>
@@ -10,8 +10,13 @@ export async function updateTextNodesAsync(
     if (node === null) {
       continue
     }
-    const textNode = node as TextNode
+    const textNode = node as TranslatableNode
     await loadFontsAsync([textNode])
-    textNode.characters = characters
+
+    if (textNode.type === 'TEXT') {
+      textNode.characters = characters
+    } else {
+      textNode.text.characters = characters
+    }
   }
 }
