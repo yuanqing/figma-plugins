@@ -18,10 +18,12 @@ export function createComponent(node: SceneNode): ComponentNode {
     typeof node.children !== 'undefined'
   ) {
     for (const child of node.children) {
-      component.appendChild(child.clone())
+      if ('clone' in child) {
+        component.appendChild(child.clone())
+      }
     }
     copyAttributes(node, component)
-  } else {
+  } else if ('clone' in node) {
     const clone = node.clone()
     component.appendChild(clone)
     clone.x = 0

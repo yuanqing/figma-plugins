@@ -30,7 +30,7 @@ export function makePixelPerfect(node: SceneNode): boolean {
       if (node.height === 0) {
         node.resize(Math.round(node.width), 0)
       }
-    } else {
+    } else if ('resize' in node) {
       node.resize(Math.round(node.width), Math.round(node.height))
     }
   }

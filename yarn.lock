@@ -283,9 +283,9 @@
     strip-json-comments "^3.1.1"
 
 "@figma/plugin-typings@^1":
-  version "1.30.0"
-  resolved "https://registry.yarnpkg.com/@figma/plugin-typings/-/plugin-typings-1.30.0.tgz#2c71b99d0312d2859130d2d366f096acd88babe6"
-  integrity sha512-KQQPrsUNoZKF9zUG6YvaQk528/LinTzjxCu4eoyOFhx10jdlOqvgLEU7hbVZZxtbKcEFjhUiC3edc185kfCKNw==
+  version "1.31.0"
+  resolved "https://registry.yarnpkg.com/@figma/plugin-typings/-/plugin-typings-1.31.0.tgz#a4a4d2e018c91b2a5a02dc7b33d01973f044de2e"
+  integrity sha512-9mOEn31yyta5QC3E3lpAaoHKeEP1/NH++nFOeXjQrfOEgVnX7za9+aG5biVxPS9DZpBcquIIHqyq31Ejnu8MgQ==
 
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"

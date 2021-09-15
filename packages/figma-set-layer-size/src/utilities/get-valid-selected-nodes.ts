@@ -1,7 +1,15 @@
 import { isWithinInstanceNode } from '@create-figma-plugin/utilities'
 
-export function getValidSelectedNodes(): Array<SceneNode> {
-  return figma.currentPage.selection.filter(function (node: SceneNode) {
-    return isWithinInstanceNode(node) === false
+import { ResizableNode } from './types'
+
+export function getValidSelectedNodes(): Array<ResizableNode> {
+  return figma.currentPage.selection.filter(function (
+    node: SceneNode
+  ): node is ResizableNode {
+    return (
+      'resize' in node &&
+      'resizeWithoutConstraints' in node &&
+      isWithinInstanceNode(node) === false
+    )
   })
 }

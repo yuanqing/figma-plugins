@@ -8,8 +8,9 @@ export function replaceNodesWithClones(
 ): Array<SceneNode> {
   return nodes.map(function (node) {
     if (
-      containsComponentNode(node) === true ||
-      isWithinInstanceNode(node) === true
+      (containsComponentNode(node) === true ||
+        isWithinInstanceNode(node) === true) &&
+      'clone' in node
     ) {
       const clone = node.clone()
       const { x, y } = getAbsolutePosition(node)

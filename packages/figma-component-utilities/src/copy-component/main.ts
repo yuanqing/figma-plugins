@@ -12,7 +12,9 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('Select a component'))
     return
   }
-  const components = figma.currentPage.selection.filter(function (node) {
+  const components = figma.currentPage.selection.filter(function (
+    node
+  ): node is ComponentNode {
     return node.type === 'COMPONENT'
   })
   if (components.length === 0) {

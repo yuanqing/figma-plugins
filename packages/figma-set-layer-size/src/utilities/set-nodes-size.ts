@@ -1,5 +1,7 @@
+import { ResizableNode } from './types'
+
 export function setNodesSize(
-  node: SceneNode,
+  node: ResizableNode,
   options: {
     width: false | number
     height: false | number

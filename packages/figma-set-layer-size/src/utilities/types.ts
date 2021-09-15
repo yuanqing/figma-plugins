@@ -5,6 +5,14 @@ export type Dimensions = {
   height: null | number
 }
 
+export type ResizableNode = Extract<
+  SceneNode,
+  {
+    resize(width: number, height: number): void
+    resizeWithoutConstraints(width: number, height: number): void
+  }
+>
+
 export type Settings = {
   resizeWithConstraints: boolean
 }

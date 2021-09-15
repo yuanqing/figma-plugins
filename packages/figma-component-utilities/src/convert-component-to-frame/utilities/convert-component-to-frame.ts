@@ -14,7 +14,7 @@ export function convertComponentToFrame(
       instance.x = child.x
       instance.y = child.y
       frame.appendChild(instance)
-    } else {
+    } else if ('clone' in child) {
       frame.appendChild(child.clone())
     }
   }
