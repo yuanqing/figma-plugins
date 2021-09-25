@@ -32,7 +32,7 @@
   "dependencies": {
     "@create-figma-plugin/ui": "latest",
     "@create-figma-plugin/utilities": "latest",
-    "preact": "^10.5.13"
+    "preact": "^10.5.14"
   },
   "figma-plugin": {
     "name": "Select Layers",

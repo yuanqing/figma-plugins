@@ -34,8 +34,8 @@
   "dependencies": {
     "@create-figma-plugin/ui": "latest",
     "@create-figma-plugin/utilities": "latest",
-    "p-memoize": "^4.0.1",
-    "preact": "^10.5.13"
+    "p-memoize": "^5.0.0",
+    "preact": "^10.5.14"
   },
   "figma-plugin": {
     "name": "Language Tester",

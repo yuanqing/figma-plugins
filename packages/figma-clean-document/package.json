@@ -33,7 +33,7 @@
     "@create-figma-plugin/ui": "latest",
     "@create-figma-plugin/utilities": "latest",
     "figma-sort-layers": "*",
-    "preact": "^10.5.13"
+    "preact": "^10.5.14"
   },
   "figma-plugin": {
     "name": "Clean Document",

@@ -31,8 +31,8 @@
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "latest",
-    "array-shuffle": "^2.0.0",
-    "mem": "^8.1.1",
+    "array-shuffle": "^3.0.0",
+    "mem": "^9.0.1",
     "natural-compare-lite": "^1.4.0"
   },
   "figma-plugin": {

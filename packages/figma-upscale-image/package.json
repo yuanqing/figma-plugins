@@ -32,9 +32,9 @@
   "dependencies": {
     "@create-figma-plugin/ui": "latest",
     "@create-figma-plugin/utilities": "latest",
-    "@tensorflow/tfjs": "3.6.0",
-    "preact": "^10.5.13",
-    "upscaler": "^0.8.22"
+    "@tensorflow/tfjs": "^3.9.0",
+    "preact": "^10.5.14",
+    "upscaler": "^0.8.27"
   },
   "figma-plugin": {
     "name": "Upscale Image",
