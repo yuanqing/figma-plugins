@@ -21,11 +21,13 @@ export default async function (): Promise<void> {
   }
   const newSelection = []
   for (const component of components) {
-    const clone = component.clone()
-    clone.x = component.x + OFFSET
-    clone.y = component.y + OFFSET
-    insertBeforeNode(clone, component)
-    newSelection.push(clone)
+    if ('clone' in component) {
+      const clone = component.clone()
+      clone.x = component.x + OFFSET
+      clone.y = component.y + OFFSET
+      insertBeforeNode(clone, component)
+      newSelection.push(clone)
+    }
   }
   figma.currentPage.selection = newSelection
   figma.closePlugin(

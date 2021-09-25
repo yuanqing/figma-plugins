@@ -18,17 +18,21 @@ export function createComponent(node: SceneNode): ComponentNode {
     typeof node.children !== 'undefined'
   ) {
     for (const child of node.children) {
-      component.appendChild(child.clone())
+      if ('clone' in child) {
+        component.appendChild(child.clone())
+      }
     }
     copyAttributes(node, component)
   } else {
-    const clone = node.clone()
-    component.appendChild(clone)
-    clone.x = 0
-    clone.y = 0
-    if (clone.exportSettings.length > 0) {
-      component.exportSettings = cloneObject(clone.exportSettings)
-      clone.exportSettings = []
+    if ('clone' in node) {
+      const clone = node.clone()
+      component.appendChild(clone)
+      clone.x = 0
+      clone.y = 0
+      if (clone.exportSettings.length > 0) {
+        component.exportSettings = cloneObject(clone.exportSettings)
+        clone.exportSettings = []
+      }
     }
   }
   const referenceNode = getReferenceNode(node)

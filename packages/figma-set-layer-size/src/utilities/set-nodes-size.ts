@@ -10,8 +10,12 @@ export function setNodesSize(
   const newWidth = width === false ? node.width : width
   const newHeight = height === false ? node.height : height
   if (node.type === 'GROUP' || resizeWithConstraints === true) {
-    node.resize(newWidth, newHeight)
+    if ('resize' in node) {
+      node.resize(newWidth, newHeight)
+    }
   } else {
-    node.resizeWithoutConstraints(newWidth, newHeight)
+    if ('resizeWithoutConstraints' in node) {
+      node.resizeWithoutConstraints(newWidth, newHeight)
+    }
   }
 }

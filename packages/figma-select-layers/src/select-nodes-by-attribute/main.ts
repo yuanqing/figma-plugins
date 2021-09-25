@@ -110,7 +110,7 @@ export const selectTextLayers = mainFactory(
 export const selectMaskLayers = mainFactory(
   'mask layer',
   function (node: SceneNode) {
-    return node.type !== 'SLICE' && node.isMask === true
+    return node.type !== 'SLICE' && 'isMask' in node && node.isMask === true
   }
 )
 
