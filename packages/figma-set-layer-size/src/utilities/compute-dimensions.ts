@@ -1,4 +1,4 @@
-import { MIXED_NUMBER } from '@create-figma-plugin/ui'
+import { MIXED_NUMBER } from '@create-figma-plugin/utilities'
 
 import { Dimensions } from './types.js'
 
