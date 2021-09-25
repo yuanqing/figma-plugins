@@ -11,15 +11,10 @@ const resolutions = ['2x', '3x', '4x', '8x', '10x']
 export default async function (): Promise<void> {
   figma.parameters.on(
     'input',
-    function (
-      parameterValues: ParameterValues,
-      key: string,
-      suggestionResults: SuggestionResults
-    ) {
-      const value = parameterValues[key]
-      suggestionResults.setSuggestions(
+    function ({ query, result }: ParameterInputEvent) {
+      result.setSuggestions(
         resolutions.filter(function (resolution: string): boolean {
-          return resolution.indexOf(value) !== -1
+          return resolution.indexOf(query) !== -1
         })
       )
     }
