@@ -15,7 +15,7 @@ import { getSelectedNodePlainObjects } from './utilities/get-valid-selected-node
 import { defaultSettings, settingsKey } from './utilities/settings.js'
 import {
   CloseUIHandler,
-  ReplaceWithComponentProps,
+  ReplaceWithComponentInstanceProps,
   SelectionChangedHandler,
   SubmitHandler
 } from './utilities/types.js'
@@ -99,7 +99,7 @@ export default async function (): Promise<void> {
       selectedNodePlainObjects: getSelectedNodePlainObjects()
     })
   })
-  showUI<ReplaceWithComponentProps>(
+  showUI<ReplaceWithComponentInstanceProps>(
     { height: 403, width: 360 },
     {
       ...settings,

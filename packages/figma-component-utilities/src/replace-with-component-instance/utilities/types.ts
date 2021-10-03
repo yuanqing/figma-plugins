@@ -13,11 +13,11 @@ export type NodePlainObject = {
 export type Settings = {
   shouldResizeToFitNode: boolean
 }
-export type ReplaceWithComponentProps = Settings & {
+export type ReplaceWithComponentInstanceProps = Settings & {
   componentNodePlainObjects: Array<ComponentNodePlainObject>
   selectedNodePlainObjects: Array<NodePlainObject>
 }
-export type FormState = ReplaceWithComponentProps & {
+export type FormState = ReplaceWithComponentInstanceProps & {
   componentId: null | string
   searchTerm: string
 }

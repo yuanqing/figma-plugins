@@ -20,7 +20,7 @@ import {
   ComponentNodePlainObject,
   FormState,
   NodePlainObject,
-  ReplaceWithComponentProps,
+  ReplaceWithComponentInstanceProps,
   SelectionChangedHandler,
   SubmitHandler
 } from '../utilities/types.js'
@@ -29,7 +29,7 @@ import styles from './replace-with-component-instance.css'
 const COMPONENT_NODE_ID_ATTRIBUTE_NAME = 'data-component-node-id'
 
 export function ReplaceWithComponentInstance(
-  props: ReplaceWithComponentProps
+  props: ReplaceWithComponentInstanceProps
 ): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
