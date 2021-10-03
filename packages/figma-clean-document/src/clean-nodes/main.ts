@@ -85,7 +85,7 @@ export default async function (): Promise<void> {
     )
   })
   showUI<CleanNodesProps>(
-    { height: 413, width: 240 },
+    { height: 413, title: 'Clean Layers', width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )
 }

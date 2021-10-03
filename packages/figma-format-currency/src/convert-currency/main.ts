@@ -82,7 +82,7 @@ export default async function (): Promise<void> {
     'characters'
   ])
   showUI<ConvertCurrencyProps>(
-    { height: 354, width: 240 },
+    { height: 354, title: 'Convert Currency', width: 240 },
     {
       ...settings.convertCurrency,
       localeCode: settings.localeCode,

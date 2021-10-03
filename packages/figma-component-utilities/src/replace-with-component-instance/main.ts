@@ -100,7 +100,7 @@ export default async function (): Promise<void> {
     })
   })
   showUI<ReplaceWithComponentInstanceProps>(
-    { height: 403, width: 360 },
+    { height: 403, title: 'Replace With Component Instance', width: 360 },
     {
       ...settings,
       componentNodePlainObjects,

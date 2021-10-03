@@ -69,7 +69,7 @@ export default async function (): Promise<void> {
   })
   const { smartRenameLayersWhitelist } = settings
   showUI<SmartRenameNodesProps>(
-    { height: 169, width: 240 },
+    { height: 169, title: 'Smart Rename Layers', width: 240 },
     {
       hasSelection: figma.currentPage.selection.length > 0,
       smartRenameLayersWhitelist
