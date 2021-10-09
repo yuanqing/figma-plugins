@@ -3,5 +3,6 @@ import { distributeNodesLeft } from './utilities/distribute-nodes-left.js'
 
 export default mainFactory({
   direction: 'left',
-  distributeNodes: distributeNodesLeft
+  distributeNodes: distributeNodesLeft,
+  title: 'Distribute Layers Left'
 })

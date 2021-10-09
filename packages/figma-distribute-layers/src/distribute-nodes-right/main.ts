@@ -3,5 +3,6 @@ import { distributeNodesRight } from './utilities/distribute-nodes-right.js'
 
 export default mainFactory({
   direction: 'right',
-  distributeNodes: distributeNodesRight
+  distributeNodes: distributeNodesRight,
+  title: 'Distribute Layers Right'
 })

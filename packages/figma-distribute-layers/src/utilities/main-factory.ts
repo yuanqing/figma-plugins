@@ -20,7 +20,8 @@ import {
 
 export function mainFactory({
   direction,
-  distributeNodes
+  distributeNodes,
+  title
 }: MainFactoryOptions) {
   return async function (): Promise<void> {
     if (figma.currentPage.selection.length < 2) {
@@ -48,7 +49,7 @@ export function mainFactory({
       )
     })
     showUI<FormState>(
-      { height: 137, width: 240 },
+      { height: 137, title, width: 240 },
       { ...settings, hasSelection: true }
     )
   }

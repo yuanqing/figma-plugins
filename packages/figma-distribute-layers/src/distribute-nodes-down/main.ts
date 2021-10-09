@@ -3,5 +3,6 @@ import { distributeNodesDown } from './utilities/distribute-nodes-down.js'
 
 export default mainFactory({
   direction: 'down',
-  distributeNodes: distributeNodesDown
+  distributeNodes: distributeNodesDown,
+  title: 'Distribute Layers Down'
 })

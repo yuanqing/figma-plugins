@@ -6,6 +6,7 @@ export type Direction = 'up' | 'down' | 'left' | 'right'
 export type MainFactoryOptions = {
   direction: Direction
   distributeNodes: (layers: Array<SceneNode>, space: number) => void
+  title: string
 }
 export type UiFactoryOptions = {
   direction: Direction
