@@ -38,6 +38,9 @@
   "figma-plugin": {
     "name": "Sort Layers",
     "id": "767379414704079825",
+    "editorType": [
+      "figma"
+    ],
     "menu": [
       {
         "name": "Sort Layers by Name",

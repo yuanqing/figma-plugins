@@ -37,6 +37,9 @@
   "figma-plugin": {
     "name": "Draw Slice Over Selection",
     "id": "767379335945775056",
+    "editorType": [
+      "figma"
+    ],
     "main": "src/main.ts",
     "ui": "src/ui.ts"
   }

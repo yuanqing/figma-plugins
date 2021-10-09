@@ -37,6 +37,9 @@
   "figma-plugin": {
     "name": "Set Layer Size",
     "id": "817982008781589678",
+    "editorType": [
+      "figma"
+    ],
     "main": "src/main.ts",
     "ui": "src/ui.ts"
   }

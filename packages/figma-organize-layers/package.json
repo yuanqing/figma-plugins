@@ -52,6 +52,9 @@
   "figma-plugin": {
     "name": "Organize Layers",
     "id": "786286754606650597",
+    "editorType": [
+      "figma"
+    ],
     "menu": [
       {
         "name": "Organize Layers",

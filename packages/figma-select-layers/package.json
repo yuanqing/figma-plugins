@@ -37,6 +37,9 @@
   "figma-plugin": {
     "name": "Select Layers",
     "id": "799648692768237063",
+    "editorType": [
+      "figma"
+    ],
     "menu": [
       {
         "name": "Select Layers by Name",

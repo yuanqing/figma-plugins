@@ -53,6 +53,9 @@
   "figma-plugin": {
     "name": "Format Currency",
     "id": "780785006732555859",
+    "editorType": [
+      "figma"
+    ],
     "menu": [
       {
         "name": "Format Currency",

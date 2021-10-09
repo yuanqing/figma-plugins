@@ -36,6 +36,9 @@
   "figma-plugin": {
     "name": "Flatten Selection to Bitmap",
     "id": "837846252158418235",
+    "editorType": [
+      "figma"
+    ],
     "menu": [
       {
         "name": "Flatten Selection to Bitmap",

@@ -37,6 +37,9 @@
   "figma-plugin": {
     "name": "Component Utilities",
     "id": "785894722513806497",
+    "editorType": [
+      "figma"
+    ],
     "menu": [
       {
         "name": "Create Component from Layer",

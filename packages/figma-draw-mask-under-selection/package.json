@@ -35,6 +35,9 @@
   "figma-plugin": {
     "name": "Draw Mask Under Selection",
     "id": "806532458729477508",
+    "editorType": [
+      "figma"
+    ],
     "main": "src/main.ts"
   }
 }

@@ -38,6 +38,9 @@
   "figma-plugin": {
     "name": "Clean Document",
     "id": "767379019764649932",
+    "editorType": [
+      "figma"
+    ],
     "menu": [
       {
         "name": "Clean Layers",

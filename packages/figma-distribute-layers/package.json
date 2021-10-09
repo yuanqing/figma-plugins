@@ -37,6 +37,9 @@
   "figma-plugin": {
     "name": "Distribute Layers",
     "id": "767379264700569551",
+    "editorType": [
+      "figma"
+    ],
     "menu": [
       {
         "name": "Distribute Layers Left",

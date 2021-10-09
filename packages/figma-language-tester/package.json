@@ -40,6 +40,9 @@
   "figma-plugin": {
     "name": "Language Tester",
     "id": "767379122107077581",
+    "editorType": [
+      "figma"
+    ],
     "menu": [
       {
         "name": "Language Tester",

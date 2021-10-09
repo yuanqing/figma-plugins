@@ -39,6 +39,9 @@
   "figma-plugin": {
     "name": "Upscale Image",
     "id": "939832535166467194",
+    "editorType": [
+      "figma"
+    ],
     "main": "src/main.ts",
     "ui": "src/ui.ts"
   }
