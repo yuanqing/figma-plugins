@@ -2,7 +2,7 @@ export function smartRenameNode(
   node: SceneNode,
   whitelistRegex: null | RegExp
 ): boolean {
-  if (node.exportSettings.length !== 0) {
+  if (node.type !== 'WIDGET' && node.exportSettings.length !== 0) {
     return false
   }
   if (whitelistRegex !== null && whitelistRegex.test(node.name) === true) {

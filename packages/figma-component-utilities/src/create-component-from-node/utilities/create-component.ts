@@ -25,7 +25,7 @@ export function createComponent(node: SceneNode): ComponentNode {
     copyAttributes(node, component)
   } else {
     if ('clone' in node) {
-      const clone = node.clone()
+      const clone = node.clone() as Exclude<SceneNode, WidgetNode>
       component.appendChild(clone)
       clone.x = 0
       clone.y = 0

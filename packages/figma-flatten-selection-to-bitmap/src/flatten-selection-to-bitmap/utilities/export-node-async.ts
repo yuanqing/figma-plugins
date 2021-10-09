@@ -1,7 +1,7 @@
 import { Resolution } from '../../utilities/types.js'
 
-export async function exportNodeAsync(
-  node: SceneNode,
+export async function exportGroupNodeAsync(
+  node: GroupNode,
   resolution: Resolution
 ): Promise<Uint8Array> {
   const exportSettings: ExportSettingsImage = {

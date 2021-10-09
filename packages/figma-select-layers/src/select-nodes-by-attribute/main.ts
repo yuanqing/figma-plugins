@@ -131,6 +131,6 @@ export const selectLockedLayers = mainFactory(
 export const selectLayersWithExports = mainFactory(
   ['layer with export settings', 'layers with export settings'],
   function (node: SceneNode) {
-    return node.exportSettings.length > 0
+    return node.type !== 'WIDGET' && node.exportSettings.length > 0
   }
 )
