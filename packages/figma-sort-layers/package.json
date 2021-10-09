@@ -30,7 +30,7 @@
     "watch": "yarn run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "latest",
+    "@create-figma-plugin/utilities": "^1.5.1",
     "array-shuffle": "^3.0.0",
     "mem": "^9.0.1",
     "natural-compare-lite": "^1.4.0"

@@ -13,9 +13,9 @@
     "test": "lerna run --stream test"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "latest",
-    "@create-figma-plugin/tsconfig": "latest",
-    "@figma/plugin-typings": "^1",
+    "@create-figma-plugin/build": "^1.5.1",
+    "@create-figma-plugin/tsconfig": "^1.5.1",
+    "@figma/plugin-typings": "^1.37.0",
     "@types/natural-compare-lite": "^1.4.0",
     "ava": "^3.15.0",
     "eslint": "^7.32.0",
@@ -30,7 +30,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-yuanqing": "^0.0.1",
     "ts-node": "^10.2.1",
-    "typescript": "^4"
+    "typescript": "^4.4.3"
   },
   "eslintConfig": {
     "extends": "yuanqing",

@@ -34,8 +34,8 @@
     "watch": "yarn run clean-build && yarn run generate-currencies-ts && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "latest",
-    "@create-figma-plugin/utilities": "latest",
+    "@create-figma-plugin/ui": "^1.5.1",
+    "@create-figma-plugin/utilities": "^1.5.1",
     "preact": "^10.5.14"
   },
   "ava": {

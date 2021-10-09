@@ -30,7 +30,7 @@
     "watch": "yarn run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "latest",
+    "@create-figma-plugin/utilities": "^1.5.1",
     "figma-insert-big-image": "*"
   },
   "figma-plugin": {

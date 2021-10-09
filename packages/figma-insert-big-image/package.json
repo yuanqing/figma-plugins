@@ -30,13 +30,17 @@
     "watch": "yarn run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "latest",
-    "@create-figma-plugin/utilities": "latest",
+    "@create-figma-plugin/ui": "^1.5.1",
+    "@create-figma-plugin/utilities": "^1.5.1",
     "preact": "^10.5.14"
   },
   "figma-plugin": {
     "name": "Insert Big Image",
     "id": "799646392992487942",
+    "editorType": [
+      "figjam",
+      "figma"
+    ],
     "main": "src/main.ts",
     "ui": "src/ui.ts"
   }
