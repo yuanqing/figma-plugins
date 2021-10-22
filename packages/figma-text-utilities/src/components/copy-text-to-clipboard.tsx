@@ -22,7 +22,7 @@ export function CopyTextToClipboard(): JSX.Element {
       'COPY_TEXT_TO_CLIPBOARD_REQUEST',
       async function (text: string) {
         const startTimestamp = Date.now()
-        copyTextToClipboard(text)
+        await copyTextToClipboardAsync(text)
         const elapsedTime = Date.now() - startTimestamp
         if (elapsedTime >= UI_MINIMUM_VISIBLE_TIME) {
           emit<CopyTextToClipboardResult>('COPY_TEXT_TO_CLIPBOARD_RESULT')
@@ -45,7 +45,11 @@ export function CopyTextToClipboard(): JSX.Element {
   )
 }
 
-function copyTextToClipboard(string: string): void {
+async function copyTextToClipboardAsync(string: string): Promise<void> {
+  if (typeof navigator.clipboard !== 'undefined') {
+    await navigator.clipboard.writeText(string)
+    return
+  }
   const textareaElement = document.createElement('textarea')
   textareaElement.style.cssText = 'position: fixed; top: 100%; left: 100%;'
   document.body.appendChild(textareaElement)
