@@ -16,6 +16,10 @@ Copy the text within the selected text layers to the clipboard.
 
 Paste the contents of the clipboard into the selected text layers.
 
+### Copy for Spreadsheet
+
+Copy the text within the selected text layers to the clipboard, formatted for pasting into a spreadsheet.
+
 ### Find and Replace
 
 Find and replace text in text layers within the selection or on the current page.
