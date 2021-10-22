@@ -12,8 +12,10 @@ import {
   CopyTextToClipboardRequest,
   CopyTextToClipboardResult
 } from '../utilities/types.js'
+import { mapTextNodesTo2dMatrix } from './utilities/map-text-nodes-to-2d-matrix.js'
+import { stringify2dMatrix } from './utilities/stringify-2d-matrix.js'
 
-export default async function (): Promise<void> {
+export default function (): void {
   if (figma.currentPage.selection.length === 0) {
     figma.closePlugin(formatErrorMessage('Select one or more text layers'))
     return
@@ -21,15 +23,6 @@ export default async function (): Promise<void> {
   const nodes = getSelectedTextNodes()
   if (nodes.length === 0) {
     figma.closePlugin(formatErrorMessage('No text layers in selection'))
-    return
-  }
-  const string = nodes
-    .map(function (node: TextNode) {
-      return node.characters
-    })
-    .join('\n')
-  if (string === '\n') {
-    figma.closePlugin(formatErrorMessage('Nothing to copy'))
     return
   }
   once<CopyTextToClipboardResult>('COPY_TEXT_TO_CLIPBOARD_RESULT', function () {
@@ -40,5 +33,7 @@ export default async function (): Promise<void> {
     )
   })
   showUI({ height: 129, width: 240 })
+  const matrix = mapTextNodesTo2dMatrix(nodes)
+  const string = stringify2dMatrix(matrix)
   emit<CopyTextToClipboardRequest>('COPY_TEXT_TO_CLIPBOARD_REQUEST', string)
 }
