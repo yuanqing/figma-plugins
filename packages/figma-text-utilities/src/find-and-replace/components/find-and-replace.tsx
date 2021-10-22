@@ -28,12 +28,14 @@ export function FindAndReplace(props: FindAndReplaceProps): JSX.Element {
       submit: function ({
         caseSensitive,
         findString,
+        useRegularExpression: regularExpression,
         replaceString
       }: FormState) {
         emit<SubmitHandler>('SUBMIT', {
           caseSensitive,
           findString,
-          replaceString
+          replaceString,
+          useRegularExpression: regularExpression
         })
       },
       validate: function ({ findString }: FormState) {
@@ -51,7 +53,13 @@ export function FindAndReplace(props: FindAndReplaceProps): JSX.Element {
     },
     [setFormState]
   )
-  const { caseSensitive, findString, hasSelection, replaceString } = formState
+  const {
+    caseSensitive,
+    findString,
+    hasSelection,
+    replaceString,
+    useRegularExpression
+  } = formState
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
@@ -63,6 +71,22 @@ export function FindAndReplace(props: FindAndReplaceProps): JSX.Element {
         onValueInput={setFormState}
         value={findString}
       />
+      <VerticalSpace space="medium" />
+      <Checkbox
+        name="caseSensitive"
+        onValueChange={setFormState}
+        value={caseSensitive === true}
+      >
+        <Text>Match case</Text>
+      </Checkbox>
+      <VerticalSpace space="small" />
+      <Checkbox
+        name="useRegularExpression"
+        onValueChange={setFormState}
+        value={useRegularExpression === true}
+      >
+        <Text>Use regular expression</Text>
+      </Checkbox>
       <VerticalSpace space="large" />
       <Text muted>Replace</Text>
       <VerticalSpace space="small" />
@@ -71,14 +95,6 @@ export function FindAndReplace(props: FindAndReplaceProps): JSX.Element {
         onValueInput={setFormState}
         value={replaceString}
       />
-      <VerticalSpace space="large" />
-      <Checkbox
-        name="caseSensitive"
-        onValueChange={setFormState}
-        value={caseSensitive === true}
-      >
-        <Text>Case sensitive</Text>
-      </Checkbox>
       <VerticalSpace space="large" />
       <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Find and Replace

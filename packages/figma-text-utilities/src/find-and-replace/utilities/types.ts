@@ -3,6 +3,7 @@ import { EventHandler } from '@create-figma-plugin/utilities'
 export type Settings = {
   caseSensitive: boolean
   findString: string
+  useRegularExpression: boolean
   replaceString: string
 }
 export type FindAndReplaceProps = Settings & {

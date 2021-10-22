@@ -27,7 +27,11 @@ export default async function (): Promise<void> {
   })
   once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings, settingsKey)
-    const { findString } = settings
+    const { caseSensitive, findString, useRegularExpression } = settings
+    const formattedFindString =
+      useRegularExpression === true
+        ? `/${findString}/g${caseSensitive === true ? '' : 'i'}`
+        : `“${findString}”`
     const scope =
       figma.currentPage.selection.length === 0 ? 'on page' : 'in selection'
     const count = await findAndReplaceAsync(
@@ -36,7 +40,7 @@ export default async function (): Promise<void> {
     )
     if (count === 0) {
       figma.closePlugin(
-        formatErrorMessage(`“${findString}” not found ${scope}`)
+        formatErrorMessage(`No matches for ${formattedFindString} ${scope}`)
       )
       return
     }
@@ -44,8 +48,9 @@ export default async function (): Promise<void> {
       formatSuccessMessage(
         `Replaced ${count} ${pluralize(
           count,
-          'instance'
-        )} of “${findString}” ${scope}`
+          'match',
+          'matches'
+        )} for ${formattedFindString} ${scope}`
       )
     )
   })
@@ -56,7 +61,7 @@ export default async function (): Promise<void> {
     )
   })
   showUI<FindAndReplaceProps>(
-    { height: 265, title: 'Find and Replace', width: 240 },
+    { height: 284, title: 'Find and Replace', width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )
 }
