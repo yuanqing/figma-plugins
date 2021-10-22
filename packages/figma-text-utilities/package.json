@@ -40,11 +40,6 @@
     ],
     "menu": [
       {
-        "name": "Copy for Spreadsheet",
-        "main": "src/copy-for-spreadsheet/main.ts",
-        "ui": "src/copy-for-spreadsheet/ui.ts"
-      },
-      {
         "name": "Bulk Copy Text",
         "main": "src/bulk-copy-text/main.ts",
         "ui": "src/bulk-copy-text/ui.ts"
@@ -53,6 +48,12 @@
         "name": "Bulk Paste Text",
         "main": "src/bulk-paste-text/main.ts",
         "ui": "src/bulk-paste-text/ui.ts"
+      },
+      "-",
+      {
+        "name": "Copy for Spreadsheet",
+        "main": "src/copy-for-spreadsheet/main.ts",
+        "ui": "src/copy-for-spreadsheet/ui.ts"
       },
       "-",
       {
