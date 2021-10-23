@@ -9,15 +9,20 @@ import {
 
 import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes.js'
 import {
+  CloseUIHandler,
+  CopyTextToClipboardProps,
   CopyTextToClipboardRequest,
-  CopyTextToClipboardResult
+  CopyTextToClipboardSuccess,
+  SelectionChangedHandler,
+  SubmitHandler
 } from '../utilities/types.js'
-import { mapTextNodesTo2dMatrix } from './utilities/map-text-nodes-to-2d-matrix.js'
-import { stringify2dMatrix } from './utilities/stringify-2d-matrix.js'
+import { createMatrix } from './utilities/create-matrix.js'
+import { stringifyMatrixToCSV } from './utilities/stringify-matrix-to-csv.js'
+import { stringifyMatrixToHTML } from './utilities/stringify-matrix-to-html.js'
 
 export default function (): void {
   if (figma.currentPage.selection.length === 0) {
-    figma.closePlugin(formatErrorMessage('Select one or more text layers'))
+    figma.closePlugin(formatErrorMessage('Select at least 1 text layer'))
     return
   }
   const nodes = getSelectedTextNodes()
@@ -25,15 +30,38 @@ export default function (): void {
     figma.closePlugin(formatErrorMessage('No text layers in selection'))
     return
   }
-  once<CopyTextToClipboardResult>('COPY_TEXT_TO_CLIPBOARD_RESULT', function () {
-    figma.closePlugin(
-      formatSuccessMessage(
-        `Copied ${nodes.length} ${pluralize(nodes.length, 'text layer')}`
+  once<CloseUIHandler>('CLOSE_UI', function () {
+    figma.closePlugin()
+  })
+  once<SubmitHandler>('SUBMIT', function () {
+    const nodes = getSelectedTextNodes()
+    const matrix = createMatrix(nodes)
+    emit<CopyTextToClipboardRequest>('COPY_TEXT_TO_CLIPBOARD_REQUEST', {
+      count: nodes.length,
+      html: stringifyMatrixToHTML(matrix),
+      text: stringifyMatrixToCSV(matrix)
+    })
+  })
+  once<CopyTextToClipboardSuccess>(
+    'COPY_TEXT_TO_CLIPBOARD_SUCCESS',
+    function (count: number) {
+      figma.closePlugin(
+        formatSuccessMessage(
+          `Copied ${count} ${pluralize(count, 'text layer')}`
+        )
       )
+    }
+  )
+  figma.on('selectionchange', function () {
+    emit<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      getSelectedTextNodes().length
     )
   })
-  showUI({ height: 129, width: 240 })
-  const matrix = mapTextNodesTo2dMatrix(nodes)
-  const string = stringify2dMatrix(matrix)
-  emit<CopyTextToClipboardRequest>('COPY_TEXT_TO_CLIPBOARD_REQUEST', string)
+  showUI<CopyTextToClipboardProps>(
+    { height: 100, width: 240 },
+    {
+      count: nodes.length
+    }
+  )
 }

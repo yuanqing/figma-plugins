@@ -1,7 +1,6 @@
-import {
-  sortNodesByCanonicalOrder,
-  traverseNode
-} from '@create-figma-plugin/utilities'
+import { traverseNode } from '@create-figma-plugin/utilities'
+
+import { sortNodesByPosition } from './sort-nodes-by-position'
 
 export function getSelectedTextNodes(): Array<TextNode> {
   const result: Array<TextNode> = []
@@ -13,5 +12,8 @@ export function getSelectedTextNodes(): Array<TextNode> {
       }
     })
   }
-  return sortNodesByCanonicalOrder(result).reverse()
+  if (result.length === 0) {
+    return []
+  }
+  return sortNodesByPosition(result, 'y')
 }

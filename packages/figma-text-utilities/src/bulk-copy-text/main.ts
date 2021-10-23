@@ -9,13 +9,17 @@ import {
 
 import { getSelectedTextNodes } from '../utilities/get-selected-text-nodes.js'
 import {
+  CloseUIHandler,
+  CopyTextToClipboardProps,
   CopyTextToClipboardRequest,
-  CopyTextToClipboardResult
+  CopyTextToClipboardSuccess,
+  SelectionChangedHandler,
+  SubmitHandler
 } from '../utilities/types.js'
 
 export default async function (): Promise<void> {
   if (figma.currentPage.selection.length === 0) {
-    figma.closePlugin(formatErrorMessage('Select one or more text layers'))
+    figma.closePlugin(formatErrorMessage('Select at least 1 text layer'))
     return
   }
   const nodes = getSelectedTextNodes()
@@ -23,22 +27,47 @@ export default async function (): Promise<void> {
     figma.closePlugin(formatErrorMessage('No text layers in selection'))
     return
   }
-  const string = nodes
+  once<CloseUIHandler>('CLOSE_UI', function () {
+    figma.closePlugin()
+  })
+  once<SubmitHandler>('SUBMIT', function () {
+    const nodes = getSelectedTextNodes()
+    const text = collectText(nodes)
+    if (text.length === 0 || text === '\n') {
+      figma.closePlugin(formatErrorMessage('Nothing to copy'))
+      return
+    }
+    emit<CopyTextToClipboardRequest>('COPY_TEXT_TO_CLIPBOARD_REQUEST', {
+      count: nodes.length,
+      text
+    })
+  })
+  once<CopyTextToClipboardSuccess>(
+    'COPY_TEXT_TO_CLIPBOARD_SUCCESS',
+    function (count: number) {
+      figma.closePlugin(
+        formatSuccessMessage(
+          `Copied ${count} ${pluralize(count, 'text layer')}`
+        )
+      )
+    }
+  )
+  figma.on('selectionchange', function () {
+    emit<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      getSelectedTextNodes().length
+    )
+  })
+  showUI<CopyTextToClipboardProps>(
+    { height: 100, width: 240 },
+    { count: nodes.length }
+  )
+}
+
+function collectText(nodes: Array<TextNode>): string {
+  return nodes
     .map(function (node: TextNode) {
       return node.characters
     })
     .join('\n')
-  if (string === '\n') {
-    figma.closePlugin(formatErrorMessage('Nothing to copy'))
-    return
-  }
-  once<CopyTextToClipboardResult>('COPY_TEXT_TO_CLIPBOARD_RESULT', function () {
-    figma.closePlugin(
-      formatSuccessMessage(
-        `Copied ${nodes.length} ${pluralize(nodes.length, 'text layer')}`
-      )
-    )
-  })
-  showUI({ height: 129, width: 240 })
-  emit<CopyTextToClipboardRequest>('COPY_TEXT_TO_CLIPBOARD_REQUEST', string)
 }

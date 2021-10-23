@@ -1,5 +1,9 @@
 import { render } from '@create-figma-plugin/ui'
 
-import { CopyTextToClipboard } from '../components/copy-text-to-clipboard.js'
+import { copyTextToClipboardFactory } from '../components/copy-text-to-clipboard-factory.js'
 
-export default render(CopyTextToClipboard)
+export default render(
+  copyTextToClipboardFactory({
+    copyButtonLabel: 'Bulk Copy Text'
+  })
+)
