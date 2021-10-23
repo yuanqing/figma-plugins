@@ -30,24 +30,37 @@ function groupNodesByAxis(
   nodes: Array<TextNode>,
   axis: keyof Vector
 ): Array<Array<TextNode>> {
-  const dimension = axis === 'x' ? 'width' : 'height'
   const [firstNode, ...rest] = sortNodesByPosition(nodes, axis)
   const result: Array<Array<TextNode>> = []
   let group: Array<TextNode> = [firstNode]
-  let endPosition = getAbsolutePosition(firstNode)[axis] + firstNode[dimension]
+  let endPosition =
+    getAbsolutePosition(firstNode)[axis] + computeTextNodeDimension(firstNode)
   for (const node of rest) {
     const position = getAbsolutePosition(node)[axis]
+    const dimension = computeTextNodeDimension(node)
     if (position > endPosition) {
-      endPosition = position + node[dimension]
+      endPosition = position + dimension
       result.push(group)
       group = [node]
       continue
     }
-    endPosition = Math.max(endPosition, position + node[dimension])
+    endPosition = Math.max(endPosition, position + dimension)
     group.push(node)
   }
   result.push(group)
   return result
+}
+
+function computeTextNodeDimension(node: TextNode): number {
+  const lineHeight = node.getRangeLineHeight(0, 1) as LineHeight
+  if (lineHeight.unit === 'PIXELS') {
+    return lineHeight.value
+  }
+  const fontSize = node.getRangeFontSize(0, 1) as number
+  if (lineHeight.unit === 'PERCENT') {
+    return (fontSize * lineHeight.value) / 100
+  }
+  return Math.round(fontSize * 1.2)
 }
 
 function mapNodeIdsToIndex(

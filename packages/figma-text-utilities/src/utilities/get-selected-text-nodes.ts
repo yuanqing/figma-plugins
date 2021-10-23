@@ -7,7 +7,7 @@ export function getSelectedTextNodes(): Array<TextNode> {
   const nodes = figma.currentPage.selection.slice()
   for (const node of nodes) {
     traverseNode(node, function (node: SceneNode) {
-      if (node.type === 'TEXT') {
+      if (node.type === 'TEXT' && node.characters.trim().length > 0) {
         result.push(node)
       }
     })
