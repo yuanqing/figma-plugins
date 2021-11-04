@@ -116,7 +116,9 @@ export function ReplaceWithComponentInstance(
   useEffect(
     function () {
       function handleWindowKeyDown(event: KeyboardEvent) {
-        handleScrollableMenuKeyDown(event)
+        handleScrollableMenuKeyDown(
+          event as JSX.TargetedKeyboardEvent<HTMLElement>
+        )
       }
       window.addEventListener('keydown', handleWindowKeyDown)
       return function (): void {
