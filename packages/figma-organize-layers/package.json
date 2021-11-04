@@ -43,7 +43,7 @@
     },
     "nodeArguments": [
       "--loader",
-      "ts-node/esm"
+      "tsm"
     ],
     "nonSemVerExperiments": {
       "configurableModuleFormat": true
