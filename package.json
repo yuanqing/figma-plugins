@@ -1,6 +1,9 @@
 {
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "build": "yarn run clean && lerna run --stream build",
     "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader tsm scripts/bump-dependencies.ts",
