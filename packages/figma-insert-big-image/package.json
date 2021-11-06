@@ -38,6 +38,7 @@
     "name": "Insert Big Image",
     "id": "799646392992487942",
     "editorType": [
+      "figjam",
       "figma"
     ],
     "main": "src/main.ts",
