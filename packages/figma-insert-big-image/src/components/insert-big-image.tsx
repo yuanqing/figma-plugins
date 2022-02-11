@@ -18,7 +18,8 @@ import { splitImageAsync } from '../utilities/split-image-async.js'
 import {
   CloseUIHandler,
   InsertBigImageHandler,
-  InsertBigImageProps
+  InsertBigImageProps,
+  SaveSettingsHandler
 } from '../utilities/types.js'
 
 export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
@@ -41,15 +42,21 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
         const name = trimExtension(file.name)
         emit<InsertBigImageHandler>('INSERT_BIG_IMAGE', images, {
           done: index === total - 1,
-          insertAs2x,
           name
         })
         setIndex(index)
         index += 1
       }
     },
-    [insertAs2x, setIndex, setTotal]
+    [setIndex, setTotal]
   )
+  const handleCheckboxValueChange = useCallback(async function (
+    insertAs2x: boolean
+  ) {
+    setInsertAs2x(insertAs2x)
+    emit<SaveSettingsHandler>('SAVE_SETTINGS', insertAs2x)
+  },
+  [])
   const initialFocus = useInitialFocus()
   if (total > 0) {
     return (
@@ -99,7 +106,7 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
       <VerticalSpace space="medium" />
       <Checkbox
         name="insertAs2x"
-        onValueChange={setInsertAs2x}
+        onValueChange={handleCheckboxValueChange}
         value={insertAs2x}
       >
         <Text>Insert as a @2x image</Text>
@@ -110,5 +117,5 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
 }
 
 function trimExtension(fileName: string): string {
-  return fileName.substr(0, fileName.lastIndexOf('.'))
+  return fileName.substring(0, fileName.lastIndexOf('.'))
 }

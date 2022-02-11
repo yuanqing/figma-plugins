@@ -15,7 +15,8 @@ import {
   CloseUIHandler,
   ImageNodePlainObject,
   InsertBigImageHandler,
-  InsertBigImageProps
+  InsertBigImageProps,
+  SaveSettingsHandler
 } from './utilities/types.js'
 
 export default async function (): Promise<void> {
@@ -26,14 +27,23 @@ export default async function (): Promise<void> {
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })
+  on<SaveSettingsHandler>(
+    'SAVE_SETTINGS',
+    async function (insertAs2x: boolean): Promise<void> {
+      await saveSettingsAsync({ insertAs2x }, settingsKey)
+    }
+  )
   on<InsertBigImageHandler>(
     'INSERT_BIG_IMAGE',
     async function (
       imageNodePlainObjects: Array<ImageNodePlainObject>,
-      options: { name: string; insertAs2x: boolean; done: boolean }
+      options: { name: string; done: boolean }
     ) {
-      const { name, insertAs2x, done } = options
-      await saveSettingsAsync({ insertAs2x }, settingsKey)
+      const { name, done } = options
+      const { insertAs2x } = await loadSettingsAsync(
+        defaultSettings,
+        settingsKey
+      )
       const imageNodes: Array<RectangleNode> = []
       for (const imageNodePlainObject of imageNodePlainObjects) {
         const imageNode = createImageNode(imageNodePlainObject, {

@@ -18,13 +18,17 @@ export interface CloseUIHandler extends EventHandler {
   handler: () => void
 }
 
+export interface SaveSettingsHandler extends EventHandler {
+  name: 'SAVE_SETTINGS'
+  handler: (insertAs2x: boolean) => void
+}
+
 export interface InsertBigImageHandler extends EventHandler {
   name: 'INSERT_BIG_IMAGE'
   handler: (
     images: Array<ImageNodePlainObject>,
     options: {
       name: string
-      insertAs2x: boolean
       done: boolean
     }
   ) => void
