@@ -8,6 +8,12 @@ export type ImageNodePlainObject = {
   height: number
 }
 
+export type DroppedImage = {
+  bytes: Uint8Array
+  name: string
+  type: string
+}
+
 export type Settings = {
   insertAs2x: boolean
 }
@@ -32,4 +38,9 @@ export interface InsertBigImageHandler extends EventHandler {
       done: boolean
     }
   ) => void
+}
+
+export interface DropImagesHandler extends EventHandler {
+  name: 'DROP_IMAGES'
+  handler: (droppedImages: Array<DroppedImage>) => void
 }

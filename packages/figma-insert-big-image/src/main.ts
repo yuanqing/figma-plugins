@@ -1,4 +1,5 @@
 import {
+  emit,
   formatSuccessMessage,
   loadSettingsAsync,
   on,
@@ -13,6 +14,8 @@ import { createImageNode } from './utilities/create-image-node.js'
 import { defaultSettings, settingsKey } from './utilities/settings.js'
 import {
   CloseUIHandler,
+  DropImagesHandler,
+  DroppedImage,
   ImageNodePlainObject,
   InsertBigImageHandler,
   InsertBigImageProps,
@@ -21,9 +24,28 @@ import {
 
 export default async function (): Promise<void> {
   let xOffset = Math.round(figma.viewport.center.x)
-  const yOffset = Math.round(figma.viewport.center.y)
+  let yOffset = Math.round(figma.viewport.center.y)
   const result: Array<SceneNode> = []
   const settings = await loadSettingsAsync(defaultSettings, settingsKey)
+  figma.on('drop', function (event: DropEvent): boolean {
+    xOffset = event.absoluteX
+    yOffset = event.absoluteY
+    const promises: Array<Promise<Uint8Array>> = []
+    for (const file of event.files) {
+      promises.push(file.getBytesAsync())
+    }
+    Promise.all(promises).then(function (result: Array<Uint8Array>): void {
+      const droppedImages: Array<DroppedImage> = result.map(function (
+        bytes: Uint8Array,
+        index: number
+      ) {
+        const file = event.files[index]
+        return { bytes, name: file.name, type: file.type }
+      })
+      emit<DropImagesHandler>('DROP_IMAGES', droppedImages)
+    })
+    return false
+  })
   once<CloseUIHandler>('CLOSE_UI', function () {
     figma.closePlugin()
   })

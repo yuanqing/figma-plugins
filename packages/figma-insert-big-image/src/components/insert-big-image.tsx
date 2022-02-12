@@ -10,13 +10,15 @@ import {
   useWindowKeyDown,
   VerticalSpace
 } from '@create-figma-plugin/ui'
-import { emit } from '@create-figma-plugin/utilities'
+import { emit, on } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
 import { splitImageAsync } from '../utilities/split-image-async.js'
 import {
   CloseUIHandler,
+  DropImagesHandler,
+  DroppedImage,
   InsertBigImageHandler,
   InsertBigImageProps,
   SaveSettingsHandler
@@ -49,6 +51,25 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
       }
     },
     [setIndex, setTotal]
+  )
+  useEffect(
+    function () {
+      return on<DropImagesHandler>(
+        'DROP_IMAGES',
+        async function (droppedImages: Array<DroppedImage>) {
+          const files: Array<File> = []
+          for (const droppedImage of droppedImages) {
+            const blob = new Blob([droppedImage.bytes], {
+              type: droppedImage.type
+            })
+            const file = new File([blob], droppedImage.name)
+            files.push(file)
+          }
+          await handleSelectedFiles(files)
+        }
+      )
+    },
+    [handleSelectedFiles]
   )
   const handleCheckboxValueChange = useCallback(async function (
     insertAs2x: boolean
