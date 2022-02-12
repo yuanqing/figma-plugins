@@ -104,7 +104,7 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
         onSelectedFiles={handleSelectedFiles}
       >
         <Text align="center" bold>
-          Drop image files here
+          Drop images on the canvas
         </Text>
         <VerticalSpace space="small" />
         <Text align="center" muted>
