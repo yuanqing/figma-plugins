@@ -32,7 +32,12 @@ export default async function (): Promise<void> {
     yOffset = event.absoluteY
     const promises: Array<Promise<Uint8Array>> = []
     for (const file of event.files) {
-      promises.push(file.getBytesAsync())
+      if (file.type === 'image/png' || file.type === 'image/jpeg') {
+        promises.push(file.getBytesAsync())
+      }
+    }
+    if (promises.length === 0) {
+      return true
     }
     Promise.all(promises).then(function (result: Array<Uint8Array>): void {
       const droppedImages: Array<DroppedImage> = result.map(function (
