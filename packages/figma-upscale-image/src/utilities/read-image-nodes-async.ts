@@ -12,7 +12,7 @@ export async function readImageNodesAsync(
       if (paint.type !== 'IMAGE') {
         continue
       }
-      const image = figma.getImageByHash(paint.imageHash as string)
+      const image = figma.getImageByHash(paint.imageHash as string) as Image
       const bytes = await image.getBytesAsync()
       result.push({
         bytes,
