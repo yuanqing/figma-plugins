@@ -33,9 +33,9 @@
     "watch": "yarn run clean-build && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^1.7.1",
-    "@create-figma-plugin/utilities": "^1.7.1",
-    "preact": "^10.5.15"
+    "@create-figma-plugin/ui": "^1.8.3",
+    "@create-figma-plugin/utilities": "^1.8.3",
+    "preact": "^10.6.5"
   },
   "ava": {
     "extensions": {
