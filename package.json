@@ -7,12 +7,12 @@
   "scripts": {
     "build": "yarn run clean && lerna run --stream build",
     "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader tsm scripts/bump-dependencies.ts ava",
-    "clean": "lerna run --parallel --stream clean && rm -rf '*.log'",
+    "clean": "lerna run --parallel --stream clean && rimraf '*.log'",
     "fix": "lerna run --parallel --stream fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel --stream lint && eslint 'scripts/**/*.ts'",
     "postinstall": "simple-git-hooks && yarn run build",
     "publish": "lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rm -rf node_modules yarn.lock && yarn install",
+    "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
     "test": "lerna run --stream test"
   },
   "devDependencies": {
@@ -29,6 +29,7 @@
     "npm-check-updates": "^12.3.0",
     "preact": "^10.6.5",
     "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.7.0",
     "stylelint": "^14.5.0",
     "stylelint-config-yuanqing": "^0.0.3",

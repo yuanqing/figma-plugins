@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "build": "yarn run clean && build-figma-plugin --typecheck --minify",
-    "clean": "rm -rf '*.log' build",
+    "clean": "rimraf '*.log' build",
     "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json'",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "watch": "yarn run clean && build-figma-plugin --typecheck --watch"
