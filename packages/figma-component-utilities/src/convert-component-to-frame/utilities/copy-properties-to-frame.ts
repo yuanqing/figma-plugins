@@ -1,4 +1,8 @@
-import { cloneObject } from '@create-figma-plugin/utilities'
+import {
+  cloneObject,
+  getAbsolutePosition,
+  setAbsolutePosition
+} from '@create-figma-plugin/utilities'
 
 export function copyPropertiesToFrame(
   node: ComponentNode | InstanceNode,
@@ -55,8 +59,8 @@ export function copyPropertiesToFrame(
 
   // Layout-related properties
   frame.resizeWithoutConstraints(node.width, node.height)
-  frame.x = node.x
-  frame.y = node.y
+  const absolutePosition = getAbsolutePosition(node)
+  setAbsolutePosition(frame, absolutePosition)
   frame.rotation = node.rotation
   frame.constrainProportions = node.constrainProportions
   frame.layoutAlign = node.layoutAlign

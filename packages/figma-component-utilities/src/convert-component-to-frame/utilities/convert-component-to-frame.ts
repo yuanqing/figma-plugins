@@ -20,7 +20,7 @@ export function convertComponentToFrame(
       }
     }
   }
-  node.remove()
   copyPropertiesToFrame(node, frame)
+  node.remove()
   return frame
 }
