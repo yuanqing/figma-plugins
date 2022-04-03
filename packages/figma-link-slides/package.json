@@ -1,0 +1,65 @@
+{
+  "name": "figma-link-slides",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins"
+  ],
+  "license": "MIT",
+  "author": "Yuan Qing Lim",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/figma-plugins.git",
+    "directory": "packages/figma-link-slides"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "yarn run clean && build-figma-plugin --typecheck --minify",
+    "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json'",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "watch": "yarn run clean && build-figma-plugin --typecheck --watch"
+  },
+  "dependencies": {
+    "@create-figma-plugin/utilities": "^1.8.3"
+  },
+  "figma-plugin": {
+    "name": "Link Slides",
+    "id": "figma-link-slides",
+    "editorType": [
+      "figma"
+    ],
+    "menu": [
+      {
+        "name": "Link Slides",
+        "main": "src/link-slides/main.ts",
+        "ui": "src/link-slides/ui.ts"
+      },
+      "-",
+      {
+        "name": "Delete Links",
+        "main": "src/delete-links/main.ts"
+      }
+    ],
+    "relaunchButtons": {
+      "link-slides": {
+        "name": "Link Slides",
+        "main": "src/link-slides/main.ts",
+        "ui": "src/link-slides/ui.ts"
+      },
+      "delete-links": {
+        "name": "Delete Links",
+        "main": "src/delete-links/main.ts"
+      }
+    }
+  }
+}
