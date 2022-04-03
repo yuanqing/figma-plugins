@@ -14,5 +14,5 @@ export default async function (): Promise<void> {
   }
   deleteLinks(nodes)
   figma.currentPage.flowStartingPoints = []
-  figma.closePlugin(formatSuccessMessage('Deleted links'))
+  figma.closePlugin(formatSuccessMessage('Unlinked slides'))
 }

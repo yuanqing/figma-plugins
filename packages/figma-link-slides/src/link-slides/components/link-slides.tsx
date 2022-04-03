@@ -30,7 +30,7 @@ export function LinkSlides(props: LinkSlidesProps): JSX.Element {
         return flowName !== ''
       }
     })
-  const { shouldNumberFrameNodes, flowName } = formState
+  const { flowName, shouldNumberFrameNodes } = formState
   return (
     <Container space="medium">
       <VerticalSpace space="large" />

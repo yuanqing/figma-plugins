@@ -6,7 +6,8 @@ import {
   pluralize,
   saveSettingsAsync,
   setRelaunchButton,
-  showUI
+  showUI,
+  updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
 
 import { deleteLinks } from '../utilities/delete-links.js'
@@ -14,7 +15,8 @@ import { getVisibleTopLevelFrameNodes } from '../utilities/get-visible-top-level
 import { defaultSettings, settingsKey } from '../utilities/settings.js'
 import { Settings } from '../utilities/types.js'
 import { linkFrameNodes } from './utilities/link-frame-nodes.js'
-import { renameFrameNodes } from './utilities/rename-frame-nodes.js'
+import { numberFrameNodes } from './utilities/number-frame-nodes.js'
+import { sortFrameNodes } from './utilities/sort-frame-nodes.js'
 import {
   CloseUIHandler,
   LinkSlidesProps,
@@ -35,17 +37,19 @@ export default async function (): Promise<void> {
   once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     const { flowName, shouldNumberFrameNodes } = settings
     await saveSettingsAsync(settings, settingsKey)
-    const nodes = getVisibleTopLevelFrameNodes()
+    let nodes = getVisibleTopLevelFrameNodes()
     deleteLinks(nodes)
+    nodes = sortFrameNodes(nodes)
+    updateNodesSortOrder(nodes)
     if (shouldNumberFrameNodes === true) {
-      renameFrameNodes(nodes)
+      numberFrameNodes(nodes)
     }
     linkFrameNodes(nodes)
     figma.currentPage.flowStartingPoints = [
-      { name: flowName, nodeId: nodes[0].id }
+      { name: flowName, nodeId: nodes[nodes.length - 1].id }
     ]
     setRelaunchButton(figma.currentPage, 'link-slides')
-    setRelaunchButton(figma.currentPage, 'delete-links')
+    setRelaunchButton(figma.currentPage, 'unlink-slides')
     figma.closePlugin(
       formatSuccessMessage(
         `Linked ${nodes.length} ${pluralize(nodes.length, 'slide')}`

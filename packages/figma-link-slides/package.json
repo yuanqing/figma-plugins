@@ -44,10 +44,9 @@
         "main": "src/link-slides/main.ts",
         "ui": "src/link-slides/ui.ts"
       },
-      "-",
       {
-        "name": "Delete Links",
-        "main": "src/delete-links/main.ts"
+        "name": "Unlink Slides",
+        "main": "src/unlink-slides/main.ts"
       }
     ],
     "relaunchButtons": {
@@ -56,9 +55,9 @@
         "main": "src/link-slides/main.ts",
         "ui": "src/link-slides/ui.ts"
       },
-      "delete-links": {
-        "name": "Delete Links",
-        "main": "src/delete-links/main.ts"
+      "unlink-slides": {
+        "name": "Unlink Slides",
+        "main": "src/unlink-slides/main.ts"
       }
     }
   }

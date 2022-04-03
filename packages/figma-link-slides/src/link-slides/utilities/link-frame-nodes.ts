@@ -1,8 +1,9 @@
 export function linkFrameNodes(nodes: Array<FrameNode | ComponentNode>): void {
+  const reversed = nodes.slice().reverse()
   let i = 0
-  while (i < nodes.length - 1) {
-    const node = nodes[i]
-    const nextNode = nodes[i + 1]
+  while (i < reversed.length - 1) {
+    const node = reversed[i]
+    const nextNode = reversed[i + 1]
     const reactions: Array<Reaction> = [
       {
         action: {
