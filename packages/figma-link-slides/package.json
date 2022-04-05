@@ -41,19 +41,23 @@
     "menu": [
       {
         "name": "Link Slides",
-        "main": "src/link-slides/main.ts",
-        "ui": "src/link-slides/ui.ts"
+        "main": "src/link-slides/main.ts"
       },
       {
         "name": "Unlink Slides",
         "main": "src/unlink-slides/main.ts"
+      },
+      "-",
+      {
+        "name": "Settings",
+        "main": "src/settings/main.ts",
+        "ui": "src/settings/ui.ts"
       }
     ],
     "relaunchButtons": {
       "link-slides": {
         "name": "Link Slides",
-        "main": "src/link-slides/main.ts",
-        "ui": "src/link-slides/ui.ts"
+        "main": "src/link-slides/main.ts"
       },
       "unlink-slides": {
         "name": "Unlink Slides",

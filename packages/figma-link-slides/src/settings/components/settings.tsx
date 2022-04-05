@@ -13,11 +13,11 @@ import { h, JSX } from 'preact'
 import {
   CloseUIHandler,
   FormState,
-  LinkSlidesProps,
+  SettingsProps,
   SubmitHandler
 } from '../utilities/types.js'
 
-export function LinkSlides(props: LinkSlidesProps): JSX.Element {
+export function Settings(props: SettingsProps): JSX.Element {
   const { disabled, formState, handleSubmit, initialFocus, setFormState } =
     useForm<FormState>(props, {
       close: function () {
@@ -52,7 +52,7 @@ export function LinkSlides(props: LinkSlidesProps): JSX.Element {
         fullWidth
         onClick={handleSubmit}
       >
-        Link Slides
+        Save Settings
       </Button>
       <VerticalSpace space="small" />
     </Container>
