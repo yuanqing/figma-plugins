@@ -17,25 +17,25 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "files": [
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean && build-figma-plugin --typecheck --minify",
+    "build": "npm run clean && build-figma-plugin --typecheck --minify",
     "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
-    "generate-translate-menu-config": "node --loader tsm scripts/generate-translate-menu-config.ts",
-    "generate-translate-main-ts": "node --loader tsm scripts/generate-translate-main-ts.ts > src/translate/main.ts",
+    "generate-translate-menu-config": "node --loader ts-node/esm scripts/generate-translate-menu-config.ts",
+    "generate-translate-main-ts": "node --loader ts-node/esm scripts/generate-translate-main-ts.ts > src/translate/main.ts",
     "fix": "eslint --fix '{scripts,src}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' '*.json'",
     "lint": "eslint '{scripts,src}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
-    "watch": "yarn run clean && build-figma-plugin --typecheck --watch"
+    "watch": "npm run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^1.8.3",
-    "@create-figma-plugin/utilities": "^1.8.3",
-    "p-memoize": "^6.0.1",
-    "preact": "^10.6.5"
+    "@create-figma-plugin/ui": "^2.0.1",
+    "@create-figma-plugin/utilities": "^2.0.1",
+    "p-memoize": "^6.0.2",
+    "preact": "^10.7.3"
   },
   "figma-plugin": {
     "name": "Language Tester",

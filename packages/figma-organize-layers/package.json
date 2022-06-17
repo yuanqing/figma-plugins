@@ -17,37 +17,36 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "files": [
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean-build && build-figma-plugin --typecheck --minify",
-    "clean": "yarn run clean-build && yarn run clean-test",
+    "build": "npm run clean-build && build-figma-plugin --typecheck --minify",
+    "clean": "npm run clean-build && npm run clean-test",
     "clean-build": "rimraf '*.log' build",
     "clean-test": "rimraf '*.log'",
     "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' '*.json'",
     "lint": "eslint '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
-    "test": "yarn run clean-test && ava 'test/**/*.ts'",
-    "watch": "yarn run clean-build && build-figma-plugin --typecheck --watch"
+    "test": "npm run clean-test && ava 'test/**/*.ts'",
+    "watch": "npm run clean-build && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^1.8.3",
-    "@create-figma-plugin/utilities": "^1.8.3",
-    "preact": "^10.6.5"
+    "@create-figma-plugin/ui": "^2.0.1",
+    "@create-figma-plugin/utilities": "^2.0.1",
+    "preact": "^10.7.3"
   },
   "ava": {
     "extensions": {
       "ts": "module"
     },
+    "failFast": true,
     "nodeArguments": [
       "--loader",
-      "tsm"
+      "ts-node/esm"
     ],
-    "nonSemVerExperiments": {
-      "configurableModuleFormat": true
-    }
+    "timeout": "2m"
   },
   "figma-plugin": {
     "name": "Organize Layers",

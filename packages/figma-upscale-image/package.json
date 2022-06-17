@@ -17,24 +17,24 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "files": [
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean && build-figma-plugin --typecheck --minify",
+    "build": "npm run clean && build-figma-plugin --typecheck --minify",
     "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
     "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json'",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "watch": "yarn run clean && build-figma-plugin --typecheck --watch"
+    "watch": "npm run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^1.8.3",
-    "@create-figma-plugin/utilities": "^1.8.3",
-    "@tensorflow/tfjs": "^3.13.0",
-    "preact": "^10.6.5",
-    "upscaler": "^0.9.0"
+    "@create-figma-plugin/ui": "^2.0.1",
+    "@create-figma-plugin/utilities": "^2.0.1",
+    "@tensorflow/tfjs": "^3.18.0",
+    "preact": "^10.7.3",
+    "upscaler": "^0.12.3"
   },
   "figma-plugin": {
     "name": "Upscale Image",

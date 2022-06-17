@@ -17,20 +17,20 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "files": [
     "src"
   ],
   "scripts": {
-    "build": "yarn run clean && build-figma-plugin --typecheck --minify",
+    "build": "npm run clean && build-figma-plugin --typecheck --minify",
     "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
     "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json'",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "watch": "yarn run clean && build-figma-plugin --typecheck --watch"
+    "watch": "npm run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^1.8.3",
+    "@create-figma-plugin/utilities": "^2.0.1",
     "array-shuffle": "^3.0.0",
     "mem": "^9.0.2",
     "natural-compare-lite": "^1.4.0"
