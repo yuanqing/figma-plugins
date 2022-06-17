@@ -34,7 +34,7 @@
     "@create-figma-plugin/utilities": "^2.0.1",
     "@tensorflow/tfjs": "^3.18.0",
     "preact": "^10.7.3",
-    "upscaler": "^0.12.3"
+    "upscaler": "0.11.0"
   },
   "figma-plugin": {
     "name": "Upscale Image",

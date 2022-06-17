@@ -6,13 +6,13 @@
   },
   "scripts": {
     "build": "npm run clean && lerna run --stream build",
-    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts",
+    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts upscaler",
     "clean": "lerna run --parallel --stream clean && rimraf '*.log'",
     "fix": "lerna run --parallel --stream fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel --stream lint && eslint 'scripts/**/*.ts'",
     "postinstall": "simple-git-hooks && npm run build",
     "publish": "lerna publish from-package",
-    "reset": "npm run clean && lerna clean --yes && rimraf node_modules package-lock.json && yarn install",
+    "reset": "npm run clean && lerna clean --yes && rimraf node_modules package-lock.json && npm install",
     "test": "lerna run --stream test"
   },
   "devDependencies": {
