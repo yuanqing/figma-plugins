@@ -39,11 +39,11 @@ export function LanguageItem(props: {
       {children}
       <div className={styles.icon}>
         {loading === false && selected === true ? (
-          <IconCheckCircle32 color="blue" />
+          <IconCheckCircle32 color="brand" />
         ) : null}
       </div>
       <div className={styles.loadingIndicator}>
-        {loading === true ? <LoadingIndicator color="blue" /> : null}
+        {loading === true ? <LoadingIndicator color="brand" /> : null}
       </div>
     </div>
   )

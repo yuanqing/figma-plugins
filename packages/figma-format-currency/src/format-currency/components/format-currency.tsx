@@ -1,6 +1,7 @@
 import {
   Button,
   Container,
+  Muted,
   SegmentedControl,
   Text,
   TextboxAutocomplete,
@@ -110,7 +111,9 @@ export function FormatCurrency(props: FormatCurrencyProps): JSX.Element {
       <Preview previewItems={previewItems} status={status} />
       <Container space="medium">
         <VerticalSpace space="large" />
-        <Text muted>Format</Text>
+        <Text>
+          <Muted>Format</Muted>
+        </Text>
         <VerticalSpace space="small" />
         <SegmentedControl
           name="currencyFormat"
@@ -119,7 +122,9 @@ export function FormatCurrency(props: FormatCurrencyProps): JSX.Element {
           value={currencyFormat}
         />
         <VerticalSpace space="large" />
-        <Text muted>Locale</Text>
+        <Text>
+          <Muted>Locale</Muted>
+        </Text>
         <VerticalSpace space="small" />
         <TextboxAutocomplete
           filter

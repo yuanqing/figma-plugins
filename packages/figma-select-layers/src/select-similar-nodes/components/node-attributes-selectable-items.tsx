@@ -1,4 +1,4 @@
-import { SelectableItem, Text } from '@create-figma-plugin/ui'
+import { Muted, SelectableItem, Text } from '@create-figma-plugin/ui'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
@@ -129,8 +129,8 @@ export function NodeAttributesSelectableItems(props: {
   if (children.length === 0) {
     return (
       <div className={styles.emptyState}>
-        <Text align="center" muted>
-          No matches
+        <Text align="center">
+          <Muted>No matches</Muted>
         </Text>
       </div>
     )

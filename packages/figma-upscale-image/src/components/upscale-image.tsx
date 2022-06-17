@@ -3,6 +3,7 @@ import {
   Container,
   LoadingIndicator,
   MiddleAlign,
+  Muted,
   SegmentedControl,
   Text,
   useForm,
@@ -85,7 +86,7 @@ export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
     return (
       <div class={styles.loading}>
         <MiddleAlign>
-          <LoadingIndicator color="blue" />
+          <LoadingIndicator color="brand" />
           <VerticalSpace space="extraSmall" />
           <Text align="center">Upscaling image…</Text>
         </MiddleAlign>
@@ -96,7 +97,9 @@ export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
-      <Text muted>Scale</Text>
+      <Text>
+        <Muted>Scale</Muted>
+      </Text>
       <VerticalSpace space="small" />
       <SegmentedControl
         {...initialFocus}

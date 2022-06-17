@@ -1,14 +1,13 @@
-import { loadFontsAsync, traverseNode } from '@create-figma-plugin/utilities'
+import { loadFontsAsync } from '@create-figma-plugin/utilities'
 
-import { Settings } from './types'
+import { Settings } from './types.js'
 
 export async function findAndReplaceAsync(
-  nodes: Array<SceneNode>,
+  textNodes: Array<TextNode>,
   options: Settings
 ): Promise<number> {
   const { caseSensitive, findString, useRegularExpression, replaceString } =
     options
-  const textNodes = filterTextNodes(nodes)
   await loadFontsAsync(textNodes)
   let count = 0
   if (useRegularExpression === false) {
@@ -33,16 +32,4 @@ export async function findAndReplaceAsync(
     })
   }
   return count
-}
-
-export function filterTextNodes(nodes: Array<SceneNode>): Array<TextNode> {
-  const result: Array<TextNode> = []
-  for (const node of nodes) {
-    traverseNode(node, function (node: SceneNode) {
-      if (node.type === 'TEXT') {
-        result.push(node)
-      }
-    })
-  }
-  return result
 }

@@ -39,7 +39,7 @@ export function FlattenSelectionToBitmap(): JSX.Element {
   return (
     <div class={styles.flattenSelectionToBitmap}>
       <MiddleAlign>
-        <LoadingIndicator color="blue" />
+        <LoadingIndicator color="brand" />
         <VerticalSpace space="extraSmall" />
         <Text align="center">Flattening selection…</Text>
       </MiddleAlign>

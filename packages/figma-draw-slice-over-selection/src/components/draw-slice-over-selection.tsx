@@ -1,6 +1,8 @@
 import {
   Button,
+  Columns,
   Container,
+  Muted,
   Text,
   TextboxNumeric,
   useForm,
@@ -17,6 +19,7 @@ import {
   SelectionChangedHandler,
   SubmitHandler
 } from '../utilities/types.js'
+import styles from './draw-slice-over-selection.css'
 
 export function DrawSliceOverSelection(
   props: DrawSliceOverSelectionProps
@@ -50,17 +53,23 @@ export function DrawSliceOverSelection(
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
-      <Text muted>Padding</Text>
-      <VerticalSpace space="small" />
-      <TextboxNumeric
-        {...initialFocus}
-        minimum={0}
-        name="padding"
-        onNumericValueInput={setFormState}
-        onValueInput={setPaddingString}
-        value={paddingString}
-      />
-      <VerticalSpace space="extraLarge" />
+      <Columns>
+        <div class={styles.text}>
+          <Text>
+            <Muted>Padding</Muted>
+          </Text>
+        </div>
+        <TextboxNumeric
+          {...initialFocus}
+          minimum={0}
+          name="padding"
+          onNumericValueInput={setFormState}
+          onValueInput={setPaddingString}
+          value={paddingString}
+          variant="underline"
+        />
+      </Columns>
+      <VerticalSpace space="large" />
       <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Draw Slice Over Selection
       </Button>

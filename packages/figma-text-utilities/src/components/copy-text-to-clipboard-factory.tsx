@@ -1,6 +1,7 @@
 import {
   Button,
   Container,
+  Muted,
   Text,
   useInitialFocus,
   useWindowKeyDown,
@@ -75,7 +76,7 @@ export function copyTextToClipboardFactory(options: {
       [count]
     )
     return (
-      <Container>
+      <Container space="medium">
         <VerticalSpace space="extraLarge" />
         <Button
           {...useInitialFocus()}
@@ -86,10 +87,12 @@ export function copyTextToClipboardFactory(options: {
           {copyButtonLabel}
         </Button>
         <VerticalSpace space="small" />
-        <Text align="center" muted>
-          {count === 0
-            ? 'Select at least 1 text layer'
-            : `${count} ${pluralize(count, 'text layer')} in selection`}
+        <Text align="center">
+          <Muted>
+            {count === 0
+              ? 'Select at least 1 text layer'
+              : `${count} ${pluralize(count, 'text layer')} in selection`}
+          </Muted>
         </Text>
         <VerticalSpace space="extraLarge" />
       </Container>

@@ -2,6 +2,7 @@ import {
   Button,
   Checkbox,
   Container,
+  Muted,
   Text,
   Textbox,
   useForm,
@@ -28,14 +29,14 @@ export function FindAndReplace(props: FindAndReplaceProps): JSX.Element {
       submit: function ({
         caseSensitive,
         findString,
-        useRegularExpression: regularExpression,
+        useRegularExpression,
         replaceString
       }: FormState) {
         emit<SubmitHandler>('SUBMIT', {
           caseSensitive,
           findString,
           replaceString,
-          useRegularExpression: regularExpression
+          useRegularExpression
         })
       },
       validate: function ({ findString }: FormState) {
@@ -63,13 +64,16 @@ export function FindAndReplace(props: FindAndReplaceProps): JSX.Element {
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
-      <Text muted>Find</Text>
+      <Text>
+        <Muted>Find</Muted>
+      </Text>
       <VerticalSpace space="small" />
       <Textbox
         {...initialFocus}
         name="findString"
         onValueInput={setFormState}
         value={findString}
+        variant="border"
       />
       <VerticalSpace space="medium" />
       <Checkbox
@@ -88,20 +92,25 @@ export function FindAndReplace(props: FindAndReplaceProps): JSX.Element {
         <Text>Use regular expression</Text>
       </Checkbox>
       <VerticalSpace space="large" />
-      <Text muted>Replace</Text>
+      <Text>
+        <Muted>Replace</Muted>
+      </Text>
       <VerticalSpace space="small" />
       <Textbox
         name="replaceString"
         onValueInput={setFormState}
         value={replaceString}
+        variant="border"
       />
       <VerticalSpace space="large" />
       <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Find and Replace
       </Button>
       <VerticalSpace space="small" />
-      <Text align="center" muted>
-        Replacing {hasSelection === true ? 'in selection' : 'on page'}
+      <Text align="center">
+        <Muted>
+          Replacing {hasSelection === true ? 'in selection' : 'on page'}
+        </Muted>
       </Text>
       <VerticalSpace space="extraLarge" />
     </Container>

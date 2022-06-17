@@ -2,6 +2,7 @@ import {
   Button,
   Checkbox,
   Container,
+  Muted,
   Text,
   Textbox,
   useForm,
@@ -34,7 +35,9 @@ export function Settings(props: SettingsProps): JSX.Element {
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
-      <Text muted>Flow name</Text>
+      <Text>
+        <Muted>Flow name</Muted>
+      </Text>
       <VerticalSpace space="small" />
       <Textbox name="flowName" onValueInput={setFormState} value={flowName} />
       <VerticalSpace space="medium" />

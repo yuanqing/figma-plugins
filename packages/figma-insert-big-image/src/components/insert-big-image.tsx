@@ -1,10 +1,12 @@
 import {
+  Bold,
   Checkbox,
   Container,
   FileUploadButton,
   FileUploadDropzone,
   LoadingIndicator,
   MiddleAlign,
+  Muted,
   Text,
   useInitialFocus,
   useWindowKeyDown,
@@ -82,7 +84,7 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
   if (total > 0) {
     return (
       <MiddleAlign>
-        <LoadingIndicator color="blue" />
+        <LoadingIndicator color="brand" />
         <VerticalSpace space="small" />
         <Text align="center" numeric>
           {total === 1
@@ -103,12 +105,12 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
         multiple
         onSelectedFiles={handleSelectedFiles}
       >
-        <Text align="center" bold>
-          Drop images on the canvas
+        <Text align="center">
+          <Bold>Drop images on the canvas</Bold>
         </Text>
         <VerticalSpace space="small" />
-        <Text align="center" muted>
-          or
+        <Text align="center">
+          <Muted>or</Muted>
         </Text>
         <VerticalSpace space="small" />
         <FileUploadButton
@@ -120,8 +122,8 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
           Choose Image Files
         </FileUploadButton>
         <VerticalSpace space="medium" />
-        <Text align="center" muted>
-          Supported formats: JPEG, PNG
+        <Text align="center">
+          <Muted>Supported formats: JPEG, PNG</Muted>
         </Text>
       </FileUploadDropzone>
       <VerticalSpace space="medium" />

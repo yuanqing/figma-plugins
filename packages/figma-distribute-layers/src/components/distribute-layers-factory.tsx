@@ -1,6 +1,7 @@
 import {
   Button,
   Container,
+  Muted,
   Text,
   TextboxNumeric,
   useForm,
@@ -51,7 +52,9 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
     return (
       <Container space="medium">
         <VerticalSpace space="large" />
-        <Text muted>Space</Text>
+        <Text>
+          <Muted>Space</Muted>
+        </Text>
         <VerticalSpace space="small" />
         <TextboxNumeric
           {...initialFocus}
@@ -60,6 +63,7 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
           onNumericValueInput={setFormState}
           onValueInput={setSpaceString}
           value={spaceString}
+          variant="border"
         />
         <VerticalSpace space="extraLarge" />
         <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>

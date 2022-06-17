@@ -10,6 +10,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
+import { filterTextNodes } from '../utilities/filter-text-nodes.js'
 import { findAndReplaceAsync } from './utilities/find-and-replace-async.js'
 import { defaultSettings, settingsKey } from './utilities/settings.js'
 import {
@@ -35,7 +36,7 @@ export default async function (): Promise<void> {
     const scope =
       figma.currentPage.selection.length === 0 ? 'on page' : 'in selection'
     const count = await findAndReplaceAsync(
-      getSelectedNodesOrAllNodes(),
+      filterTextNodes(getSelectedNodesOrAllNodes()),
       settings
     )
     if (count === 0) {

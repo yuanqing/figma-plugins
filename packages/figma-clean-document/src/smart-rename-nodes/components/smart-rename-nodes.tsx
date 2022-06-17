@@ -1,6 +1,7 @@
 import {
   Button,
   Container,
+  Muted,
   Text,
   Textbox,
   useForm,
@@ -43,7 +44,9 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
-      <Text muted>Ignore layers named</Text>
+      <Text>
+        <Muted>Ignore layers named</Muted>
+      </Text>
       <VerticalSpace space="small" />
       <Textbox
         {...initialFocus}
@@ -51,6 +54,7 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
         name="smartRenameLayersWhitelist"
         onValueInput={setFormState}
         value={smartRenameLayersWhitelist}
+        variant="border"
       />
       <VerticalSpace space="extraLarge" />
       <Button
@@ -62,10 +66,12 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
         Smart Rename Layers
       </Button>
       <VerticalSpace space="small" />
-      <Text align="center" muted>
-        {hasSelection === true
-          ? 'Renaming layers in selection'
-          : 'Renaming all layers on page'}
+      <Text align="center">
+        <Muted>
+          {hasSelection === true
+            ? 'Renaming layers in selection'
+            : 'Renaming all layers on page'}
+        </Muted>
       </Text>
       <VerticalSpace space="extraLarge" />
     </Container>

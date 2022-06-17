@@ -5,6 +5,7 @@ import {
   Container,
   IconSpaceHorizontal16,
   IconSpaceVertical16,
+  Muted,
   SegmentedControl,
   SegmentedControlOption,
   Text,
@@ -100,7 +101,9 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
       <OrganizeNodesPreview groups={groups} />
       <Container space="medium">
         <VerticalSpace space="large" />
-        <Text muted>Group by text before</Text>
+        <Text>
+          <Muted>Group by text before</Muted>
+        </Text>
         <VerticalSpace space="small" />
         <SegmentedControl
           name="groupDefinition"
@@ -111,7 +114,9 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
           }
         />
         <VerticalSpace space="large" />
-        <Text muted>Space between layers</Text>
+        <Text>
+          <Muted>Space between layers</Muted>
+        </Text>
         <VerticalSpace space="small" />
         <Columns space="extraSmall">
           <TextboxNumeric

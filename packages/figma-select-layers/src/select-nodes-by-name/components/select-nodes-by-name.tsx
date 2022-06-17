@@ -2,6 +2,7 @@ import {
   Button,
   Checkbox,
   Container,
+  Muted,
   Text,
   Textbox,
   useForm,
@@ -66,10 +67,12 @@ export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
         Select Layers by Name
       </Button>
       <VerticalSpace space="small" />
-      <Text align="center" muted>
-        {hasSelection === true
-          ? 'Matching layers within selection'
-          : 'Matching layers on page'}
+      <Text align="center">
+        <Muted>
+          {hasSelection === true
+            ? 'Matching layers within selection'
+            : 'Matching layers on page'}
+        </Muted>
       </Text>
       <VerticalSpace space="extraLarge" />
     </Container>

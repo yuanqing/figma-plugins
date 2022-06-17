@@ -2,6 +2,7 @@ import {
   Button,
   Checkbox,
   Container,
+  Muted,
   Text,
   TextboxAutocomplete,
   useForm,
@@ -131,7 +132,9 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
       <Preview previewItems={previewItems} status={status} />
       <Container space="medium">
         <VerticalSpace space="large" />
-        <Text muted>Currency</Text>
+        <Text>
+          <Muted>Currency</Muted>
+        </Text>
         <VerticalSpace space="small" />
         <TextboxAutocomplete
           filter
@@ -149,7 +152,9 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
           <Text>Round numbers</Text>
         </Checkbox>
         <VerticalSpace space="large" />
-        <Text muted>Locale</Text>
+        <Text>
+          <Muted>Locale</Muted>
+        </Text>
         <VerticalSpace space="small" />
         <TextboxAutocomplete
           filter

@@ -5,6 +5,7 @@ import {
   Divider,
   IconLayerComponent16,
   Layer,
+  Muted,
   SearchTextbox,
   Text,
   useForm,
@@ -141,8 +142,8 @@ export function ReplaceWithComponentInstance(
       <Divider />
       {filteredComponentNodes.length === 0 ? (
         <div className={styles.emptyState}>
-          <Text align="center" muted>
-            No components match “{searchTerm}”
+          <Text align="center">
+            <Muted>No components match “{searchTerm}”</Muted>
           </Text>
         </div>
       ) : (
@@ -156,12 +157,12 @@ export function ReplaceWithComponentInstance(
               <Layer
                 key={index}
                 bold
-                color="purple"
+                component
+                description={pageName}
                 icon={<IconLayerComponent16 />}
                 name="componentId"
                 onChange={handleLayerChange}
                 onMouseDown={handleLayerMouseDown}
-                pageName={pageName}
                 value={id === componentId}
                 {...{ [`${COMPONENT_NODE_ID_ATTRIBUTE_NAME}`]: id }}
               >

@@ -2,6 +2,7 @@ import {
   Button,
   Checkbox,
   Container,
+  Muted,
   Stack,
   Text,
   Textbox,
@@ -124,13 +125,16 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
         >
           <Text>Smart rename layers</Text>
           <VerticalSpace space="medium" />
-          <Text muted>Ignore layers named</Text>
+          <Text>
+            <Muted>Ignore layers named</Muted>
+          </Text>
           <VerticalSpace space="small" />
           <Textbox
             disabled={smartRenameLayers === false || loading === true}
             name="smartRenameLayersWhitelist"
             onValueInput={setFormState}
             value={smartRenameLayersWhitelist}
+            variant="border"
           />
         </Checkbox>
         <Checkbox
@@ -141,9 +145,11 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
         >
           <Text>Smart sort layers</Text>
           <VerticalSpace space="medium" />
-          <Text muted>
-            Sort layers by their X and Y position while maintaining their
-            relative stacking order on the page
+          <Text>
+            <Muted>
+              Sort layers by their X and Y position while maintaining their
+              relative stacking order on the page
+            </Muted>
           </Text>
         </Checkbox>
         <Checkbox
@@ -166,10 +172,12 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
         Clean Layers
       </Button>
       <VerticalSpace space="small" />
-      <Text align="center" muted>
-        {hasSelection === true
-          ? 'Cleaning layers in selection'
-          : 'Cleaning all layers on page'}
+      <Text align="center">
+        <Muted>
+          {hasSelection === true
+            ? 'Cleaning layers in selection'
+            : 'Cleaning all layers on page'}
+        </Muted>
       </Text>
       <VerticalSpace space="extraLarge" />
     </Container>
