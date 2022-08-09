@@ -70,7 +70,7 @@ export default async function (): Promise<void> {
   })
   const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   showUI<UpscaleImageProps>(
-    { height: 129, width: 240 },
+    { height: 108, width: 240 },
     { ...settings, hasSelection }
   )
 }

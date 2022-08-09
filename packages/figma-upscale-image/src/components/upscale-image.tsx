@@ -1,5 +1,6 @@
 import {
   Button,
+  Columns,
   Container,
   LoadingIndicator,
   MiddleAlign,
@@ -97,21 +98,24 @@ export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
-      <Text>
-        <Muted>Scale</Muted>
-      </Text>
-      <VerticalSpace space="small" />
-      <SegmentedControl
-        {...initialFocus}
-        name="scale"
-        onValueChange={setFormState}
-        options={[
-          { children: '2x', value: 2 },
-          { children: '3x', value: 3 },
-          { children: '4x', value: 4 }
-        ]}
-        value={scale}
-      />
+      <Columns>
+        <div class={styles.text}>
+          <Text>
+            <Muted>Scale</Muted>
+          </Text>
+        </div>
+        <SegmentedControl
+          {...initialFocus}
+          name="scale"
+          onValueChange={setFormState}
+          options={[
+            { children: '2x', value: 2 },
+            { children: '3x', value: 3 },
+            { children: '4x', value: 4 }
+          ]}
+          value={scale}
+        />
+      </Columns>
       <VerticalSpace space="large" />
       <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Upscale Image
