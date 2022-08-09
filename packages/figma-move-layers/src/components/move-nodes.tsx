@@ -68,6 +68,7 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
           onNumericValueInput={setFormState}
           onValueInput={setHorizontalOffsetString}
           value={horizontalOffsetString}
+          variant="border"
         />
         <TextboxNumeric
           icon={<IconMoveDown16 />}
@@ -75,6 +76,7 @@ export function MoveNodes(props: MoveNodesProps): JSX.Element {
           onNumericValueInput={setFormState}
           onValueInput={setVerticalOffsetString}
           value={verticalOffsetString}
+          variant="border"
         />
       </Columns>
       <VerticalSpace space="large" />

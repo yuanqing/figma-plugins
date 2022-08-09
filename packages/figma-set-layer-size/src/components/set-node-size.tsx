@@ -71,6 +71,7 @@ export function SetNodeSize(props: SetNodeSizeProps): JSX.Element {
           onNumericValueInput={setFormState}
           onValueInput={setWidthString}
           value={widthString}
+          variant="border"
         />
         <TextboxNumeric
           disabled={hasSelection === false}
@@ -80,6 +81,7 @@ export function SetNodeSize(props: SetNodeSizeProps): JSX.Element {
           onNumericValueInput={setFormState}
           onValueInput={setHeightString}
           value={heightString}
+          variant="border"
         />
       </Columns>
       <VerticalSpace space="medium" />

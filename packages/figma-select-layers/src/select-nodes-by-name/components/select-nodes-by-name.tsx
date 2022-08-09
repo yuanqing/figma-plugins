@@ -53,6 +53,7 @@ export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
         onValueInput={setFormState}
         placeholder="Layer name"
         value={layerName}
+        variant="border"
       />
       <VerticalSpace space="medium" />
       <Checkbox
