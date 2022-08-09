@@ -20,12 +20,12 @@ export function LanguageItem(props: {
   const { disabled, selected, children, languageKey, loading, onClick } = props
   const handleClick: JSX.MouseEventHandler<HTMLDivElement> = useCallback(
     function () {
-      if (selected === true) {
+      if (disabled === true || selected === true) {
         return
       }
       onClick(languageKey)
     },
-    [selected, languageKey, onClick]
+    [disabled, selected, languageKey, onClick]
   )
   return (
     <div

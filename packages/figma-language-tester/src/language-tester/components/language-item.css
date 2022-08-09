@@ -1,25 +1,20 @@
 .languageItem {
   position: relative;
   padding: var(--space-extra-small) var(--space-medium);
-  color: var(--color-black-80);
   cursor: default;
   user-select: none;
 }
-.languageItem:hover {
-  background-color: var(--color-selection-b);
+.languageItem:not(.selected):not(.disabled):hover {
+  background-color: var(--figma-color-bg-hover);
 }
 
 .selected {
-  background-color: var(--color-selection-b);
+  background-color: var(--figma-color-bg-selected);
 }
 
 .disabled {
-  background-color: var(--color-black-30);
+  color: var(--figma-color-text-disabled);
   cursor: not-allowed;
-  opacity: var(--opacity-30);
-}
-.disabled:hover {
-  background-color: var(--color-black-30);
 }
 
 .icon {
