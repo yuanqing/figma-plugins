@@ -133,6 +133,7 @@ export function FormatCurrency(props: FormatCurrencyProps): JSX.Element {
           strict
           top
           value={localeCodeString}
+          variant="border"
         />
         <VerticalSpace space="extraLarge" />
         <Button

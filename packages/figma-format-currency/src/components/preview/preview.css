@@ -3,8 +3,8 @@
   overflow: auto;
   height: 121px;
   padding: 16px 16px 16px 0;
-  border-bottom: 1px solid var(--color-silver);
-  background-color: var(--color-black-3-translucent);
+  border-bottom: 1px solid var(--figma-color-border);
+  background-color: var(--figma-color-bg-secondary);
   cursor: default;
   user-select: none;
 }
@@ -23,7 +23,7 @@
 }
 
 .empty {
-  color: var(--color-black-30);
+  color: var(--figma-color-text-secondary);
 }
 
 .item {
@@ -41,7 +41,7 @@
 
 .original {
   padding-right: 8px;
-  color: var(--color-black-30);
+  color: var(--figma-color-text-secondary);
 }
 .strikethrough {
   text-decoration: line-through;

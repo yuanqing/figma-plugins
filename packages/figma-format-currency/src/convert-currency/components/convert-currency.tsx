@@ -142,6 +142,7 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
           options={currencyCodeOptions}
           strict
           value={currencyCodeString}
+          variant="border"
         />
         <VerticalSpace space="medium" />
         <Checkbox
@@ -163,6 +164,7 @@ export function ConvertCurrency(props: ConvertCurrencyProps): JSX.Element {
           strict
           top
           value={localeCodeString}
+          variant="border"
         />
         <VerticalSpace space="extraLarge" />
         <Button
