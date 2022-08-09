@@ -37,7 +37,7 @@ export function Settings(props: SettingsProps): JSX.Element {
   return (
     <Container space="medium">
       <VerticalSpace space="medium" />
-      <Columns>
+      <Columns space="large">
         <div class={styles.text}>
           <Text>
             <Muted>Flow name</Muted>

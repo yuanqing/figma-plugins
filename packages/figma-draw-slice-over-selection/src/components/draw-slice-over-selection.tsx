@@ -53,7 +53,7 @@ export function DrawSliceOverSelection(
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
-      <Columns>
+      <Columns space="large">
         <div class={styles.text}>
           <Text>
             <Muted>Padding</Muted>
