@@ -8,6 +8,10 @@
 
 ## Commands
 
+### Bulk Edit Text
+
+Automatically propagate edits to all identical text layers.
+
 ### Bulk Copy Text
 
 Copy the text within the selected text layers to the clipboard.
