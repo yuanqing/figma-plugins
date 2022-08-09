@@ -1,5 +1,6 @@
 import {
   Button,
+  Columns,
   Container,
   Muted,
   Text,
@@ -19,6 +20,7 @@ import {
   SubmitHandler,
   UiFactoryOptions
 } from '../utilities/types.js'
+import styles from './distribute-layers-factory.css'
 
 export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
   const directionLabel = `${direction[0].toUpperCase()}${direction.slice(1)}`
@@ -52,20 +54,23 @@ export function distributeLayersFactory({ direction, icon }: UiFactoryOptions) {
     return (
       <Container space="medium">
         <VerticalSpace space="large" />
-        <Text>
-          <Muted>Space</Muted>
-        </Text>
-        <VerticalSpace space="small" />
-        <TextboxNumeric
-          {...initialFocus}
-          icon={icon}
-          name="space"
-          onNumericValueInput={setFormState}
-          onValueInput={setSpaceString}
-          value={spaceString}
-          variant="border"
-        />
-        <VerticalSpace space="extraLarge" />
+        <Columns space="large">
+          <div class={styles.text}>
+            <Text>
+              <Muted>Space</Muted>
+            </Text>
+          </div>
+          <TextboxNumeric
+            {...initialFocus}
+            icon={icon}
+            name="space"
+            onNumericValueInput={setFormState}
+            onValueInput={setSpaceString}
+            value={spaceString}
+            variant="underline"
+          />
+        </Columns>
+        <VerticalSpace space="large" />
         <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
           Distribute Layers {directionLabel}
         </Button>
