@@ -171,7 +171,7 @@ export function CleanNodes(props: CleanNodesProps): JSX.Element {
       >
         Clean Layers
       </Button>
-      <VerticalSpace space="small" />
+      <VerticalSpace space="medium" />
       <Text align="center">
         <Muted>
           {hasSelection === true

@@ -62,7 +62,7 @@ export default async function (): Promise<void> {
     )
   })
   showUI<FindAndReplaceProps>(
-    { height: 284, title: 'Find and Replace', width: 240 },
+    { height: 288, title: 'Find and Replace', width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )
 }

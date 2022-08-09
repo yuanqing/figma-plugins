@@ -106,7 +106,7 @@ export function FindAndReplace(props: FindAndReplaceProps): JSX.Element {
       <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Find and Replace
       </Button>
-      <VerticalSpace space="small" />
+      <VerticalSpace space="medium" />
       <Text align="center">
         <Muted>
           Replacing {hasSelection === true ? 'in selection' : 'on page'}

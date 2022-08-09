@@ -67,7 +67,7 @@ export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
       <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Select Layers by Name
       </Button>
-      <VerticalSpace space="small" />
+      <VerticalSpace space="medium" />
       <Text align="center">
         <Muted>
           {hasSelection === true
