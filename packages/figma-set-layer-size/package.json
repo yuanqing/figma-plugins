@@ -30,9 +30,9 @@
     "watch": "npm run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^2.0.1",
-    "@create-figma-plugin/utilities": "^2.0.1",
-    "preact": "^10.7.3"
+    "@create-figma-plugin/ui": "^2.1.1",
+    "@create-figma-plugin/utilities": "^2.1.1",
+    "preact": "^10.10.1"
   },
   "figma-plugin": {
     "name": "Set Layer Size",
