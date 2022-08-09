@@ -1,4 +1,4 @@
-# Component Utilities [![Figma Plugin](https://img.shields.io/badge/figma-Component%20Utilities-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/785894722513806497/Component-Utilities) [![installs](https://img.shields.io/endpoint?cacheSeconds=1800&url=https://yuanqing.github.io/figma-plugins-stats/plugin/785894722513806497/installs.json)](https://figma.com/community/plugin/785894722513806497/Component-Utilities) [![npm Version](https://img.shields.io/npm/v/figma-component-utilities?cacheSeconds=1800)](https://npmjs.com/package/figma-component-utilities)
+# Component Utilities [![Figma Plugin](https://img.shields.io/badge/figma-Component%20Utilities-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/785894722513806497/Component-Utilities) [![npm Version](https://img.shields.io/npm/v/figma-component-utilities?cacheSeconds=1800)](https://npmjs.com/package/figma-component-utilities)
 
 > A Figma plugin to create and copy components, and replace layers with components
 

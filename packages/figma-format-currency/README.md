@@ -1,4 +1,4 @@
-# Format Currency [![Figma Plugin](https://img.shields.io/badge/figma-Format%20Currency-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/780785006732555859/Format-Currency) [![installs](https://img.shields.io/endpoint?cacheSeconds=1800&url=https://yuanqing.github.io/figma-plugins-stats/plugin/780785006732555859/installs.json)](https://figma.com/community/plugin/780785006732555859/Format-Currency) [![npm Version](https://img.shields.io/npm/v/figma-format-currency?cacheSeconds=1800)](https://npmjs.com/package/figma-format-currency)
+# Format Currency [![Figma Plugin](https://img.shields.io/badge/figma-Format%20Currency-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/780785006732555859/Format-Currency) [![npm Version](https://img.shields.io/npm/v/figma-format-currency?cacheSeconds=1800)](https://npmjs.com/package/figma-format-currency)
 
 > A Figma plugin to format and convert between currencies
 

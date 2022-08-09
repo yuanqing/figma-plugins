@@ -1,4 +1,4 @@
-# Text Utilities [![Figma Plugin](https://img.shields.io/badge/figma-Text%20Utilities-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/899501266127939530/Text-Utilities) [![installs](https://img.shields.io/endpoint?cacheSeconds=1800&url=https://yuanqing.github.io/figma-plugins-stats/plugin/899501266127939530/installs.json)](https://figma.com/community/plugin/899501266127939530/Text-Utilities) [![npm Version](https://img.shields.io/npm/v/figma-text-utilities?cacheSeconds=1800)](https://npmjs.com/package/figma-text-utilities)
+# Text Utilities [![Figma Plugin](https://img.shields.io/badge/figma-Text%20Utilities-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/899501266127939530/Text-Utilities) [![npm Version](https://img.shields.io/npm/v/figma-text-utilities?cacheSeconds=1800)](https://npmjs.com/package/figma-text-utilities)
 
 > A Figma plugin to split, normalize, and bulk copy and paste text layers
 

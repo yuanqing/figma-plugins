@@ -1,4 +1,4 @@
-# Organize Layers [![Figma Plugin](https://img.shields.io/badge/figma-Organize%20Layers-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/786286754606650597/Organize-Layers) [![installs](https://img.shields.io/endpoint?cacheSeconds=1800&url=https://yuanqing.github.io/figma-plugins-stats/plugin/786286754606650597/installs.json)](https://figma.com/community/plugin/786286754606650597/Organize-Layers) [![npm Version](https://img.shields.io/npm/v/figma-organize-layers?cacheSeconds=1800)](https://npmjs.com/package/figma-organize-layers)
+# Organize Layers [![Figma Plugin](https://img.shields.io/badge/figma-Organize%20Layers-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/786286754606650597/Organize-Layers) [![npm Version](https://img.shields.io/npm/v/figma-organize-layers?cacheSeconds=1800)](https://npmjs.com/package/figma-organize-layers)
 
 > A Figma plugin to organize layers on the page
 

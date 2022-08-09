@@ -1,4 +1,4 @@
-# Upscale Image [![Figma Plugin](https://img.shields.io/badge/figma-Upscale%20Image-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/939832535166467194/Upscale-Image) [![installs](https://img.shields.io/endpoint?cacheSeconds=1800&url=https://yuanqing.github.io/figma-plugins-stats/plugin/939832535166467194/installs.json)](https://figma.com/community/plugin/939832535166467194/Upscale-Image) [![npm Version](https://img.shields.io/npm/v/figma-upscale-image?cacheSeconds=1800)](https://npmjs.com/package/figma-upscale-image)
+# Upscale Image [![Figma Plugin](https://img.shields.io/badge/figma-Upscale%20Image-yellow?cacheSeconds=1800)](https://figma.com/community/plugin/939832535166467194/Upscale-Image) [![npm Version](https://img.shields.io/npm/v/figma-upscale-image?cacheSeconds=1800)](https://npmjs.com/package/figma-upscale-image)
 
 > A Figma plugin to upscale low resolution images using machine learning
 
