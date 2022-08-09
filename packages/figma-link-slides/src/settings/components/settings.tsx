@@ -1,6 +1,7 @@
 import {
   Button,
   Checkbox,
+  Columns,
   Container,
   Muted,
   Text,
@@ -17,6 +18,7 @@ import {
   SettingsProps,
   SubmitHandler
 } from '../utilities/types.js'
+import styles from './settings.css'
 
 export function Settings(props: SettingsProps): JSX.Element {
   const { disabled, formState, handleSubmit, initialFocus, setFormState } =
@@ -34,12 +36,20 @@ export function Settings(props: SettingsProps): JSX.Element {
   const { flowName, shouldNumberFrameNodes } = formState
   return (
     <Container space="medium">
-      <VerticalSpace space="large" />
-      <Text>
-        <Muted>Flow name</Muted>
-      </Text>
-      <VerticalSpace space="small" />
-      <Textbox name="flowName" onValueInput={setFormState} value={flowName} />
+      <VerticalSpace space="medium" />
+      <Columns>
+        <div class={styles.text}>
+          <Text>
+            <Muted>Flow name</Muted>
+          </Text>
+        </div>
+        <Textbox
+          name="flowName"
+          onValueInput={setFormState}
+          value={flowName}
+          variant="underline"
+        />
+      </Columns>
       <VerticalSpace space="medium" />
       <Checkbox
         name="shouldNumberFrameNodes"

@@ -26,7 +26,7 @@ export default async function (): Promise<void> {
 
   const settings = await loadSettingsAsync(defaultSettings, settingsKey)
   showUI<SettingsProps>(
-    { height: 160, title: 'Settings', width: 240 },
+    { height: 136, title: 'Settings', width: 240 },
     settings
   )
 }
