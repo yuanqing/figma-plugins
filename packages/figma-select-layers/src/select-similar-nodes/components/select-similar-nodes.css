@@ -10,10 +10,10 @@
 .checkAllToggle {
   flex: 0 0 auto;
   padding: var(--space-small) var(--space-medium);
-  color: var(--color-black-30);
+  color: var(--figma-color-text-secondary);
 }
 .checkAllToggle:hover {
-  color: var(--color-black-80);
+  color: var(--figma-color-text);
 }
 
 .checkAllToggle input {

@@ -105,14 +105,27 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
           <Muted>Group by text before</Muted>
         </Text>
         <VerticalSpace space="small" />
-        <SegmentedControl
-          name="groupDefinition"
-          onValueChange={setFormState}
-          options={groupDefinitions.slice(0, maximumGroupDefinition)}
-          value={
-            Math.min(groupDefinition, maximumGroupDefinition) as GroupDefinition
-          }
-        />
+        {groups.length === 0 ? (
+          <SegmentedControl
+            disabled
+            name="groupDefinition"
+            onValueChange={setFormState}
+            options={groupDefinitions.slice(0, 1)}
+            value={1}
+          />
+        ) : (
+          <SegmentedControl
+            name="groupDefinition"
+            onValueChange={setFormState}
+            options={groupDefinitions.slice(0, maximumGroupDefinition)}
+            value={
+              Math.min(
+                groupDefinition,
+                maximumGroupDefinition
+              ) as GroupDefinition
+            }
+          />
+        )}
         <VerticalSpace space="large" />
         <Text>
           <Muted>Space between layers</Muted>
@@ -127,6 +140,7 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
             onNumericValueInput={setFormState}
             onValueInput={setHorizontalSpaceString}
             value={horizontalSpaceString}
+            variant="border"
           />
           <TextboxNumeric
             icon={<IconSpaceVertical16 />}
@@ -135,6 +149,7 @@ export function OrganizeNodes(props: OrganizeNodesProps): JSX.Element {
             onNumericValueInput={setFormState}
             onValueInput={setVerticalSpaceString}
             value={verticalSpaceString}
+            variant="border"
           />
         </Columns>
         <VerticalSpace space="large" />

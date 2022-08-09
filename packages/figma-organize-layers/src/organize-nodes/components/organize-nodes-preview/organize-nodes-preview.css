@@ -1,11 +1,11 @@
 .empty {
   padding: 0 var(--space-medium);
-  color: var(--color-black-30);
+  color: var(--figma-color-text-secondary);
 }
 
 .preview {
   display: flex;
-  color: var(--color-black-30);
+  color: var(--figma-color-text-secondary);
 }
 
 .group {
@@ -18,6 +18,6 @@
 }
 
 .groupName {
-  color: var(--color-black-80);
+  color: var(--figma-color-text);
   font-weight: var(--font-weight-regular);
 }
