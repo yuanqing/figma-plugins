@@ -30,7 +30,7 @@
     "watch": "npm run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^2.1.1"
+    "@create-figma-plugin/utilities": "^2.1.5"
   },
   "figma-plugin": {
     "name": "Draw Mask Under Selection",

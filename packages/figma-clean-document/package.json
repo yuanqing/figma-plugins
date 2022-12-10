@@ -30,10 +30,10 @@
     "watch": "npm run clean && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^2.1.1",
-    "@create-figma-plugin/utilities": "^2.1.1",
+    "@create-figma-plugin/ui": "^2.1.5",
+    "@create-figma-plugin/utilities": "^2.1.5",
     "figma-sort-layers": "*",
-    "preact": "^10.10.1"
+    "preact": "^10.11.3"
   },
   "figma-plugin": {
     "name": "Clean Document",
