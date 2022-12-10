@@ -51,7 +51,7 @@ export default async function (): Promise<void> {
   })
   showUI<ExportImages>(
     {
-      height: 129,
+      height: 120,
       width: 240
     },
     {

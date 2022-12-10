@@ -65,7 +65,7 @@ export default async function (): Promise<void> {
     }
   )
   showUI({
-    height: 129,
+    height: 132,
     width: 240
   })
   const bytes = await exportGroupNodeAsync(temporaryGroupNode, resolution)

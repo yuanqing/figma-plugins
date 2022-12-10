@@ -62,6 +62,7 @@ export function ExportImages(props: ExportImages): JSX.Element {
         <Text align="center">
           Exporting image {index + 1} of {total}…
         </Text>
+        <VerticalSpace space="extraSmall" />
       </MiddleAlign>
     </div>
   )

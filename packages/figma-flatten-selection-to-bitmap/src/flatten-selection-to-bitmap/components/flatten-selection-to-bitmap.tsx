@@ -40,8 +40,9 @@ export function FlattenSelectionToBitmap(): JSX.Element {
     <div class={styles.flattenSelectionToBitmap}>
       <MiddleAlign>
         <LoadingIndicator color="brand" />
-        <VerticalSpace space="extraSmall" />
+        <VerticalSpace space="small" />
         <Text align="center">Flattening selection…</Text>
+        <VerticalSpace space="extraSmall" />
       </MiddleAlign>
     </div>
   )
