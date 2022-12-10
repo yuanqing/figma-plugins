@@ -23,8 +23,8 @@ Name | Description
 
 *Unpublished*
 
-- [**Export Images**](/packages/figma-export-images)
-- [**Text Utilities**](/packages/figma-text-utilities)
+- [Export Images](/packages/figma-export-images)
+- [Link Slides](/packages/figma-link-slides)
 
 ## See also
 
