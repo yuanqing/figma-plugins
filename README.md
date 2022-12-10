@@ -21,6 +21,11 @@ Name | Description
 [**Text Utilities**](/packages/figma-text-utilities) | Split, normalize, and bulk copy and paste text layers
 [**Upscale Image**](/packages/figma-upscale-image) | Upscale low resolution images using machine learning
 
+*Unpublished*
+
+- [**Export Images**](/packages/figma-export-images)
+- [**Text Utilities**](/packages/figma-text-utilities)
+
 ## See also
 
 - [Create Figma Plugin](https://yuanqing.github.io/create-figma-plugin/)
