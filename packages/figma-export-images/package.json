@@ -1,0 +1,51 @@
+{
+  "name": "figma-export-images",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins"
+  ],
+  "license": "MIT",
+  "author": "Yuan Qing Lim",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/figma-plugins.git",
+    "directory": "packages/figma-export-images"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "npm run clean && build-figma-plugin --typecheck --minify",
+    "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
+    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json'",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "watch": "npm run clean && build-figma-plugin --typecheck --watch"
+  },
+  "dependencies": {
+    "@create-figma-plugin/ui": "^2.1.5",
+    "@create-figma-plugin/utilities": "^2.1.5",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
+    "preact": "^10.11.3"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.5"
+  },
+  "figma-plugin": {
+    "name": "Export Images",
+    "id": "1183407960399507194",
+    "editorType": [
+      "figma"
+    ],
+    "main": "src/main.ts",
+    "ui": "src/ui.ts"
+  }
+}
