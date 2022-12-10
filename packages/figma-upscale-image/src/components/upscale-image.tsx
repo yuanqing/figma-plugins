@@ -90,6 +90,7 @@ export function UpscaleImage(props: UpscaleImageProps): JSX.Element {
           <LoadingIndicator color="brand" />
           <VerticalSpace space="extraSmall" />
           <Text align="center">Upscaling image…</Text>
+          <VerticalSpace space="extraSmall" />
         </MiddleAlign>
       </div>
     )
