@@ -24,6 +24,7 @@ Name | Description
 *Unpublished*
 
 - [Export Images](/packages/figma-export-images)
+- [Frame Utilities](/packages/figma-frame-utilities)
 - [Link Slides](/packages/figma-link-slides)
 
 ## See also
