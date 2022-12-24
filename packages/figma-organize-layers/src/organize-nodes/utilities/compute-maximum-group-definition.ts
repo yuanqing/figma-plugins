@@ -1,5 +1,6 @@
 import { GroupDefinition } from '../../utilities/types.js'
 import { NodePlainObject } from './types.js'
+
 const slashRegex = /\//g
 
 export function computeMaximumGroupDefinition(

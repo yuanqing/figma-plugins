@@ -24,11 +24,11 @@ import {
   TextNodePlainObject
 } from '../../utilities/types.js'
 import {
+  FormatCurrencyProps,
   FormState,
   SelectionChangedHandler,
   SubmitHandler
 } from '../utilities/types.js'
-import { FormatCurrencyProps } from '../utilities/types.js'
 
 const currencyFormatOptions: Array<{
   children: ComponentChildren

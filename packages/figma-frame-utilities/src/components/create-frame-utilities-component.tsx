@@ -33,7 +33,7 @@ export function createFrameUtilitiesComponent(options: {
   buttonLabel: string
 }) {
   const { allowNullPadding, buttonLabel } = options
-  return function (props: FrameUtilitiesProps): h.JSX.Element {
+  return function FrameUtilities(props: FrameUtilitiesProps): h.JSX.Element {
     const { disabled, handleSubmit, initialFocus, setFormState } =
       useForm<FormState>(props, {
         close: function () {

@@ -17,9 +17,9 @@ import {
   NodeAttributes,
   SelectionChangedHandler,
   SelectSimilarNodesProps,
+  SelectSimilarNodesSettings,
   SubmitHandler
 } from './utilities/types.js'
-import { SelectSimilarNodesSettings } from './utilities/types.js'
 
 export default async function (): Promise<void> {
   const selection = figma.currentPage.selection
