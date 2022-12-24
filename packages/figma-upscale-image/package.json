@@ -37,8 +37,8 @@
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "2.2.0-alpha.0",
-    "@create-figma-plugin/utilities": "2.2.0-alpha.0",
+    "@create-figma-plugin/ui": "2.2.0",
+    "@create-figma-plugin/utilities": "2.2.0",
     "@tensorflow/tfjs": "3.19.0",
     "preact": "^10.11.3",
     "upscaler": "0.11.0"

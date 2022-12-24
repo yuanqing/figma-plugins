@@ -20,8 +20,8 @@
     "test": "turbo run test"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "2.2.0-alpha.0",
-    "@create-figma-plugin/tsconfig": "2.2.0-alpha.0",
+    "@create-figma-plugin/build": "2.2.0",
+    "@create-figma-plugin/tsconfig": "2.2.0",
     "@figma/plugin-typings": "^1.57.1",
     "@lerna-lite/cli": "^1.13.0",
     "@types/natural-compare-lite": "^1.4.0",
