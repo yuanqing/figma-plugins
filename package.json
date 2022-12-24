@@ -50,7 +50,10 @@
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing",
-    "root": true
+    "root": true,
+    "ignorePatterns": [
+      "*.css.d.ts"
+    ]
   },
   "lint-staged": {
     "*.{ts,tsx}": [
