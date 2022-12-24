@@ -17,18 +17,22 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "scripts": {
-    "build": "npm run clean && build-figma-plugin --typecheck --minify",
+    "prebuild": "npm run clean",
+    "build": "build-figma-plugin --typecheck --minify",
     "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
-    "fix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json'",
+    "fix": "concurrently npm:fix:js npm:fix:json",
+    "fix:js": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "fix:json": "prettier --loglevel error --write '*.json'",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "watch": "npm run clean && build-figma-plugin --typecheck --watch"
+    "prewatch": "npm run clean",
+    "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^2.1.5",
-    "@create-figma-plugin/utilities": "^2.1.5",
+    "@create-figma-plugin/ui": "2.2.0-alpha.0",
+    "@create-figma-plugin/utilities": "2.2.0-alpha.0",
     "preact": "^10.11.3"
   },
   "figma-plugin": {

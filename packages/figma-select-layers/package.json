@@ -17,21 +17,28 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "files": [
     "src"
   ],
   "scripts": {
-    "build": "npm run clean && build-figma-plugin --typecheck --minify",
+    "prebuild": "npm run clean",
+    "build": "build-figma-plugin --typecheck --minify",
     "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
-    "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' '*.json'",
-    "lint": "eslint '{src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
-    "watch": "npm run clean && build-figma-plugin --typecheck --watch"
+    "fix": "concurrently npm:fix:css npm:fix:js npm:fix:json",
+    "fix:css": "stylelint --fix 'src/**/*.css'",
+    "fix:js": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "fix:json": "prettier --loglevel error --write '*.json'",
+    "lint": "concurrently npm:lint:css npm:lint:js",
+    "lint:css": "stylelint 'src/**/*.css'",
+    "lint:js": "eslint 'src/**/*.{ts,tsx}'",
+    "prewatch": "npm run clean",
+    "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^2.1.5",
-    "@create-figma-plugin/utilities": "^2.1.5",
+    "@create-figma-plugin/ui": "2.2.0-alpha.0",
+    "@create-figma-plugin/utilities": "2.2.0-alpha.0",
     "preact": "^10.11.3"
   },
   "figma-plugin": {

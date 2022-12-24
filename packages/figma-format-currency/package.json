@@ -17,25 +17,31 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "files": [
     "src"
   ],
   "scripts": {
-    "build": "npm run clean-build && npm run generate-currencies-ts && build-figma-plugin --typecheck --minify",
-    "generate-currencies-ts": "node --loader ts-node/esm scripts/generate-currencies-ts.ts > src/utilities/data/currencies.ts && eslint --fix src/utilities/data/currencies.ts",
-    "clean": "npm run clean-build && npm run clean-test",
-    "clean-build": "rimraf '*.log' build",
-    "clean-test": "rimraf '*.log'",
-    "fix": "eslint --fix '{scripts,src,test}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write 'src/**/*.css' '*.json'",
-    "lint": "eslint '{scripts,src,test}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
-    "test": "npm run clean-test && npm run generate-currencies-ts && ava 'test/**/*.ts'",
-    "watch": "npm run clean-build && npm run generate-currencies-ts && build-figma-plugin --typecheck --watch"
+    "prebuild": "npm run clean",
+    "build": "npm run generate-currencies-ts && build-figma-plugin --typecheck --minify",
+    "generate-currencies-ts": "tsx scripts/generate-currencies-ts.ts > src/utilities/data/currencies.ts && eslint --fix src/utilities/data/currencies.ts",
+    "clean": "rimraf '*.log' build",
+    "fix": "concurrently npm:fix:css npm:fix:js npm:fix:json",
+    "fix:css": "stylelint --fix 'src/**/*.css'",
+    "fix:js": "eslint --fix '{scripts,src,test}/**/*.{ts,tsx}'",
+    "fix:json": "prettier --loglevel error --write '*.json'",
+    "lint": "concurrently npm:lint:css npm:lint:js",
+    "lint:css": "stylelint 'src/**/*.css'",
+    "lint:js": "eslint '{scripts,src,test}/**/*.{ts,tsx}'",
+    "pretest": "npm run build",
+    "test": "ava 'test/**/*.ts'",
+    "prewatch": "npm run clean",
+    "watch": "npm run generate-currencies-ts && build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "^2.1.5",
-    "@create-figma-plugin/utilities": "^2.1.5",
+    "@create-figma-plugin/ui": "2.2.0-alpha.0",
+    "@create-figma-plugin/utilities": "2.2.0-alpha.0",
     "preact": "^10.11.3"
   },
   "ava": {
@@ -45,7 +51,7 @@
     "failFast": true,
     "nodeArguments": [
       "--loader",
-      "ts-node/esm"
+      "tsx"
     ],
     "timeout": "2m"
   },

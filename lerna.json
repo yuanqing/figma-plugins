@@ -1,10 +1,6 @@
 {
+  "$schema": "node_modules/@lerna-lite/cli/schemas/lerna-schema.json",
   "version": "independent",
   "npmClient": "npm",
-  "useWorkspaces": true,
-  "command": {
-    "bootstrap": {
-      "forceLocal": true
-    }
-  }
+  "packages": ["packages/*"]
 }
