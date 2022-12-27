@@ -1,0 +1,64 @@
+{
+  "name": "figma-color-utilities",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins"
+  ],
+  "license": "MIT",
+  "author": "Yuan Qing Lim",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/figma-plugins.git",
+    "directory": "packages/figma-color-utilities"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "build-figma-plugin --typecheck --minify",
+    "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
+    "fix": "concurrently npm:fix:js npm:fix:json",
+    "fix:js": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "fix:json": "prettier --loglevel error --write '*.json'",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "prewatch": "npm run clean",
+    "watch": "build-figma-plugin --typecheck --watch"
+  },
+  "dependencies": {
+    "@create-figma-plugin/ui": "2.2.0",
+    "@create-figma-plugin/utilities": "2.2.0",
+    "preact": "^10.11.3",
+    "tinycolor2": "^1.5.1"
+  },
+  "devDependencies": {
+    "@types/tinycolor2": "^1.4.3"
+  },
+  "figma-plugin": {
+    "name": "Color Utilities",
+    "id": "1189102614181279411",
+    "editorType": [
+      "figma"
+    ],
+    "menu": [
+      {
+        "name": "Invert Colors",
+        "main": "src/invert-colors/main.ts",
+        "ui": "src/invert-colors/ui.ts"
+      },
+      {
+        "name": "Desaturate",
+        "main": "src/desaturate/main.ts",
+        "ui": "src/desaturate/ui.ts"
+      }
+    ]
+  }
+}

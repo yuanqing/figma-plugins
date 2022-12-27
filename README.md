@@ -23,6 +23,7 @@ Name | Description
 
 *Unpublished*
 
+- [Color Utilities](/packages/figma-color-utilities)
 - [Export Images](/packages/figma-export-images)
 - [Frame Utilities](/packages/figma-frame-utilities)
 - [Link Slides](/packages/figma-link-slides)
