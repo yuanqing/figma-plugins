@@ -24,8 +24,8 @@ export function uiFactory({ transformImageData }: UiFactoryOptions) {
           canvasElement.width,
           canvasElement.height
         )
-        const invertedImageData = transformImageData(imageData)
-        context.putImageData(invertedImageData, 0, 0)
+        const transformedImageData = transformImageData(imageData)
+        context.putImageData(transformedImageData, 0, 0)
         emit<TransformImageColorsResult>('TRANSFORM_IMAGE_COLORS_RESULT', {
           bytes: await readBytesFromCanvasElement(canvasElement)
         })
