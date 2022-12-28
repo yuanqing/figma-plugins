@@ -4,7 +4,8 @@ import {
   formatSuccessMessage,
   once,
   pluralize,
-  showUI
+  showUI,
+  traverseNodeAsync
 } from '@create-figma-plugin/utilities'
 
 import {
@@ -24,14 +25,13 @@ export function mainFactory({
     }
     showUI({ height: 0, visible: false, width: 0 })
     let count = 0
-    const selection = figma.currentPage.selection.slice()
-    for (const node of selection) {
+    async function transformNodeAsync(node: SceneNode): Promise<void> {
       let didChange = false
       if (!('fills' in node)) {
-        continue
+        return
       }
       if (node.fills === figma.mixed) {
-        continue
+        return
       }
       const newFills: Array<Paint> = []
       for (const fill of node.fills) {
@@ -101,6 +101,10 @@ export function mainFactory({
         count += 1
       }
       node.fills = newFills
+    }
+    const selection = figma.currentPage.selection.slice()
+    for (const node of selection) {
+      await traverseNodeAsync(node, transformNodeAsync)
     }
     figma.closePlugin(
       formatSuccessMessage(
