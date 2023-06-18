@@ -1,7 +1,10 @@
-import { emit, on } from '@create-figma-plugin/utilities'
+import {
+  createCanvasElementFromBytesAsync,
+  emit,
+  on,
+  readBytesFromCanvasElementAsync
+} from '@create-figma-plugin/utilities'
 
-import { createCanvasElementFromBytesAsync } from './create-canvas-element-from-bytes-async.js'
-import { readBytesFromCanvasElement } from './read-bytes-from-canvas-element-async.js'
 import {
   TransformImageColorsRequest,
   TransformImageColorsResult,
@@ -27,7 +30,7 @@ export function uiFactory({ transformImageData }: UiFactoryOptions) {
         const transformedImageData = transformImageData(imageData)
         context.putImageData(transformedImageData, 0, 0)
         emit<TransformImageColorsResult>('TRANSFORM_IMAGE_COLORS_RESULT', {
-          bytes: await readBytesFromCanvasElement(canvasElement)
+          bytes: await readBytesFromCanvasElementAsync(canvasElement)
         })
       }
     )
