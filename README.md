@@ -19,7 +19,6 @@ Name | Description
 [**Set Layer Size**](/packages/figma-set-layer-size) | Precisely set the size of layers, while ignoring constraints
 [**Sort Layers**](/packages/figma-sort-layers) | Sort layers by name or position
 [**Text Utilities**](/packages/figma-text-utilities) | Split, normalize, and bulk copy and paste text layers
-[**Upscale Image**](/packages/figma-upscale-image) | Upscale low resolution images using machine learning
 
 *Unpublished*
 
