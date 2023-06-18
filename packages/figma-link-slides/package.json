@@ -37,7 +37,7 @@
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "2.2.0"
+    "@create-figma-plugin/utilities": "2.5.0"
   },
   "figma-plugin": {
     "name": "Link Slides",
