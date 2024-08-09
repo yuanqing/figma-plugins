@@ -44,6 +44,7 @@
     "editorType": [
       "figma"
     ],
+    "documentAccess": "dynamic-page",
     "main": "src/main.ts",
     "ui": "src/ui.ts"
   }
