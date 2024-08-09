@@ -34,13 +34,13 @@
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "2.5.0",
-    "@create-figma-plugin/utilities": "2.5.0",
-    "preact": "^10.15.1",
+    "@create-figma-plugin/ui": "3.2.0",
+    "@create-figma-plugin/utilities": "3.2.0",
+    "preact": "^10.23.1",
     "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
-    "@types/tinycolor2": "^1.4.3"
+    "@types/tinycolor2": "^1.4.6"
   },
   "figma-plugin": {
     "name": "Color Utilities",

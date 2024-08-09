@@ -34,10 +34,10 @@
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "2.5.0",
-    "@create-figma-plugin/utilities": "2.5.0",
+    "@create-figma-plugin/ui": "3.2.0",
+    "@create-figma-plugin/utilities": "3.2.0",
     "figma-sort-layers": "*",
-    "preact": "^10.15.1"
+    "preact": "^10.23.1"
   },
   "figma-plugin": {
     "name": "Clean Document",

@@ -37,15 +37,15 @@
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "2.5.0",
-    "@create-figma-plugin/utilities": "2.5.0",
+    "@create-figma-plugin/ui": "3.2.0",
+    "@create-figma-plugin/utilities": "3.2.0",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
-    "preact": "^10.15.1"
+    "preact": "^10.23.1"
   },
   "devDependencies": {
-    "@types/file-saver": "^2.0.5",
-    "@types/node": "^20.3.1"
+    "@types/file-saver": "^2.0.7",
+    "@types/node": "^22.1.0"
   },
   "figma-plugin": {
     "name": "Export Images",
