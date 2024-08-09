@@ -5,17 +5,17 @@ import {
   Muted,
   Text,
   TextboxNumeric,
-  useForm,
+  useInitialFocus,
+  useWindowKeyDown,
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
-import { useEffect, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
 import {
   CloseUIHandler,
   DrawSliceOverSelectionProps,
-  FormState,
   SelectionChangedHandler,
   SubmitHandler
 } from '../utilities/types.js'
@@ -24,32 +24,30 @@ import styles from './draw-slice-over-selection.css'
 export function DrawSliceOverSelection(
   props: DrawSliceOverSelectionProps
 ): JSX.Element {
-  const { disabled, handleSubmit, initialFocus, setFormState } =
-    useForm<FormState>(props, {
-      close: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      submit: function ({ padding }: FormState) {
-        emit<SubmitHandler>('SUBMIT', { padding })
-      },
-      validate: function ({ hasSelection, padding }: FormState) {
-        return hasSelection === true && padding !== null
-      }
-    })
-  useEffect(
+  const [padding, setPadding] = useState<null | number>(props.padding)
+  const [hasSelection, setHasSelection] = useState<boolean>(true)
+  const handleSubmit = useCallback(
     function () {
-      return on<SelectionChangedHandler>(
-        'SELECTION_CHANGED',
-        function (hasSelection: boolean) {
-          setFormState(hasSelection, 'hasSelection')
-        }
-      )
+      emit<SubmitHandler>('SUBMIT', { padding })
     },
-    [setFormState]
+    [padding]
   )
+  useEffect(function () {
+    return on<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      function (hasSelection: boolean) {
+        setHasSelection(hasSelection)
+      }
+    )
+  }, [])
+  useWindowKeyDown('Escape', function () {
+    emit<CloseUIHandler>('CLOSE_UI')
+  })
+  useWindowKeyDown('Enter', handleSubmit)
   const [paddingString, setPaddingString] = useState(
     props.padding === null ? '' : `${props.padding}`
   )
+  const disabled = hasSelection === true && padding !== null
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
@@ -60,10 +58,10 @@ export function DrawSliceOverSelection(
           </Text>
         </div>
         <TextboxNumeric
-          {...initialFocus}
+          {...useInitialFocus()}
           minimum={0}
           name="padding"
-          onNumericValueInput={setFormState}
+          onNumericValueInput={setPadding}
           onValueInput={setPaddingString}
           value={paddingString}
           variant="underline"
