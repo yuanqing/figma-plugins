@@ -3,7 +3,7 @@
   "name": "figma-plugins",
   "type": "module",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "packageManager": "npm@10.2.5",
   "scripts": {
