@@ -24,6 +24,7 @@
   "devDependencies": {
     "@create-figma-plugin/build": "3.2.0",
     "@create-figma-plugin/tsconfig": "3.2.0",
+    "@figma/eslint-plugin-figma-plugins": "^0.15.0",
     "@figma/plugin-typings": "1.97.0",
     "@lerna-lite/cli": "^3.8.0",
     "@types/natural-compare-lite": "^1.4.2",
@@ -52,7 +53,10 @@
     "typescript": "^5.5.4"
   },
   "eslintConfig": {
-    "extends": "eslint-config-yuanqing",
+    "extends": [
+      "eslint-config-yuanqing",
+      "plugin:@figma/figma-plugins/recommended"
+    ],
     "root": true,
     "ignorePatterns": [
       "*.css.d.ts"
