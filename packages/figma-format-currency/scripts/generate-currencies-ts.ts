@@ -58,7 +58,7 @@ function parseSignificantFigures(currencyCode: string, localeCode: string) {
     currency: currencyCode,
     currencyDisplay: 'code',
     style: 'currency'
-  }).format(123456789.123456789) // eslint-disable-line @typescript-eslint/no-loss-of-precision
+  }).format(123456789.123456789) // eslint-disable-line no-loss-of-precision
   const currencyCodeRegex = /\s?[A-Z]{3}\s?/
   const value = string.replace(currencyCodeRegex, '')
   const nonDigitRegex = /([^\d])/g

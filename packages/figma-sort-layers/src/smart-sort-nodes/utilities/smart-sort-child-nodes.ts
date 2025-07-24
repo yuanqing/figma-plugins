@@ -32,11 +32,11 @@ export function smartSortChildNodes(
         scrollingNodes: smartSortChildNodesHelper(scrollingNodes)
       }
     }
-    const nodes = children
-      .slice()
-      .filter(function (layer: PageNode | SceneNode) {
-        return ids.indexOf(layer.id) !== -1
-      })
+    const nodes = children.slice().filter(function (
+      layer: PageNode | SceneNode
+    ) {
+      return ids.indexOf(layer.id) !== -1
+    })
     return smartSortChildNodesHelper(nodes)
   }
   throw new Error('Node has no children')

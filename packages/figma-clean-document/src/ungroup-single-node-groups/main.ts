@@ -16,7 +16,9 @@ export default mainFactory({
       'group'
     )} ${scope}`
   },
-  processNode: ungroupSingleNodeGroup,
+  processNodeAsync: async function (node: SceneNode) {
+    return ungroupSingleNodeGroup(node)
+  },
   stopTraversal: function (node: SceneNode) {
     return node.type === 'INSTANCE'
   }

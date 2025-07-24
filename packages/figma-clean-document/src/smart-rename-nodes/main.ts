@@ -9,7 +9,7 @@ import {
 
 import { mainFactory } from '../utilities/main-factory.js'
 import { defaultSettings, settingsKey } from '../utilities/settings.js'
-import { smartRenameNode } from '../utilities/smart-rename-node.js'
+import { smartRenameNodeAsync } from '../utilities/smart-rename-node-async.js'
 import { Settings } from '../utilities/types.js'
 import {
   CloseUIHandler,
@@ -39,7 +39,7 @@ export default async function (): Promise<void> {
         smartRenameLayersWhitelist === ''
           ? null
           : new RegExp(smartRenameLayersWhitelist)
-      mainFactory({
+      await mainFactory({
         createFailureMessage: function (scope: string) {
           return `No layers renamed ${scope}`
         },
@@ -49,8 +49,8 @@ export default async function (): Promise<void> {
         createSuccessMessage: function (scope: string, count: number) {
           return `Renamed ${count} ${pluralize(count, 'layer')} ${scope}`
         },
-        processNode: function (node: SceneNode) {
-          return smartRenameNode(node, smartRenameNodesWhitelistRegex)
+        processNodeAsync: async function (node: SceneNode) {
+          return smartRenameNodeAsync(node, smartRenameNodesWhitelistRegex)
         },
         stopTraversal: function (node: SceneNode) {
           return (
@@ -69,7 +69,7 @@ export default async function (): Promise<void> {
   })
   const { smartRenameLayersWhitelist } = settings
   showUI<SmartRenameNodesProps>(
-    { height: 169, title: 'Smart Rename Layers', width: 240 },
+    { height: 156, title: 'Smart Rename Layers', width: 240 },
     {
       hasSelection: figma.currentPage.selection.length > 0,
       smartRenameLayersWhitelist

@@ -5,9 +5,6 @@ import { Settings } from '../../utilities/types.js'
 export type CleanNodesProps = Settings & {
   hasSelection: boolean
 }
-export type FormState = CleanNodesProps & {
-  loading: boolean
-}
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'

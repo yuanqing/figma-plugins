@@ -30,8 +30,8 @@
     "generate-translate-main-ts": "tsx scripts/generate-translate-main-ts.ts > src/translate/main.ts",
     "fix": "concurrently npm:fix:css npm:fix:js npm:fix:json",
     "fix:css": "stylelint --fix 'src/**/*.css'",
-    "fix:js": "eslint --fix 'src/**/*.{ts,tsx}'",
-    "fix:json": "prettier --loglevel error --write '*.json'",
+    "fix:js": "eslint --fix '{scripts,src}/**/*.{ts,tsx}'",
+    "fix:json": "prettier --log-level error --write '*.json'",
     "lint": "concurrently npm:lint:css npm:lint:js",
     "lint:css": "stylelint 'src/**/*.css'",
     "lint:js": "eslint 'src/**/*.{ts,tsx}'",
@@ -39,10 +39,10 @@
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "3.2.0",
-    "@create-figma-plugin/utilities": "3.2.0",
-    "p-memoize": "^7.1.1",
-    "preact": "^10.23.1"
+    "@create-figma-plugin/ui": "4.0.1",
+    "@create-figma-plugin/utilities": "4.0.1",
+    "p-memoize": "7.1.1",
+    "preact": "10.26.9"
   },
   "figma-plugin": {
     "name": "Language Tester",

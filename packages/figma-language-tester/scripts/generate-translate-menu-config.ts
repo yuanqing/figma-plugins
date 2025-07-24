@@ -1,4 +1,4 @@
-/* eslint-disable no-console, sort-keys-fix/sort-keys-fix */
+/* eslint-disable no-console */
 
 import { languages } from '../src/utilities/languages.js'
 import { LanguageKey } from '../src/utilities/types.js'
@@ -8,11 +8,11 @@ function main() {
   const languageKeys = Object.keys(languages) as Array<LanguageKey>
   for (const languageKey of languageKeys) {
     result.push({
-      name: languages[languageKey],
       main: {
-        src: 'src/translate/main.ts',
-        handler: languageKey.replace('-', '')
+        handler: languageKey.replace('-', ''),
+        src: 'src/translate/main.ts'
       },
+      name: languages[languageKey],
       ui: 'src/translate/ui.ts'
     })
   }

@@ -28,15 +28,15 @@
     "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
     "fix": "concurrently npm:fix:js npm:fix:json",
     "fix:js": "eslint --fix 'src/**/*.{ts,tsx}'",
-    "fix:json": "prettier --loglevel error --write '*.json'",
+    "fix:json": "prettier --log-level error --write '*.json'",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "prewatch": "npm run clean",
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/ui": "3.2.0",
-    "@create-figma-plugin/utilities": "3.2.0",
-    "preact": "^10.23.1"
+    "@create-figma-plugin/ui": "4.0.1",
+    "@create-figma-plugin/utilities": "4.0.1",
+    "preact": "10.26.9"
   },
   "figma-plugin": {
     "name": "Set Layer Size",

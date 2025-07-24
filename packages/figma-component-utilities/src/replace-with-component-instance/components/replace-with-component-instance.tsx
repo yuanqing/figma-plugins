@@ -83,8 +83,7 @@ export function ReplaceWithComponentInstance(
   ) {
     // Stop clicking from losing focus on the search textbox
     event.preventDefault()
-  },
-  [])
+  }, [])
   const { handleScrollableMenuKeyDown } = useScrollableMenu({
     itemIdDataAttributeName: COMPONENT_NODE_ID_ATTRIBUTE_NAME,
     menuElementRef,

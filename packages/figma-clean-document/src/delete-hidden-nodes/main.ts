@@ -13,7 +13,9 @@ export default mainFactory({
   createSuccessMessage: function (scope: string, count: number) {
     return `Deleted ${count} hidden ${pluralize(count, 'layer')} ${scope}`
   },
-  processNode: deleteHiddenNodes,
+  processNodeAsync: async function (node: SceneNode) {
+    return deleteHiddenNodes(node)
+  },
   stopTraversal: function (node: SceneNode) {
     return node.type === 'INSTANCE'
   }

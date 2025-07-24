@@ -47,7 +47,7 @@ export function DrawSliceOverSelection(
   const [paddingString, setPaddingString] = useState(
     props.padding === null ? '' : `${props.padding}`
   )
-  const disabled = hasSelection === true && padding !== null
+  const disabled = hasSelection === false || padding === null
   return (
     <Container space="medium">
       <VerticalSpace space="large" />

@@ -1,7 +1,9 @@
-export function smartRenameNode(
+import { isWithinInstanceNode } from '@create-figma-plugin/utilities'
+
+export async function smartRenameNodeAsync(
   node: SceneNode,
   whitelistRegex: null | RegExp
-): boolean {
+): Promise<boolean> {
   if (node.type !== 'WIDGET' && node.exportSettings.length !== 0) {
     return false
   }
@@ -36,15 +38,11 @@ export function smartRenameNode(
       break
     }
     case 'FRAME': {
-      if (node.parent !== null && node.parent.type !== 'PAGE') {
-        if (node.layoutMode === 'HORIZONTAL') {
-          node.name = 'Auto Layout Horizontal'
-          break
-        }
-        if (node.layoutMode === 'VERTICAL') {
-          node.name = 'Auto Layout Vertical'
-          break
-        }
+      if (
+        node.parent !== null &&
+        node.parent.type !== 'PAGE' &&
+        node.parent.type !== 'SECTION'
+      ) {
         node.name = 'Frame'
       }
       break
@@ -58,8 +56,14 @@ export function smartRenameNode(
       break
     }
     case 'INSTANCE': {
-      if (node.mainComponent !== null) {
-        node.name = node.mainComponent.name
+      const mainComponent = await node.getMainComponentAsync()
+      if (mainComponent !== null) {
+        const mainComponentParent = mainComponent.parent
+        node.name =
+          mainComponentParent !== null &&
+          mainComponentParent.type === 'COMPONENT_SET'
+            ? mainComponentParent.name
+            : mainComponent.name
       }
       break
     }
@@ -89,7 +93,7 @@ export function smartRenameNode(
       break
     }
     case 'TEXT': {
-      if (node.characters.length > 0) {
+      if (node.characters.length > 0 && isWithinInstanceNode(node) === false) {
         node.autoRename = true
       }
       break

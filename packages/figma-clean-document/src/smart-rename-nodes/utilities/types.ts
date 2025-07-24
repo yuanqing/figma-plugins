@@ -8,9 +8,6 @@ export type SmartRenameNodesProps = Pick<
 > & {
   hasSelection: boolean
 }
-export type FormState = SmartRenameNodesProps & {
-  loading: boolean
-}
 
 export interface CloseUIHandler extends EventHandler {
   name: 'CLOSE_UI'

@@ -18,9 +18,8 @@ export function createMatrix(nodes: Array<TextNode>): Array<Array<string>> {
     if (result[rowIndex][columnIndex] === '') {
       result[rowIndex][columnIndex] = node.characters
     } else {
-      result[rowIndex][
-        columnIndex
-      ] = `${result[rowIndex][columnIndex]}\n${node.characters}`
+      result[rowIndex][columnIndex] =
+        `${result[rowIndex][columnIndex]}\n${node.characters}`
     }
   }
   return result

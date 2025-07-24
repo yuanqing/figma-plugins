@@ -2,27 +2,27 @@ import {
   formatErrorMessage,
   formatSuccessMessage,
   getSelectedNodesOrAllNodes,
-  traverseNode
+  traverseNodeAsync
 } from '@create-figma-plugin/utilities'
 
 import { getScope } from '../utilities/get-scope.js'
 import { showLoadingNotification } from '../utilities/show-loading-notification.js'
 
 export function mainFactory(options: {
-  processNode: (node: SceneNode) => boolean
+  processNodeAsync: (node: SceneNode) => Promise<boolean>
   stopTraversal: (node: SceneNode) => boolean
   createLoadingMessage: (scope: string) => string
   createSuccessMessage: (scope: string, count: number) => string
   createFailureMessage: (scope: string) => string
-}): () => void {
+}): () => Promise<void> {
   const {
-    processNode,
+    processNodeAsync,
     stopTraversal,
     createLoadingMessage,
     createSuccessMessage,
     createFailureMessage
   } = options
-  return function (): void {
+  return async function (): Promise<void> {
     if (figma.currentPage.children.length === 0) {
       figma.closePlugin(formatErrorMessage('No layers on page'))
       return
@@ -34,14 +34,16 @@ export function mainFactory(options: {
     )
     let count = 0
     for (const node of nodes) {
-      traverseNode(
+      await traverseNodeAsync(
         node,
-        function (node) {
-          if (processNode(node) === true) {
+        async function (node: SceneNode) {
+          if ((await processNodeAsync(node)) === true) {
             count++
           }
         },
-        stopTraversal
+        async function (node: SceneNode) {
+          return stopTraversal(node)
+        }
       )
     }
     hideLoadingNotification()

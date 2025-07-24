@@ -33,6 +33,10 @@ export function mainFactory({
         continue
       }
       const sortFixedNodesResult = updateNodesSortOrder(result.fixedNodes)
+      const parentNode = nodes[0].parent
+      if (parentNode !== null && 'numberOfFixedChildren' in parentNode) {
+        parentNode.numberOfFixedChildren = result.fixedNodes.length
+      }
       const sortScrollingNodesResult = updateNodesSortOrder(
         result.scrollingNodes
       )

@@ -1,4 +1,4 @@
-/* eslint-disable sort-keys, sort-keys-fix/sort-keys-fix */
+/* eslint-disable sort-keys */
 
 export const languages = {
   'af': 'Afrikaans',

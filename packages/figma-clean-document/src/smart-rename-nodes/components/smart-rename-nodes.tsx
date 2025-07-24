@@ -4,43 +4,48 @@ import {
   Muted,
   Text,
   Textbox,
-  useForm,
+  useInitialFocus,
+  useWindowKeyDown,
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
 import {
   CloseUIHandler,
-  FormState,
+  SelectionChangedHandler,
   SmartRenameNodesProps,
   SubmitHandler
 } from '../utilities/types.js'
 
 export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
-  const { formState, handleSubmit, initialFocus, setFormState } =
-    useForm<FormState>(
-      { ...props, loading: false },
-      {
-        close: function () {
-          emit<CloseUIHandler>('CLOSE_UI')
-        },
-        submit: function ({ loading, smartRenameLayersWhitelist }: FormState) {
-          setFormState(loading, 'loading')
-          emit<SubmitHandler>('SUBMIT', smartRenameLayersWhitelist)
-        }
+  const [smartRenameLayersWhitelist, setSmartRenameLayersWhitelist] =
+    useState<string>(props.smartRenameLayersWhitelist)
+
+  const [hasSelection, setHasSelection] = useState<boolean>(props.hasSelection)
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const handleSubmit = useCallback(
+    function () {
+      setLoading(true)
+      emit<SubmitHandler>('SUBMIT', smartRenameLayersWhitelist)
+    },
+    [smartRenameLayersWhitelist]
+  )
+  useEffect(function () {
+    return on<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      function (hasSelection: boolean) {
+        setHasSelection(hasSelection)
       }
     )
-  useEffect(
-    function () {
-      return on('SELECTION_CHANGED', function (hasSelection: boolean) {
-        setFormState(hasSelection, 'hasSelection')
-      })
-    },
-    [setFormState]
-  )
-  const { hasSelection, loading, smartRenameLayersWhitelist } = formState
+  }, [])
+  useWindowKeyDown('Escape', function () {
+    emit<CloseUIHandler>('CLOSE_UI')
+  })
+  useWindowKeyDown('Enter', handleSubmit)
+
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
@@ -49,15 +54,13 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
       </Text>
       <VerticalSpace space="small" />
       <Textbox
-        {...initialFocus}
         disabled={loading === true}
-        name="smartRenameLayersWhitelist"
-        onValueInput={setFormState}
+        onValueInput={setSmartRenameLayersWhitelist}
         value={smartRenameLayersWhitelist}
-        variant="border"
       />
-      <VerticalSpace space="extraLarge" />
+      <VerticalSpace space="large" />
       <Button
+        {...useInitialFocus()}
         disabled={loading === true}
         fullWidth
         loading={loading === true}
@@ -65,7 +68,7 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
       >
         Smart Rename Layers
       </Button>
-      <VerticalSpace space="small" />
+      <VerticalSpace space="medium" />
       <Text align="center">
         <Muted>
           {hasSelection === true

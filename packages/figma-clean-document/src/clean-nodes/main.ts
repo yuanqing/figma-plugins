@@ -11,7 +11,7 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { cleanNodes } from '../utilities/clean-nodes.js'
+import { cleanNodesAsync } from '../utilities/clean-nodes-async.js'
 import { getScope } from '../utilities/get-scope.js'
 import { getSiblingNodes } from '../utilities/get-sibling-nodes.js'
 import { defaultSettings, settingsKey } from '../utilities/settings.js'
@@ -55,14 +55,14 @@ export default async function (): Promise<void> {
     let didChange = false
     for (const node of getSelectedNodesOrAllNodes()) {
       didChange =
-        cleanNodes(node, {
+        (await cleanNodesAsync(node, {
           deleteHiddenLayers,
           pixelPerfect,
           skipLockedLayers,
           smartRenameLayers,
           smartRenameLayersWhitelistRegex,
           ungroupSingleLayerGroups
-        }) || didChange
+        })) || didChange
       collapseLayer(node)
     }
     if (settings.smartSortLayers === true) {

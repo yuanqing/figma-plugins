@@ -13,7 +13,9 @@ export default mainFactory({
   createSuccessMessage: function (scope: string, count: number) {
     return `Made ${count} ${pluralize(count, 'layer')} ${scope} pixel-perfect`
   },
-  processNode: makePixelPerfect,
+  processNodeAsync: async function (node: SceneNode) {
+    return makePixelPerfect(node)
+  },
   stopTraversal: function (node: SceneNode) {
     return node.type === 'INSTANCE' || node.type === 'BOOLEAN_OPERATION'
   }

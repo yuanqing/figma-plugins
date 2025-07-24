@@ -29,7 +29,7 @@
     "fix": "concurrently npm:fix:css npm:fix:js npm:fix:json",
     "fix:css": "stylelint --fix 'src/**/*.css'",
     "fix:js": "eslint --fix 'src/**/*.{ts,tsx}'",
-    "fix:json": "prettier --loglevel error --write '*.json'",
+    "fix:json": "prettier --log-level error --write '*.json'",
     "lint": "concurrently npm:lint:css npm:lint:js",
     "lint:css": "stylelint 'src/**/*.css'",
     "lint:js": "eslint 'src/**/*.{ts,tsx}'",
@@ -37,7 +37,7 @@
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "3.2.0"
+    "@create-figma-plugin/utilities": "4.0.1"
   },
   "figma-plugin": {
     "name": "Link Slides",

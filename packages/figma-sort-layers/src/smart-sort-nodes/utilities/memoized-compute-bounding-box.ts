@@ -1,7 +1,7 @@
 import { computeBoundingBox } from '@create-figma-plugin/utilities'
-import mem from 'mem'
+import memoize from 'memoize'
 
-const memoized = mem(function (_: string, node: SceneNode) {
+const memoized = memoize(function (_: string, node: SceneNode) {
   return computeBoundingBox(node)
 })
 

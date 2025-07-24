@@ -11,7 +11,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { saveImagesAsync } from '../utilities/save-images-async.js'
 import {
   ExportImageResultHandler,
-  ExportImages,
+  type ExportImages,
   ExportImagesCompleteHandler,
   ExportImagesRequestHandler,
   ImagePlainObject

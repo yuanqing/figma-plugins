@@ -78,8 +78,7 @@ export function InsertBigImage(props: InsertBigImageProps): JSX.Element {
   ) {
     setInsertAs2x(insertAs2x)
     emit<SaveSettingsHandler>('SAVE_SETTINGS', insertAs2x)
-  },
-  [])
+  }, [])
   const initialFocus = useInitialFocus()
   if (total > 0) {
     return (

@@ -3,7 +3,7 @@ import {
   traverseNode,
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
-import { smartSortChildNodes } from 'figma-sort-layers/src/smart-sort-nodes/utilities/smart-sort-child-nodes'
+import { smartSortChildNodes } from 'figma-sort-layers/src/smart-sort-nodes/utilities/smart-sort-child-nodes.js'
 
 import { isNodeAnIllustration } from './is-node-an-illustration.js'
 
@@ -56,6 +56,9 @@ function smartSortNodesHelper(
     return updateNodesSortOrder(result)
   }
   const sortFixedNodesResult = updateNodesSortOrder(result.fixedNodes)
+  if ('numberOfFixedChildren' in node) {
+    node.numberOfFixedChildren = result.fixedNodes.length
+  }
   const sortScrollingNodesResult = updateNodesSortOrder(result.scrollingNodes)
   return sortFixedNodesResult || sortScrollingNodesResult
 }

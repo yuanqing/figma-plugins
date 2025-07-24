@@ -1,12 +1,12 @@
 import { deleteHiddenNodes } from './delete-hidden-nodes.js'
 import { makePixelPerfect } from './make-pixel-perfect.js'
-import { smartRenameNode } from './smart-rename-node.js'
+import { smartRenameNodeAsync } from './smart-rename-node-async.js'
 import { ungroupSingleNodeGroup } from './ungroup-single-node-group.js'
 
-export function cleanNodes(
+export async function cleanNodesAsync(
   node: SceneNode,
   settings: { [key: string]: any }
-): boolean {
+): Promise<boolean> {
   const {
     deleteHiddenLayers,
     pixelPerfect,
@@ -34,7 +34,7 @@ export function cleanNodes(
     ungroupSingleNodeGroup(node) === true
   ) {
     // Recurse into the single child of `node`
-    return cleanNodes(parent.children[index], settings)
+    return cleanNodesAsync(parent.children[index], settings)
   }
   let didChange = false
   if ('children' in node) {
@@ -42,12 +42,15 @@ export function cleanNodes(
       if (smartRenameLayers === true) {
         for (const child of node.children) {
           didChange =
-            smartRenameNode(child, smartRenameLayersWhitelistRegex) || didChange
+            (await smartRenameNodeAsync(
+              child,
+              smartRenameLayersWhitelistRegex
+            )) || didChange
         }
       }
     } else {
       for (const child of node.children) {
-        didChange = cleanNodes(child, settings) || didChange
+        didChange = (await cleanNodesAsync(child, settings)) || didChange
       }
     }
   }
@@ -63,7 +66,8 @@ export function cleanNodes(
   }
   if (smartRenameLayers === true) {
     didChange =
-      smartRenameNode(node, smartRenameLayersWhitelistRegex) || didChange
+      (await smartRenameNodeAsync(node, smartRenameLayersWhitelistRegex)) ||
+      didChange
   }
   return didChange
 }
