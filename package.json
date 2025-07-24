@@ -3,64 +3,50 @@
   "name": "figma-plugins",
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
-  "packageManager": "npm@10.2.5",
+  "packageManager": "npm@11.4.2",
   "scripts": {
     "build": "turbo run build",
-    "bump-dependencies": "tsx scripts/bump-dependencies.ts upscaler @tensorflow/tfjs",
+    "bump-dependencies": "tsx scripts/bump-dependencies.ts @figma/plugin-typings",
     "clean": "turbo run clean && rimraf '*.log'",
     "fix": "turbo run fix && concurrently npm:fix:js npm:fix:json",
     "fix:js": "eslint --fix 'scripts/**/*.ts'",
-    "fix:json": "prettier --loglevel error --write '*.json'",
+    "fix:json": "prettier --log-level error --write '*.json'",
     "lint": "turbo run lint && npm run lint:js",
-    "lint:js": "eslint 'scripts/**/*.ts'",
+    "lint:js": "eslint eslint.config.js 'scripts/**/*.ts'",
     "postinstall": "simple-git-hooks && npm run build",
-    "prepackages-publish": "turbo run fix lint test build",
-    "packages-publish": "lerna publish from-package",
     "reset": "npm run clean && rimraf node_modules package-lock.json './packages/*/node_modules' && npm install",
     "test": "turbo run test"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "3.2.0",
-    "@create-figma-plugin/tsconfig": "3.2.0",
-    "@figma/eslint-plugin-figma-plugins": "^0.15.0",
-    "@figma/plugin-typings": "1.97.0",
-    "@lerna-lite/cli": "^3.8.0",
-    "@types/natural-compare-lite": "^1.4.2",
-    "@typescript-eslint/eslint-plugin": "8.0.1",
-    "ava": "^6.1.3",
-    "concurrently": "^8.2.2",
-    "eslint": "<=8",
-    "eslint-config-yuanqing": "0.0.10",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-react": "7.35.0",
-    "eslint-plugin-react-hooks": "4.6.2",
+    "@create-figma-plugin/build": "4.0.1",
+    "@create-figma-plugin/tsconfig": "4.0.1",
+    "@figma/eslint-plugin-figma-plugins": "0.16.1",
+    "@figma/plugin-typings": "1.109.0",
+    "@types/natural-compare-lite": "1.4.2",
+    "ava": "6.4.1",
+    "concurrently": "9.2.0",
+    "eslint": "9.31.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.3",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "eslint-plugin-sort-keys-fix": "1.1.2",
-    "globby": "^14.0.2",
-    "lint-staged": "^15.2.8",
-    "npm-check-updates": "^17.0.6",
-    "preact": "^10.23.1",
-    "prettier": "^3.3.3",
-    "rimraf": "^6.0.1",
-    "simple-git-hooks": "^2.11.1",
-    "stylelint": "^16.8.1",
-    "stylelint-config-yuanqing": "0.0.7",
-    "tsx": "^4.17.0",
-    "turbo": "^2.0.12",
-    "typescript": "^5.5.4"
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint-config-yuanqing",
-      "plugin:@figma/figma-plugins/recommended"
-    ],
-    "root": true,
-    "ignorePatterns": [
-      "*.css.d.ts"
-    ]
+    "globby": "14.1.0",
+    "lint-staged": "16.1.2",
+    "npm-check-updates": "18.0.2",
+    "preact": "10.26.9",
+    "prettier": "3.6.2",
+    "rimraf": "6.0.1",
+    "simple-git-hooks": "2.13.0",
+    "stylelint": "16.22.0",
+    "stylelint-config-idiomatic-order": "10.0.0",
+    "stylelint-prettier": "5.0.3",
+    "tsx": "4.20.3",
+    "turbo": "2.5.5",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.38.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -71,13 +57,21 @@
       "prettier"
     ]
   },
-  "prettier": "eslint-config-yuanqing/prettier",
+  "prettier": {
+    "quoteProps": "consistent",
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
     "pre-push": "npx turbo run fix lint test build"
   },
   "stylelint": {
-    "extends": "stylelint-config-yuanqing"
+    "extends": [
+      "stylelint-prettier/recommended",
+      "stylelint-config-idiomatic-order"
+    ]
   },
   "workspaces": [
     "packages/*"
