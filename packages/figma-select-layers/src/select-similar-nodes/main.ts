@@ -67,14 +67,11 @@ export default async function (): Promise<void> {
     const selection = figma.currentPage.selection
     if (selection.length === 1) {
       const targetNodeType = selection[0].type
-      const validNodeAttributeNames = computeValidNodeAttributeKeys(
+      const validNodeAttributeKeys = computeValidNodeAttributeKeys(
         nodeAttributes,
         targetNodeType
       )
-      emit<SelectionChangedHandler>(
-        'SELECTION_CHANGED',
-        validNodeAttributeNames
-      )
+      emit<SelectionChangedHandler>('SELECTION_CHANGED', validNodeAttributeKeys)
       return
     }
     figma.notify(createErrorMessage(selection.length))
@@ -87,7 +84,7 @@ export default async function (): Promise<void> {
     targetNodeType
   )
   showUI<SelectSimilarNodesProps>(
-    { height: 437, title: 'Select Similar Layers', width: 240 },
+    { height: 378, title: 'Select Similar Layers', width: 280 },
     {
       nodeAttributes,
       validNodeAttributeKeys

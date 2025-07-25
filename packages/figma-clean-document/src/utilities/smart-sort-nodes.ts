@@ -55,11 +55,17 @@ function smartSortNodesHelper(
   if (Array.isArray(result)) {
     return updateNodesSortOrder(result)
   }
-  const sortFixedNodesResult = updateNodesSortOrder(result.fixedNodes)
+  const sortFixedNodesResult =
+    result.fixedNodes.length === 0
+      ? false
+      : updateNodesSortOrder(result.fixedNodes)
   if ('numberOfFixedChildren' in node) {
     node.numberOfFixedChildren = result.fixedNodes.length
   }
-  const sortScrollingNodesResult = updateNodesSortOrder(result.scrollingNodes)
+  const sortScrollingNodesResult =
+    result.scrollingNodes.length === 0
+      ? false
+      : updateNodesSortOrder(result.scrollingNodes)
   return sortFixedNodesResult || sortScrollingNodesResult
 }
 

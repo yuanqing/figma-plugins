@@ -3,17 +3,17 @@ import {
   Container,
   Divider,
   SearchTextbox,
-  useForm,
+  useInitialFocus,
+  useWindowKeyDown,
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { Fragment, h, JSX } from 'preact'
-import { useCallback, useEffect } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
 import { filterNodeAttributesByName } from '../utilities/filter-node-attributes-by-name.js'
 import {
   CloseUIHandler,
-  FormState,
   NodeAttributes,
   SelectionChangedHandler,
   SelectSimilarNodesProps,
@@ -25,29 +25,14 @@ import styles from './select-similar-nodes.css'
 export function SelectSimilarNodes(
   props: SelectSimilarNodesProps
 ): JSX.Element {
-  const { disabled, formState, handleSubmit, initialFocus, setFormState } =
-    useForm<FormState>(
-      { ...props, searchTerm: '' },
-      {
-        close: function () {
-          emit<CloseUIHandler>('CLOSE_UI')
-        },
-        submit: function ({ nodeAttributes }: FormState) {
-          emit<SubmitHandler>('SUBMIT', nodeAttributes)
-        },
-        validate: function ({
-          nodeAttributes,
-          validNodeAttributeKeys
-        }: FormState) {
-          return someNodeAttributeEqualsTargetValue(
-            nodeAttributes,
-            validNodeAttributeKeys,
-            true
-          )
-        }
-      }
-    )
-  const { nodeAttributes, validNodeAttributeKeys, searchTerm } = formState
+  const [searchTerm, setSearchTerm] = useState<string>('')
+  const [nodeAttributes, setNodeAttributes] = useState<NodeAttributes>(
+    props.nodeAttributes
+  )
+  const [validNodeAttributeKeys, setValidNodeAttributeKeys] = useState<
+    Array<keyof NodeAttributes>
+  >(props.validNodeAttributeKeys)
+
   const filteredNodeAttributeKeys = filterNodeAttributesByName(
     nodeAttributes,
     searchTerm
@@ -57,11 +42,12 @@ export function SelectSimilarNodes(
     validNodeAttributeKeys,
     true
   )
-  const handleNodeAttributesChange = useCallback(
-    function (nodeAttributes: NodeAttributes) {
-      setFormState(nodeAttributes, 'nodeAttributes')
+
+  const handleSubmit = useCallback(
+    function () {
+      emit<SubmitHandler>('SUBMIT', nodeAttributes)
     },
-    [setFormState]
+    [nodeAttributes]
   )
   const handleCheckAllToggleChange: JSX.GenericEventHandler<HTMLInputElement> =
     useCallback(
@@ -71,35 +57,43 @@ export function SelectSimilarNodes(
         for (const key of validNodeAttributeKeys) {
           result[key] = value
         }
-        setFormState(result, 'nodeAttributes')
+        setNodeAttributes(result)
       },
       [
         areAllValidNodeAttributesSelected,
         nodeAttributes,
-        validNodeAttributeKeys,
-        setFormState
+        validNodeAttributeKeys
       ]
     )
-  useEffect(
-    function () {
-      return on<SelectionChangedHandler>(
-        'SELECTION_CHANGED',
-        function (validNodeAttributeNames: Array<keyof NodeAttributes>) {
-          setFormState(validNodeAttributeNames, 'validNodeAttributeKeys')
-        }
-      )
-    },
-    [setFormState]
-  )
+
+  useEffect(function () {
+    return on<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      function (validNodeAttributeKeys: Array<keyof NodeAttributes>) {
+        setValidNodeAttributeKeys(validNodeAttributeKeys)
+      }
+    )
+  }, [])
+  useWindowKeyDown('Escape', function () {
+    emit<CloseUIHandler>('CLOSE_UI')
+  })
+  useWindowKeyDown('Enter', handleSubmit)
+
+  const disabled =
+    someNodeAttributeEqualsTargetValue(
+      nodeAttributes,
+      validNodeAttributeKeys,
+      true
+    ) === false
+
   return (
     <Fragment>
       <div className={styles.wrapper}>
         <div className={styles.search}>
           <SearchTextbox
-            {...initialFocus}
+            {...useInitialFocus()}
             clearOnEscapeKeyDown
-            name="searchTerm"
-            onValueInput={setFormState}
+            onValueInput={setSearchTerm}
             placeholder="Search"
             value={searchTerm}
           />
@@ -120,7 +114,7 @@ export function SelectSimilarNodes(
       <Divider />
       <NodeAttributesSelectableItems
         filteredNodeAttributeKeys={filteredNodeAttributeKeys}
-        handleNodeAttributesChange={handleNodeAttributesChange}
+        handleNodeAttributesChange={setNodeAttributes}
         nodeAttributes={nodeAttributes}
         validNodeAttributeKeys={validNodeAttributeKeys}
       />

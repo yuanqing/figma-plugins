@@ -22,7 +22,6 @@
   "devDependencies": {
     "@create-figma-plugin/build": "4.0.1",
     "@create-figma-plugin/tsconfig": "4.0.1",
-    "@figma/eslint-plugin-figma-plugins": "0.16.1",
     "@figma/plugin-typings": "1.109.0",
     "@types/natural-compare-lite": "1.4.2",
     "ava": "6.4.1",

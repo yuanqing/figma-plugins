@@ -79,6 +79,13 @@
           },
           "-",
           {
+            "name": "Select Sections",
+            "main": {
+              "src": "src/select-nodes-by-attribute/main.ts",
+              "handler": "selectSections"
+            }
+          },
+          {
             "name": "Select Frames",
             "main": {
               "src": "src/select-nodes-by-attribute/main.ts",
@@ -222,6 +229,12 @@
         "name": "Reset Plugin",
         "main": "src/reset-plugin/main.ts"
       }
-    ]
+    ],
+    "documentAccess": "dynamic-page",
+    "networkAccess": {
+      "allowedDomains": [
+        "none"
+      ]
+    }
   }
 }

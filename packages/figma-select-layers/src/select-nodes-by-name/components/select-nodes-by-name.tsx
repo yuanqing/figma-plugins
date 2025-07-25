@@ -5,66 +5,66 @@ import {
   Muted,
   Text,
   Textbox,
-  useForm,
+  useInitialFocus,
+  useWindowKeyDown,
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
 import {
   CloseUIHandler,
-  FormState,
+  SelectionChangedHandler,
   SelectNodesByNameProps,
   SubmitHandler
 } from '../utilities/types.js'
 
 export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
-  const { disabled, formState, initialFocus, setFormState, handleSubmit } =
-    useForm<FormState>(props, {
-      close: function () {
-        emit<CloseUIHandler>('CLOSE_UI')
-      },
-      submit: function ({ exactMatch, layerName }: FormState) {
-        emit<SubmitHandler>('SUBMIT', {
-          exactMatch,
-          layerName
-        })
-      },
-      validate: function ({ layerName }: FormState) {
-        return layerName !== ''
-      }
-    })
-  useEffect(
+  const [layerName, setLayerName] = useState<string>(props.layerName)
+  const [exactMatch, setExactMatch] = useState<boolean>(props.exactMatch)
+  const [hasSelection, setHasSelection] = useState<boolean>(props.hasSelection)
+
+  const handleSubmit = useCallback(
     function () {
-      return on('SELECTION_CHANGED', function (hasSelection) {
-        setFormState(hasSelection, 'hasSelection')
+      emit<SubmitHandler>('SUBMIT', {
+        exactMatch,
+        layerName
       })
     },
-    [setFormState]
+    [exactMatch, layerName]
   )
-  const { exactMatch, layerName, hasSelection } = formState
+  useEffect(function () {
+    return on<SelectionChangedHandler>(
+      'SELECTION_CHANGED',
+      function (hasSelection: boolean) {
+        setHasSelection(hasSelection)
+      }
+    )
+  }, [])
+  useWindowKeyDown('Escape', function () {
+    emit<CloseUIHandler>('CLOSE_UI')
+  })
+  useWindowKeyDown('Enter', handleSubmit)
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
       <Textbox
-        {...initialFocus}
-        name="layerName"
-        onValueInput={setFormState}
+        onValueInput={setLayerName}
         placeholder="Layer name"
         value={layerName}
-        variant="border"
       />
-      <VerticalSpace space="medium" />
-      <Checkbox
-        name="exactMatch"
-        onValueChange={setFormState}
-        value={exactMatch === true}
-      >
+      <VerticalSpace space="small" />
+      <Checkbox onValueChange={setExactMatch} value={exactMatch === true}>
         <Text>Exact match</Text>
       </Checkbox>
       <VerticalSpace space="large" />
-      <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
+      <Button
+        {...useInitialFocus()}
+        disabled={layerName === ''}
+        fullWidth
+        onClick={handleSubmit}
+      >
         Select Layers by Name
       </Button>
       <VerticalSpace space="medium" />

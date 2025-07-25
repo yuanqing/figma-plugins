@@ -11,6 +11,14 @@ export const selectComponents = mainFactory(
   }
 )
 
+export const selectSections = mainFactory(
+  'section',
+  isNodeTypeFactory('SECTION'),
+  function (node: SceneNode) {
+    return node.parent !== null && node.parent.type !== 'PAGE'
+  }
+)
+
 export const selectVariants = mainFactory(
   'variant',
   isNodeTypeFactory('COMPONENT_SET'),

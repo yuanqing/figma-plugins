@@ -1,6 +1,5 @@
 import { Muted, SelectableItem, Text } from '@create-figma-plugin/ui'
 import { ComponentChildren, h, JSX } from 'preact'
-import { useCallback } from 'preact/hooks'
 
 import { categoryLabels, labels } from '../utilities/labels.js'
 import { normalizeNodeAttributes } from '../utilities/normalize-node-attributes.js'
@@ -27,27 +26,6 @@ export function NodeAttributesSelectableItems(props: {
     nodeAttributes,
     validNodeAttributeKeys
   )
-  const onValueChange = useCallback(
-    function (newValue: boolean, name: undefined | string) {
-      if (typeof name === 'undefined') {
-        throw new Error(`\`name\` is \`undefined\``)
-      }
-      const result: NodeAttributes = { ...nodeAttributes }
-      for (const {
-        categoryKey,
-        nodeAttributeKey,
-        value
-      } of normalizedNodeAttributes) {
-        if (nodeAttributeKey === name || categoryKey === name) {
-          result[nodeAttributeKey] = newValue
-        } else {
-          result[nodeAttributeKey] = value
-        }
-      }
-      handleNodeAttributesChange(result)
-    },
-    [handleNodeAttributesChange, nodeAttributes, normalizedNodeAttributes]
-  )
   const categoriesAlreadyAdded: Record<string, true> = {}
   for (const {
     categoryKey,
@@ -58,6 +36,21 @@ export function NodeAttributesSelectableItems(props: {
     if (filteredNodeAttributeKeys.includes(nodeAttributeKey) === false) {
       continue
     }
+    const onValueChange = function (newValue: boolean) {
+      const result: NodeAttributes = { ...nodeAttributes }
+      for (const normalizedNodeAttribute of normalizedNodeAttributes) {
+        if (
+          normalizedNodeAttribute.nodeAttributeKey === nodeAttributeKey ||
+          normalizedNodeAttribute.categoryKey === nodeAttributeKey
+        ) {
+          result[normalizedNodeAttribute.nodeAttributeKey] = newValue
+        } else {
+          result[normalizedNodeAttribute.nodeAttributeKey] =
+            normalizedNodeAttribute.value
+        }
+      }
+      handleNodeAttributesChange(result)
+    }
     if (categoryKey === null) {
       // Item
       children.push(
@@ -65,7 +58,6 @@ export function NodeAttributesSelectableItems(props: {
           key={nodeAttributeKey}
           bold
           disabled={disabled === true}
-          name={`${nodeAttributeKey}`}
           onValueChange={onValueChange}
           value={value}
         >
@@ -104,7 +96,6 @@ export function NodeAttributesSelectableItems(props: {
           key={categoryKey}
           bold
           disabled={categoryDisabled}
-          name={categoryKey}
           onValueChange={onValueChange}
           value={categoryValue}
         >
@@ -118,7 +109,6 @@ export function NodeAttributesSelectableItems(props: {
         key={nodeAttributeKey}
         disabled={disabled === true}
         indent
-        name={`${nodeAttributeKey}`}
         onValueChange={onValueChange}
         value={value}
       >

@@ -1,10 +1,11 @@
 .attributes,
 .emptyState {
-  height: 338px;
+  height: 280px;
 }
 
 .attributes {
   overflow: auto;
+  padding: var(--space-extra-small) 0;
 }
 
 .emptyState {

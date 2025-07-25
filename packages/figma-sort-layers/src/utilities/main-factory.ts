@@ -32,14 +32,18 @@ export function mainFactory({
         didChange = updateNodesSortOrder(result) || didChange
         continue
       }
-      const sortFixedNodesResult = updateNodesSortOrder(result.fixedNodes)
+      const sortFixedNodesResult =
+        result.fixedNodes.length === 0
+          ? false
+          : updateNodesSortOrder(result.fixedNodes)
       const parentNode = nodes[0].parent
       if (parentNode !== null && 'numberOfFixedChildren' in parentNode) {
         parentNode.numberOfFixedChildren = result.fixedNodes.length
       }
-      const sortScrollingNodesResult = updateNodesSortOrder(
-        result.scrollingNodes
-      )
+      const sortScrollingNodesResult =
+        result.scrollingNodes.length === 0
+          ? false
+          : updateNodesSortOrder(result.scrollingNodes)
       didChange = sortFixedNodesResult || sortScrollingNodesResult
     }
     figma.closePlugin(

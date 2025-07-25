@@ -43,6 +43,9 @@ export function smartSortChildNodes(
 }
 
 function smartSortChildNodesHelper(nodes: Array<SceneNode>): Array<SceneNode> {
+  if (nodes.length === 0) {
+    return []
+  }
   const [firstNode, ...rest] = nodes
   const result = [firstNode]
   for (const node of rest) {

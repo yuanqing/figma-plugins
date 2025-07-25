@@ -1,6 +1,8 @@
 .wrapper {
   display: flex;
+  height: 48px;
   align-items: center;
+  padding: 0 var(--space-small);
 }
 
 .search {
@@ -8,9 +10,10 @@
 }
 
 .checkAllToggle {
-  flex: 0 0 auto;
-  padding: var(--space-small) var(--space-medium);
+  flex: 0 0 76px;
+  padding: var(--space-medium) 0;
   color: var(--figma-color-text-secondary);
+  text-align: right;
 }
 .checkAllToggle:hover {
   color: var(--figma-color-text);
