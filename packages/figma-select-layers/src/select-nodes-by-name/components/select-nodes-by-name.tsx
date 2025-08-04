@@ -50,6 +50,7 @@ export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
     <Container space="medium">
       <VerticalSpace space="large" />
       <Textbox
+        {...useInitialFocus()}
         onValueInput={setLayerName}
         placeholder="Layer name"
         value={layerName}
@@ -59,12 +60,7 @@ export function SelectNodesByName(props: SelectNodesByNameProps): JSX.Element {
         <Text>Exact match</Text>
       </Checkbox>
       <VerticalSpace space="large" />
-      <Button
-        {...useInitialFocus()}
-        disabled={layerName === ''}
-        fullWidth
-        onClick={handleSubmit}
-      >
+      <Button disabled={layerName === ''} fullWidth onClick={handleSubmit}>
         Select Layers by Name
       </Button>
       <VerticalSpace space="medium" />
