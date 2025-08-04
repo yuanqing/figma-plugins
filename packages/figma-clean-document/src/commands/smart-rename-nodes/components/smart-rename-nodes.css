@@ -1,0 +1,6 @@
+.footer {
+  display: flex;
+  justify-content: end;
+  padding: var(--space-extra-small) var(--space-small);
+  gap: var(--space-extra-small);
+}

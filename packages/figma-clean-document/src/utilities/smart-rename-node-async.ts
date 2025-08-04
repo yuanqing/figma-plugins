@@ -10,6 +10,10 @@ export async function smartRenameNodeAsync(
   if (whitelistRegex !== null && whitelistRegex.test(node.name) === true) {
     return false
   }
+  const parentNode = node.parent
+  const isChildOfPageOrSection =
+    parentNode !== null &&
+    (parentNode.type === 'PAGE' || parentNode.type === 'SECTION')
   const previousName = node.name
   switch (node.type) {
     case 'BOOLEAN_OPERATION': {
@@ -38,11 +42,7 @@ export async function smartRenameNodeAsync(
       break
     }
     case 'FRAME': {
-      if (
-        node.parent !== null &&
-        node.parent.type !== 'PAGE' &&
-        node.parent.type !== 'SECTION'
-      ) {
+      if (isChildOfPageOrSection === false) {
         node.name = 'Frame'
       }
       break
@@ -56,6 +56,9 @@ export async function smartRenameNodeAsync(
       break
     }
     case 'INSTANCE': {
+      if (isChildOfPageOrSection === true) {
+        break
+      }
       const mainComponent = await node.getMainComponentAsync()
       if (mainComponent !== null) {
         const mainComponentParent = mainComponent.parent

@@ -72,8 +72,17 @@
       },
       "-",
       {
+        "name": "Reposition Layers by Layer Order",
+        "main": "src/reposition-nodes-by-layer-order/main.ts"
+      },
+      "-",
+      {
         "name": "Sort Pages by Name",
         "main": "src/sort-pages-by-name/main.ts"
+      },
+      {
+        "name": "Sort Flows by Name",
+        "main": "src/sort-flows-by-name/main.ts"
       }
     ],
     "documentAccess": "dynamic-page",

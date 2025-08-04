@@ -26,10 +26,13 @@
     "prebuild": "npm run clean",
     "build": "build-figma-plugin --typecheck --minify",
     "clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
-    "fix": "concurrently npm:fix:js npm:fix:json",
+    "fix": "concurrently npm:fix:css npm:fix:js npm:fix:json",
+    "fix:css": "stylelint --fix 'src/**/*.css'",
     "fix:js": "eslint --fix 'src/**/*.{ts,tsx}'",
     "fix:json": "prettier --log-level error --write '*.json'",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint": "concurrently npm:lint:css npm:lint:js",
+    "lint:css": "stylelint 'src/**/*.css'",
+    "lint:js": "eslint 'src/**/*.{ts,tsx}'",
     "prewatch": "npm run clean",
     "watch": "build-figma-plugin --typecheck --watch"
   },
@@ -48,47 +51,52 @@
     "menu": [
       {
         "name": "Clean Layers",
-        "main": "src/clean-nodes/main.ts",
-        "ui": "src/clean-nodes/ui.ts"
+        "main": "src/commands/clean-nodes/main.ts",
+        "ui": "src/commands/clean-nodes/ui.ts"
       },
       "-",
       {
         "name": "Delete Hidden Layers",
-        "main": "src/delete-hidden-nodes/main.ts"
+        "main": "src/commands/delete-hidden-nodes/main.ts"
       },
       {
         "name": "Ungroup Single-Layer Groups",
-        "main": "src/ungroup-single-node-groups/main.ts"
+        "main": "src/commands/ungroup-single-node-groups/main.ts"
       },
       {
         "name": "Make Pixel-Perfect",
-        "main": "src/make-pixel-perfect/main.ts"
+        "main": "src/commands/make-pixel-perfect/main.ts"
       },
       {
         "name": "Smart Rename Layers",
-        "main": "src/smart-rename-nodes/main.ts",
-        "ui": "src/smart-rename-nodes/ui.ts"
+        "main": "src/commands/smart-rename-nodes/main.ts",
+        "ui": "src/commands/smart-rename-nodes/ui.ts"
       },
       {
         "name": "Smart Sort Layers",
-        "main": "src/smart-sort-nodes/main.ts"
+        "main": "src/commands/smart-sort-nodes/main.ts"
+      },
+      "-",
+      {
+        "name": "Position Canvas at (0,0)",
+        "main": "src/commands/position-canvas-at-zero-zero/main.ts"
       },
       "-",
       {
         "name": "Sort Pages by Name",
-        "main": "src/sort-pages-by-name/main.ts"
+        "main": "src/commands/sort-pages-by-name/main.ts"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "main": "src/reset-plugin/main.ts"
+        "main": "src/commands/reset-plugin/main.ts"
       }
     ],
     "relaunchButtons": {
       "cleanLayers": {
         "name": "Clean Layers",
-        "main": "src/clean-nodes/main.ts",
-        "ui": "src/clean-nodes/ui.ts"
+        "main": "src/commands/clean-nodes/main.ts",
+        "ui": "src/commands/clean-nodes/ui.ts"
       }
     },
     "documentAccess": "dynamic-page",

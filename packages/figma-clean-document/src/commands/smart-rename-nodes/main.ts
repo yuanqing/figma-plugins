@@ -7,10 +7,10 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { mainFactory } from '../utilities/main-factory.js'
-import { defaultSettings, settingsKey } from '../utilities/settings.js'
-import { smartRenameNodeAsync } from '../utilities/smart-rename-node-async.js'
-import { Settings } from '../utilities/types.js'
+import { mainFactory } from '../../utilities/main-factory.js'
+import { defaultSettings, settingsKey } from '../../utilities/settings.js'
+import { smartRenameNodeAsync } from '../../utilities/smart-rename-node-async.js'
+import { Settings } from '../../utilities/types.js'
 import {
   CloseUIHandler,
   SelectionChangedHandler,
@@ -69,7 +69,7 @@ export default async function (): Promise<void> {
   })
   const { smartRenameLayersWhitelist } = settings
   showUI<SmartRenameNodesProps>(
-    { height: 156, title: 'Smart Rename Layers', width: 240 },
+    { height: 157, title: 'Smart Rename Layers', width: 240 },
     {
       hasSelection: figma.currentPage.selection.length > 0,
       smartRenameLayersWhitelist

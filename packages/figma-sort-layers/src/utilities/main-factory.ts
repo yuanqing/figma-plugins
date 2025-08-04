@@ -1,10 +1,10 @@
 import {
-  computeSiblingNodes,
   formatErrorMessage,
   formatSuccessMessage,
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
 
+import { computeNodeGroups } from './compute-node-groups.js'
 import { MainFactoryOptions } from './types.js'
 
 export function mainFactory({
@@ -17,14 +17,22 @@ export function mainFactory({
       figma.closePlugin(errorMessage)
       return
     }
-    const groups = computeGroups()
+    const groups = computeNodeGroups()
     if (groups === null) {
       figma.closePlugin(errorMessage)
       return
     }
     let didChange = false
     for (const nodes of groups) {
-      const result = sortNodes(nodes)
+      const parentNode = nodes[0].parent
+      if (parentNode === null) {
+        throw new Error('`parentNode` is `null`')
+      }
+      const result = sortNodes(
+        'layoutMode' in parentNode && parentNode.layoutMode !== 'NONE'
+          ? nodes.slice().reverse()
+          : nodes
+      )
       if (result === null) {
         continue
       }
@@ -36,8 +44,7 @@ export function mainFactory({
         result.fixedNodes.length === 0
           ? false
           : updateNodesSortOrder(result.fixedNodes)
-      const parentNode = nodes[0].parent
-      if (parentNode !== null && 'numberOfFixedChildren' in parentNode) {
+      if ('numberOfFixedChildren' in parentNode) {
         parentNode.numberOfFixedChildren = result.fixedNodes.length
       }
       const sortScrollingNodesResult =
@@ -52,15 +59,4 @@ export function mainFactory({
         : 'No change to sort order'
     )
   }
-}
-
-function computeGroups(): null | Array<Array<SceneNode>> {
-  const selection = figma.currentPage.selection
-  if (selection.length === 1) {
-    if ('children' in selection[0] && selection[0].children.length > 1) {
-      return computeSiblingNodes(selection[0].children.slice())
-    }
-    return null
-  }
-  return computeSiblingNodes(selection.slice())
 }

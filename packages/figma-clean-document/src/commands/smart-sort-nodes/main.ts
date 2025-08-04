@@ -3,10 +3,10 @@ import {
   formatSuccessMessage
 } from '@create-figma-plugin/utilities'
 
-import { getScope } from '../utilities/get-scope.js'
-import { getSiblingNodes } from '../utilities/get-sibling-nodes.js'
-import { showLoadingNotification } from '../utilities/show-loading-notification.js'
-import { smartSortNodes } from '../utilities/smart-sort-nodes.js'
+import { getScope } from '../../utilities/get-scope.js'
+import { getSiblingNodes } from '../../utilities/get-sibling-nodes.js'
+import { showLoadingNotification } from '../../utilities/show-loading-notification.js'
+import { smartSortNodes } from '../../utilities/smart-sort-nodes.js'
 
 export default function (): void {
   if (figma.currentPage.children.length === 0) {

@@ -1,21 +1,36 @@
 import { deleteHiddenNodes } from './delete-hidden-nodes.js'
 import { makePixelPerfect } from './make-pixel-perfect.js'
+import { positionAllNodesAtZeroZero } from './position-all-nodes-at-zero-zero.js'
 import { smartRenameNodeAsync } from './smart-rename-node-async.js'
 import { ungroupSingleNodeGroup } from './ungroup-single-node-group.js'
 
 export async function cleanNodesAsync(
   node: SceneNode,
-  settings: { [key: string]: any }
+  settings: {
+    cleanInstanceLayers: boolean
+    cleanLockedLayers: boolean
+    deleteHiddenLayers: boolean
+    pixelPerfect: boolean
+    positionCanvasAtZeroZero: boolean
+    smartRenameLayers: boolean
+    smartRenameLayersWhitelistRegex: null | RegExp
+    ungroupSingleLayerGroups: boolean
+  }
 ): Promise<boolean> {
   const {
+    cleanInstanceLayers,
+    cleanLockedLayers,
     deleteHiddenLayers,
     pixelPerfect,
-    skipLockedLayers,
+    positionCanvasAtZeroZero,
     smartRenameLayers,
     smartRenameLayersWhitelistRegex,
     ungroupSingleLayerGroups
   } = settings
-  if (skipLockedLayers === true && node.locked === true) {
+  if (cleanInstanceLayers === false && node.type === 'INSTANCE') {
+    return false
+  }
+  if (cleanLockedLayers === false && node.locked === true) {
     return false
   }
   if (node.removed === true) {
@@ -68,6 +83,9 @@ export async function cleanNodesAsync(
     didChange =
       (await smartRenameNodeAsync(node, smartRenameLayersWhitelistRegex)) ||
       didChange
+  }
+  if (positionCanvasAtZeroZero === true) {
+    didChange = positionAllNodesAtZeroZero() || didChange
   }
   return didChange
 }

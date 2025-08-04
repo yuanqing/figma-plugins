@@ -11,13 +11,13 @@ import {
   showUI
 } from '@create-figma-plugin/utilities'
 
-import { cleanNodesAsync } from '../utilities/clean-nodes-async.js'
-import { getScope } from '../utilities/get-scope.js'
-import { getSiblingNodes } from '../utilities/get-sibling-nodes.js'
-import { defaultSettings, settingsKey } from '../utilities/settings.js'
-import { showLoadingNotification } from '../utilities/show-loading-notification.js'
-import { smartSortNodes } from '../utilities/smart-sort-nodes.js'
-import { Settings } from '../utilities/types.js'
+import { cleanNodesAsync } from '../../utilities/clean-nodes-async.js'
+import { getScope } from '../../utilities/get-scope.js'
+import { getSiblingNodes } from '../../utilities/get-sibling-nodes.js'
+import { defaultSettings, settingsKey } from '../../utilities/settings.js'
+import { showLoadingNotification } from '../../utilities/show-loading-notification.js'
+import { smartSortNodes } from '../../utilities/smart-sort-nodes.js'
+import { Settings } from '../../utilities/types.js'
 import {
   CleanNodesProps,
   CloseUIHandler,
@@ -37,9 +37,11 @@ export default async function (): Promise<void> {
   once<SubmitHandler>('SUBMIT', async function (settings: Settings) {
     await saveSettingsAsync(settings, settingsKey)
     const {
+      cleanInstanceLayers,
+      cleanLockedLayers,
       deleteHiddenLayers,
       pixelPerfect,
-      skipLockedLayers,
+      positionCanvasAtZeroZero,
       smartRenameLayers,
       smartRenameLayersWhitelist,
       ungroupSingleLayerGroups
@@ -56,9 +58,12 @@ export default async function (): Promise<void> {
     for (const node of getSelectedNodesOrAllNodes()) {
       didChange =
         (await cleanNodesAsync(node, {
+          cleanInstanceLayers,
+          cleanLockedLayers,
           deleteHiddenLayers,
           pixelPerfect,
-          skipLockedLayers,
+          positionCanvasAtZeroZero:
+            scope === 'selection' ? false : positionCanvasAtZeroZero,
           smartRenameLayers,
           smartRenameLayersWhitelistRegex,
           ungroupSingleLayerGroups
@@ -67,7 +72,7 @@ export default async function (): Promise<void> {
     }
     if (settings.smartSortLayers === true) {
       for (const nodes of getSiblingNodes()) {
-        didChange = smartSortNodes(nodes, skipLockedLayers) || didChange
+        didChange = smartSortNodes(nodes, cleanLockedLayers) || didChange
       }
     }
     hideLoadingNotification()
@@ -85,7 +90,7 @@ export default async function (): Promise<void> {
     )
   })
   showUI<CleanNodesProps>(
-    { height: 416, title: 'Clean Layers', width: 240 },
+    { height: 461, title: 'Clean Layers', width: 240 },
     { ...settings, hasSelection: figma.currentPage.selection.length > 0 }
   )
 }

@@ -1,6 +1,7 @@
 import {
   Button,
   Container,
+  Divider,
   Muted,
   Text,
   Textbox,
@@ -9,15 +10,17 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit, on } from '@create-figma-plugin/utilities'
-import { h, JSX } from 'preact'
+import { Fragment, h, JSX } from 'preact'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 
+import { Selection } from '../../../components/selection.js'
 import {
   CloseUIHandler,
   SelectionChangedHandler,
   SmartRenameNodesProps,
   SubmitHandler
 } from '../utilities/types.js'
+import styles from './smart-rename-nodes.css'
 
 export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
   const [smartRenameLayersWhitelist, setSmartRenameLayersWhitelist] =
@@ -26,6 +29,9 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
   const [hasSelection, setHasSelection] = useState<boolean>(props.hasSelection)
   const [loading, setLoading] = useState<boolean>(false)
 
+  const handleCancel = useCallback(function () {
+    emit<CloseUIHandler>('CLOSE_UI')
+  }, [])
   const handleSubmit = useCallback(
     function () {
       setLoading(true)
@@ -47,36 +53,37 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
   useWindowKeyDown('Enter', handleSubmit)
 
   return (
-    <Container space="medium">
-      <VerticalSpace space="large" />
-      <Text>
-        <Muted>Ignore layers named</Muted>
-      </Text>
-      <VerticalSpace space="small" />
-      <Textbox
-        disabled={loading === true}
-        onValueInput={setSmartRenameLayersWhitelist}
-        value={smartRenameLayersWhitelist}
-      />
-      <VerticalSpace space="large" />
-      <Button
-        {...useInitialFocus()}
-        disabled={loading === true}
-        fullWidth
-        loading={loading === true}
-        onClick={handleSubmit}
-      >
-        Smart Rename Layers
-      </Button>
-      <VerticalSpace space="medium" />
-      <Text align="center">
-        <Muted>
-          {hasSelection === true
-            ? 'Renaming layers in selection'
-            : 'Renaming all layers on page'}
-        </Muted>
-      </Text>
-      <VerticalSpace space="extraLarge" />
-    </Container>
+    <Fragment>
+      <Container space="small">
+        <VerticalSpace space="large" />
+        <Text>
+          <Muted>Ignore layers named</Muted>
+        </Text>
+        <VerticalSpace space="small" />
+        <Textbox
+          disabled={loading === true}
+          onValueInput={setSmartRenameLayersWhitelist}
+          value={smartRenameLayersWhitelist}
+        />
+        <VerticalSpace space="large" />
+      </Container>
+
+      <Divider />
+      <div class={styles.footer}>
+        <Button disabled={loading === true} onClick={handleCancel} secondary>
+          Cancel
+        </Button>
+        <Button
+          {...useInitialFocus()}
+          disabled={loading === true}
+          fullWidth
+          loading={loading === true}
+          onClick={handleSubmit}
+        >
+          Smart rename layers
+        </Button>
+      </div>
+      <Selection hasSelection={hasSelection} />
+    </Fragment>
   )
 }

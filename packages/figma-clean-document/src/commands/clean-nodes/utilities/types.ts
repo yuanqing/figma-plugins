@@ -1,11 +1,8 @@
 import { EventHandler } from '@create-figma-plugin/utilities'
 
-import { Settings } from '../../utilities/types.js'
+import { Settings } from '../../../utilities/types.js'
 
-export type SmartRenameNodesProps = Pick<
-  Settings,
-  'smartRenameLayersWhitelist'
-> & {
+export type CleanNodesProps = Settings & {
   hasSelection: boolean
 }
 
@@ -15,9 +12,7 @@ export interface CloseUIHandler extends EventHandler {
 }
 export interface SubmitHandler extends EventHandler {
   name: 'SUBMIT'
-  handler: (
-    smartRenameLayersWhitelist: Settings['smartRenameLayersWhitelist']
-  ) => void
+  handler: (settings: Settings) => void
 }
 export interface SelectionChangedHandler extends EventHandler {
   name: 'SELECTION_CHANGED'
