@@ -67,7 +67,6 @@ export function SmartRenameNodes(props: SmartRenameNodesProps): JSX.Element {
         />
         <VerticalSpace space="large" />
       </Container>
-
       <Divider />
       <div class={styles.footer}>
         <Button disabled={loading === true} onClick={handleCancel} secondary>

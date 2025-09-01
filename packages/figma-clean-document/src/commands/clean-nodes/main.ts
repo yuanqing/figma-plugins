@@ -63,7 +63,7 @@ export default async function (): Promise<void> {
           deleteHiddenLayers,
           pixelPerfect,
           positionCanvasAtZeroZero:
-            scope === 'selection' ? false : positionCanvasAtZeroZero,
+            scope === 'in selection' ? false : positionCanvasAtZeroZero,
           smartRenameLayers,
           smartRenameLayersWhitelistRegex,
           ungroupSingleLayerGroups

@@ -1,6 +1,6 @@
 import { formatSuccessMessage } from '@create-figma-plugin/utilities'
 
-import { sortFlowsByName } from './utlities/sort-flows-by-name.js'
+import { sortFlowsByName } from './utilities/sort-flows-by-name.js'
 
 export default function (): void {
   const originalFlowStartingPoints =

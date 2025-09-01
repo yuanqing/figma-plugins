@@ -9,3 +9,5 @@ export type Settings = {
   smartSortLayers: boolean
   ungroupSingleLayerGroups: boolean
 }
+
+export type Scope = 'on page' | 'in selection'
